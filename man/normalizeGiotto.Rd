@@ -6,20 +6,26 @@
 \usage{
 normalizeGiotto(
   gobject,
-  norm_methods = c("standard", "osmFISH"),
+  feat_type = NULL,
+  norm_methods = c("standard", "pearson_resid", "osmFISH"),
   library_size_norm = TRUE,
   scalefactor = 6000,
   log_norm = TRUE,
   log_offset = 1,
   logbase = 2,
-  scale_genes = T,
-  scale_cells = T,
-  scale_order = c("first_genes", "first_cells"),
-  verbose = F
+  scale_feats = TRUE,
+  scale_genes = NULL,
+  scale_cells = TRUE,
+  scale_order = c("first_feats", "first_cells"),
+  theta = 100,
+  update_slot = "scaled",
+  verbose = TRUE
 )
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{feat_type}{feature type}
 
 \item{norm_methods}{normalization method to use}
 
@@ -33,11 +39,17 @@ normalizeGiotto(
 
 \item{logbase}{log base to use to log normalize expression values}
 
-\item{scale_genes}{z-score genes over all cells}
+\item{scale_feats}{z-score genes over all cells}
+
+\item{scale_genes}{deprecated, use scale_feats}
 
 \item{scale_cells}{z-score cells over all genes}
 
-\item{scale_order}{order to scale genes and cells}
+\item{scale_order}{order to scale feats and cells}
+
+\item{theta}{theta parameter for the pearson residual normalization step}
+
+\item{update_slot}{slot or name to use for the results from osmFISH and pearson residual normalization}
 
 \item{verbose}{be verbose}
 }
@@ -64,14 +76,11 @@ multiply by the total number of genes.}
   \item{2. Next normalize cells, for each cell divide the normalized gene counts by the total
 counts per cell and multiply by the total number of cells.}
 }
-This data will be saved in the Giotto slot for custom expression.
+C. The normalization method as provided by Lause/Kobak et al is also implemented: \cr
+\itemize{
+  \item{1. First calculate expected values based on Pearson correlations.}
+  \item{2. Next calculate z-scores based on observed and expected values.}
 }
-\examples{
-
-
-data(mini_giotto_single_cell)
-
-norm_gobject = normalizeGiotto(mini_giotto_single_cell)
-
-
+By default the latter two results will be saved in the Giotto slot for scaled expression,
+ this can be changed by changing the update_slot parameters
 }

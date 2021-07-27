@@ -4,16 +4,33 @@
 \alias{subsetGiotto}
 \title{subsetGiotto}
 \usage{
-subsetGiotto(gobject, cell_ids = NULL, gene_ids = NULL, verbose = FALSE)
+subsetGiotto(
+  gobject,
+  cell_ids = NULL,
+  feat_type = NULL,
+  feat_ids = NULL,
+  gene_ids = NULL,
+  poly_info = NULL,
+  verbose = FALSE,
+  toplevel_params = 2
+)
 }
 \arguments{
 \item{gobject}{giotto object}
 
 \item{cell_ids}{cell IDs to keep}
 
-\item{gene_ids}{gene IDs to keep}
+\item{feat_type}{feature type to use}
+
+\item{feat_ids}{feature IDs to keep}
+
+\item{gene_ids}{deprecated, use feat_ids}
+
+\item{poly_info}{polygon information to use}
 
 \item{verbose}{be verbose}
+
+\item{toplevel_params}{parameters to extract}
 }
 \value{
 giotto object
@@ -31,7 +48,7 @@ random_genes = sample(slot(mini_giotto_single_cell, 'gene_ID'), 10)
 
 subset_obj = subsetGiotto(mini_giotto_single_cell,
                          cell_ids = random_cells,
-                         gene_ids = random_genes)
+                         feat_ids = random_genes)
 
 }
 

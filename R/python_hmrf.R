@@ -3,8 +3,10 @@
 #' @name doHMRF
 #' @description Run HMRF
 #' @param gobject giotto object
+#' @param feat_type feature type
 #' @param expression_values expression values to use
 #' @param spatial_network_name name of spatial network to use for HMRF
+#' @param spat_loc_name name of spatial locations
 #' @param spatial_genes spatial genes to use for HMRF
 #' @param spatial_dimensions select spatial dimensions to use, default is all possible dimensions
 #' @param dim_reduction_to_use use another dimension reduction set as input
@@ -24,8 +26,10 @@
 #' @details Description of HMRF parameters ...
 #' @export
 doHMRF <- function(gobject,
+                   feat_type = NULL,
                    expression_values = c('normalized', 'scaled', 'custom'),
                    spatial_network_name = 'Delaunay_network',
+                   spat_loc_name = 'raw',
                    spatial_genes = NULL,
                    spatial_dimensions = c('sdimx', 'sdimy', 'sdimz'),
                    dim_reduction_to_use = NULL,
@@ -55,11 +59,15 @@ doHMRF <- function(gobject,
   # data.table set global variable
   to = from = NULL
 
+  # specify feat_type
+  if(is.null(feat_type)) {
+    feat_type = gobject@expression_feat[[1]]
+  }
+
   ## check or make paths
   # python path
   if(is.null(python_path)) {
     python_path = readGiottoInstructions(gobject, param = "python_path")
-    #python_path = system('which python')
   }
 
   ## reader.py and get_result.py paths
@@ -86,11 +94,20 @@ doHMRF <- function(gobject,
 
   ## 1. expression values
   if(!is.null(dim_reduction_to_use)) {
-    expr_values = gobject@dimension_reduction[['cells']][[dim_reduction_to_use]][[dim_reduction_name]][['coordinates']][, dimensions_to_use]
-    expr_values = t_giotto(expr_values)
+
+    #expr_values = gobject@dimension_reduction[['cells']][[dim_reduction_to_use]][[dim_reduction_name]][['coordinates']][, dimensions_to_use]
+
+    expr_values = select_dimReduction(gobject = gobject,
+                                      reduction = 'cells',
+                                      reduction_method = dim_reduction_to_use,
+                                      name = dim_reduction_name,
+                                      return_dimObj = FALSE)
+    expr_values = expr_values[, dimensions_to_use]
+    expr_values = t_flex(expr_values)
+
   } else {
-    values = match.arg(expression_values, c('normalized', 'scaled', 'custom'))
-    expr_values = select_expression_values(gobject = gobject, values = values)
+    values = match.arg(expression_values, unique(c('normalized', 'scaled', 'custom', expression_values)))
+    expr_values = select_expression_values(gobject = gobject, feat_type = feat_type, values = values)
   }
   expression_file = paste0(output_folder,'/', 'expression_matrix.txt')
 
@@ -145,7 +162,9 @@ doHMRF <- function(gobject,
 
 
   ## 3. spatial network
-  spatial_network = select_spatialNetwork(gobject,name = spatial_network_name,return_network_Obj = FALSE)
+  spatial_network = select_spatialNetwork(gobject,
+                                          name = spatial_network_name,
+                                          return_network_Obj = FALSE)
   spatial_network = spatial_network[,.(to,from)]
   spatial_network_file = paste0(output_folder,'/', 'spatial_network.txt')
 
@@ -166,7 +185,9 @@ doHMRF <- function(gobject,
 
 
   ## 4. cell location
-  spatial_location = gobject@spatial_locs
+  spatial_location = select_spatial_locations(gobject = gobject,
+                                            spat_loc_name = spat_loc_name)
+  #spatial_location = gobject@spatial_locs
 
   # select spatial dimensions that are available #
   spatial_dimensions = spatial_dimensions[spatial_dimensions %in% colnames(spatial_location)]
@@ -233,6 +254,7 @@ doHMRF <- function(gobject,
 
   # store parameter results in HMRF S3 object
   HMRFObj = list(name = name,
+                 feat_type = feat_type,
                  output_data = output_data,
                  k = k,
                  betas = betas,
@@ -455,6 +477,9 @@ addHMRF <- function(gobject,
     stop('\n HMRFoutput needs to be output from doHMRFextend \n')
   }
 
+  # get feat_type
+  feat_type = HMRFoutput$feat_type
+
   ## reader.py and get_result.py paths
   # TODO: part of the package
   get_result_path = system.file("python", "get_result2.py", package = 'Giotto')
@@ -478,7 +503,7 @@ addHMRF <- function(gobject,
 
 
   # get cell metadata for object
-  cell_metadata = pDataDT(gobject)
+  cell_metadata = pDataDT(gobject, feat_type = feat_type)
 
 
   # plot betas
@@ -505,7 +530,9 @@ addHMRF <- function(gobject,
     }
 
 
-    gobject = addCellMetadata(gobject = gobject, column_cell_ID = 'cell_ID',
+    gobject = addCellMetadata(gobject = gobject,
+                              feat_type = feat_type,
+                              column_cell_ID = 'cell_ID',
                               new_metadata = annot_DT,
                               by_column = F)
 

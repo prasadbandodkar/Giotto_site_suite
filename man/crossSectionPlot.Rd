@@ -6,6 +6,8 @@
 \usage{
 crossSectionPlot(
   gobject,
+  spat_loc_name = "raw",
+  feat_type = NULL,
   crossSection_obj = NULL,
   name = NULL,
   spatial_network_name = "Delaunay_network",
@@ -15,6 +17,10 @@ crossSectionPlot(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_loc_name}{name of spatial locations}
+
+\item{feat_type}{feature type}
 
 \item{crossSection_obj}{cross section object as alternative input. default = NULL.}
 

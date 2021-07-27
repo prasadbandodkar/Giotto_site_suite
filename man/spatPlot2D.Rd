@@ -6,11 +6,13 @@
 \usage{
 spatPlot2D(
   gobject,
+  feat_type = NULL,
   show_image = F,
   gimage = NULL,
   image_name = "image",
   group_by = NULL,
   group_by_subset = NULL,
+  spat_loc_name = NULL,
   sdimx = "sdimx",
   sdimy = "sdimy",
   spat_enr_names = NULL,
@@ -48,8 +50,8 @@ spatPlot2D(
   coord_fix_ratio = NULL,
   title = NULL,
   show_legend = T,
-  legend_text = 8,
-  legend_symbol_size = 1,
+  legend_text = 10,
+  legend_symbol_size = 2,
   background_color = "white",
   vor_border_color = "white",
   vor_max_radius = 200,
@@ -70,15 +72,19 @@ spatPlot2D(
 \arguments{
 \item{gobject}{giotto object}
 
+\item{feat_type}{feature type}
+
 \item{show_image}{show a tissue background image}
 
 \item{gimage}{a giotto image}
 
-\item{image_name}{name of a giotto image}
+\item{image_name}{name of a giotto image or multiple images with group_by}
 
 \item{group_by}{create multiple plots based on cell annotation column}
 
 \item{group_by_subset}{subset the group_by factor column}
+
+\item{spat_loc_name}{name of spatial locations}
 
 \item{sdimx}{x-axis dimension name (default = 'sdimx')}
 

@@ -1150,7 +1150,7 @@ plotCellProximityGenes = function(gobject,
                                   min_spat_diff = 0.2,
                                   min_log2_fc = 0.2,
                                   min_zscore = 2,
-                                  zscores_column = c('cell_type', 'genes'),
+                                  zscores_column = c('cell_type', 'feats'),
                                   direction = c('both', 'up', 'down'),
                                   cell_color_code = NULL,
                                   show_plot = NA,
@@ -1291,6 +1291,9 @@ plotCellProximityGenes = function(gobject,
 
     # library(ggalluvial) # this is needed for it to work, why??
     # maybe use requireNamespace() instead?
+
+    # verify if optional package is installed
+    package_check(pkg_name = "ggalluvial", repository = "CRAN")
 
     pl <- ggplot2::ggplot(testalluv,
                           ggplot2::aes(y = N, axis1 = cell_type, axis2 = int_cell_type)) +
@@ -1458,6 +1461,109 @@ plotCPG = function(gobject,
 
 
 
+#' @name plotInteractionChangedFeats
+#' @description Create barplot to visualize interaction changed features
+#' @param gobject giotto object
+#' @param cpgObject ICF (interaction changed feature) score object
+#' @param source_type cell type of the source cell
+#' @param source_markers markers for the source cell type
+#' @param ICF_feats named character vector of ICF features
+#' @param cell_color_code cell color code for the interacting cell types
+#' @param show_plot show plots
+#' @param return_plot return plotting object
+#' @param save_plot directly save the plot [boolean]
+#' @param save_param list of saving parameters from \code{\link{all_plots_save_function}}
+#' @param default_save_name default save name for saving, don't change, change save_name in save_param
+#' @return plot
+#' @export
+plotInteractionChangedFeats = function(gobject,
+                                       cpgObject,
+                                       source_type,
+                                       source_markers,
+                                       ICF_feats,
+                                       cell_color_code = NULL,
+                                       show_plot = NA,
+                                       return_plot = NA,
+                                       save_plot = NA,
+                                       save_param =  list(),
+                                       default_save_name = 'plotInteractionChangedFeats') {
+
+
+  # data.table variables
+  cell_type = int_cell_type = log2fc = NULL
+
+
+  if(!'cpgObject' %in% class(cpgObject)) {
+    stop('\n cpgObject needs to be the output from findCellProximityFeats() or findCPF() \n')
+  }
+
+  CPGscores = cpgObject[['CPGscores']]
+
+  # combine feats
+  names(source_markers) = rep('marker', length(source_markers))
+  neighbor_types = names(ICF_feats)
+  all_feats = c(source_markers, ICF_feats)
+
+  # warning if there are feats selected that are not detected
+  detected_feats = unique(CPGscores[['feats']])
+  not_detected_feats = all_feats[!all_feats %in% detected_feats]
+  if(length(not_detected_feats) > 0) {
+    cat('These selected feats are not in the cpgObject: \n',
+        not_detected_feats, '\n')
+  }
+
+  # data.table set column names
+  feats = group = NULL
+
+  tempDT = CPGscores[feats %in% all_feats][cell_type == source_type][int_cell_type %in% neighbor_types]
+  tempDT[, feats := factor(feats, levels = all_feats)]
+  tempDT[, group := names(all_feats[all_feats == feats]), by = 1:nrow(tempDT)]
+
+
+  if(is.null(cell_color_code)) {
+    mycolors = getDistinctColors(n = length(unique(tempDT$int_cell_type)))
+    names(mycolors) = unique(tempDT$int_cell_type)
+  } else {
+    mycolors = cell_color_code
+  }
+
+
+  pl = ggplot2::ggplot()
+  pl = pl + ggplot2::theme_classic() + ggplot2::theme(axis.text.x = ggplot2::element_text(size = 14, angle = 45, vjust = 1, hjust = 1),
+                                                      axis.text.y = ggplot2::element_text(size = 14),
+                                                      axis.title = ggplot2::element_text(size = 14))
+  pl = pl + ggplot2::geom_bar(data = tempDT, ggplot2::aes(x = feats, y = log2fc, fill = int_cell_type), stat = 'identity', position = ggplot2::position_dodge())
+  pl = pl + ggplot2::scale_fill_manual(values = mycolors)
+  pl = pl + ggplot2::labs(x = '', title = paste0('fold-change z-scores in ' ,source_type))
+
+
+
+  # print, return and save parameters
+  show_plot = ifelse(is.na(show_plot), readGiottoInstructions(gobject, param = 'show_plot'), show_plot)
+  save_plot = ifelse(is.na(save_plot), readGiottoInstructions(gobject, param = 'save_plot'), save_plot)
+  return_plot = ifelse(is.na(return_plot), readGiottoInstructions(gobject, param = 'return_plot'), return_plot)
+
+
+  ## print plot
+  if(show_plot == TRUE) {
+    print(pl)
+  }
+
+  ## save plot
+  if(save_plot == TRUE) {
+    do.call('all_plots_save_function', c(list(gobject = gobject, plot_object = pl, default_save_name = default_save_name), save_param))
+  }
+
+  ## return plot
+  if(return_plot == TRUE) {
+    return(pl)
+  }
+
+
+}
+
+
+
 
 #' @title plotInteractionChangedGenes
 #' @name plotInteractionChangedGenes
@@ -1487,79 +1593,67 @@ plotInteractionChangedGenes = function(gobject,
                                        save_param =  list(),
                                        default_save_name = 'plotInteractionChangedGenes') {
 
+  warning("Deprecated and replaced by plotInteractionChangedFeats")
 
-  # data.table variables
-  cell_type = int_cell_type = log2fc = NULL
-
-
-  if(!'cpgObject' %in% class(cpgObject)) {
-    stop('\n cpgObject needs to be the output from findCellProximityGenes() or findCPG() \n')
-  }
-
-  CPGscores = cpgObject[['CPGscores']]
-
-  # combine genes
-  names(source_markers) = rep('marker', length(source_markers))
-  neighbor_types = names(ICG_genes)
-  all_genes = c(source_markers, ICG_genes)
-
-  # warning if there are genes selected that are not detected
-  detected_genes = unique(CPGscores[['genes']])
-  not_detected_genes = all_genes[!all_genes %in% detected_genes]
-  if(length(not_detected_genes) > 0) {
-    cat('These selected genes are not in the cpgObject: \n',
-        not_detected_genes, '\n')
-  }
-
-  # data.table set column names
-  genes = group = NULL
-
-  tempDT = CPGscores[genes %in% all_genes][cell_type == source_type][int_cell_type %in% neighbor_types]
-  tempDT[, genes := factor(genes, levels = all_genes)]
-  tempDT[, group := names(all_genes[all_genes == genes]), by = 1:nrow(tempDT)]
-
-
-  if(is.null(cell_color_code)) {
-    mycolors = getDistinctColors(n = length(unique(tempDT$int_cell_type)))
-    names(mycolors) = unique(tempDT$int_cell_type)
-  } else {
-    mycolors = cell_color_code
-  }
-
-
-  pl = ggplot2::ggplot()
-  pl = pl + ggplot2::theme_classic() + ggplot2::theme(axis.text.x = ggplot2::element_text(size = 14, angle = 45, vjust = 1, hjust = 1),
-                                                      axis.text.y = ggplot2::element_text(size = 14),
-                                                      axis.title = ggplot2::element_text(size = 14))
-  pl = pl + ggplot2::geom_bar(data = tempDT, ggplot2::aes(x = genes, y = log2fc, fill = int_cell_type), stat = 'identity', position = ggplot2::position_dodge())
-  pl = pl + ggplot2::scale_fill_manual(values = mycolors)
-  pl = pl + ggplot2::labs(x = '', title = paste0('fold-change z-scores in ' ,source_type))
-
-
-
-  # print, return and save parameters
-  show_plot = ifelse(is.na(show_plot), readGiottoInstructions(gobject, param = 'show_plot'), show_plot)
-  save_plot = ifelse(is.na(save_plot), readGiottoInstructions(gobject, param = 'save_plot'), save_plot)
-  return_plot = ifelse(is.na(return_plot), readGiottoInstructions(gobject, param = 'return_plot'), return_plot)
-
-
-  ## print plot
-  if(show_plot == TRUE) {
-    print(pl)
-  }
-
-  ## save plot
-  if(save_plot == TRUE) {
-    do.call('all_plots_save_function', c(list(gobject = gobject, plot_object = pl, default_save_name = default_save_name), save_param))
-  }
-
-  ## return plot
-  if(return_plot == TRUE) {
-    return(pl)
-  }
-
+  plotInteractionChangedFeats(gobject = gobject,
+                              cpgObject = cpgObject,
+                              source_type = source_type,
+                              source_markers = source_markers,
+                              ICF_feats = ICG_genes,
+                              cell_color_code = cell_color_code,
+                              show_plot = show_plot,
+                              return_plot = return_plot,
+                              save_plot = save_plot,
+                              save_param =  save_param,
+                              default_save_name = default_save_name)
 
 }
+
+
+
+#' @name plotICF
+#' @description Create barplot to visualize interaction changed features
+#' @param gobject giotto object
+#' @param cpgObject ICF (interaction changed feature) score object
+#' @param source_type cell type of the source cell
+#' @param source_markers markers for the source cell type
+#' @param ICF_feats named character vector of ICF features
+#' @param cell_color_code cell color code for the interacting cell types
+#' @param show_plot show plots
+#' @param return_plot return plotting object
+#' @param save_plot directly save the plot [boolean]
+#' @param save_param list of saving parameters from \code{\link{all_plots_save_function}}
+#' @param default_save_name default save name for saving, don't change, change save_name in save_param
+#' @return plot
+#' @export
+plotICF = function(gobject,
+                   cpgObject,
+                   source_type,
+                   source_markers,
+                   ICF_feats,
+                   cell_color_code = NULL,
+                   show_plot = NA,
+                   return_plot = NA,
+                   save_plot = NA,
+                   save_param =  list(),
+                   default_save_name = 'plotICF') {
+
+
+  plotInteractionChangedFeats(gobject = gobject,
+                              cpgObject = cpgObject,
+                              source_type = source_type,
+                              source_markers = source_markers,
+                              ICF_feats = ICF_feats,
+                              cell_color_code = cell_color_code,
+                              show_plot = show_plot,
+                              return_plot = return_plot,
+                              save_plot = save_plot,
+                              save_param =  save_param,
+                              default_save_name = default_save_name)
+
+}
+
+
 
 
 #' @title plotICG
@@ -1591,17 +1685,19 @@ plotICG = function(gobject,
                    default_save_name = 'plotICG') {
 
 
-  plotInteractionChangedGenes(gobject = gobject,
-                             cpgObject = cpgObject,
-                             source_type = source_type,
-                             source_markers = source_markers,
-                             ICG_genes = ICG_genes,
-                             cell_color_code = cell_color_code,
-                             show_plot = show_plot,
-                             return_plot = return_plot,
-                             save_plot = save_plot,
-                             save_param =  save_param,
-                             default_save_name = default_save_name)
+  warning("Deprecated and replaced by plotInteractionChangedFeats or plotICF")
+
+  plotInteractionChangedFeats(gobject = gobject,
+                              cpgObject = cpgObject,
+                              source_type = source_type,
+                              source_markers = source_markers,
+                              ICF_feats = ICG_genes,
+                              cell_color_code = cell_color_code,
+                              show_plot = show_plot,
+                              return_plot = return_plot,
+                              save_plot = save_plot,
+                              save_param =  save_param,
+                              default_save_name = default_save_name)
 
 }
 
@@ -2514,10 +2610,10 @@ plotRecovery = function(gobject,
 # * ####
 # cell proximity spatplots ####
 
-#' @title cellProximitySpatPlot2D
 #' @name cellProximitySpatPlot2D
 #' @description Visualize 2D cell-cell interactions according to spatial coordinates in ggplot mode
 #' @param gobject giotto object
+#' @param feat_type feature type
 #' @param interaction_name cell-cell interaction name
 #' @param cluster_column cluster column with cell clusters
 #' @param sdimx x-axis dimension name (default = 'sdimx')
@@ -2551,6 +2647,7 @@ plotRecovery = function(gobject,
 #' @details Description of parameters.
 #' @export
 cellProximitySpatPlot2D <- function(gobject,
+                                    feat_type = NULL,
                                     interaction_name = NULL,
                                     cluster_column = NULL,
                                     sdimx = 'sdimx',
@@ -2584,12 +2681,18 @@ cellProximitySpatPlot2D <- function(gobject,
     stop('\n you need to specific at least one interaction name, run cellProximityEnrichment \n')
   }
 
+  # specify feat_type
+  if(is.null(feat_type)) {
+    feat_type = gobject@expression_feat[[1]]
+  }
+
 
   cell_locations  = gobject@spatial_locs
   spatial_grid    = gobject@spatial_grid[[spatial_grid_name]]
-  cell_metadata   = gobject@cell_metadata
+  cell_metadata   = gobject@cell_metadata[[feat_type]]
 
   spatial_network = annotateSpatialNetwork(gobject = gobject,
+                                           feat_type = feat_type,
                                            spatial_network_name = spatial_network_name,
                                            cluster_column = cluster_column)
 
@@ -2736,7 +2839,6 @@ cellProximitySpatPlot2D <- function(gobject,
     return(pl)
   }
 }
-
 
 
 #' @title cellProximitySpatPlot

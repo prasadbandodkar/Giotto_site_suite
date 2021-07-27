@@ -11,11 +11,13 @@ spatPlot(...)
   Arguments passed on to \code{\link[=spatPlot2D]{spatPlot2D}}
   \describe{
     \item{\code{gobject}}{giotto object}
+    \item{\code{feat_type}}{feature type}
     \item{\code{show_image}}{show a tissue background image}
     \item{\code{gimage}}{a giotto image}
-    \item{\code{image_name}}{name of a giotto image}
+    \item{\code{image_name}}{name of a giotto image or multiple images with group_by}
     \item{\code{group_by}}{create multiple plots based on cell annotation column}
     \item{\code{group_by_subset}}{subset the group_by factor column}
+    \item{\code{spat_loc_name}}{name of spatial locations}
     \item{\code{sdimx}}{x-axis dimension name (default = 'sdimx')}
     \item{\code{sdimy}}{y-axis dimension name (default = 'sdimy')}
     \item{\code{spat_enr_names}}{names of spatial enrichment results to include}

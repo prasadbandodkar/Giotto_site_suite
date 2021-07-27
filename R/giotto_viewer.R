@@ -120,6 +120,7 @@ write_giotto_viewer_dim_reduction = function(dim_reduction_cell,
 #' @name exportGiottoViewer
 #' @description compute highly variable genes
 #' @param gobject giotto object
+#' @param feat_type feature types
 #' @param output_directory directory where to save the files
 #' @param spat_enr_names spatial enrichment results to include for annotations
 #' @param factor_annotations giotto cell annotations to view as factor
@@ -148,6 +149,7 @@ write_giotto_viewer_dim_reduction = function(dim_reduction_cell,
 #' }
 #'
 exportGiottoViewer = function(gobject,
+                              feat_type = NULL,
                               output_directory = NULL,
                               spat_enr_names = NULL,
                               factor_annotations = NULL,
@@ -158,19 +160,18 @@ exportGiottoViewer = function(gobject,
                               dim_red_rounding = NULL,
                               dim_red_rescale = c(-20,20),
                               expression_rounding = 2,
-                              overwrite_dir = T,
+                              overwrite_dir = TRUE,
                               verbose = T) {
-
 
   ## output directory ##
   if(file.exists(output_directory)) {
     if(overwrite_dir == TRUE) {
-      cat('output directory already exits, files will be overwritten \n')
+      cat('\n output directory already exists, files will be overwritten \n')
     } else {
-      stop('output directory already exits, change overwrite_dir = TRUE to overwrite files \n')
+      stop('\n output directory already exists, change overwrite_dir = TRUE to overwrite files \n')
     }
   } else if(is.null(output_directory)) {
-    cat('no output directory is provides, defaults to current directory: ', getwd(), '\n')
+    cat('\n no output directory is provided, defaults to current directory: ', getwd(), '\n')
     output_directory = getwd()
   } else {
     cat('output directory is created \n')
@@ -178,16 +179,28 @@ exportGiottoViewer = function(gobject,
   }
 
 
-  if(verbose == TRUE) cat('write cell and gene IDs\n')
+  # set feat type
+  if(is.null(feat_type)) {
+    feat_type = gobject@expression_feat[[1]]
+  }
+
+
+  if(verbose == TRUE) cat('\n write cell and gene IDs \n')
+
   ### output cell_IDs ###
   giotto_cell_ids = gobject@cell_ID
   write.table(giotto_cell_ids, file = paste0(output_directory,'/','giotto_cell_ids.txt'),
               quote = F, row.names = F, col.names = F, sep = ' ')
 
-  ### output gene_IDs ###
-  giotto_gene_ids = gobject@gene_ID
-  write.table(giotto_gene_ids, file = paste0(output_directory,'/','giotto_gene_ids.txt'),
-              quote = F, row.names = F, col.names = F, sep = ' ')
+  ### output all feat_IDs ###
+  possible_feat_types =  names(gobject@feat_ID)
+  feat_type = feat_type[feat_type %in% possible_feat_types]
+
+  for(feat in feat_type) {
+    giotto_feat_ids = gobject@feat_ID[[feat]]
+    write.table(giotto_feat_ids, file = paste0(output_directory,'/','giotto_',feat,'_ids.txt'),
+                quote = F, row.names = F, col.names = F, sep = ' ')
+  }
 
 
   ### physical location ###
@@ -211,71 +224,94 @@ exportGiottoViewer = function(gobject,
 
 
   ### annotations ###
-  cell_metadata = combineMetadata(gobject = gobject, spat_enr_names = spat_enr_names)
+  for(feat in feat_type) {
 
-  # factor annotations #
-  if(!is.null(factor_annotations)) {
-    found_factor_annotations = factor_annotations[factor_annotations %in% colnames(cell_metadata)]
-    for(sel_annot in found_factor_annotations) {
 
-      if(verbose == TRUE) cat('write annotation data for: ', sel_annot,'\n')
+    if(verbose == TRUE) cat('\n for feature type ', feat, ' do: ','\n')
 
-      selected_annotation = cell_metadata[[sel_annot]]
-      write_giotto_viewer_annotation(annotation = selected_annotation, annot_name = sel_annot,
-                                     output_directory = output_directory)
+    cell_metadata = combineMetadata(gobject = gobject,
+                                    feat_type = feat,
+                                    spat_enr_names = spat_enr_names)
 
+
+    # factor annotations #
+    if(!is.null(factor_annotations)) {
+      found_factor_annotations = factor_annotations[factor_annotations %in% colnames(cell_metadata)]
+
+      for(sel_annot in found_factor_annotations) {
+
+        if(verbose == TRUE) cat('\n write annotation data for: ', sel_annot,'\n')
+
+        selected_annotation = cell_metadata[[sel_annot]]
+        write_giotto_viewer_annotation(annotation = selected_annotation,
+                                       annot_name = paste0(feat,'_', sel_annot),
+                                       output_directory = output_directory)
+
+      }
+
+      # annotiation list #
+      text_file_names = list()
+      annot_names = list()
+      for(sel_annot_id in 1:length(found_factor_annotations)) {
+
+        sel_annot_name = found_factor_annotations[sel_annot_id]
+        annot_inf_name = paste0(sel_annot_name,'_annot_information.txt')
+
+        annot_names[[sel_annot_id]] = sel_annot_name
+        text_file_names[[sel_annot_id]] = annot_inf_name
+
+      }
+
+      annot_list = data.table(txtfiles = unlist(text_file_names), names = unlist(annot_names))
+      write.table(annot_list, file = paste0(output_directory,'/','annotation_list','_',feat, '.txt'),
+                  quote = F, row.names = F, col.names = F, sep = ' ')
     }
 
-    # annotiation list #
-    text_file_names = list()
-    annot_names = list()
-    for(sel_annot_id in 1:length(found_factor_annotations)) {
 
-      sel_annot_name = found_factor_annotations[sel_annot_id]
-      annot_inf_name = paste0(sel_annot_name,'_annot_information.txt')
 
-      annot_names[[sel_annot_id]] = sel_annot_name
-      text_file_names[[sel_annot_id]] = annot_inf_name
+    # numeric annotations #
+    if(!is.null(numeric_annotations)) {
+      found_numeric_annotations = numeric_annotations[numeric_annotations %in% colnames(cell_metadata)]
+      for(sel_annot in found_numeric_annotations) {
 
+        if(verbose == TRUE) cat('\n write annotation data for: ', sel_annot,'\n')
+        selected_annotation = cell_metadata[[sel_annot]]
+        write_giotto_viewer_numeric_annotation(annotation = selected_annotation,
+                                               annot_name = paste0(feat,'_', sel_annot),
+                                               output_directory = output_directory)
+
+      }
+
+
+
+      # numeric annotiation list #
+      text_file_names = list()
+      annot_names = list()
+      for(sel_annot_id in 1:length(found_numeric_annotations)) {
+
+        sel_annot_name = found_numeric_annotations[sel_annot_id]
+        annot_inf_name = paste0(sel_annot_name,'_num_annot_information.txt')
+
+        annot_names[[sel_annot_id]] = sel_annot_name
+        text_file_names[[sel_annot_id]] = annot_inf_name
+
+      }
+
+      annot_list = data.table(txtfiles = unlist(text_file_names), names = unlist(annot_names))
+      write.table(annot_list, file = paste0(output_directory,'/','annotation_num_list','_',feat, '.txt'),
+                  quote = F, row.names = F, col.names = F, sep = ' ')
     }
 
-    annot_list = data.table(txtfiles = unlist(text_file_names), names = unlist(annot_names))
-    write.table(annot_list, file = paste0(output_directory,'/','annotation_list.txt'),
-                quote = F, row.names = F, col.names = F, sep = ' ')
+
   }
 
 
 
-  # numeric annotations #
-  if(!is.null(numeric_annotations)) {
-    found_numeric_annotations = numeric_annotations[numeric_annotations %in% colnames(cell_metadata)]
-    for(sel_annot in found_numeric_annotations) {
-
-      if(verbose == TRUE) cat('write annotation data for: ', sel_annot,'\n')
-      selected_annotation = cell_metadata[[sel_annot]]
-      write_giotto_viewer_numeric_annotation(annotation = selected_annotation, annot_name = sel_annot,
-                                             output_directory = output_directory)
-
-    }
+  ## end feat type loop
 
 
-    # numeric annotiation list #
-    text_file_names = list()
-    annot_names = list()
-    for(sel_annot_id in 1:length(found_numeric_annotations)) {
 
-      sel_annot_name = found_numeric_annotations[sel_annot_id]
-      annot_inf_name = paste0(sel_annot_name,'_num_annot_information.txt')
 
-      annot_names[[sel_annot_id]] = sel_annot_name
-      text_file_names[[sel_annot_id]] = annot_inf_name
-
-    }
-
-    annot_list = data.table(txtfiles = unlist(text_file_names), names = unlist(annot_names))
-    write.table(annot_list, file = paste0(output_directory,'/','annotation_num_list.txt'),
-                quote = F, row.names = F, col.names = F, sep = ' ')
-  }
 
 
   ### dimension reduction ###
@@ -301,42 +337,46 @@ exportGiottoViewer = function(gobject,
 
   ### expression data ###
   # expression values to be used
-  if(verbose == TRUE) cat('write expression values \n')
-  values = match.arg(expression_values, c( 'scaled', 'normalized', 'custom'))
-  expr_values = select_expression_values(gobject = gobject, values = values)
+  if(verbose == TRUE) cat('\n write expression values \n')
+  values = match.arg(expression_values, unique(c( 'scaled', 'normalized', 'custom', expression_values)))
 
-  # swap cell_IDs for numerical values
-  colnames(expr_values) = 1:ncol(expr_values)
-  # round values
-  if(!is.null(expression_rounding)) {
-    expr_values = round(x = expr_values, digits = expression_rounding)
-  }
-  data.table::fwrite(data.table::as.data.table(expr_values, keep.rownames="gene"), file=fs::path(output_directory, "giotto_expression.csv"), sep=",", quot=F, row.names=F, col.names=T)
-  #write.table(expr_values, quote = F, row.names = T, col.names = NA, sep = ',', file = paste0(output_directory,'/','giotto_expression.csv'))
+  for(feat in feat_type) {
+    expr_values = select_expression_values(gobject = gobject,
+                                           feat_type = feat,
+                                           values = values)
+
+    # swap cell_IDs for numerical values
+    colnames(expr_values) = 1:ncol(expr_values)
+    # round values
+    if(!is.null(expression_rounding)) {
+      expr_values = round(x = expr_values, digits = expression_rounding)
+    }
+    data.table::fwrite(data.table::as.data.table(expr_values, keep.rownames="gene"), file=fs::path(output_directory, "giotto_expression.csv"), sep=",", quot=F, row.names=F, col.names=T)
 
 
-  if(verbose == TRUE) cat('finished writing giotto viewer files to', output_directory , '\n')
+    if(verbose == TRUE) cat('\n finished writing giotto viewer files to', output_directory , '\n')
 
+    if(verbose == TRUE){
+      cat("\n")
+      cat("================================================================", "\n")
+      cat("Next steps. Please manually run the following in a SHELL terminal:", "\n")
+      cat("================================================================", "\n")
+      cat("cd ", output_directory, "\n")
+      cat("giotto_setup_image --require-stitch=n --image=n --image-multi-channel=n --segmentation=n --multi-fov=n --output-json=step1.json", "\n")
+      cat("smfish_step1_setup -c step1.json", "\n")
+      cat("giotto_setup_viewer --num-panel=2 --input-preprocess-json=step1.json --panel-1=PanelPhysicalSimple --panel-2=PanelTsne --output-json=step2.json --input-annotation-list=annotation_list.txt", "\n")
+      cat("smfish_read_config -c step2.json -o test.dec6.js -p test.dec6.html -q test.dec6.css", "\n")
+      cat("giotto_copy_js_css --output .", "\n")
+      cat("python3 -m http.server", "\n")
+      cat("================================================================", "\n")
+      cat("\n")
+      cat("Finally, open your browser, navigate to http://localhost:8000/. Then click on the file test.dec6.html to see the viewer.", "\n")
+      cat("\n")
+      cat("\n")
+      cat("For more information, http://spatialgiotto.rc.fas.harvard.edu/giotto.viewer.setup3.html", "\n")
+      cat("\n")
+    }
 
-  if(verbose == TRUE){
-     cat("\n")
-     cat("================================================================", "\n")
-     cat("Next steps. Please manually run the following in a SHELL terminal:", "\n")
-	 cat("================================================================", "\n")
-     cat("cd ", output_directory, "\n")
-     cat("giotto_setup_image --require-stitch=n --image=n --image-multi-channel=n --segmentation=n --multi-fov=n --output-json=step1.json", "\n")
-     cat("smfish_step1_setup -c step1.json", "\n")
-	 cat("giotto_setup_viewer --num-panel=2 --input-preprocess-json=step1.json --panel-1=PanelPhysicalSimple --panel-2=PanelTsne --output-json=step2.json --input-annotation-list=annotation_list.txt", "\n")
-	 cat("smfish_read_config -c step2.json -o test.dec6.js -p test.dec6.html -q test.dec6.css", "\n")
-     cat("giotto_copy_js_css --output .", "\n")
-	 cat("python3 -m http.server", "\n")
-     cat("================================================================", "\n")
-     cat("\n")
-	 cat("Finally, open your browser, navigate to http://localhost:8000/. Then click on the file test.dec6.html to see the viewer.", "\n")
-     cat("\n")
-     cat("\n")
-     cat("For more information, http://spatialgiotto.rc.fas.harvard.edu/giotto.viewer.setup3.html", "\n")
-	 cat("\n")
   }
 
 }

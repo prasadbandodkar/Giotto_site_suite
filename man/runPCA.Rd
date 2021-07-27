@@ -6,15 +6,18 @@
 \usage{
 runPCA(
   gobject,
+  feat_type = NULL,
   expression_values = c("normalized", "scaled", "custom"),
-  reduction = c("cells", "genes"),
-  name = "pca",
-  genes_to_use = "hvg",
+  reduction = c("cells", "feats"),
+  name = NULL,
+  feats_to_use = "hvf",
+  genes_to_use = NULL,
   return_gobject = TRUE,
   center = TRUE,
   scale_unit = TRUE,
   ncp = 100,
-  method = c("irlba", "factominer"),
+  method = c("irlba", "exact", "random", "factominer"),
+  method_params = list(NA),
   rev = FALSE,
   set_seed = TRUE,
   seed_number = 1234,
@@ -25,13 +28,17 @@ runPCA(
 \arguments{
 \item{gobject}{giotto object}
 
+\item{feat_type}{feature type}
+
 \item{expression_values}{expression values to use}
 
 \item{reduction}{cells or genes}
 
 \item{name}{arbitrary name for PCA run}
 
-\item{genes_to_use}{subset of genes to use for PCA}
+\item{feats_to_use}{subset of features to use for PCA}
+
+\item{genes_to_use}{deprecated use feats_to_use}
 
 \item{return_gobject}{boolean: return giotto object (default = TRUE)}
 
@@ -42,6 +49,8 @@ runPCA(
 \item{ncp}{number of principal components to calculate}
 
 \item{method}{which implementation to use}
+
+\item{method_params}{additional parameters}
 
 \item{rev}{do a reverse PCA}
 
@@ -60,23 +69,11 @@ giotto object with updated PCA dimension recuction
 runs a Principal Component Analysis
 }
 \details{
-See \code{\link[irlba]{prcomp_irlba}} and \code{\link[FactoMineR]{PCA}} for more information about other parameters.
+See \code{\link[BiocSingular]{runPCA}} and \code{\link[FactoMineR]{PCA}} for more information about other parameters.
 \itemize{
-  \item genes_to_use = NULL: will use all genes from the selected matrix
-  \item genes_to_use = <hvg name>: can be used to select a column name of
-  highly variable genes, created by (see \code{\link{calculateHVG}})
-  \item genes_to_use = c('geneA', 'geneB', ...): will use all manually provided genes
+  \item feats_to_use = NULL: will use all features from the selected matrix
+  \item feats_to_use = <hvg name>: can be used to select a column name of
+  highly variable features, created by (see \code{\link{calculateHVF}})
+  \item feats_to_use = c('geneA', 'geneB', ...): will use all manually provided features
 }
-}
-\examples{
-
-data(mini_giotto_single_cell)
-
-# run PCA
-mini_giotto_single_cell <- runPCA(gobject = mini_giotto_single_cell,
-                                  center = TRUE, scale_unit = TRUE)
-
-# plot PCA results
-plotPCA(mini_giotto_single_cell)
-
 }

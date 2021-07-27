@@ -15,7 +15,9 @@ createGiottoInstructions(
   units = NULL,
   height = NULL,
   width = NULL,
-  is_docker = FALSE
+  is_docker = FALSE,
+  plot_count = 0,
+  fiji_path = NULL
 )
 }
 \arguments{
@@ -40,6 +42,8 @@ createGiottoInstructions(
 \item{width}{width of  plots}
 
 \item{is_docker}{using docker implementation of Giotto (defaults to FALSE)}
+
+\item{plot_count}{[global option] start count for creating automatic unique plots}
 }
 \value{
 named vector with giotto instructions

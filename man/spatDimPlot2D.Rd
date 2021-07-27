@@ -6,9 +6,11 @@
 \usage{
 spatDimPlot2D(
   gobject,
+  feat_type = NULL,
   show_image = F,
   gimage = NULL,
   image_name = "image",
+  spat_loc_name = NULL,
   plot_alignment = c("vertical", "horizontal"),
   dim_reduction_to_use = "umap",
   dim_reduction_name = "umap",
@@ -67,8 +69,8 @@ spatDimPlot2D(
   spat_other_cells_alpha = 0.5,
   dim_show_legend = F,
   spat_show_legend = F,
-  legend_text = 8,
-  legend_symbol_size = 1,
+  legend_text = 10,
+  legend_symbol_size = 2,
   dim_background_color = "white",
   spat_background_color = "white",
   vor_border_color = "white",
@@ -85,6 +87,8 @@ spatDimPlot2D(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{feat_type}{feature type}
 
 \item{show_image}{show a tissue background image}
 

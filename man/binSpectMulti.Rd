@@ -6,8 +6,10 @@
 \usage{
 binSpectMulti(
   gobject,
+  feat_type = NULL,
   bin_method = c("kmeans", "rank"),
   expression_values = c("normalized", "scaled", "custom"),
+  subset_feats = NULL,
   subset_genes = NULL,
   spatial_network_k = c(5, 10, 20),
   reduce_network = FALSE,
@@ -36,11 +38,15 @@ binSpectMulti(
 \arguments{
 \item{gobject}{giotto object}
 
+\item{feat_type}{feature type}
+
 \item{bin_method}{method to binarize gene expression}
 
 \item{expression_values}{expression values to use}
 
-\item{subset_genes}{only select a subset of genes to test}
+\item{subset_feats}{only select a subset of features to test}
+
+\item{subset_genes}{deprecated, use subset_feats}
 
 \item{spatial_network_k}{different k's for a spatial kNN to evaluate}
 

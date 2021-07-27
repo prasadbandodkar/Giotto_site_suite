@@ -411,13 +411,11 @@ kmeans_arma_subset_binarize = function(x, n_iter = 5, extreme_nr = 20, sample_nr
 }
 
 
-#' @title kmeans_binarize_wrapper
 #' @name kmeans_binarize_wrapper
 #' @description wrapper for different binarization functions
 #' @keywords internal
-kmeans_binarize_wrapper = function(gobject,
-                                   expression_values = c('normalized', 'scaled', 'custom'),
-                                   subset_genes = NULL,
+kmeans_binarize_wrapper = function(expr_values,
+                                   subset_feats = NULL,
                                    kmeans_algo = c('kmeans', 'kmeans_arma', 'kmeans_arma_subset'),
                                    nstart = 3,
                                    iter_max = 10,
@@ -426,39 +424,33 @@ kmeans_binarize_wrapper = function(gobject,
                                    set.seed = NULL) {
 
 
-  # expression
-  values = match.arg(expression_values, c('normalized', 'scaled', 'custom'))
-  expr_values = select_expression_values(gobject = gobject, values = values)
 
-  if(!is.null(subset_genes)) {
-    expr_values = expr_values[rownames(expr_values) %in% subset_genes, ]
+  # expression values
+  if(!is.null(subset_feats)) {
+    expr_values = expr_values[rownames(expr_values) %in% subset_feats, ]
   }
 
   # check parameter
   kmeans_algo = match.arg(arg = kmeans_algo, choices = c('kmeans', 'kmeans_arma', 'kmeans_arma_subset'))
 
   if(kmeans_algo == 'kmeans') {
-    bin_matrix = t_giotto(apply(X = expr_values, MARGIN = 1, FUN = kmeans_binarize,
-                                nstart = nstart, iter.max = iter_max, set.seed = set.seed))
+    bin_matrix = t_flex(apply(X = expr_values, MARGIN = 1, FUN = Giotto:::kmeans_binarize,
+                              nstart = nstart, iter.max = iter_max, set.seed = set.seed))
   } else if(kmeans_algo == 'kmeans_arma') {
-    bin_matrix = t_giotto(apply(X = expr_values, MARGIN = 1, FUN = kmeans_arma_binarize,
-                                n_iter = iter_max, set.seed = set.seed))
+    bin_matrix = t_flex(apply(X = expr_values, MARGIN = 1, FUN = Giotto:::kmeans_arma_binarize,
+                              n_iter = iter_max, set.seed = set.seed))
   } else if(kmeans_algo == 'kmeans_arma_subset') {
-    bin_matrix = t_giotto(apply(X = expr_values, MARGIN = 1, FUN = kmeans_arma_subset_binarize,
-                                n_iter = iter_max,
-                                extreme_nr = extreme_nr,
-                                sample_nr = sample_nr,
-                                set.seed = set.seed))
+    bin_matrix = t_flex(apply(X = expr_values, MARGIN = 1, FUN = Giotto:::kmeans_arma_subset_binarize,
+                              n_iter = iter_max,
+                              extreme_nr = extreme_nr,
+                              sample_nr = sample_nr,
+                              set.seed = set.seed))
   }
 
   return(bin_matrix)
 
 }
 
-
-
-
-#' @title rank_binarize
 #' @name rank_binarize
 #' @description create binarized scores from a vector using arbitrary rank
 #' @keywords internal
@@ -473,6 +465,26 @@ rank_binarize = function(x, max_rank = 200) {
   return(sel_gene_bin)
 
 }
+
+
+#' @name rank_binarize_wrapper
+#' @description wrapper for rank binarization function
+#' @keywords internal
+rank_binarize_wrapper = function(expr_values,
+                                 subset_feats = NULL,
+                                 percentage_rank = 30) {
+
+  # expression values
+  if(!is.null(subset_feats)) {
+    expr_values = expr_values[rownames(expr_values) %in% subset_feats, ]
+  }
+
+  max_rank = (ncol(expr_values)/100)*percentage_rank
+  bin_matrix = t_flex(apply(X = expr_values, MARGIN = 1, FUN = rank_binarize, max_rank = max_rank))
+
+  return(bin_matrix)
+}
+
 
 
 ## data.table helper functions ####
@@ -707,7 +719,7 @@ getSpatialDataset = function(dataset = c('ST_OB1',
 }
 
 
-#' @title get10Xmatrix
+#' @name get10Xmatrix
 #' @description This function creates an expression matrix from a 10X structured folder
 #' @param path_to_data path to the 10X folder
 #' @param gene_column_index which column from the features or genes .tsv file to use for row ids
@@ -756,12 +768,91 @@ get10Xmatrix = function(path_to_data, gene_column_index = 1, remove_zero_rows = 
   colnames(MMmatrix) = barcodes_vec
 
   if(remove_zero_rows == TRUE) {
-    rowsums_result = rowSums_giotto(MMmatrix)
+    rowsums_result = rowSums_flex(MMmatrix)
     rowsums_bool = rowsums_result != 0
     MMmatrix = MMmatrix[rowsums_bool, ]
   }
 
   return(MMmatrix)
+
+}
+
+
+
+
+#' @name get10XmatrixOLD
+#' @description This function creates an expression matrix from a 10X structured folder
+#' @param path_to_data path to the 10X folder
+#' @param gene_column_index which column from the features or genes .tsv file to use for row ids
+#' @return sparse expression matrix from 10X
+#' @details A typical 10X folder is named raw_feature_bc_matrix or filtered_feature_bc_matrix and it has 3 files:
+#' \itemize{
+#'   \item{barcodes.tsv(.gz)}
+#'   \item{features.tsv(.gz) or genes.tsv(.gz)}
+#'   \item{matrix.mtx(.gz)}
+#' }
+#' By default the first column of the features or genes .tsv file will be used, however if multiple
+#' annotations are provided (e.g. ensembl gene ids and gene symbols) the user can select another column.
+get10XmatrixOLD = function(path_to_data, gene_column_index = 1) {
+
+  # data.table variables
+  total = gene_symbol = gene_id = gene_id_num = cell_id = cell_id_num = sort_gene_id_num = NULL
+
+  # data directory
+  files_10X = list.files(path_to_data)
+
+  # get barcodes and create vector
+  barcodes_file = grep(files_10X, pattern = 'barcodes', value = T)
+  barcodesDT = data.table::fread(input = paste0(path_to_data,'/',barcodes_file), header = F)
+  barcodes_vec = barcodesDT$V1
+  names(barcodes_vec) = 1:nrow(barcodesDT)
+
+  # get features and create vector
+  features_file = grep(files_10X, pattern = 'features|genes', value = T)
+  featuresDT = data.table::fread(input = paste0(path_to_data,'/',features_file), header = F)
+
+  g_name = colnames(featuresDT)[gene_column_index]
+  ## convert ensembl gene id to gene symbol ##
+  ## TODO
+
+  featuresDT[, total := .N, by = get(g_name)]
+  featuresDT[, gene_symbol := ifelse(total > 1, paste0(get(g_name),'--',1:.N), get(g_name)), by = get(g_name)]
+  features_vec = featuresDT$gene_symbol
+  names(features_vec) = 1:nrow(featuresDT)
+
+  # get matrix
+  matrix_file = grep(files_10X, pattern = 'matrix', value = T)
+  matrixDT = data.table::fread(input = paste0(path_to_data,'/',matrix_file), header = F, skip = 3)
+  colnames(matrixDT) = c('gene_id_num', 'cell_id_num', 'umi')
+
+  # extend matrixDT with missing cell IDs
+  all_matrix_cell_ids = unique(matrixDT$cell_id_num)
+  missing_barcodes_cell_ids = as.integer(names(barcodes_vec)[!names(barcodes_vec) %in% all_matrix_cell_ids])
+  length_missing = length(missing_barcodes_cell_ids)
+
+  if(length_missing > 0) {
+    missing_matrixDT = data.table(gene_id_num = rep(1, length_missing),
+                                  cell_id_num = missing_barcodes_cell_ids,
+                                  umi = rep(0, length_missing))
+    matrixDT = rbind(matrixDT, missing_matrixDT)
+  }
+
+
+  # convert barcodes and features
+  matrixDT[, gene_id := features_vec[gene_id_num]]
+  matrixDT[, cell_id := barcodes_vec[cell_id_num]]
+
+  # make sure that gene id are consecutive
+  sort_gene_id_vec = 1:length(unique(matrixDT$gene_id))
+  names(sort_gene_id_vec) = unique(matrixDT$gene_id)
+  matrixDT[, sort_gene_id_num := sort_gene_id_vec[gene_id]]
+
+  sparsemat = Matrix::sparseMatrix(i = matrixDT$sort_gene_id_num,
+                                   j = matrixDT$cell_id_num,
+                                   x = matrixDT$umi,
+                                   dimnames = list(unique(matrixDT$gene_id), unique(matrixDT$cell_id)))
+
+  return(sparsemat)
 
 }
 

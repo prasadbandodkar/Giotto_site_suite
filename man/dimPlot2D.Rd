@@ -6,6 +6,7 @@
 \usage{
 dimPlot2D(
   gobject,
+  feat_type = NULL,
   group_by = NULL,
   group_by_subset = NULL,
   dim_reduction_to_use = "umap",
@@ -13,22 +14,22 @@ dimPlot2D(
   dim1_to_use = 1,
   dim2_to_use = 2,
   spat_enr_names = NULL,
-  show_NN_network = F,
+  show_NN_network = FALSE,
   nn_network_to_use = "sNN",
   network_name = "sNN.pca",
   cell_color = NULL,
-  color_as_factor = T,
+  color_as_factor = TRUE,
   cell_color_code = NULL,
   cell_color_gradient = c("blue", "white", "red"),
   gradient_midpoint = NULL,
   gradient_limits = NULL,
   select_cell_groups = NULL,
   select_cells = NULL,
-  show_other_cells = T,
+  show_other_cells = TRUE,
   other_cell_color = "lightgrey",
   other_point_size = 0.5,
-  show_cluster_center = F,
-  show_center_label = T,
+  show_cluster_center = FALSE,
+  show_center_label = TRUE,
   center_point_size = 4,
   center_point_border_col = "black",
   center_point_border_stroke = 0.1,
@@ -41,9 +42,9 @@ dimPlot2D(
   point_border_col = "black",
   point_border_stroke = 0.1,
   title = NULL,
-  show_legend = T,
-  legend_text = 8,
-  legend_symbol_size = 1,
+  show_legend = TRUE,
+  legend_text = 10,
+  legend_symbol_size = 2,
   background_color = "white",
   axis_text = 8,
   axis_title = 8,
@@ -60,6 +61,8 @@ dimPlot2D(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{feat_type}{feature type}
 
 \item{group_by}{create multiple plots based on cell annotation column}
 

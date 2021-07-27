@@ -6,6 +6,8 @@
 \usage{
 spark(
   gobject,
+  spat_loc_name = "raw",
+  feat_type = NULL,
   percentage = 0.1,
   min_count = 10,
   expression_values = "raw",
@@ -17,6 +19,10 @@ spark(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_loc_name}{name for spatial locations}
+
+\item{feat_type}{feature type}
 
 \item{percentage}{The percentage of cells that are expressed for analysis}
 

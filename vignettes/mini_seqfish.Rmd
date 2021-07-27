@@ -32,7 +32,7 @@ To run this vignette you need to install all the necessary Python modules.
 ```{r eval=FALSE}
 # to automatically save figures in save_dir set save_plot to TRUE
 temp_dir = getwd()
-temp_dir = '~/Temp/'
+#temp_dir = '~/Temp/'
 myinstructions = createGiottoInstructions(save_dir = temp_dir,
                                           save_plot = FALSE, 
                                           show_plot = F)
@@ -84,7 +84,7 @@ seqfish_mini <- normalizeGiotto(gobject = seqfish_mini, scalefactor = 6000, verb
 seqfish_mini <- addStatistics(gobject = seqfish_mini)
 seqfish_mini <- adjustGiottoMatrix(gobject = seqfish_mini, 
                                    expression_values = c('normalized'),
-                                   covariate_columns = c('nr_genes', 'total_expr'))
+                                   covariate_columns = c('nr_feats', 'total_expr'))
 ```
 
 
@@ -140,12 +140,14 @@ gini_markers = findMarkers_one_vs_all(gobject = seqfish_mini,
 
 # get top 2 genes per cluster and visualize with violinplot
 topgenes_gini = gini_markers[, head(.SD, 2), by = 'cluster']
-violinPlot(seqfish_mini, genes = topgenes_gini$genes, cluster_column = 'leiden_clus')
+violinPlot(seqfish_mini, genes = topgenes_gini$feats[1:4], cluster_column = 'leiden_clus')
 
 # get top 6 genes per cluster and visualize with heatmap
 topgenes_gini2 = gini_markers[, head(.SD, 6), by = 'cluster']
-plotMetaDataHeatmap(seqfish_mini, selected_genes = topgenes_gini2$genes,
+plotMetaDataHeatmap(seqfish_mini, selected_genes = topgenes_gini2$feats,
                     metadata_cols = c('leiden_clus'))
+
+
 ```
 
 
@@ -153,8 +155,8 @@ plotMetaDataHeatmap(seqfish_mini, selected_genes = topgenes_gini2$genes,
 ## 6. cell type annotation
 ```{r eval=FALSE}
 clusters_cell_types = c('cell A', 'cell B', 'cell C', 'cell D',
-                        'cell E', 'cell F', 'cell G')
-names(clusters_cell_types) = 1:7
+                        'cell E', 'cell F', 'cell G', 'cell H')
+names(clusters_cell_types) = 1:8
 seqfish_mini = annotateGiotto(gobject = seqfish_mini, 
                               annotation_vector = clusters_cell_types, 
                               cluster_column = 'leiden_clus', 
@@ -165,6 +167,15 @@ pDataDT(seqfish_mini)
 # visualize annotations
 spatDimPlot(gobject = seqfish_mini, cell_color = 'cell_types', 
             spat_point_size = 3, dim_point_size = 3)
+
+# heatmap
+topgenes_heatmap = gini_markers[, head(.SD, 4), by = 'cluster']
+plotHeatmap(gobject = seqfish_mini,
+            genes = topgenes_heatmap$feats, 
+            gene_order = 'custom',
+            gene_custom_order = unique(topgenes_heatmap$feats),
+            cluster_column = 'cell_types',
+            legend_nrows = 1)
 ```
 
 
@@ -218,14 +229,14 @@ Visualize top 4 genes per method.
 ```{r eval=FALSE, fig.width=10, fig.height=10}
 km_spatialgenes = binSpect(seqfish_mini)
 spatGenePlot(seqfish_mini, expression_values = 'scaled', 
-             genes = km_spatialgenes[1:4]$genes,
+             genes = km_spatialgenes[1:4]$feats,
              point_shape = 'border', point_border_stroke = 0.1,
              show_network = F, network_color = 'lightgrey', point_size = 2.5,
              cow_n_col = 2)
 
 rank_spatialgenes = binSpect(seqfish_mini, bin_method = 'rank')
 spatGenePlot(seqfish_mini, expression_values = 'scaled', 
-             genes = rank_spatialgenes[1:4]$genes,
+             genes = rank_spatialgenes[1:4]$feats,
              point_shape = 'border', point_border_stroke = 0.1,
              show_network = F, network_color = 'lightgrey', point_size = 2.5,
              cow_n_col = 2)
@@ -247,7 +258,7 @@ and a subset of individual spatial genes.
 ```{r eval=FALSE, fig.width=10, fig.height=10}
 
 # 1. calculate spatial correlation scores 
-ext_spatial_genes = km_spatialgenes[1:500]$genes
+ext_spatial_genes = km_spatialgenes[1:500]$feats
 spat_cor_netw_DT = detectSpatialCorGenes(seqfish_mini,
                                          method = 'network', 
                                          spatial_network_name = 'Delaunay_network',
@@ -270,10 +281,12 @@ top_netw_spat_cluster = showSpatialCorGenes(spat_cor_netw_DT,
 cluster_genes_DT = showSpatialCorGenes(spat_cor_netw_DT, 
                                        use_clus_name = 'spat_netw_clus',
                                        show_top_genes = 1)
-cluster_genes = cluster_genes_DT$clus; names(cluster_genes) = cluster_genes_DT$gene_ID
+cluster_genes = cluster_genes_DT$clus; names(cluster_genes) = cluster_genes_DT$feat_ID
 
 
-seqfish_mini = createMetagenes(seqfish_mini, gene_clusters = cluster_genes, name = 'cluster_metagene')
+seqfish_mini = createMetagenes(seqfish_mini,
+                               gene_clusters = cluster_genes,
+                               name = 'cluster_metagene')
 spatCellPlot(seqfish_mini,
              spat_enr_names = 'cluster_metagene',
              cell_annotation_values = netw_ranks$clusters,
@@ -422,8 +435,8 @@ plotICG(gobject = seqfish_mini,
 
 LR_data = data.table::fread(system.file("extdata", "mouse_ligand_receptors.txt", package = 'Giotto'))
 
-LR_data[, ligand_det := ifelse(mouseLigand %in% seqfish_mini@gene_ID, T, F)]
-LR_data[, receptor_det := ifelse(mouseReceptor %in% seqfish_mini@gene_ID, T, F)]
+LR_data[, ligand_det := ifelse(mouseLigand %in% seqfish_mini@feat_ID[['rna']], T, F)]
+LR_data[, receptor_det := ifelse(mouseReceptor %in% seqfish_mini@feat_ID[['rna']], T, F)]
 LR_data_det = LR_data[ligand_det == T & receptor_det == T]
 select_ligands = LR_data_det$mouseLigand
 select_receptors = LR_data_det$mouseReceptor
@@ -432,7 +445,7 @@ select_receptors = LR_data_det$mouseReceptor
 ## get statistical significance of gene pair expression changes based on expression ##
 expr_only_scores = exprCellCellcom(gobject = seqfish_mini,
                                    cluster_column = 'cell_types',
-                                   random_iter = 500,
+                                   random_iter = 50,
                                    gene_set_1 = select_ligands,
                                    gene_set_2 = select_receptors)
 
@@ -440,7 +453,7 @@ expr_only_scores = exprCellCellcom(gobject = seqfish_mini,
 spatial_all_scores = spatCellCellcom(seqfish_mini,
                                      spatial_network_name = 'Delaunay_network',
                                      cluster_column = 'cell_types',
-                                     random_iter = 500,
+                                     random_iter = 50,
                                      gene_set_1 = select_ligands,
                                      gene_set_2 = select_receptors,
                                      adjust_method = 'fdr',
@@ -500,7 +513,8 @@ plotRecovery(gobject = seqfish_mini,
 viewer_folder = paste0(temp_dir, '/', 'Mouse_cortex_viewer')
 
 # select annotations, reductions and expression values to view in Giotto Viewer
-exportGiottoViewer(gobject = seqfish_mini, output_directory = viewer_folder,
+exportGiottoViewer(gobject = seqfish_mini,
+                   output_directory = viewer_folder,
                    factor_annotations = c('cell_types',
                                           'leiden_clus',
                                           'HMRF_k9_b.28'),

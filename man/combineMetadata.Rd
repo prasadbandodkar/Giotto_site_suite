@@ -4,10 +4,17 @@
 \alias{combineMetadata}
 \title{combineMetadata}
 \usage{
-combineMetadata(gobject, spat_enr_names = NULL)
+combineMetadata(
+  gobject,
+  feat_type = NULL,
+  spat_loc_name = "raw",
+  spat_enr_names = NULL
+)
 }
 \arguments{
 \item{gobject}{Giotto object}
+
+\item{feat_type}{feature type}
 
 \item{spat_enr_names}{names of spatial enrichment results to include}
 }
