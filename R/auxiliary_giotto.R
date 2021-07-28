@@ -1697,11 +1697,6 @@ normalizeGiotto <- function(gobject,
 #' @details This function implements the \code{\link[limma]{removeBatchEffect}} function to
 #' remove known batch effects and to adjust expression values according to provided covariates.
 #' @export
-#' @examples
-#'
-#' data(mini_giotto_single_cell)
-#'
-#' adjust_gobject = adjustGiottoMatrix(mini_giotto_single_cell)
 #'
 adjustGiottoMatrix <- function(gobject,
                                feat_type = NULL,
@@ -1782,7 +1777,7 @@ adjustGiottoMatrix <- function(gobject,
 }
 
 
-#' @title processGiotto
+#' @name processGiotto
 #' @description Wrapper for the different Giotto object processing functions
 #' @param gobject giotto object
 #' @param filter_params additional parameters to filterGiotto
@@ -1796,13 +1791,6 @@ adjustGiottoMatrix <- function(gobject,
 #' information about the different parameters in each step. If you do not provide
 #' them it will use the default values.
 #' @export
-#' @examples
-#'
-#' data(mini_giotto_single_cell)
-#'
-#' processed_object = processGiotto(mini_giotto_single_cell,
-#'                                  filter_params = list(gene_det_in_min_cells = 10,
-#'                                  min_det_genes_per_cell = 10))
 #'
 processGiotto = function(gobject,
                          filter_params = list(),
