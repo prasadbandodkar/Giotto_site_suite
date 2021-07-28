@@ -6,7 +6,7 @@ output: github_document
 <!-- This line is from RStudio -->
 
 
-# Giotto Suite Website
+# Giotto Suite
 
 <!-- badges: start -->
 <!-- badges: end -->
