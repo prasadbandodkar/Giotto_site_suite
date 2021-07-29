@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>create_genes_to_use_matrix — create_genes_to_use_matrix • Giotto Suite</title>
+<title>fiji — fiji • Giotto Suite</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="create_genes_to_use_matrix — create_genes_to_use_matrix" />
-<meta property="og:description" content="subsets matrix based on vector of genes or hvf column" />
+<meta property="og:title" content="fiji — fiji" />
+<meta property="og:description" content="fiji returns path to preferred Fiji executable" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -127,52 +127,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>create_genes_to_use_matrix</h1>
-    <small class="dont-index">Source: <a href='https://github.com/RubD/Giotto/blob/master/R/dimension_reduction.R'><code>R/dimension_reduction.R</code></a></small>
-    <div class="hidden name"><code>create_genes_to_use_matrix.Rd</code></div>
+    <h1>fiji</h1>
+    <small class="dont-index">Source: <a href='https://github.com/RubD/Giotto/blob/master/R/image_registration.R'><code>R/image_registration.R</code></a></small>
+    <div class="hidden name"><code>runFijiMacro.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>subsets matrix based on vector of genes or hvf column</p>
+    <p><code>fiji</code> returns path to preferred Fiji executable</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_feats_to_use_matrix</span><span class='op'>(</span>
-  <span class='va'>gobject</span>,
-  feat_type <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>sel_matrix</span>,
-  <span class='va'>feats_to_use</span>,
-  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>fiji</span><span class='op'>(</span>fijiPath <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>gobject</th>
-      <td><p>giotto object</p></td>
-    </tr>
-    <tr>
-      <th>feat_type</th>
-      <td><p>feature type</p></td>
-    </tr>
-    <tr>
-      <th>sel_matrix</th>
-      <td><p>selected expression matrix</p></td>
-    </tr>
-    <tr>
-      <th>feats_to_use</th>
-      <td><p>feats to use, character or vector of features</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>verbosity</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>subsetted matrix based on selected genes</p>
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Path to current Fiji executable</span>
+<span class='co'># \donttest{</span>
+<span class='fu'>fiji</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "/Applications/Fiji.app/Contents/MacOS/ImageJ-macosx"</div><div class='input'><span class='co'># }</span>
 
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># This function was taken and modified from jimpipeline by jefferislab #</span>
+<span class='co'># Set path to preferred Fiji executable (this will be remembered)</span>
+<span class='co'># you can also set options(giotto.fiji="/some/path")</span>
+<span class='fu'>fiji</span><span class='op'>(</span><span class='st'>"/Applications/Fiji.app/Contents/MacOS/ImageJ-macosx"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

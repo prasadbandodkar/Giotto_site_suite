@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>create_genes_to_use_matrix — create_genes_to_use_matrix • Giotto Suite</title>
+<title>registerImagesFIJI — registerImagesFIJI • Giotto Suite</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="create_genes_to_use_matrix — create_genes_to_use_matrix" />
-<meta property="og:description" content="subsets matrix based on vector of genes or hvf column" />
+<meta property="og:title" content="registerImagesFIJI — registerImagesFIJI" />
+<meta property="og:description" content="Wrapper function for Register Virtual Stack Slices plugin in FIJI" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -127,51 +127,142 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>create_genes_to_use_matrix</h1>
-    <small class="dont-index">Source: <a href='https://github.com/RubD/Giotto/blob/master/R/dimension_reduction.R'><code>R/dimension_reduction.R</code></a></small>
-    <div class="hidden name"><code>create_genes_to_use_matrix.Rd</code></div>
+    <h1>registerImagesFIJI</h1>
+    <small class="dont-index">Source: <a href='https://github.com/RubD/Giotto/blob/master/R/image_registration.R'><code>R/image_registration.R</code></a></small>
+    <div class="hidden name"><code>registerImagesFIJI.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>subsets matrix based on vector of genes or hvf column</p>
+    <p>Wrapper function for Register Virtual Stack Slices plugin in FIJI</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_feats_to_use_matrix</span><span class='op'>(</span>
-  <span class='va'>gobject</span>,
-  feat_type <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>sel_matrix</span>,
-  <span class='va'>feats_to_use</span>,
-  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
+    <pre class="usage"><span class='fu'>registerImagesFIJI</span><span class='op'>(</span>
+  <span class='va'>source</span>,
+  <span class='va'>output</span>,
+  init_gauss_blur <span class='op'>=</span> <span class='fl'>1.6</span>,
+  steps_per_scale_octave <span class='op'>=</span> <span class='fl'>3</span>,
+  min_img_size <span class='op'>=</span> <span class='fl'>64</span>,
+  max_img_size <span class='op'>=</span> <span class='fl'>1024</span>,
+  feat_desc_size <span class='op'>=</span> <span class='fl'>8</span>,
+  feat_desc_orient_bins <span class='op'>=</span> <span class='fl'>8</span>,
+  closest_next_closest_Ratio <span class='op'>=</span> <span class='fl'>0.92</span>,
+  max_align_err <span class='op'>=</span> <span class='fl'>25</span>,
+  inlier_ratio <span class='op'>=</span> <span class='fl'>0.05</span>,
+  headless <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  batch <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  MinMem <span class='op'>=</span> <span class='va'>MaxMem</span>,
+  MaxMem <span class='op'>=</span> <span class='fl'>2500</span>,
+  IncrementalGC <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  Threads <span class='op'>=</span> <span class='cn'>NULL</span>,
+  fijiArgs <span class='op'>=</span> <span class='cn'>NULL</span>,
+  javaArgs <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ijArgs <span class='op'>=</span> <span class='cn'>NULL</span>,
+  fijiPath <span class='op'>=</span> <span class='fu'><a href='fiji.html'>fiji</a></span><span class='op'>(</span><span class='op'>)</span>,
+  DryRun <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>gobject</th>
-      <td><p>giotto object</p></td>
+      <th>source</th>
+      <td><p>Folder containing images to be registered</p></td>
     </tr>
     <tr>
-      <th>feat_type</th>
-      <td><p>feature type</p></td>
+      <th>output</th>
+      <td><p>Folder to save registered images to</p></td>
     </tr>
     <tr>
-      <th>sel_matrix</th>
-      <td><p>selected expression matrix</p></td>
+      <th>init_gauss_blur</th>
+      <td><p>Point detector option: initial image blurring</p></td>
     </tr>
     <tr>
-      <th>feats_to_use</th>
-      <td><p>feats to use, character or vector of features</p></td>
+      <th>steps_per_scale_octave</th>
+      <td><p>Point detector option</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p>verbosity</p></td>
+      <th>min_img_size</th>
+      <td><p>Point detector option</p></td>
+    </tr>
+    <tr>
+      <th>max_img_size</th>
+      <td><p>Point detector option</p></td>
+    </tr>
+    <tr>
+      <th>feat_desc_size</th>
+      <td><p>Feature descriptor option</p></td>
+    </tr>
+    <tr>
+      <th>feat_desc_orient_bins</th>
+      <td><p>Feature descriptor option</p></td>
+    </tr>
+    <tr>
+      <th>closest_next_closest_Ratio</th>
+      <td><p>Feature descriptor option</p></td>
+    </tr>
+    <tr>
+      <th>max_align_err</th>
+      <td><p>Geometric consensus filter option</p></td>
+    </tr>
+    <tr>
+      <th>inlier_ratio</th>
+      <td><p>Geometric consensus filter option</p></td>
+    </tr>
+    <tr>
+      <th>headless</th>
+      <td><p>Whether to have ImageJ/Fiji running headless #TODO</p></td>
+    </tr>
+    <tr>
+      <th>batch</th>
+      <td><p>Use batch mode #TODO</p></td>
+    </tr>
+    <tr>
+      <th>MinMem, MaxMem</th>
+      <td><p>Memory limits</p></td>
+    </tr>
+    <tr>
+      <th>IncrementalGC</th>
+      <td><p>Whether to use incremental garbage collection</p></td>
+    </tr>
+    <tr>
+      <th>Threads</th>
+      <td><p>Number of threads</p></td>
+    </tr>
+    <tr>
+      <th>fijiArgs</th>
+      <td><p>Arguments for ImageJ/FIJI</p></td>
+    </tr>
+    <tr>
+      <th>javaArgs</th>
+      <td><p>Arguments for Java</p></td>
+    </tr>
+    <tr>
+      <th>ijArgs</th>
+      <td><p>Arguments for ImageJ</p></td>
+    </tr>
+    <tr>
+      <th>fijiPath</th>
+      <td><p>Path to fiji executable (can be set by
+<code><a href='https://rdrr.io/r/base/options.html'>options(giotto.fiji="/some/path")</a></code>)</p></td>
+    </tr>
+    <tr>
+      <th>DryRun</th>
+      <td><p>Whether to return the command to be run rather than actually
+executing it.</p></td>
+    </tr>
+    <tr>
+      <th>transformSave</th>
+      <td><p>Folder to save transforms to</p></td>
+    </tr>
+    <tr>
+      <th>referenceImg</th>
+      <td><p>File name of reference image for the registration</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>subsetted matrix based on selected genes</p>
+    <p>list of registered giotto objects where the registered images and spatial locations</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

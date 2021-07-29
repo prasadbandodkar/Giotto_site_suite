@@ -4,6 +4,7 @@ template:
     ganalytics:
     bootstrap: 4
     bootswatch: cosmo
+    ganalytics: G-BCXT5392QC
 
 authors:
   Ruben Dries:
