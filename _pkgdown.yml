@@ -1,7 +1,6 @@
 
 template:
   params:
-    ganalytics:
     bootstrap: 4
     bootswatch: cosmo
     ganalytics: G-BCXT5392QC
@@ -31,5 +30,59 @@ navbar:
     - text: "Try Giotto"
       menu:
 
+reference:
+  - title: Giotto environment
+    desc: install & work with Giotto python environment
+    contents:
+    - installGiottoEnvironment
+    - removeGiottoEnvironment
+    - checkGiottoEnvironment
+
+  - title: Giotto instructions
+    desc: Create or change Giotto instructions
+    contents:
+    - createGiottoInstructions
+    - readGiottoInstructions
+    - showGiottoInstructions
+    - changeGiottoInstructions
+    - replaceGiottoInstructions
+
+  - title: import raw data
+    desc: functions to help to import raw spatial data
+    contents:
+    - getSpatialDataset
+    - readExprMatrix
+    - get10Xmatrix
+    - get10Xmatrix_h5
+    - stitchFieldCoordinates
+    - stitchTileCoordinates
+
+  - title: add images
+    desc: functions to work with images for a Giotto object
+    contents:
+    - estimateImageBg
+    - changeImageBg
+    - createGiottoImage
+    - addGiottoImage
+    - addGiottoImageToSpatPlot
+    - showGiottoImageNames
+    - updateGiottoImage
+    - getGiottoImage
+    - plotGiottoImage
+
+  - title: Giotto object
+    desc: Create Giotto objects
+    contents:
+    - createGiottoObject
+    - createGiottoVisiumObject
+    - createGiottoObjectSubcellular
+
+  - title: Modify Giotto object(s)
+    desc: filter, subset or join Giotto objects
+    contents:
+    - filterGiotto
+    - subsetGiotto
+    - subsetGiottoLocs
+    - joinGiottoObjects
 
 
