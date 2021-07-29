@@ -5,13 +5,15 @@
 
 # Giotto Suite
 
+Giotto Suite is the new and updated version of Giotto.
+
 ### (under construction)
+
+### (stay tuned for updates: latest Aug 29th)
 
 <!-- badges: start -->
 
 <!-- badges: end -->
-
-Giotto Suite is the new and updated version of Giotto.
 
 **Giotto Suite** is a suite of software tools, including data structures
 and methods, for the comprehensive analysis and visualization of spatial

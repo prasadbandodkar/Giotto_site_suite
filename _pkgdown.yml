@@ -49,7 +49,7 @@ reference:
     - changeGiottoInstructions
     - replaceGiottoInstructions
 
-  - title: import raw data
+  - title: Import raw data
     desc: functions to help to import raw spatial data
     contents:
     - getSpatialDataset
@@ -59,7 +59,7 @@ reference:
     - stitchFieldCoordinates
     - stitchTileCoordinates
 
-  - title: add images
+  - title: Images
     desc: functions to work with images for a Giotto object
     contents:
     - estimateImageBg

@@ -6,13 +6,15 @@ output: github_document
 <!-- This line is from RStudio -->
 
 
-# Giotto Suite
+# Giotto Suite  
+
+Giotto Suite is the new and updated version of Giotto. 
+
 ### (under construction)
+### (stay tuned for updates: latest Aug 29th)
 
 <!-- badges: start -->
 <!-- badges: end -->
-
-Giotto Suite is the new and updated version of Giotto. 
 
 **Giotto Suite** is a suite of software tools, including data structures and methods, for the comprehensive analysis and visualization of spatial expression data. It was developed to extend and improve our previous R package Giotto. This will ensure that our spatial analysis solutions remain compatible with all current and future developed spatial technologies and platforms. It will also aid in the further integration with other external analysis pipelines and tools.
 
