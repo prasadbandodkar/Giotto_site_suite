@@ -1,14 +1,34 @@
 
-
-home:
-  title: Giotto Suite
-  description: Collection of integrated and external tools for spatial transcriptomic analysis
+template:
+  params:
+    ganalytics:
+    bootstrap: 4
+    bootswatch: cosmo
 
 authors:
   Ruben Dries:
     href: https://www.drieslab.com/
 
-
+title: Giotto Suite
 
 navbar:
-  title: Giotto Suite
+  title: ~
+  type: default
+  left:
+    - text: "Start"
+      menu:
+      - text: Description
+      - text: Workflow
+      - text: HOWTOs
+    - text: "Documentation"
+      href: reference/index.html
+    - text: "Datasets"
+      menu:
+    - text: "Contribute"
+    - text: "FAQ"
+    - text: "News"
+    - text: "Try Giotto"
+      menu:
+
+
+
