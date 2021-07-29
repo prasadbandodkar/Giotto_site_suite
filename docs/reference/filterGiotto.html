@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>cor_sparse adapted from wydr package — cor_sparse • Giotto Suite</title>
+<title>filterGiotto — filterGiotto • Giotto Suite</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="cor_sparse adapted from wydr package — cor_sparse" />
-<meta property="og:description" content="cor_sparse adapted from wydr package" />
+<meta property="og:title" content="filterGiotto — filterGiotto" />
+<meta property="og:description" content="filter Giotto object based on expression threshold" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -62,6 +62,16 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BCXT5392QC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BCXT5392QC');
+</script>
 
 
   </head>
@@ -127,18 +137,79 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>cor_sparse adapted from wydr package</h1>
+    <h1>filterGiotto</h1>
     <small class="dont-index">Source: <a href='https://github.com/RubD/Giotto/blob/master/R/auxiliary_giotto.R'><code>R/auxiliary_giotto.R</code></a></small>
-    <div class="hidden name"><code>cor_sparse.Rd</code></div>
+    <div class="hidden name"><code>filterGiotto.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>cor_sparse adapted from wydr package</p>
+    <p>filter Giotto object based on expression threshold</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cor_sparse</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>filterGiotto</span><span class='op'>(</span>
+  <span class='va'>gobject</span>,
+  feat_type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  expression_values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"raw"</span>, <span class='st'>"normalized"</span>, <span class='st'>"scaled"</span>, <span class='st'>"custom"</span><span class='op'>)</span>,
+  expression_threshold <span class='op'>=</span> <span class='fl'>1</span>,
+  feat_det_in_min_cells <span class='op'>=</span> <span class='fl'>100</span>,
+  gene_det_in_min_cells <span class='op'>=</span> <span class='cn'>NULL</span>,
+  min_det_feats_per_cell <span class='op'>=</span> <span class='fl'>100</span>,
+  min_det_genes_per_cell <span class='op'>=</span> <span class='cn'>NULL</span>,
+  poly_info <span class='op'>=</span> <span class='st'>"cell"</span>,
+  verbose <span class='op'>=</span> <span class='cn'>F</span>
+<span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>gobject</th>
+      <td><p>giotto object</p></td>
+    </tr>
+    <tr>
+      <th>feat_type</th>
+      <td><p>feature type</p></td>
+    </tr>
+    <tr>
+      <th>expression_values</th>
+      <td><p>expression values to use</p></td>
+    </tr>
+    <tr>
+      <th>expression_threshold</th>
+      <td><p>threshold to consider a gene expressed</p></td>
+    </tr>
+    <tr>
+      <th>feat_det_in_min_cells</th>
+      <td><p>minimum # of cells that need to express a feature</p></td>
+    </tr>
+    <tr>
+      <th>gene_det_in_min_cells</th>
+      <td><p>deprecated, use feat_det_in_min_cells</p></td>
+    </tr>
+    <tr>
+      <th>min_det_feats_per_cell</th>
+      <td><p>minimum # of features that need to be detected in a cell</p></td>
+    </tr>
+    <tr>
+      <th>min_det_genes_per_cell</th>
+      <td><p>deprecated, use min_det_feats_per_cell</p></td>
+    </tr>
+    <tr>
+      <th>poly_info</th>
+      <td><p>polygon information to use</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>verbose</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>giotto object</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The function <code>filterCombinations</code> can be used to explore the effect of different parameter values.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

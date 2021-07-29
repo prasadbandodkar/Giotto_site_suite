@@ -24,6 +24,8 @@ navbar:
       href: reference/index.html
     - text: "Datasets"
       menu:
+      - text: Visium
+      - text: Subcellular
     - text: "Contribute"
     - text: "FAQ"
     - text: "News"

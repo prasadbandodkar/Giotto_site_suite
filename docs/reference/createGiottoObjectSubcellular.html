@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>rowSums_giotto — rowSums_giotto • Giotto Suite</title>
+<title>createGiottoObjectSubcellular — createGiottoObjectSubcellular • Giotto Suite</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="rowSums_giotto — rowSums_giotto" />
-<meta property="og:description" content="rowSums function that works with multiple matrix representations" />
+<meta property="og:title" content="createGiottoObjectSubcellular — createGiottoObjectSubcellular" />
+<meta property="og:description" content="Function to create a giotto object starting from subcellular polygon (e.g. cell) and points (e.g. transcripts) information" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -62,6 +62,16 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BCXT5392QC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BCXT5392QC');
+</script>
 
 
   </head>
@@ -127,29 +137,106 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>rowSums_giotto</h1>
-    <small class="dont-index">Source: <a href='https://github.com/RubD/Giotto/blob/master/R/auxiliary_giotto.R'><code>R/auxiliary_giotto.R</code></a></small>
-    <div class="hidden name"><code>rowSums_giotto.Rd</code></div>
+    <h1>createGiottoObjectSubcellular</h1>
+    <small class="dont-index">Source: <a href='https://github.com/RubD/Giotto/blob/master/R/giotto.R'><code>R/giotto.R</code></a></small>
+    <div class="hidden name"><code>createGiottoObjectSubcellular.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>rowSums function that works with multiple matrix representations</p>
+    <p>Function to create a giotto object starting from subcellular polygon (e.g. cell) and points (e.g. transcripts) information</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rowSums_giotto</span><span class='op'>(</span><span class='va'>mymatrix</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>createGiottoObjectSubcellular</span><span class='op'>(</span>
+  gpoints <span class='op'>=</span> <span class='cn'>NULL</span>,
+  gpolygons <span class='op'>=</span> <span class='cn'>NULL</span>,
+  cell_metadata <span class='op'>=</span> <span class='cn'>NULL</span>,
+  feat_metadata <span class='op'>=</span> <span class='cn'>NULL</span>,
+  spatial_network <span class='op'>=</span> <span class='cn'>NULL</span>,
+  spatial_network_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  spatial_grid <span class='op'>=</span> <span class='cn'>NULL</span>,
+  spatial_grid_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  spatial_enrichment <span class='op'>=</span> <span class='cn'>NULL</span>,
+  spatial_enrichment_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  dimension_reduction <span class='op'>=</span> <span class='cn'>NULL</span>,
+  nn_network <span class='op'>=</span> <span class='cn'>NULL</span>,
+  images <span class='op'>=</span> <span class='cn'>NULL</span>,
+  instructions <span class='op'>=</span> <span class='cn'>NULL</span>,
+  cores <span class='op'>=</span> <span class='cn'>NA</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>mymatrix</th>
-      <td><p>matrix object</p></td>
+      <th>gpoints</th>
+      <td><p>giotto points</p></td>
+    </tr>
+    <tr>
+      <th>gpolygons</th>
+      <td><p>giotto polygons</p></td>
+    </tr>
+    <tr>
+      <th>cell_metadata</th>
+      <td><p>cell annotation metadata</p></td>
+    </tr>
+    <tr>
+      <th>feat_metadata</th>
+      <td><p>feature annotation metadata for each unique feature</p></td>
+    </tr>
+    <tr>
+      <th>spatial_network</th>
+      <td><p>list of spatial network(s)</p></td>
+    </tr>
+    <tr>
+      <th>spatial_network_name</th>
+      <td><p>list of spatial network name(s)</p></td>
+    </tr>
+    <tr>
+      <th>spatial_grid</th>
+      <td><p>list of spatial grid(s)</p></td>
+    </tr>
+    <tr>
+      <th>spatial_grid_name</th>
+      <td><p>list of spatial grid name(s)</p></td>
+    </tr>
+    <tr>
+      <th>spatial_enrichment</th>
+      <td><p>list of spatial enrichment score(s) for each spatial region</p></td>
+    </tr>
+    <tr>
+      <th>spatial_enrichment_name</th>
+      <td><p>list of spatial enrichment name(s)</p></td>
+    </tr>
+    <tr>
+      <th>dimension_reduction</th>
+      <td><p>list of dimension reduction(s)</p></td>
+    </tr>
+    <tr>
+      <th>nn_network</th>
+      <td><p>list of nearest neighbor network(s)</p></td>
+    </tr>
+    <tr>
+      <th>images</th>
+      <td><p>list of images</p></td>
+    </tr>
+    <tr>
+      <th>instructions</th>
+      <td><p>list of instructions or output result from <code><a href='createGiottoInstructions.html'>createGiottoInstructions</a></code></p></td>
+    </tr>
+    <tr>
+      <th>cores</th>
+      <td><p>how many cores or threads to use to read data if paths are provided</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>be verbose when building Giotto object</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>numeric vector</p>
+    <p>giotto object</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
