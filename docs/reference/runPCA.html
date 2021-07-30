@@ -103,16 +103,31 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Description</li>
-    <li class="dropdown-header">Workflow</li>
-    <li class="dropdown-header">HOWTOs</li>
+    <li>
+      <a href="../articles/getting_started.html#workflow">Workflow</a>
+    </li>
+    <li>
+      <a href="../articles/getting_started.html#howtos">HOWTOs</a>
+    </li>
   </ul>
 </li>
 <li>
   <a href="../reference/index.html">Documentation</a>
 </li>
-<li class="dropdown-header">Datasets</li>
-<li class="dropdown-header">Contribute</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Datasets
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Visium</li>
+    <li class="dropdown-header">Subcellular</li>
+  </ul>
+</li>
+<li>
+  <a href="../articles/contribute.html">Contribute</a>
+</li>
 <li class="dropdown-header">FAQ</li>
 <li class="dropdown-header">News</li>
 <li class="dropdown-header">Try Giotto</li>
@@ -249,7 +264,7 @@
     <p>giotto object with updated PCA dimension recuction</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>See <code><a href='https://rdrr.io/pkg/BiocSingular/man/runPCA.html'>runPCA</a></code> and <code><a href='https://rdrr.io/pkg/FactoMineR/man/PCA.html'>PCA</a></code> for more information about other parameters.</p><ul>
+    <p>See <code><a href='https://rdrr.io/pkg/BiocSingular/man/runPCA.html'>runPCA</a></code> and <code>PCA</code> for more information about other parameters.</p><ul>
 <li><p>feats_to_use = NULL: will use all features from the selected matrix</p></li>
 <li><p>feats_to_use = &lt;hvg name&gt;: can be used to select a column name of
   highly variable features, created by (see <code><a href='calculateHVF.html'>calculateHVF</a></code>)</p></li>

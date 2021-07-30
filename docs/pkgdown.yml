@@ -1,9 +1,11 @@
-pandoc: 2.7.3
+pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  contribute: contribute.html
+  getting_started: getting_started.html
   mini_seqfish: mini_seqfish.html
   mini_starmap: mini_starmap.html
   mini_visium: mini_visium.html
-last_built: 2021-07-29T18:40Z
+last_built: 2021-07-30T10:24Z
 

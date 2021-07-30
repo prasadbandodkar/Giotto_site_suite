@@ -103,16 +103,31 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Description</li>
-    <li class="dropdown-header">Workflow</li>
-    <li class="dropdown-header">HOWTOs</li>
+    <li>
+      <a href="../articles/getting_started.html#workflow">Workflow</a>
+    </li>
+    <li>
+      <a href="../articles/getting_started.html#howtos">HOWTOs</a>
+    </li>
   </ul>
 </li>
 <li>
   <a href="../reference/index.html">Documentation</a>
 </li>
-<li class="dropdown-header">Datasets</li>
-<li class="dropdown-header">Contribute</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Datasets
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Visium</li>
+    <li class="dropdown-header">Subcellular</li>
+  </ul>
+</li>
+<li>
+  <a href="../articles/contribute.html">Contribute</a>
+</li>
 <li class="dropdown-header">FAQ</li>
 <li class="dropdown-header">News</li>
 <li class="dropdown-header">Try Giotto</li>
@@ -265,13 +280,14 @@ how the networks are created.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span><span class='op'>)</span>
-
-<span class='va'>mini_giotto_single_cell</span> <span class='op'>&lt;-</span> <span class='fu'>createNearestNetwork</span><span class='op'>(</span>gobject <span class='op'>=</span> <span class='va'>mini_giotto_single_cell</span>,
-                                                dimensions_to_use <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, k <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in createNearestNetwork(gobject = mini_giotto_single_cell, dimensions_to_use = 1:3,     k = 3): no slot of name "expression_feat" for this object of class "giotto"</span></div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>mini_giotto_single_cell</span> <span class='op'>&lt;-</span> <span class='fu'>createNearestNetwork</span><span class='op'>(</span>gobject <span class='op'>=</span> <span class='va'>mini_giotto_single_cell</span>,</span>
+<span class='r-in'>                                                dimensions_to_use <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, k <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in createNearestNetwork(gobject = mini_giotto_single_cell, dimensions_to_use = 1:3,     k = 3)</span> no slot of name "expression_feat" for this object of class "giotto"</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

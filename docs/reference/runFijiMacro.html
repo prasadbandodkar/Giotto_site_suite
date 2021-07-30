@@ -103,16 +103,31 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Description</li>
-    <li class="dropdown-header">Workflow</li>
-    <li class="dropdown-header">HOWTOs</li>
+    <li>
+      <a href="../articles/getting_started.html#workflow">Workflow</a>
+    </li>
+    <li>
+      <a href="../articles/getting_started.html#howtos">HOWTOs</a>
+    </li>
   </ul>
 </li>
 <li>
   <a href="../reference/index.html">Documentation</a>
 </li>
-<li class="dropdown-header">Datasets</li>
-<li class="dropdown-header">Contribute</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Datasets
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Visium</li>
+    <li class="dropdown-header">Subcellular</li>
+  </ul>
+</li>
+<li>
+  <a href="../articles/contribute.html">Contribute</a>
+</li>
 <li class="dropdown-header">FAQ</li>
 <li class="dropdown-header">News</li>
 <li class="dropdown-header">Try Giotto</li>
@@ -151,18 +166,19 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Path to current Fiji executable</span>
-<span class='co'># \donttest{</span>
-<span class='fu'>fiji</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "/Applications/Fiji.app/Contents/MacOS/ImageJ-macosx"</div><div class='input'><span class='co'># }</span>
-
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># This function was taken and modified from jimpipeline by jefferislab #</span>
-<span class='co'># Set path to preferred Fiji executable (this will be remembered)</span>
-<span class='co'># you can also set options(giotto.fiji="/some/path")</span>
-<span class='fu'>fiji</span><span class='op'>(</span><span class='st'>"/Applications/Fiji.app/Contents/MacOS/ImageJ-macosx"</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># Path to current Fiji executable</span></span>
+<span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='fu'>fiji</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "/Applications/Fiji.app/Contents/MacOS/ImageJ-macosx"</span>
+<span class='r-in'><span class='co'># }</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># This function was taken and modified from jimpipeline by jefferislab #</span></span>
+<span class='r-in'><span class='co'># Set path to preferred Fiji executable (this will be remembered)</span></span>
+<span class='r-in'><span class='co'># you can also set options(giotto.fiji="/some/path")</span></span>
+<span class='r-in'><span class='fu'>fiji</span><span class='op'>(</span><span class='st'>"/Applications/Fiji.app/Contents/MacOS/ImageJ-macosx"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

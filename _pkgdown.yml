@@ -17,9 +17,10 @@ navbar:
   left:
     - text: "Start"
       menu:
-      - text: Description
       - text: Workflow
+        href: articles/getting_started.html#workflow
       - text: HOWTOs
+        href: articles/getting_started.html#howtos
     - text: "Documentation"
       href: reference/index.html
     - text: "Datasets"
@@ -27,6 +28,7 @@ navbar:
       - text: Visium
       - text: Subcellular
     - text: "Contribute"
+      href: articles/contribute.html
     - text: "FAQ"
     - text: "News"
     - text: "Try Giotto"

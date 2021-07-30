@@ -104,16 +104,31 @@ on a Giotto object in a summarized format" />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Description</li>
-    <li class="dropdown-header">Workflow</li>
-    <li class="dropdown-header">HOWTOs</li>
+    <li>
+      <a href="../articles/getting_started.html#workflow">Workflow</a>
+    </li>
+    <li>
+      <a href="../articles/getting_started.html#howtos">HOWTOs</a>
+    </li>
   </ul>
 </li>
 <li>
   <a href="../reference/index.html">Documentation</a>
 </li>
-<li class="dropdown-header">Datasets</li>
-<li class="dropdown-header">Contribute</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Datasets
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Visium</li>
+    <li class="dropdown-header">Subcellular</li>
+  </ul>
+</li>
+<li>
+  <a href="../articles/contribute.html">Contribute</a>
+</li>
 <li class="dropdown-header">FAQ</li>
 <li class="dropdown-header">News</li>
 <li class="dropdown-header">Try Giotto</li>
@@ -164,53 +179,54 @@ on a Giotto object in a summarized format</p>
     <p>list of processing steps and names</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span><span class='op'>)</span>
-
-<span class='fu'>showProcessingSteps</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Processing steps: 
-#&gt;  
-#&gt; 
-#&gt;  0_subset 
-#&gt; 
-#&gt;  1_filter 
-#&gt; 
-#&gt;  2_normalize 
-#&gt; 
-#&gt;  3_gene_stats 
-#&gt; 
-#&gt;  4_cell_stats 
-#&gt; 
-#&gt;  5_hvg 
-#&gt; 	 name info:  hvg 
-#&gt; 
-#&gt;  6_pca 
-#&gt; 	 name info:  pca 
-#&gt; 
-#&gt;  7_umap 
-#&gt; 	 name info:  pca umap 
-#&gt; 
-#&gt;  8_tsne 
-#&gt; 	 name info:  pca tsne 
-#&gt; 
-#&gt;  9_nn_network 
-#&gt; 	 name info:  pca sNN.pca 
-#&gt; 
-#&gt;  10_cluster 
-#&gt; 	 name info:  sNN.pca leiden_clus 
-#&gt; 
-#&gt;  11_grid 
-#&gt; 	 name info:  spatial_grid 
-#&gt; 
-#&gt;  12_delaunay_spatial_network 
-#&gt; 	 name info:  Delaunay_network 
-#&gt; 
-#&gt;  13_spatial_network 
-#&gt; 	 name info:  kNN_network 
-#&gt; 
-#&gt;  14_create_metagene 
-#&gt; 	 name info:  cluster_metagene </div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>showProcessingSteps</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Processing steps: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0_subset </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1_filter </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  2_normalize </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3_gene_stats </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  4_cell_stats </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  5_hvg </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 	 name info:  hvg </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  6_pca </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 	 name info:  pca </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  7_umap </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 	 name info:  pca umap </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  8_tsne </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 	 name info:  pca tsne </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  9_nn_network </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 	 name info:  pca sNN.pca </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  10_cluster </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 	 name info:  sNN.pca leiden_clus </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  11_grid </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 	 name info:  spatial_grid </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  12_delaunay_spatial_network </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 	 name info:  Delaunay_network </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  13_spatial_network </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 	 name info:  kNN_network </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  14_create_metagene </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 	 name info:  cluster_metagene </span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

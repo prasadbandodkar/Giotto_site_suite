@@ -11,7 +11,8 @@ output: github_document
 Giotto Suite is the new and updated version of Giotto. 
 
 ### (under construction)
-### (stay tuned for updates: latest Aug 29th)
+### (stay tuned for updates: latest Aug 30th)  
+
 
 <!-- badges: start -->
 <!-- badges: end -->

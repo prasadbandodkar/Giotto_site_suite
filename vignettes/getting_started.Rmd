@@ -1,0 +1,23 @@
+---
+output: html_document
+---
+
+
+\  
+
+## Workflow
+[under construction]  
+
+
+\  
+
+## HOWTOs 
+[under construction]  
+ 
+Giotto provides a lot of analyses, visualizations and other options to facilitate your spatial dataset analysis.
+We are working on providing easy-to-understand examples or tutorials, but if anything is not clear or if there is something you
+would like to see in particular, then do not hesitate to contact [us](https://github.com/RubD/Giotto/issues).
+
+
+\  
+
