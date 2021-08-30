@@ -2266,6 +2266,71 @@ plot_spat_image_layer_ggplot = function(ggplot,
 }
 
 
+
+
+#' @title plot_spat_scatterpie_layer_ggplot
+#' @name plot_spat_scatterpie_layer_ggplot
+#' @description create scatterpie in ggplot
+#' @param gobject giotto object
+#' @param sdimx x-axis dimension name (default = 'sdimx')
+#' @param sdimy y-axis dimension name (default = 'sdimy')
+#' @param spatial_locations spatial locations
+#' @param spatial_enrichment spatial enrichment results
+#' @param radius radius of scatterpie
+#' @param color color of lines within pie chart
+#' @param cell_color_code color code for the cell types
+#' @return ggplot
+#' @keywords internal
+plot_spat_scatterpie_layer_ggplot = function(ggobject,
+                                             sdimx = 'sdimx',
+                                             sdimy = 'sdimy',
+                                             spatial_locations = NULL,
+                                             spatial_enrichment = NULL,
+                                             radius = 10,
+                                             color = NA,
+                                             alpha = 1,
+                                             cell_color_code = NULL) {
+
+
+  # get cell names
+  cell_names = colnames(spatial_enrichment)[-1]
+
+  # combine spatial locations and enrichment results
+  combined_spat_enrichm = data.table::merge.data.table(x = spatial_enrichment,
+                                                       y = spatial_locations,
+                                                       by = 'cell_ID')
+
+  # plot scatterpie
+  pl = ggobject
+  pl = pl + scatterpie::geom_scatterpie(data = combined_spat_enrichm,
+                                        aes(x = sdimx, y = sdimy, r = radius),
+                                        cols = cell_names,
+                                        color = color,
+                                        alpha = alpha)
+
+  ## specificy colors to use
+  if(!is.null(cell_color_code)) {
+    pl = pl + ggplot2::scale_fill_manual(values = cell_color_code)
+  } else {
+
+    number_colors = length(unique(cell_names))
+    cell_color_code = getDistinctColors(n = number_colors)
+    names(cell_color_code) = unique(cell_names)
+    pl = pl + ggplot2::scale_fill_manual(values = cell_color_code)
+
+  }
+
+  return(pl)
+
+}
+
+
+
+
+
+
+
+
 #' @title spatPlot2D_single
 #' @name spatPlot2D_single
 #' @description Visualize cells according to spatial coordinates
@@ -2430,7 +2495,7 @@ spatPlot2D_single = function(gobject,
 
   ## extract spatial grid
   if(show_grid == TRUE) {
-    spatial_grid = select_spatialGrid(gobject = gobject,
+    spatial_grid = get_spatialGrid(gobject = gobject,
                                       name = spatial_grid_name)
   } else {
     spatial_grid = NULL
@@ -3045,6 +3110,186 @@ spatPlot = function(...) {
 
 
 
+
+
+
+## ** spatial deconvolution plotting ####
+
+
+#' @title spatDeconvPlot
+#' @name spatDeconvPlot
+#' @description Visualize cell type enrichment / deconvolution results in a scatterpie
+#' @param gobject giotto object
+#' @param feat_type feature type
+#' @param deconv_name name of deconvolution results to use
+#' @param show_image show a tissue background image
+#' @param gimage a giotto image
+#' @param image_name name of a giotto image
+#' @param spat_loc_name name of spatial locations
+#' @param sdimx x-axis dimension name (default = 'sdimx')
+#' @param sdimy y-axis dimension name (default = 'sdimy')
+#' @param cell_color_code named vector with colors
+#' @param line_color color of line within pie charts
+#' @param radius radios of pie charts
+#' @param alpha alpha of pie charts
+#' @param coord_fix_ratio fix ratio between x and y-axis
+#' @param title title of plot
+#' @param legend_text size of legend text
+#' @param background_color color of plot background
+#' @param title title for plot (default = deconv_name)
+#' @param axis_text size of axis text
+#' @param axis_title size of axis title
+#' @param show_plot show plot
+#' @param return_plot return ggplot object
+#' @param save_plot directly save the plot [boolean]
+#' @param save_param list of saving parameters from \code{\link{all_plots_save_function}}
+#' @param default_save_name default save name for saving, don't change, change save_name in save_param
+#' @return ggplot
+#' @details Description of parameters.
+#' @export
+spatDeconvPlot = function(gobject,
+                          feat_type = NULL,
+                          deconv_name = 'DWLS',
+                          show_image = F,
+                          gimage = NULL,
+                          image_name = 'image',
+                          spat_loc_name = NULL,
+                          sdimx = 'sdimx',
+                          sdimy = 'sdimy',
+                          cell_color_code = NULL,
+                          line_color = NA,
+                          radius = 10,
+                          alpha = 1,
+                          legend_text = 8,
+                          background_color = 'white',
+                          title = NULL,
+                          axis_text = 8,
+                          axis_title = 8,
+                          coord_fix_ratio = TRUE,
+                          show_plot = NA,
+                          return_plot = NA,
+                          save_plot = NA,
+                          save_param =  list(),
+                          default_save_name = 'spatDeconvPlot') {
+
+
+  # check for installed packages
+  package_check(pkg_name = "scatterpie", repository = "CRAN")
+
+
+  # specify feat_type
+  if(is.null(feat_type)) {
+    feat_type = gobject@expression_feat[[1]]
+  }
+
+  ## giotto image ##
+  if(show_image == TRUE) {
+    if(!is.null(gimage)) gimage = gimage
+    else if(!is.null(image_name)) {
+
+      if(length(image_name) == 1) {
+        gimage = gobject@images[[image_name]]
+        if(is.null(gimage)) warning('image_name: ', image_name, ' does not exists')
+      } else {
+        gimage = list()
+        for(gim in 1:length(image_name)) {
+          gimage[[gim]] = gobject@images[[gim]]
+          if(is.null(gimage[[gim]])) warning('image_name: ', gim, ' does not exists')
+        }
+      }
+
+
+    }
+  }
+
+  ## get spatial cell locations
+  spatial_locations = get_spatial_locations(gobject = gobject,
+                                            spat_loc_name = spat_loc_name)
+
+  ## deconvolution results
+  spatial_enrichment = get_spatial_enrichment(gobject = gobject,
+                                              enrichm_name = deconv_name)
+
+
+
+
+  ### create 2D plot with ggplot ###
+  #cat('create 2D plot with ggplot \n')
+
+
+  pl <- ggplot2::ggplot()
+  pl <- pl + ggplot2::theme_bw()
+
+  ## plot image ##
+  if(show_image == TRUE & !is.null(gimage)) {
+    pl = plot_spat_image_layer_ggplot(ggplot = pl,
+                                      gobject = gobject,
+                                      spat_loc_name = spat_loc_name,
+                                      gimage = gimage,
+                                      sdimx = sdimx,
+                                      sdimy = sdimy)
+  }
+
+
+  ## plot scatterpie ##
+  pl = plot_spat_scatterpie_layer_ggplot(ggobject = pl,
+                                         sdimx = sdimx,
+                                         sdimy = sdimy,
+                                         spatial_locations = spatial_locations,
+                                         spatial_enrichment = spatial_enrichment,
+                                         radius = radius,
+                                         color = line_color,
+                                         alpha = alpha,
+                                         cell_color_code = cell_color_code)
+
+
+  ## adjust theme settings
+  pl = pl + ggplot2::theme(plot.title = element_text(hjust = 0.5),
+                           legend.title = element_blank(),
+                           legend.text = element_text(size = legend_text),
+                           axis.title = element_text(size = axis_title),
+                           axis.text = element_text(size = axis_text),
+                           panel.grid = element_blank(),
+                           panel.background = element_rect(fill = background_color))
+
+  # fix coord ratio
+  if(!is.null(coord_fix_ratio)) {
+    pl <- pl + ggplot2::coord_fixed(ratio = coord_fix_ratio)
+  }
+
+  # provide x, y and plot titles
+  if(is.null(title)) title = deconv_name
+  pl <- pl + ggplot2::labs(x = 'x coordinates', y = 'y coordinates', title = title)
+
+
+  # print, return and save parameters
+  show_plot = ifelse(is.na(show_plot), readGiottoInstructions(gobject, param = 'show_plot'), show_plot)
+  save_plot = ifelse(is.na(save_plot), readGiottoInstructions(gobject, param = 'save_plot'), save_plot)
+  return_plot = ifelse(is.na(return_plot), readGiottoInstructions(gobject, param = 'return_plot'), return_plot)
+
+  ## print plot
+  if(show_plot == TRUE) {
+    print(pl)
+  }
+
+  ## save plot
+  if(save_plot == TRUE) {
+    do.call('all_plots_save_function', c(list(gobject = gobject,
+                                              plot_object = pl,
+                                              default_save_name = default_save_name), save_param))
+  }
+
+  ## return plot
+  if(return_plot == TRUE) {
+    return(pl)
+  }
+
+
+}
+
+
+
+
 ## ** spatial and dim reduction plotting ####
 
 
@@ -3410,6 +3655,7 @@ spatDimPlot = function(...) {
 
 ## ** spatial feature plotting ####
 
+#' @title spatFeatPlot2D_single
 #' @name spatFeatPlot2D_single
 #' @description Visualize cells and feature expression according to spatial coordinates
 #' @param gobject giotto object
@@ -3573,7 +3819,7 @@ spatFeatPlot2D_single <- function(gobject,
 
   ## extract spatial grid
   if(show_grid == TRUE) {
-    spatial_grid = select_spatialGrid(gobject,
+    spatial_grid = get_spatialGrid(gobject,
                                       spatial_grid_name)
   } else {
     spatial_grid = NULL
@@ -3844,7 +4090,7 @@ spatFeatPlot2D_single <- function(gobject,
 }
 
 
-
+#' @title spatFeatPlot2D
 #' @name spatFeatPlot2D
 #' @description Visualize cells and feature expression according to spatial coordinates
 #' @param gobject giotto object
@@ -4128,7 +4374,7 @@ spatFeatPlot2D <- function(gobject,
 
 
 
-
+#' @title spatGenePlot2D
 #' @name spatGenePlot2D
 #' @description Visualize cells and gene expression according to spatial coordinates
 #' @param gobject giotto object
@@ -4172,6 +4418,7 @@ spatGenePlot = function(...) {
 
 ## ** dim reduction feature plotting ####
 
+#' @title dimFeatPlot2D
 #' @name dimFeatPlot2D
 #' @description Visualize gene expression according to dimension reduction coordinates
 #' @param gobject giotto object
@@ -4500,7 +4747,7 @@ dimFeatPlot2D <- function(gobject,
 
 
 
-
+#' @title dimGenePlot2D
 #' @name dimGenePlot2D
 #' @description Visualize gene expression according to dimension reduction coordinates
 #' @param gobject giotto object
@@ -4525,7 +4772,7 @@ dimGenePlot2D <- function(gobject,
 
 
 
-
+#' @title dimGenePlot
 #' @name dimGenePlot
 #' @description Visualize gene expression according to dimension reduction coordinates
 #' @inheritDotParams dimGenePlot2D
@@ -4544,7 +4791,7 @@ dimGenePlot = function(...) {
 ## ** spatial and dim reduction feature plotting ####
 
 
-
+#' @title spatDimFeatPlot2D
 #' @name spatDimFeatPlot2D
 #' @description Visualize cells according to spatial AND dimension reduction coordinates in ggplot mode
 #' @param gobject giotto object
@@ -4787,7 +5034,7 @@ spatDimFeatPlot2D <- function(gobject,
 
 
 
-
+#' @title spatDimGenePlot2D
 #' @name spatDimGenePlot2D
 #' @description Visualize cells according to spatial AND dimension reduction coordinates in ggplot mode
 #' @param gobject giotto object
@@ -4836,7 +5083,7 @@ spatDimGenePlot = function(...) {
 
 
 
-
+#' @title spatCellPlot2D
 #' @name spatCellPlot2D
 #' @description Visualize cells according to spatial coordinates
 #' @param gobject giotto object
@@ -6514,7 +6761,7 @@ spatPlot_2D_plotly = function(gobject,
 
   ## extract spatial grid
   if(show_grid == TRUE) {
-    spatial_grid = select_spatialGrid(gobject, spatial_grid_name)
+    spatial_grid = get_spatialGrid(gobject, spatial_grid_name)
   } else {
     spatial_grid = NULL
   }
@@ -6738,7 +6985,7 @@ spatPlot_3D_plotly = function(gobject,
 
   ## extract spatial grid
   if(show_grid == TRUE) {
-    spatial_grid = select_spatialGrid(gobject, spatial_grid_name)
+    spatial_grid = get_spatialGrid(gobject, spatial_grid_name)
   } else {
     spatial_grid = NULL
   }
@@ -7266,7 +7513,7 @@ spatDimPlot3D <- function(gobject,
 
   ## extract spatial grid
   if(show_spatial_grid == TRUE) {
-    spatial_grid = select_spatialGrid(gobject, spatial_grid_name)
+    spatial_grid = get_spatialGrid(gobject, spatial_grid_name)
   } else {
     spatial_grid = NULL
   }
@@ -7958,7 +8205,7 @@ spatGenePlot3D <- function(gobject,
 
   ## extract spatial grid
   if(show_grid == TRUE) {
-    spatial_grid = select_spatialGrid(gobject, spatial_grid_name)
+    spatial_grid = get_spatialGrid(gobject, spatial_grid_name)
   } else {
     spatial_grid = NULL
   }
@@ -8700,7 +8947,7 @@ spatDimGenePlot3D <- function(gobject,
 
   ## extract spatial grid
   if(show_spatial_grid == TRUE) {
-    spatial_grid = select_spatialGrid(gobject, spatial_grid_name)
+    spatial_grid = get_spatialGrid(gobject, spatial_grid_name)
   } else {
     spatial_grid = NULL
   }

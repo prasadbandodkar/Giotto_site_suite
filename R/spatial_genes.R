@@ -1973,7 +1973,7 @@ spatialAEH <- function(gobject = NULL,
   results = SpatialDE_results[['results']][['results']]
 
   ## automatic expression histology
-  AEH_results = Spatial_DE_AEH(filterd_exprs = as.data.frame(t_giotto(as.matrix(expr_values))),
+  AEH_results = Spatial_DE_AEH(filterd_exprs = as.data.frame(t_flex(as.matrix(expr_values))),
                                coordinates = spatial_locs,
                                results = as.data.frame(results),
                                pattern_num = pattern_num,
@@ -3025,7 +3025,7 @@ detectSpatialCorFeatsMatrix <- function(expression_matrix,
   ## spatial averaging or smoothing
   if(method == 'grid') {
 
-    loc_av_expr_matrix = do_spatial_grid_averaging(expression_matrix = expression_matrix,
+    loc_av_expr_matrix = do_spatial_grid_averaging(expression_matrix = as.matrix(expression_matrix),
                                                    spatial_grid = spatial_grid,
                                                    spatial_locs = spatial_locs,
                                                    subset_feats = subset_feats,
@@ -3043,7 +3043,7 @@ detectSpatialCorFeatsMatrix <- function(expression_matrix,
 
   if(method == 'network') {
 
-    knn_av_expr_matrix = do_spatial_knn_smoothing(expression_matrix = expression_matrix,
+    knn_av_expr_matrix = do_spatial_knn_smoothing(expression_matrix = as.matrix(expression_matrix),
                                                   spatial_network = spatial_network,
                                                   subset_feats = subset_feats,
                                                   b = network_smoothing)
@@ -3172,7 +3172,7 @@ detectSpatialCorFeats <- function(gobject,
 
   # get spatial locations
   spatial_locs = get_spatial_locations(gobject,
-                                          spat_loc_name = spat_loc_name)
+                                       spat_loc_name = spat_loc_name)
 
   ## spatial averaging or smoothing
   if(method == 'grid') {
@@ -3182,7 +3182,7 @@ detectSpatialCorFeats <- function(gobject,
                                       name = spatial_grid_name,
                                       return_grid_Obj = FALSE)
 
-    loc_av_expr_matrix = do_spatial_grid_averaging(expression_matrix = expr_values,
+    loc_av_expr_matrix = do_spatial_grid_averaging(expression_matrix = as.matrix(expr_values),
                                                    spatial_grid  = spatial_grid,
                                                    spatial_locs = spatial_locs,
                                                    subset_feats = subset_feats,
@@ -3191,7 +3191,7 @@ detectSpatialCorFeats <- function(gobject,
     # data.table variables
     feat_ID = variable = NULL
 
-    cor_spat_matrix = cor_giotto(t_giotto(as.matrix(loc_av_expr_matrix)), method = cor_method)
+    cor_spat_matrix = cor_flex(t_flex(as.matrix(loc_av_expr_matrix)), method = cor_method)
     cor_spat_matrixDT = data.table::as.data.table(cor_spat_matrix)
     cor_spat_matrixDT[, feat_ID := rownames(cor_spat_matrix)]
     cor_spat_DT = data.table::melt.data.table(data = cor_spat_matrixDT,
@@ -3205,7 +3205,7 @@ detectSpatialCorFeats <- function(gobject,
                                       name = spatial_network_name,
                                       return_network_Obj = FALSE)
 
-    knn_av_expr_matrix = do_spatial_knn_smoothing(expression_matrix = expr_values,
+    knn_av_expr_matrix = do_spatial_knn_smoothing(expression_matrix = as.matrix(expr_values),
                                                   spatial_network = spatial_network,
                                                   subset_feats = subset_feats,
                                                   b = network_smoothing)
@@ -3213,7 +3213,7 @@ detectSpatialCorFeats <- function(gobject,
 
     #print(knn_av_expr_matrix[1:4, 1:4])
 
-    cor_spat_matrix = cor_giotto(t_giotto(as.matrix(knn_av_expr_matrix)), method = cor_method)
+    cor_spat_matrix = cor_flex(t_flex(as.matrix(knn_av_expr_matrix)), method = cor_method)
     cor_spat_matrixDT = data.table::as.data.table(cor_spat_matrix)
     cor_spat_matrixDT[, feat_ID := rownames(cor_spat_matrix)]
     cor_spat_DT = data.table::melt.data.table(data = cor_spat_matrixDT,
@@ -3228,7 +3228,7 @@ detectSpatialCorFeats <- function(gobject,
   cordiff = spat_cor = expr_cor = spatrank= exprrank = rankdiff = NULL
 
   ## 2. perform expression correlation at single-cell level without spatial information
-  cor_matrix = cor_giotto(t_giotto(expr_values), method = cor_method)
+  cor_matrix = cor_flex(t_flex(expr_values), method = cor_method)
   cor_matrixDT = data.table::as.data.table(cor_matrix)
   cor_matrixDT[, feat_ID := rownames(cor_matrix)]
   cor_DT = data.table::melt.data.table(data = cor_matrixDT,
