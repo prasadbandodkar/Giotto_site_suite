@@ -47,9 +47,9 @@
 
 
 <meta property="og:title" content="makeSignMatrixDWLS — makeSignMatrixDWLS" />
-<meta property="og:description" content="Function to convert signature genes into an average expression matrix format that can be used for
-spatialDWLS. gobject is the single cell Giotto object. sign_gene is in character format contains all DEGs.
-cell_type are all the cell types used for single cell analysis." />
+<meta property="og:description" content="Function to convert a matrix within a Giotto object into a format
+ that can be used with runDWLSDeconv. A vector of cell types
+ for cell_type_vector can be created from the cell metadata (pDataDT)." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -92,7 +92,7 @@ cell_type are all the cell types used for single cell analysis." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.9036</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.9046</span>
       </span>
     </div>
 
@@ -160,12 +160,21 @@ cell_type are all the cell types used for single cell analysis." />
     </div>
 
     <div class="ref-description">
-    <p>Function to convert signature genes into an average expression matrix format that can be used for
-spatialDWLS. gobject is the single cell Giotto object. sign_gene is in character format contains all DEGs.
-cell_type are all the cell types used for single cell analysis.</p>
+    <p>Function to convert a matrix within a Giotto object into a format
+ that can be used with <code><a href='runDWLSDeconv.html'>runDWLSDeconv</a></code>. A vector of cell types
+ for cell_type_vector can be created from the cell metadata (pDataDT).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>makeSignMatrixDWLS</span><span class='op'>(</span><span class='va'>gobject</span>, <span class='va'>sign_gene</span>, <span class='va'>cell_type</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>makeSignMatrixDWLS</span><span class='op'>(</span>
+  <span class='va'>gobject</span>,
+  feat_type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  expression_values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"normalized"</span>, <span class='st'>"scaled"</span>, <span class='st'>"custom"</span><span class='op'>)</span>,
+  reverse_log <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  log_base <span class='op'>=</span> <span class='fl'>2</span>,
+  <span class='va'>sign_gene</span>,
+  <span class='va'>cell_type_vector</span>,
+  cell_type <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,12 +184,32 @@ cell_type are all the cell types used for single cell analysis.</p>
       <td><p>Giotto object of single cell</p></td>
     </tr>
     <tr>
+      <th>feat_type</th>
+      <td><p>feature type to use</p></td>
+    </tr>
+    <tr>
+      <th>expression_values</th>
+      <td><p>expression values to use</p></td>
+    </tr>
+    <tr>
+      <th>reverse_log</th>
+      <td><p>reverse a log-normalized expression matrix</p></td>
+    </tr>
+    <tr>
+      <th>log_base</th>
+      <td><p>the logarithm base (deafult  = 2)</p></td>
+    </tr>
+    <tr>
       <th>sign_gene</th>
       <td><p>all of DE genes (signature)</p></td>
     </tr>
     <tr>
+      <th>cell_type_vector</th>
+      <td><p>vector with cell types (length = ncol(matrix))</p></td>
+    </tr>
+    <tr>
       <th>cell_type</th>
-      <td><p>cell type for single cells</p></td>
+      <td><p>deprecated, use cell_type_vector</p></td>
     </tr>
     </table>
 
