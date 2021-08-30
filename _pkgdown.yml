@@ -25,7 +25,8 @@ navbar:
       href: reference/index.html
     - text: "Datasets"
       menu:
-      - text: Visium
+      - text: "mouse Visium kidney"
+        href: articles/mouse_visium_kidney_210830.html
       - text: Subcellular
     - text: "Contribute"
       href: articles/contribute.html
