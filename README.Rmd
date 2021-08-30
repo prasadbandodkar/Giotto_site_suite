@@ -11,8 +11,11 @@ output: github_document
 Giotto Suite is the new and updated version of Giotto. 
 
 ### (under construction)
-### (stay tuned for updates: latest Aug 30th)  
+### latest update: 
 
+```{r echo=F}
+Sys.Date()
+```
 
 <!-- badges: start -->
 <!-- badges: end -->
