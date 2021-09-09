@@ -73,15 +73,3 @@ The Jackstraw method uses the \code{\link[jackstraw]{permutationPA}} function. B
  systematically permuting genes it identifies robust, and thus significant, PCs.
  \cr
 }
-\examples{
-
-\donttest{
-
-data(mini_giotto_single_cell)
-
-# jackstraw package is required to run
-jackstrawPlot(mini_giotto_single_cell, ncp = 10)
-
-}
-
-}

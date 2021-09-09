@@ -2,7 +2,7 @@
 % Please edit documentation in R/spatial_structures.R
 \name{spatNetwDistributions}
 \alias{spatNetwDistributions}
-\title{spatNetwDistributionsDistance}
+\title{spatNetwDistributions}
 \usage{
 spatNetwDistributions(
   gobject,

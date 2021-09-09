@@ -4,10 +4,17 @@
 \alias{removeCellAnnotation}
 \title{removeCellAnnotation}
 \usage{
-removeCellAnnotation(gobject, columns = NULL, return_gobject = TRUE)
+removeCellAnnotation(
+  gobject,
+  feat_type = NULL,
+  columns = NULL,
+  return_gobject = TRUE
+)
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{feat_type}{feature type}
 
 \item{columns}{names of columns to remove}
 
@@ -17,20 +24,8 @@ removeCellAnnotation(gobject, columns = NULL, return_gobject = TRUE)
 giotto object
 }
 \description{
-removes cell annotation of giotto object
+removes cell annotation from a Giotto object for a specific feature modality (default = 'rna')
 }
 \details{
 if return_gobject = FALSE, it will return the cell metadata
-}
-\examples{
-
-data(mini_giotto_single_cell) # load full mini giotto object
-
-# show cell metadata
-pDataDT(mini_giotto_single_cell)
-
-# remove cell_types column
-mini_giotto_single_cell = removeCellAnnotation(mini_giotto_single_cell,
-                                               columns = 'cell_types')
-
 }

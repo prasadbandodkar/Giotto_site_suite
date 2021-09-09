@@ -41,16 +41,12 @@ logNorm_giotto = function(mymatrix, base, offset) {
 
 
 #' @title pDataDT
+#' @name pDataDT
 #' @description show cell metadata
 #' @param gobject giotto object
 #' @param feat_type feature type
 #' @return data.table with cell metadata
 #' @export
-#' @examples
-#'
-#' data(mini_giotto_single_cell) # loads existing Giotto object
-#' pDataDT(mini_giotto_single_cell)
-#'
 pDataDT <- function(gobject,
                     feat_type = NULL) {
 
@@ -75,6 +71,7 @@ pDataDT <- function(gobject,
 }
 
 #' @title fDataDT
+#' @name fDataDT
 #' @description show gene metadata
 #' @param gobject giotto object
 #' @param feat_type feature type
@@ -1379,6 +1376,7 @@ rna_pears_resid_normalization = function(gobject,
 
 
 #' @title normalizeGiotto
+#' @name normalizeGiotto
 #' @description fast normalize and/or scale expresion values of Giotto object
 #' @param gobject giotto object
 #' @param feat_type feature type
@@ -1503,6 +1501,7 @@ normalizeGiotto <- function(gobject,
 
 
 
+#' @title adjustGiottoMatrix
 #' @name adjustGiottoMatrix
 #' @description Adjust expression values to account for known batch effects or technological covariates.
 #' @param gobject giotto object
@@ -1596,6 +1595,7 @@ adjustGiottoMatrix <- function(gobject,
 }
 
 
+#' @title processGiotto
 #' @name processGiotto
 #' @description Wrapper for the different Giotto object processing functions
 #' @param gobject giotto object
@@ -1656,6 +1656,7 @@ processGiotto = function(gobject,
 
 
 #' @title annotateGiotto
+#' @name annotateGiotto
 #' @description Converts cluster results into a user provided annotation.
 #' @param gobject giotto object
 #' @param feat_type feature type
@@ -1671,29 +1672,6 @@ processGiotto = function(gobject,
 #'   \item{3. provide original cluster names to previous vector, e.g. names(cell_types) = c(2, 1, 3)}
 #' }
 #' @export
-#' @examples
-#'
-#' data(mini_giotto_single_cell)
-#'
-#' # show leiden clustering results
-#' cell_metadata = pDataDT(mini_giotto_single_cell)
-#' cell_metadata[['leiden_clus']]
-#'
-#' # create vector with cell type names as names of the vector
-#' clusters_cell_types = c('cell_type_1', 'cell_type_2', 'cell_type_3')
-#' names(clusters_cell_types) = 1:3
-#'
-#' # convert cluster results into annotations and add to cell metadata
-#' mini_giotto_single_cell = annotateGiotto(gobject = mini_giotto_single_cell,
-#'                                          annotation_vector = clusters_cell_types,
-#'                                          cluster_column = 'leiden_clus', name = 'cell_types2')
-#'
-#' # visualize annotation results
-#' spatDimPlot(gobject = mini_giotto_single_cell,
-#'             cell_color = 'cell_types2',
-#'             spat_point_size = 3, dim_point_size = 3)
-#'
-#'
 annotateGiotto <- function(gobject,
                            feat_type = NULL,
                            annotation_vector = NULL,
@@ -1758,82 +1736,81 @@ annotateGiotto <- function(gobject,
 
 
 #' @title removeCellAnnotation
-#' @description removes cell annotation of giotto object
+#' @name removeCellAnnotation
+#' @description removes cell annotation from a Giotto object for a specific feature modality (default = 'rna')
 #' @param gobject giotto object
+#' @param feat_type feature type
 #' @param columns names of columns to remove
 #' @param return_gobject boolean: return giotto object (default = TRUE)
 #' @return giotto object
 #' @details if return_gobject = FALSE, it will return the cell metadata
 #' @export
-#' @examples
-#'
-#' data(mini_giotto_single_cell) # load full mini giotto object
-#'
-#' # show cell metadata
-#' pDataDT(mini_giotto_single_cell)
-#'
-#' # remove cell_types column
-#' mini_giotto_single_cell = removeCellAnnotation(mini_giotto_single_cell,
-#'                                                columns = 'cell_types')
-#'
 removeCellAnnotation <- function(gobject,
+                                 feat_type = NULL,
                                  columns = NULL,
                                  return_gobject = TRUE) {
+
+  # specify feat_type
+  if(is.null(feat_type)) {
+    feat_type = gobject@expression_feat[[1]]
+  }
+
 
   if(is.null(columns)) {
     stop('\t You need to provide a vector of metadata column names to remove \t')
   }
 
-  gobject@cell_metadata[, (columns) := NULL]
+  gobject@cell_metadata[[feat_type]][, (columns) := NULL]
 
   if(return_gobject == TRUE) {
     return(gobject)
   } else {
-    gobject@cell_metadata
+    gobject@cell_metadata[[feat_type]]
   }
 
 }
 
 
-#' @title removeGeneAnnotation
-#' @description removes gene annotation of giotto object
+#' @title removeFeatAnnotation
+#' @name removeFeatAnnotation
+#' @description removes feature annotation from a Giotto object for a specific feature modality
 #' @param gobject giotto object
+#' @param feat_type feature type
 #' @param columns names of columns to remove
 #' @param return_gobject boolean: return giotto object (default = TRUE)
 #' @return giotto object
 #' @details if return_gobject = FALSE, it will return the gene metadata
 #' @export
-#' @examples
-#'
-#' data(mini_giotto_single_cell) # load full mini giotto object
-#'
-#' # show gene metadata
-#' fDataDT(mini_giotto_single_cell)
-#'
-#' # remove nr_cells column
-#' mini_giotto_single_cell = removeGeneAnnotation(mini_giotto_single_cell,
-#'                                                columns = 'nr_cells')
-#'
-removeGeneAnnotation <- function(gobject,
+removeFeatAnnotation <- function(gobject,
+                                 feat_type = NULL,
                                  columns = NULL,
                                  return_gobject = TRUE) {
+
+
+  # specify feat_type
+  if(is.null(feat_type)) {
+    feat_type = gobject@expression_feat[[1]]
+  }
+
 
   if(is.null(columns)) {
     stop('\t You need to provide a vector of metadata column names to remove \t')
   }
 
-  gobject@gene_metadata[, (columns) := NULL]
+  gobject@feat_metadata[[feat_type]][, (columns) := NULL]
 
   if(return_gobject == TRUE) {
     return(gobject)
   } else {
-    gobject@gene_metadata
+    gobject@gene_metadata[[feat_type]]
   }
 
 }
 
 
+
 #' @title addCellMetadata
+#' @name addCellMetadata
 #' @description adds cell metadata to the giotto object
 #' @param gobject giotto object
 #' @param feat_type feature type
@@ -1918,6 +1895,8 @@ addCellMetadata <- function(gobject,
   return(gobject)
 }
 
+
+#' @title addFeatMetadata
 #' @name addFeatMetadata
 #' @description adds gene metadata to the giotto object
 #' @param gobject giotto object
@@ -1969,7 +1948,8 @@ addFeatMetadata <- function(gobject,
 
 
 
-#' @title addGeneMetadata
+
+#' @name addGeneMetadata
 #' @description adds gene metadata to the giotto object
 #' @param gobject giotto object
 #' @param new_metadata new metadata to use
@@ -1999,7 +1979,7 @@ addGeneMetadata <- function(gobject,
 
 
 
-
+#' @title addFeatStatistics
 #' @name addFeatStatistics
 #' @description adds gene statistics to the giotto object
 #' @param gobject giotto object
@@ -2018,12 +1998,6 @@ addGeneMetadata <- function(gobject,
 #'   \item{mean_expr_det: }{Average feature expression in cells with detectable levels of the gene}
 #' }
 #' @export
-#' @examples
-#'
-#' data(mini_giotto_single_cell)
-#'
-#' updated_giotto_object = addFeatStatistics(mini_giotto_single_cell)
-#'
 addFeatStatistics <- function(gobject,
                               feat_type = NULL,
                               expression_values = c('normalized', 'scaled', 'custom'),
@@ -2131,6 +2105,7 @@ addGeneStatistics <- function(gobject,
 
 
 #' @title addCellStatistics
+#' @name addCellStatistics
 #' @description adds cells statistics to the giotto object
 #' @param gobject giotto object
 #' @param feat_type feature type
@@ -2204,6 +2179,7 @@ addCellStatistics <- function(gobject,
 
 
 #' @title addStatistics
+#' @name addStatistics
 #' @description adds genes and cells statistics to the giotto object
 #' @param gobject giotto object
 #' @param feat_type feature type
@@ -2213,12 +2189,6 @@ addCellStatistics <- function(gobject,
 #' @return giotto object if return_gobject = TRUE, else a list with results
 #' @details See \code{\link{addFeatStatistics}} and \code{\link{addCellStatistics}}
 #' @export
-#' @examples
-#'
-#' data(mini_giotto_single_cell)
-#'
-#' updated_giotto_object = addStatistics(mini_giotto_single_cell)
-#'
 addStatistics <- function(gobject,
                           feat_type = NULL,
                           expression_values = c('normalized', 'scaled', 'custom'),
@@ -2261,7 +2231,7 @@ addStatistics <- function(gobject,
 
 
 
-
+#' @title addFeatsPerc
 #' @name addFeatsPerc
 #' @description calculates the total percentage of (normalized) counts for a subset of selected genes
 #' @param gobject giotto object
@@ -2272,21 +2242,6 @@ addStatistics <- function(gobject,
 #' @param return_gobject boolean: return giotto object (default = TRUE)
 #' @return giotto object if return_gobject = TRUE, else a vector with % results
 #' @export
-#' @examples
-#'
-#' data(mini_giotto_single_cell)
-#'
-#' # select genes (e.g. Rpl or mitochondrial)
-#' random_genes = sample(slot(mini_giotto_single_cell, 'gene_ID'), 5)
-#'
-#' # calculate percentage of those selected genes per cells/spot
-#' updated_giotto_object = addFeatsPerc(mini_giotto_single_cell,
-#'                                      feats = random_genes,
-#'                                      vector_name = 'random_gene_perc')
-#'
-#' # visualize result in data.table format
-#' pDataDT(updated_giotto_object)
-#'
 addFeatsPerc = function(gobject,
                         feat_type = NULL,
                         expression_values = c('normalized', 'scaled', 'custom'),
@@ -2337,7 +2292,8 @@ addFeatsPerc = function(gobject,
 }
 
 
-#' @title addGenesPerc
+
+#' @name addGenesPerc
 #' @description calculates the total percentage of (normalized) counts for a subset of selected genes
 #' @param gobject giotto object
 #' @param expression_values expression values to use
@@ -2346,22 +2302,6 @@ addFeatsPerc = function(gobject,
 #' @param return_gobject boolean: return giotto object (default = TRUE)
 #' @return giotto object if return_gobject = TRUE, else a vector with % results
 #' @export
-#' @examples
-#'
-#' data(mini_giotto_single_cell)
-#'
-#' # select genes (e.g. Rpl or mitochondrial)
-#' random_genes = sample(slot(mini_giotto_single_cell, 'gene_ID'), 5)
-#'
-#' # calculate percentage of those selected genes per cells/spot
-#' updated_giotto_object = addGenesPerc(mini_giotto_single_cell,
-#'                                      genes = random_genes,
-#'                                      vector_name = 'random_gene_perc')
-#'
-#' # visualize result in data.table format
-#' pDataDT(updated_giotto_object)
-#'
-#'
 addGenesPerc = function(gobject,
                         expression_values = c('normalized', 'scaled', 'custom'),
                         genes = NULL,
@@ -2390,17 +2330,12 @@ addGenesPerc = function(gobject,
 
 
 #' @title showProcessingSteps
+#' @name showProcessingSteps
 #' @description shows the sequential processing steps that were performed
 #' on a Giotto object in a summarized format
 #' @param gobject giotto object
 #' @return list of processing steps and names
 #' @export
-#' @examples
-#'
-#' data(mini_giotto_single_cell)
-#'
-#' showProcessingSteps(mini_giotto_single_cell)
-#'
 showProcessingSteps <- function(gobject) {
 
   parameters = gobject@parameters
@@ -2489,6 +2424,7 @@ create_cluster_matrix <- function(gobject,
 
 
 #' @title calculateMetaTable
+#' @name calculateMetaTable
 #' @description calculates the average gene expression for one or more (combined) annotation columns.
 #' @param gobject giotto object
 #' @param expression_values expression values to use
@@ -2496,17 +2432,6 @@ create_cluster_matrix <- function(gobject,
 #' @param selected_genes subset of genes to use
 #' @return data.table with average expression values for each gene per (combined) annotation
 #' @export
-#' @examples
-#'
-#' data(mini_giotto_single_cell)
-#'
-#' # show cell metadata
-#' pDataDT(mini_giotto_single_cell)
-#'
-#' # show average gene expression per annotated cell type
-#' calculateMetaTable(mini_giotto_single_cell,
-#'                    metadata_cols = 'cell_types')
-#'
 calculateMetaTable = function(gobject,
                               feat_type = NULL,
                               expression_values =  c("normalized", "scaled", "custom"),
@@ -2580,6 +2505,7 @@ calculateMetaTable = function(gobject,
 
 
 #' @title calculateMetaTableCells
+#' @name calculateMetaTableCells
 #' @description calculates the average metadata values for one or more (combined) annotation columns.
 #' @param gobject giotto object
 #' @param value_cols metadata or enrichment value columns to use
@@ -2629,6 +2555,7 @@ calculateMetaTableCells = function(gobject,
 
 
 #' @title combineMetadata
+#' @name combineMetadata
 #' @description This function combines the cell metadata with spatial locations and
 #' enrichment results from \code{\link{runSpatialEnrich}}
 #' @param gobject Giotto object
@@ -2706,7 +2633,7 @@ combineMetadata = function(gobject,
 
 
 
-
+#' @title createMetafeats
 #' @name createMetafeats
 #' @description This function creates an average metafeat/metagene/module for clusters.
 #' @param gobject Giotto object
@@ -2819,6 +2746,7 @@ createMetagenes = function(gobject,
 
 
 #' @title findNetworkNeighbors
+#' @name findNetworkNeighbors
 #' @description Find the spatial neighbors for a selected group of cells within the selected spatial network.
 #' @param gobject Giotto object
 #' @param spatial_network_name name of spatial network
@@ -2826,19 +2754,6 @@ createMetagenes = function(gobject,
 #' @param name name of the results
 #' @return data.table
 #' @export
-#' @examples
-#'
-#' data(mini_giotto_single_cell)
-#'
-#' # get all cells
-#' all_cells = slot(mini_giotto_single_cell, 'cell_ID')
-#'
-#' # find all the spatial neighbours for the first 5 cells
-#' # within the Delaunay network
-#' findNetworkNeighbors(mini_giotto_single_cell,
-#'                      spatial_network_name = 'Delaunay_network',
-#'                      source_cell_ids = all_cells[1:5])
-#'
 findNetworkNeighbors = function(gobject,
                                 spatial_network_name,
                                 source_cell_ids = NULL,
@@ -2918,6 +2833,8 @@ merge_spatial_locs_feat_info = function(spatial_info,
 }
 
 
+
+#' @title combineSpatialCellFeatureInfo
 #' @name combineSpatialCellFeatureInfo
 #' @description Combine spatial cell information (e.g. polygon)
 #' and spatial feature information (e.g. transcript locations)
@@ -2983,7 +2900,7 @@ combineSpatialCellFeatureInfo = function(gobject,
 
 
 
-
+#' @title combineSpatialCellMetadataInfo
 #' @name combineSpatialCellMetadataInfo
 #' @description Combine cell metadata with spatial cell information (e.g. polygon)
 #' @param gobject Giotto object
