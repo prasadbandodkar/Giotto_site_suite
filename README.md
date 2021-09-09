@@ -11,7 +11,7 @@ Giotto Suite is the new and updated version of Giotto.
 
 ### latest update:
 
-    ## [1] "2021-08-30"
+    ## [1] "2021-09-09"
 
 <!-- badges: start -->
 

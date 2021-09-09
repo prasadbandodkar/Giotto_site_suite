@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.9046</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.952</span>
       </span>
     </div>
 
@@ -280,26 +280,6 @@ higher than the threshold (<em>zscore_threshold</em>) are considered highly vari
 A predicted COV is calculated for each feature using loess regression (COV~log(mean expression))
 Features that show a higher than predicted COV (<em>difference_in_cov</em>) are considered highly variable. <br /></p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span><span class='op'>)</span> <span class='co'># loads existing Giotto object</span>
-
-<span class='co'># update a giotto object</span>
-<span class='va'>mini_giotto_single_cell</span> <span class='op'>&lt;-</span> <span class='fu'>calculateHVF</span><span class='op'>(</span>gobject <span class='op'>=</span> <span class='va'>mini_giotto_single_cell</span>,
-                                        zscore_threshold <span class='op'>=</span> <span class='fl'>0.1</span>,
-                                        nr_expression_groups <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in calculateHVF(gobject = mini_giotto_single_cell, zscore_threshold = 0.1,     nr_expression_groups = 3): no slot of name "expression_feat" for this object of class "giotto"</span></div><div class='input'>
-<span class='co'># return a data.table with the high variable genes annotated</span>
-<span class='va'>hvg_dt</span> <span class='op'>&lt;-</span> <span class='fu'>calculateHVF</span><span class='op'>(</span>gobject <span class='op'>=</span> <span class='va'>mini_giotto_single_cell</span>,
-                       zscore_threshold <span class='op'>=</span> <span class='fl'>0.1</span>, nr_expression_groups <span class='op'>=</span> <span class='fl'>3</span>,
-                       return_plot <span class='op'>=</span> <span class='cn'>FALSE</span>, return_gobject <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in calculateHVF(gobject = mini_giotto_single_cell, zscore_threshold = 0.1,     nr_expression_groups = 3, return_plot = FALSE, return_gobject = FALSE): no slot of name "expression_feat" for this object of class "giotto"</span></div><div class='input'>
-<span class='co'># return the ggplot object</span>
-<span class='va'>hvg_plot</span> <span class='op'>&lt;-</span> <span class='fu'>calculateHVF</span><span class='op'>(</span>gobject <span class='op'>=</span> <span class='va'>mini_giotto_single_cell</span>,
-                       zscore_threshold <span class='op'>=</span> <span class='fl'>0.1</span>, nr_expression_groups <span class='op'>=</span> <span class='fl'>3</span>,
-                       return_plot <span class='op'>=</span> <span class='cn'>TRUE</span>, return_gobject <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in calculateHVF(gobject = mini_giotto_single_cell, zscore_threshold = 0.1,     nr_expression_groups = 3, return_plot = TRUE, return_gobject = FALSE): no slot of name "expression_feat" for this object of class "giotto"</span></div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

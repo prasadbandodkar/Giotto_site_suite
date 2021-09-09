@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.9046</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.952</span>
       </span>
     </div>
 
@@ -119,7 +119,8 @@
     
     
 <!-- mouse_cortex_1_simple.md is generated from mouse_cortex_1_simple.Rmd Please edit that file -->
-<pre><code>#&gt; Warning: Your using the same Giotto version with which this tutorial was written</code></pre>
+<pre><code>#&gt; Warning: This tutorial was written with Giotto version 2.0.0.9046, your version
+#&gt; is 2.0.0.952.This is an older version and results could be slightly different</code></pre>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/">Giotto</a></span><span class="op">)</span>
 
@@ -219,11 +220,11 @@
 <p><img src="../inst/images/mouse_visium_kidney/210830_results/5-PCA.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## run UMAP and tSNE on PCA space (default)</span>
-<span class="va">visium_kidney</span> <span class="op">&lt;-</span> <span class="fu">runUMAP</span><span class="op">(</span><span class="va">visium_kidney</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
+<span class="va">visium_kidney</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runUMAP.html">runUMAP</a></span><span class="op">(</span><span class="va">visium_kidney</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_kidney</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_kidney/210830_results/6-UMAP.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">visium_kidney</span> <span class="op">&lt;-</span> <span class="fu">runtSNE</span><span class="op">(</span><span class="va">visium_kidney</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">visium_kidney</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runtSNE.html">runtSNE</a></span><span class="op">(</span><span class="va">visium_kidney</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plotTSNE.html">plotTSNE</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_kidney</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_kidney/210830_results/7-tSNE.png" style="width:50.0%"></p>
 </div>
@@ -381,13 +382,13 @@
 
 <span class="co"># 1. calculate gene spatial correlation and single-cell correlation </span>
 <span class="co"># create spatial correlation object</span>
-<span class="va">spat_cor_netw_DT</span> <span class="op">=</span> <span class="fu">detectSpatialCorFeats</span><span class="op">(</span><span class="va">visium_kidney</span>,
+<span class="va">spat_cor_netw_DT</span> <span class="op">=</span> <span class="fu"><a href="../reference/detectSpatialCorFeats.html">detectSpatialCorFeats</a></span><span class="op">(</span><span class="va">visium_kidney</span>,
                                          method <span class="op">=</span> <span class="st">'network'</span>,
                                          spatial_network_name <span class="op">=</span> <span class="st">'Delaunay_network'</span>,
                                          subset_feats <span class="op">=</span> <span class="va">ext_spatial_genes</span><span class="op">)</span>
 
 <span class="co"># 2. identify most similar spatially correlated genes for one gene</span>
-<span class="va">Napsa_top10_genes</span> <span class="op">=</span> <span class="fu">showSpatialCorFeats</span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, feats <span class="op">=</span> <span class="st">'Napsa'</span>, show_top_feats <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<span class="va">Napsa_top10_genes</span> <span class="op">=</span> <span class="fu"><a href="../reference/showSpatialCorFeats.html">showSpatialCorFeats</a></span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, feats <span class="op">=</span> <span class="st">'Napsa'</span>, show_top_feats <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/spatFeatPlot2D.html">spatFeatPlot2D</a></span><span class="op">(</span><span class="va">visium_kidney</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>,
                feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Napsa'</span>, <span class="st">'Kap'</span>, <span class="st">'Defb29'</span>, <span class="st">'Prdx1'</span><span class="op">)</span>, point_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
@@ -396,7 +397,7 @@
 <code class="sourceCode R"><span class="co"># 3. cluster correlated genes &amp; visualize</span>
 <span class="va">spat_cor_netw_DT</span> <span class="op">=</span> <span class="fu"><a href="../reference/clusterSpatialCorFeats.html">clusterSpatialCorFeats</a></span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>, k <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>
 
-<span class="fu">heatmSpatialCorFeats</span><span class="op">(</span><span class="va">visium_kidney</span>, spatCorObject <span class="op">=</span> <span class="va">spat_cor_netw_DT</span>, use_clus_name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>,
+<span class="fu"><a href="../reference/heatmSpatialCorFeats.html">heatmSpatialCorFeats</a></span><span class="op">(</span><span class="va">visium_kidney</span>, spatCorObject <span class="op">=</span> <span class="va">spat_cor_netw_DT</span>, use_clus_name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>,
                      save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'22-z1-heatmap_correlated_genes'</span>, save_format <span class="op">=</span> <span class="st">'pdf'</span>,
                                     base_height <span class="op">=</span> <span class="fl">6</span>, base_width <span class="op">=</span> <span class="fl">8</span>, units <span class="op">=</span> <span class="st">'cm'</span><span class="op">)</span>,
                      heatmap_legend_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -408,14 +409,14 @@
                                                  base_height <span class="op">=</span> <span class="fl">3</span>, base_width <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_kidney/210830_results/22-z2-rank_correlated_groups.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">top_netw_spat_cluster</span> <span class="op">=</span> <span class="fu">showSpatialCorFeats</span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, use_clus_name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>,
+<code class="sourceCode R"><span class="va">top_netw_spat_cluster</span> <span class="op">=</span> <span class="fu"><a href="../reference/showSpatialCorFeats.html">showSpatialCorFeats</a></span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, use_clus_name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>,
                                             selected_clusters <span class="op">=</span> <span class="fl">6</span>, show_top_feats <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="co"># 5. create metagene enrichment score for clusters</span>
-<span class="va">cluster_genes_DT</span> <span class="op">=</span> <span class="fu">showSpatialCorFeats</span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, use_clus_name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>, show_top_feats <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">cluster_genes_DT</span> <span class="op">=</span> <span class="fu"><a href="../reference/showSpatialCorFeats.html">showSpatialCorFeats</a></span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, use_clus_name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>, show_top_feats <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="va">cluster_genes</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">clus</span>; <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">cluster_genes</span><span class="op">)</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">feat_ID</span>
 
-<span class="va">visium_kidney</span> <span class="op">=</span> <span class="fu">createMetafeats</span><span class="op">(</span><span class="va">visium_kidney</span>, feat_clusters <span class="op">=</span> <span class="va">cluster_genes</span>, name <span class="op">=</span> <span class="st">'cluster_metagene'</span><span class="op">)</span>
+<span class="va">visium_kidney</span> <span class="op">=</span> <span class="fu"><a href="../reference/createMetafeats.html">createMetafeats</a></span><span class="op">(</span><span class="va">visium_kidney</span>, feat_clusters <span class="op">=</span> <span class="va">cluster_genes</span>, name <span class="op">=</span> <span class="st">'cluster_metagene'</span><span class="op">)</span>
 
 <span class="fu">showGiottoSpatEnrichments</span><span class="op">(</span><span class="va">visium_kidney</span><span class="op">)</span>
 

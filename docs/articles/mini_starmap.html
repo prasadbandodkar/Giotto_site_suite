@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.9046</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.952</span>
       </span>
     </div>
 
@@ -149,7 +149,7 @@
 <code class="sourceCode R"><span class="co"># giotto object </span>
 <span class="va">expr_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"starmap_expr.txt.gz"</span>, package <span class="op">=</span> <span class="st">'Giotto'</span><span class="op">)</span>
 <span class="va">loc_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"starmap_cell_loc.txt"</span>, package <span class="op">=</span> <span class="st">'Giotto'</span><span class="op">)</span>
-<span class="va">starmap_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>raw_exprs <span class="op">=</span> <span class="va">expr_path</span>,
+<span class="va">starmap_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create%20Giotto%20object.html">createGiottoObject</a></span><span class="op">(</span>raw_exprs <span class="op">=</span> <span class="va">expr_path</span>,
                                    spatial_locs <span class="op">=</span> <span class="va">loc_path</span>,
                                    instructions <span class="op">=</span> <span class="va">myinstructions</span><span class="op">)</span></code></pre></div>
 <p>How to work with Giotto instructions that are part of your Giotto object:<br>
@@ -208,15 +208,15 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <span class="fu"><a href="../reference/plotPCA.html">plotPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">starmap_mini</span><span class="op">)</span>
 
 <span class="co"># 2D umap</span>
-<span class="va">starmap_mini</span> <span class="op">&lt;-</span> <span class="fu">runUMAP</span><span class="op">(</span><span class="va">starmap_mini</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span>
+<span class="va">starmap_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runUMAP.html">runUMAP</a></span><span class="op">(</span><span class="va">starmap_mini</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">starmap_mini</span><span class="op">)</span>
 
 <span class="co"># 3D umap</span>
-<span class="va">starmap_mini</span> <span class="op">&lt;-</span> <span class="fu">runUMAP</span><span class="op">(</span><span class="va">starmap_mini</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, name <span class="op">=</span> <span class="st">'3D_umap'</span>, n_components <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<span class="va">starmap_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runUMAP.html">runUMAP</a></span><span class="op">(</span><span class="va">starmap_mini</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, name <span class="op">=</span> <span class="st">'3D_umap'</span>, n_components <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plotUMAP_3D.html">plotUMAP_3D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">starmap_mini</span>, dim_reduction_name <span class="op">=</span> <span class="st">'3D_umap'</span><span class="op">)</span>
 
 <span class="co"># 2D tsne</span>
-<span class="va">starmap_mini</span> <span class="op">&lt;-</span> <span class="fu">runtSNE</span><span class="op">(</span><span class="va">starmap_mini</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span>
+<span class="va">starmap_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runtSNE.html">runtSNE</a></span><span class="op">(</span><span class="va">starmap_mini</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plotTSNE.html">plotTSNE</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">starmap_mini</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="clustering" class="section level2">
@@ -361,21 +361,21 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <p>Visualize top 4 genes per method.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">km_spatialgenes</span> <span class="op">=</span> <span class="fu"><a href="../reference/binSpect.html">binSpect</a></span><span class="op">(</span><span class="va">starmap_mini</span><span class="op">)</span>
-<span class="fu"><a href="../reference/spatGenePlot.html">spatGenePlot</a></span><span class="op">(</span><span class="va">starmap_mini</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>, 
+<span class="fu">spatGenePlot</span><span class="op">(</span><span class="va">starmap_mini</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>, 
              genes <span class="op">=</span> <span class="va">km_spatialgenes</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>,
              point_shape <span class="op">=</span> <span class="st">'border'</span>, point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,
              show_network <span class="op">=</span> <span class="cn">F</span>, network_color <span class="op">=</span> <span class="st">'lightgrey'</span>, point_size <span class="op">=</span> <span class="fl">2.5</span>,
              cow_n_col <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
 <span class="va">rank_spatialgenes</span> <span class="op">=</span> <span class="fu"><a href="../reference/binSpect.html">binSpect</a></span><span class="op">(</span><span class="va">starmap_mini</span>, bin_method <span class="op">=</span> <span class="st">'rank'</span><span class="op">)</span>
-<span class="fu"><a href="../reference/spatGenePlot.html">spatGenePlot</a></span><span class="op">(</span><span class="va">starmap_mini</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>, 
+<span class="fu">spatGenePlot</span><span class="op">(</span><span class="va">starmap_mini</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>, 
              genes <span class="op">=</span> <span class="va">rank_spatialgenes</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>,
              point_shape <span class="op">=</span> <span class="st">'border'</span>, point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,
              show_network <span class="op">=</span> <span class="cn">F</span>, network_color <span class="op">=</span> <span class="st">'lightgrey'</span>, point_size <span class="op">=</span> <span class="fl">2.5</span>,
              cow_n_col <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
 <span class="va">silh_spatialgenes</span> <span class="op">=</span> <span class="fu"><a href="../reference/silhouetteRank.html">silhouetteRank</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">starmap_mini</span><span class="op">)</span> <span class="co"># TODO: suppress print output</span>
-<span class="fu"><a href="../reference/spatGenePlot.html">spatGenePlot</a></span><span class="op">(</span><span class="va">starmap_mini</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>, 
+<span class="fu">spatGenePlot</span><span class="op">(</span><span class="va">starmap_mini</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>, 
              genes <span class="op">=</span> <span class="va">silh_spatialgenes</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">genes</span>,
              point_shape <span class="op">=</span> <span class="st">'border'</span>, point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,
              show_network <span class="op">=</span> <span class="cn">F</span>, network_color <span class="op">=</span> <span class="st">'lightgrey'</span>, point_size <span class="op">=</span> <span class="fl">2.5</span>,
@@ -397,7 +397,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
                                          subset_genes <span class="op">=</span> <span class="va">ext_spatial_genes</span><span class="op">)</span>
 
 <span class="co"># 2. cluster correlation scores</span>
-<span class="va">spat_cor_netw_DT</span> <span class="op">=</span> <span class="fu"><a href="../reference/clusterSpatialCorGenes.html">clusterSpatialCorGenes</a></span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, 
+<span class="va">spat_cor_netw_DT</span> <span class="op">=</span> <span class="fu">clusterSpatialCorGenes</span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, 
                                           name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>,
                                           k <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
 <span class="fu">heatmSpatialCorGenes</span><span class="op">(</span><span class="va">starmap_mini</span>,
@@ -508,7 +508,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
                         point_size_select <span class="op">=</span> <span class="fl">4</span>, point_size_other <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
 <span class="co"># Option 2: create additional metadata</span>
-<span class="va">starmap_mini</span> <span class="op">=</span> <span class="fu">addCellIntMetadata</span><span class="op">(</span><span class="va">starmap_mini</span>,
+<span class="va">starmap_mini</span> <span class="op">=</span> <span class="fu"><a href="../reference/addCellIntMetadata.html">addCellIntMetadata</a></span><span class="op">(</span><span class="va">starmap_mini</span>,
                              spatial_network <span class="op">=</span> <span class="st">'Delaunay_network'</span>,
                              cluster_column <span class="op">=</span> <span class="st">'cell_types'</span>,
                              cell_interaction <span class="op">=</span> <span class="va">spec_interaction</span>,

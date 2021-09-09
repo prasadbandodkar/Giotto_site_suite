@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.9046</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.952</span>
       </span>
     </div>
 
@@ -166,6 +166,8 @@
     <pre class="usage"><span class='fu'>createGiottoObjectSubcellular</span><span class='op'>(</span>
   gpoints <span class='op'>=</span> <span class='cn'>NULL</span>,
   gpolygons <span class='op'>=</span> <span class='cn'>NULL</span>,
+  polygon_mask_list_params <span class='op'>=</span> <span class='cn'>NA</span>,
+  polygon_dfr_list_params <span class='op'>=</span> <span class='cn'>NA</span>,
   cell_metadata <span class='op'>=</span> <span class='cn'>NULL</span>,
   feat_metadata <span class='op'>=</span> <span class='cn'>NULL</span>,
   spatial_network <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -192,6 +194,14 @@
     <tr>
       <th>gpolygons</th>
       <td><p>giotto polygons</p></td>
+    </tr>
+    <tr>
+      <th>polygon_mask_list_params</th>
+      <td><p>list parameters for <code><a href='createGiottoPolygonsFromMask.html'>createGiottoPolygonsFromMask</a></code></p></td>
+    </tr>
+    <tr>
+      <th>polygon_dfr_list_params</th>
+      <td><p>list parameters for <code><a href='createGiottoPolygonsFromDfr.html'>createGiottoPolygonsFromDfr</a></code></p></td>
     </tr>
     <tr>
       <th>cell_metadata</th>

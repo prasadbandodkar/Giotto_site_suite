@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.9046</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.952</span>
       </span>
     </div>
 
@@ -226,16 +226,6 @@ the <code><a href='https://rdrr.io/pkg/scran/man/findMarkers.html'>findMarkers</
 <p>To perform differential expression between cluster groups you need to specificy cluster IDs
 to the parameters <em>group_1</em> and <em>group_2</em>.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span><span class='op'>)</span>
-
-<span class='va'>scran_markers</span> <span class='op'>=</span> <span class='fu'>findScranMarkers</span><span class='op'>(</span>gobject <span class='op'>=</span> <span class='va'>mini_giotto_single_cell</span>,
-                                 cluster_column <span class='op'>=</span> <span class='st'>'leiden_clus'</span>,
-                                 group_1 <span class='op'>=</span> <span class='fl'>1</span>,
-                                 group_2 <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in findScranMarkers(gobject = mini_giotto_single_cell, cluster_column = "leiden_clus",     group_1 = 1, group_2 = 2): no slot of name "expression_feat" for this object of class "giotto"</span></div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
