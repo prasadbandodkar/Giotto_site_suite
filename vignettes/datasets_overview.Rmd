@@ -6,34 +6,39 @@ output: html_document
 
 ## Array based
 
-### Visium datasets
+#### Visium datasets
 
 [![](../inst/images/general_figs/visium_kidney_image_summary.png){width=30%}](./mouse_visium_kidney_210830.html)
 [![](../inst/images/general_figs/visium_brain_image_summary.png){width=30%}](./temp_construction.html)
 [![](../inst/images/general_figs/coming_soon_summary.png){width=30%}](./mouse_visium_kidney_210830.html)
 
-### Other technologies
+#### Other technologies
 
 [![](../inst/images/general_figs/coming_soon_summary.png){width=30%}](./temp_construction.html)
 [![](../inst/images/general_figs/coming_soon_summary.png){width=30%}](./temp_construction.html)
+
+<br>
 
 ## Single-cell
 
-### 2D datasets
+#### 2D datasets
 
 [![](../inst/images/general_figs/cortex_image_summary.png){width=30%}](./temp_construction.html)
 [![](../inst/images/general_figs/osmFISH_SS_cortex_image_summary.png){width=30%}](./temp_construction.html)
 
-### 3D datasets
+#### 3D datasets
 
 [![](../inst/images/general_figs/merFISH_hypoth_image_summary.png){width=30%}](./temp_construction.html)
 [![](../inst/images/general_figs/starmap_cortex_image_summary.png){width=30%}](./temp_construction.html)
+
+<br>
 
 ## Subcellular datasets
 
 [![](../inst/images/general_figs/coming_soon_summary.png){width=30%}](./temp_construction.html)
 [![](../inst/images/general_figs/coming_soon_summary.png){width=30%}](./temp_construction.html)
 
+<br>
 
 ## Protein multiplexing
 
