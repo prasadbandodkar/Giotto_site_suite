@@ -29,9 +29,9 @@ make_simulated_network = function(gobject,
                                                  cluster_column = cluster_column)
 
   # remove double edges between same cells #
-  spatial_network_annot = Giotto:::sort_combine_two_DT_columns(spatial_network_annot,
-                                                               column1 = 'from', column2 = 'to',
-                                                               myname = 'unified_cells')
+  spatial_network_annot = sort_combine_two_DT_columns(spatial_network_annot,
+                                                      column1 = 'from', column2 = 'to',
+                                                      myname = 'unified_cells')
   spatial_network_annot = spatial_network_annot[!duplicated(unified_cells)]
 
   # create a simulated network
@@ -135,7 +135,7 @@ cellProximityEnrichment <- function(gobject,
   # data.table variables
   unified_cells = type_int = N = NULL
 
-  spatial_network_annot = Giotto:::sort_combine_two_DT_columns(spatial_network_annot, 'to', 'from', 'unified_cells')
+  spatial_network_annot = sort_combine_two_DT_columns(spatial_network_annot, 'to', 'from', 'unified_cells')
   spatial_network_annot = spatial_network_annot[!duplicated(unified_cells)]
 
   sample_dt = make_simulated_network(gobject = gobject,
@@ -565,7 +565,6 @@ do_multi_permuttest_random = function(expr_values,
                                       mean_method,
                                       offset = 0.1,
                                       n = 100,
-                                      cores = 2,
                                       set_seed = TRUE,
                                       seed_number = 1234) {
 
@@ -573,7 +572,9 @@ do_multi_permuttest_random = function(expr_values,
     seed_number_list = seed_number:(seed_number + (n-1))
   }
 
-  result = flex_lapply(X = 1:n, cores = cores, fun = function(x) {
+  result = lapply(X = 1:n, FUN = function(x) {
+
+    #print('lapply')
 
     seed_number = seed_number_list[x]
 
@@ -601,15 +602,20 @@ do_permuttest = function(expr_values,
                          adjust_method = 'fdr',
                          mean_method,
                          offset = 0.1,
-                         cores = 2,
                          set_seed = TRUE,
                          seed_number = 1234) {
+
+
+  print(' ')
+  print('do_permuttest')
+  print(' ')
 
   # data.table variables
   log2fc_diff = log2fc = sel = other = feats = p_higher = p_lower = perm_sel = NULL
   perm_other = perm_log2fc = perm_diff = p.value = p.adj = NULL
 
   ## original data
+  print('ok1')
   original = do_permuttest_original(expr_values = expr_values,
                                     select_ind = select_ind, other_ind = other_ind,
                                     name = 'orig',
@@ -617,13 +623,13 @@ do_permuttest = function(expr_values,
                                     offset = offset)
 
   ## random permutations
+  print('ok2')
   random_perms = do_multi_permuttest_random(expr_values = expr_values,
                                             n = n_perm,
                                             select_ind = select_ind,
                                             other_ind = other_ind,
                                             mean_method = mean_method,
                                             offset = offset,
-                                            cores = cores,
                                             set_seed = set_seed,
                                             seed_number = seed_number)
 
@@ -664,7 +670,6 @@ do_cell_proximity_test = function(expr_values,
                                   n_perm = 100,
                                   adjust_method = c("bonferroni","BH", "holm", "hochberg", "hommel",
                                                     "BY", "fdr", "none"),
-                                  cores = 2,
                                   set_seed = TRUE,
                                   seed_number = 1234) {
 
@@ -674,11 +679,14 @@ do_cell_proximity_test = function(expr_values,
                                                        "BY", "fdr", "none"))
   mean_method = match.arg(mean_method, choices = c('arithmic', 'geometric'))
 
+  print(' ')
+  print('do_cell_proximity_test')
+  print(' ')
 
   if(diff_test == 'permutation') {
     result = do_permuttest(expr_values = expr_values,
                            select_ind = select_ind, other_ind = other_ind,
-                           n_perm = n_perm, adjust_method = adjust_method, cores = cores,
+                           n_perm = n_perm, adjust_method = adjust_method,
                            mean_method = mean_method, offset = offset,
                            set_seed = set_seed,
                            seed_number = seed_number)
@@ -711,10 +719,10 @@ do_cell_proximity_test = function(expr_values,
 #' @name findCellProximityFeats_per_interaction
 #' @description Identifies features that are differentially expressed due to proximity to other cell types.
 #' @keywords internal
-findCellProximityFeats_per_interaction = function(expr_values,
+findCellProximityFeats_per_interaction = function(sel_int,
+                                                  expr_values,
                                                   cell_metadata,
                                                   annot_spatnetwork,
-                                                  sel_int,
                                                   cluster_column = NULL,
                                                   minimum_unique_cells = 1,
                                                   minimum_unique_int_cells = 1,
@@ -724,7 +732,6 @@ findCellProximityFeats_per_interaction = function(expr_values,
                                                   offset = 0.1,
                                                   adjust_method = 'bonferroni',
                                                   nr_permutations = 100,
-                                                  cores = 1,
                                                   set_seed = TRUE,
                                                   seed_number = 1234) {
 
@@ -781,6 +788,7 @@ findCellProximityFeats_per_interaction = function(expr_values,
        length(sel_ind2) < minimum_unique_int_cells) {
       result_cell_1 = NULL
     } else {
+
       result_cell_1 = do_cell_proximity_test(expr_values = expr_values,
                                              select_ind = sel_ind1,
                                              other_ind = all_ind1,
@@ -789,7 +797,6 @@ findCellProximityFeats_per_interaction = function(expr_values,
                                              mean_method = mean_method,
                                              offset = offset,
                                              adjust_method = adjust_method,
-                                             cores = cores,
                                              set_seed = set_seed,
                                              seed_number = seed_number)
       result_cell_1[, cell_type := first_cell_type]
@@ -807,6 +814,7 @@ findCellProximityFeats_per_interaction = function(expr_values,
        length(sel_ind1) < minimum_unique_int_cells) {
       result_cell_2 = NULL
     } else {
+
       result_cell_2 = do_cell_proximity_test(expr_values = expr_values,
                                              select_ind = sel_ind2, other_ind = all_ind2,
                                              diff_test = diff_test,
@@ -814,7 +822,6 @@ findCellProximityFeats_per_interaction = function(expr_values,
                                              mean_method = mean_method,
                                              offset = offset,
                                              adjust_method = adjust_method,
-                                             cores = cores,
                                              set_seed = set_seed,
                                              seed_number = seed_number)
       result_cell_2[, cell_type := second_cell_type]
@@ -862,6 +869,8 @@ findCellProximityFeats_per_interaction = function(expr_values,
       return(NULL)
     }
 
+    print('second')
+
     result_cells = do_cell_proximity_test(expr_values = expr_values,
                                           select_ind = sel_ind1, other_ind = all_ind1,
                                           diff_test = diff_test,
@@ -869,7 +878,6 @@ findCellProximityFeats_per_interaction = function(expr_values,
                                           mean_method = mean_method,
                                           offset = offset,
                                           adjust_method = adjust_method,
-                                          cores = cores,
                                           set_seed = set_seed,
                                           seed_number = seed_number)
 
@@ -910,7 +918,6 @@ findCellProximityFeats_per_interaction = function(expr_values,
 #' @param nr_permutations number of permutations if diff_test = permutation
 #' @param exclude_selected_cells_from_test exclude interacting cells other cells
 #' @param do_parallel run calculations in parallel with mclapply
-#' @param cores number of cores to use if do_parallel = TRUE
 #' @param set_seed set a seed for reproducibility
 #' @param seed_number seed number
 #' @return cpgObject that contains the Interaction Changed differential gene scores
@@ -950,7 +957,6 @@ findInteractionChangedFeats = function(gobject,
                                        nr_permutations = 1000,
                                        exclude_selected_cells_from_test = T,
                                        do_parallel = TRUE,
-                                       cores = NA,
                                        set_seed = TRUE,
                                        seed_number = 1234) {
 
@@ -962,7 +968,7 @@ findInteractionChangedFeats = function(gobject,
 
   # expression values to be used
   values = match.arg(expression_values, unique(c('normalized', 'scaled', 'custom', expression_values)))
-  expr_values = select_expression_values(gobject = gobject, feat_type = feat_type, values = values)
+  expr_values = get_expression_values(gobject = gobject, feat_type = feat_type, values = values)
 
   ## test selected feats ##
   if(!is.null(selected_feats)) {
@@ -997,10 +1003,14 @@ findInteractionChangedFeats = function(gobject,
 
   print(all_interactions)
 
+
   if(do_parallel == TRUE) {
 
 
-    fin_result = flex_lapply(X = all_interactions, cores = cores, fun = function(x) {
+    fin_result = lapply_flex(X = all_interactions, future.seed=TRUE, FUN = function(x) {
+
+      #print('first')
+      #print(x)
 
       tempres = findCellProximityFeats_per_interaction(expr_values = expr_values,
                                                        cell_metadata = cell_metadata,
@@ -1015,7 +1025,6 @@ findInteractionChangedFeats = function(gobject,
                                                        offset = offset,
                                                        adjust_method = adjust_method,
                                                        nr_permutations = nr_permutations,
-                                                       cores = 2,
                                                        set_seed = set_seed,
                                                        seed_number = seed_number)
 
@@ -1045,7 +1054,6 @@ findInteractionChangedFeats = function(gobject,
                                                        offset = offset,
                                                        adjust_method = adjust_method,
                                                        nr_permutations = nr_permutations,
-                                                       cores = 2,
                                                        set_seed = set_seed,
                                                        seed_number = seed_number)
 
@@ -1104,7 +1112,6 @@ findInteractionChangedFeats = function(gobject,
 #' @param nr_permutations number of permutations if diff_test = permutation
 #' @param exclude_selected_cells_from_test exclude interacting cells other cells
 #' @param do_parallel run calculations in parallel with mclapply
-#' @param cores number of cores to use if do_parallel = TRUE
 #' @param set_seed set a seed for reproducibility
 #' @param seed_number seed number
 #' @return cpgObject that contains the Interaction Changed differential gene scores
@@ -1143,7 +1150,6 @@ findInteractionChangedGenes = function(gobject,
                                        nr_permutations = 1000,
                                        exclude_selected_cells_from_test = T,
                                        do_parallel = TRUE,
-                                       cores = NA,
                                        set_seed = TRUE,
                                        seed_number = 1234) {
 
@@ -1164,7 +1170,6 @@ findInteractionChangedGenes = function(gobject,
                               nr_permutations = nr_permutations,
                               exclude_selected_cells_from_test = exclude_selected_cells_from_test,
                               do_parallel = do_parallel,
-                              cores = cores,
                               set_seed = set_seed,
                               seed_number = seed_number)
 
@@ -1208,7 +1213,6 @@ findCellProximityGenes <- function(...) {
 #' @param nr_permutations number of permutations if diff_test = permutation
 #' @param exclude_selected_cells_from_test exclude interacting cells other cells
 #' @param do_parallel run calculations in parallel with mclapply
-#' @param cores number of cores to use if do_parallel = TRUE
 #' @param set_seed set a seed for reproducibility
 #' @param seed_number seed number
 #' @return cpgObject that contains the Interaction Changed differential gene scores
@@ -1249,7 +1253,6 @@ findICF = function(gobject,
                    nr_permutations = 100,
                    exclude_selected_cells_from_test = T,
                    do_parallel = TRUE,
-                   cores = NA,
                    set_seed = TRUE,
                    seed_number = 1234) {
 
@@ -1269,7 +1272,6 @@ findICF = function(gobject,
                               nr_permutations = nr_permutations,
                               exclude_selected_cells_from_test = exclude_selected_cells_from_test,
                               do_parallel = do_parallel,
-                              cores = cores,
                               set_seed = set_seed,
                               seed_number = seed_number)
 
@@ -1297,7 +1299,6 @@ findICF = function(gobject,
 #' @param nr_permutations number of permutations if diff_test = permutation
 #' @param exclude_selected_cells_from_test exclude interacting cells other cells
 #' @param do_parallel run calculations in parallel with mclapply
-#' @param cores number of cores to use if do_parallel = TRUE
 #' @param set_seed set a seed for reproducibility
 #' @param seed_number seed number
 #' @return cpgObject that contains the differential gene scores
@@ -1337,7 +1338,6 @@ findICG = function(gobject,
                    nr_permutations = 100,
                    exclude_selected_cells_from_test = T,
                    do_parallel = TRUE,
-                   cores = NA,
                    set_seed = TRUE,
                    seed_number = 1234) {
 
@@ -1359,7 +1359,6 @@ findICG = function(gobject,
                               nr_permutations = nr_permutations,
                               exclude_selected_cells_from_test = exclude_selected_cells_from_test,
                               do_parallel = do_parallel,
-                              cores = cores,
                               set_seed = set_seed,
                               seed_number = seed_number)
 
@@ -1860,7 +1859,6 @@ combineCellProximityGenes_per_interaction =  function(cpgObject,
 #' @param min_spat_diff minimum absolute spatial expression difference
 #' @param min_log2_fc minimum absolute log2 fold-change
 #' @param do_parallel run calculations in parallel with mclapply
-#' @param cores number of cores to use if do_parallel = TRUE
 #' @param verbose verbose
 #' @return cpgObject that contains the filtered differential gene scores
 #' @export
@@ -1875,7 +1873,6 @@ combineInteractionChangedGenes = function(cpgObject,
                                      min_spat_diff = 0,
                                      min_log2_fc = 0.5,
                                      do_parallel = TRUE,
-                                     cores = NA,
                                      verbose = T) {
 
   # data.table variables
@@ -1896,7 +1893,7 @@ combineInteractionChangedGenes = function(cpgObject,
   # parallel
   if(do_parallel == TRUE) {
 
-    GTGresults = giotto_lapply(X = all_ints, cores = cores, fun = function(x) {
+    GTGresults = lapply_flex(X = all_ints, FUN = function(x) {
 
       tempres =  combineCellProximityGenes_per_interaction(cpgObject = cpgObject,
                                                            sel_int = x,
@@ -2685,7 +2682,7 @@ spatCellCellcom = function(gobject,
   verbose = match.arg(verbose, choices = c('a little', 'a lot', 'none'))
 
   ## check if spatial network exists ##
-  spat_networks = showNetworks(gobject = gobject, verbose = F)
+  spat_networks = showGiottoSpatNetworks(gobject = gobject, verbose = F)
   if(!spatial_network_name %in% spat_networks) {
     stop(spatial_network_name, ' is not an existing spatial network \n',
          'use showNetworks() to see the available networks \n',
@@ -2721,7 +2718,7 @@ spatCellCellcom = function(gobject,
   if(do_parallel == TRUE) {
 
 
-    savelist = flex_lapply(X = 1:nrow(combn_DT), cores = cores, fun = function(row) {
+    savelist = lapply_flex(X = 1:nrow(combn_DT), future.seed=TRUE, cores = cores, fun = function(row) {
 
       cell_type_1 = combn_DT[row][['V1']]
       cell_type_2 = combn_DT[row][['V2']]

@@ -1176,7 +1176,7 @@ plotCellProximityGenes = function(gobject,
 
 
   ## first filter
-  filter_cpg = filterInteractionChangedGenes(cpgObject = cpgObject,
+  filter_cpg = filterInteractionChangedFeats(cpgObject = cpgObject,
                                              min_cells = min_cells,
                                              min_cells_expr = min_cells_expr,
                                              min_int_cells = min_int_cells,
@@ -2442,7 +2442,7 @@ plotRankSpatvsExpr = function(gobject,
   pl = pl + ggplot2::theme_classic() + ggplot2::theme(axis.text = element_blank())
   pl = pl + ggplot2::geom_point(data = rnk_res_m, ggplot2::aes(x = variable, y = spt_rank, size = value, color = value))
   pl = pl + ggplot2::scale_color_gradient2(low = 'blue', mid = 'yellow', high = 'red', midpoint = midpoint, guide = guide_legend(title = ''))
-  pl = pl + ggplot2::scale_size_continuous(range = size_range, guide = F)
+  pl = pl + ggplot2::scale_size_continuous(range = size_range, guide = "none")
   pl = pl + ggplot2::labs(x = 'expression rank', y = 'spatial rank')
 
   if(!is.null(xlims)) {
@@ -2618,6 +2618,7 @@ plotRecovery = function(gobject,
 #' @name cellProximitySpatPlot2D
 #' @description Visualize 2D cell-cell interactions according to spatial coordinates in ggplot mode
 #' @param gobject giotto object
+#' @param spat_loc_name spatial locations to use
 #' @param feat_type feature type
 #' @param interaction_name cell-cell interaction name
 #' @param cluster_column cluster column with cell clusters
@@ -2652,6 +2653,7 @@ plotRecovery = function(gobject,
 #' @details Description of parameters.
 #' @export
 cellProximitySpatPlot2D <- function(gobject,
+                                    spat_loc_name = NULL,
                                     feat_type = NULL,
                                     interaction_name = NULL,
                                     cluster_column = NULL,
@@ -2692,8 +2694,13 @@ cellProximitySpatPlot2D <- function(gobject,
   }
 
 
-  cell_locations  = gobject@spatial_locs
-  spatial_grid    = gobject@spatial_grid[[spatial_grid_name]]
+  # get information from all slots
+  cell_locations  = get_spatial_locations(gobject = gobject,
+                                          spat_loc_name = spat_loc_name)
+
+  spatial_grid = get_spatialGrid(gobject = gobject,
+                                 name = spatial_grid_name)
+
   cell_metadata   = gobject@cell_metadata[[feat_type]]
 
   spatial_network = annotateSpatialNetwork(gobject = gobject,
@@ -2722,7 +2729,7 @@ cellProximitySpatPlot2D <- function(gobject,
   if(nrow(cell_metadata) == 0) {
     cell_locations_metadata = cell_locations
   } else {
-    cell_locations_metadata <- merge(cell_locations, cell_metadata,by = "cell_ID")
+    cell_locations_metadata <- merge(cell_locations, cell_metadata, by = "cell_ID")
   }
 
 
