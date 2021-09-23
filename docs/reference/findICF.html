@@ -91,7 +91,7 @@ i.e. features that are differentially expressed due to proximity to other cell t
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.952</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.956</span>
       </span>
     </div>
 
@@ -123,9 +123,17 @@ i.e. features that are differentially expressed due to proximity to other cell t
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/mouse_visium_kidney_210830.html">mouse Visium kidney</a>
+      <a href="../articles/datasets_overview.html#array-based-datasets-1">Array based</a>
     </li>
-    <li class="dropdown-header">Subcellular</li>
+    <li>
+      <a href="../articles/datasets_overview.html#single-cell-1">Single-cell</a>
+    </li>
+    <li>
+      <a href="../articles/datasets_overview.html#subcellular-datasets-1">Subcellular</a>
+    </li>
+    <li>
+      <a href="../articles/datasets_overview.html#protein-multiplexing-1">Protein multiplexing</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -182,7 +190,6 @@ i.e. features that are differentially expressed due to proximity to other cell t
   nr_permutations <span class='op'>=</span> <span class='fl'>100</span>,
   exclude_selected_cells_from_test <span class='op'>=</span> <span class='cn'>T</span>,
   do_parallel <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  cores <span class='op'>=</span> <span class='cn'>NA</span>,
   set_seed <span class='op'>=</span> <span class='cn'>TRUE</span>,
   seed_number <span class='op'>=</span> <span class='fl'>1234</span>
 <span class='op'>)</span></pre>
@@ -249,10 +256,6 @@ i.e. features that are differentially expressed due to proximity to other cell t
     <tr>
       <th>do_parallel</th>
       <td><p>run calculations in parallel with mclapply</p></td>
-    </tr>
-    <tr>
-      <th>cores</th>
-      <td><p>number of cores to use if do_parallel = TRUE</p></td>
     </tr>
     <tr>
       <th>set_seed</th>

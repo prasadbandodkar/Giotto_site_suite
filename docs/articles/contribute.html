@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.952</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.956</span>
       </span>
     </div>
 
@@ -76,9 +76,17 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/mouse_visium_kidney_210830.html">mouse Visium kidney</a>
+      <a href="../articles/datasets_overview.html#array-based-datasets-1">Array based</a>
     </li>
-    <li class="dropdown-header">Subcellular</li>
+    <li>
+      <a href="../articles/datasets_overview.html#single-cell-1">Single-cell</a>
+    </li>
+    <li>
+      <a href="../articles/datasets_overview.html#subcellular-datasets-1">Subcellular</a>
+    </li>
+    <li>
+      <a href="../articles/datasets_overview.html#protein-multiplexing-1">Protein multiplexing</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -105,7 +113,7 @@
 
       
 
-      </header><script src="contribute_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="contribute_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Contribute</h1>
@@ -238,22 +246,22 @@
 <ol style="list-style-type: decimal">
 <li>write python wrapper and store as python_leiden.py in <em>/inst/python</em>:</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> igraph <span class="im">as</span> ig</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> leidenalg <span class="im">as</span> la</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">def</span> python_leiden(df, partition_type, initial_membership<span class="op">=</span><span class="va">None</span>, weights<span class="op">=</span><span class="va">None</span>, n_iterations<span class="op">=</span><span class="dv">2</span>, seed<span class="op">=</span><span class="va">None</span>, resolution_parameter <span class="op">=</span> <span class="dv">1</span>):</span>
-<span id="cb1-7"><a href="#cb1-7"></a>    </span>
-<span id="cb1-8"><a href="#cb1-8"></a>    <span class="co"># create networkx object</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>    Gx <span class="op">=</span> nx.from_pandas_edgelist(df <span class="op">=</span> df, source <span class="op">=</span> <span class="st">'from'</span>, target <span class="op">=</span>  <span class="st">'to'</span>, edge_attr <span class="op">=</span> <span class="st">'weight'</span>)  </span>
-<span id="cb1-10"><a href="#cb1-10"></a>    </span>
-<span id="cb1-11"><a href="#cb1-11"></a>    <span class="co"># get weight attribute</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>    myweights <span class="op">=</span> nx.get_edge_attributes(Gx, <span class="st">'weight'</span>)</span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a>    ....</span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a>    <span class="cf">return</span>(leiden_dfr)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> igraph <span class="im">as</span> ig</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> leidenalg <span class="im">as</span> la</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> python_leiden(df, partition_type, initial_membership<span class="op">=</span><span class="va">None</span>, weights<span class="op">=</span><span class="va">None</span>, n_iterations<span class="op">=</span><span class="dv">2</span>, seed<span class="op">=</span><span class="va">None</span>, resolution_parameter <span class="op">=</span> <span class="dv">1</span>):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create networkx object</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    Gx <span class="op">=</span> nx.from_pandas_edgelist(df <span class="op">=</span> df, source <span class="op">=</span> <span class="st">'from'</span>, target <span class="op">=</span>  <span class="st">'to'</span>, edge_attr <span class="op">=</span> <span class="st">'weight'</span>)  </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get weight attribute</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    myweights <span class="op">=</span> nx.get_edge_attributes(Gx, <span class="st">'weight'</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    ....</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(leiden_dfr)</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>source python code with reticulate:</li>
 </ol>

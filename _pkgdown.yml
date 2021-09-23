@@ -25,9 +25,14 @@ navbar:
       href: reference/index.html
     - text: "Datasets"
       menu:
-      - text: "mouse Visium kidney"
-        href: articles/mouse_visium_kidney_210830.html
-      - text: Subcellular
+      - text: "Array based"
+        href: articles/datasets_overview.html#array-based-datasets-1
+      - text: "Single-cell"
+        href: articles/datasets_overview.html#single-cell-1
+      - text: "Subcellular"
+        href: articles/datasets_overview.html#subcellular-datasets-1
+      - text: "Protein multiplexing"
+        href: articles/datasets_overview.html#protein-multiplexing-1
     - text: "Contribute"
       href: articles/contribute.html
     - text: "FAQ"
