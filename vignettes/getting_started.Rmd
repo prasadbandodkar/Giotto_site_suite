@@ -3,21 +3,41 @@ output: html_document
 ---
 
 
+Giotto provides a lot of analyses, visualizations and other options to facilitate your spatial dataset analysis.
+We are working on providing easy-to-understand examples or tutorials, but if anything is not clear or if there is something you would like to see in particular, then do not hesitate to contact [us](https://github.com/RubD/Giotto/issues).
+
 \  
 
 ## Workflow
+
 [under construction]  
+
+Describe typical workflow:  
+- input  
+- components  
+- classes  
+- visualization  
 
 
 \  
 
+
+## Analyses
+
+[![](../inst/images/icons/analyses/icons_image_analysis.png){width=30%}](./temp_construction.html)
+[![](../inst/images/icons/analyses/icons_cell_type.png){width=30%}](./temp_construction.html)
+[![](../inst/images/icons/analyses/icons_deconvolution.png){width=30%}](./temp_construction.html)
+[![](../inst/images/icons/analyses/icons_distribution.png){width=30%}](./temp_construction.html)
+[![](../inst/images/icons/analyses/icons_interaction.png){width=30%}](./temp_construction.html)
+[![](../inst/images/icons/analyses/icons_patterns.png){width=30%}](./temp_construction.html)
+[![](../inst/images/icons/analyses/icons_subcellular.png){width=30%}](./temp_construction.html)
+\  
+
 ## HOWTOs 
+
 [under construction]  
  
-Giotto provides a lot of analyses, visualizations and other options to facilitate your spatial dataset analysis.
-We are working on providing easy-to-understand examples or tutorials, but if anything is not clear or if there is something you
-would like to see in particular, then do not hesitate to contact [us](https://github.com/RubD/Giotto/issues).
-
+Tutorials for Giotto specific tasks and functionalities.
 
 \  
 
