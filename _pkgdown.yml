@@ -44,6 +44,7 @@ navbar:
         - text: GitHub Issues Guidelines
           href: articles/github_issues.html
     - text: "News"
+      href: news/index.html
     - text: "Try Giotto"
       menu:
 
