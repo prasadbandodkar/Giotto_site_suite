@@ -2,13 +2,14 @@
 output: github_document
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-<!-- This line is from RStudio -->
-
 
 # Giotto Suite  
 
 [under construction] Giotto Suite is the new and updated version of Giotto. 
+
+
+![](./inst/images/general_figs/Giotto_to_suite.png){width=80%}
+
 
 <br> 
 

@@ -47,6 +47,10 @@ navbar:
       href: news/index.html
     - text: "Try Giotto"
       menu:
+        - text: "Docker"
+          href:
+        - text: "Binder"
+          href:
 
 reference:
   - title: Giotto environment

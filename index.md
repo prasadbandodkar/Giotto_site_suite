@@ -1,11 +1,10 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-<!-- This line is from RStudio -->
-
 # Giotto Suite
 
 \[under construction\] Giotto Suite is the new and updated version of
 Giotto.
+
+<img src="./inst/images/general_figs/Giotto_to_suite.png" style="width:80.0%" />
 
 <br>
 
