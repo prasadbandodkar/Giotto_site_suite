@@ -19,6 +19,8 @@ navbar:
       menu:
       - text: Workflow
         href: articles/getting_started.html#workflow
+      - text: Analyses
+        href: articles/getting_started.html#analyses
       - text: HOWTOs
         href: articles/getting_started.html#howtos
     - text: "Documentation"
