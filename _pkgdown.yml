@@ -38,6 +38,11 @@ navbar:
     - text: "Contribute"
       href: articles/contribute.html
     - text: "FAQ"
+      menu:
+        - text: Frequently Asked Questions
+          href: articles/faqs.html
+        - text: GitHub Issues Guidelines
+          href: articles/github_issues.html
     - text: "News"
     - text: "Try Giotto"
       menu:

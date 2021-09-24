@@ -19,14 +19,14 @@ Giotto.
 
 You can install Giotto Suite on any platform in 2 easy steps:
 
-##### Step 1: install Giotto Suite
+#### Step 1: install Giotto Suite
 
 ``` r
 library(remotes)
 remotes::install_github("RubD/Giotto@suite") 
 ```
 
-##### Step 2: install the Giotto python environment
+#### Step 2: install the Giotto python environment
 
 The python environment only needs to be installed once.
 
@@ -71,12 +71,17 @@ The most important changes and additions are:
     -   efficient representations for image information (e.g. nucleus,
         membrane, …)  
     -   individual transcript locations
+    -   subcellular analyses
 -   image processing tools
     -   registration  
-    -   segmentation  
--   Joint analysis: combining and analyzing multiple spatial datasets  
+    -   segmentation
+    -   integration
+    -   efficient visualization
+-   Joint analysis: combining, batch correcting and analyzing multiple
+    spatial datasets  
 -   Large file management:
-    -   DelayedArray
+    -   DelayedArray  
+    -   terra
 
 <br>
 
@@ -86,3 +91,5 @@ The most important changes and additions are:
     analysis and visualization of spatial expression data. Genome
     Biology
     (2021).](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02286-2)
+      
+-   \[Coming soon\] Spatial review.

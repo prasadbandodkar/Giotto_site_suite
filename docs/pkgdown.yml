@@ -4,11 +4,14 @@ pkgdown_sha: ~
 articles:
   contribute: contribute.html
   datasets_overview: datasets_overview.html
+  faqs: faqs.html
   getting_started: getting_started.html
+  github_issues: github_issues.html
+  installation_issues: installation_issues.html
   mini_seqfish: mini_seqfish.html
   mini_starmap: mini_starmap.html
   mini_visium: mini_visium.html
   mouse_visium_kidney_210830: mouse_visium_kidney_210830.html
   temp_construction: temp_construction.html
-last_built: 2021-09-24T13:40Z
+last_built: 2021-09-24T13:55Z
 
