@@ -1,5 +1,5 @@
 ---
-output: github_document
+output: html_document
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -10,17 +10,50 @@ output: github_document
 
 [under construction] Giotto Suite is the new and updated version of Giotto. 
 
-### latest update: 
+<br> 
+
+## latest update: 
 
 ```{r echo=F}
 Sys.Date()
 ```
 
-### Installation:
+
+
+<br>  
+
+## Installation:
+
+You can install Giotto Suite on any platform in 2 easy steps:
+
+##### Step 1: install Giotto Suite
+``` r
+library(remotes)
+remotes::install_github("RubD/Giotto@suite") 
+```
+
+##### Step 2: install the Giotto python environment
+The python environment only needs to be installed once.
+
+``` r
+library(Giotto)
+installGiottoEnvironment()
+```
+
+This command only needs to be run once and then Giotto will automatically detect the environment in the future.  
+
+For more information:   
+
+* See [Installation](https://giottosuite.com/articles/temp_construction.html) for alternative (manual) installation options.  
+* See [Giotto Environment](https://giottosuite.com/articles/temp_construction.html) to learn more about the Giotto environment.  
+* See [FAQ](https://giottosuite.com/articles/faq.html) for troubleshooting.  
 
 
 
 
+<br> 
+
+## Summary:
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -41,6 +74,7 @@ The most important changes and additions are:
     + DelayedArray  
     
 
+<br> 
 
 ## References
 
