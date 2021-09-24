@@ -7,13 +7,15 @@
 \[under construction\] Giotto Suite is the new and updated version of
 Giotto.
 
-  
+<br>
 
 ## latest update:
 
     ## [1] "2021-09-24"
 
-<br> \#\# Installation:
+<br>
+
+## Installation:
 
 You can install Giotto Suite on any platform in 2 easy steps:
 
@@ -36,10 +38,20 @@ installGiottoEnvironment()
 This command only needs to be run once and then Giotto will
 automatically detect the environment in the future.
 
-See [FAQ](https://giottosuite.com/articles/faq.html) for additional
-information.
+For more information:
 
-<br> \#\# Summary:
+-   See
+    [Installation](https://giottosuite.com/articles/temp_construction.html)
+    for alternative (manual) installation options.  
+-   See [Giotto
+    Environment](https://giottosuite.com/articles/temp_construction.html)
+    to learn more about the Giotto environment.  
+-   See [FAQ](https://giottosuite.com/articles/faq.html) for
+    troubleshooting.
+
+<br>
+
+## Summary:
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -65,6 +77,8 @@ The most important changes and additions are:
 -   Joint analysis: combining and analyzing multiple spatial datasets  
 -   Large file management:
     -   DelayedArray
+
+<br>
 
 ## References
 
