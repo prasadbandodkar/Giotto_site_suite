@@ -4,7 +4,7 @@
 \[under construction\] Giotto Suite is the new and updated version of
 Giotto.
 
-<img src="../inst/images/general_figs/Giotto_to_suite.png" style="width:80.0%" />
+<img src="./inst/images/general_figs/Giotto_to_suite.png" style="width:80.0%" />
 
 <br>
 
