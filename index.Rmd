@@ -5,7 +5,7 @@ output: github_document
 
 # Giotto Suite  
 
-[under construction] Giotto Suite is the new and updated version of Giotto. 
+**under construction:** Giotto Suite is the new and updated version of Giotto. 
 
 
 ![](./inst/images/general_figs/Giotto_to_suite.png){width=80%}
