@@ -98,7 +98,7 @@ reference:
     - createGiottoObject
     - createGiottoVisiumObject
     - createGiottoObjectSubcellular
-    
+
   - title: Giotto helper functions
     desc: Common functions to help working with Giotto objects
     contents:
@@ -175,8 +175,7 @@ reference:
     - findScranMarkers_one_vs_all
     - findMastMarkers
     - findMastMarkers_one_vs_all
-    
-    
+
   - title: Auxiliary visualizations
     desc: Different visualization options to explore gene, cell or cluster characteristics
     contents:
@@ -186,4 +185,3 @@ reference:
     - plotMetaDataHeatmap
     - plotMetaDataCellsHeatmap
     - violinPlot
-    
