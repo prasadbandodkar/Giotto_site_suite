@@ -7,7 +7,7 @@
 \[under construction\] Giotto Suite is the new and updated version of
 Giotto.
 
-www.giottosuite.com
+<https://giottosuite.com>
 
 ### latest update:
 
