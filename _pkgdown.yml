@@ -108,14 +108,12 @@ reference:
     - calculateMetaTable
     - calculateMetaTableCells
     - combineMetadata
-    - createMetagenes
+    - createMetafeats
     - findNetworkNeighbors
 
-  - title: Modify Giotto object(s)
-    desc: filter, subset or join Giotto objects
+  - title: Modify Giotto object
+    desc: Modifications to the Giotto objects
     contents:
-    - filterDistributions
-    - filterCombinations
     - filterGiotto
     - subsetGiotto
     - subsetGiottoLocs
@@ -133,7 +131,6 @@ reference:
     - addFeatsPerc
     - addCellIntMetadata
 
-
   - title: dimension reduction
     desc: Functions to reduce dimensions
     contents:
@@ -150,7 +147,6 @@ reference:
     contents:
     - createNearestNetwork
     - addNetworkLayout
-    - get_NearestNetwork
     - clusterCells
     - doLeidenCluster
     - doLouvainCluster
