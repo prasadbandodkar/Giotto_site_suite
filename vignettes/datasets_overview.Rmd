@@ -10,7 +10,7 @@ output: html_document
 
 [![](../inst/images/general_figs/visium_kidney_image_summary.png){width=30%}](./mouse_visium_kidney_210830.html)
 [![](../inst/images/general_figs/visium_brain_image_summary.png){width=30%}](./temp_construction.html)
-[![](../inst/images/general_figs/coming_soon_summary.png){width=30%}](./mouse_visium_kidney_210830.html)
+[![](../inst/images/general_figs/visium_prostate_summary.png){width=30%}](./mouse_visium_kidney_210830.html)
 
 #### Other technologies
 
@@ -35,8 +35,8 @@ output: html_document
 
 ## Subcellular datasets
 
-[![](../inst/images/general_figs/coming_soon_summary.png){width=30%}](./temp_construction.html)
-[![](../inst/images/general_figs/coming_soon_summary.png){width=30%}](./temp_construction.html)
+[![](../inst/images/general_figs/vizgen_brain_summary.png){width=30%}](./temp_construction.html)
+[![](../inst/images/general_figs/resolve_bioscience_cancer_summary.png){width=30%}](./temp_construction.html)
 
 <br>
 
