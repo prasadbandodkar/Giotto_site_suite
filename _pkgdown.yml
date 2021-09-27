@@ -98,13 +98,92 @@ reference:
     - createGiottoObject
     - createGiottoVisiumObject
     - createGiottoObjectSubcellular
+    
+  - title: Giotto helper functions
+    desc: Common functions to help working with Giotto objects
+    contents:
+    - pDataDT
+    - fDataDT
+    - showProcessingSteps
+    - calculateMetaTable
+    - calculateMetaTableCells
+    - combineMetadata
+    - createMetagenes
+    - findNetworkNeighbors
 
   - title: Modify Giotto object(s)
     desc: filter, subset or join Giotto objects
     contents:
+    - filterDistributions
+    - filterCombinations
     - filterGiotto
     - subsetGiotto
     - subsetGiottoLocs
     - joinGiottoObjects
+    - normalizeGiotto
+    - adjustGiottoMatrix
+    - annotateGiotto
+    - removeCellAnnotation
+    - removeFeatAnnotation
+    - addCellMetadata
+    - addFeatMetadata
+    - addFeatStatistics
+    - addCellStatistics
+    - addStatistics
+    - addFeatsPerc
+    - addCellIntMetadata
 
 
+  - title: dimension reduction
+    desc: Functions to reduce dimensions
+    contents:
+    - calculateHVF
+    - signPCA
+    - screePlot
+    - jackstrawPlot
+    - runPCA
+    - runUMAP
+    - runtSNE
+
+  - title: Clustering
+    desc: Functions to cluster cells
+    contents:
+    - createNearestNetwork
+    - addNetworkLayout
+    - get_NearestNetwork
+    - clusterCells
+    - doLeidenCluster
+    - doLouvainCluster
+    - doKmeans
+    - doHclust
+    - subClusterCells
+    - doLeidenSubCluster
+    - doLouvainSubCluster
+    - getClusterSimilarity
+    - mergeClusters
+    - getDendrogramSplits
+
+
+  - title: Marker genes
+    desc: Functions to detect cell type / cluster specific marker genes
+    contents:
+    - findMarkers
+    - findMarkers_one_vs_all
+    - findGiniMarkers
+    - findGiniMarkers_one_vs_all
+    - findScranMarkers
+    - findScranMarkers_one_vs_all
+    - findMastMarkers
+    - findMastMarkers_one_vs_all
+    
+    
+  - title: Auxiliary visualizations
+    desc: Different visualization options to explore gene, cell or cluster characteristics
+    contents:
+    - showClusterHeatmap
+    - showClusterDendrogram
+    - plotHeatmap
+    - plotMetaDataHeatmap
+    - plotMetaDataCellsHeatmap
+    - violinPlot
+    
