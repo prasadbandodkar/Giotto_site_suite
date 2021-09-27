@@ -1,7 +1,4 @@
 
----
-output: github_document
----
 
 
 # Giotto Suite 2.0.0
