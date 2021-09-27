@@ -1,0 +1,14 @@
+---
+title: "News"
+output: html_document
+---
+
+# Giotto Suite 2.0.0
+
+- First release coming soon
+
+# Giotto Suite 2.0.0.xxx
+
+- beta release  
+
+

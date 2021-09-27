@@ -6,6 +6,7 @@ articles:
   datasets_overview: datasets_overview.html
   faqs: faqs.html
   getting_started: getting_started.html
+  giotto_news: giotto_news.html
   github_issues: github_issues.html
   installation_issues: installation_issues.html
   mini_seqfish: mini_seqfish.html
@@ -13,5 +14,5 @@ articles:
   mini_visium: mini_visium.html
   mouse_visium_kidney_210830: mouse_visium_kidney_210830.html
   temp_construction: temp_construction.html
-last_built: 2021-09-27T14:42Z
+last_built: 2021-09-27T15:47Z
 

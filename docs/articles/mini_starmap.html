@@ -95,6 +95,9 @@
 <li>
   <a href="../articles/contribute.html">Contribute</a>
 </li>
+<li>
+  <a href="../articles/giotto_news.html">News</a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     FAQ
@@ -109,9 +112,6 @@
       <a href="../articles/github_issues.html">GitHub Issues Guidelines</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -211,9 +211,9 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <li>adjust expression matrix for technical covariates or batches (optional). These results will be stored in the <em>custom</em> slot.</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">filterDistributions</span><span class="op">(</span><span class="va">starmap_mini</span>, detection <span class="op">=</span> <span class="st">'genes'</span><span class="op">)</span>
-<span class="fu">filterDistributions</span><span class="op">(</span><span class="va">starmap_mini</span>, detection <span class="op">=</span> <span class="st">'cells'</span><span class="op">)</span>
-<span class="fu">filterCombinations</span><span class="op">(</span><span class="va">starmap_mini</span>,
+<code class="sourceCode R"><span class="fu"><a href="../reference/filterDistributions.html">filterDistributions</a></span><span class="op">(</span><span class="va">starmap_mini</span>, detection <span class="op">=</span> <span class="st">'genes'</span><span class="op">)</span>
+<span class="fu"><a href="../reference/filterDistributions.html">filterDistributions</a></span><span class="op">(</span><span class="va">starmap_mini</span>, detection <span class="op">=</span> <span class="st">'cells'</span><span class="op">)</span>
+<span class="fu"><a href="../reference/filterCombinations.html">filterCombinations</a></span><span class="op">(</span><span class="va">starmap_mini</span>,
                    expression_thresholds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,
                    gene_det_in_min_cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">200</span><span class="op">)</span>,
                    min_det_genes_per_cell <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">28</span>, <span class="fl">28</span><span class="op">)</span><span class="op">)</span>
@@ -350,7 +350,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
                               sdimy_stepsize <span class="op">=</span> <span class="fl">200</span>,
                               sdimz_stepsize <span class="op">=</span> <span class="fl">20</span>,
                               minimum_padding <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-<span class="fu"><a href="../reference/showGrids.html">showGrids</a></span><span class="op">(</span><span class="va">starmap_mini</span><span class="op">)</span>
+<span class="fu">showGrids</span><span class="op">(</span><span class="va">starmap_mini</span><span class="op">)</span>
 
 <span class="co"># visualize grid</span>
 <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">starmap_mini</span>, show_grid <span class="op">=</span> <span class="cn">T</span>, point_size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></code></pre></div>
@@ -377,7 +377,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <span class="va">starmap_mini</span> <span class="op">=</span> <span class="fu"><a href="../reference/createSpatialNetwork.html">createSpatialNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">starmap_mini</span>,
                                     minimum_k <span class="op">=</span> <span class="fl">2</span>, 
                                     method <span class="op">=</span> <span class="st">'kNN'</span>, k <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-<span class="fu"><a href="../reference/showNetworks.html">showNetworks</a></span><span class="op">(</span><span class="va">starmap_mini</span><span class="op">)</span>
+<span class="fu">showNetworks</span><span class="op">(</span><span class="va">starmap_mini</span><span class="op">)</span>
 
 <span class="co"># visualize the two different spatial networks  </span>
 <span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">starmap_mini</span>, show_network <span class="op">=</span> <span class="cn">T</span>,
