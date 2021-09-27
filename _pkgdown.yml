@@ -133,7 +133,6 @@ reference:
     - addFeatsPerc
     - addCellIntMetadata
 
-
   - title: dimension reduction
     desc: Functions to reduce dimensions
     contents:
