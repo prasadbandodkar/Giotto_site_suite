@@ -37,20 +37,26 @@ navbar:
         href: articles/datasets_overview.html#protein-multiplexing-1
     - text: "Contribute"
       href: articles/contribute.html
+    - text: "News"
+      href: articles/giotto_news.html
     - text: "FAQ"
       menu:
         - text: Frequently Asked Questions
           href: articles/faqs.html
         - text: GitHub Issues Guidelines
           href: articles/github_issues.html
-    - text: "News"
-      href: news/index.html
     - text: "Try Giotto"
       menu:
         - text: "Docker"
           href:
         - text: "Binder"
           href:
+
+
+news:
+  releases:
+    - text: "Giotto 2.0.0.958"
+      href: https://giottosuite.com/articles/temp_construction.html
 
 reference:
   - title: Giotto environment
@@ -98,7 +104,7 @@ reference:
     - createGiottoObject
     - createGiottoVisiumObject
     - createGiottoObjectSubcellular
-    
+
   - title: Giotto helper functions
     desc: Common functions to help working with Giotto objects
     contents:
@@ -108,14 +114,12 @@ reference:
     - calculateMetaTable
     - calculateMetaTableCells
     - combineMetadata
-    - createMetagenes
+    - createMetafeats
     - findNetworkNeighbors
 
-  - title: Modify Giotto object(s)
-    desc: filter, subset or join Giotto objects
+  - title: Modify Giotto object
+    desc: Modifications to the Giotto objects
     contents:
-    - filterDistributions
-    - filterCombinations
     - filterGiotto
     - subsetGiotto
     - subsetGiottoLocs
@@ -149,7 +153,6 @@ reference:
     contents:
     - createNearestNetwork
     - addNetworkLayout
-    - get_NearestNetwork
     - clusterCells
     - doLeidenCluster
     - doLouvainCluster
@@ -174,8 +177,7 @@ reference:
     - findScranMarkers_one_vs_all
     - findMastMarkers
     - findMastMarkers_one_vs_all
-    
-    
+
   - title: Auxiliary visualizations
     desc: Different visualization options to explore gene, cell or cluster characteristics
     contents:
@@ -185,4 +187,3 @@ reference:
     - plotMetaDataHeatmap
     - plotMetaDataCellsHeatmap
     - violinPlot
-    

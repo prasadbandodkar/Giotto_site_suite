@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.956</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.958</span>
       </span>
     </div>
 
@@ -95,6 +95,9 @@
 <li>
   <a href="../articles/contribute.html">Contribute</a>
 </li>
+<li>
+  <a href="../articles/giotto_news.html">News</a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     FAQ
@@ -109,9 +112,6 @@
       <a href="../articles/github_issues.html">GitHub Issues Guidelines</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -343,7 +343,7 @@ See <strong>doLeidenCLuster</strong> for more detailed information.</li>
 
 
   <span class="co"># extract expression values from gobject using one of the accessors</span>
-  <span class="va">expr</span> <span class="op">=</span> <span class="fu">get_expression_values</span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">gobject</span>, values <span class="op">=</span> <span class="va">expression_values</span><span class="op">)</span>
+  <span class="va">expr</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_expression_values.html">get_expression_values</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">gobject</span>, values <span class="op">=</span> <span class="va">expression_values</span><span class="op">)</span>
 
   <span class="co"># extract coordinates from gobject</span>
   <span class="co"># check the different slots of the giotto S4 object</span>
@@ -372,7 +372,7 @@ See <strong>doLeidenCLuster</strong> for more detailed information.</li>
 
     <span class="va">metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">tempgobject</span><span class="op">)</span>
 
-    <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">covariates</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">covariates</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
       <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="va">covariates</span>, <span class="st">' was not found in the cell metadata of the giotto object, will be set to NULL \n'</span><span class="op">)</span>
       <span class="va">covariates</span> <span class="op">=</span> <span class="cn">NULL</span>
     <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
