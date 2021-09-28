@@ -17,11 +17,11 @@ navbar:
   left:
     - text: "Start"
       menu:
-      - text: Installation
+      - text: "Installation"
         href: articles/getting_started.html#installation
-      - text: Analyses
+      - text: "Getting Started"
         href: articles/getting_started.html#getting-started
-      - text: HOWTOs
+      - text: "Analyses"
         href: articles/getting_started.html#analyses
     - text: "Documentation"
       href: reference/index.html

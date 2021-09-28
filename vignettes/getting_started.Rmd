@@ -49,10 +49,13 @@ For more information:
  
 Tutorials for Giotto specific tasks and functionalities.
 
-[![](../inst/images/icons/getting_started/icons_temporary.png){width=20%}](./temp_construction.html)
-[![](../inst/images/icons/getting_started/icons_temporary.png){width=20%}](./temp_construction.html)
-[![](../inst/images/icons/getting_started/icons_temporary.png){width=20%}](./temp_construction.html)
-[![](../inst/images/icons/getting_started/icons_temporary.png){width=20%}](./temp_construction.html)
+[![](../inst/images/icons/getting_started/icons_configuration.png){width=20%}](./temp_construction.html)
+[![](../inst/images/icons/getting_started/icons_giotto.png){width=20%}](./temp_construction.html)
+[![](../inst/images/icons/getting_started/icons_processing.png){width=20%}](./temp_construction.html)
+[![](../inst/images/icons/getting_started/icons_visualizations.png){width=20%}](./temp_construction.html)  
+
+[![](../inst/images/icons/getting_started/icons_saving.png){width=20%}](./temp_construction.html)
+[![](../inst/images/icons/getting_started/icons_temporary.png){width=20%}](./temp_construction.html)  
 
 
 
@@ -60,6 +63,9 @@ Tutorials for Giotto specific tasks and functionalities.
 
 
 ## Analyses
+
+Tutorials for Spatial analyses that can be performed with Giotto Suite.  
+Full dataset examples can be found in the [Datasets](../articles/datasets_overview.html) tab.
 
 [![](../inst/images/icons/analyses/icons_image_analysis.png){width=30%}](./temp_construction.html)
 [![](../inst/images/icons/analyses/icons_cell_type.png){width=30%}](./temp_construction.html)
