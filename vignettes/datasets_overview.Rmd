@@ -36,7 +36,7 @@ output: html_document
 ## Subcellular datasets
 
 [![](../inst/images/general_figs/vizgen_brain_summary.png){width=30%}](./temp_construction.html)
-[![](../inst/images/general_figs/resolve_bioscience_cancer_summary.png){width=30%}](./temp_construction.html)
+[![](../inst/images/general_figs/resolve_bioscience_cancer_summary.png){width=30%}](./Resolve_bc_210928.html)
 
 <br>
 

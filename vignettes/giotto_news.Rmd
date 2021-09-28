@@ -7,8 +7,27 @@ output: html_document
 
 - First release coming soon
 
+\  
+
 # Giotto Suite 2.0.0.xxx
 
-- beta release  
+### beta release  
+
+The most important changes and additions are:    
+
+* Support for multi-modal datasets (e.g. RNA + Protein) 
+* Support for subcellular data  
+    + efficient representations for image information (e.g. nucleus, membrane, ...)  
+    + individual transcript locations
+    + subcellular analyses
+* Image processing tools  
+    + registration  
+    + segmentation 
+    + integration
+    + efficient visualization
+* Joint analysis: combining, batch correcting and analyzing multiple spatial datasets  
+* Large file management:  
+    + DelayedArray  
+    + terra
 
 
