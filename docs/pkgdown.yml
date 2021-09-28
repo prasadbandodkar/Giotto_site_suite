@@ -2,6 +2,7 @@ pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  Resolve_bc_210928: Resolve_bc_210928.html
   SeqFISH_cortex_210923: SeqFISH_cortex_210923.html
   contribute: contribute.html
   datasets_overview: datasets_overview.html
@@ -16,5 +17,9 @@ articles:
   mini_visium: mini_visium.html
   mouse_visium_kidney_210830: mouse_visium_kidney_210830.html
   temp_construction: temp_construction.html
+<<<<<<< HEAD
+last_built: 2021-09-28T20:26Z
+=======
 last_built: 2021-09-28T16:44Z
+>>>>>>> 557ba652723060b8387f93a5b88ea17e095d0dbc
 
