@@ -1,6 +1,8 @@
 
 # Giotto Suite
 
+## Multi-level Spatial Biology Exploration
+
 **under construction:** Giotto Suite is the new and updated version of
 Giotto.
 
@@ -8,45 +10,9 @@ Giotto.
 
 <br>
 
-### latest update:
+#### latest update:
 
-    ## [1] "2021-09-26"
-
-<br>
-
-## Installation:
-
-You can install Giotto Suite on any platform in 2 easy steps:
-
-#### Step 1: install Giotto Suite
-
-``` r
-library(remotes)
-remotes::install_github("RubD/Giotto@suite") 
-```
-
-#### Step 2: install the Giotto python environment
-
-The python environment only needs to be installed once.
-
-``` r
-library(Giotto)
-installGiottoEnvironment()
-```
-
-This command only needs to be run once and then Giotto will
-automatically detect the environment in the future.
-
-For more information:
-
--   See
-    [Installation](https://giottosuite.com/articles/temp_construction.html)
-    for alternative (manual) installation options.  
--   See [Giotto
-    Environment](https://giottosuite.com/articles/temp_construction.html)
-    to learn more about the Giotto environment.  
--   See [FAQ](https://giottosuite.com/articles/faq.html) for
-    troubleshooting.
+    ## [1] "2021-09-28"
 
 <br>
 
@@ -63,24 +29,18 @@ remain compatible with all current and future developed spatial
 technologies and platforms. It will also aid in the further integration
 with other external analysis pipelines and tools.
 
-The most important changes and additions are:
+See
+[NEWS](https://giottosuite.com/articles/giotto_news.html#giotto-suite-2-0-0-xxx-1)
 
--   support for multi-modal datasets (e.g. RNA + Protein)
--   support for subcellular data
-    -   efficient representations for image information (e.g. nucleus,
-        membrane, …)  
-    -   individual transcript locations
-    -   subcellular analyses
--   image processing tools
-    -   registration  
-    -   segmentation
-    -   integration
-    -   efficient visualization
--   Joint analysis: combining, batch correcting and analyzing multiple
-    spatial datasets  
--   Large file management:
-    -   DelayedArray  
-    -   terra
+<br>
+
+## Workflow
+
+Describe typical workflow:  
+- input  
+- components  
+- classes  
+- visualization
 
 <br>
 
@@ -91,4 +51,4 @@ The most important changes and additions are:
     Biology
     (2021).](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02286-2)
       
--   \[Coming soon\] Spatial review.
+-   **Coming soon:** Spatial review.

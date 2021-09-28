@@ -8,15 +8,52 @@ We are working on providing easy-to-understand examples or tutorials, but if any
 
 \  
 
-## Workflow
+## Installation
+
+You can install Giotto Suite on any platform in 2 easy steps:
+
+#### Step 1: install Giotto Suite
+``` r
+library(remotes)
+remotes::install_github("RubD/Giotto@suite") 
+```
+
+#### Step 2: install the Giotto python environment
+The python environment only needs to be installed once.
+
+``` r
+library(Giotto)
+installGiottoEnvironment()
+```
+
+This command only needs to be run once and then Giotto will automatically detect the environment in the future.  
+
+For more information:   
+
+* See [Installation](https://giottosuite.com/articles/temp_construction.html) for alternative (manual) installation options.  
+* See [Giotto Environment](https://giottosuite.com/articles/temp_construction.html) to learn more about the Giotto environment.  
+* See [FAQ](https://giottosuite.com/articles/faq.html) for troubleshooting.  
+
+
+
+
+<br> 
+
+
+\ 
+
+ 
+## Getting started
 
 [under construction]  
+ 
+Tutorials for Giotto specific tasks and functionalities.
 
-Describe typical workflow:  
-- input  
-- components  
-- classes  
-- visualization  
+[![](../inst/images/icons/getting_started/icons_temporary.png){width=20%}](./temp_construction.html)
+[![](../inst/images/icons/getting_started/icons_temporary.png){width=20%}](./temp_construction.html)
+[![](../inst/images/icons/getting_started/icons_temporary.png){width=20%}](./temp_construction.html)
+[![](../inst/images/icons/getting_started/icons_temporary.png){width=20%}](./temp_construction.html)
+
 
 
 \  
@@ -35,11 +72,5 @@ Describe typical workflow:
 [![](../inst/images/icons/analyses/icons_subcellular.png){width=30%}](./temp_construction.html)
 \  
 
-## HOWTOs 
-
-[under construction]  
  
-Tutorials for Giotto specific tasks and functionalities.
-
-\  
 
