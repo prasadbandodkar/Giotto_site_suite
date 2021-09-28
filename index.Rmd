@@ -4,6 +4,14 @@ output: github_document
 
 
 # Giotto Suite
+
+##### latest update: 
+
+```{r echo=F}
+Sys.Date()
+```
+
+
 ## Multi-level Spatial Biology Exploration
 
 **under construction:** Giotto Suite is the new and updated version of Giotto. 
@@ -14,17 +22,6 @@ output: github_document
 
 <br> 
 
-#### latest update: 
-
-```{r echo=F}
-Sys.Date()
-```
-
-
-<br>  
-
-
-
 ## Summary:
 
 <!-- badges: start -->
@@ -32,7 +29,7 @@ Sys.Date()
 
 **Giotto Suite** is a suite of software tools, including data structures and methods, for the comprehensive analysis and visualization of spatial expression data. It was developed to extend and improve our previous R package Giotto. This will ensure that our spatial analysis solutions remain compatible with all current and future developed spatial technologies and platforms. It will also aid in the further integration with other external analysis pipelines and tools.
 
-See [NEWS](https://giottosuite.com/articles/giotto_news.html#giotto-suite-2-0-0-xxx-1)
+See [NEWS](https://giottosuite.com/articles/giotto_news.html#giotto-suite-2-0-0-xxx-1) for more details.
     
 
 <br> 

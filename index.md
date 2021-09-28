@@ -1,18 +1,16 @@
 
 # Giotto Suite
 
+##### latest update:
+
+    ## [1] "2021-09-28"
+
 ## Multi-level Spatial Biology Exploration
 
 **under construction:** Giotto Suite is the new and updated version of
 Giotto.
 
 <img src="./inst/images/general_figs/Giotto_to_suite.png" style="width:80.0%" />
-
-<br>
-
-#### latest update:
-
-    ## [1] "2021-09-28"
 
 <br>
 
@@ -31,6 +29,7 @@ with other external analysis pipelines and tools.
 
 See
 [NEWS](https://giottosuite.com/articles/giotto_news.html#giotto-suite-2-0-0-xxx-1)
+for more details.
 
 <br>
 

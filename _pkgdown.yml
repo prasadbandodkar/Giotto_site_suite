@@ -117,6 +117,37 @@ reference:
     - createMetafeats
     - findNetworkNeighbors
 
+  - title: Giotto getters & setters
+    desc: Low level functions to get, set and show Giotto slots
+    contents:
+    - get_expression_values
+    - set_expression_values
+    - showGiottoExpression
+    - get_spatial_locations
+    - set_spatial_locations
+    - showGiottoSpatLocs
+    - get_dimReduction
+    - set_dimReduction
+    - showGiottoDimRed
+    - get_NearestNetwork
+    - set_NearestNetwork
+    - get_spatialNetwork
+    - set_spatialNetwork
+    - showGiottoSpatNetworks
+    - get_spatialGrid
+    - set_spatialGrid
+    - showGiottoSpatGrids
+    - get_polygon_info
+    - set_polygon_info
+    - showGiottoSpatialInfo
+    - get_feature_info
+    - set_feature_info
+    - showGiottoFeatInfo
+    - get_spatial_enrichment
+    - set_spatial_enrichment
+    - showGiottoSpatEnrichments
+
+
   - title: Modify Giotto object
     desc: Modifications to the Giotto objects
     contents:
