@@ -42,5 +42,5 @@ output: html_document
 
 ## Protein multiplexing
 
-[![](../inst/images/general_figs/CODEX_spleen_image_summary.png){width=30%}](./temp_construction.html)
+[![](../inst/images/general_figs/CODEX_spleen_image_summary.png){width=30%}](./mouse_codex_spleen.html)
 [![](../inst/images/general_figs/cyCIF_PDAC_image_summary.png){width=30%}](./temp_construction.html)
