@@ -3,7 +3,7 @@
 
 ##### latest update:
 
-    ## [1] "2021-09-28"
+    ## [1] "2021-09-29"
 
 ## Multi-level Spatial Biology Exploration
 
@@ -35,11 +35,7 @@ for more details.
 
 ## Workflow
 
-Describe typical workflow:  
-- input  
-- components  
-- classes  
-- visualization
+<img src="./inst/images/general_figs/temp_workflow.png" style="width:80.0%" />
 
 <br>
 

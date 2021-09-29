@@ -37,11 +37,12 @@ See [NEWS](https://giottosuite.com/articles/giotto_news.html#giotto-suite-2-0-0-
 
 ## Workflow
 
-Describe typical workflow:  
-- input  
-- components  
-- classes  
-- visualization 
+
+![](./inst/images/general_figs/temp_workflow.png){width=80%}
+
+
+
+
 
 <br>  
 
