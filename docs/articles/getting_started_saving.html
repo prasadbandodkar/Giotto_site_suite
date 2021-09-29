@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>News • Giotto Suite</title>
+<title> • Giotto Suite</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="News">
+<script src="../pkgdown.js"></script><meta property="og:title" content="">
 <meta property="og:description" content="Giotto">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -142,63 +142,89 @@
 
       
 
-      </header><script src="giotto_news_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="getting_started_saving_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>News</h1>
+      <h1 data-toc-skip></h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/master/vignettes/giotto_news.Rmd"><code>vignettes/giotto_news.Rmd</code></a></small>
-      <div class="hidden name"><code>giotto_news.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/master/vignettes/getting_started_saving.Rmd"><code>vignettes/getting_started_saving.Rmd</code></a></small>
+      <div class="hidden name"><code>getting_started_saving.Rmd</code></div>
 
     </div>
 
     
     
-<div id="giotto-suite-2-0-0" class="section level1">
+<div id="different-ways-to-save-your-plots" class="section level1">
 <h1 class="hasAnchor">
-<a href="#giotto-suite-2-0-0" class="anchor"></a>Giotto Suite 2.0.0</h1>
+<a href="#different-ways-to-save-your-plots" class="anchor"></a>Different ways to save your plots?</h1>
+<p>R/Rstudio and Giotto provide different ways to save your spatial data:</p>
 <ul>
-<li>First release coming soon</li>
+<li><p>see also FAQ <a href="./getting_started_instructions.html">How to create global instructions and show or save your created plots?</a></p></li>
+<li><p>All parameters available to save_param are found by running <strong>showSaveParameters()</strong></p></li>
 </ul>
-<p> </p>
-</div>
-<div id="giotto-suite-2-0-0-xxx" class="section level1">
-<h1 class="hasAnchor">
-<a href="#giotto-suite-2-0-0-xxx" class="anchor"></a>Giotto Suite 2.0.0.xxx</h1>
-<div id="beta-release-development-versionss" class="section level3">
+<div id="examples" class="section level3">
 <h3 class="hasAnchor">
-<a href="#beta-release-development-versionss" class="anchor"></a>beta release ~ development versions(s)</h3>
-<p>The most important changes and additions are:</p>
-<ul>
-<li>Support for multi-modal datasets (e.g. RNA + Protein)</li>
-<li>Support for subcellular data
-<ul>
-<li>efficient representations for image information (e.g. nucleus, membrane, …)<br>
-</li>
-<li>individual transcript locations</li>
-<li>subcellular analyses</li>
-</ul>
-</li>
-<li>Image processing tools
-<ul>
-<li>registration<br>
-</li>
-<li>segmentation</li>
-<li>integration</li>
-<li>efficient visualization</li>
-</ul>
-</li>
-<li>Joint analysis: combining, batch correcting and analyzing multiple spatial datasets<br>
-</li>
-<li>Large file management:
-<ul>
-<li>DelayedArray<br>
-</li>
-<li>terra</li>
-</ul>
-</li>
-</ul>
+<a href="#examples" class="anchor"></a>Examples :</h3>
+<div id="standard-r-way" class="section level4">
+<h4 class="hasAnchor">
+<a href="#standard-r-way" class="anchor"></a>1. standard R way</h4>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pl</span> <span class="op">=</span> <span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">mygobject</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/grDevices/pdf.html">pdf</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">'path/to/save/to/plot.pdf'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">pl</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="save-plot-directly-to-your-designated-folder-according-to-the-provided-instructions" class="section level4">
+<h4 class="hasAnchor">
+<a href="#save-plot-directly-to-your-designated-folder-according-to-the-provided-instructions" class="anchor"></a>2. save plot directly to your designated folder according to the provided instructions</h4>
+<p>See also the <a href="">Giotto Instruction</a> information page.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">mygobject</span>, 
+         cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, 
+         save_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="save-plot-directly-but-overwrite-default-parameters" class="section level4">
+<h4 class="hasAnchor">
+<a href="#save-plot-directly-but-overwrite-default-parameters" class="anchor"></a>3. save plot directly, but overwrite default parameters</h4>
+<p>See also the <a href="">Giotto Instruction</a> information page.<br>
+Run the command <strong>showSaveParameters()</strong> to see all available parameters.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">mygobject</span>, 
+         cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, 
+         save_plot <span class="op">=</span> <span class="cn">TRUE</span>,
+         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_folder <span class="op">=</span> <span class="st">'my_subfolder'</span>, 
+                           save_name <span class="op">=</span> <span class="st">'my_name'</span>, 
+                           save_format <span class="op">=</span> <span class="st">'png'</span>, 
+                           units <span class="op">=</span> <span class="st">'in'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="just-view-the-plot" class="section level4">
+<h4 class="hasAnchor">
+<a href="#just-view-the-plot" class="anchor"></a>4. just view the plot</h4>
+<p>See also the <a href="">Giotto Instruction</a> information page.<br>
+Set save_plot &amp; return_plot to FALSE and show_plot to TRUE.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">mygobject</span>, 
+         cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, 
+         save_plot <span class="op">=</span> <span class="cn">F</span>, return_plot <span class="op">=</span> <span class="cn">F</span>, show_plot <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="just-save-the-plot-fastest-for-large-datasets" class="section level4">
+<h4 class="hasAnchor">
+<a href="#just-save-the-plot-fastest-for-large-datasets" class="anchor"></a>5. just save the plot: FASTEST for large datasets!</h4>
+<p>See also the <a href="">Giotto Instruction</a> information page.<br>
+Set save_plot &amp; return_plot to FALSE and show_plot to TRUE.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># only saves the plot</span>
+<span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">mygobject</span>, 
+         cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, 
+         save_plot <span class="op">=</span> <span class="cn">TRUE</span>, return_plot <span class="op">=</span> <span class="cn">FALSE</span>, show_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="co"># only saves the plot, but launches the saved plot in a window</span>
+<span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">mygobject</span>, 
+         cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, 
+         save_plot <span class="op">=</span> <span class="cn">TRUE</span>, return_plot <span class="op">=</span> <span class="cn">FALSE</span>, show_plot <span class="op">=</span> <span class="cn">TRUE</span>,
+         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>show_saved_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
 </div>
 </div>
   </div>

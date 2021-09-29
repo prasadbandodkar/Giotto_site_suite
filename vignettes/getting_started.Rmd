@@ -49,12 +49,12 @@ For more information:
  
 Tutorials for Giotto specific tasks and functionalities.
 
-[![](../inst/images/icons/getting_started/icons_configuration.png){width=20%}](./temp_construction.html)
+[![](../inst/images/icons/getting_started/icons_configuration.png){width=20%}](./getting_started_instructions.html)
 [![](../inst/images/icons/getting_started/icons_giotto.png){width=20%}](./temp_construction.html)
 [![](../inst/images/icons/getting_started/icons_processing.png){width=20%}](./temp_construction.html)
 [![](../inst/images/icons/getting_started/icons_visualizations.png){width=20%}](./temp_construction.html)  
 
-[![](../inst/images/icons/getting_started/icons_saving.png){width=20%}](./temp_construction.html)
+[![](../inst/images/icons/getting_started/icons_saving.png){width=20%}](./getting_started_saving.html)
 [![](../inst/images/icons/getting_started/icons_temporary.png){width=20%}](./temp_construction.html)  
 
 

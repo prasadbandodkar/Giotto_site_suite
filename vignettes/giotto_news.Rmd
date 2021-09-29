@@ -11,7 +11,7 @@ output: html_document
 
 # Giotto Suite 2.0.0.xxx
 
-### beta release  
+### beta release ~ development versions(s)
 
 The most important changes and additions are:    
 
