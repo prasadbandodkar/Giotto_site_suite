@@ -302,7 +302,10 @@
 
 <span class="va">subc_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">subc_test</span>, norm_methods <span class="op">=</span> <span class="st">'pearson_resid'</span>, update_slot <span class="op">=</span> <span class="st">'pearson'</span><span class="op">)</span>
 <span class="fu"><a href="../reference/showGiottoExpression.html">showGiottoExpression</a></span><span class="op">(</span><span class="va">subc_test</span><span class="op">)</span></code></pre></div>
-<p>Part 8: Dimension Reduction</p>
+</div>
+<div id="part-8-dimension-reduction" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-8-dimension-reduction" class="anchor"></a>Part 8: Dimension Reduction</h2>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Find highly valuable Features</span>
 
@@ -506,7 +509,7 @@
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># find interaction changed genes</span>
 <span class="co"># genes whose expression difference is associated with a neighboring cell type</span>
-<span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="st">'multisession'</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="co"># sometimes unstable, restart R session</span>
+<span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/future/man/plan.html">plan</a></span><span class="op">(</span><span class="st">'multisession'</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="co"># sometimes unstable, restart R session</span>
 
 <span class="va">test</span> <span class="op">=</span> <span class="fu"><a href="../reference/findInteractionChangedFeats.html">findInteractionChangedFeats</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">subc_test</span>,
                                    cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span><span class="op">)</span>

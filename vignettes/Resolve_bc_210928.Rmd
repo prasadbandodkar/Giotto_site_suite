@@ -161,7 +161,7 @@ showGiottoExpression(subc_test)
 ```
 
 
-Part 8: Dimension Reduction
+## Part 8: Dimension Reduction
 ```{r, eval=FALSE}
 # Find highly valuable Features
 
