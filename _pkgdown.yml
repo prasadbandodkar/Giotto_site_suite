@@ -53,11 +53,6 @@ navbar:
           href:
 
 
-news:
-  releases:
-    - text: "Giotto 2.0.0.958"
-      href: https://giottosuite.com/articles/temp_construction.html
-
 reference:
   - title: Giotto environment
     desc: install & work with Giotto python environment

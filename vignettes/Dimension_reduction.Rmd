@@ -1,19 +1,12 @@
 ---
   title: How to cluster my Giotto object?
-  output:
-  html_document:
-    toc: yes
-    toc_depth: '2'
-    df_print: paged
-  github_document:
-    toc: yes
-    toc_depth: 2
+  output: html_document
 ---
 
 
 This tutorial will take you through the dimension reduction and clustering capabilities of Giotto. The starting point is a Giotto object that has already gone through data processing- more details on that process can be found in the data processing tutorial.
 
-This tutorial uses a SeqFISH+ dataset of a murine cortex and subventrical zone. A complete walkthough of that dataset can be found [**here**](./SeqFISH_cortex_210923.html).
+This tutorial uses a SeqFISH+ dataset of a murine cortex and subventrical zone. A complete walkthrough of that dataset can be found [**here**](https://giottosuite.com/articles/SeqFISH_cortex_210923.html).
 
 # Creating and Processing a Giotto Object
 
