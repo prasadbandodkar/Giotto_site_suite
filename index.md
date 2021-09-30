@@ -40,7 +40,7 @@ for more details.
 <img src="./inst/images/icons/overview/data_structure_Data%20Structure.png" style="width:80.0%" />
 
 More information can be found in the [detailed workflow
-section](https://giottosuite.com/articles/overview/temp_construction.html).
+section](https://giottosuite.com/articles/overview/giotto_input.html).
 
 <br>
 

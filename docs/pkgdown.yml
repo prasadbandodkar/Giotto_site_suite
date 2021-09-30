@@ -2,12 +2,10 @@ pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  Dimension_reduction: Dimension_reduction.html
   Resolve_bc_210928: Resolve_bc_210928.html
   SeqFISH_cortex_210923: SeqFISH_cortex_210923.html
   Visium_prostate_integration_Sep30_21: Visium_prostate_integration_Sep30_21.html
   contribute: contribute.html
-  data_processing: data_processing.html
   datasets_overview: datasets_overview.html
   faqs: faqs.html
   getting_started: getting_started.html
@@ -27,5 +25,5 @@ articles:
   overview/temp_construction: temp_construction.html
   singlecell_prostate_standard_Sep29_21: singlecell_prostate_standard_Sep29_21.html
   temp_construction: temp_construction.html
-last_built: 2021-09-30T18:10Z
+last_built: 2021-09-30T18:25Z
 
