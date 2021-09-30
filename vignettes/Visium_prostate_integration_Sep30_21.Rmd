@@ -361,7 +361,7 @@ spatCellPlot2D(gobject = testcombo,
 
 
 
-### 5.4deconvolution
+### 5.4 DWLS Deconvolution
 ```{r eval=FALSE}
 # Create DWLS matrix, not that DWLS matrix is different from PAGE and rank
 # A count matrix a vector for a list of gene signatures and a vector for all cell labels will be needed
