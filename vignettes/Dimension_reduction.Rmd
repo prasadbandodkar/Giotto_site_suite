@@ -1,11 +1,17 @@
 ---
-title: "Dimension Reduction and Clustering"
-output: html_document
+  title: How to cluster my Giotto object?
+  output:
+  html_document:
+    toc: yes
+    toc_depth: '2'
+    df_print: paged
+  github_document:
+    toc: yes
+    toc_depth: 2
 ---
 
-#How to cluster my Giotto object?
 
-This tutorial will take you through the dimension reduction and clustering capabilities of Giotto. 
+This tutorial will take you through the dimension reduction and clustering capabilities of Giotto. The starting point is a Giotto object that has already gone through data processing- more details on that process can be found in the data processing tutorial.
 
 This tutorial uses a SeqFISH+ dataset of a murine cortex and subventrical zone. A complete walkthough of that dataset can be found [**here**](./SeqFISH_cortex_210923.html).
 
@@ -78,16 +84,34 @@ cell_metadata = pDataDT(testobj)
 cortex_cell_ids = cell_metadata[FOV %in% 0:4]$cell_ID
 testobj = subsetGiotto(testobj, cell_ids = cortex_cell_ids)
 
+# Process the Giotto object, filtering, normalization, adding statistics and correcting for covariates
+processGiotto(testobj,filter_params = list(expression_threshold = 1,feat_det_in_min_cells = 100, min_det_feats_per_cell = 10),
+                      norm_params = list( norm_methods = 'standard', scale_feats = TRUE, scalefactor = 6000),
+                      stat_params = list(expression_values = 'normalized'),
+                      adjust_params = list(expression_values = c('normalized')))
+
 
 
 ```
 
 
-## 3. Dimension Reduction and PCA
+## 1. Dimension Reduction and PCA
 You can compute highly variable genes based on high coefficient of variance within groups, loess regression predictions, or variance of pearson residuals for each gene, based on which **method** is selected. 
 ```{r, eval=FALSE}
 #calculate HVF using the loess regression prediction model
+testobj <- calculateHVF(gobject = testobj, method = 'cov_groups')
+
+```
+![](../inst/images/SeqFish_mouse_cortex/0-HVFplot.png){ width=50% } 
+```{r, eval=FALSE}
+#calculate HVF using the loess regression prediction model
 testobj <- calculateHVF(gobject = testobj, method = 'cov_loess')
+
+```
+![](../inst/images/SeqFish_mouse_cortex/2-HVFplot.png){ width=50% } 
+```{r, eval=FALSE}
+#calculate HVF using the loess regression prediction model
+testobj <- calculateHVF(gobject = testobj, method = 'var_p_resid')
 
 ```
 ![](../inst/images/SeqFish_mouse_cortex/1-HVFplot.png){ width=50% } 
@@ -101,8 +125,26 @@ featgenes = gene_metadata[hvf == 'yes' & perc_cells > 4 & mean_expr_det > 0.5]$g
 ## run PCA on expression values (default)
 testobj <- runPCA(gobject = testobj, genes_to_use = featgenes, scale_unit = F, center = F)
 
+# plot a scree plot
+screePlot(SS_seqfish)
+```
+![](../inst/images/SeqFish_mouse_cortex/2-screePlot.png){ width=50% }
+
+```{r, eval=FALSE}
+# Plot a PCA
+plotPCA(gobject = SS_seqfish)
+```
+![](../inst/images/SeqFish_mouse_cortex/3-PCA.png){ width=50% }
+
+```{r, eval=FALSE}
 # Run a TSNE based on PCA dimension reduction
 testobj <- runtSNE(testobj, dimensions_to_use = 1:15)
+plotTSNE(gobject = SS_seqfish)
+```
+![](../inst/images/SeqFish_mouse_cortex/5-tSNE.png){ width=50% }
+
+
+```{r, eval=FALSE}
 # Run a UMAP based on PCA dimension reduction
 testobj <- runUMAP(testobj, dimensions_to_use = 1:15)
 # view pre-clustering UMAP
@@ -110,15 +152,19 @@ plotUMAP(gobject = testobj)
 ```
 ![](../inst/images/SeqFish_mouse_cortex/4-UMAP.png){ width=50% }
 
-## 4. Clustering
+
+## 2. Clustering
 Clustering your cells into distinct groups based on feature expression. The input is a Giotto object that has undergone either TSNE or UMAP dimension reduction.
 ```{r, eval=FALSE}
 ## create a shared nearest neighbor network (sNN), where k is the number of k niehgbors to use
 testobj <- createNearestNetwork(gobject = testobj, dimensions_to_use = 1:15, k = 15)
 ```
 
-Giotto supports both Leiden and Louvain clustering. 
+Cells can be clustered in Giotto using k-means, Leiden, or Louvain clustering
 ```{r, eval=FALSE}
+## k-means clustering
+testobj <- doKmeans(gobject = testobj, dim_reduction_to_use = 'pca')
+
 ## Leiden clustering- increase the resolution to increase the number of clusters
 testobj <- doLeidenCluster(gobject = testobj, resolution = 0.4, n_iterations = 1000)
 
