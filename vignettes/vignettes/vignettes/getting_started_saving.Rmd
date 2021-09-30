@@ -1,0 +1,72 @@
+---
+output: github_document
+---
+
+# Different ways to save your plots?
+
+R/Rstudio and Giotto provide different ways to save your spatial data:  
+
+
+- see also FAQ [How to create global instructions and show or save your created plots?](./getting_started_instructions.html)  
+
+- All parameters available to save_param are found by running **showSaveParameters()**  
+
+### Examples :  
+
+#### 1. standard R way
+```{r, eval=FALSE}
+pl = spatPlot(mygobject, cell_color = 'cell_types')
+pdf(file = 'path/to/save/to/plot.pdf')
+print(pl)
+dev.off()
+```
+
+
+#### 2. save plot directly to your designated folder according to the provided instructions  
+See also the [Giotto Instruction]() information page.
+```{r, eval=FALSE}
+spatPlot(mygobject, 
+         cell_color = 'cell_types', 
+         save_plot = TRUE)
+```
+
+
+#### 3. save plot directly, but overwrite default parameters
+See also the [Giotto Instruction]() information page.  
+Run the command **showSaveParameters()** to see all available parameters.   
+```{r, eval=FALSE}
+spatPlot(mygobject, 
+         cell_color = 'cell_types', 
+         save_plot = TRUE,
+         save_param = list(save_folder = 'my_subfolder', 
+                           save_name = 'my_name', 
+                           save_format = 'png', 
+                           units = 'in'))
+```
+
+
+#### 4. just view the plot
+See also the [Giotto Instruction]() information page.  
+Set save_plot & return_plot to FALSE and show_plot to TRUE.
+```{r, eval=FALSE}
+spatPlot(mygobject, 
+         cell_color = 'cell_types', 
+         save_plot = F, return_plot = F, show_plot = T)
+```
+
+
+#### 5. just save the plot: FASTEST for large datasets!
+See also the [Giotto Instruction]() information page.  
+Set save_plot & return_plot to FALSE and show_plot to TRUE.
+```{r, eval=FALSE}
+# only saves the plot
+spatPlot(mygobject, 
+         cell_color = 'cell_types', 
+         save_plot = TRUE, return_plot = FALSE, show_plot = TRUE)
+
+# only saves the plot, but launches the saved plot in a window
+spatPlot(mygobject, 
+         cell_color = 'cell_types', 
+         save_plot = TRUE, return_plot = FALSE, show_plot = TRUE,
+         save_param = list(show_saved_plot = TRUE))
+```
