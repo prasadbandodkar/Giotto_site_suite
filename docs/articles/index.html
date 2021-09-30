@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>runGiottoHarmony — runGiottoHarmony • Giotto Suite</title>
+<title>Articles • Giotto Suite</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,7 @@
 
 
 
-<meta property="og:title" content="runGiottoHarmony — runGiottoHarmony" />
-<meta property="og:description" content="run UMAP" />
+<meta property="og:title" content="Articles" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -77,7 +76,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-article-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -191,97 +190,68 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>runGiottoHarmony</h1>
-    <small class="dont-index">Source: <a href='https://github.com/RubD/Giotto/blob/master/R/dimension_reduction.R'><code>R/dimension_reduction.R</code></a></small>
-    <div class="hidden name"><code>runGiottoHarmony.Rd</code></div>
+      <h1>Articles</h1>
     </div>
 
-    <div class="ref-description">
-    <p>run UMAP</p>
+    <div class="section ">
+      <h3>All vignettes</h3>
+      <p class="section-desc"></p>
+
+      <dl>
+        <dt><a href="Dimension_reduction.html">How to cluster my Giotto object?</a></dt>
+        <dd></dt>
+        <dt><a href="Resolve_bc_210928.html">Resolve Bioscience Breast Cancer Subcellular</a></dt>
+        <dd></dt>
+        <dt><a href="SeqFISH_cortex_210923.html">SeqFish+ Mouse Cortex Example</a></dt>
+        <dd></dt>
+        <dt><a href="Visium_prostate_integration_Sep30_21.html">R Notebook</a></dt>
+        <dd></dt>
+        <dt><a href="Visualizations.html">How to make visualizations with Giotto?</a></dt>
+        <dd></dt>
+        <dt><a href="contribute.html">Contribute</a></dt>
+        <dd></dt>
+        <dt><a href="data_processing.html">How to process your Giotto object?</a></dt>
+        <dd></dt>
+        <dt><a href="datasets_overview.html">Datasets overview</a></dt>
+        <dd></dt>
+        <dt><a href="faqs.html">FAQs</a></dt>
+        <dd></dt>
+        <dt><a href="getting_started.html">UNKNOWN TITLE</a></dt>
+        <dd></dt>
+        <dt><a href="getting_started_instructions.html">UNKNOWN TITLE</a></dt>
+        <dd></dt>
+        <dt><a href="getting_started_saving.html">UNKNOWN TITLE</a></dt>
+        <dd></dt>
+        <dt><a href="giotto_news.html">News</a></dt>
+        <dd></dt>
+        <dt><a href="github_issues.html">How to Submit a GitHub Issue</a></dt>
+        <dd></dt>
+        <dt><a href="installation_issues.html">UNKNOWN TITLE</a></dt>
+        <dd></dt>
+        <dt><a href="merFISH_hypoth_210924.html">merFISH Mouse Hypothalmic Preoptic Region</a></dt>
+        <dd></dt>
+        <dt><a href="mini_seqfish.html">mini_seqfish</a></dt>
+        <dd></dt>
+        <dt><a href="mini_starmap.html">mini_starmap</a></dt>
+        <dd></dt>
+        <dt><a href="mini_visium.html">mini_visium</a></dt>
+        <dd></dt>
+        <dt><a href="mouse_codex_spleen_Sep29_21.html">Codex Mouse Spleen</a></dt>
+        <dd></dt>
+        <dt><a href="mouse_visium_kidney_210830.html">Visium Kidney</a></dt>
+        <dd></dt>
+        <dt><a href="osmFISH_mouse_SScortex_Sep29_21.html">osmFISH mouse SS cortex</a></dt>
+        <dd></dt>
+        <dt><a href="overview/giotto_input.html">Giotto Suite Workflow</a></dt>
+        <dd></dt>
+        <dt><a href="overview/temp_construction.html">Under construction</a></dt>
+        <dd></dt>
+        <dt><a href="singlecell_prostate_standard_Sep29_21.html">10X single cell RNA sequencing</a></dt>
+        <dd></dt>
+        <dt><a href="temp_construction.html">Under construction</a></dt>
+        <dd></dt>
+      </dl>
     </div>
-
-    <pre class="usage"><span class='fu'>runGiottoHarmony</span><span class='op'>(</span>
-  <span class='va'>gobject</span>,
-  feat_type <span class='op'>=</span> <span class='cn'>NULL</span>,
-  vars_use <span class='op'>=</span> <span class='st'>"list_ID"</span>,
-  do_pca <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  expression_values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"normalized"</span>, <span class='st'>"scaled"</span>, <span class='st'>"custom"</span><span class='op'>)</span>,
-  dim_reduction_to_use <span class='op'>=</span> <span class='st'>"pca"</span>,
-  dim_reduction_name <span class='op'>=</span> <span class='cn'>NULL</span>,
-  dimensions_to_use <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>,
-  name <span class='op'>=</span> <span class='cn'>NULL</span>,
-  feats_to_use <span class='op'>=</span> <span class='cn'>NULL</span>,
-  toplevel_params <span class='op'>=</span> <span class='fl'>2</span>,
-  return_gobject <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>gobject</th>
-      <td><p>giotto object</p></td>
-    </tr>
-    <tr>
-      <th>feat_type</th>
-      <td><p>feature type</p></td>
-    </tr>
-    <tr>
-      <th>expression_values</th>
-      <td><p>expression values to use</p></td>
-    </tr>
-    <tr>
-      <th>dim_reduction_to_use</th>
-      <td><p>use another dimension reduction set as input</p></td>
-    </tr>
-    <tr>
-      <th>dim_reduction_name</th>
-      <td><p>name of dimension reduction set to use</p></td>
-    </tr>
-    <tr>
-      <th>dimensions_to_use</th>
-      <td><p>number of dimensions to use as input</p></td>
-    </tr>
-    <tr>
-      <th>name</th>
-      <td><p>arbitrary name for Harmony run</p></td>
-    </tr>
-    <tr>
-      <th>feats_to_use</th>
-      <td><p>if dim_reduction_to_use = NULL, which genes to use</p></td>
-    </tr>
-    <tr>
-      <th>toplevel_params</th>
-      <td><p>parameters to extract</p></td>
-    </tr>
-    <tr>
-      <th>return_gobject</th>
-      <td><p>boolean: return giotto object (default = TRUE)</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>additional Harmony parameters</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>be verbose</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>giotto object with updated Harmony dimension recuction</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>See <code><a href='https://rdrr.io/pkg/harmony/man/HarmonyMatrix.html'>HarmonyMatrix</a></code> for more information about these and other parameters.
-This is a simple wrapper for the HarmonyMatrix function in the Harmony package.</p>
-
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <nav id="toc" data-toggle="toc" class="sticky-top">
-      <h2 data-toc-skip>Contents</h2>
-    </nav>
   </div>
 </div>
 
