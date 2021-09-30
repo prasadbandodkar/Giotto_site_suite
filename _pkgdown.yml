@@ -196,7 +196,6 @@ reference:
     - mergeClusters
     - getDendrogramSplits
 
-
   - title: Marker genes
     desc: Functions to detect cell type / cluster specific marker genes
     contents:
@@ -218,3 +217,36 @@ reference:
     - plotMetaDataHeatmap
     - plotMetaDataCellsHeatmap
     - violinPlot
+
+
+
+
+  - title: Spatial Expression Patterns
+    desc: Methods to detect spatially coherent expression patterns
+    contents:
+    - binSpectSingleMatrix
+    - binSpectSingle
+    - binSpectMultiMatrix
+    - binSpectMulti
+    - binSpect
+    - spatialDE
+    - spatialAEH
+    - trendSceek
+    - spark
+
+  - title: Simulate spatiial expression patterns
+    desc: Function to simulate a user-defined pattern using the full complexity of the different gene distributions.
+    contents:
+    - simulateOneGenePatternGiottoObject
+    - runPatternSimulation
+
+
+  - title: Spatial Co-Expression Modules
+    desc: Method to detect spatially co-expressed feature modules
+    contents:
+    - detectSpatialCorFeatsMatrix
+    - detectSpatialCorFeats
+    - showSpatialCorFeats
+    - clusterSpatialCorFeats
+    - heatmSpatialCorFeats
+    - rankSpatialCorGroups

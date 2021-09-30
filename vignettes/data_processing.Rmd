@@ -1,0 +1,198 @@
+---
+  title: How to process your Giotto object?
+  output:
+  html_document:
+    toc: yes
+    toc_depth: '2'
+    df_print: paged
+  github_document:
+    toc: yes
+    toc_depth: 2
+---
+
+After creating your Giotto object, it needs to be prepared for downstream analysis. This tutorials walks through filtering, normalization, adjusting for batch effects, and adding statistics and metadata to your Giotto object as well as high efficency options for data processing.
+
+This tutorial uses a SeqFISH+ dataset of a murine cortex and subventrical zone. A complete walkthough of that dataset can be found [**here**](./SeqFISH_cortex_210923.html).
+
+## Creating our Giotto Object
+```{r, eval=FALSE}
+library(Giotto)
+my_working_dir = '/path/to/directory/'
+
+# set python path to your preferred python version path
+# set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment
+python_path = NULL 
+if(is.null(python_path)) {
+  installGiottoEnvironment(force_environment = TRUE)
+}
+
+getSpatialDataset(dataset = 'seqfish_SS_cortex', directory = my_working_dir, method = 'wget')
+
+#  set Giotto instructions
+instrs = createGiottoInstructions(save_plot = TRUE, 
+                                  show_plot = FALSE,
+                                  save_dir = my_working_dir, 
+                                  python_path = NULL)
+
+# create giotto object from provided paths ####
+expr_path = paste0(my_working_dir, "cortex_svz_expression.txt")
+loc_path = paste0(my_working_dir, "cortex_svz_centroids_coord.txt")
+meta_path = paste0(my_working_dir, "cortex_svz_centroids_annot.txt")
+
+
+#This dataset contains multiple field of views which need to be stitched together
+
+# first merge location and additional metadata
+SS_locations = data.table::fread(loc_path)
+cortex_fields = data.table::fread(meta_path)
+SS_loc_annot = data.table::merge.data.table(SS_locations, cortex_fields, by = 'ID')
+SS_loc_annot[, ID := factor(ID, levels = paste0('cell_',1:913))]
+data.table::setorder(SS_loc_annot, ID)
+
+# create file with offset information
+my_offset_file = data.table::data.table(field = c(0, 1, 2, 3, 4, 5, 6),
+                                        x_offset = c(0, 1654.97, 1750.75, 1674.35, 675.5, 2048, 675),
+                                        y_offset = c(0, 0, 0, 0, -1438.02, -1438.02, 0))
+
+# create a stitch file
+stitch_file = stitchFieldCoordinates(location_file = SS_loc_annot,
+                                     offset_file = my_offset_file,
+                                     cumulate_offset_x = T,
+                                     cumulate_offset_y = F,
+                                     field_col = 'FOV',
+                                     reverse_final_x = F,
+                                     reverse_final_y = T)
+stitch_file    = stitch_file[,.(ID, X_final, Y_final)]
+my_offset_file = my_offset_file[,.(field, x_offset_final, y_offset_final)]
+
+# create Giotto object
+testobj <- createGiottoObject(expression = expr_path,
+                                 spatial_locs = stitch_file,
+                                 offset_file = my_offset_file,
+                                 instructions = instrs)
+
+# add additional annotation if wanted
+testobj = addCellMetadata(testobj,
+                             new_metadata = cortex_fields,
+                             by_column = T,
+                             column_cell_ID = 'ID')
+
+# subset data to the cortex field of views
+cell_metadata = pDataDT(testobj)
+cortex_cell_ids = cell_metadata[FOV %in% 0:4]$cell_ID
+testobj = subsetGiotto(testobj, cell_ids = cortex_cell_ids)
+
+```
+
+
+## 1. Filtering the Giotto Object
+You can filter a Giotto object to based on expression thresholds. 
+-**feat_det_in_min_cells** sets a threshold of the number of cells that must include a feature, to keep that feature in the dataset -**min_det_feats_per_cell** sets a threshold of the number of features expressed by a cell to keep that cell in the dataset.
+
+```{r, eval=FALSE}
+testobj <- filterGiotto(gobject = testobj,
+                          expression_threshold = 1,
+                          feat_det_in_min_cells = 100,
+                          min_det_feats_per_cell = 10)
+
+```
+If you are not sure how stringent your filters should be, you can check the distribution of feature expression
+
+```{r, eval=FALSE}
+filterDistributions(testobj, detection = 'feats')
+```
+![](../inst/images/SeqFish_mouse_cortex/0-filterDistributions.png){ width=50% }
+
+
+```{r, eval=FALSE}
+ filterDistributions(testobj, detection = 'cells')
+```
+![](../inst/images/SeqFish_mouse_cortex/1-filterDistributions.png){ width=50% }
+
+**filterCombinations** can also be used to test how different filtering parameters will affect the number of cells and features in your dataset.
+```{r, eval=FALSE}
+filterCombinations(testobj,
+                   expression_thresholds = c(1,2, 3),
+                   feat_det_in_min_cells = c(50, 100, 200),
+                   min_det_feats_per_cell = c(5, 10, 25))
+```
+![](../inst/images/SeqFish_mouse_cortex/11-filterCombinations.png){ width=50% }
+
+
+## 2. Normalization of Raw Counts Data
+There are two methods of normalization supported by Giotto. Method A normalizes the data by total library size and a custom scale factor, then log transforms the data and z-scores the data by genes and or cells.
+```{r, eval=FALSE}
+# normalize to scale expression values of the Giotto object using method A and z-scoring feats over cells
+testobj <- normalizeGiotto(gobject = testobj, norm_methods = 'standard', scale_feats = TRUE, scalefactor = 6000, verbose = T)
+```
+
+Method B uses the Lause/Kobak et al. method. Fist, expected values are calculated based on Pearson correlations. Next, z-scores are calculated based on observed and expected values.
+```{r, eval=FALSE}
+# normalize to scale expression values of the Giotto object using method B 
+testobj <- normalizeGiotto(gobject = testobj, norm_methods = 'pearson_resid', scale_feats = TRUE, scalefactor = 6000, verbose = T)
+```
+
+
+## 3. Add Statistics and Metadata
+Addiing statistics will add the following statistics to cell metadata
+-**nr_feats**: Denotes in how many features are detected per cell
+
+-**perc_feats**: Denotes what percentage of features is detected per cell
+
+-**total_expr**: Shows the total sum of feature expression per cell
+
+as well as the following statistics to feature metadata
+-**nr_cells**: Denotes in how many cells the feature is detected
+
+-**per_cells**: Denotes in what percentage of cells the feature is detected
+
+-**total_expr**: Shows the total sum of feature expression in all cells
+
+-**mean_expr**: Average feature expression in all cells
+
+-**mean_expr_det**: Average feature expression in cells with detectable levels of the gen
+
+```{r, eval=FALSE}
+# add gene & cell statistics to the giotto object
+testobj <- addStatistics(gobject = testobj, expression_values = 'normalized')
+testobj@cell_metadata$rna
+testobj@feat_metadata$rna
+```
+
+
+**addFeatsPerc** can be used to detect the percentage of features in each cell within a given gene family (ie. mitochondrial genes, ribosomal genes)
+```{r, eval=FALSE}
+#Calculate the percentage of BMP genes per cell
+featdata = fDataDT(testobj)
+bmp_genes = grep('Bmp', x = featdata$feat_ID, value = TRUE)
+testobj <- addFeatsPerc(testobj, expression_values = 'normalized', feats = bmp_genes, 
+                        vector_name = "perc_bmp")
+```
+
+
+## 4. Adjust Expression Matrix
+Adjust expression matrix for known batch effects or technological covariates
+```{r, eval=FALSE}
+# In this case, since there are no known batch effects I will be regressing out the number of features detected per cell
+# So that covariate will not effect further analysis
+testobj <- adjustGiottoMatrix(gobject = testobj, expression_values = c('normalized'),
+                                 covariate_columns = 'nr_feats')
+
+```
+
+##5. High Efficiency Data Processing
+**processGiotto** completes the filtering, normalization, statistical, and adjustment steps of processing in one single step. This is ideal for faster processing.
+```{r, eval=FALSE}
+processGiotto(testobj,filter_params = list(expression_threshold = 1,feat_det_in_min_cells = 100, min_det_feats_per_cell = 10),
+                      norm_params = list( norm_methods = 'standard', scale_feats = TRUE, scalefactor = 6000),
+                      stat_params = list(expression_values = 'normalized'),
+                      adjust_params = list(expression_values = c('normalized'), covariate_columns = 'nr_feats'))
+```
+
+
+
+
+
+
+
+
