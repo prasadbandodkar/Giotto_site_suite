@@ -37,7 +37,7 @@ instrs = createGiottoInstructions(save_dir = results_folder,
 ## Part 1: Create Giotto object from 10X dataset 
 Note that you will need an input directory for barcodes.tsv(.gz)  features.tsv(.gz)  matrix.mtx(.gz)
 ```{r eval=FALSE}
-giotto_SC<-createGiottoObject(expression = get10Xmatrix("/restricted/projectnb/camplab/home/junxiang/souporcell_test/Aggr/outs/count/filtered_feature_bc_matrix", 
+giotto_SC<-createGiottoObject(expression = get10Xmatrix("/path/to/filtered_feature_bc_matrix", 
                               gene_column_index = 2, remove_zero_rows = TRUE),
                               instructions = instrs)
 ```

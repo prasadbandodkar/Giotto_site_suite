@@ -2,10 +2,12 @@ pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  Dimension_reduction: Dimension_reduction.html
   Resolve_bc_210928: Resolve_bc_210928.html
   SeqFISH_cortex_210923: SeqFISH_cortex_210923.html
   Visium_prostate_integration_Sep30_21: Visium_prostate_integration_Sep30_21.html
   contribute: contribute.html
+  data_processing: data_processing.html
   datasets_overview: datasets_overview.html
   faqs: faqs.html
   getting_started: getting_started.html
@@ -19,11 +21,13 @@ articles:
   mini_starmap: mini_starmap.html
   mini_visium: mini_visium.html
   mouse_codex_spleen_Sep29_21: mouse_codex_spleen_Sep29_21.html
+  mouse_visium_brain_Sep30_21: mouse_visium_brain_Sep30_21.html
   mouse_visium_kidney_210830: mouse_visium_kidney_210830.html
   osmFISH_mouse_SScortex_Sep29_21: osmFISH_mouse_SScortex_Sep29_21.html
   overview/giotto_input: giotto_input.html
   overview/temp_construction: temp_construction.html
+  singlecell_prostate_integration_Sep30_21: singlecell_prostate_integration_Sep30_21.html
   singlecell_prostate_standard_Sep29_21: singlecell_prostate_standard_Sep29_21.html
   temp_construction: temp_construction.html
-last_built: 2021-09-30T18:25Z
+last_built: 2021-09-30T20:13Z
 
