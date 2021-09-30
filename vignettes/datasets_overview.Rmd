@@ -10,7 +10,7 @@ output: html_document
 
 [![](../inst/images/icons/datasets/visium_kidney_image_summary.png){width=30%}](./mouse_visium_kidney_210830.html)
 [![](../inst/images/icons/datasets/visium_brain_image_summary.png){width=30%}](./temp_construction.html)
-[![](../inst/images/icons/datasets/visium_prostate_summary.png){width=30%}](./temp_construction.html)
+[![](../inst/images/icons/datasets/visium_prostate_summary.png){width=30%}](./Visium_prostate_integration_Sep30_21.html)
 
 #### Other technologies
 
@@ -24,7 +24,7 @@ output: html_document
 #### 2D datasets
 
 [![](../inst/images/icons/datasets/cortex_image_summary.png){width=30%}](./SeqFISH_cortex_210923.html)
-[![](../inst/images/icons/datasets/osmFISH_SS_cortex_image_summary.png){width=30%}](./temp_construction.html)
+[![](../inst/images/icons/datasets/osmFISH_SS_cortex_image_summary.png){width=30%}](./osmFISH_mouse_SScortex_Sep29_21.html)
 
 #### 3D datasets
 
@@ -42,13 +42,13 @@ output: html_document
 
 ## Protein multiplexing
 
-[![](../inst/images/icons/datasets/CODEX_spleen_image_summary.png){width=30%}](./mouse_codex_spleen.html)
+[![](../inst/images/icons/datasets/CODEX_spleen_image_summary.png){width=30%}](./mouse_codex_spleen_Sep29_21.html)
 [![](../inst/images/icons/datasets/cyCIF_PDAC_image_summary.png){width=30%}](./temp_construction.html)
 
 <br>
 
 ## Single Cell RNA sequencing data
 
-[![](../inst/images/icons/datasets/SC_RNAseq_standard.png){width=30%}](./temp_construction.html)
+[![](../inst/images/icons/datasets/SC_RNAseq_standard.png){width=30%}](./singlecell_prostate_standard_Sep29_21.html)
 [![](../inst/images/icons/datasets/SC_RNAseq_integration.png){width=30%}](./temp_construction.html)
 

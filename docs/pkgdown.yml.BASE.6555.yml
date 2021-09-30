@@ -1,0 +1,24 @@
+pandoc: 2.11.4
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  Resolve_bc_210928: Resolve_bc_210928.html
+  SeqFISH_cortex_210923: SeqFISH_cortex_210923.html
+  contribute: contribute.html
+  datasets_overview: datasets_overview.html
+  faqs: faqs.html
+  getting_started: getting_started.html
+  getting_started_instructions: getting_started_instructions.html
+  getting_started_saving: getting_started_saving.html
+  giotto_news: giotto_news.html
+  github_issues: github_issues.html
+  installation_issues: installation_issues.html
+  merFISH_hypoth_210924: merFISH_hypoth_210924.html
+  mini_seqfish: mini_seqfish.html
+  mini_starmap: mini_starmap.html
+  mini_visium: mini_visium.html
+  mouse_codex_spleen: mouse_codex_spleen.html
+  mouse_visium_kidney_210830: mouse_visium_kidney_210830.html
+  temp_construction: temp_construction.html
+last_built: 2021-09-29T20:56Z
+
