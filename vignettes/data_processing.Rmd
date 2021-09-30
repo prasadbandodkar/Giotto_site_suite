@@ -180,7 +180,8 @@ testobj <- adjustGiottoMatrix(gobject = testobj, expression_values = c('normaliz
 
 ```
 
-##5. High Efficiency Data Processing
+
+## 5. High Efficiency Data Processing
 **processGiotto** completes the filtering, normalization, statistical, and adjustment steps of processing in one single step. This is ideal for faster processing.
 ```{r, eval=FALSE}
 processGiotto(testobj,filter_params = list(expression_threshold = 1,feat_det_in_min_cells = 100, min_det_feats_per_cell = 10),
