@@ -1,7 +1,10 @@
 ---
 title: "Codex Mouse Spleen"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
+
 
 ##Set up Giotto environment
 ```{r eval=FALSE}
@@ -225,6 +228,7 @@ violinPlot(codex_test, genes = unique(topgenes_gini), cluster_column = cluster_c
            save_param = list(save_name = '6_d_violinplot'))
 ```
 ![](../inst/images/mouse_codex_spleen/vignette_sep29_2021/6_d_violinplot.png){ width=50% }
+
 ## Part 7: Cell type annotation
 ```{r eval=FALSE}
 clusters_cell_types<-c("naive B cells","B cells","B cells","naive B cells","B cells",
@@ -265,7 +269,7 @@ spatPlot(gobject = codex_test, cell_color = 'Imaging_phenotype_cell_type', point
 ```
 ![](../inst/images/mouse_codex_spleen/vignette_sep29_2021/7_c_spatplot.png){ width=50% }
 
-## part 8: Visualize cell types and gene expression in selected zones
+## Part 8: Visualize cell types and gene expression in selected zones
 ```{r eval=FALSE}
 cell_metadata = pDataDT(codex_test)
 subset_cell_ids = cell_metadata[sample_Xtile_Ytile=="BALBc-3_X04_Y08"]$cell_ID
