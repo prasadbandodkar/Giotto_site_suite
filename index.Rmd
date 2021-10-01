@@ -44,7 +44,7 @@ See [NEWS](https://giottosuite.com/articles/giotto_news.html#giotto-suite-2-0-0-
   
 ![](./inst/images/icons/overview/analysis.png){width=80%}
 
-More information can be found in the [detailed workflow section](https://giottosuite.com/articles/overview/giotto_input.html).
+More technical information can be found in the [detailed workflow section](https://giottosuite.com/articles/overview/giotto_input.html).
 
 
 <br>  

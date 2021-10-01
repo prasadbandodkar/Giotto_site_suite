@@ -41,7 +41,7 @@ for more details.
 
 <img src="./inst/images/icons/overview/analysis.png" style="width:80.0%" />
 
-More information can be found in the [detailed workflow
+More technical information can be found in the [detailed workflow
 section](https://giottosuite.com/articles/overview/giotto_input.html).
 
 <br>
