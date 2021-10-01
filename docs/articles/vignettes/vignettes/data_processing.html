@@ -142,7 +142,7 @@
 
       
 
-      </header><script src="data_processing_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="data_processing_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>How to process your Giotto object?</h1>
@@ -224,7 +224,7 @@
 
 <span class="co"># subset data to the cortex field of views</span>
 <span class="va">cell_metadata</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span>
-<span class="va">cortex_cell_ids</span> <span class="op">=</span> <span class="va">cell_metadata</span><span class="op">[</span><span class="va">FOV</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span>
+<span class="va">cortex_cell_ids</span> <span class="op">=</span> <span class="va">cell_metadata</span><span class="op">[</span><span class="va">FOV</span> <span class="op">%in%</span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span>
 <span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">testobj</span>, cell_ids <span class="op">=</span> <span class="va">cortex_cell_ids</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="filtering-the-giotto-object" class="section level2">

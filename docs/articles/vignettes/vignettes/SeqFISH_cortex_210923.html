@@ -142,7 +142,7 @@
 
       
 
-      </header><script src="SeqFISH_cortex_210923_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="SeqFISH_cortex_210923_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>SeqFish+ Mouse Cortex Example</h1>
@@ -239,7 +239,7 @@
 
 <span class="co"># subset data to the cortex field of views</span>
 <span class="va">cell_metadata</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">SS_seqfish</span><span class="op">)</span>
-<span class="va">cortex_cell_ids</span> <span class="op">=</span> <span class="va">cell_metadata</span><span class="op">[</span><span class="va">FOV</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span>
+<span class="va">cortex_cell_ids</span> <span class="op">=</span> <span class="va">cell_metadata</span><span class="op">[</span><span class="va">FOV</span> <span class="op">%in%</span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span>
 <span class="va">SS_seqfish</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">SS_seqfish</span>, cell_ids <span class="op">=</span> <span class="va">cortex_cell_ids</span><span class="op">)</span>
 
 <span class="co"># filter</span>
@@ -701,8 +701,8 @@
 <span class="co">## LR activity changes</span>
 <span class="va">LR_data</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"mouse_ligand_receptors.txt"</span>, package <span class="op">=</span> <span class="st">'Giotto'</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">LR_data</span><span class="op">[</span>, <span class="va">ligand_det</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">LR_data</span><span class="op">$</span><span class="va">mouseLigand</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">SS_seqfish</span><span class="op">@</span><span class="va">feat_ID</span><span class="op">$</span><span class="va">rna</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span><span class="op">]</span>
-<span class="va">LR_data</span><span class="op">[</span>, <span class="va">receptor_det</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">LR_data</span><span class="op">$</span><span class="va">mouseReceptor</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">SS_seqfish</span><span class="op">@</span><span class="va">feat_ID</span><span class="op">$</span><span class="va">rna</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span><span class="op">]</span>
+<span class="va">LR_data</span><span class="op">[</span>, <span class="va">ligand_det</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">LR_data</span><span class="op">$</span><span class="va">mouseLigand</span> <span class="op">%in%</span> <span class="va">SS_seqfish</span><span class="op">@</span><span class="va">feat_ID</span><span class="op">$</span><span class="va">rna</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span><span class="op">]</span>
+<span class="va">LR_data</span><span class="op">[</span>, <span class="va">receptor_det</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">LR_data</span><span class="op">$</span><span class="va">mouseReceptor</span> <span class="op">%in%</span> <span class="va">SS_seqfish</span><span class="op">@</span><span class="va">feat_ID</span><span class="op">$</span><span class="va">rna</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span><span class="op">]</span>
 <span class="va">LR_data_det</span> <span class="op">=</span> <span class="va">LR_data</span><span class="op">[</span><span class="va">ligand_det</span> <span class="op">==</span> <span class="cn">T</span> <span class="op">&amp;</span> <span class="va">receptor_det</span> <span class="op">==</span> <span class="cn">T</span><span class="op">]</span>
 <span class="va">select_ligands</span> <span class="op">=</span> <span class="va">LR_data_det</span><span class="op">$</span><span class="va">mouseLigand</span>
 <span class="va">select_receptors</span> <span class="op">=</span> <span class="va">LR_data_det</span><span class="op">$</span><span class="va">mouseReceptor</span>

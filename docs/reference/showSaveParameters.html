@@ -208,39 +208,38 @@
     <p>Instruction on how to use the automatic plot saving options within Giotto</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'>    <span class='fu'>showSaveParameters</span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> This is a simple guide to help you with automatically saving plots. </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Importantly, defaults for all these parameters can be set at the beginning with createGiottoInstructions() </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> See https://rubd.github.io/Giotto/articles/instructions_and_plotting.html for more information and examples </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Each plotting function in Giotto has 4 important parameters for showing and/or saving a plot: </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - show_plot: TRUE or FALSE, show the plot to the console</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - return_plot: TRUE or FALSE, return the plot to the console (e.g. to further modify or save the plot</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - save_plot: TRUE or FALSE, automatically save the plot</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - save_param: a list of parameters that can be set </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> The following list of parameters can be provided to save_param: </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - save_dir: directory to save the plot to</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - save_folder: if not NULL, a subfolder within save_dir that will be created to save the plot to</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - save_name: name of the plot (no extension needed, see save_format)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - save_format: picture format to use, default is .png</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - ncol: number of columns for multiplots</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - nrow: number of rows for multiplot</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - scale: scale of plots</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - base_width: width of plot</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - base_height: height of plot</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - base_aspect_ratio: ratio of plot</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - units: plotting units (e.g. in)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       - dpi: dpi for each plot if plot is in raster format</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Example: </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       plotfunction(...,</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                    save_plot = TRUE,</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                    save_param = list(save_name = 'favorite_name', units = 'png'))</span>
-</pre>
+    <pre class="examples"><div class='input'>    <span class='fu'>showSaveParameters</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; This is a simple guide to help you with automatically saving plots. 
+#&gt; Importantly, defaults for all these parameters can be set at the beginning with createGiottoInstructions() 
+#&gt; See https://rubd.github.io/Giotto/articles/instructions_and_plotting.html for more information and examples 
+#&gt;  
+#&gt; Each plotting function in Giotto has 4 important parameters for showing and/or saving a plot: 
+#&gt; 
+#&gt;       - show_plot: TRUE or FALSE, show the plot to the console
+#&gt;       - return_plot: TRUE or FALSE, return the plot to the console (e.g. to further modify or save the plot
+#&gt;       - save_plot: TRUE or FALSE, automatically save the plot
+#&gt;       - save_param: a list of parameters that can be set 
+#&gt; 
+#&gt; The following list of parameters can be provided to save_param: 
+#&gt; 
+#&gt;       - save_dir: directory to save the plot to
+#&gt;       - save_folder: if not NULL, a subfolder within save_dir that will be created to save the plot to
+#&gt;       - save_name: name of the plot (no extension needed, see save_format)
+#&gt;       - save_format: picture format to use, default is .png
+#&gt;       - ncol: number of columns for multiplots
+#&gt;       - nrow: number of rows for multiplot
+#&gt;       - scale: scale of plots
+#&gt;       - base_width: width of plot
+#&gt;       - base_height: height of plot
+#&gt;       - base_aspect_ratio: ratio of plot
+#&gt;       - units: plotting units (e.g. in)
+#&gt;       - dpi: dpi for each plot if plot is in raster format
+#&gt; 
+#&gt; Example: 
+#&gt; 
+#&gt;       plotfunction(...,
+#&gt;                    save_plot = TRUE,
+#&gt;                    save_param = list(save_name = 'favorite_name', units = 'png'))</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
