@@ -142,7 +142,7 @@
 
       
 
-      </header><script src="singlecell_prostate_standard_Sep29_21_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><script src="singlecell_prostate_standard_Sep29_21_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>10X single cell RNA sequencing</h1>
@@ -210,7 +210,7 @@
 
 <span class="co">## add mitochondria gene percentage and filter giotto object by percent mito</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rtracklayer</span><span class="op">)</span>
-<span class="va">gtf</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"Homo_sapiens.GRCh38.101.gtf.gz"</span><span class="op">)</span>
+<span class="va">gtf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rtracklayer/man/export.html">import</a></span><span class="op">(</span><span class="st">"Homo_sapiens.GRCh38.101.gtf.gz"</span><span class="op">)</span>
 <span class="va">gtf</span> <span class="op">&lt;-</span> <span class="va">gtf</span><span class="op">[</span><span class="va">gtf</span><span class="op">$</span><span class="va">gene_name</span><span class="op">!=</span><span class="st">""</span><span class="op">]</span>
 <span class="va">gtf</span> <span class="op">&lt;-</span> <span class="va">gtf</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">gtf</span><span class="op">$</span><span class="va">gene_name</span><span class="op">)</span><span class="op">]</span>
 <span class="va">mito</span> <span class="op">&lt;-</span> <span class="va">gtf</span><span class="op">$</span><span class="va">gene_name</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu">seqnames</span><span class="op">(</span><span class="va">gtf</span><span class="op">)</span><span class="op">)</span> <span class="op">%in%</span> <span class="st">"MT"</span><span class="op">]</span>

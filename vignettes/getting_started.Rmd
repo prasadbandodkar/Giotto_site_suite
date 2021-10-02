@@ -54,7 +54,7 @@ Tutorials for Giotto specific tasks and functionalities.
 [![](../inst/images/icons/getting_started/icons_processing.png){width=20%}](./data_processing.html)
 [![](../inst/images/icons/getting_started/icons_clustering.png){width=20%}](./Dimension_reduction.html)
 
-[![](../inst/images/icons/getting_started/icons_visualizations.png){width=20%}](./temp_construction.html)
+[![](../inst/images/icons/getting_started/icons_visualizations.png){width=20%}](./Visualizations.html)
 [![](../inst/images/icons/getting_started/icons_saving.png){width=20%}](./getting_started_saving.html)
  
 
