@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.958</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
       </span>
     </div>
 
@@ -142,7 +142,7 @@
 
       
 
-      </header><script src="contribute_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="contribute_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Contribute</h1>
@@ -354,7 +354,7 @@ See <strong>doLeidenCLuster</strong> for more detailed information.</li>
   <span class="co"># Here we implemented spark according to their github example code: </span>
   
   <span class="co"># create SPARK object for analysis and filter out lowly expressed genes</span>
-  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu">CreateSPARKObject</span><span class="op">(</span>counts <span class="op">=</span> <span class="va">expr</span>,
+  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/SPARK/man/CreateSPARKObject.html">CreateSPARKObject</a></span><span class="op">(</span>counts <span class="op">=</span> <span class="va">expr</span>,
                                      location <span class="op">=</span> <span class="va">locs</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>,
                                      percentage <span class="op">=</span> <span class="va">percentage</span>,
                                      min_total_counts <span class="op">=</span> <span class="va">min_count</span><span class="op">)</span>
@@ -381,7 +381,7 @@ See <strong>doLeidenCLuster</strong> for more detailed information.</li>
   <span class="op">}</span>
 
   <span class="co"># Fit statistical model under null hypothesis</span>
-  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu">spark.vc</span><span class="op">(</span><span class="va">sobject</span>,
+  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/SPARK/man/spark.vc.html">spark.vc</a></span><span class="op">(</span><span class="va">sobject</span>,
                             covariates <span class="op">=</span> <span class="va">covariates</span>,
                             lib_size <span class="op">=</span> <span class="va">sobject</span><span class="op">@</span><span class="va">lib_size</span>,
                             num_core <span class="op">=</span> <span class="va">num_core</span>,
@@ -390,7 +390,7 @@ See <strong>doLeidenCLuster</strong> for more detailed information.</li>
 
   <span class="co"># test spatially expressed pattern genes</span>
   <span class="co"># calculating pval</span>
-  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu">spark.test</span><span class="op">(</span><span class="va">sobject</span>,
+  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/SPARK/man/spark.test.html">spark.test</a></span><span class="op">(</span><span class="va">sobject</span>,
                               check_positive <span class="op">=</span> <span class="cn">T</span>,
                               verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
 

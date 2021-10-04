@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.958</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
       </span>
     </div>
 
@@ -142,7 +142,7 @@
 
       
 
-      </header><script src="Resolve_bc_210928_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="Resolve_bc_210928_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Resolve Bioscience Breast Cancer Subcellular</h1>
@@ -509,7 +509,7 @@
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># find interaction changed genes</span>
 <span class="co"># genes whose expression difference is associated with a neighboring cell type</span>
-<span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/future/man/plan.html">plan</a></span><span class="op">(</span><span class="st">'multisession'</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="co"># sometimes unstable, restart R session</span>
+<span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="st">'multisession'</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="co"># sometimes unstable, restart R session</span>
 
 <span class="va">test</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/findInteractionChangedFeats.html">findInteractionChangedFeats</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">subc_test</span>,
                                    cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span><span class="op">)</span>
