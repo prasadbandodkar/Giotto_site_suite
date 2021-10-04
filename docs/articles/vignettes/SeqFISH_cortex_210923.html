@@ -142,7 +142,7 @@
 
       
 
-      </header><script src="SeqFISH_cortex_210923_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
+      </header><script src="SeqFISH_cortex_210923_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>SeqFish+ Mouse Cortex Example</h1>
@@ -653,7 +653,7 @@
          legend_symbol_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/35-spatPlot2D.png" style="width:50.0%"> ## Part 13: Cell Neighborhood: Interaction Changed Genes</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://future.futureverse.org">future</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/HenrikBengtsson/future">future</a></span><span class="op">)</span>
 <span class="co">## select top 25th highest expressing genes</span>
 <span class="va">gene_metadata</span> <span class="op">=</span> <span class="fu"><a href="../../reference/fDataDT.html">fDataDT</a></span><span class="op">(</span><span class="va">SS_seqfish</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">gene_metadata</span><span class="op">$</span><span class="va">nr_cells</span>, <span class="va">gene_metadata</span><span class="op">$</span><span class="va">mean_expr</span><span class="op">)</span>
@@ -663,7 +663,7 @@
 <span class="va">high_expressed_genes</span> <span class="op">=</span> <span class="va">gene_metadata</span><span class="op">[</span><span class="va">mean_expr_det</span> <span class="op">&gt;</span> <span class="fl">3.5</span><span class="op">]</span><span class="op">$</span><span class="va">gene_ID</span>
 
 <span class="co">## identify genes that are associated with proximity to other cell types</span>
-<span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="st">'multisession'</span>, workers <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/future/man/plan.html">plan</a></span><span class="op">(</span><span class="st">'multisession'</span>, workers <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
 <span class="va">ICGscoresHighGenes</span> <span class="op">=</span>  <span class="fu"><a href="../../reference/findInteractionChangedFeats.html">findInteractionChangedFeats</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>,
                               selected_feats <span class="op">=</span> <span class="va">high_expressed_genes</span>,
                               spatial_network_name <span class="op">=</span> <span class="st">'Delaunay_network'</span>,
