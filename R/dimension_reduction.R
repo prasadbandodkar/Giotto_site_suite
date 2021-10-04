@@ -975,7 +975,7 @@ jackstrawPlot = function(gobject,
 #' @export
 signPCA <- function(gobject,
                     feat_type = NULL,
-                    name = 'pca',
+                    name = NULL,
                     method = c('screeplot', 'jackstraw'),
                     expression_values = c("normalized", "scaled", "custom"),
                     reduction = c("cells", "feats"),
@@ -998,6 +998,21 @@ signPCA <- function(gobject,
                     default_save_name = 'signPCA') {
 
 
+  # specify feat_type
+  if(is.null(feat_type)) {
+    feat_type = gobject@expression_feat[[1]]
+  }
+
+
+  # specify name to use
+  if(!is.null(name)) {
+    if(feat_type == 'rna') {
+      name = 'pca'
+    } else {
+      name = paste0(feat_type,'.','pca')
+    }
+  }
+
   ## deprecated arguments
   if(!is.null(genes_to_use)) {
     feats_to_use = genes_to_use
@@ -1007,12 +1022,17 @@ signPCA <- function(gobject,
   # select method
   method = match.arg(method, choices = c('screeplot', 'jackstraw'))
 
+  # select PCA method
+  pca_method = match.arg(pca_method, choices = c('irlba', 'factominer'))
+
   # select direction of reduction
   reduction = match.arg(reduction, c('cells', 'feats'))
 
   # expression values to be used
-  values = match.arg(expression_values, c('normalized', 'scaled', 'custom'))
-  expr_values = get_expression_values(gobject = gobject, values = values)
+  values = match.arg(expression_values, unique(c('normalized', 'scaled', 'custom', expression_values)))
+  expr_values = get_expression_values(gobject = gobject,
+                                      feat_type = feat_type,
+                                      values = values)
 
   # print, return and save parameters
   show_plot = ifelse(is.na(show_plot), readGiottoInstructions(gobject, param = 'show_plot'), show_plot)
