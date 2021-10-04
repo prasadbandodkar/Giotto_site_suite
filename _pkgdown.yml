@@ -117,31 +117,34 @@ reference:
     contents:
     - get_expression_values
     - set_expression_values
-    - showGiottoExpression
     - get_spatial_locations
     - set_spatial_locations
-    - showGiottoSpatLocs
     - get_dimReduction
     - set_dimReduction
-    - showGiottoDimRed
     - get_NearestNetwork
     - set_NearestNetwork
     - get_spatialNetwork
     - set_spatialNetwork
-    - showGiottoSpatNetworks
     - get_spatialGrid
     - set_spatialGrid
-    - showGiottoSpatGrids
     - get_polygon_info
     - set_polygon_info
-    - showGiottoSpatialInfo
     - get_feature_info
     - set_feature_info
-    - showGiottoFeatInfo
     - get_spatial_enrichment
     - set_spatial_enrichment
-    - showGiottoSpatEnrichments
 
+  - title: Giotto show slots
+    desc: Show what is available in different information slots
+    contents:
+    - showGiottoExpression
+    - showGiottoSpatLocs
+    - showGiottoDimRed
+    - showGiottoSpatNetworks
+    - showGiottoSpatGrids
+    - showGiottoSpatialInfo
+    - showGiottoFeatInfo
+    - showGiottoSpatEnrichments
 
   - title: Modify Giotto object
     desc: Modifications to the Giotto objects
@@ -213,8 +216,38 @@ reference:
     - plotMetaDataCellsHeatmap
     - violinPlot
 
+  - title: Spatial enrichment
+    desc: algorithms to compute spatial enrichment of gene signatures or scRNA-seq matrix
+    contents:
+    - makeSignMatrixPAGE
+    - makeSignMatrixRank
+    - runSpatialEnrich
+    - runPAGEEnrich
+    - runRankEnrich
+    - runHyperGeometricEnrich
 
 
+  - title: Spatial deconvolution
+    desc: algorithms to perform spatial deconvolution based on gene signatures or single-cell RNAseq information
+    contents:
+    - makeSignMatrixDWLSfromMatrix
+    - makeSignMatrixDWLS
+    - runSpatialDeconv
+    - runDWLSDeconv
+
+  - title: Spatial network or grid
+    desc: Function to (help) create a spatial network or grid
+    contents:
+    - spatNetwDistributionsDistance
+    - spatNetwDistributionsKneighbors
+    - spatNetwDistributions
+    - createSpatialDelaunayNetwork
+    - plotStatDelaunayNetwork
+    - createSpatialKNNnetwork
+    - createSpatialNetwork
+    - annotateSpatialNetwork
+    - annotateSpatialGrid
+    - createSpatialGrid
 
   - title: Spatial Expression Patterns
     desc: Methods to detect spatially coherent expression patterns
@@ -235,13 +268,129 @@ reference:
     - simulateOneGenePatternGiottoObject
     - runPatternSimulation
 
-
   - title: Spatial Co-Expression Modules
     desc: Method to detect spatially co-expressed feature modules
     contents:
-    - detectSpatialCorFeatsMatrix
-    - detectSpatialCorFeats
-    - showSpatialCorFeats
-    - clusterSpatialCorFeats
-    - heatmSpatialCorFeats
+    - ends_with("SpatialCorFeats")
     - rankSpatialCorGroups
+
+  - title: HMRF
+    desc: Functions to identify spatial domains with HMRF
+    contents:
+    - doHMRF
+    - loadHMRF
+    - viewHMRFresults
+    - writeHMRFresults
+    - addHMRF
+    - viewHMRFresults2D
+    - viewHMRFresults3D
+
+  - title: 2D visualization in expression space
+    desc: Visualization of expression space (e.g. UMAP) in 2D
+    contents:
+    - dimPlot
+    - plotUMAP
+    - plotTSNE
+    - plotPCA
+    - dimFeatPlot
+    - dimCellPlot
+
+  - title: 2D visualization in spatial space
+    desc: Visualization in 2D spatial space
+    contents:
+    - spatPlot
+    - spatFeatPlot
+    - spatCellPlot
+
+  - title: 2D visualization in spatial and expression space
+    desc: Visualization in both 2D spatial and expression space
+    contents:
+    - spatDimPlot
+    - spatDimFeatPlot
+    - spatDimCellPlot
+
+  - title: 3D dimension reduction visualization
+    desc: Visualization of expression space (e.g. UMAP) in 3D
+    contents:
+    - dimPlot3D
+    - plotUMAP_3D
+    - plotTSNE_3D
+    - plotPCA_3D
+    - dimFeatPlot3D
+
+  - title: 3D visualization in spatial space
+    desc: Visualization in 3D spatial space
+    contents:
+    - spatPlot3D
+    - spatFeatPlot3D
+
+  - title: 3D visualization in spatial and expression space
+    desc: Visualization in both 3D spatial and expression space
+    contents:
+    - spatDimPlot3D
+    - spatDimFeatPlot3D
+
+
+  - title: In silico cross sections
+    desc: create in silico 2D cross sections from 3D data
+    contents:
+    - createCrossSection
+    - crossSectionGenePlot
+    - crossSectionPlot
+    - crossSectionGenePlot3D
+    - crossSectionPlot3D
+    - insertCrossSectionSpatPlot3D
+    - insertCrossSectionGenePlot3D
+
+  - title: cell neighborhood; cell-type/cell-type enrichment
+    desc: calculate and visualize cell-type/cell-type spatial enrichment or depletion
+    contents:
+    - cellProximityEnrichment
+    - cellProximityBarplot
+    - cellProximityHeatmap
+    - cellProximityNetwork
+    - cellProximitySpatPlot
+    - cellProximitySpatPlot3D
+
+
+  - title: cell neighborhood; cell-type/cell-type enrichment
+    desc: calculate and visualize cell-type/cell-type spatial enrichment or depletion
+    contents:
+    - cellProximityEnrichment
+    - cellProximityBarplot
+    - cellProximityHeatmap
+    - cellProximityNetwork
+    - cellProximitySpatPlot
+    - cellProximitySpatPlot3D
+
+  - title: cell neighborhood; spatial interaction changed genes
+    desc: Identify and visualize genes that change in a source cell type due to interaction with another neighboring cell type
+    contents:
+    - findInteractionChangedFeats
+    - findICF
+    - filterInteractionChangedFeats
+    - filterICF
+    - combineInteractionChangedFeats
+    - combineICF
+    - plotInteractionChangedFeats
+    - plotICF
+    - plotCombineInteractionChangedFeats
+    - plotCombineICF
+
+  - title: cell neighborhood; ligand-receptor cell communication
+    desc: Find putative increased spatial ligand-receptor activity between cells of pairs of cell types
+    contents:
+    - exprCellCellcom
+    - spatCellCellcom
+    - plotCCcomDotplot
+    - plotRankSpatvsExpr
+    - plotRecovery
+
+  - title: Interoperability
+    desc: Convert other type of objects into a Giotto object
+    contents:
+    - anndataToGiotto
+    - giottoToSeurat
+    - seuratToGiotto
+
+
