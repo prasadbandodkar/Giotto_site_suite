@@ -52,5 +52,7 @@ section](https://giottosuite.com/articles/overview/giotto_input.html).
     analysis and visualization of spatial expression data. Genome
     Biology
     (2021).](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02286-2)
-      
--   **Coming soon:** Spatial review.
+
+-   [Dries, R., Chen, J., Rossi, N. del, Khan, M.M., Sistig, A., Yuan,
+    G.-C., 2021. Advances in spatial transcriptomic data analysis.
+    Genome Res. 31, 1706–1718](https://doi.org/10.1101/gr.275224.121)
