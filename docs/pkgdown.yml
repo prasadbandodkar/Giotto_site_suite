@@ -12,6 +12,7 @@ articles:
   datasets_overview: datasets_overview.html
   faqs: faqs.html
   getting_started: getting_started.html
+  getting_started_images: getting_started_images.html
   getting_started_instructions: getting_started_instructions.html
   getting_started_saving: getting_started_saving.html
   giotto_news: giotto_news.html
@@ -83,11 +84,5 @@ articles:
   vignettes/vignettes/singlecell_prostate_standard_Sep29_21: singlecell_prostate_standard_Sep29_21.html
   vignettes/vignettes/temp_construction: temp_construction.html
   vizgen_mouse_brain_210929: vizgen_mouse_brain_210929.html
-<<<<<<< HEAD
-last_built: 2021-10-04T14:20Z
-||||||| merged common ancestors
-last_built: 2021-10-04T13:32Z
-=======
-last_built: 2021-10-04T15:17Z
->>>>>>> 46513512316cda58a97f05e86cfa9c42b1761d91
+last_built: 2021-10-12T14:04Z
 
