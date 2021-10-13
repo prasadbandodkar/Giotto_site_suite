@@ -425,8 +425,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
 1. calculate spatial correlation scores<br>
 2. cluster correlation scores</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co"># 1. calculate spatial correlation scores </span>
+<code class="sourceCode R"><span class="co"># 1. calculate spatial correlation scores </span>
 <span class="va">ext_spatial_genes</span> <span class="op">=</span> <span class="va">km_spatialgenes</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>
 <span class="va">spat_cor_netw_DT</span> <span class="op">=</span> <span class="fu">detectSpatialCorGenes</span><span class="op">(</span><span class="va">starmap_mini</span>,
                                          method <span class="op">=</span> <span class="st">'network'</span>, 
@@ -558,8 +557,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <h2 class="hasAnchor">
 <a href="#d-cross-sections-from-3d-object" class="anchor"></a>13. 2D cross sections from 3D object</h2>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co"># create cross section</span>
+<code class="sourceCode R"><span class="co"># create cross section</span>
 <span class="va">starmap_mini</span> <span class="op">=</span> <span class="fu"><a href="../../reference/createCrossSection.html">createCrossSection</a></span><span class="op">(</span><span class="va">starmap_mini</span>,
                                 method<span class="op">=</span><span class="st">"equation"</span>,
                                 equation<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">600</span><span class="op">)</span>,
