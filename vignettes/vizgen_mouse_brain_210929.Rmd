@@ -16,7 +16,7 @@ This tutorial was written using Giotto version 2.0.0.9045. Check the version you
 If you do not have Giotto installed, you can do so by running the following code.
 
 ```{r, eval=FALSE}
-remotes::install_github("RubD/Giotto")
+remotes::install_github("RubD/Giotto@suite")
 ```
 
 Now, load the library and define the project path.
@@ -248,6 +248,7 @@ spatPlot2D(gobject = vizgen_subset, cell_color = 'leiden_clus', point_size = 2.5
 ```
 
 ![](../inst/images/vizgen_mouse_brain/210929_results/10-spatPlot2D.png){ width=50% }
+
 Giotto can include the information about the polygons as provided by Vizgen. Since we are working with a subset of the data, it is necessary to read only the polygons that are present in the current FOVs.
 
 ```{r, eval=FALSE}
