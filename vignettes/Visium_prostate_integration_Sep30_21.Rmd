@@ -80,11 +80,13 @@ testcombo = joinGiottoObjects(gobject_list = list(N_pros, C_pros),
 # simple list for now
 testcombo@join_info
 
-#fDataDT(testcombo)
-#pDataDT(testcombo)
-#showGiottoImageNames(testcombo)
-#showGiottoSpatLocs(testcombo)
-#showGiottoExpression(testcombo)
+
+# check joined Giotto object
+fDataDT(testcombo)
+pDataDT(testcombo)
+showGiottoImageNames(testcombo)
+showGiottoSpatLocs(testcombo)
+showGiottoExpression(testcombo)
 ```
 
 
@@ -136,7 +138,6 @@ testcombo <- filterGiotto(gobject = testcombo,
 
 ## normalize
 testcombo <- normalizeGiotto(gobject = testcombo, scalefactor = 6000)
-#testcombo <- normalizeGiotto(gobject = testcombo, norm_methods = 'pearson_resid')
 
 ## add gene & cell statistics
 testcombo <- addStatistics(gobject = testcombo, expression_values = 'raw')
@@ -169,13 +170,10 @@ screePlot(testcombo, ncp = 30, save_param = list(save_name = "3a_screeplot"))
 
 ## Part 4: Clustering
 ### 4.1 Without Integration
+Integration is usually needed for dataset of different conditions to minimize batch effects. Without integration means without using any integration methods.
 ```{r eval=FALSE}
-## WITHOUT INTEGRATION ##
-# --------------------- #
-
 ## cluster and run UMAP ##
 # sNN network (default)
-showGiottoDimRed(testcombo)
 testcombo <- createNearestNetwork(gobject = testcombo,
     dim_reduction_to_use = 'pca', dim_reduction_name = 'pca',
     dimensions_to_use = 1:10, k = 15)
@@ -211,9 +209,6 @@ spatDimPlot2D(gobject = testcombo,
 ### 4.2 With Harmony integration
 Harmony is a integration algorithm developed by [Korsunsky, I. et al.](https://www.nature.com/articles/s41592-019-0619-0). It was designed for integration of single cell data but also work well on spatial datasets. 
 ```{r eval=FALSE}
-## WITH INTEGRATION ##
-# --------------------- #
-
 ## data integration, cluster and run UMAP ##
 
 # harmony
@@ -221,12 +216,11 @@ Harmony is a integration algorithm developed by [Korsunsky, I. et al.](https://w
 #install_github("immunogenomics/harmony")
 library(harmony)
 
-#pDataDT(testcombo)
+## run harmony integration
 testcombo = runGiottoHarmony(testcombo, vars_use = 'list_ID', do_pca = F)
 
 
 ## sNN network (default)
-#showGiottoDimRed(testcombo)
 testcombo <- createNearestNetwork(gobject = testcombo,
     dim_reduction_to_use = 'harmony', dim_reduction_name = 'harmony', name = 'NN.harmony',
     dimensions_to_use = 1:10, k = 15)
@@ -236,7 +230,6 @@ testcombo <- doLeidenCluster(gobject = testcombo,
     network_name = 'NN.harmony', resolution = 0.2, n_iterations = 1000, name = 'leiden_harmony')
 
 # UMAP dimension reduction
-#showGiottoDimRed(testcombo)
 testcombo = runUMAP(testcombo, dim_reduction_name = 'harmony', dim_reduction_to_use = 'harmony', name = 'umap_harmony')
 plotUMAP(gobject = testcombo,
     dim_reduction_name = 'umap_harmony',
@@ -280,9 +273,9 @@ spatPlot2D(gobject = testcombo,
 
 ## Part 5: Cell type annotation
 Visium spatial transcriptomics does not provide single-cell resolution, making cell type annotation a harder problem. Giotto provides several ways to calculate enrichment of specific cell-type signature gene list:    
-- PAGE  
-- hypergeometric test
-- Rank
+- PAGE   
+- hypergeometric test   
+- Rank   
 - [DWLS Deconvolution](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02362-7) 
 
 This is also the easiest way to integrate Visium datasets with single cell data. Example shown here is from [Ma et al.](https://pubmed.ncbi.nlm.nih.gov/33032611/) from two prostate cancer patients. The raw dataset can be found [here](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE157703) 

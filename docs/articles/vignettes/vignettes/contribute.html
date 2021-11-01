@@ -372,7 +372,7 @@ See <strong>doLeidenCLuster</strong> for more detailed information.</li>
 
     <span class="va">metadata</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">tempgobject</span><span class="op">)</span>
 
-    <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">covariates</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">covariates</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
       <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="va">covariates</span>, <span class="st">' was not found in the cell metadata of the giotto object, will be set to NULL \n'</span><span class="op">)</span>
       <span class="va">covariates</span> <span class="op">=</span> <span class="cn">NULL</span>
     <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>

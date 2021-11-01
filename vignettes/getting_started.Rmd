@@ -71,7 +71,7 @@ Full dataset examples can be found in the [Datasets](../articles/datasets_overvi
 
 [![](../inst/images/icons/analyses/icons_image_analysis.png){width=30%}](./temp_construction.html)
 [![](../inst/images/icons/analyses/icons_cell_type.png){width=30%}](./temp_construction.html)
-[![](../inst/images/icons/analyses/icons_deconvolution.png){width=30%}](./temp_construction.html)    
+[![](../inst/images/icons/analyses/icons_deconvolution.png){width=30%}](./analyses_deconvolutuon_Oct2021.html)    
 
 [![](../inst/images/icons/analyses/icons_distribution.png){width=30%}](./temp_construction.html)
 [![](../inst/images/icons/analyses/icons_interaction.png){width=30%}](./temp_construction.html)

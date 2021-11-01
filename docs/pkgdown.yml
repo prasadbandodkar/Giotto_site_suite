@@ -7,6 +7,7 @@ articles:
   SeqFISH_cortex_210923: SeqFISH_cortex_210923.html
   Visium_prostate_integration_Sep30_21: Visium_prostate_integration_Sep30_21.html
   Visualizations: Visualizations.html
+  analyses_deconvolution_Oct2021: analyses_deconvolution_Oct2021.html
   contribute: contribute.html
   data_processing: data_processing.html
   datasets_overview: datasets_overview.html
@@ -84,5 +85,5 @@ articles:
   vignettes/vignettes/singlecell_prostate_standard_Sep29_21: singlecell_prostate_standard_Sep29_21.html
   vignettes/vignettes/temp_construction: temp_construction.html
   vizgen_mouse_brain_210929: vizgen_mouse_brain_210929.html
-last_built: 2021-10-13T22:28Z
+last_built: 2021-11-01T07:11Z
 
