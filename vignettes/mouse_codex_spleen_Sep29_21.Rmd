@@ -300,7 +300,7 @@ spatPlot(gobject = codex_test_zone1,
 ![](../inst/images/mouse_codex_spleen/vignette_sep29_2021/8_b_spatplot.png){ width=50% }
 
 ```{r eval=FALSE}
-spatDimGenePlot(codex_test_zone1, 
+spatDimFeatPlot2D(codex_test_zone1, 
                 expression_values = 'scaled',
                 genes = c("CD8a","CD19"),
                 spat_point_shape = 'no_border',
@@ -338,7 +338,7 @@ spatPlot(gobject = codex_test_zone2, cell_color = 'Imaging_phenotype_cell_type',
 ![](../inst/images/mouse_codex_spleen/vignette_sep29_2021/8_e_spatPlot.png){ width=50% }
 
 ```{r eval=FALSE}
-spatDimGenePlot(codex_test_zone2, 
+spatDimFeatPlot2D(codex_test_zone2, 
                 expression_values = 'scaled',
                 genes = c("CD4", "CD106"),
                 spat_point_shape = 'no_border',

@@ -223,11 +223,13 @@
 <span class="co"># simple list for now</span>
 <span class="va">testcombo</span><span class="op">@</span><span class="va">join_info</span>
 
-<span class="co">#fDataDT(testcombo)</span>
-<span class="co">#pDataDT(testcombo)</span>
-<span class="co">#showGiottoImageNames(testcombo)</span>
-<span class="co">#showGiottoSpatLocs(testcombo)</span>
-<span class="co">#showGiottoExpression(testcombo)</span></code></pre></div>
+
+<span class="co"># check joined Giotto object</span>
+<span class="fu"><a href="../reference/fDataDT.html">fDataDT</a></span><span class="op">(</span><span class="va">testcombo</span><span class="op">)</span>
+<span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">testcombo</span><span class="op">)</span>
+<span class="fu"><a href="../reference/showGiottoImageNames.html">showGiottoImageNames</a></span><span class="op">(</span><span class="va">testcombo</span><span class="op">)</span>
+<span class="fu"><a href="../reference/showGiottoSpatLocs.html">showGiottoSpatLocs</a></span><span class="op">(</span><span class="va">testcombo</span><span class="op">)</span>
+<span class="fu"><a href="../reference/showGiottoExpression.html">showGiottoExpression</a></span><span class="op">(</span><span class="va">testcombo</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># this plots all the images by list_ID</span>
 <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testcombo</span>, cell_color <span class="op">=</span> <span class="st">'in_tissue'</span>,
@@ -268,7 +270,6 @@
 
 <span class="co">## normalize</span>
 <span class="va">testcombo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testcombo</span>, scalefactor <span class="op">=</span> <span class="fl">6000</span><span class="op">)</span>
-<span class="co">#testcombo &lt;- normalizeGiotto(gobject = testcombo, norm_methods = 'pearson_resid')</span>
 
 <span class="co">## add gene &amp; cell statistics</span>
 <span class="va">testcombo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/addStatistics.html">addStatistics</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testcombo</span>, expression_values <span class="op">=</span> <span class="st">'raw'</span><span class="op">)</span>
@@ -301,13 +302,10 @@
 <div id="without-integration" class="section level3">
 <h3 class="hasAnchor">
 <a href="#without-integration" class="anchor"></a>4.1 Without Integration</h3>
+<p>Integration is usually needed for dataset of different conditions to minimize batch effects. Without integration means without using any integration methods.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## WITHOUT INTEGRATION ##</span>
-<span class="co"># --------------------- #</span>
-
-<span class="co">## cluster and run UMAP ##</span>
+<code class="sourceCode R"><span class="co">## cluster and run UMAP ##</span>
 <span class="co"># sNN network (default)</span>
-<span class="fu"><a href="../reference/showGiottoDimRed.html">showGiottoDimRed</a></span><span class="op">(</span><span class="va">testcombo</span><span class="op">)</span>
 <span class="va">testcombo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createNearestNetwork.html">createNearestNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testcombo</span>,
     dim_reduction_to_use <span class="op">=</span> <span class="st">'pca'</span>, dim_reduction_name <span class="op">=</span> <span class="st">'pca'</span>,
     dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, k <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>
@@ -339,22 +337,18 @@
 <a href="#with-harmony-integration" class="anchor"></a>4.2 With Harmony integration</h3>
 <p>Harmony is a integration algorithm developed by <a href="https://www.nature.com/articles/s41592-019-0619-0">Korsunsky, I. et al.</a>. It was designed for integration of single cell data but also work well on spatial datasets.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## WITH INTEGRATION ##</span>
-<span class="co"># --------------------- #</span>
-
-<span class="co">## data integration, cluster and run UMAP ##</span>
+<code class="sourceCode R"><span class="co">## data integration, cluster and run UMAP ##</span>
 
 <span class="co"># harmony</span>
 <span class="co">#library(devtools)</span>
 <span class="co">#install_github("immunogenomics/harmony")</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">harmony</span><span class="op">)</span>
 
-<span class="co">#pDataDT(testcombo)</span>
+<span class="co">## run harmony integration</span>
 <span class="va">testcombo</span> <span class="op">=</span> <span class="fu"><a href="../reference/runGiottoHarmony.html">runGiottoHarmony</a></span><span class="op">(</span><span class="va">testcombo</span>, vars_use <span class="op">=</span> <span class="st">'list_ID'</span>, do_pca <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
 
 
 <span class="co">## sNN network (default)</span>
-<span class="co">#showGiottoDimRed(testcombo)</span>
 <span class="va">testcombo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createNearestNetwork.html">createNearestNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testcombo</span>,
     dim_reduction_to_use <span class="op">=</span> <span class="st">'harmony'</span>, dim_reduction_name <span class="op">=</span> <span class="st">'harmony'</span>, name <span class="op">=</span> <span class="st">'NN.harmony'</span>,
     dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, k <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>
@@ -364,7 +358,6 @@
     network_name <span class="op">=</span> <span class="st">'NN.harmony'</span>, resolution <span class="op">=</span> <span class="fl">0.2</span>, n_iterations <span class="op">=</span> <span class="fl">1000</span>, name <span class="op">=</span> <span class="st">'leiden_harmony'</span><span class="op">)</span>
 
 <span class="co"># UMAP dimension reduction</span>
-<span class="co">#showGiottoDimRed(testcombo)</span>
 <span class="va">testcombo</span> <span class="op">=</span> <span class="fu"><a href="../reference/runUMAP.html">runUMAP</a></span><span class="op">(</span><span class="va">testcombo</span>, dim_reduction_name <span class="op">=</span> <span class="st">'harmony'</span>, dim_reduction_to_use <span class="op">=</span> <span class="st">'harmony'</span>, name <span class="op">=</span> <span class="st">'umap_harmony'</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testcombo</span>,
     dim_reduction_name <span class="op">=</span> <span class="st">'umap_harmony'</span>,
@@ -399,7 +392,9 @@
 <a href="#part-5-cell-type-annotation" class="anchor"></a>Part 5: Cell type annotation</h2>
 <p>Visium spatial transcriptomics does not provide single-cell resolution, making cell type annotation a harder problem. Giotto provides several ways to calculate enrichment of specific cell-type signature gene list:<br>
 - PAGE<br>
-- hypergeometric test - Rank - <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02362-7">DWLS Deconvolution</a></p>
+- hypergeometric test<br>
+- Rank<br>
+- <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02362-7">DWLS Deconvolution</a></p>
 <p>This is also the easiest way to integrate Visium datasets with single cell data. Example shown here is from <a href="https://pubmed.ncbi.nlm.nih.gov/33032611/">Ma et al.</a> from two prostate cancer patients. The raw dataset can be found <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE157703">here</a> Giotto_SC is processed variable in the <a href="https://giottosuite.com/articles/singlecell_prostate_standard_Sep29_21.html">single cell RNAseq tutorial</a></p>
 <div id="page-enrichment" class="section level3">
 <h3 class="hasAnchor">

@@ -273,20 +273,21 @@
     <p>giotto object</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span><span class='op'>)</span>
-
-<span class='va'>random_cells</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'>slot</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span>, <span class='st'>'cell_ID'</span><span class='op'>)</span>, <span class='fl'>10</span><span class='op'>)</span>
-<span class='va'>random_genes</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'>slot</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span>, <span class='st'>'gene_ID'</span><span class='op'>)</span>, <span class='fl'>10</span><span class='op'>)</span>
-
-<span class='va'>subset_obj</span> <span class='op'>=</span> <span class='fu'>subsetGiotto</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span>,
-                         cell_ids <span class='op'>=</span> <span class='va'>random_cells</span>,
-                         feat_ids <span class='op'>=</span> <span class='va'>random_genes</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in subsetGiotto(mini_giotto_single_cell, cell_ids = random_cells,     feat_ids = random_genes): no slot of name "expression_feat" for this object of class "giotto"</span></div><div class='input'>
-<span class='co'># }</span>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>random_cells</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'>slot</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span>, <span class='st'>'cell_ID'</span><span class='op'>)</span>, <span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>random_genes</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'>slot</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span>, <span class='st'>'gene_ID'</span><span class='op'>)</span>, <span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>subset_obj</span> <span class='op'>=</span> <span class='fu'>subsetGiotto</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span>,</span>
+<span class='r-in'>                         cell_ids <span class='op'>=</span> <span class='va'>random_cells</span>,</span>
+<span class='r-in'>                         feat_ids <span class='op'>=</span> <span class='va'>random_genes</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in subsetGiotto(mini_giotto_single_cell, cell_ids = random_cells,     feat_ids = random_genes):</span> no slot of name "expression_feat" for this object of class "giotto"</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># }</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

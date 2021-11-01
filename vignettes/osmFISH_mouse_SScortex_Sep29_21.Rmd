@@ -359,7 +359,7 @@ spatPlot2D(gobject = osm_test, show_network = T,
 kmtest = binSpect(osm_test, calc_hub = T, hub_min_int = 5,
                   bin_method = 'kmeans')
 
-spatDimGenePlot2D(osm_test, expression_values = 'scaled',
+spatFeatPlot2D(osm_test, expression_values = 'scaled',
                   genes = kmtest$feats[1:3], dim_point_shape ='no_border',
                   plot_alignment = 'horizontal', cow_n_col = 1,
                   save_param = c(save_name = '10_a_spatial_genes_km'))
