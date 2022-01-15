@@ -6,6 +6,7 @@
 \usage{
 dimPlot2D_single(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   dim_reduction_to_use = "umap",
   dim_reduction_name = NULL,
@@ -55,6 +56,8 @@ dimPlot2D_single(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type}
 

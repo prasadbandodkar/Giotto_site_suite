@@ -6,6 +6,7 @@
 \usage{
 calculateMetaTable(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   expression_values = c("normalized", "scaled", "custom"),
   metadata_cols = NULL,
@@ -15,6 +16,10 @@ calculateMetaTable(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
+
+\item{feat_type}{feature type}
 
 \item{expression_values}{expression values to use}
 

@@ -6,6 +6,7 @@
 \usage{
 average_feat_feat_expression_in_groups(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   cluster_column = "cell_types",
   feat_set_1,
@@ -14,6 +15,8 @@ average_feat_feat_expression_in_groups(
 }
 \arguments{
 \item{gobject}{giotto object to use}
+
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type}
 

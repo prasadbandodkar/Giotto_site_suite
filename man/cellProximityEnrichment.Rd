@@ -6,6 +6,7 @@
 \usage{
 cellProximityEnrichment(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   spatial_network_name = "Delaunay_network",
   cluster_column,
@@ -18,6 +19,8 @@ cellProximityEnrichment(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type}
 

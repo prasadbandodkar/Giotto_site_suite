@@ -7,6 +7,7 @@
 #' @name spatNetwDistributionsDistance
 #' @description This function return histograms displaying the distance distribution for each spatial k-neighbor
 #' @param gobject Giotto object
+#' @param spat_unit spatial unit
 #' @param spatial_network_name name of spatial network
 #' @param hist_bins number of binds to use for the histogram
 #' @param test_distance_limit effect of different distance threshold on k-neighbors
@@ -19,6 +20,7 @@
 #' @return ggplot plot
 #' @export
 spatNetwDistributionsDistance <- function(gobject,
+                                          spat_unit = NULL,
                                           spatial_network_name = 'spatial_network',
                                           hist_bins = 30,
                                           test_distance_limit =  NULL,
@@ -30,12 +32,19 @@ spatNetwDistributionsDistance <- function(gobject,
                                           default_save_name = 'spatNetwDistributionsDistance') {
 
 
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+
   # data.table variables
   distance = rank_int = status = label = keep = NULL
 
   ## spatial network
   #spatial_network = gobject@spatial_network[[spatial_network_name]]
-  spatial_network = get_spatialNetwork(gobject,name = spatial_network_name,return_network_Obj = FALSE)
+  spatial_network = get_spatialNetwork(gobject,
+                                       spat_unit = spat_unit,
+                                       name = spatial_network_name,
+                                       return_network_Obj = FALSE)
 
   ## convert to full network with rank_int column
   spatial_network = convert_to_full_spatial_network(spatial_network)
@@ -101,6 +110,7 @@ spatNetwDistributionsDistance <- function(gobject,
 #' @title spatNetwDistributionsKneighbors
 #' @description This function returns a histogram displaying the number of k-neighbors distribution for each cell
 #' @param gobject Giotto object
+#' @param spat_unit spatial unit
 #' @param spatial_network_name name of spatial network
 #' @param hist_bins number of binds to use for the histogram
 #' @param show_plot show plot
@@ -111,6 +121,7 @@ spatNetwDistributionsDistance <- function(gobject,
 #' @return ggplot plot
 #' @export
 spatNetwDistributionsKneighbors = function(gobject,
+                                           spat_unit = NULL,
                                            spatial_network_name = 'spatial_network',
                                            hist_bins = 30,
                                            show_plot = NA,
@@ -119,12 +130,19 @@ spatNetwDistributionsKneighbors = function(gobject,
                                            save_param =  list(),
                                            default_save_name = 'spatNetwDistributionsKneighbors') {
 
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+
   # data.table variables
   N = NULL
 
   ## spatial network
   #spatial_network = gobject@spatial_network[[spatial_network_name]]
-  spatial_network = get_spatialNetwork(gobject,name = spatial_network_name,return_network_Obj = FALSE)
+  spatial_network = get_spatialNetwork(gobject,
+                                       spat_unit = spat_unit,
+                                       name = spatial_network_name,
+                                       return_network_Obj = FALSE)
 
   ## convert to full network with rank_int column
   spatial_network = convert_to_full_spatial_network(spatial_network)
@@ -170,6 +188,7 @@ spatNetwDistributionsKneighbors = function(gobject,
 #' @name spatNetwDistributions
 #' @description This function return histograms displaying the distance distribution for each spatial k-neighbor
 #' @param gobject Giotto object
+#' @param spat_unit spatial unit
 #' @param spatial_network_name name of spatial network
 #' @param distribution show the distribution of cell-to-cell distance or number of k neighbors
 #' @param hist_bins number of binds to use for the histogram
@@ -187,6 +206,7 @@ spatNetwDistributionsKneighbors = function(gobject,
 #' @return ggplot plot
 #' @export
 spatNetwDistributions <- function(gobject,
+                                  spat_unit = NULL,
                                   spatial_network_name = 'spatial_network',
                                   distribution = c('distance', 'k_neighbors'),
                                   hist_bins = 30,
@@ -198,12 +218,20 @@ spatNetwDistributions <- function(gobject,
                                   save_param =  list(),
                                   default_save_name = 'spatNetwDistributions') {
 
+
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+
   ## histogram to show
-  distribution = match.arg(distribution, choices = distribution)
+  distribution = match.arg(distribution, choices = c('distance', 'k_neighbors'))
 
   ## spatial network
   #spatial_network = gobject@spatial_network[[spatial_network_name]]
-  spatial_network = get_spatialNetwork(gobject,name = spatial_network_name,return_network_Obj = FALSE)
+  spatial_network = get_spatialNetwork(gobject,
+                                       spat_unit = spat_unit,
+                                       name = spatial_network_name,
+                                       return_network_Obj = FALSE)
   if(is.null(spatial_network)) {
     stop('spatial network ', spatial_network_name, ' was not found')
   }
@@ -212,6 +240,7 @@ spatNetwDistributions <- function(gobject,
   if(distribution == 'distance') {
 
     spatNetwDistributionsDistance(gobject = gobject,
+                                  spat_unit = spat_unit,
                                   spatial_network_name = spatial_network_name,
                                   hist_bins = hist_bins,
                                   test_distance_limit =  test_distance_limit,
@@ -225,6 +254,7 @@ spatNetwDistributions <- function(gobject,
   } else if(distribution == 'k_neighbors') {
 
     spatNetwDistributionsKneighbors(gobject = gobject,
+                                    spat_unit = spat_unit,
                                     spatial_network_name = spatial_network_name,
                                     hist_bins = hist_bins,
                                     show_plot = show_plot,
@@ -504,10 +534,10 @@ compatible_spatial_network = function(spatial_network,
 #' @description Create a spatial Delaunay network.
 #' @keywords internal
 create_delaunayNetwork_geometry <- function(spatial_locations,
-                                               sdimx = 'sdimx',
-                                               sdimy = 'sdimy',
-                                               options = "Pp",
-                                               ...) {
+                                            sdimx = 'sdimx',
+                                            sdimy = 'sdimy',
+                                            options = "Pp",
+                                            ...) {
 
 
   # verify if optional package is installed
@@ -566,11 +596,11 @@ create_delaunayNetwork_geometry <- function(spatial_locations,
 #' @description Create a spatial 3D Delaunay network with geometry
 #' @keywords internal
 create_delaunayNetwork_geometry_3D <- function(spatial_locations,
-                                                  sdimx = 'sdimx',
-                                                  sdimy = 'sdimy',
-                                                  sdimz = 'sdimz',
-                                                  options = options,
-                                                  ...){
+                                               sdimx = 'sdimx',
+                                               sdimy = 'sdimy',
+                                               sdimz = 'sdimz',
+                                               options = options,
+                                               ...){
 
 
   # verify if optional package is installed
@@ -745,6 +775,7 @@ create_delaunayNetwork_deldir <- function(spatial_locations,
 #' @keywords internal
 create_delaunayNetwork2D <- function (gobject,
                                       method = c("delaunayn_geometry", "RTriangle", "deldir"),
+                                      spat_unit = NULL,
                                       spat_loc_name = 'raw',
                                       sdimx = 'sdimx',
                                       sdimy = 'sdimy',
@@ -764,8 +795,13 @@ create_delaunayNetwork2D <- function (gobject,
   # get parameter values
   method = match.arg(method, c("delaunayn_geometry", "RTriangle", "deldir"))
 
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+
   spatial_locations = get_spatial_locations(gobject,
-                                               spat_loc_name = spat_loc_name)
+                                            spat_unit = spat_unit,
+                                            spat_loc_name = spat_loc_name)
 
   spatial_locations = spatial_locations[, c('cell_ID', sdimx, sdimy), with = F]
 
@@ -853,19 +889,19 @@ create_delaunayNetwork2D <- function (gobject,
   ###
   ###
   delaunay_network_Obj = create_spatialNetworkObject(name = name,
-                                                              method = method,
-                                                              parameters = parameters,
-                                                              outputObj = outputObj,
-                                                              networkDT = delaunay_network_DT,
-                                                              networkDT_before_filter = networkDT_before_filter,
-                                                              cellShapeObj = cellShapeObj,
-                                                              misc = NULL)
+                                                     method = method,
+                                                     parameters = parameters,
+                                                     outputObj = outputObj,
+                                                     networkDT = delaunay_network_DT,
+                                                     networkDT_before_filter = networkDT_before_filter,
+                                                     cellShapeObj = cellShapeObj,
+                                                     misc = NULL)
   ###
   ###
 
   if (return_gobject == TRUE) {
 
-    spn_names = names(gobject@spatial_network)
+    spn_names = names(gobject@spatial_network[[spat_unit]])
     if (name %in% spn_names) {
       cat("\n ", name, " has already been used, will be overwritten \n")
     }
@@ -897,7 +933,7 @@ create_delaunayNetwork2D <- function (gobject,
     # gobject@spatial_network[[name]] = delaunay_network_DT
 
     ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
-    gobject@spatial_network[[name]] = delaunay_network_Obj
+    gobject@spatial_network[[spat_unit]][[name]] = delaunay_network_Obj
     ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
 
 
@@ -916,6 +952,7 @@ create_delaunayNetwork2D <- function (gobject,
 #' @keywords internal
 create_delaunayNetwork3D <- function (gobject,
                                       method = "delaunayn_geometry",
+                                      spat_unit = NULL,
                                       spat_loc_name = 'raw',
                                       sdimx = 'sdimx',
                                       sdimy = 'sdimy',
@@ -931,8 +968,13 @@ create_delaunayNetwork3D <- function (gobject,
   # get parameter values
   method = match.arg(method, c("delaunayn_geometry", "RTriangle", "deldir"))
 
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+
   spatial_locations =  get_spatial_locations(gobject = gobject,
-                                                spat_loc_name = spat_loc_name)
+                                             spat_unit = spat_unit,
+                                             spat_loc_name = spat_loc_name)
   spatial_locations = spatial_locations[, c('cell_ID', sdimx, sdimy, sdimz), with = F]
 
 
@@ -975,7 +1017,7 @@ create_delaunayNetwork3D <- function (gobject,
   )
 
   if (return_gobject == TRUE) {
-    spn_names = names(gobject@spatial_network)
+    spn_names = names(gobject@spatial_network[[spat_unit]])
     if (name %in% spn_names) {
       cat("\n ", name, " has already been used, will be overwritten \n")
     }
@@ -1004,7 +1046,7 @@ create_delaunayNetwork3D <- function (gobject,
                                                        misc = NULL)
     ###
     ###
-    gobject@spatial_network[[name]] = delaunay_network_Obj
+    gobject@spatial_network[[spat_unit]][[name]] = delaunay_network_Obj
     ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
 
 
@@ -1027,6 +1069,8 @@ create_delaunayNetwork3D <- function (gobject,
 #' @description Create a spatial Delaunay network based on cell centroid physical distances.
 #' @param gobject giotto object
 #' @param name name for spatial network (default = 'delaunay_network')
+#' @param feat_type feature type
+#' @param spat_unit spatial unit
 #' @param spat_loc_name name of spatial locations
 #' @param method package to use to create a Delaunay network
 #' @param spat_loc_name name of spatial locations
@@ -1045,6 +1089,8 @@ create_delaunayNetwork3D <- function (gobject,
 #' @export
 createSpatialDelaunayNetwork <- function(gobject,
                                          name = "Delaunay_network",
+                                         spat_unit = NULL,
+                                         feat_type = NULL,
                                          spat_loc_name = NULL,
                                          method = c("deldir", "delaunayn_geometry", "RTriangle"),
                                          dimensions = "all",
@@ -1059,12 +1105,20 @@ createSpatialDelaunayNetwork <- function(gobject,
                                          ...) {
 
 
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+  feat_type = set_default_feat_type(gobject = gobject,
+                                    spat_unit = spat_unit,
+                                    feat_type = feat_type)
+
   # get parameter values
   method = match.arg(method, c("deldir", "delaunayn_geometry", "RTriangle"))
 
   # determine the network dimesions
   spatial_locations = get_spatial_locations(gobject = gobject,
-                                               spat_loc_name = spat_loc_name)
+                                            spat_unit = spat_unit,
+                                            spat_loc_name = spat_loc_name)
   spatial_locations = spatial_locations[, grepl("sdim", colnames(spatial_locations)),  with = F]
 
   if (dimensions != "all") {
@@ -1080,8 +1134,9 @@ createSpatialDelaunayNetwork <- function(gobject,
     first_dimension = colnames(spatial_locations)[[1]]
     second_dimension = colnames(spatial_locations)[[2]]
 
-    out = create_delaunayNetwork2D(gobject=gobject,
+    out = create_delaunayNetwork2D(gobject = gobject,
                                    method = method,
+                                   spat_unit = spat_unit,
                                    spat_loc_name = spat_loc_name,
                                    sdimx = first_dimension,
                                    sdimy = second_dimension,
@@ -1105,8 +1160,9 @@ createSpatialDelaunayNetwork <- function(gobject,
       second_dimension = colnames(spatial_locations)[[2]]
       third_dimension = colnames(spatial_locations)[[3]]
 
-      out = create_delaunayNetwork3D(gobject=gobject,
+      out = create_delaunayNetwork3D(gobject = gobject,
                                      method = method,
+                                     spat_unit = spat_unit,
                                      spat_loc_name = spat_loc_name,
                                      sdimx = first_dimension,
                                      sdimy = second_dimension,
@@ -1131,6 +1187,8 @@ createSpatialDelaunayNetwork <- function(gobject,
 #' @name plotStatDelaunayNetwork
 #' @description Plots network statistics for a Delaunay network..
 #' @param gobject giotto object
+#' @param feat_type feature type
+#' @param spat_unit spatial unit
 #' @param method package to use to create a Delaunay network
 #' @param dimensions which spatial dimensions to use (maximum 2 dimensions)
 #' @param maximum_distance distance cuttof for Delaunay neighbors to consider
@@ -1148,6 +1206,8 @@ createSpatialDelaunayNetwork <- function(gobject,
 #' @return giotto object with updated spatial network slot
 #' @export
 plotStatDelaunayNetwork = function(gobject,
+                                   feat_type = NULL,
+                                   spat_unit = NULL,
                                    method = c("deldir", "delaunayn_geometry", "RTriangle"),
                                    dimensions = "all",
                                    maximum_distance = "auto", # all
@@ -1168,17 +1228,19 @@ plotStatDelaunayNetwork = function(gobject,
   distance = rank_int = N = NULL
 
   delaunay_network_DT = createSpatialDelaunayNetwork(gobject = gobject,
-                                                        method = method,
-                                                        dimensions = dimensions,
-                                                        name = 'temp_network',
-                                                        maximum_distance = maximum_distance, # all
-                                                        minimum_k = minimum_k, # all
-                                                        options = options, # geometry
-                                                        Y = Y, # RTriange
-                                                        j = j, # RTriange
-                                                        S = S, # RTriange
-                                                        return_gobject = F,
-                                                        ...)
+                                                     feat_type = feat_type,
+                                                     spat_unit = spat_unit,
+                                                     method = method,
+                                                     dimensions = dimensions,
+                                                     name = 'temp_network',
+                                                     maximum_distance = maximum_distance, # all
+                                                     minimum_k = minimum_k, # all
+                                                     options = options, # geometry
+                                                     Y = Y, # RTriange
+                                                     j = j, # RTriange
+                                                     S = S, # RTriange
+                                                     return_gobject = F,
+                                                     ...)
 
   delaunay_network_DT_c = convert_to_full_spatial_network(reduced_spatial_network_DT = delaunay_network_DT)
 
@@ -1355,8 +1417,11 @@ create_KNNnetwork_dbscan = function(spatial_locations,
 #' @name createSpatialKNNnetwork
 #' @description Create a spatial knn network.
 #' @param gobject giotto object
+#' @param feat_type feature type
+#' @param spat_unit spatial unit
 #' @param name name for spatial network (default = 'spatial_network')
 #' @param method method to create kNN network
+#' @param spat_unit spatial unit
 #' @param spat_loc_name name of spatial locations
 #' @param dimensions which spatial dimensions to use (default = all)
 #' @param k number of nearest neighbors based on physical distance
@@ -1377,6 +1442,8 @@ create_KNNnetwork_dbscan = function(spatial_locations,
 #' @export
 createSpatialKNNnetwork <- function (gobject,
                                      method = "dbscan",
+                                     spat_unit = NULL,
+                                     feat_type = NULL,
                                      spat_loc_name = NULL,
                                      dimensions = "all",
                                      name = "knn_network",
@@ -1389,13 +1456,21 @@ createSpatialKNNnetwork <- function (gobject,
 {
 
 
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+  feat_type = set_default_feat_type(gobject = gobject,
+                                    spat_unit = spat_unit,
+                                    feat_type = feat_type)
+
   # data.table variables
   distance = rank_int = NULL
 
   # get parameter values
   method = match.arg(method, c("dbscan"))
   spatial_locations = get_spatial_locations(gobject = gobject,
-                                               spat_loc_name = spat_loc_name)
+                                            spat_unit = spat_unit,
+                                            spat_loc_name = spat_loc_name)
 
   if (dimensions != "all") {
     temp_spatial_locations = spatial_locations[, dimensions, with = FALSE]
@@ -1457,17 +1532,19 @@ createSpatialKNNnetwork <- function (gobject,
                     "dimensions" = dimensions)
 
   spatial_network_Obj = create_spatialNetworkObject(name = name,
-                                                             method = method,
-                                                             parameters = parameters,
-                                                             outputObj = outputObj,
-                                                             networkDT = spatial_network_DT,
-                                                             misc = NULL)
+                                                    method = method,
+                                                    parameters = parameters,
+                                                    outputObj = outputObj,
+                                                    networkDT = spatial_network_DT,
+                                                    misc = NULL)
 
   ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
   ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
 
   if (return_gobject == TRUE) {
-    spn_names = names(gobject@spatial_network)
+
+    spn_names = names(gobject@spatial_network[[spat_unit]])
+
     if (name %in% spn_names) {
       cat("\n ", name, " has already been used, will be overwritten \n")
     }
@@ -1483,7 +1560,7 @@ createSpatialKNNnetwork <- function (gobject,
     #gobject@spatial_network[[name]] = spatial_network_DT
 
     ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
-    gobject@spatial_network[[name]] = spatial_network_Obj
+    gobject@spatial_network[[spat_unit]][[name]] = spatial_network_Obj
     ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
 
     return(gobject)
@@ -1508,6 +1585,8 @@ createSpatialKNNnetwork <- function (gobject,
 #' @description Create a spatial network based on cell centroid physical distances.
 #' @param gobject giotto object
 #' @param name name for spatial network (default = 'spatial_network')
+#' @param spat_unit spatial unit
+#' @param feat_type feature type
 #' @param spat_loc_name name of spatial locations to use
 #' @param dimensions which spatial dimensions to use (default = all)
 #' @param method which method to use to create a spatial network. (default = Delaunay)
@@ -1536,6 +1615,8 @@ createSpatialKNNnetwork <- function (gobject,
 #' @export
 createSpatialNetwork <- function(gobject,
                                  name = NULL,
+                                 spat_unit = NULL,
+                                 feat_type = NULL,
                                  spat_loc_name = NULL,
                                  dimensions = "all",
                                  method = c('Delaunay', 'kNN'),
@@ -1565,8 +1646,10 @@ createSpatialNetwork <- function(gobject,
     knn_method = match.arg(knn_method,c("dbscan"))
 
     out = createSpatialKNNnetwork(gobject = gobject,
-                                  spat_loc_name = spat_loc_name,
+                                  spat_unit = spat_unit,
+                                  feat_type = feat_type,
                                   method = knn_method,
+                                  spat_loc_name = spat_loc_name,
                                   dimensions = dimensions,
                                   k = k,
                                   maximum_distance = maximum_distance_knn,
@@ -1583,6 +1666,8 @@ createSpatialNetwork <- function(gobject,
       name = paste0(method,"_","network")
     }
     out = createSpatialDelaunayNetwork(gobject=gobject,
+                                       spat_unit = spat_unit,
+                                       feat_type = feat_type,
                                        spat_loc_name = spat_loc_name,
                                        method = delaunay_method,
                                        dimensions = dimensions,
@@ -1617,6 +1702,7 @@ createSpatialNetwork <- function(gobject,
 #' @export
 annotateSpatialNetwork = function(gobject,
                                   feat_type = NULL,
+                                  spat_unit = NULL,
                                   spatial_network_name = 'Delaunay_network',
                                   cluster_column,
                                   create_full_network = FALSE) {
@@ -1626,13 +1712,19 @@ annotateSpatialNetwork = function(gobject,
     feat_type = gobject@expression_feat[[1]]
   }
 
+  # set spatial unit
+  if(is.null(spat_unit)) {
+    spat_unit = names(gobject@expression[[feat_type]])[[1]]
+  }
+
   # get network
-  if(!spatial_network_name %in% names(gobject@spatial_network)) {
+  if(!spatial_network_name %in% names(gobject@spatial_network[[spat_unit]])) {
     stop('\n spatial network with name: ', spatial_network_name, ' does not exist \n')
   }
   spatial_network = get_spatialNetwork(gobject,
-                                          name = spatial_network_name,
-                                          return_network_Obj = FALSE)
+                                       spat_unit = spat_unit,
+                                       name = spatial_network_name,
+                                       return_network_Obj = FALSE)
 
 
 
@@ -1657,7 +1749,9 @@ annotateSpatialNetwork = function(gobject,
 
 
   # cell metadata
-  cell_metadata = pDataDT(gobject, feat_type = feat_type)
+  cell_metadata = pDataDT(gobject,
+                          feat_type = feat_type,
+                          spat_unit = spat_unit)
   if(!cluster_column %in% colnames(cell_metadata)) {
     stop('\n the cluster column does not exist in pDataDT(gobject) \n')
   }
@@ -1786,6 +1880,7 @@ create_spatialGridObject <- function(name = NULL,
 #' @description create a 2D spatial grid
 #' @keywords internal
 create_spatialGrid_default_2D <- function(gobject,
+                                          spat_unit = NULL,
                                           spat_loc_name = 'raw',
                                           sdimx_stepsize = NULL,
                                           sdimy_stepsize = NULL,
@@ -1795,8 +1890,12 @@ create_spatialGrid_default_2D <- function(gobject,
   # data.table variables
   gr_name = gr_x_name = gr_y_name = gr_x_loc = gr_y_loc = gr_loc = NULL
 
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+
   spatlocs = get_spatial_locations(gobject = gobject,
-                                      spat_loc_name = spat_loc_name)
+                                   spat_unit = spat_unit,
+                                   spat_loc_name = spat_loc_name)
 
   if(is.null(spatlocs)) stop('\n spatial locations are needed to create a spatial grid \n')
 
@@ -1862,6 +1961,7 @@ create_spatialGrid_default_2D <- function(gobject,
 #' @description create a 3D spatial grid
 #' @keywords internal
 create_spatialGrid_default_3D <- function(gobject,
+                                          spat_unit = NULL,
                                           spat_loc_name = 'raw',
                                           sdimx_stepsize = NULL,
                                           sdimy_stepsize = NULL,
@@ -1872,8 +1972,12 @@ create_spatialGrid_default_3D <- function(gobject,
   # data.table variables
   gr_name = gr_x_name = gr_y_name = gr_z_name = gr_x_loc = gr_y_loc = gr_z_loc = gr_loc = NULL
 
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+
   spatlocs = get_spatial_locations(gobject = gobject,
-                                      spat_loc_name = spat_loc_name)
+                                   spat_unit = spat_unit,
+                                   spat_loc_name = spat_loc_name)
 
   if(is.null(spatlocs)) stop('\n spatial locations are needed to create a spatial grid \n')
 
@@ -1956,6 +2060,8 @@ create_spatialGrid_default_3D <- function(gobject,
 #' @name createSpatialDefaultGrid
 #' @description Create a spatial grid using the default method
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
+#' @param spat_loc_name spatial location name
 #' @param sdimx_stepsize stepsize along the x-axis
 #' @param sdimy_stepsize stepsize along the y-axis
 #' @param sdimz_stepsize stepsize along the z-axis
@@ -1967,6 +2073,8 @@ create_spatialGrid_default_3D <- function(gobject,
 #' The dimension units are based on the provided spatial location units.
 #' @export
 createSpatialDefaultGrid <- function(gobject,
+                                     spat_unit = NULL,
+                                     spat_loc_name = 'raw',
                                      sdimx_stepsize = NULL,
                                      sdimy_stepsize = NULL,
                                      sdimz_stepsize = NULL,
@@ -1982,6 +2090,8 @@ createSpatialDefaultGrid <- function(gobject,
   if(length(c(sdimx_stepsize, sdimy_stepsize, sdimz_stepsize)) == 3) {
 
     resultgrid = create_spatialGrid_default_3D(gobject = gobject,
+                                               spat_unit = spat_unit,
+                                               spat_loc_name = spat_loc_name,
                                                sdimx_stepsize = sdimx_stepsize,
                                                sdimy_stepsize = sdimy_stepsize,
                                                sdimz_stepsize = sdimz_stepsize,
@@ -1990,6 +2100,8 @@ createSpatialDefaultGrid <- function(gobject,
   } else if(!is.null(sdimx_stepsize) & !is.null(sdimy_stepsize)) {
 
     resultgrid = create_spatialGrid_default_2D(gobject = gobject,
+                                               spat_unit = spat_unit,
+                                               spat_loc_name = spat_loc_name,
                                                sdimx_stepsize = sdimx_stepsize,
                                                sdimy_stepsize = sdimy_stepsize,
                                                minimum_padding = minimum_padding)
@@ -2003,7 +2115,7 @@ createSpatialDefaultGrid <- function(gobject,
   if(return_gobject == TRUE) {
 
     # 1. check if name has already been used
-    spg_names = names(gobject@spatial_grid)
+    spg_names = names(gobject@spatial_grid[[spat_unit]])
 
     if(name %in% spg_names) {
       cat('\n ', name, ' has already been used, will be overwritten \n')
@@ -2023,7 +2135,7 @@ createSpatialDefaultGrid <- function(gobject,
                                            misc = NULL)
 
     # 3. assign spatial grid object
-    gobject@spatial_grid[[name]] <- spatgridobj
+    gobject@spatial_grid[[spat_unit]][[name]] = spatgridobj
 
 
     # 4. update log
@@ -2060,6 +2172,8 @@ createSpatialDefaultGrid <- function(gobject,
 #' @name createSpatialGrid
 #' @description Create a spatial grid using the default method
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
+#' @param spat_loc_name spatial location name
 #' @param name name for spatial grid
 #' @param method method to create a spatial grid
 #' @param sdimx_stepsize stepsize along the x-axis
@@ -2075,6 +2189,8 @@ createSpatialDefaultGrid <- function(gobject,
 #' }
 #' @export
 createSpatialGrid <- function(gobject,
+                              spat_unit = NULL,
+                              spat_loc_name = 'raw',
                               name = NULL,
                               method = c('default'),
                               sdimx_stepsize = NULL,
@@ -2089,6 +2205,8 @@ createSpatialGrid <- function(gobject,
   if(method == 'default') {
 
     out = createSpatialDefaultGrid(gobject = gobject,
+                                   spat_unit = spat_unit,
+                                   spat_loc_name = spat_loc_name,
                                    sdimx_stepsize = sdimx_stepsize,
                                    sdimy_stepsize = sdimy_stepsize,
                                    sdimz_stepsize = sdimz_stepsize,
@@ -2209,12 +2327,14 @@ annotate_spatlocs_with_spatgrid_3D = function(spatloc,
 #' @name annotateSpatialGrid
 #' @description annotate spatial grid with cell ID and cell metadata (optional)
 #' @param gobject Giotto object
+#' @param spat_unit spatial unit
 #' @param spat_loc_name name of spatial locations
 #' @param spatial_grid_name name of spatial grid, see \code{\link{showGrids}}
 #' @param cluster_columns names of cell metadata, see \code{\link{pDataDT}}
 #' @return annotated spatial grid data.table
 #' @export
 annotateSpatialGrid = function(gobject,
+                               spat_unit = NULL,
                                spat_loc_name = 'raw',
                                spatial_grid_name = 'spatial_grid',
                                cluster_columns = NULL) {
@@ -2222,9 +2342,11 @@ annotateSpatialGrid = function(gobject,
 
   # get grid
   spatial_grid = get_spatialGrid(gobject = gobject,
-                                    name = spatial_grid_name)
+                                 spat_unit = spat_unit,
+                                 name = spatial_grid_name)
   spatial_locs = get_spatial_locations(gobject = gobject,
-                                          spat_loc_name = spat_loc_name)
+                                       spat_unit = spat_unit,
+                                       spat_loc_name = spat_loc_name)
 
   # 1. annotate spatial grid with spatial locations
   if(all(c('sdimx', 'sdimy', 'sdimz') %in% colnames(spatial_locs))) {
@@ -2234,7 +2356,9 @@ annotateSpatialGrid = function(gobject,
   }
 
   # 2.select metadata
-  cell_metadata = pDataDT(gobject)
+  cell_metadata = pDataDT(gobject,
+                          spat_unit = spat_unit,
+                          feat_type = NULL)
 
   if(!is.null(cluster_columns)) {
 

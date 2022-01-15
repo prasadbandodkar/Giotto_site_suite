@@ -6,10 +6,12 @@
 \usage{
 spatFeatPlot2D_single(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   show_image = F,
   gimage = NULL,
-  image_name = "image",
+  image_name = NULL,
+  largeImage_name = NULL,
   spat_loc_name = NULL,
   sdimx = "sdimx",
   sdimy = "sdimy",
@@ -54,6 +56,8 @@ spatFeatPlot2D_single(
 \arguments{
 \item{gobject}{giotto object}
 
+\item{spat_unit}{spatial unit}
+
 \item{feat_type}{feature type}
 
 \item{show_image}{show a tissue background image}
@@ -61,6 +65,10 @@ spatFeatPlot2D_single(
 \item{gimage}{a giotto image}
 
 \item{image_name}{name of a giotto image}
+
+\item{largeImage_name}{name of a giottoLargeImage}
+
+\item{spat_loc_name}{name of spatial locations}
 
 \item{sdimx}{x-axis dimension name (default = 'sdimx')}
 
@@ -112,7 +120,7 @@ spatFeatPlot2D_single(
 
 \item{vor_border_color}{border colorr for voronoi plot}
 
-\item{vor_alpha}{transparancy of voronoi 'cells'}
+\item{vor_alpha}{transparency of voronoi 'cells'}
 
 \item{vor_max_radius}{maximum radius for voronoi 'cells'}
 

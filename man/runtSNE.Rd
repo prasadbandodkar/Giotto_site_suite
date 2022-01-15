@@ -6,6 +6,7 @@
 \usage{
 runtSNE(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   expression_values = c("normalized", "scaled", "custom"),
   reduction = c("cells", "feats"),
@@ -28,6 +29,8 @@ runtSNE(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type}
 

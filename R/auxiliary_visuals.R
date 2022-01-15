@@ -436,6 +436,7 @@ showSaveParameters = function() {
 #' @name showClusterHeatmap
 #' @description Creates heatmap based on identified clusters
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
 #' @param feat_type feature type
 #' @param expression_values expression values to use
 #' @param genes vector of genes to use, default to 'all'
@@ -452,6 +453,7 @@ showSaveParameters = function() {
 #' @details Correlation heatmap of selected clusters.
 #' @export
 showClusterHeatmap <- function(gobject,
+                               spat_unit = NULL,
                                feat_type = NULL,
                                expression_values = c('normalized', 'scaled', 'custom'),
                                feats = 'all',
@@ -474,10 +476,13 @@ showClusterHeatmap <- function(gobject,
   }
 
 
-  # specify feat_type
-  if(is.null(feat_type)) {
-    feat_type = gobject@expression_feat[[1]]
-  }
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+  feat_type = set_default_feat_type(gobject = gobject,
+                                    spat_unit = spat_unit,
+                                    feat_type = feat_type)
+
 
   ## correlation
   cor = match.arg(cor, c('pearson', 'spearman'))
@@ -493,6 +498,7 @@ showClusterHeatmap <- function(gobject,
   }
 
   metatable = calculateMetaTable(gobject = gobject,
+                                 spat_unit = spat_unit,
                                  feat_type = feat_type,
                                  expression_values = values,
                                  metadata_cols = cluster_column,
@@ -538,6 +544,7 @@ showClusterHeatmap <- function(gobject,
 #' @name showClusterDendrogram
 #' @description Creates dendrogram for selected clusters.
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
 #' @param feat_type feature type
 #' @param expression_values expression values to use
 #' @param cluster_column name of column to use for clusters
@@ -556,6 +563,7 @@ showClusterHeatmap <- function(gobject,
 #' @details Expression correlation dendrogram for selected clusters.
 #' @export
 showClusterDendrogram <- function(gobject,
+                                  spat_unit = NULL,
                                   feat_type = NULL,
                                   expression_values = c('normalized', 'scaled', 'custom'),
                                   cluster_column,
@@ -578,12 +586,15 @@ showClusterDendrogram <- function(gobject,
   cor = match.arg(cor, c('pearson', 'spearman'))
   values = match.arg(expression_values, unique(c('normalized', 'scaled', 'custom', expression_values)))
 
-  # specify feat_type
-  if(is.null(feat_type)) {
-    feat_type = gobject@expression_feat[[1]]
-  }
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+  feat_type = set_default_feat_type(gobject = gobject,
+                                    spat_unit = spat_unit,
+                                    feat_type = feat_type)
 
   metatable = calculateMetaTable(gobject = gobject,
+                                 spat_unit = spat_unit,
                                  feat_type = feat_type,
                                  expression_values = values,
                                  metadata_cols = cluster_column)
@@ -632,6 +643,7 @@ showClusterDendrogram <- function(gobject,
 #' @name decide_cluster_order
 #' @description creates order for clusters
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
 #' @param feat_type feature type
 #' @param expression_values expression values to use
 #' @param feats features to use (e.g. genes)
@@ -645,6 +657,7 @@ showClusterDendrogram <- function(gobject,
 #' @details Calculates order for clusters.
 #' @keywords internal
 decide_cluster_order = function(gobject,
+                                spat_unit = NULL,
                                 feat_type = NULL,
                                 expression_values = c('normalized', 'scaled', 'custom'),
                                 feats,
@@ -660,23 +673,28 @@ decide_cluster_order = function(gobject,
     feats = genes
   }
 
-  # specify feat_type
-  if(is.null(feat_type)) {
-    feat_type = gobject@expression_feat[[1]]
-  }
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+  feat_type = set_default_feat_type(gobject = gobject,
+                                    spat_unit = spat_unit,
+                                    feat_type = feat_type)
 
   # epxression data
   values = match.arg(expression_values, unique(c('normalized', 'scaled', 'custom', expression_values)))
   expr_values = get_expression_values(gobject = gobject,
-                                         feat_type = feat_type,
-                                         values = values)
+                                      spat_unit = spat_unit,
+                                      feat_type = feat_type,
+                                      values = values)
 
   # subset expression data
   detected_feats = feats[feats %in% rownames(expr_values)]
   subset_values = expr_values[rownames(expr_values) %in% detected_feats, ]
 
   # metadata
-  cell_metadata = pDataDT(gobject, feat_type = feat_type)
+  cell_metadata = pDataDT(gobject,
+                          spat_unit = spat_unit,
+                          feat_type = feat_type)
 
   ## check parameters
   if(is.null(cluster_column)) stop('\n cluster column must be selected \n')
@@ -695,6 +713,7 @@ decide_cluster_order = function(gobject,
   } else if(cluster_order == 'correlation') {
     ## sorts clusters based on their correlation
     subset_matrix = create_cluster_matrix(gobject = gobject,
+                                          spat_unit = spat_unit,
                                           feat_type = feat_type,
                                           cluster_column = cluster_column,
                                           feat_subset = detected_feats,
@@ -724,6 +743,7 @@ decide_cluster_order = function(gobject,
 #' @name createHeatmap_DT
 #' @description creates order for clusters
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
 #' @param feat_type feature type
 #' @param expression_values expression values to use
 #' @param feats features to use
@@ -745,6 +765,7 @@ decide_cluster_order = function(gobject,
 #' @details Creates input data.tables for plotHeatmap function.
 #' @keywords internal
 createHeatmap_DT <- function(gobject,
+                             spat_unit = NULL,
                              feat_type = NULL,
                              expression_values = c('normalized', 'scaled', 'custom'),
                              feats,
@@ -787,23 +808,29 @@ createHeatmap_DT <- function(gobject,
   }
 
 
-  # specify feat_type
-  if(is.null(feat_type)) {
-    feat_type = gobject@expression_feat[[1]]
-  }
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+  feat_type = set_default_feat_type(gobject = gobject,
+                                    spat_unit = spat_unit,
+                                    feat_type = feat_type)
+
 
   # epxression data
   values = match.arg(expression_values, unique(c('normalized', 'scaled', 'custom', expression_values)))
   expr_values = get_expression_values(gobject = gobject,
-                                         feat_type = feat_type,
-                                         values = values)
+                                      spat_unit = spat_unit,
+                                      feat_type = feat_type,
+                                      values = values)
 
   # subset expression data
   detected_feats = feats[feats %in% rownames(expr_values)]
   subset_values = expr_values[rownames(expr_values) %in% detected_feats, ]
 
   # metadata
-  cell_metadata = pDataDT(gobject, feat_type = feat_type)
+  cell_metadata = pDataDT(gobject,
+                          spat_unit = spat_unit,
+                          feat_type = feat_type)
 
   # feat order
   feat_order = match.arg(feat_order, c('correlation', 'custom'))
@@ -811,6 +838,7 @@ createHeatmap_DT <- function(gobject,
 
   ### cluster order ###
   clus_sort_names = decide_cluster_order(gobject = gobject,
+                                         spat_unit = spat_unit,
                                          feat_type = feat_type,
                                          expression_values = expression_values,
                                          feats = feats,
@@ -884,6 +912,7 @@ createHeatmap_DT <- function(gobject,
 #' @name plotHeatmap
 #' @description Creates heatmap for genes and clusters.
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
 #' @param feat_type feature type
 #' @param expression_values expression values to use
 #' @param feats features to use
@@ -922,6 +951,7 @@ createHeatmap_DT <- function(gobject,
 #' }
 #' @export
 plotHeatmap <- function(gobject,
+                        spat_unit = NULL,
                         feat_type = NULL,
                         expression_values = c('normalized', 'scaled', 'custom'),
                         feats,
@@ -957,6 +987,8 @@ plotHeatmap <- function(gobject,
 
 
   heatmap_data = createHeatmap_DT(gobject = gobject,
+                                  spat_unit = spat_unit,
+                                  feat_type = feat_type,
                                   expression_values = expression_values,
                                   feats = feats,
                                   genes = genes,
@@ -1146,6 +1178,7 @@ plotHeatmap <- function(gobject,
 #' @name plotMetaDataHeatmap
 #' @description Creates heatmap for genes within aggregated clusters.
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
 #' @param feat_type feature type
 #' @param expression_values expression values to use
 #' @param metadata_cols annotation columns found in pDataDT(gobject)
@@ -1178,6 +1211,7 @@ plotHeatmap <- function(gobject,
 #' @seealso \code{\link{plotMetaDataCellsHeatmap}} for numeric cell annotation instead of gene expression.
 #' @export
 plotMetaDataHeatmap = function(gobject,
+                               spat_unit = NULL,
                                feat_type = NULL,
                                expression_values =  c("normalized", "scaled", "custom"),
                                metadata_cols = NULL,
@@ -1227,13 +1261,15 @@ plotMetaDataHeatmap = function(gobject,
     warning('gene_cluster_method is deprecated, use feat_cluster_method in the future \n')
   }
 
-
-  # specify feat_type
-  if(is.null(feat_type)) {
-    feat_type = gobject@expression_feat[[1]]
-  }
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+  feat_type = set_default_feat_type(gobject = gobject,
+                                    spat_unit = spat_unit,
+                                    feat_type = feat_type)
 
   metaDT = calculateMetaTable(gobject = gobject,
+                              spat_unit = spat_unit,
                               feat_type = feat_type,
                               expression_values = expression_values,
                               metadata_cols = metadata_cols,
@@ -1428,6 +1464,8 @@ plotMetaDataHeatmap = function(gobject,
 #' @name plotMetaDataCellsHeatmap
 #' @description Creates heatmap for numeric cell metadata within aggregated clusters.
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
+#' @param feat_type feature type
 #' @param metadata_cols annotation columns found in pDataDT(gobject)
 #' @param spat_enr_names spatial enrichment results to include
 #' @param value_cols value columns to use
@@ -1455,6 +1493,8 @@ plotMetaDataHeatmap = function(gobject,
 #' @seealso \code{\link{plotMetaDataHeatmap}} for gene expression instead of numeric cell annotation data.
 #' @export
 plotMetaDataCellsHeatmap = function(gobject,
+                                    spat_unit = NULL,
+                                    feat_type = NULL,
                                     metadata_cols = NULL,
                                     spat_enr_names = NULL,
                                     value_cols = NULL,
@@ -1480,6 +1520,8 @@ plotMetaDataCellsHeatmap = function(gobject,
 
 
   metaDT = calculateMetaTableCells(gobject = gobject,
+                                   spat_unit = spat_unit,
+                                   feat_type = feat_type,
                                    value_cols = value_cols,
                                    metadata_cols = metadata_cols,
                                    spat_enr_names = spat_enr_names)
@@ -1647,6 +1689,7 @@ plotMetaDataCellsHeatmap = function(gobject,
 #' @name violinPlot
 #' @description Creates violinplot for selected clusters
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
 #' @param feat_type feature type
 #' @param expression_values expression values to use
 #' @param feats features to plot
@@ -1668,6 +1711,7 @@ plotMetaDataCellsHeatmap = function(gobject,
 #' @return ggplot
 #' @export
 violinPlot <- function(gobject,
+                       spat_unit = NULL,
                        feat_type = NULL,
                        expression_values = c('normalized', 'scaled', 'custom'),
                        feats = NULL,
@@ -1693,10 +1737,12 @@ violinPlot <- function(gobject,
     warning('genes is deprecated, use feats in the future \n')
   }
 
-  # specify feat_type
-  if(is.null(feat_type)) {
-    feat_type = gobject@expression_feat[[1]]
-  }
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+  feat_type = set_default_feat_type(gobject = gobject,
+                                    spat_unit = spat_unit,
+                                    feat_type = feat_type)
 
   ## strip position
   strip_position = match.arg(strip_position, c('top', 'right', 'left', 'bottom'))
@@ -1707,8 +1753,9 @@ violinPlot <- function(gobject,
   ## expression data ##
   values = match.arg(expression_values, unique(c('normalized', 'scaled', 'custom', expression_values)))
   expr_data = get_expression_values(gobject = gobject,
-                                       feat_type = feat_type,
-                                       values = values)
+                                    feat_type = feat_type,
+                                    spat_unit = spat_unit,
+                                    values = values)
 
   # only keep feats that are in the dataset
   selected_feats = feats[feats %in% rownames(expr_data)]
@@ -1733,7 +1780,8 @@ violinPlot <- function(gobject,
 
   # metadata
   metadata = pDataDT(gobject,
-                     feat_type = feat_type)
+                     feat_type = feat_type,
+                     spat_unit = spat_unit)
 
   if(length(feats) == 1) {
     metadata_expr <- cbind(metadata,  t_subset_data)

@@ -11,10 +11,12 @@ spatPlot(...)
   Arguments passed on to \code{\link[=spatPlot2D]{spatPlot2D}}
   \describe{
     \item{\code{gobject}}{giotto object}
+    \item{\code{spat_unit}}{spatial unit}
     \item{\code{feat_type}}{feature type}
     \item{\code{show_image}}{show a tissue background image}
     \item{\code{gimage}}{a giotto image}
     \item{\code{image_name}}{name of a giotto image or multiple images with group_by}
+    \item{\code{largeImage_name}}{name of a giottoLargeImage or multiple images with group_by}
     \item{\code{group_by}}{create multiple plots based on cell annotation column}
     \item{\code{group_by_subset}}{subset the group_by factor column}
     \item{\code{spat_loc_name}}{name of spatial locations}
@@ -52,7 +54,7 @@ spatPlot(...)
     \item{\code{other_cell_color}}{color of not selected cells}
     \item{\code{other_point_size}}{point size of not selected cells}
     \item{\code{other_cells_alpha}}{alpha of not selected cells}
-    \item{\code{coord_fix_ratio}}{fix ratio between x and y-axis}
+    \item{\code{coord_fix_ratio}}{fix ratio between x and y-axis (default = 1)}
     \item{\code{title}}{title of plot}
     \item{\code{show_legend}}{show legend}
     \item{\code{legend_text}}{size of legend text}

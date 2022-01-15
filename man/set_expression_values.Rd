@@ -4,10 +4,18 @@
 \alias{set_expression_values}
 \title{set_expression_values}
 \usage{
-set_expression_values(gobject, feat_type = NULL, name = "test", values)
+set_expression_values(
+  gobject,
+  spat_unit = NULL,
+  feat_type = NULL,
+  name = "test",
+  values
+)
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type}
 

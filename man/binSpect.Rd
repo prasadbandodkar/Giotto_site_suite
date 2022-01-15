@@ -6,6 +6,7 @@
 \usage{
 binSpect(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   bin_method = c("kmeans", "rank"),
   expression_values = c("normalized", "scaled", "custom"),
@@ -39,6 +40,8 @@ binSpect(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type}
 

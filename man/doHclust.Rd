@@ -6,6 +6,8 @@
 \usage{
 doHclust(
   gobject,
+  spat_unit = NULL,
+  feat_type = NULL,
   expression_values = c("normalized", "scaled", "custom"),
   genes_to_use = NULL,
   dim_reduction_to_use = c("cells", "pca", "umap", "tsne"),
@@ -25,6 +27,10 @@ doHclust(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
+
+\item{feat_type}{feature type}
 
 \item{expression_values}{expression values to use}
 

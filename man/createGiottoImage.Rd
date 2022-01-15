@@ -6,29 +6,47 @@
 \usage{
 createGiottoImage(
   gobject = NULL,
+  spat_unit = NULL,
   spatial_locs = NULL,
   spat_loc_name = NULL,
   mg_object,
   name = "image",
   image_transformations = NULL,
+  negative_y = TRUE,
   do_manual_adj = FALSE,
   xmax_adj = 0,
   xmin_adj = 0,
   ymax_adj = 0,
   ymin_adj = 0,
-  scale_factor = 1
+  scale_factor = 1,
+  x_shift = NULL,
+  y_shift = NULL,
+  scale_x = NULL,
+  scale_y = NULL,
+  order = c("first_scale", "first_adj"),
+  xmin_set = NULL,
+  xmax_set = NULL,
+  ymin_set = NULL,
+  ymax_set = NULL,
+  verbose = TRUE
 )
 }
 \arguments{
 \item{gobject}{giotto object}
 
-\item{spatial_locs}{spatial locations (alternative if giobject = NULL)}
+\item{spat_unit}{spatial unit}
+
+\item{spatial_locs}{spatial locations (alternative if gobject = NULL)}
+
+\item{spat_loc_name}{name of spatial locations within gobject}
 
 \item{mg_object}{magick image object}
 
 \item{name}{name for the image}
 
 \item{image_transformations}{vector of sequential image transformations}
+
+\item{negative_y}{Map image to negative y spatial values if TRUE during automatic alignment. Meaning that origin is in upper left instead of lower left.}
 
 \item{do_manual_adj}{flag to use manual adj values instead of automatic alignment when given a gobject or spatlocs}
 
@@ -41,6 +59,24 @@ createGiottoImage(
 \item{ymin_adj}{adjustment of the minimum y-value to align the image}
 
 \item{scale_factor}{scaling of image dimensions relative to spatial coordinates}
+
+\item{x_shift}{shift image in positive y direction}
+
+\item{scale_x}{independently scale image in x direction}
+
+\item{scale_y}{independently scale image in y direction}
+
+\item{order}{perform scaling or adjustments and shifts first}
+
+\item{xmin_set}{values to override image minmax spatial anchors when doing adjustments}
+
+\item{xmax_set}{values to override image minmax spatial anchors when doing adjustments}
+
+\item{ymin_set}{values to override image minmax spatial anchors when doing adjustments}
+
+\item{ymax_set}{values to override image minmax spatial anchors when doing adjustments}
+
+\item{verbose}{be verbose}
 }
 \value{
 a giottoImage object

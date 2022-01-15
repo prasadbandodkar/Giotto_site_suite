@@ -6,6 +6,7 @@
 \usage{
 make_simulated_network(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   spatial_network_name = "Delaunay_network",
   cluster_column,

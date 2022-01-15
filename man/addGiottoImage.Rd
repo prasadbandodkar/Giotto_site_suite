@@ -4,20 +4,31 @@
 \alias{addGiottoImage}
 \title{addGiottoImage}
 \usage{
-addGiottoImage(gobject, images, spat_loc_name = "raw", scale_factor = 1)
+addGiottoImage(
+  gobject = NULL,
+  images = NULL,
+  largeImages = NULL,
+  spat_loc_name = NULL,
+  scale_factor = NULL,
+  negative_y = TRUE
+)
 }
 \arguments{
-\item{gobject}{giotto object}
+\item{gobject}{gobject to add images objects to}
 
-\item{images}{list of giotto image objects, see \code{\link{createGiottoImage}}}
+\item{images}{list of giottoImages to add}
 
-\item{spat_loc_name}{provide spatial location slot in Giotto to align images. Defaults to 'raw'}
+\item{largeImages}{list of giottoLargeImages to add}
 
-\item{scale_factor}{provide scale of image pixel dimensions relative to spatial coordinates. Defaults to 1:1}
+\item{spat_loc_name}{provide spatial location slot in Giotto to align giottoImages. Defaults to first one}
+
+\item{scale_factor}{provide scale of image pixel dimensions relative to spatial coordinates.}
+
+\item{negative_y}{Map image to negative y spatial values if TRUE during automatic alignment. Meaning that origin is in upper left instead of lower left.}
 }
 \value{
 an updated Giotto object with access to the list of images
 }
 \description{
-Adds giotto image objects to your giotto object
+Adds lists of giottoImages and giottoLargeImages to gobjects
 }

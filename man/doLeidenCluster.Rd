@@ -6,6 +6,7 @@
 \usage{
 doLeidenCluster(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   name = "leiden_clus",
   nn_network_to_use = "sNN",
@@ -23,6 +24,8 @@ doLeidenCluster(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type}
 

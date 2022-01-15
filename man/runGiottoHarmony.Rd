@@ -6,6 +6,7 @@
 \usage{
 runGiottoHarmony(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   vars_use = "list_ID",
   do_pca = FALSE,
@@ -22,6 +23,8 @@ runGiottoHarmony(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type}
 

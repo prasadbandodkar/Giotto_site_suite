@@ -6,6 +6,8 @@
 \usage{
 set_NearestNetwork(
   gobject,
+  spat_unit = NULL,
+  feat_type = NULL,
   nn_network_to_use = "sNN",
   network_name = "sNN.pca",
   nn_network
@@ -13,6 +15,10 @@ set_NearestNetwork(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
+
+\item{feat_type}{feature type}
 
 \item{nn_network_to_use}{kNN or sNN}
 

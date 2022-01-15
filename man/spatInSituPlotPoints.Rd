@@ -6,6 +6,11 @@
 \usage{
 spatInSituPlotPoints(
   gobject,
+  show_image = F,
+  gimage = NULL,
+  image_name = "image",
+  spat_unit = NULL,
+  spat_loc_name = NULL,
   feats = NULL,
   feat_type = "rna",
   feats_color_code = NULL,
@@ -28,6 +33,7 @@ spatInSituPlotPoints(
   axis_text = 8,
   axis_title = 8,
   legend_text = 6,
+  coord_fix_ratio = NULL,
   background_color = "black",
   show_legend = TRUE,
   plot_method = c("ggplot", "scattermore", "scattermost"),
@@ -40,6 +46,16 @@ spatInSituPlotPoints(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{show_image}{show a tissue background image}
+
+\item{gimage}{a giotto image}
+
+\item{image_name}{name of a giotto image}
+
+\item{spat_unit}{spatial unit}
+
+\item{spat_loc_name}{name of spatial locations}
 
 \item{feats}{features to plot}
 
@@ -55,7 +71,7 @@ spatInSituPlotPoints(
 
 \item{point_size}{size of the points}
 
-\item{show_polygon}{overlay polygon information (cell shape)}
+\item{show_polygon}{overlay polygon information (e.g. cell shape)}
 
 \item{use_overlap}{use polygon and feature coordinates overlap results}
 
@@ -80,6 +96,8 @@ spatInSituPlotPoints(
 \item{axis_title}{title text size}
 
 \item{legend_text}{legend text size}
+
+\item{coord_fix_ratio}{fix ratio of coordinates}
 
 \item{background_color}{background color}
 

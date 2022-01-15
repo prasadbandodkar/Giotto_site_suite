@@ -6,6 +6,7 @@
 \usage{
 adjustGiottoMatrix(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   expression_values = c("normalized", "scaled", "custom"),
   batch_columns = NULL,
@@ -16,6 +17,8 @@ adjustGiottoMatrix(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type}
 
