@@ -1,23 +1,14 @@
 
 # Giotto Suite
 
-##### latest update:
-
-    ## [1] "2021-10-04"
+<!-- badges: start -->
+<!-- badges: end -->
 
 ## Multi-level Spatial Biology Exploration
 
 **under construction:** Giotto Suite is the new and updated version of
 Giotto.
-
-<img src="./inst/images/general_figs/Giotto_to_suite.png" style="width:80.0%" />
-
-<br>
-
-## Summary:
-
-<!-- badges: start -->
-<!-- badges: end -->
+<img src="./inst/images/general_figs/Giotto_to_suite.png" style="width:40.0%" />
 
 **Giotto Suite** is a suite of software tools, including data structures
 and methods, for the comprehensive analysis and visualization of spatial
@@ -56,3 +47,7 @@ section](https://giottosuite.com/articles/overview/giotto_input.html).
 -   [Dries, R., Chen, J., Rossi, N. del, Khan, M.M., Sistig, A., Yuan,
     G.-C., 2021. Advances in spatial transcriptomic data analysis.
     Genome Res. 31, 1706–1718](https://doi.org/10.1101/gr.275224.121)
+
+#### latest update:
+
+    ## [1] "2022-01-15"

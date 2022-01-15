@@ -5,29 +5,17 @@ output: github_document
 
 # Giotto Suite
 
-##### latest update: 
-
-```{r echo=F}
-Sys.Date()
-```
-
-
-## Multi-level Spatial Biology Exploration
-
-**under construction:** Giotto Suite is the new and updated version of Giotto. 
-
-
-![](./inst/images/general_figs/Giotto_to_suite.png){width=80%}
-
-
-<br> 
-
-## Summary:
-
 <!-- badges: start -->
 <!-- badges: end -->
 
-**Giotto Suite** is a suite of software tools, including data structures and methods, for the comprehensive analysis and visualization of spatial expression data. It was developed to extend and improve our previous R package Giotto. This will ensure that our spatial analysis solutions remain compatible with all current and future developed spatial technologies and platforms. It will also aid in the further integration with other external analysis pipelines and tools.
+## Multi-level Spatial Biology Exploration
+
+**under construction:** Giotto Suite is the new and updated version of Giotto. ![](./inst/images/general_figs/Giotto_to_suite.png){width=40%}
+
+
+
+
+ **Giotto Suite** is a suite of software tools, including data structures and methods, for the comprehensive analysis and visualization of spatial expression data. It was developed to extend and improve our previous R package Giotto. This will ensure that our spatial analysis solutions remain compatible with all current and future developed spatial technologies and platforms. It will also aid in the further integration  with other external analysis pipelines and tools.
 
 See [NEWS](https://giottosuite.com/articles/giotto_news.html#giotto-suite-2-0-0-xxx-1) for more details.
     
@@ -58,5 +46,9 @@ More technical information can be found in the [detailed workflow section](https
 - [Dries, R., Chen, J., Rossi, N. del, Khan, M.M., Sistig, A., Yuan, G.-C., 2021. Advances in spatial transcriptomic data analysis. Genome Res. 31, 1706–1718](https://doi.org/10.1101/gr.275224.121)
 
 
+#### latest update: 
 
+```{r echo=F}
+Sys.Date()
+```
 

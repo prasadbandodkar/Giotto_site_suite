@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
@@ -202,6 +202,8 @@
 
     <pre class="usage"><span class='fu'>set_dimReduction</span><span class='op'>(</span>
   <span class='va'>gobject</span>,
+  spat_unit <span class='op'>=</span> <span class='cn'>NULL</span>,
+  feat_type <span class='op'>=</span> <span class='cn'>NULL</span>,
   reduction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cells"</span>, <span class='st'>"genes"</span><span class='op'>)</span>,
   reduction_method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pca"</span>, <span class='st'>"umap"</span>, <span class='st'>"tsne"</span><span class='op'>)</span>,
   name <span class='op'>=</span> <span class='st'>"pca"</span>,
@@ -216,20 +218,28 @@
       <td><p>giotto object</p></td>
     </tr>
     <tr>
+      <th>spat_unit</th>
+      <td><p>spatial unit</p></td>
+    </tr>
+    <tr>
+      <th>feat_type</th>
+      <td><p>feature type</p></td>
+    </tr>
+    <tr>
       <th>reduction</th>
-      <td><p>reduction with cells or genes</p></td>
+      <td><p>reduction on cells or features</p></td>
     </tr>
     <tr>
       <th>reduction_method</th>
-      <td><p>reduction name</p></td>
+      <td><p>reduction method (e.g. pca)</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>reduction name</p></td>
+      <td><p>name of reduction results</p></td>
     </tr>
     <tr>
       <th>dimObject</th>
-      <td><p>dimension object</p></td>
+      <td><p>dimension object result to set</p></td>
     </tr>
     </table>
 

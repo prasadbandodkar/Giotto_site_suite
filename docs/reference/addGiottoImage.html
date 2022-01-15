@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="addGiottoImage — addGiottoImage" />
-<meta property="og:description" content="Adds giotto image objects to your giotto object" />
+<meta property="og:description" content="Adds lists of giottoImages and giottoLargeImages to gobjects" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
@@ -197,29 +197,44 @@
     </div>
 
     <div class="ref-description">
-    <p>Adds giotto image objects to your giotto object</p>
+    <p>Adds lists of giottoImages and giottoLargeImages to gobjects</p>
     </div>
 
-    <pre class="usage"><span class='fu'>addGiottoImage</span><span class='op'>(</span><span class='va'>gobject</span>, <span class='va'>images</span>, spat_loc_name <span class='op'>=</span> <span class='st'>"raw"</span>, scale_factor <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>addGiottoImage</span><span class='op'>(</span>
+  gobject <span class='op'>=</span> <span class='cn'>NULL</span>,
+  images <span class='op'>=</span> <span class='cn'>NULL</span>,
+  largeImages <span class='op'>=</span> <span class='cn'>NULL</span>,
+  spat_loc_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  scale_factor <span class='op'>=</span> <span class='cn'>NULL</span>,
+  negative_y <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>gobject</th>
-      <td><p>giotto object</p></td>
+      <td><p>gobject to add images objects to</p></td>
     </tr>
     <tr>
       <th>images</th>
-      <td><p>list of giotto image objects, see <code><a href='createGiottoImage.html'>createGiottoImage</a></code></p></td>
+      <td><p>list of giottoImages to add</p></td>
+    </tr>
+    <tr>
+      <th>largeImages</th>
+      <td><p>list of giottoLargeImages to add</p></td>
     </tr>
     <tr>
       <th>spat_loc_name</th>
-      <td><p>provide spatial location slot in Giotto to align images. Defaults to 'raw'</p></td>
+      <td><p>provide spatial location slot in Giotto to align giottoImages. Defaults to first one</p></td>
     </tr>
     <tr>
       <th>scale_factor</th>
-      <td><p>provide scale of image pixel dimensions relative to spatial coordinates. Defaults to 1:1</p></td>
+      <td><p>provide scale of image pixel dimensions relative to spatial coordinates.</p></td>
+    </tr>
+    <tr>
+      <th>negative_y</th>
+      <td><p>Map image to negative y spatial values if TRUE during automatic alignment. Meaning that origin is in upper left instead of lower left.</p></td>
     </tr>
     </table>
 

@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="getGiottoImage — getGiottoImage" />
-<meta property="og:description" content="get get a giotto image from a giotto object" />
+<meta property="og:description" content="get a giotto image from a giotto object
+get giottoImage or giottoLargeImage from gobject" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -90,7 +91,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
@@ -197,10 +198,13 @@
     </div>
 
     <div class="ref-description">
-    <p>get get a giotto image from a giotto object</p>
+    <p>get a giotto image from a giotto object</p>
+<p>get giottoImage or giottoLargeImage from gobject</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getGiottoImage</span><span class='op'>(</span><span class='va'>gobject</span>, <span class='va'>image_name</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_GiottoImage_MG</span><span class='op'>(</span>gobject <span class='op'>=</span> <span class='cn'>NULL</span>, image_name <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+
+<span class='fu'>getGiottoImage</span><span class='op'>(</span>gobject <span class='op'>=</span> <span class='cn'>NULL</span>, image_name <span class='op'>=</span> <span class='cn'>NULL</span>, largeImage_name <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -211,13 +215,18 @@
     </tr>
     <tr>
       <th>image_name</th>
-      <td><p>name of giotto image <code><a href='showGiottoImageNames.html'>showGiottoImageNames</a></code></p></td>
+      <td><p>name of a giottoImage <code><a href='showGiottoImageNames.html'>showGiottoImageNames</a></code></p></td>
+    </tr>
+    <tr>
+      <th>largeImage_name</th>
+      <td><p>name of a giottoLargeImage</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a giotto image</p>
+<p>a giottoImage or giottoLargeImage</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
@@ -202,10 +202,12 @@
 
     <pre class="usage"><span class='fu'>spatFeatPlot2D_single</span><span class='op'>(</span>
   <span class='va'>gobject</span>,
+  spat_unit <span class='op'>=</span> <span class='cn'>NULL</span>,
   feat_type <span class='op'>=</span> <span class='cn'>NULL</span>,
   show_image <span class='op'>=</span> <span class='cn'>F</span>,
   gimage <span class='op'>=</span> <span class='cn'>NULL</span>,
-  image_name <span class='op'>=</span> <span class='st'>"image"</span>,
+  image_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  largeImage_name <span class='op'>=</span> <span class='cn'>NULL</span>,
   spat_loc_name <span class='op'>=</span> <span class='cn'>NULL</span>,
   sdimx <span class='op'>=</span> <span class='st'>"sdimx"</span>,
   sdimy <span class='op'>=</span> <span class='st'>"sdimy"</span>,
@@ -255,6 +257,10 @@
       <td><p>giotto object</p></td>
     </tr>
     <tr>
+      <th>spat_unit</th>
+      <td><p>spatial unit</p></td>
+    </tr>
+    <tr>
       <th>feat_type</th>
       <td><p>feature type</p></td>
     </tr>
@@ -269,6 +275,14 @@
     <tr>
       <th>image_name</th>
       <td><p>name of a giotto image</p></td>
+    </tr>
+    <tr>
+      <th>largeImage_name</th>
+      <td><p>name of a giottoLargeImage</p></td>
+    </tr>
+    <tr>
+      <th>spat_loc_name</th>
+      <td><p>name of spatial locations</p></td>
     </tr>
     <tr>
       <th>sdimx</th>
@@ -372,7 +386,7 @@
     </tr>
     <tr>
       <th>vor_alpha</th>
-      <td><p>transparancy of voronoi 'cells'</p></td>
+      <td><p>transparency of voronoi 'cells'</p></td>
     </tr>
     <tr>
       <th>vor_max_radius</th>

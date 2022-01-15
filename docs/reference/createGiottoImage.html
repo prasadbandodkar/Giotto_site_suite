@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
@@ -202,17 +202,29 @@
 
     <pre class="usage"><span class='fu'>createGiottoImage</span><span class='op'>(</span>
   gobject <span class='op'>=</span> <span class='cn'>NULL</span>,
+  spat_unit <span class='op'>=</span> <span class='cn'>NULL</span>,
   spatial_locs <span class='op'>=</span> <span class='cn'>NULL</span>,
   spat_loc_name <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>mg_object</span>,
   name <span class='op'>=</span> <span class='st'>"image"</span>,
   image_transformations <span class='op'>=</span> <span class='cn'>NULL</span>,
+  negative_y <span class='op'>=</span> <span class='cn'>TRUE</span>,
   do_manual_adj <span class='op'>=</span> <span class='cn'>FALSE</span>,
   xmax_adj <span class='op'>=</span> <span class='fl'>0</span>,
   xmin_adj <span class='op'>=</span> <span class='fl'>0</span>,
   ymax_adj <span class='op'>=</span> <span class='fl'>0</span>,
   ymin_adj <span class='op'>=</span> <span class='fl'>0</span>,
-  scale_factor <span class='op'>=</span> <span class='fl'>1</span>
+  scale_factor <span class='op'>=</span> <span class='fl'>1</span>,
+  x_shift <span class='op'>=</span> <span class='cn'>NULL</span>,
+  y_shift <span class='op'>=</span> <span class='cn'>NULL</span>,
+  scale_x <span class='op'>=</span> <span class='cn'>NULL</span>,
+  scale_y <span class='op'>=</span> <span class='cn'>NULL</span>,
+  order <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"first_scale"</span>, <span class='st'>"first_adj"</span><span class='op'>)</span>,
+  xmin_set <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xmax_set <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ymin_set <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ymax_set <span class='op'>=</span> <span class='cn'>NULL</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -223,8 +235,16 @@
       <td><p>giotto object</p></td>
     </tr>
     <tr>
+      <th>spat_unit</th>
+      <td><p>spatial unit</p></td>
+    </tr>
+    <tr>
       <th>spatial_locs</th>
-      <td><p>spatial locations (alternative if giobject = NULL)</p></td>
+      <td><p>spatial locations (alternative if gobject = NULL)</p></td>
+    </tr>
+    <tr>
+      <th>spat_loc_name</th>
+      <td><p>name of spatial locations within gobject</p></td>
     </tr>
     <tr>
       <th>mg_object</th>
@@ -237,6 +257,10 @@
     <tr>
       <th>image_transformations</th>
       <td><p>vector of sequential image transformations</p></td>
+    </tr>
+    <tr>
+      <th>negative_y</th>
+      <td><p>Map image to negative y spatial values if TRUE during automatic alignment. Meaning that origin is in upper left instead of lower left.</p></td>
     </tr>
     <tr>
       <th>do_manual_adj</th>
@@ -261,6 +285,42 @@
     <tr>
       <th>scale_factor</th>
       <td><p>scaling of image dimensions relative to spatial coordinates</p></td>
+    </tr>
+    <tr>
+      <th>x_shift</th>
+      <td><p>shift image in positive y direction</p></td>
+    </tr>
+    <tr>
+      <th>scale_x</th>
+      <td><p>independently scale image in x direction</p></td>
+    </tr>
+    <tr>
+      <th>scale_y</th>
+      <td><p>independently scale image in y direction</p></td>
+    </tr>
+    <tr>
+      <th>order</th>
+      <td><p>perform scaling or adjustments and shifts first</p></td>
+    </tr>
+    <tr>
+      <th>xmin_set</th>
+      <td><p>values to override image minmax spatial anchors when doing adjustments</p></td>
+    </tr>
+    <tr>
+      <th>xmax_set</th>
+      <td><p>values to override image minmax spatial anchors when doing adjustments</p></td>
+    </tr>
+    <tr>
+      <th>ymin_set</th>
+      <td><p>values to override image minmax spatial anchors when doing adjustments</p></td>
+    </tr>
+    <tr>
+      <th>ymax_set</th>
+      <td><p>values to override image minmax spatial anchors when doing adjustments</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>be verbose</p></td>
     </tr>
     </table>
 

@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
@@ -200,7 +200,7 @@
     <p>show gene metadata</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fDataDT</span><span class='op'>(</span><span class='va'>gobject</span>, feat_type <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>fDataDT</span><span class='op'>(</span><span class='va'>gobject</span>, spat_unit <span class='op'>=</span> <span class='cn'>NULL</span>, feat_type <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -208,6 +208,10 @@
     <tr>
       <th>gobject</th>
       <td><p>giotto object</p></td>
+    </tr>
+    <tr>
+      <th>spat_unit</th>
+      <td><p>spatial unit</p></td>
     </tr>
     <tr>
       <th>feat_type</th>
@@ -223,7 +227,7 @@
     <pre class="examples"><span class='r-in'></span>
 <span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span><span class='op'>)</span> <span class='co'># loads existing Giotto object</span></span>
 <span class='r-in'><span class='fu'>fDataDT</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span><span class='op'>)</span></span>
-<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in fDataDT(mini_giotto_single_cell):</span> no slot of name "expression_feat" for this object of class "giotto"</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in set_default_spat_unit(gobject = gobject, spat_unit = spat_unit)</span> no slot of name "expression" for this object of class "giotto"</span>
 <span class='r-in'></span>
 </pre>
   </div>

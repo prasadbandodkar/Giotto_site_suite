@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="plotGiottoImage — plotGiottoImage" />
-<meta property="og:description" content="get plot a giotto image from a giotto object" />
+<meta property="og:description" content="plot a giottoImage or giottoLargeImage" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
@@ -197,27 +197,55 @@
     </div>
 
     <div class="ref-description">
-    <p>get plot a giotto image from a giotto object</p>
+    <p>plot a giottoImage or giottoLargeImage</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plotGiottoImage</span><span class='op'>(</span><span class='va'>gobject</span>, <span class='va'>image_name</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>plotGiottoImage</span><span class='op'>(</span>
+  gobject <span class='op'>=</span> <span class='cn'>NULL</span>,
+  image_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  largeImage_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  giottoImage <span class='op'>=</span> <span class='cn'>NULL</span>,
+  giottoLargeImage <span class='op'>=</span> <span class='cn'>NULL</span>,
+  largeImage_crop_params_list <span class='op'>=</span> <span class='cn'>NULL</span>,
+  largeImage_max_intensity <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>gobject</th>
-      <td><p>giotto object</p></td>
+      <td><p>gobject containing giottoImage or giottoLargeImage</p></td>
     </tr>
     <tr>
       <th>image_name</th>
-      <td><p>name of giotto image <code><a href='showGiottoImageNames.html'>showGiottoImageNames</a></code></p></td>
+      <td><p>name of giottoImage</p></td>
+    </tr>
+    <tr>
+      <th>largeImage_name</th>
+      <td><p>name of giottoLargeImage</p></td>
+    </tr>
+    <tr>
+      <th>giottoImage</th>
+      <td><p>giottoImage object</p></td>
+    </tr>
+    <tr>
+      <th>giottoLargeImage</th>
+      <td><p>giottoLargeImage object</p></td>
+    </tr>
+    <tr>
+      <th>largeImage_crop_params_list</th>
+      <td><p>list of parameters for focusing on a specified region of a giottoLargeImage for potentially better plotting resolution</p></td>
+    </tr>
+    <tr>
+      <th>largeImage_max_intensity</th>
+      <td><p>assign override value to treat as maximum intensity in color scale when plotting giottoLargeImage</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>plot</p>
+    <p>a plot</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

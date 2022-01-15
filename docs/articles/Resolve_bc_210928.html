@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
@@ -142,7 +142,7 @@
 
       
 
-      </header><script src="Resolve_bc_210928_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><script src="Resolve_bc_210928_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Resolve Bioscience Breast Cancer Subcellular</h1>
@@ -256,14 +256,14 @@
 <h2 class="hasAnchor">
 <a href="#part-5-calculate-cell-shape-overlap" class="anchor"></a>Part 5: Calculate Cell Shape Overlap</h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span>
-<span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/calculateOverlap.html">calculateOverlap</a></span><span class="op">(</span><span class="va">testobj</span>,
+<code class="sourceCode R"><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">testobj</span> <span class="op">=</span> <span class="fu">calculateOverlap</span><span class="op">(</span><span class="va">testobj</span>,
                            method <span class="op">=</span> <span class="st">'parallel'</span>,
                            x_step <span class="op">=</span> <span class="fl">1000</span>,
                            y_step <span class="op">=</span> <span class="fl">1000</span>,
                            poly_info <span class="op">=</span> <span class="st">'cell'</span>,
                            feat_info <span class="op">=</span> <span class="st">'rna'</span><span class="op">)</span>
-<span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span>
+<span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#convert overlap to matrix </span>
 <span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/overlapToMatrix.html">overlapToMatrix</a></span><span class="op">(</span><span class="va">testobj</span>,
                           poly_info <span class="op">=</span> <span class="st">'cell'</span>,
@@ -345,7 +345,7 @@
 <span class="va">subc_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doLeidenCluster.html">doLeidenCluster</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">subc_test</span>, resolution <span class="op">=</span> <span class="fl">0.05</span>, n_iterations <span class="op">=</span> <span class="fl">1000</span>, name <span class="op">=</span> <span class="st">'leiden_0.05'</span><span class="op">)</span>
 
 <span class="co"># Create color palettes, or proceed with Giotto defaults</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"alyssafrazee/RSkittleBrewer"</span><span class="op">)</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"alyssafrazee/RSkittleBrewer"</span><span class="op">)</span>
 <span class="va">colorcode</span> <span class="op">=</span> <span class="fu">lacroix_palette</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"paired"</span><span class="op">)</span>
 <span class="va">featcolor</span> <span class="op">=</span> <span class="fu">lacroix_palette</span><span class="op">(</span><span class="st">"KeyLime"</span>, type <span class="op">=</span> <span class="st">"discrete"</span><span class="op">)</span>
 

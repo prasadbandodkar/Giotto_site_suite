@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
@@ -213,7 +213,8 @@
   flip_horizontal <span class='op'>=</span> <span class='cn'>TRUE</span>,
   shift_horizontal_step <span class='op'>=</span> <span class='cn'>TRUE</span>,
   calc_centroids <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  fix_multipart <span class='op'>=</span> <span class='cn'>TRUE</span>
+  fix_multipart <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  remove_unvalid_polygons <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -266,6 +267,10 @@
     <tr>
       <th>fix_multipart</th>
       <td><p>try to split polygons with multiple parts (default: TRUE)</p></td>
+    </tr>
+    <tr>
+      <th>remove_unvalid_polygons</th>
+      <td><p>remove unvalid polygons (default: TRUE)</p></td>
     </tr>
     </table>
 

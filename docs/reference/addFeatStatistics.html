@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
@@ -203,6 +203,7 @@
     <pre class="usage"><span class='fu'>addFeatStatistics</span><span class='op'>(</span>
   <span class='va'>gobject</span>,
   feat_type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  spat_unit <span class='op'>=</span> <span class='cn'>NULL</span>,
   expression_values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"normalized"</span>, <span class='st'>"scaled"</span>, <span class='st'>"custom"</span><span class='op'>)</span>,
   detection_threshold <span class='op'>=</span> <span class='fl'>0</span>,
   return_gobject <span class='op'>=</span> <span class='cn'>TRUE</span>
@@ -218,6 +219,10 @@
     <tr>
       <th>feat_type</th>
       <td><p>feature type</p></td>
+    </tr>
+    <tr>
+      <th>spat_unit</th>
+      <td><p>spatial unit</p></td>
     </tr>
     <tr>
       <th>expression_values</th>
