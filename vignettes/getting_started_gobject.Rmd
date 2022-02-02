@@ -13,9 +13,11 @@ Data is organized within the **giottoObject** in defined **slots** as described 
 ![](../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-03.svg){width=100%}  
     
 ## Nested organization within slots    
-Spatial data has a tiered organization and so does Giotto. Tissue regions can be divided down into individual cells and then further into organelles. The data structure of Giotto mirrors biological structure by nesting data within slots related to spatial data by **spat_unit** (spatial unit).
+Spatial data has a tiered organization and so does Giotto. Tissue regions can be divided down into individual cells and then further into organelles. 
+The data structure of Giotto mirrors biological structure by nesting data within slots related to spatial data by **spat_unit** (spatial unit). 
+Additonally, to facilitate the integration of multiple omic data, slots related to feature data will be nested with **feat_type** (feature type).
 <br>    
-To facilitate the integration of multiple omic data, slots related to feature data will be nested with **feat_type** (feature type).
+Included below is a description of this nesting and also, for advanced users and contributors/developers, accessor functions for the slots are also provided.
 <br>    
     
 ```{r include=FALSE}
