@@ -32,6 +32,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -44,7 +46,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0.991</span>
       </span>
     </div>
 
@@ -127,7 +129,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/RubD/Giotto/">
+  <a href="https://github.com/RubD/Giotto/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -142,28 +144,28 @@
 
       
 
-      </header><script src="contribute_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Contribute</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/master/vignettes/vignettes/vignettes/contribute.Rmd"><code>vignettes/vignettes/vignettes/contribute.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/HEAD/vignettes/vignettes/vignettes/contribute.Rmd" class="external-link"><code>vignettes/vignettes/vignettes/contribute.Rmd</code></a></small>
       <div class="hidden name"><code>contribute.Rmd</code></div>
 
     </div>
 
     
     
-<div id="how-to-contribute" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-to-contribute" class="anchor"></a>How to contribute</h2>
+<div class="section level2">
+<h2 id="how-to-contribute">How to contribute<a class="anchor" aria-label="anchor" href="#how-to-contribute"></a>
+</h2>
 <p>We welcome contributions or suggestions from other developers and here we provide a number of rules, suggestions and tips to help you contribute to Giotto in a sustainable manner. Please contact us if you have questions or would like to discuss an addition or major modifications to the Giotto main code.</p>
 <p><span class="math inline">\(~\)</span></p>
-<div id="coding-style" class="section level3">
-<h3 class="hasAnchor">
-<a href="#coding-style" class="anchor"></a>Coding Style</h3>
-<p>Following a particular programming style will help programmers read and understand source code conforming to the style, and help to avoid introducing errors. Here we present a small list of guidelines on what is considered a good practice when writing R codes in Giotto package. Most of them are adapted from <a href="https://bioconductor.org/developers/how-to/coding-style/">Bioconductor - coding style</a> or <a href="https://google.github.io/styleguide/Rguide.xml">Google’s R Style Guide</a>. These guidelines are preferences and strongly encouraged!</p>
+<div class="section level3">
+<h3 id="coding-style">Coding Style<a class="anchor" aria-label="anchor" href="#coding-style"></a>
+</h3>
+<p>Following a particular programming style will help programmers read and understand source code conforming to the style, and help to avoid introducing errors. Here we present a small list of guidelines on what is considered a good practice when writing R codes in Giotto package. Most of them are adapted from <a href="https://bioconductor.org/developers/how-to/coding-style/" class="external-link">Bioconductor - coding style</a> or <a href="https://google.github.io/styleguide/Rguide.xml" class="external-link">Google’s R Style Guide</a>. These guidelines are preferences and strongly encouraged!</p>
 <ul>
 <li>
 <strong>Indentation</strong>
@@ -191,10 +193,10 @@
 </ul>
 <p><span class="math inline">\(~\)</span></p>
 </div>
-<div id="stat-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#stat-functions" class="anchor"></a>Stat functions</h3>
-<p>Most Giotto commands can accept several matrix classes (DelayedMatrix, SparseM, Matrix or base matrix). To facilitate this we provide <strong>flexible</strong> wrappers that work on any type of matrix class. They can be found in the <a href="https://github.com/RubD/Giotto/blob/suite/R/utilities.R">utilities.R</a> file.</p>
+<div class="section level3">
+<h3 id="stat-functions">Stat functions<a class="anchor" aria-label="anchor" href="#stat-functions"></a>
+</h3>
+<p>Most Giotto commands can accept several matrix classes (DelayedMatrix, SparseM, Matrix or base matrix). To facilitate this we provide <strong>flexible</strong> wrappers that work on any type of matrix class. They can be found in the <a href="https://github.com/RubD/Giotto/blob/suite/R/utilities.R" class="external-link">utilities.R</a> file.</p>
 <ul>
 <li>
 <strong>mean_flex</strong>: analogous to mean()<br>
@@ -219,9 +221,9 @@
 </ul>
 <p><span class="math inline">\(~\)</span></p>
 </div>
-<div id="auxiliary-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#auxiliary-functions" class="anchor"></a>Auxiliary functions</h3>
+<div class="section level3">
+<h3 id="auxiliary-functions">Auxiliary functions<a class="anchor" aria-label="anchor" href="#auxiliary-functions"></a>
+</h3>
 <p>Giotto has a number of auxiliary or convenience functions that might help you to adapt your code or write new code for Giotto. We encourage you to use these small functions to maintain uniformity throughout the code.</p>
 <ul>
 <li>
@@ -244,10 +246,10 @@
 <p>The last function should be used within your contribution code. It has the additional benefit that it will suggest the user how to download the package if it is not available. To keep the size of Giotto within limits we prefer not to add too many new dependencies.</p>
 <p><span class="math inline">\(~\)</span></p>
 </div>
-<div id="getters-and-setters" class="section level3">
-<h3 class="hasAnchor">
-<a href="#getters-and-setters" class="anchor"></a>Getters and Setters</h3>
-<p>Giotto stores information in different slots, which can be accessed through these getters and setters functions. They can be found in the <a href="https://github.com/RubD/Giotto/blob/suite/R/accessors.R">accessors.R</a> file.</p>
+<div class="section level3">
+<h3 id="getters-and-setters">Getters and Setters<a class="anchor" aria-label="anchor" href="#getters-and-setters"></a>
+</h3>
+<p>Giotto stores information in different slots, which can be accessed through these getters and setters functions. They can be found in the <a href="https://github.com/RubD/Giotto/blob/suite/R/accessors.R" class="external-link">accessors.R</a> file.</p>
 <ul>
 <li><p><strong>get_expression_values</strong>: To select the expression matrix to use</p></li>
 <li><p><strong>set_expression_values</strong>: Sets a new expression matrix to the expression slot</p></li>
@@ -268,9 +270,9 @@
 </ul>
 <p><span class="math inline">\(~\)</span></p>
 </div>
-<div id="python-code" class="section level3">
-<h3 class="hasAnchor">
-<a href="#python-code" class="anchor"></a>Python code</h3>
+<div class="section level3">
+<h3 id="python-code">Python code<a class="anchor" aria-label="anchor" href="#python-code"></a>
+</h3>
 <p>To use Python code we prefer to create a python wrapper/functions around the python code, which can then be sourced by reticulate. As an example we show the basic principles of how we implemented the Leiden clustering algorithm.</p>
 <ol style="list-style-type: decimal">
 <li>write python wrapper and store as python_leiden.py in <em>/inst/python</em>:</li>
@@ -295,8 +297,8 @@
 <li>source python code with reticulate:</li>
 </ol>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">python_leiden_function</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"python"</span>, <span class="st">"python_leiden.py"</span>, package <span class="op">=</span> <span class="st">'Giotto'</span><span class="op">)</span>
-<span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/source_python.html">source_python</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">python_leiden_function</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">python_leiden_function</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"python"</span>, <span class="st">"python_leiden.py"</span>, package <span class="op">=</span> <span class="st">'Giotto'</span><span class="op">)</span>
+<span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/source_python.html" class="external-link">source_python</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">python_leiden_function</span><span class="op">)</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>use python code as if R code:<br>
 See <strong>doLeidenCLuster</strong> for more detailed information.</li>
@@ -311,10 +313,10 @@ See <strong>doLeidenCLuster</strong> for more detailed information.</li>
                                    resolution_parameter <span class="op">=</span> <span class="va">resolution</span><span class="op">)</span></code></pre></div>
 <p><span class="math inline">\(~\)</span></p>
 </div>
-<div id="example" class="section level3">
-<h3 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h3>
-<p>As an example we show the implementation of SPARK, which is a recent method developed by <a href="https://doi.org/10.1038/s41592-019-0701-7">Sun et al</a> and provide some comments within the code.</p>
+<div class="section level3">
+<h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h3>
+<p>As an example we show the implementation of SPARK, which is a recent method developed by <a href="https://doi.org/10.1038/s41592-019-0701-7" class="external-link">Sun et al</a> and provide some comments within the code.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">spark</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">gobject</span>,
                  <span class="va">percentage</span> <span class="op">=</span> <span class="fl">0.1</span>,
@@ -332,12 +334,12 @@ See <strong>doLeidenCLuster</strong> for more detailed information.</li>
   <span class="co"># test if SPARK is installed </span>
   <span class="co"># if false, it will suggest how to install SPARK</span>
   <span class="fu"><a href="../../../reference/package_check.html">package_check</a></span><span class="op">(</span>pkg_name <span class="op">=</span> <span class="st">'SPARK'</span>,
-                repository <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'github'</span><span class="op">)</span>,
+                repository <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'github'</span><span class="op">)</span>,
                 github_repo <span class="op">=</span> <span class="st">'xzhoulab/SPARK'</span><span class="op">)</span>
 
 
   <span class="co"># print message with information and encouraging users to cite the authors their work  </span>
-  <span class="fu"><a href="https://rdrr.io/r/base/message.html">message</a></span><span class="op">(</span><span class="st">"using 'SPARK' for spatial gene/pattern detection. If used in published research, please cite:
+  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"using 'SPARK' for spatial gene/pattern detection. If used in published research, please cite:
   Sun, Shiquan, Jiaqiang Zhu, and Xiang Zhou. “Statistical Analysis of Spatial Expression Pattern for Spatially Resolved Transcriptomic Studies.”
           BioRxiv, October 21, 2019, 810903. https://doi.org/10.1101/810903."</span><span class="op">)</span>
 
@@ -347,8 +349,8 @@ See <strong>doLeidenCLuster</strong> for more detailed information.</li>
 
   <span class="co"># extract coordinates from gobject</span>
   <span class="co"># check the different slots of the giotto S4 object</span>
-  <span class="va">locs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">gobject</span><span class="op">@</span><span class="va">spatial_locs</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">locs</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">expr</span><span class="op">)</span>
+  <span class="va">locs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">gobject</span><span class="op">@</span><span class="va">spatial_locs</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">locs</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">expr</span><span class="op">)</span>
 
   
   <span class="co"># Here we implemented spark according to their github example code: </span>
@@ -360,20 +362,20 @@ See <strong>doLeidenCLuster</strong> for more detailed information.</li>
                                      min_total_counts <span class="op">=</span> <span class="va">min_count</span><span class="op">)</span>
 
   <span class="co"># total counts for each cell</span>
-  <span class="va">sobject</span><span class="op">@</span><span class="va">lib_size</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">sobject</span><span class="op">@</span><span class="va">counts</span>, <span class="fl">2</span>, <span class="va">sum</span><span class="op">)</span>
+  <span class="va">sobject</span><span class="op">@</span><span class="va">lib_size</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">sobject</span><span class="op">@</span><span class="va">counts</span>, <span class="fl">2</span>, <span class="va">sum</span><span class="op">)</span>
 
   <span class="co"># extract covariates to adjust for from the cell metadata </span>
-  <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">covariates</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">covariates</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
 
     <span class="co"># first filter giotto object based on spark object</span>
-    <span class="va">filter_cell_ids</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">sobject</span><span class="op">@</span><span class="va">counts</span><span class="op">)</span>
-    <span class="va">filter_gene_ids</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">sobject</span><span class="op">@</span><span class="va">counts</span><span class="op">)</span>
+    <span class="va">filter_cell_ids</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">sobject</span><span class="op">@</span><span class="va">counts</span><span class="op">)</span>
+    <span class="va">filter_gene_ids</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">sobject</span><span class="op">@</span><span class="va">counts</span><span class="op">)</span>
     <span class="va">tempgobject</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">gobject</span>, cell_ids <span class="op">=</span> <span class="va">filter_cell_ids</span>, gene_ids <span class="op">=</span> <span class="va">filter_gene_ids</span><span class="op">)</span>
 
     <span class="va">metadata</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">tempgobject</span><span class="op">)</span>
 
-    <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">covariates</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-      <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="va">covariates</span>, <span class="st">' was not found in the cell metadata of the giotto object, will be set to NULL \n'</span><span class="op">)</span>
+    <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">covariates</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+      <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="va">covariates</span>, <span class="st">' was not found in the cell metadata of the giotto object, will be set to NULL \n'</span><span class="op">)</span>
       <span class="va">covariates</span> <span class="op">=</span> <span class="cn">NULL</span>
     <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
       <span class="va">covariates</span> <span class="op">=</span> <span class="va">metadata</span><span class="op">[[</span><span class="va">covariates</span><span class="op">]</span><span class="op">]</span>
@@ -397,13 +399,13 @@ See <strong>doLeidenCLuster</strong> for more detailed information.</li>
   <span class="co"># return results</span>
   <span class="co"># return full output or a simple data.table format with the essental information</span>
   <span class="kw">if</span><span class="op">(</span><span class="va">return_object</span> <span class="op">==</span> <span class="st">'spark'</span><span class="op">)</span><span class="op">{</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">sobject</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">sobject</span><span class="op">)</span>
   <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">return_object</span> <span class="op">==</span> <span class="st">'data.table'</span><span class="op">)</span><span class="op">{</span>
-    <span class="va">DT_results</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html">as.data.table</a></span><span class="op">(</span><span class="va">sobject</span><span class="op">@</span><span class="va">res_mtest</span><span class="op">)</span>
-    <span class="va">gene_names</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">sobject</span><span class="op">@</span><span class="va">counts</span><span class="op">)</span>
+    <span class="va">DT_results</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">sobject</span><span class="op">@</span><span class="va">res_mtest</span><span class="op">)</span>
+    <span class="va">gene_names</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">sobject</span><span class="op">@</span><span class="va">counts</span><span class="op">)</span>
     <span class="va">DT_results</span><span class="op">[</span>, <span class="va">genes</span> <span class="op">:=</span> <span class="va">gene_names</span><span class="op">]</span>
-    <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">setorder</a></span><span class="op">(</span><span class="va">DT_results</span>, <span class="va">adjusted_pvalue</span>, <span class="va">combined_pvalue</span><span class="op">)</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">DT_results</span><span class="op">)</span>
+    <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html" class="external-link">setorder</a></span><span class="op">(</span><span class="va">DT_results</span>, <span class="va">adjusted_pvalue</span>, <span class="va">combined_pvalue</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">DT_results</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">}</span></code></pre></div>
 </div>
@@ -421,11 +423,13 @@ See <strong>doLeidenCLuster</strong> for more detailed information.</li>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.drieslab.com/">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
+  <p></p>
+<p>Developed by <a href="https://www.drieslab.com/" class="external-link">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -433,6 +437,8 @@ See <strong>doLeidenCLuster</strong> for more detailed information.</li>
 
   
 
+
+  
 
   </body>
 </html>
