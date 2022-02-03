@@ -1,8 +1,9 @@
-pandoc: 2.14.0.3
+pandoc: 2.11.4
 pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   Dimension_reduction: Dimension_reduction.html
+  Nanostring_Lung12_jan26_21: Nanostring_Lung12_jan26_21.html
   Resolve_bc_210928: Resolve_bc_210928.html
   SeqFISH_cortex_210923: SeqFISH_cortex_210923.html
   Visium_prostate_integration_Sep30_21: Visium_prostate_integration_Sep30_21.html
@@ -27,6 +28,7 @@ articles:
   mouse_codex_spleen_Sep29_21: mouse_codex_spleen_Sep29_21.html
   mouse_visium_brain_Sep30_21: mouse_visium_brain_Sep30_21.html
   mouse_visium_kidney_210830: mouse_visium_kidney_210830.html
+  nanostring_examples_overview: nanostring_examples_overview.html
   osmFISH_mouse_SScortex_Sep29_21: osmFISH_mouse_SScortex_Sep29_21.html
   giotto_input: overview/giotto_input.html
   temp_construction: overview/temp_construction.html
@@ -86,5 +88,5 @@ articles:
   singlecell_prostate_standard_Sep29_21: vignettes/vignettes/singlecell_prostate_standard_Sep29_21.html
   temp_construction: vignettes/vignettes/temp_construction.html
   vizgen_mouse_brain_210929: vizgen_mouse_brain_210929.html
-last_built: 2022-02-02T19:10Z
+last_built: 2022-02-03T20:23Z
 

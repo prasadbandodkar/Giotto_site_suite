@@ -242,17 +242,17 @@ The Giotto branch <strong>cless</strong> is a version of Giotto without C++ code
 <li>Add these lines to the Makevars file</li>
 </ol>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># comment out first line 'CC= ... if there are errors with compiling a package</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="va">CC</span><span class="op">=</span>/usr/local/opt/llvm/bin/clang <span class="ex">-fopenmp</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="va">CXX</span><span class="op">=</span>/usr/local/opt/llvm/bin/clang++</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="va">CC=</span>/usr/local/opt/llvm/bin/clang <span class="ex">-fopenmp</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="va">CXX=</span>/usr/local/opt/llvm/bin/clang++</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Also potentially CXX11 (for C++11 compiler)</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="va">CXX11</span><span class="op">=</span>/usr/local/opt/llvm/bin/clang++</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="va">CXX11=</span>/usr/local/opt/llvm/bin/clang++</span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># -O3 should be faster than -O2 (default) level optimisation ..</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="va">CFLAGS</span><span class="op">=</span>-g <span class="ex">-O3</span> <span class="at">-Wall</span> <span class="at">-pedantic</span> <span class="at">-std</span><span class="op">=</span>gnu99 <span class="at">-mtune</span><span class="op">=</span>native <span class="at">-pipe</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="va">CXXFLAGS</span><span class="op">=</span>-g <span class="ex">-O3</span> <span class="at">-Wall</span> <span class="at">-pedantic</span> <span class="at">-std</span><span class="op">=</span>c++11 <span class="at">-mtune</span><span class="op">=</span>native <span class="at">-pipe</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="va">LDFLAGS</span><span class="op">=</span>-L/usr/local/opt/gettext/lib <span class="ex">-L/usr/local/opt/llvm/lib</span> <span class="at">-Wl,-rpath,</span>/usr/local/opt/llvm/lib</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="va">CPPFLAGS</span><span class="op">=</span>-I/usr/local/opt/gettext/include <span class="ex">-I/usr/local/opt/llvm/include</span></span></code></pre></div>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="va">CFLAGS=</span>-g <span class="ex">-O3</span> <span class="at">-Wall</span> <span class="at">-pedantic</span> <span class="at">-std</span><span class="op">=</span>gnu99 <span class="at">-mtune</span><span class="op">=</span>native <span class="at">-pipe</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="va">CXXFLAGS=</span>-g <span class="ex">-O3</span> <span class="at">-Wall</span> <span class="at">-pedantic</span> <span class="at">-std</span><span class="op">=</span>c++11 <span class="at">-mtune</span><span class="op">=</span>native <span class="at">-pipe</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="va">LDFLAGS=</span>-L/usr/local/opt/gettext/lib <span class="ex">-L/usr/local/opt/llvm/lib</span> <span class="at">-Wl,-rpath,</span>/usr/local/opt/llvm/lib</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="va">CPPFLAGS=</span>-I/usr/local/opt/gettext/include <span class="ex">-I/usr/local/opt/llvm/include</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="issue-2-clang-error">2.2 issue 2: clang error<a class="anchor" aria-label="anchor" href="#issue-2-clang-error"></a>
@@ -272,10 +272,10 @@ The Giotto branch <strong>cless</strong> is a version of Giotto without C++ code
 <p>If you use the latest MacOS ‘Catalina’ and the latest R version 3.6.3 then you need to install Clang 7.0.0 and GNU Fortran 6.1 as per <a href="https://cran.rstudio.com/bin/macosx/" class="external-link">instructions</a>.</p>
 <p>Additionally, you might have to specify some flags in “~/.R/Makevars”</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clang: start</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="va">CFLAGS</span><span class="op">=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="va">CCFLAGS</span><span class="op">=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="va">CXXFLAGS</span><span class="op">=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="va">CPPFLAGS</span><span class="op">=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="va">CFLAGS=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="va">CCFLAGS=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="va">CXXFLAGS=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="va">CPPFLAGS=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># clang: end</span></span></code></pre></div>
 <p>We hope that these issues will be resolved soon.</p>
 </div>
