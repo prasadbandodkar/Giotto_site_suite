@@ -32,6 +32,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -44,14 +46,14 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0.991</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Start
      
     <span class="caret"></span>
@@ -72,7 +74,7 @@
   <a href="../../../reference/index.html">Documentation</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Datasets
      
     <span class="caret"></span>
@@ -99,7 +101,7 @@
   <a href="../../../articles/giotto_news.html">News</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     FAQ
      
     <span class="caret"></span>
@@ -114,7 +116,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Try Giotto
      
     <span class="caret"></span>
@@ -127,7 +129,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/RubD/Giotto/">
+  <a href="https://github.com/RubD/Giotto/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -142,24 +144,24 @@
 
       
 
-      </header><script src="singlecell_prostate_standard_Sep29_21_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>10X single cell RNA sequencing</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/master/vignettes/vignettes/vignettes/singlecell_prostate_standard_Sep29_21.Rmd"><code>vignettes/vignettes/vignettes/singlecell_prostate_standard_Sep29_21.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/HEAD/vignettes/vignettes/vignettes/singlecell_prostate_standard_Sep29_21.Rmd" class="external-link"><code>vignettes/vignettes/vignettes/singlecell_prostate_standard_Sep29_21.Rmd</code></a></small>
       <div class="hidden name"><code>singlecell_prostate_standard_Sep29_21.Rmd</code></div>
 
     </div>
 
     
     
-<div id="set-up-giotto-environment" class="section level2">
-<h2 class="hasAnchor">
-<a href="#set-up-giotto-environment" class="anchor"></a>Set up Giotto Environment</h2>
+<div class="section level2">
+<h2 id="set-up-giotto-environment">Set up Giotto Environment<a class="anchor" aria-label="anchor" href="#set-up-giotto-environment"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/">Giotto</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span>
 
 <span class="co"># 1. set working directory</span>
 <span class="va">results_folder</span> <span class="op">=</span> <span class="st">'path/to/result'</span>
@@ -170,7 +172,7 @@
 <span class="co"># python_path = '/path_to_conda/.conda/envs/giotto/bin/python'</span>
 <span class="co"># set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment</span>
 <span class="va">python_path</span> <span class="op">=</span> <span class="va">null</span>
-<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">python_path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">python_path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="../../../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span>
 <span class="op">}</span>
 
@@ -180,41 +182,41 @@
                                   show_plot <span class="op">=</span> <span class="cn">FALSE</span>,
                                   python_path <span class="op">=</span> <span class="va">python_path</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="dataset-explanation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#dataset-explanation" class="anchor"></a>Dataset explanation</h2>
-<p><a href="https://pubmed.ncbi.nlm.nih.gov/33032611/">Ma et al.</a> Processed 10X Single Cell RNAseq from two prostate cancer patients. The raw dataset can be found <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE157703">here</a></p>
+<div class="section level2">
+<h2 id="dataset-explanation">Dataset explanation<a class="anchor" aria-label="anchor" href="#dataset-explanation"></a>
+</h2>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/33032611/" class="external-link">Ma et al.</a> Processed 10X Single Cell RNAseq from two prostate cancer patients. The raw dataset can be found <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE157703" class="external-link">here</a></p>
 </div>
-<div id="part-1-create-giotto-object-from-10x-dataset" class="section level2">
-<h2 class="hasAnchor">
-<a href="#part-1-create-giotto-object-from-10x-dataset" class="anchor"></a>Part 1: Create Giotto object from 10X dataset</h2>
+<div class="section level2">
+<h2 id="part-1-create-giotto-object-from-10x-dataset">Part 1: Create Giotto object from 10X dataset<a class="anchor" aria-label="anchor" href="#part-1-create-giotto-object-from-10x-dataset"></a>
+</h2>
 <p>Note that you will need an input directory for barcodes.tsv(.gz) features.tsv(.gz) matrix.mtx(.gz)</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">giotto_SC</span><span class="op">&lt;-</span><span class="fu"><a href="../../../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="fu"><a href="../../../reference/get10Xmatrix.html">get10Xmatrix</a></span><span class="op">(</span><span class="st">"/path/to/filtered_feature_bc_matrix"</span>, 
                               gene_column_index <span class="op">=</span> <span class="fl">2</span>, remove_zero_rows <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
                               instructions <span class="op">=</span> <span class="va">instrs</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="part-2-process-giotto-object" class="section level2">
-<h2 class="hasAnchor">
-<a href="#part-2-process-giotto-object" class="anchor"></a>Part 2: Process Giotto object</h2>
+<div class="section level2">
+<h2 id="part-2-process-giotto-object">Part 2: Process Giotto object<a class="anchor" aria-label="anchor" href="#part-2-process-giotto-object"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">giotto_SC</span><span class="op">&lt;-</span><span class="fu"><a href="../../../reference/filterGiotto.html">filterGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC</span>,
     expression_threshold <span class="op">=</span> <span class="fl">1</span>,
     feat_det_in_min_cells <span class="op">=</span> <span class="fl">50</span>,
     min_det_feats_per_cell <span class="op">=</span> <span class="fl">500</span>,
-    expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'raw'</span><span class="op">)</span>,
+    expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'raw'</span><span class="op">)</span>,
     verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 
 <span class="co">## normalize</span>
 <span class="va">giotto_SC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC</span>, scalefactor <span class="op">=</span> <span class="fl">6000</span><span class="op">)</span>
 
 <span class="co">## add mitochondria gene percentage and filter giotto object by percent mito</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rtracklayer</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">rtracklayer</span><span class="op">)</span>
 <span class="va">gtf</span> <span class="op">&lt;-</span> <span class="fu">import</span><span class="op">(</span><span class="st">"Homo_sapiens.GRCh38.101.gtf.gz"</span><span class="op">)</span>
 <span class="va">gtf</span> <span class="op">&lt;-</span> <span class="va">gtf</span><span class="op">[</span><span class="va">gtf</span><span class="op">$</span><span class="va">gene_name</span><span class="op">!=</span><span class="st">""</span><span class="op">]</span>
-<span class="va">gtf</span> <span class="op">&lt;-</span> <span class="va">gtf</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">gtf</span><span class="op">$</span><span class="va">gene_name</span><span class="op">)</span><span class="op">]</span>
-<span class="va">mito</span> <span class="op">&lt;-</span> <span class="va">gtf</span><span class="op">$</span><span class="va">gene_name</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu">seqnames</span><span class="op">(</span><span class="va">gtf</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"MT"</span><span class="op">]</span>
-<span class="va">mito</span><span class="op">&lt;-</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">mito</span><span class="op">)</span>
+<span class="va">gtf</span> <span class="op">&lt;-</span> <span class="va">gtf</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">gtf</span><span class="op">$</span><span class="va">gene_name</span><span class="op">)</span><span class="op">]</span>
+<span class="va">mito</span> <span class="op">&lt;-</span> <span class="va">gtf</span><span class="op">$</span><span class="va">gene_name</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu">seqnames</span><span class="op">(</span><span class="va">gtf</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"MT"</span><span class="op">]</span>
+<span class="va">mito</span><span class="op">&lt;-</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">mito</span><span class="op">)</span>
 
 <span class="va">giotto_SC</span><span class="op">&lt;-</span><span class="fu"><a href="../../../reference/addFeatsPerc.html">addFeatsPerc</a></span><span class="op">(</span>
   <span class="va">giotto_SC</span>,
@@ -223,25 +225,25 @@
 <span class="op">)</span>
 
 <span class="va">giotto_SC</span><span class="op">&lt;-</span><span class="fu"><a href="../../../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">giotto_SC</span>,
-  cell_ids <span class="op">=</span> <span class="fu"><a href="../../../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="../../../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">perc_mito</span> <span class="op">&lt;</span> <span class="fl">15</span><span class="op">)</span>,<span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span><span class="op">)</span>
+  cell_ids <span class="op">=</span> <span class="fu"><a href="../../../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="../../../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">perc_mito</span> <span class="op">&lt;</span> <span class="fl">15</span><span class="op">)</span>,<span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span><span class="op">)</span>
 
 
 <span class="co">## add gene &amp; cell statistics</span>
 <span class="va">giotto_SC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/addStatistics.html">addStatistics</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC</span>, expression_values <span class="op">=</span> <span class="st">'raw'</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="part-3-dimention-reduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#part-3-dimention-reduction" class="anchor"></a>Part 3: Dimention reduction</h2>
+<div class="section level2">
+<h2 id="part-3-dimention-reduction">Part 3: Dimention reduction<a class="anchor" aria-label="anchor" href="#part-3-dimention-reduction"></a>
+</h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## PCA ##</span>
 <span class="va">giotto_SC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/calculateHVF.html">calculateHVF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC</span><span class="op">)</span>
 <span class="va">giotto_SC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/runPCA.html">runPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale_unit <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="../../../reference/screePlot.html">screePlot</a></span><span class="op">(</span><span class="va">giotto_SC</span>, ncp <span class="op">=</span> <span class="fl">30</span>, save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'3_scree_plot'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../../../reference/screePlot.html">screePlot</a></span><span class="op">(</span><span class="va">giotto_SC</span>, ncp <span class="op">=</span> <span class="fl">30</span>, save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'3_scree_plot'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_standard/vignette_sep29_2021/3_scree_plot.png" style="width:50.0%"></p>
 </div>
-<div id="part-4-cluster" class="section level2">
-<h2 class="hasAnchor">
-<a href="#part-4-cluster" class="anchor"></a>Part 4: Cluster</h2>
+<div class="section level2">
+<h2 id="part-4-cluster">Part 4: Cluster<a class="anchor" aria-label="anchor" href="#part-4-cluster"></a>
+</h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## cluster and run UMAP ##</span>
 <span class="co"># sNN network (default)</span>
@@ -259,44 +261,44 @@
 
 <span class="fu"><a href="../../../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC</span>,
     cell_color <span class="op">=</span> <span class="st">'leiden_clus'</span>, show_NN_network <span class="op">=</span> <span class="cn">T</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>,
-    save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"4_Cluster"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"4_Cluster"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_standard/vignette_sep29_2021/4_Cluster.png" style="width:50.0%"></p>
 </div>
-<div id="part-5-differential-expression" class="section level2">
-<h2 class="hasAnchor">
-<a href="#part-5-differential-expression" class="anchor"></a>Part 5: Differential Expression</h2>
+<div class="section level2">
+<h2 id="part-5-differential-expression">Part 5: Differential Expression<a class="anchor" aria-label="anchor" href="#part-5-differential-expression"></a>
+</h2>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">markers_scran</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject<span class="op">=</span><span class="va">giotto_SC</span>, method<span class="op">=</span><span class="st">"scran"</span>,
                                        expression_values<span class="op">=</span><span class="st">"normalized"</span>, cluster_column<span class="op">=</span><span class="st">'leiden_clus'</span>, min_feats<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
-<span class="va">markergenes_scran</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">markers_scran</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">3</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"cluster"</span><span class="op">]</span><span class="op">[[</span><span class="st">"genes"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+<span class="va">markergenes_scran</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">markers_scran</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">3</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"cluster"</span><span class="op">]</span><span class="op">[[</span><span class="st">"genes"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 
 <span class="fu"><a href="../../../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">giotto_SC</span>, expression_values <span class="op">=</span> <span class="st">"normalized"</span>, metadata_cols <span class="op">=</span> <span class="st">'leiden_clus'</span>, 
                     selected_feats <span class="op">=</span> <span class="va">markergenes_scran</span>,
                     y_text_size <span class="op">=</span> <span class="fl">8</span>, show_values <span class="op">=</span> <span class="st">'zscores_rescaled'</span>,
-                    save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'5_a_metaheatmap'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                    save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'5_a_metaheatmap'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_standard/vignette_sep29_2021/5_a_metaheatmap.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">topgenes_scran</span> <span class="op">=</span> <span class="va">markers_scran</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">1</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">genes</span>
+<code class="sourceCode R"><span class="va">topgenes_scran</span> <span class="op">=</span> <span class="va">markers_scran</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">1</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">genes</span>
 <span class="co"># violinplot</span>
-<span class="fu"><a href="../../../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">giotto_SC</span>, genes <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">topgenes_scran</span><span class="op">)</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>,
+<span class="fu"><a href="../../../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">giotto_SC</span>, genes <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">topgenes_scran</span><span class="op">)</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>,
            strip_text <span class="op">=</span> <span class="fl">10</span>, strip_position <span class="op">=</span> <span class="st">'right'</span>,
-           save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'5_b_violinplot_scran'</span>, base_width <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+           save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'5_b_violinplot_scran'</span>, base_width <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_standard/vignette_sep29_2021/5_b_violinplot_scran.png" style="width:50.0%"></p>
 </div>
-<div id="part-6-featureplot" class="section level2">
-<h2 class="hasAnchor">
-<a href="#part-6-featureplot" class="anchor"></a>Part 6: FeaturePlot</h2>
+<div class="section level2">
+<h2 id="part-6-featureplot">Part 6: FeaturePlot<a class="anchor" aria-label="anchor" href="#part-6-featureplot"></a>
+</h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot known marker genes across different cell types. EPCAM for epithelial cells, </span>
 <span class="co"># DPP4(CD26) for Epithelial luminal cells, PECAM1(CD31) for Endothelial cells and CD3D for T cells</span>
-<span class="fu"><a href="../../../reference/dimFeatPlot2D.html">dimFeatPlot2D</a></span><span class="op">(</span><span class="va">giotto_SC</span>, feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"EPCAM"</span>,<span class="st">"DPP4"</span>,<span class="st">"PECAM1"</span>,<span class="st">"CD3D"</span><span class="op">)</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"6_featureplot"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../../../reference/dimFeatPlot2D.html">dimFeatPlot2D</a></span><span class="op">(</span><span class="va">giotto_SC</span>, feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EPCAM"</span>,<span class="st">"DPP4"</span>,<span class="st">"PECAM1"</span>,<span class="st">"CD3D"</span><span class="op">)</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"6_featureplot"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_standard/vignette_sep29_2021/6_featureplot.png" style="width:50.0%"></p>
 </div>
-<div id="part-7-cell-type-annotation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#part-7-cell-type-annotation" class="anchor"></a>Part 7: Cell type annotation</h2>
+<div class="section level2">
+<h2 id="part-7-cell-type-annotation">Part 7: Cell type annotation<a class="anchor" aria-label="anchor" href="#part-7-cell-type-annotation"></a>
+</h2>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">prostate_labels</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Endothelial cells"</span>,<span class="co">#1</span>
+<code class="sourceCode R"><span class="va">prostate_labels</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Endothelial cells"</span>,<span class="co">#1</span>
                    <span class="st">"T cells"</span>,<span class="co">#2</span>
                    <span class="st">"Epithelial_basal"</span>,<span class="co">#3</span>
                    <span class="st">"Epithelial_luminal"</span>,<span class="co">#4</span>
@@ -309,25 +311,25 @@
                    <span class="st">"Mast cells"</span>,<span class="co">#11</span>
                    <span class="st">"Mesenchymal cells"</span>,<span class="co">#12</span>
                    <span class="st">"Neural Progenitor cells"</span><span class="op">)</span><span class="co">#13</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">prostate_labels</span><span class="op">)</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">:</span><span class="fl">13</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">prostate_labels</span><span class="op">)</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">:</span><span class="fl">13</span>
 <span class="va">giotto_SC</span><span class="op">&lt;-</span><span class="fu"><a href="../../../reference/annotateGiotto.html">annotateGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC</span>, annotation_vector <span class="op">=</span> <span class="va">prostate_labels</span> ,
                           cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>, name <span class="op">=</span> <span class="st">'prostate_labels'</span><span class="op">)</span>
 <span class="fu"><a href="../../../reference/dimPlot2D.html">dimPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC</span>,     dim_reduction_name <span class="op">=</span> <span class="st">'umap'</span>,
     cell_color <span class="op">=</span> <span class="st">"prostate_labels"</span>, show_NN_network <span class="op">=</span> <span class="cn">T</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>,
-    save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"7_Annotation"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"7_Annotation"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_standard/vignette_sep29_2021/7_Annotation.png" style="width:50.0%"></p>
 </div>
-<div id="part-8-subset-and-recluster" class="section level2">
-<h2 class="hasAnchor">
-<a href="#part-8-subset-and-recluster" class="anchor"></a>Part 8: Subset and Recluster</h2>
+<div class="section level2">
+<h2 id="part-8-subset-and-recluster">Part 8: Subset and Recluster<a class="anchor" aria-label="anchor" href="#part-8-subset-and-recluster"></a>
+</h2>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Subset_giotto_T</span><span class="op">&lt;-</span><span class="fu"><a href="../../../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">giotto_SC</span>,
-  cell_ids <span class="op">=</span> <span class="fu"><a href="../../../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="../../../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">prostate_labels</span> <span class="op">==</span> <span class="st">"T cells"</span><span class="op">)</span>,<span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span><span class="op">)</span>
+  cell_ids <span class="op">=</span> <span class="fu"><a href="../../../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="../../../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">prostate_labels</span> <span class="op">==</span> <span class="st">"T cells"</span><span class="op">)</span>,<span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span><span class="op">)</span>
 <span class="co">## PCA</span>
 
 <span class="va">Subset_giotto_T</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/calculateHVF.html">calculateHVF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">Subset_giotto_T</span><span class="op">)</span>
 <span class="va">Subset_giotto_T</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/runPCA.html">runPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">Subset_giotto_T</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale_unit <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="../../../reference/screePlot.html">screePlot</a></span><span class="op">(</span><span class="va">Subset_giotto_T</span>, ncp <span class="op">=</span> <span class="fl">20</span>, save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'8a_scree_plot'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../../../reference/screePlot.html">screePlot</a></span><span class="op">(</span><span class="va">Subset_giotto_T</span>, ncp <span class="op">=</span> <span class="fl">20</span>, save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'8a_scree_plot'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_standard/vignette_sep29_2021/8a_scree_plot.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Subset_giotto_T</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/createNearestNetwork.html">createNearestNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">Subset_giotto_T</span>,
@@ -343,30 +345,30 @@
 
 <span class="fu"><a href="../../../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">Subset_giotto_T</span>,
     cell_color <span class="op">=</span> <span class="st">'leiden_clus'</span>, show_NN_network <span class="op">=</span> <span class="cn">T</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>,
-    save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"8b_Cluster"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"8b_Cluster"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_standard/vignette_sep29_2021/8b_Cluster.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">markers_scran_T</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject<span class="op">=</span><span class="va">Subset_giotto_T</span>, method<span class="op">=</span><span class="st">"scran"</span>,
                                        expression_values<span class="op">=</span><span class="st">"normalized"</span>, cluster_column<span class="op">=</span><span class="st">'leiden_clus'</span>, min_feats<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
-<span class="va">markergenes_scran_T</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">markers_scran_T</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">5</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"cluster"</span><span class="op">]</span><span class="op">[[</span><span class="st">"genes"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+<span class="va">markergenes_scran_T</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">markers_scran_T</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">5</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"cluster"</span><span class="op">]</span><span class="op">[[</span><span class="st">"genes"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 
 <span class="fu"><a href="../../../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">Subset_giotto_T</span>, expression_values <span class="op">=</span> <span class="st">"normalized"</span>, metadata_cols <span class="op">=</span> <span class="st">'leiden_clus'</span>, 
                     selected_feats <span class="op">=</span> <span class="va">markergenes_scran_T</span>,
                     y_text_size <span class="op">=</span> <span class="fl">8</span>, show_values <span class="op">=</span> <span class="st">'zscores_rescaled'</span>,
-                    save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'8_c_metaheatmap'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                    save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'8_c_metaheatmap'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_standard/vignette_sep29_2021/8_c_metaheatmap.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">T_labels</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Naive T cells"</span>,<span class="co">#1</span>
+<code class="sourceCode R"><span class="va">T_labels</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Naive T cells"</span>,<span class="co">#1</span>
             <span class="st">"Tfh cells"</span>,<span class="co">#2</span>
             <span class="st">"CD8 T cells"</span>,<span class="co">#3</span>
             <span class="st">"NK T cells"</span>,<span class="co">#4</span>
             <span class="st">"CD4 T cells"</span><span class="op">)</span><span class="co">#5</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">T_labels</span><span class="op">)</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">T_labels</span><span class="op">)</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>
 <span class="va">Subset_giotto_T</span><span class="op">&lt;-</span><span class="fu"><a href="../../../reference/annotateGiotto.html">annotateGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">Subset_giotto_T</span>, annotation_vector <span class="op">=</span> <span class="va">T_labels</span> ,
                           cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>, name <span class="op">=</span> <span class="st">'subset_labels'</span><span class="op">)</span>
 <span class="fu"><a href="../../../reference/dimPlot2D.html">dimPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">Subset_giotto_T</span>,     dim_reduction_name <span class="op">=</span> <span class="st">'umap'</span>,
     cell_color <span class="op">=</span> <span class="st">"subset_labels"</span>, show_NN_network <span class="op">=</span> <span class="cn">T</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>,
-    save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"8d_Annotation"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"8d_Annotation"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_standard/vignette_sep29_2021/8d_Annotation.png" style="width:50.0%"></p>
 </div>
   </div>
@@ -382,11 +384,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.drieslab.com/">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
+  <p></p>
+<p>Developed by <a href="https://www.drieslab.com/" class="external-link">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -394,6 +398,8 @@
 
   
 
+
+  
 
   </body>
 </html>
