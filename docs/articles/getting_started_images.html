@@ -32,8 +32,6 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -46,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
@@ -129,7 +127,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/RubD/Giotto/" class="external-link">
+  <a href="https://github.com/RubD/Giotto/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -144,28 +142,28 @@
 
       
 
-      </header><div class="row">
+      </header><script src="getting_started_images_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip></h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/HEAD/vignettes/getting_started_images.Rmd" class="external-link"><code>vignettes/getting_started_images.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/master/vignettes/getting_started_images.Rmd"><code>vignettes/getting_started_images.Rmd</code></a></small>
       <div class="hidden name"><code>getting_started_images.Rmd</code></div>
 
     </div>
 
     
     
-<div class="section level2">
-<h2 id="giotto-and-image-data">Giotto and Image Data<a class="anchor" aria-label="anchor" href="#giotto-and-image-data"></a>
-</h2>
+<div id="giotto-and-image-data" class="section level1">
+<h1 class="hasAnchor">
+<a href="#giotto-and-image-data" class="anchor"></a>Giotto and Image Data</h1>
 <p><br> Multiple images can be attached to your Giotto object. Spatial data can be overlaid over these images and the images themselves can also be used for downstream image analyses. While Giotto attempts to automate the addition and alignment of images as much as possible, manual adjustments may sometimes be necessary, and this tutorial will be covering both topics.<br>
-Examples will be worked using Visium’s normal human prostate FFPE <a href="https://www.10xgenomics.com/resources/datasets/normal-human-prostate-ffpe-1-standard-1-3-0" class="external-link">dataset</a> for both the Visium and manual adjustment workflows.</p>
-<div class="section level4">
-<h4 id="conceptual-overview">Conceptual Overview<a class="anchor" aria-label="anchor" href="#conceptual-overview"></a>
-</h4>
-<p>Images are loaded in using the <a href="https://rdrr.io/cran/magick/" class="external-link"><strong>magick</strong></a> package and then placed into <strong>giottoImage</strong> objects to be worked with in Giotto.</p>
+Examples will be worked using Visium’s normal human prostate FFPE <a href="https://www.10xgenomics.com/resources/datasets/normal-human-prostate-ffpe-1-standard-1-3-0">dataset</a> for both the Visium and manual adjustment workflows.</p>
+<div id="conceptual-overview" class="section level3">
+<h3 class="hasAnchor">
+<a href="#conceptual-overview" class="anchor"></a>Conceptual Overview</h3>
+<p>Images are loaded in using the <a href="https://rdrr.io/cran/magick/"><strong>magick</strong></a> package and then placed into <strong>giottoImage</strong> objects to be worked with in Giotto.</p>
 <details><summary><strong>More about the giottoImage container</strong>
 </summary><hr>
 <p><strong>giottoImages</strong> are S4 class objects with slots that contain both the image itself, and all the metadata needed to plot them in the right position. The <strong>magick</strong> package allows easy access to image processing functions and also the ability to refer to images through pointers so that they are only loaded into memory when needed.</p>
@@ -212,14 +210,14 @@ Calling the <strong>giottoImage</strong> by itself will display its class and na
 - <strong>ymin_adj</strong> = (spatial location ymin) - (ymin image bound in original dimensions)<br>
 - <strong>ymax_adj</strong> = 0 - (spatial location ymax)<br><br></p>
 </div>
-<div class="section level4">
-<h4 id="visium-workflow-only-automated">Visium workflow only (Automated):<a class="anchor" aria-label="anchor" href="#visium-workflow-only-automated"></a>
-</h4>
+<div id="visium-workflow-only-automated" class="section level3">
+<h3 class="hasAnchor">
+<a href="#visium-workflow-only-automated" class="anchor"></a>Visium workflow only (Automated):</h3>
 <p>Assembly of Giotto object and reading in and alignment of the tissue staining image from the visium spatial subdirectory is done automatically using <strong>createGiottoVisiumObject()</strong>.</p>
 <p>Creation of a giotto object from<br>
 Either the hires or lowres image will be loaded depending on whether "<strong>tissue_hires_image.png"</strong> or <strong>“tissue_lowres_image.png”</strong> is provided to the <strong>png_name</strong> argument.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/">Giotto</a></span><span class="op">)</span>
   
 <span class="co"># gobject creation</span>
 <span class="va">VisiumDir</span> <span class="op">&lt;-</span> <span class="st">'path/to/visium/dataset/directory'</span>
@@ -231,12 +229,12 @@ Either the hires or lowres image will be loaded depending on whether "<strong>ti
            cell_color <span class="op">=</span> <span class="st">'in_tissue'</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/getting_started_figs/getting_started_images/images_VisAutoAdj_FFPE_prostate.png" style="width:50.0%"><br><br></p>
 </div>
-<div class="section level4">
-<h4 id="standard-workflow">Standard workflow<a class="anchor" aria-label="anchor" href="#standard-workflow"></a>
-</h4>
-<div class="section level5">
-<h5 id="step-0---inverting-y-values">Step 0 - Inverting Y-Values<a class="anchor" aria-label="anchor" href="#step-0---inverting-y-values"></a>
-</h5>
+<div id="standard-workflow" class="section level3">
+<h3 class="hasAnchor">
+<a href="#standard-workflow" class="anchor"></a>Standard workflow</h3>
+<div id="step-0---inverting-y-values" class="section level4">
+<h4 class="hasAnchor">
+<a href="#step-0---inverting-y-values" class="anchor"></a>Step 0 - Inverting Y-Values</h4>
 <p>Often, the first step is making the y values in your spatial locations negative. This is due to differences in conventions for defining coordinates in images and plotting and is required in order for the spatial locations to appear in the same orientation as your image.<br>
 This transformation of the spatial locations is automatically done for Visium datasets during <strong>createGiottoVisiumObject()</strong>.</p>
 <details><summary><strong>Why this is needed</strong>
@@ -256,9 +254,9 @@ The reason for this issue is because image coordinates are defined to start in t
 <p><img src="../inst/images/getting_started_figs/getting_started_images/images_inverty.png" style="width:70.0%"></p>
 <hr></details><p><br></p>
 </div>
-<div class="section level5">
-<h5 id="step-1---giottoimage-creation">Step 1 - giottoImage Creation<a class="anchor" aria-label="anchor" href="#step-1---giottoimage-creation"></a>
-</h5>
+<div id="step-1---giottoimage-creation" class="section level4">
+<h4 class="hasAnchor">
+<a href="#step-1---giottoimage-creation" class="anchor"></a>Step 1 - giottoImage Creation</h4>
 <p>giottoImages are created using the <strong>createGiottoImage()</strong> function. This function requires a <strong>magick</strong>-compatible image (eg. jpg, tiff, png) to be provided to the <strong>mg_object</strong> argument as either a filepath or already loaded in as a <strong>magick</strong> object.<br>
 Also required if automatic image alignment is desired is the <strong>scale_factor</strong> which is the scaling from the spatial locations to the image.<br><em>This is since spatial locations do not contain information for how large the image is past the spatial xmax and ymin values. Those two image bounds are instead inferred by scaling up the current image dimensions to those of the spatial locations.</em><br>
 For Visium datasets, scaling information is available in the <strong>scalefactors_json.json</strong> file found within the <strong>spatial</strong> subdirectory.</p>
@@ -368,12 +366,12 @@ For Visium datasets, scaling information is available in the <strong>scalefactor
 <span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  raw <span class="sc">:</span>  <span class="fl">45.78167</span> </span></code></pre></div>
 <hr></details><p><em>When <strong>do_manual_adj = TRUE</strong>, automatic alignment is bypassed in favor of the four manual adjustment values.</em><br><em>These values default to 0.</em><br><br></p>
 </div>
-<div class="section level5">
-<h5 id="step-2---add-giottoimage-to-giottoobject-and-visualize">Step 2 - Add giottoImage to giottoObject and Visualize<a class="anchor" aria-label="anchor" href="#step-2---add-giottoimage-to-giottoobject-and-visualize"></a>
-</h5>
+<div id="step-2---add-giottoimage-to-giottoobject-and-visualize" class="section level4">
+<h4 class="hasAnchor">
+<a href="#step-2---add-giottoimage-to-giottoobject-and-visualize" class="anchor"></a>Step 2 - Add giottoImage to giottoObject and Visualize</h4>
 <p><strong>addGiottoImage()</strong> adds a <strong>list</strong> of images to the <strong>giottoObject</strong> specified. The name that the image is referred to as within the <strong>images</strong> slot is inherited from the <strong>name</strong> argument during <strong>createGiottoImage()</strong>. The default name is “image.”</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">FFPE_prostate</span> <span class="op">=</span> <span class="fu"><a href="../reference/addGiottoImage.html">addGiottoImage</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">FFPE_prostate</span>, images <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">lowResG_img</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">FFPE_prostate</span> <span class="op">=</span> <span class="fu"><a href="../reference/addGiottoImage.html">addGiottoImage</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">FFPE_prostate</span>, images <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">lowResG_img</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">FFPE_prostate</span>,
            show_image <span class="op">=</span> <span class="cn">TRUE</span>,
@@ -382,14 +380,14 @@ For Visium datasets, scaling information is available in the <strong>scalefactor
 <p><img src="../inst/images/getting_started_figs/getting_started_images/images_VisAutoAdj_FFPE_prostate_lowres.png" style="width:50.0%"></p>
 </div>
 </div>
-<div class="section level4">
-<h4 id="manual-adjustment">Manual Adjustment<a class="anchor" aria-label="anchor" href="#manual-adjustment"></a>
-</h4>
+<div id="manual-adjustment" class="section level3">
+<h3 class="hasAnchor">
+<a href="#manual-adjustment" class="anchor"></a>Manual Adjustment</h3>
 <p>Manually adjusting the plotting of images comes either during <strong>createGiottoImage()</strong> using <strong>do_manual_adj = TRUE</strong> and the four adjustment values <strong>(xmin_adj, xmax_adj, ymin_adj, ymax_adj)</strong> or after <strong>giottoImage</strong> creation using <strong>updateGiottoImage()</strong>.<br>
 This method is performed by eye and may be necessary depending on preference or if despite accounting for scaling, the image coordinates do not match up with the spatial coordinates for some reason.</p>
-<div class="section level5">
-<h5 id="during-giottoimage-creation">During giottoImage creation<a class="anchor" aria-label="anchor" href="#during-giottoimage-creation"></a>
-</h5>
+<div id="during-giottoimage-creation" class="section level4">
+<h4 class="hasAnchor">
+<a href="#during-giottoimage-creation" class="anchor"></a>During giottoImage creation</h4>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># createGiottoImage with manually defined adjustment values</span>
 <span class="va">lowRes</span> <span class="op">&lt;-</span> <span class="st">"/path/to/visium/directory/spatial/tissue_lowres_image.png"</span>
@@ -402,7 +400,7 @@ This method is performed by eye and may be necessary depending on preference or 
                                  ymax_adj <span class="op">=</span> <span class="fl">3682</span>,
                                  scale_factor <span class="op">=</span> <span class="fl">0.021842804</span><span class="op">)</span>
 
-<span class="va">FFPE_prostate</span> <span class="op">=</span> <span class="fu"><a href="../reference/addGiottoImage.html">addGiottoImage</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">FFPE_prostate</span>, images <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">lowResG_img</span><span class="op">)</span><span class="op">)</span>
+<span class="va">FFPE_prostate</span> <span class="op">=</span> <span class="fu"><a href="../reference/addGiottoImage.html">addGiottoImage</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">FFPE_prostate</span>, images <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">lowResG_img</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">FFPE_prostate</span>,
            show_image <span class="op">=</span> <span class="cn">TRUE</span>,
@@ -410,9 +408,9 @@ This method is performed by eye and may be necessary depending on preference or 
            cell_color <span class="op">=</span> <span class="st">"in_tissue"</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/getting_started_figs/getting_started_images/images_create_manual.png" style="width:50.0%"></p>
 </div>
-<div class="section level5">
-<h5 id="after-giottoimage-creation">After giottoImage creation<a class="anchor" aria-label="anchor" href="#after-giottoimage-creation"></a>
-</h5>
+<div id="after-giottoimage-creation" class="section level4">
+<h4 class="hasAnchor">
+<a href="#after-giottoimage-creation" class="anchor"></a>After giottoImage creation</h4>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># createGiottoImage with manually defined adjustment values</span>
 <span class="va">lowRes</span> <span class="op">&lt;-</span> <span class="st">"/path/to/visium/directory/spatial/tissue_lowres_image.png"</span>
@@ -425,7 +423,7 @@ This method is performed by eye and may be necessary depending on preference or 
                                  ymax_adj <span class="op">=</span> <span class="fl">0</span>,
                                  scale_factor <span class="op">=</span> <span class="fl">0.021842804</span><span class="op">)</span>
 
-<span class="va">FFPE_prostate</span> <span class="op">=</span> <span class="fu"><a href="../reference/addGiottoImage.html">addGiottoImage</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">FFPE_prostate</span>, images <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">lowResG_img</span><span class="op">)</span><span class="op">)</span>
+<span class="va">FFPE_prostate</span> <span class="op">=</span> <span class="fu"><a href="../reference/addGiottoImage.html">addGiottoImage</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">FFPE_prostate</span>, images <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">lowResG_img</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">FFPE_prostate</span>,
            show_image <span class="op">=</span> <span class="cn">TRUE</span>,
@@ -462,13 +460,11 @@ This method is performed by eye and may be necessary depending on preference or 
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by <a href="https://www.drieslab.com/" class="external-link">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
+  <p>Developed by <a href="https://www.drieslab.com/">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -476,8 +472,6 @@ This method is performed by eye and may be necessary depending on preference or 
 
   
 
-
-  
 
   </body>
 </html>

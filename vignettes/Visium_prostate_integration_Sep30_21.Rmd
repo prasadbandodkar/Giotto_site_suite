@@ -73,7 +73,7 @@ C_pros = createGiottoVisiumObject(
 # if x_shift = NULL, then the total shift will be guessed from the giotto image
 testcombo = joinGiottoObjects(gobject_list = list(N_pros, C_pros),
     gobject_names = c('NP', 'CP'),
-    join_method = 'x_shift', x_padding = 1000)
+    join_method = 'shift', x_padding = 1000)
 
 
 # join info is stored in this slot
@@ -231,10 +231,16 @@ testcombo <- doLeidenCluster(gobject = testcombo,
 
 # UMAP dimension reduction
 testcombo = runUMAP(testcombo, dim_reduction_name = 'harmony', dim_reduction_to_use = 'harmony', name = 'umap_harmony')
+
+
 plotUMAP(gobject = testcombo,
     dim_reduction_name = 'umap_harmony',
-    cell_color = 'leiden_harmony', show_NN_network = T, point_size = 1.5,
+    cell_color = 'leiden_harmony', 
+    show_NN_network = F, 
+    point_size = 1.5,
     save_param = list(save_name = "4.2a_plot"))
+# If you want to show NN network information, you will need to specify these arguments in the plotUMAP function
+# show_NN_network = T, nn_network_to_use = 'sNN' , network_name = 'NN.harmony'
 ```
 ![](../inst/images/visium_prostate_integration/vignette_sep29_2021/4.2a_plot.png){ width=50% } 
 
