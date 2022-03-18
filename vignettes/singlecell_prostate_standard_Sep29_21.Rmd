@@ -17,7 +17,7 @@ results_folder = 'path/to/result'
 # set python path to conda env/bin/ directory if manually installed Giotto python dependencies by conda
 # python_path = '/path_to_conda/.conda/envs/giotto/bin/python'
 # set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment
-python_path = null
+python_path = NULL
 if(is.null(python_path)) {
   installGiottoEnvironment()
 }
@@ -57,9 +57,8 @@ giotto_SC <- normalizeGiotto(gobject = giotto_SC, scalefactor = 6000)
 
 ## add mitochondria gene percentage and filter giotto object by percent mito
 library(rtracklayer)
-gtf <- import("Homo_sapiens.GRCh38.101.gtf.gz")
-gtf <- gtf[gtf$gene_name!=""]
-gtf <- gtf[!is.na(gtf$gene_name)]
+gtf <- import("Homo_sapiens.GRCh38.105.gtf.gz")
+gtf <- gtf[gtf$gene_name!="" & !is.na(gtf$gene_name)]
 mito <- gtf$gene_name[as.character(seqnames(gtf)) %in% "MT"]
 mito<-unique(mito)
 
@@ -117,7 +116,7 @@ plotUMAP(gobject = giotto_SC,
 ```{r eval = FALSE}
 markers_scran = findMarkers_one_vs_all(gobject=giotto_SC, method="scran",
                                        expression_values="normalized", cluster_column='leiden_clus', min_feats=3)
-markergenes_scran = unique(markers_scran[, head(.SD, 3), by="cluster"][["genes"]])
+markergenes_scran = unique(markers_scran[, head(.SD, 3), by="cluster"][["feats"]])
 
 plotMetaDataHeatmap(giotto_SC, expression_values = "normalized", metadata_cols = 'leiden_clus', 
                     selected_feats = markergenes_scran,
@@ -127,12 +126,11 @@ plotMetaDataHeatmap(giotto_SC, expression_values = "normalized", metadata_cols =
 ![](../inst/images/singlecell_prostate_standard/vignette_sep29_2021/5_a_metaheatmap.png){ width=50% }
 
 ```{r eval = FALSE}
-topgenes_scran = markers_scran[, head(.SD, 1), by = 'cluster']$genes
+topgenes_scran = markers_scran[, head(.SD, 1), by = 'cluster']$feats
 # violinplot
-violinPlot(giotto_SC, genes = unique(topgenes_scran), cluster_column = 'leiden_clus',
+violinPlot(giotto_SC, feats = unique(topgenes_scran), cluster_column = 'leiden_clus',
            strip_text = 10, strip_position = 'right',
            save_param = list(save_name = '5_b_violinplot_scran', base_width = 5))
-
 ```
 ![](../inst/images/singlecell_prostate_standard/vignette_sep29_2021/5_b_violinplot_scran.png){ width=50% }
 
@@ -208,14 +206,13 @@ plotUMAP(gobject = Subset_giotto_T,
 
 ```{r eval = FALSE}
 markers_scran_T = findMarkers_one_vs_all(gobject=Subset_giotto_T, method="scran",
-                                       expression_values="normalized", cluster_column='leiden_clus', min_feats=3)
-markergenes_scran_T = unique(markers_scran_T[, head(.SD, 5), by="cluster"][["genes"]])
+                                         expression_values="normalized", cluster_column='leiden_clus', min_feats=3)
+markergenes_scran_T = unique(markers_scran_T[, head(.SD, 5), by="cluster"][["feats"]])
 
 plotMetaDataHeatmap(Subset_giotto_T, expression_values = "normalized", metadata_cols = 'leiden_clus', 
                     selected_feats = markergenes_scran_T,
                     y_text_size = 8, show_values = 'zscores_rescaled',
                     save_param = list(save_name = '8_c_metaheatmap'))
-
 ```
 ![](../inst/images/singlecell_prostate_standard/vignette_sep29_2021/8_c_metaheatmap.png){ width=50% }
 

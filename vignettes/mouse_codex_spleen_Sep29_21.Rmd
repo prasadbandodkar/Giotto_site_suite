@@ -19,7 +19,7 @@ results_folder = 'path/to/result'
 # set python path to conda env/bin/ directory if manually installed Giotto python dependencies by conda
 # python_path = '/path_to_conda/.conda/envs/giotto/bin/python'
 # set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment
-python_path = null
+python_path = NULL
 if(is.null(python_path)) {
   installGiottoEnvironment()
 }
@@ -156,7 +156,7 @@ plotUMAP(gobject = codex_test, point_shape = 'no_border', point_size = 0.2,
 codex_test <- createNearestNetwork(gobject = codex_test, dimensions_to_use = 1:14, k = 20)
 
 ## 0.1 resolution
-codex_test <- doLeidenCluster(gobject = codex_test, resolution = 0.5, n_iterations = 100, name = 'leiden',python_path = python_path)
+codex_test <- doLeidenCluster(gobject = codex_test, resolution = 0.5, n_iterations = 100, name = 'leiden')
 
 codex_metadata = pDataDT(codex_test)
 leiden_colors = Giotto:::getDistinctColors(length(unique(codex_metadata$leiden)))
@@ -191,10 +191,10 @@ spatDimPlot2D(gobject = codex_test, cell_color = 'leiden', spat_point_shape = 'n
 cluster_column = 'leiden'
 markers_scran = findMarkers_one_vs_all(gobject=codex_test, method="scran",
                                        expression_values="normalized", cluster_column=cluster_column, min_feats=3)
-markergenes_scran = unique(markers_scran[, head(.SD, 5), by="cluster"][["genes"]])
+markergenes_scran = unique(markers_scran[, head(.SD, 5), by="cluster"][["feats"]])
 
 plotMetaDataHeatmap(codex_test, expression_values = "normalized", metadata_cols = c(cluster_column), 
-                    selected_genes = markergenes_scran,
+                    selected_feats = markergenes_scran,
                     y_text_size = 8, show_values = 'zscores_rescaled',
                     save_param = list(save_name = '6_a_metaheatmap'))
 ```
@@ -202,8 +202,8 @@ plotMetaDataHeatmap(codex_test, expression_values = "normalized", metadata_cols 
 ![](../inst/images/mouse_codex_spleen/vignette_sep29_2021/6_a_metaheatmap.png){ width=50% }
 
 ```{r eval=FALSE}
-topgenes_scran = markers_scran[, head(.SD, 1), by = 'cluster']$genes
-violinPlot(codex_test, genes = unique(topgenes_scran)[1:8], cluster_column = cluster_column,
+topgenes_scran = markers_scran[, head(.SD, 1), by = 'cluster']$feats
+violinPlot(codex_test, feats = unique(topgenes_scran)[1:8], cluster_column = cluster_column,
            strip_text = 8, strip_position = 'right',
            save_param = list(save_name = '6_b_violinplot'))
 ```
@@ -214,7 +214,7 @@ violinPlot(codex_test, genes = unique(topgenes_scran)[1:8], cluster_column = clu
 # gini
 markers_gini = findMarkers_one_vs_all(gobject=codex_test, method="gini", expression_values="normalized",
                                       cluster_column=cluster_column, min_feats=5)
-markergenes_gini = unique(markers_gini[, head(.SD, 5), by="cluster"][["genes"]])
+markergenes_gini = unique(markers_gini[, head(.SD, 5), by="cluster"][["feats"]])
 plotMetaDataHeatmap(codex_test, expression_values = "normalized", 
                     metadata_cols = c(cluster_column), selected_feats = markergenes_gini,
                     show_values = 'zscores_rescaled',
@@ -224,7 +224,7 @@ plotMetaDataHeatmap(codex_test, expression_values = "normalized",
 
 ```{r eval=FALSE}
 topgenes_gini = markers_gini[, head(.SD, 1), by = 'cluster']$feats
-violinPlot(codex_test, genes = unique(topgenes_gini), cluster_column = cluster_column,
+violinPlot(codex_test, feats = unique(topgenes_gini), cluster_column = cluster_column,
            strip_text = 8, strip_position = 'right',
            save_param = list(save_name = '6_d_violinplot'))
 ```
@@ -302,7 +302,7 @@ spatPlot(gobject = codex_test_zone1,
 ```{r eval=FALSE}
 spatDimFeatPlot2D(codex_test_zone1, 
                 expression_values = 'scaled',
-                genes = c("CD8a","CD19"),
+                feats = c("CD8a","CD19"),
                 spat_point_shape = 'no_border',
                 dim_point_shape = 'no_border',
                 cell_color_gradient = c("darkblue", "white", "red"),
@@ -340,7 +340,7 @@ spatPlot(gobject = codex_test_zone2, cell_color = 'Imaging_phenotype_cell_type',
 ```{r eval=FALSE}
 spatDimFeatPlot2D(codex_test_zone2, 
                 expression_values = 'scaled',
-                genes = c("CD4", "CD106"),
+                feats = c("CD4", "CD106"),
                 spat_point_shape = 'no_border',
                 dim_point_shape = 'no_border',
                 cell_color_gradient = c("darkblue", "white", "red"),

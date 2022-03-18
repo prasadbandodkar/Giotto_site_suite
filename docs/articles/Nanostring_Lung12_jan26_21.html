@@ -32,8 +32,6 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -46,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
@@ -129,7 +127,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/RubD/Giotto/" class="external-link">
+  <a href="https://github.com/RubD/Giotto/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -144,29 +142,29 @@
 
       
 
-      </header><div class="row">
+      </header><script src="Nanostring_Lung12_jan26_21_files/header-attrs-2.13/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Nanostring CosMx Subcellular Lung Cancer</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/HEAD/vignettes/Nanostring_Lung12_jan26_21.Rmd" class="external-link"><code>vignettes/Nanostring_Lung12_jan26_21.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/master/vignettes/Nanostring_Lung12_jan26_21.Rmd"><code>vignettes/Nanostring_Lung12_jan26_21.Rmd</code></a></small>
       <div class="hidden name"><code>Nanostring_Lung12_jan26_21.Rmd</code></div>
 
     </div>
 
     
     
-<p>This example uses subcellular data from Nanostring’s CosMx Spatial Molecular Imager. This publicly available dataset, (which can be found here: <a href="https://www.nanostring.com/products/cosmx-spatial-molecular-imager/ffpe-dataset/" class="external-link uri">https://www.nanostring.com/products/cosmx-spatial-molecular-imager/ffpe-dataset/</a>) is from a FFPE sample of non-small-cell lung cancer. This example works with Lung12.</p>
-<div class="section level2">
-<h2 id="start-giotto">1. Start Giotto<a class="anchor" aria-label="anchor" href="#start-giotto"></a>
-</h2>
+<p>This example uses subcellular data from Nanostring’s CosMx Spatial Molecular Imager. This publicly available dataset, (which can be found here: <a href="https://www.nanostring.com/products/cosmx-spatial-molecular-imager/ffpe-dataset/" class="uri">https://www.nanostring.com/products/cosmx-spatial-molecular-imager/ffpe-dataset/</a>) is from a FFPE sample of non-small-cell lung cancer. This example works with Lung12.</p>
+<div id="start-giotto" class="section level1">
+<h1 class="hasAnchor">
+<a href="#start-giotto" class="anchor"></a>1. Start Giotto</h1>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Load Giotto, data.table is also necessary for this example</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/">Giotto</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span>
 <span class="co"># add color palettes if you want!</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Nowosad/rcartocolor" class="external-link">rcartocolor</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Nowosad/rcartocolor">rcartocolor</a></span><span class="op">)</span>
 <span class="va">pal</span> <span class="op">&lt;-</span> <span class="fu">carto_pal</span><span class="op">(</span>n<span class="op">=</span><span class="fl">10</span>, <span class="st">"Pastel"</span><span class="op">)</span>
 
 <span class="co"># set working directory</span>
@@ -176,7 +174,7 @@
 <span class="co"># set python path to your preferred python version path</span>
 <span class="co"># set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment</span>
 <span class="va">python_path</span> <span class="op">=</span> <span class="cn">NULL</span>
-<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">python_path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">python_path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span>
 <span class="op">}</span>
 
@@ -188,55 +186,55 @@
                                   show_plot <span class="op">=</span> <span class="cn">FALSE</span>,
                                   return_plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="load-in-data">2. Load in Data<a class="anchor" aria-label="anchor" href="#load-in-data"></a>
-</h2>
+<div id="load-in-data" class="section level1">
+<h1 class="hasAnchor">
+<a href="#load-in-data" class="anchor"></a>2. Load in Data</h1>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## provide path to nanostring folder</span>
 <span class="va">data_path</span> <span class="op">=</span> <span class="st">'/path/to/data/Lung12-Flat_files_and_images/'</span>
 
 <span class="co"># load transcript coordinates</span>
-<span class="va">tx_coord_all</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_path</span>, <span class="st">'Lung12_tx_file-002.csv'</span><span class="op">)</span><span class="op">)</span>
+<span class="va">tx_coord_all</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">data_path</span>, <span class="st">'Lung12_tx_file-002.csv'</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co">#  load field of vision (fov) positions</span>
-<span class="va">fov_offset_file</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_path</span>, <span class="st">'Lung12_fov_positions_file.csv'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="section level4">
-<h4 id="choose-field-of-vision-for-analysis">Choose field of vision for analysis<a class="anchor" aria-label="anchor" href="#choose-field-of-vision-for-analysis"></a>
-</h4>
+<span class="va">fov_offset_file</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">data_path</span>, <span class="st">'Lung12_fov_positions_file.csv'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div id="choose-field-of-vision-for-analysis" class="section level3">
+<h3 class="hasAnchor">
+<a href="#choose-field-of-vision-for-analysis" class="anchor"></a>Choose field of vision for analysis</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gobjects_list</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">gobjects_list</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># select which FOV's you would like to work with</span>
 <span class="co"># the dataset includes 28, which is too much for most computers to handle at once. </span>
 <span class="co">#For this example I am using 02, 03, and 04</span>
-<span class="va">id_set</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'02'</span>, <span class="st">'03'</span>, <span class="st">'04'</span><span class="op">)</span></code></pre></div>
+<span class="va">id_set</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'02'</span>, <span class="st">'03'</span>, <span class="st">'04'</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div class="section level2">
-<h2 id="create-a-giotto-object-for-each-fov">3. Create a Giotto Object for each FOV<a class="anchor" aria-label="anchor" href="#create-a-giotto-object-for-each-fov"></a>
-</h2>
+<div id="create-a-giotto-object-for-each-fov" class="section level1">
+<h1 class="hasAnchor">
+<a href="#create-a-giotto-object-for-each-fov" class="anchor"></a>3. Create a Giotto Object for each FOV</h1>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">for</span><span class="op">(</span><span class="va">fov_i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">id_set</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+<code class="sourceCode R"><span class="kw">for</span><span class="op">(</span><span class="va">fov_i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">id_set</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   
   <span class="va">fov_id</span> <span class="op">=</span> <span class="va">id_set</span><span class="op">[</span><span class="va">fov_i</span><span class="op">]</span>
 
 
   <span class="co"># 1. original composite image as png</span>
-  <span class="va">original_composite_image</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_path</span>, <span class="st">'CellComposite/CellComposite_F0'</span>, <span class="va">fov_id</span>,<span class="st">'.jpg'</span><span class="op">)</span>
+  <span class="va">original_composite_image</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">data_path</span>, <span class="st">'CellComposite/CellComposite_F0'</span>, <span class="va">fov_id</span>,<span class="st">'.jpg'</span><span class="op">)</span>
   
   <span class="co"># 2. input cell segmentation as mask file</span>
-  <span class="va">segmentation_mask</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_path</span>, <span class="st">'CellLabels/CellLabels_F0'</span>, <span class="va">fov_id</span>, <span class="st">'.tif'</span><span class="op">)</span>
+  <span class="va">segmentation_mask</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">data_path</span>, <span class="st">'CellLabels/CellLabels_F0'</span>, <span class="va">fov_id</span>, <span class="st">'.tif'</span><span class="op">)</span>
   
   <span class="co"># 3. input features coordinates + offset</span>
-  <span class="va">tx_coord</span> <span class="op">=</span> <span class="va">tx_coord_all</span><span class="op">[</span><span class="va">fov</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">fov_id</span><span class="op">)</span><span class="op">]</span>
+  <span class="va">tx_coord</span> <span class="op">=</span> <span class="va">tx_coord_all</span><span class="op">[</span><span class="va">fov</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">fov_id</span><span class="op">)</span><span class="op">]</span>
   <span class="va">tx_coord</span> <span class="op">=</span> <span class="va">tx_coord</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">x_local_px</span>, <span class="va">y_local_px</span>, <span class="va">z</span>, <span class="va">target</span><span class="op">)</span><span class="op">]</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">tx_coord</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'x'</span>, <span class="st">'y'</span>, <span class="st">'z'</span>, <span class="st">'gene_id'</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">tx_coord</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'x'</span>, <span class="st">'y'</span>, <span class="st">'z'</span>, <span class="st">'gene_id'</span><span class="op">)</span>
   <span class="va">tx_coord</span> <span class="op">=</span> <span class="va">tx_coord</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">gene_id</span><span class="op">)</span><span class="op">]</span>
   
   
-  <span class="va">fovsubset</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoObjectSubcellular.html">createGiottoObjectSubcellular</a></span><span class="op">(</span>gpoints <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="va">tx_coord</span><span class="op">)</span>,
-                                            gpolygons <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'cell'</span> <span class="op">=</span> <span class="va">segmentation_mask</span><span class="op">)</span>,
-                                            polygon_mask_list_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mask_method <span class="op">=</span> <span class="st">'guess'</span>,
+  <span class="va">fovsubset</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoObjectSubcellular.html">createGiottoObjectSubcellular</a></span><span class="op">(</span>gpoints <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="va">tx_coord</span><span class="op">)</span>,
+                                            gpolygons <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'cell'</span> <span class="op">=</span> <span class="va">segmentation_mask</span><span class="op">)</span>,
+                                            polygon_mask_list_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mask_method <span class="op">=</span> <span class="st">'guess'</span>,
                                                                             flip_vertical <span class="op">=</span> <span class="cn">TRUE</span>,
                                                                             flip_horizontal <span class="op">=</span> <span class="cn">FALSE</span>,
                                                                             shift_horizontal_step <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,
@@ -253,7 +251,7 @@
                                      name <span class="op">=</span> <span class="st">'composite'</span><span class="op">)</span>
   
   <span class="va">fovsubset</span> <span class="op">=</span> <span class="fu"><a href="../reference/addGiottoImage.html">addGiottoImage</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">fovsubset</span>,
-                             largeImages <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">composite</span><span class="op">)</span><span class="op">)</span>
+                             largeImages <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">composite</span><span class="op">)</span><span class="op">)</span>
   
   
   <span class="va">fovsubset</span> <span class="op">=</span> <span class="fu"><a href="../reference/convertGiottoLargeImageToMG.html">convertGiottoLargeImageToMG</a></span><span class="op">(</span>giottoLargeImage <span class="op">=</span> <span class="va">composite</span>,
@@ -266,13 +264,13 @@
   
 <span class="op">}</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="join-giotto-objects">4. Join Giotto Objects<a class="anchor" aria-label="anchor" href="#join-giotto-objects"></a>
-</h2>
+<div id="join-giotto-objects" class="section level1">
+<h1 class="hasAnchor">
+<a href="#join-giotto-objects" class="anchor"></a>4. Join Giotto Objects</h1>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">new_names</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"fov0"</span>, <span class="va">id_set</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">new_names</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"fov0"</span>, <span class="va">id_set</span><span class="op">)</span>
 
-<span class="va">id_match</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">id_set</span><span class="op">)</span>, <span class="va">fov_offset_file</span><span class="op">$</span><span class="va">fov</span><span class="op">)</span>
+<span class="va">id_match</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">id_set</span><span class="op">)</span>, <span class="va">fov_offset_file</span><span class="op">$</span><span class="va">fov</span><span class="op">)</span>
 <span class="va">x_shifts</span> <span class="op">=</span> <span class="va">fov_offset_file</span><span class="op">[</span><span class="va">id_match</span><span class="op">]</span><span class="op">$</span><span class="va">x_global_px</span>
 <span class="va">y_shifts</span> <span class="op">=</span> <span class="va">fov_offset_file</span><span class="op">[</span><span class="va">id_match</span><span class="op">]</span><span class="op">$</span><span class="va">y_global_px</span>
 
@@ -285,16 +283,16 @@
 
 <span class="fu"><a href="../reference/showGiottoImageNames.html">showGiottoImageNames</a></span><span class="op">(</span><span class="va">fov_join</span><span class="op">)</span>
 
-<span class="va">image_names</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">new_names</span>, <span class="st">'-image'</span><span class="op">)</span></code></pre></div>
+<span class="va">image_names</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">new_names</span>, <span class="st">'-image'</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="visualize-cells-and-genes-of-interest">5. Visualize Cells and Genes of Interest<a class="anchor" aria-label="anchor" href="#visualize-cells-and-genes-of-interest"></a>
-</h2>
+<div id="visualize-cells-and-genes-of-interest" class="section level1">
+<h1 class="hasAnchor">
+<a href="#visualize-cells-and-genes-of-interest" class="anchor"></a>5. Visualize Cells and Genes of Interest</h1>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">fov_join</span>,
                      show_image <span class="op">=</span> <span class="cn">T</span>,
                      image_name <span class="op">=</span> <span class="va">image_names</span>,
-                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span>, <span class="st">'EPCAM'</span><span class="op">)</span><span class="op">)</span>,
+                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span>, <span class="st">'EPCAM'</span><span class="op">)</span><span class="op">)</span>,
                      spat_unit <span class="op">=</span> <span class="st">'cell'</span>,
                      point_size <span class="op">=</span> <span class="fl">0.15</span>,
                      show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,
@@ -305,9 +303,9 @@
                      coord_fix_ratio <span class="op">=</span> <span class="cn">TRUE</span>,
                      background_color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1272022/Rplot1.png" style="width:175.0%"></p>
-<div class="section level4">
-<h4 id="visulaize-cells">Visulaize Cells<a class="anchor" aria-label="anchor" href="#visulaize-cells"></a>
-</h4>
+<div id="visulaize-cells" class="section level3">
+<h3 class="hasAnchor">
+<a href="#visulaize-cells" class="anchor"></a>Visulaize Cells</h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">fov_join</span>,
            image_name <span class="op">=</span> <span class="va">image_names</span>,
@@ -317,9 +315,9 @@
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1272022/Rplot2.png" style="width:150.0%"></p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="extract-data-from-your-giotto-object">6. Extract Data from your Giotto Object<a class="anchor" aria-label="anchor" href="#extract-data-from-your-giotto-object"></a>
-</h2>
+<div id="extract-data-from-your-giotto-object" class="section level1">
+<h1 class="hasAnchor">
+<a href="#extract-data-from-your-giotto-object" class="anchor"></a>6. Extract Data from your Giotto Object</h1>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fov_join</span> <span class="op">=</span> <span class="fu"><a href="../reference/calculateOverlapRaster.html">calculateOverlapRaster</a></span><span class="op">(</span><span class="va">fov_join</span><span class="op">)</span>
 
@@ -331,15 +329,15 @@
 <span class="va">morphometa</span> <span class="op">=</span> <span class="fu"><a href="../reference/combineCellData.html">combineCellData</a></span><span class="op">(</span><span class="va">fov_join</span>, feat_type <span class="op">=</span> <span class="st">'rna'</span><span class="op">)</span>
 
 <span class="co"># combine feature data</span>
-<span class="va">featmeta</span> <span class="op">=</span> <span class="fu"><a href="../reference/combineFeatureData.html">combineFeatureData</a></span><span class="op">(</span><span class="va">fov_join</span>, feat_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'rna'</span><span class="op">)</span><span class="op">)</span>
+<span class="va">featmeta</span> <span class="op">=</span> <span class="fu"><a href="../reference/combineFeatureData.html">combineFeatureData</a></span><span class="op">(</span><span class="va">fov_join</span>, feat_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'rna'</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># combine overlapping feature data</span>
 <span class="va">featoverlapmeta</span> <span class="op">=</span> <span class="fu"><a href="../reference/combineFeatureOverlapData.html">combineFeatureOverlapData</a></span><span class="op">(</span><span class="va">fov_join</span>,
-                                            feat_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'rna'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                                            feat_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'rna'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="process-giotto-object">7. Process Giotto Object<a class="anchor" aria-label="anchor" href="#process-giotto-object"></a>
-</h2>
+<div id="process-giotto-object" class="section level1">
+<h1 class="hasAnchor">
+<a href="#process-giotto-object" class="anchor"></a>7. Process Giotto Object</h1>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># filter</span>
 <span class="va">fov_join</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filterGiotto.html">filterGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">fov_join</span>,
@@ -357,18 +355,18 @@
 <span class="co"># View rna data</span>
 <span class="fu"><a href="../reference/fDataDT.html">fDataDT</a></span><span class="op">(</span><span class="va">fov_join</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="view-transcript-number-distribution">8. View Transcript Number Distribution<a class="anchor" aria-label="anchor" href="#view-transcript-number-distribution"></a>
-</h2>
+<div id="view-transcript-number-distribution" class="section level1">
+<h1 class="hasAnchor">
+<a href="#view-transcript-number-distribution" class="anchor"></a>8. View Transcript Number Distribution</h1>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cellmeta</span> <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">fov_join</span>, feat_type <span class="op">=</span> <span class="st">'rna'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">cellmeta</span><span class="op">$</span><span class="va">nr_feats</span>, <span class="fl">100</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">cellmeta</span><span class="op">$</span><span class="va">nr_feats</span>, <span class="fl">100</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1262022/Rplothist.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">fov_join</span>,
            cell_color <span class="op">=</span> <span class="st">'total_expr'</span>, color_as_factor <span class="op">=</span> <span class="cn">F</span>,
            show_image <span class="op">=</span> <span class="cn">TRUE</span>,
-           image_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'fov002-image'</span>, <span class="st">'fov003-image'</span>, <span class="st">'fov004-image'</span><span class="op">)</span>,
+           image_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'fov002-image'</span>, <span class="st">'fov003-image'</span>, <span class="st">'fov004-image'</span><span class="op">)</span>,
            point_size <span class="op">=</span> <span class="fl">1.5</span>, point_alpha <span class="op">=</span> <span class="fl">0.75</span>, coord_fix_ratio <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1272022/Rplot3.png" style="width:150.0%"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -381,12 +379,12 @@
                      coord_fix_ratio <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1272022/Rplot5.png" style="width:150.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="dimension-reduction">9. Dimension Reduction<a class="anchor" aria-label="anchor" href="#dimension-reduction"></a>
-</h2>
-<div class="section level4">
-<h4 id="calculate-highly-variable-genes">Calculate Highly Variable Genes<a class="anchor" aria-label="anchor" href="#calculate-highly-variable-genes"></a>
-</h4>
+<div id="dimension-reduction" class="section level1">
+<h1 class="hasAnchor">
+<a href="#dimension-reduction" class="anchor"></a>9. Dimension Reduction</h1>
+<div id="calculate-highly-variable-genes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#calculate-highly-variable-genes" class="anchor"></a>Calculate Highly Variable Genes</h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># typical way of calculating HVG</span>
 <span class="va">fov_join</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateHVF.html">calculateHVF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">fov_join</span>, HVFname <span class="op">=</span> <span class="st">'hvg_orig'</span><span class="op">)</span></code></pre></div>
@@ -399,16 +397,16 @@
                          show_plot <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1252022/5-HVFplot.png" style="width:50.0%"></p>
 </div>
-<div class="section level4">
-<h4 id="view-highly-variable-features">View Highly Variable Features<a class="anchor" aria-label="anchor" href="#view-highly-variable-features"></a>
-</h4>
+<div id="view-highly-variable-features" class="section level3">
+<h3 class="hasAnchor">
+<a href="#view-highly-variable-features" class="anchor"></a>View Highly Variable Features</h3>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gene_meta</span> <span class="op">=</span> <span class="fu"><a href="../reference/fDataDT.html">fDataDT</a></span><span class="op">(</span><span class="va">fov_join</span><span class="op">)</span>
 <span class="va">gene_meta</span><span class="op">[</span><span class="va">hvf</span> <span class="op">==</span> <span class="st">'yes'</span><span class="op">]</span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="run-pca">Run PCA<a class="anchor" aria-label="anchor" href="#run-pca"></a>
-</h4>
+<div id="run-pca" class="section level3">
+<h3 class="hasAnchor">
+<a href="#run-pca" class="anchor"></a>Run PCA</h3>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fov_join</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runPCA.html">runPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">fov_join</span>,
                    expression_values <span class="op">=</span> <span class="st">'pearson'</span>,
@@ -416,27 +414,27 @@
 <span class="fu"><a href="../reference/screePlot.html">screePlot</a></span><span class="op">(</span><span class="va">fov_join</span>, ncp <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1252022/6-screePlot.png" style="width:50.0%"></p>
 </div>
-<div class="section level4">
-<h4 id="plot-pca">Plot PCA<a class="anchor" aria-label="anchor" href="#plot-pca"></a>
-</h4>
+<div id="plot-pca" class="section level3">
+<h3 class="hasAnchor">
+<a href="#plot-pca" class="anchor"></a>Plot PCA</h3>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/plotPCA.html">plotPCA</a></span><span class="op">(</span><span class="va">fov_join</span>,
         dim1_to_use <span class="op">=</span> <span class="fl">1</span>,
         dim2_to_use <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1252022/7-PCA.png" style="width:50.0%"></p>
 </div>
-<div class="section level4">
-<h4 id="run-umap">Run UMAP<a class="anchor" aria-label="anchor" href="#run-umap"></a>
-</h4>
+<div id="run-umap" class="section level3">
+<h3 class="hasAnchor">
+<a href="#run-umap" class="anchor"></a>Run UMAP</h3>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fov_join</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runUMAP.html">runUMAP</a></span><span class="op">(</span><span class="va">fov_join</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, n_threads <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">fov_join</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1252022/8-UMAP.png" style="width:50.0%"></p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="cluster">10. Cluster<a class="anchor" aria-label="anchor" href="#cluster"></a>
-</h2>
+<div id="cluster" class="section level1">
+<h1 class="hasAnchor">
+<a href="#cluster" class="anchor"></a>10. Cluster</h1>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fov_join</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createNearestNetwork.html">createNearestNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">fov_join</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, k <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 <span class="va">fov_join</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doLeidenCluster.html">doLeidenCluster</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">fov_join</span>, resolution <span class="op">=</span> <span class="fl">0.05</span>, n_iterations <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
@@ -455,7 +453,7 @@
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1252022/10-spatDimPlot2D.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">fov_join</span>,
-                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span>, <span class="st">'EPCAM'</span><span class="op">)</span><span class="op">)</span>,
+                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span>, <span class="st">'EPCAM'</span><span class="op">)</span><span class="op">)</span>,
                      point_size <span class="op">=</span> <span class="fl">0.15</span>,
                      show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,
                      polygon_color <span class="op">=</span> <span class="st">'white'</span>,
@@ -465,9 +463,9 @@
                      coord_fix_ratio <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1272022/spatinsituclustered.png" style="width:150.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="small-subset-visiualization">11. Small Subset Visiualization<a class="anchor" aria-label="anchor" href="#small-subset-visiualization"></a>
-</h2>
+<div id="small-subset-visiualization" class="section level1">
+<h1 class="hasAnchor">
+<a href="#small-subset-visiualization" class="anchor"></a>11. Small Subset Visiualization</h1>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">locs</span> <span class="op">&lt;-</span><span class="va">fov_join</span><span class="op">@</span><span class="va">spatial_locs</span><span class="op">$</span><span class="va">cell</span><span class="op">$</span><span class="va">raw</span>
 
@@ -483,7 +481,7 @@
 
 <span class="co">#plot all genes</span>
 <span class="fu"><a href="../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">test</span>,
-                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">testfeats</span><span class="op">)</span>,
+                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">testfeats</span><span class="op">)</span>,
                      point_size <span class="op">=</span> <span class="fl">0.15</span>,
                      polygon_line_size <span class="op">=</span> <span class="fl">.1</span>,
                      show_polygon <span class="op">=</span> <span class="cn">T</span>,
@@ -494,9 +492,9 @@
                      show_legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1252022/12-spatInSituPlotPoints.png" style="width:75.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="spatial-expression-patterns">12. Spatial Expression Patterns<a class="anchor" aria-label="anchor" href="#spatial-expression-patterns"></a>
-</h2>
+<div id="spatial-expression-patterns" class="section level1">
+<h1 class="hasAnchor">
+<a href="#spatial-expression-patterns" class="anchor"></a>12. Spatial Expression Patterns</h1>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create spatial network based on physical distance of cell centroids</span>
 <span class="va">fov_join</span> <span class="op">=</span> <span class="fu"><a href="../reference/createSpatialNetwork.html">createSpatialNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">fov_join</span>, minimum_k <span class="op">=</span> <span class="fl">2</span>,
@@ -510,59 +508,59 @@
 <span class="co"># visualize spatial expression of selected genes obtained from binSpect</span>
 <span class="fu"><a href="../reference/spatFeatPlot2D.html">spatFeatPlot2D</a></span><span class="op">(</span><span class="va">fov_join</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>,
                feats <span class="op">=</span> <span class="va">km_spatialgenes</span><span class="op">$</span><span class="va">feats</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>,
-               cell_color_gradient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'blue'</span>, <span class="st">'white'</span>, <span class="st">'red'</span><span class="op">)</span>,
+               cell_color_gradient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'blue'</span>, <span class="st">'white'</span>, <span class="st">'red'</span><span class="op">)</span>,
                point_shape <span class="op">=</span> <span class="st">'border'</span>, point_border_stroke <span class="op">=</span> <span class="fl">0.01</span>,
                show_network <span class="op">=</span> <span class="cn">F</span>, network_color <span class="op">=</span> <span class="st">'lightgrey'</span>, point_size <span class="op">=</span> <span class="fl">1.2</span>,
                cow_n_col <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1252022/13-spatFeatPlot2D.png" style="width:50.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="identify-clusters">13. Identify Clusters<a class="anchor" aria-label="anchor" href="#identify-clusters"></a>
-</h2>
-<div class="section level3">
-<h3 id="violin-plot">Violin plot<a class="anchor" aria-label="anchor" href="#violin-plot"></a>
-</h3>
+<div id="identify-clusters" class="section level1">
+<h1 class="hasAnchor">
+<a href="#identify-clusters" class="anchor"></a>13. Identify Clusters</h1>
+<div id="violin-plot" class="section level2">
+<h2 class="hasAnchor">
+<a href="#violin-plot" class="anchor"></a>Violin plot</h2>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">markers</span> <span class="op">=</span> <span class="fu"><a href="../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">fov_join</span>,
                                  method <span class="op">=</span> <span class="st">'gini'</span>,
                                  expression_values <span class="op">=</span> <span class="st">'normalized'</span>,
                                  cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>,
                                  min_feats <span class="op">=</span> <span class="fl">1</span>, rank_score <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="va">markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">5</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span>
+<span class="va">markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">5</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span>
 
 <span class="co"># violinplot</span>
-<span class="va">topgini_genes</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>
+<span class="va">topgini_genes</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>
 <span class="fu"><a href="../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">fov_join</span>, feats <span class="op">=</span> <span class="va">topgini_genes</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>, strip_position <span class="op">=</span> <span class="st">'right'</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1252022/14-violinPlot.png" style="width:50.0%"></p>
 </div>
-<div class="section level3">
-<h3 id="heatmap">Heatmap<a class="anchor" aria-label="anchor" href="#heatmap"></a>
-</h3>
+<div id="heatmap" class="section level2">
+<h2 class="hasAnchor">
+<a href="#heatmap" class="anchor"></a>Heatmap</h2>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cluster_order</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">cluster_order</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">fov_join</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>,
-                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'leiden_clus'</span><span class="op">)</span>,
+                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'leiden_clus'</span><span class="op">)</span>,
                     selected_feats <span class="op">=</span> <span class="va">topgini_genes</span>,
                     custom_cluster_order <span class="op">=</span> <span class="va">cluster_order</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1262022/6-plotMetaDataHeatmap.png" style="width:50.0%"></p>
 </div>
-<div class="section level3">
-<h3 id="annotate-giotto-object">Annotate Giotto Object<a class="anchor" aria-label="anchor" href="#annotate-giotto-object"></a>
-</h3>
+<div id="annotate-giotto-object" class="section level2">
+<h2 class="hasAnchor">
+<a href="#annotate-giotto-object" class="anchor"></a>Annotate Giotto Object</h2>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## add cell types ###</span>
-<span class="va">clusters_cell_types_lung</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Normal Epithelial'</span>, <span class="st">'Cancer'</span>, <span class="st">'Stromal'</span>, <span class="st">'Plasma Cells'</span>,<span class="st">'Cytotoxic T Cells'</span>, <span class="st">'Cancer Stem Cells'</span>,
+<span class="va">clusters_cell_types_lung</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Normal Epithelial'</span>, <span class="st">'Cancer'</span>, <span class="st">'Stromal'</span>, <span class="st">'Plasma Cells'</span>,<span class="st">'Cytotoxic T Cells'</span>, <span class="st">'Cancer Stem Cells'</span>,
                              <span class="st">'Macrophage'</span>, <span class="st">'Memory B Cell'</span>, <span class="st">'Memory B Cell'</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">clusters_cell_types_lung</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">cluster_order</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">clusters_cell_types_lung</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">cluster_order</span><span class="op">)</span><span class="op">)</span>
 <span class="va">fov_join</span> <span class="op">=</span> <span class="fu"><a href="../reference/annotateGiotto.html">annotateGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">fov_join</span>, annotation_vector <span class="op">=</span> <span class="va">clusters_cell_types_lung</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span><span class="va">fov_join</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>, cell_color_code <span class="op">=</span> <span class="va">colorcode</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1252022/15-UMAP.png" style="width:50.0%"></p>
 </div>
-<div class="section level3">
-<h3 id="visualize">Visualize<a class="anchor" aria-label="anchor" href="#visualize"></a>
-</h3>
+<div id="visualize" class="section level2">
+<h2 class="hasAnchor">
+<a href="#visualize" class="anchor"></a>Visualize</h2>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/spatDimPlot2D.html">spatDimPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">fov_join</span>,
               show_image <span class="op">=</span> <span class="cn">T</span>,
@@ -582,11 +580,11 @@
 <p><img src="../inst/images/nanostring_CosMx_Lung12/Emma/results-1252022/17-spatInSituPlotPoints.png" style="width:50.0%"></p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="interaction-changed-genes">14. Interaction Changed Genes<a class="anchor" aria-label="anchor" href="#interaction-changed-genes"></a>
-</h2>
+<div id="interaction-changed-genes" class="section level1">
+<h1 class="hasAnchor">
+<a href="#interaction-changed-genes" class="anchor"></a>14. Interaction Changed Genes</h1>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">'multisession'</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="co"># NOTE: Depending on your system this could take time</span>
+<code class="sourceCode R"><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="st">'multisession'</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="co"># NOTE: Depending on your system this could take time</span>
 
 <span class="va">goi</span> <span class="op">=</span> <span class="fu"><a href="../reference/findInteractionChangedFeats.html">findInteractionChangedFeats</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">fov_join</span>,
                                    cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span><span class="op">)</span>
@@ -596,7 +594,7 @@
 
 <span class="co"># Visualize ICG expression</span>
 <span class="fu"><a href="../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">fov_join</span>,
-                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">testy</span><span class="op">$</span><span class="va">CPGscores</span><span class="op">[</span><span class="va">type_int</span> <span class="op">==</span> <span class="st">'hetero'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span>,
+                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">testy</span><span class="op">$</span><span class="va">CPGscores</span><span class="op">[</span><span class="va">type_int</span> <span class="op">==</span> <span class="st">'hetero'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span>,
                      point_size <span class="op">=</span> <span class="fl">0.6</span>,
                      show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,
                      polygon_feat_type <span class="op">=</span> <span class="st">'cell'</span>,
@@ -620,13 +618,11 @@
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by <a href="https://www.drieslab.com/" class="external-link">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
+  <p>Developed by <a href="https://www.drieslab.com/">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -634,8 +630,6 @@
 
   
 
-
-  
 
   </body>
 </html>
