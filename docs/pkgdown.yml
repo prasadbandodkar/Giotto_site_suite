@@ -1,5 +1,5 @@
-pandoc: 2.11.4
-pkgdown: 1.6.1
+pandoc: 2.14.0.3
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   Dimension_reduction: Dimension_reduction.html
@@ -30,63 +30,63 @@ articles:
   mouse_visium_kidney_210830: mouse_visium_kidney_210830.html
   nanostring_examples_overview: nanostring_examples_overview.html
   osmFISH_mouse_SScortex_Sep29_21: osmFISH_mouse_SScortex_Sep29_21.html
-  overview/giotto_input: giotto_input.html
-  overview/temp_construction: temp_construction.html
+  giotto_input: overview/giotto_input.html
+  temp_construction: overview/temp_construction.html
   singlecell_prostate_integration_Sep30_21: singlecell_prostate_integration_Sep30_21.html
   singlecell_prostate_standard_Sep29_21: singlecell_prostate_standard_Sep29_21.html
   temp_construction: temp_construction.html
-  vignettes/Dimension_reduction: Dimension_reduction.html
-  vignettes/Resolve_bc_210928: Resolve_bc_210928.html
-  vignettes/SeqFISH_cortex_210923: SeqFISH_cortex_210923.html
-  vignettes/Visium_prostate_integration_Sep30_21: Visium_prostate_integration_Sep30_21.html
-  vignettes/contribute: contribute.html
-  vignettes/data_processing: data_processing.html
-  vignettes/datasets_overview: datasets_overview.html
-  vignettes/faqs: faqs.html
-  vignettes/getting_started: getting_started.html
-  vignettes/getting_started_instructions: getting_started_instructions.html
-  vignettes/getting_started_saving: getting_started_saving.html
-  vignettes/giotto_news: giotto_news.html
-  vignettes/github_issues: github_issues.html
-  vignettes/installation_issues: installation_issues.html
-  vignettes/merFISH_hypoth_210924: merFISH_hypoth_210924.html
-  vignettes/mini_seqfish: mini_seqfish.html
-  vignettes/mini_starmap: mini_starmap.html
-  vignettes/mini_visium: mini_visium.html
-  vignettes/mouse_codex_spleen_Sep29_21: mouse_codex_spleen_Sep29_21.html
-  vignettes/mouse_visium_brain_Sep30_21: mouse_visium_brain_Sep30_21.html
-  vignettes/mouse_visium_kidney_210830: mouse_visium_kidney_210830.html
-  vignettes/osmFISH_mouse_SScortex_Sep29_21: osmFISH_mouse_SScortex_Sep29_21.html
-  vignettes/singlecell_prostate_integration_Sep30_21: singlecell_prostate_integration_Sep30_21.html
-  vignettes/singlecell_prostate_standard_Sep29_21: singlecell_prostate_standard_Sep29_21.html
-  vignettes/temp_construction: temp_construction.html
-  vignettes/vignettes/Dimension_reduction: Dimension_reduction.html
-  vignettes/vignettes/Resolve_bc_210928: Resolve_bc_210928.html
-  vignettes/vignettes/SeqFISH_cortex_210923: SeqFISH_cortex_210923.html
-  vignettes/vignettes/Visium_prostate_integration_Sep30_21: Visium_prostate_integration_Sep30_21.html
-  vignettes/vignettes/contribute: contribute.html
-  vignettes/vignettes/data_processing: data_processing.html
-  vignettes/vignettes/datasets_overview: datasets_overview.html
-  vignettes/vignettes/faqs: faqs.html
-  vignettes/vignettes/getting_started: getting_started.html
-  vignettes/vignettes/getting_started_instructions: getting_started_instructions.html
-  vignettes/vignettes/getting_started_saving: getting_started_saving.html
-  vignettes/vignettes/giotto_news: giotto_news.html
-  vignettes/vignettes/github_issues: github_issues.html
-  vignettes/vignettes/installation_issues: installation_issues.html
-  vignettes/vignettes/merFISH_hypoth_210924: merFISH_hypoth_210924.html
-  vignettes/vignettes/mini_seqfish: mini_seqfish.html
-  vignettes/vignettes/mini_starmap: mini_starmap.html
-  vignettes/vignettes/mini_visium: mini_visium.html
-  vignettes/vignettes/mouse_codex_spleen_Sep29_21: mouse_codex_spleen_Sep29_21.html
-  vignettes/vignettes/mouse_visium_brain_Sep30_21: mouse_visium_brain_Sep30_21.html
-  vignettes/vignettes/mouse_visium_kidney_210830: mouse_visium_kidney_210830.html
-  vignettes/vignettes/osmFISH_mouse_SScortex_Sep29_21: osmFISH_mouse_SScortex_Sep29_21.html
-  vignettes/vignettes/overview/giotto_input: giotto_input.html
-  vignettes/vignettes/overview/temp_construction: temp_construction.html
-  vignettes/vignettes/singlecell_prostate_integration_Sep30_21: singlecell_prostate_integration_Sep30_21.html
-  vignettes/vignettes/singlecell_prostate_standard_Sep29_21: singlecell_prostate_standard_Sep29_21.html
-  vignettes/vignettes/temp_construction: temp_construction.html
+  Dimension_reduction: vignettes/Dimension_reduction.html
+  Resolve_bc_210928: vignettes/Resolve_bc_210928.html
+  SeqFISH_cortex_210923: vignettes/SeqFISH_cortex_210923.html
+  Visium_prostate_integration_Sep30_21: vignettes/Visium_prostate_integration_Sep30_21.html
+  contribute: vignettes/contribute.html
+  data_processing: vignettes/data_processing.html
+  datasets_overview: vignettes/datasets_overview.html
+  faqs: vignettes/faqs.html
+  getting_started: vignettes/getting_started.html
+  getting_started_instructions: vignettes/getting_started_instructions.html
+  getting_started_saving: vignettes/getting_started_saving.html
+  giotto_news: vignettes/giotto_news.html
+  github_issues: vignettes/github_issues.html
+  installation_issues: vignettes/installation_issues.html
+  merFISH_hypoth_210924: vignettes/merFISH_hypoth_210924.html
+  mini_seqfish: vignettes/mini_seqfish.html
+  mini_starmap: vignettes/mini_starmap.html
+  mini_visium: vignettes/mini_visium.html
+  mouse_codex_spleen_Sep29_21: vignettes/mouse_codex_spleen_Sep29_21.html
+  mouse_visium_brain_Sep30_21: vignettes/mouse_visium_brain_Sep30_21.html
+  mouse_visium_kidney_210830: vignettes/mouse_visium_kidney_210830.html
+  osmFISH_mouse_SScortex_Sep29_21: vignettes/osmFISH_mouse_SScortex_Sep29_21.html
+  singlecell_prostate_integration_Sep30_21: vignettes/singlecell_prostate_integration_Sep30_21.html
+  singlecell_prostate_standard_Sep29_21: vignettes/singlecell_prostate_standard_Sep29_21.html
+  temp_construction: vignettes/temp_construction.html
+  Dimension_reduction: vignettes/vignettes/Dimension_reduction.html
+  Resolve_bc_210928: vignettes/vignettes/Resolve_bc_210928.html
+  SeqFISH_cortex_210923: vignettes/vignettes/SeqFISH_cortex_210923.html
+  Visium_prostate_integration_Sep30_21: vignettes/vignettes/Visium_prostate_integration_Sep30_21.html
+  contribute: vignettes/vignettes/contribute.html
+  data_processing: vignettes/vignettes/data_processing.html
+  datasets_overview: vignettes/vignettes/datasets_overview.html
+  faqs: vignettes/vignettes/faqs.html
+  getting_started: vignettes/vignettes/getting_started.html
+  getting_started_instructions: vignettes/vignettes/getting_started_instructions.html
+  getting_started_saving: vignettes/vignettes/getting_started_saving.html
+  giotto_news: vignettes/vignettes/giotto_news.html
+  github_issues: vignettes/vignettes/github_issues.html
+  installation_issues: vignettes/vignettes/installation_issues.html
+  merFISH_hypoth_210924: vignettes/vignettes/merFISH_hypoth_210924.html
+  mini_seqfish: vignettes/vignettes/mini_seqfish.html
+  mini_starmap: vignettes/vignettes/mini_starmap.html
+  mini_visium: vignettes/vignettes/mini_visium.html
+  mouse_codex_spleen_Sep29_21: vignettes/vignettes/mouse_codex_spleen_Sep29_21.html
+  mouse_visium_brain_Sep30_21: vignettes/vignettes/mouse_visium_brain_Sep30_21.html
+  mouse_visium_kidney_210830: vignettes/vignettes/mouse_visium_kidney_210830.html
+  osmFISH_mouse_SScortex_Sep29_21: vignettes/vignettes/osmFISH_mouse_SScortex_Sep29_21.html
+  giotto_input: vignettes/vignettes/overview/giotto_input.html
+  temp_construction: vignettes/vignettes/overview/temp_construction.html
+  singlecell_prostate_integration_Sep30_21: vignettes/vignettes/singlecell_prostate_integration_Sep30_21.html
+  singlecell_prostate_standard_Sep29_21: vignettes/vignettes/singlecell_prostate_standard_Sep29_21.html
+  temp_construction: vignettes/vignettes/temp_construction.html
   vizgen_mouse_brain_210929: vizgen_mouse_brain_210929.html
-last_built: 2022-03-18T07:49Z
+last_built: 2022-03-18T21:03Z
 

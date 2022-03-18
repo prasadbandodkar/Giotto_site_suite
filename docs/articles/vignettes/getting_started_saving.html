@@ -32,6 +32,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -44,7 +46,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0.991</span>
       </span>
     </div>
 
@@ -127,7 +129,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/RubD/Giotto/">
+  <a href="https://github.com/RubD/Giotto/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -142,65 +144,65 @@
 
       
 
-      </header><script src="getting_started_saving_files/header-attrs-2.13/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip></h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/master/vignettes/vignettes/getting_started_saving.Rmd"><code>vignettes/vignettes/getting_started_saving.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/HEAD/vignettes/vignettes/getting_started_saving.Rmd" class="external-link"><code>vignettes/vignettes/getting_started_saving.Rmd</code></a></small>
       <div class="hidden name"><code>getting_started_saving.Rmd</code></div>
 
     </div>
 
     
     
-<div id="different-ways-to-save-your-plots" class="section level1">
-<h1 class="hasAnchor">
-<a href="#different-ways-to-save-your-plots" class="anchor"></a>Different ways to save your plots?</h1>
+<div class="section level2">
+<h2 id="different-ways-to-save-your-plots">Different ways to save your plots?<a class="anchor" aria-label="anchor" href="#different-ways-to-save-your-plots"></a>
+</h2>
 <p>R/Rstudio and Giotto provide different ways to save your spatial data:</p>
 <ul>
 <li><p>see also FAQ <a href="./getting_started_instructions.html">How to create global instructions and show or save your created plots?</a></p></li>
 <li><p>All parameters available to save_param are found by running <strong>showSaveParameters()</strong></p></li>
 </ul>
-<div id="examples" class="section level3">
-<h3 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples :</h3>
-<div id="standard-r-way" class="section level4">
-<h4 class="hasAnchor">
-<a href="#standard-r-way" class="anchor"></a>1. standard R way</h4>
+<div class="section level4">
+<h4 id="examples">Examples :<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h4>
+<div class="section level5">
+<h5 id="standard-r-way">1. standard R way<a class="anchor" aria-label="anchor" href="#standard-r-way"></a>
+</h5>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pl</span> <span class="op">=</span> <span class="fu"><a href="../../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">mygobject</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/grDevices/pdf.html">pdf</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">'path/to/save/to/plot.pdf'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">pl</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/grDevices/pdf.html" class="external-link">pdf</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">'path/to/save/to/plot.pdf'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">pl</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="save-plot-directly-to-your-designated-folder-according-to-the-provided-instructions" class="section level4">
-<h4 class="hasAnchor">
-<a href="#save-plot-directly-to-your-designated-folder-according-to-the-provided-instructions" class="anchor"></a>2. save plot directly to your designated folder according to the provided instructions</h4>
+<div class="section level5">
+<h5 id="save-plot-directly-to-your-designated-folder-according-to-the-provided-instructions">2. save plot directly to your designated folder according to the provided instructions<a class="anchor" aria-label="anchor" href="#save-plot-directly-to-your-designated-folder-according-to-the-provided-instructions"></a>
+</h5>
 <p>See also the <a href="">Giotto Instruction</a> information page.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">mygobject</span>, 
          cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, 
          save_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="save-plot-directly-but-overwrite-default-parameters" class="section level4">
-<h4 class="hasAnchor">
-<a href="#save-plot-directly-but-overwrite-default-parameters" class="anchor"></a>3. save plot directly, but overwrite default parameters</h4>
+<div class="section level5">
+<h5 id="save-plot-directly-but-overwrite-default-parameters">3. save plot directly, but overwrite default parameters<a class="anchor" aria-label="anchor" href="#save-plot-directly-but-overwrite-default-parameters"></a>
+</h5>
 <p>See also the <a href="">Giotto Instruction</a> information page.<br>
 Run the command <strong>showSaveParameters()</strong> to see all available parameters.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">mygobject</span>, 
          cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, 
          save_plot <span class="op">=</span> <span class="cn">TRUE</span>,
-         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_folder <span class="op">=</span> <span class="st">'my_subfolder'</span>, 
+         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_folder <span class="op">=</span> <span class="st">'my_subfolder'</span>, 
                            save_name <span class="op">=</span> <span class="st">'my_name'</span>, 
                            save_format <span class="op">=</span> <span class="st">'png'</span>, 
                            units <span class="op">=</span> <span class="st">'in'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="just-view-the-plot" class="section level4">
-<h4 class="hasAnchor">
-<a href="#just-view-the-plot" class="anchor"></a>4. just view the plot</h4>
+<div class="section level5">
+<h5 id="just-view-the-plot">4. just view the plot<a class="anchor" aria-label="anchor" href="#just-view-the-plot"></a>
+</h5>
 <p>See also the <a href="">Giotto Instruction</a> information page.<br>
 Set save_plot &amp; return_plot to FALSE and show_plot to TRUE.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -208,9 +210,9 @@ Set save_plot &amp; return_plot to FALSE and show_plot to TRUE.</p>
          cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, 
          save_plot <span class="op">=</span> <span class="cn">F</span>, return_plot <span class="op">=</span> <span class="cn">F</span>, show_plot <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="just-save-the-plot-fastest-for-large-datasets" class="section level4">
-<h4 class="hasAnchor">
-<a href="#just-save-the-plot-fastest-for-large-datasets" class="anchor"></a>5. just save the plot: FASTEST for large datasets!</h4>
+<div class="section level5">
+<h5 id="just-save-the-plot-fastest-for-large-datasets">5. just save the plot: FASTEST for large datasets!<a class="anchor" aria-label="anchor" href="#just-save-the-plot-fastest-for-large-datasets"></a>
+</h5>
 <p>See also the <a href="">Giotto Instruction</a> information page.<br>
 Set save_plot &amp; return_plot to FALSE and show_plot to TRUE.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -223,7 +225,7 @@ Set save_plot &amp; return_plot to FALSE and show_plot to TRUE.</p>
 <span class="fu"><a href="../../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">mygobject</span>, 
          cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, 
          save_plot <span class="op">=</span> <span class="cn">TRUE</span>, return_plot <span class="op">=</span> <span class="cn">FALSE</span>, show_plot <span class="op">=</span> <span class="cn">TRUE</span>,
-         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>show_saved_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>show_saved_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -240,11 +242,13 @@ Set save_plot &amp; return_plot to FALSE and show_plot to TRUE.</p>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.drieslab.com/">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
+  <p></p>
+<p>Developed by <a href="https://www.drieslab.com/" class="external-link">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -252,6 +256,8 @@ Set save_plot &amp; return_plot to FALSE and show_plot to TRUE.</p>
 
   
 
+
+  
 
   </body>
 </html>
