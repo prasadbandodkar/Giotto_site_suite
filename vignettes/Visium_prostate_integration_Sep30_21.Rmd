@@ -285,7 +285,26 @@ Visium spatial transcriptomics does not provide single-cell resolution, making c
 - [DWLS Deconvolution](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02362-7) 
 
 This is also the easiest way to integrate Visium datasets with single cell data. Example shown here is from [Ma et al.](https://pubmed.ncbi.nlm.nih.gov/33032611/) from two prostate cancer patients. The raw dataset can be found [here](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE157703) 
-Giotto_SC is processed variable in the [single cell RNAseq tutorial](https://giottosuite.com/articles/singlecell_prostate_standard_Sep29_21.html)
+Giotto_SC is processed variable in the [single cell RNAseq tutorial](https://giottosuite.com/articles/singlecell_prostate_standard_Sep29_21.html). You can also get access to the processed files of this dataset using getSpatialDataset
+```{r eval=FALSE}
+# download data to results directory ####
+# if wget is installed, set method = 'wget'
+# if you run into authentication issues with wget, then add " extra = '--no-check-certificate' "
+getSpatialDataset(dataset = 'Human_PCa_scRNAseq', directory = results_folder)
+
+sc_expression = paste0(results_folder, "/prostate_sc_expression_matrix.csv.gz")
+sc_metadata = paste(results_folder,"/prostate_sc_metadata.csv")
+
+giotto_SC <- createGiottoObject(
+  expression = sc_expression,
+  instructions = instrs
+)
+
+giotto_SC <- addCellMetadata(giotto_SC, 
+                             new_metadata = data.table::fread(sc_metadata))
+
+giotto_SC<- normalizeGiotto(giotto_SC)
+```
 
 ### 5.1 PAGE enrichment
 ```{r eval=FALSE}
