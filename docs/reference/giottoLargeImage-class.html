@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.997</span>
       </span>
     </div>
 
@@ -211,6 +211,8 @@
 
 <dt><code>raster_object</code></dt><dd><p>terra raster object</p></dd>
 
+<dt><code>extent</code></dt><dd><p>tracks the extent of the raster object. Note that most processes should rely on the extent of the raster object instead of this.</p></dd>
+
 <dt><code>overall_extent</code></dt><dd><p>terra extent object covering the original extent of image</p></dd>
 
 <dt><code>scale_factor</code></dt><dd><p>image scaling relative to spatial locations</p></dd>
@@ -222,6 +224,8 @@
 <dt><code>min_intensity</code></dt><dd><p>minimum value found</p></dd>
 
 <dt><code>is_int</code></dt><dd><p>values are integers</p></dd>
+
+<dt><code>file_path</code></dt><dd><p>file path to the image if given</p></dd>
 
 <dt><code>OS_platform</code></dt><dd><p>Operating System to run Giotto analysis on</p></dd>
 

@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.997</span>
       </span>
     </div>
 
@@ -208,7 +208,9 @@
   <span class='va'>cluster_column</span>,
   subset_clusters <span class='op'>=</span> <span class='cn'>NULL</span>,
   group_1 <span class='op'>=</span> <span class='cn'>NULL</span>,
+  group_1_name <span class='op'>=</span> <span class='cn'>NULL</span>,
   group_2 <span class='op'>=</span> <span class='cn'>NULL</span>,
+  group_2_name <span class='op'>=</span> <span class='cn'>NULL</span>,
   min_expr_gini_score <span class='op'>=</span> <span class='fl'>0.2</span>,
   min_det_gini_score <span class='op'>=</span> <span class='fl'>0.2</span>,
   detection_threshold <span class='op'>=</span> <span class='fl'>0</span>,
@@ -249,8 +251,16 @@
       <td><p>group 1 cluster IDs from cluster_column for pairwise comparison</p></td>
     </tr>
     <tr>
+      <th>group_1_name</th>
+      <td><p>custom name for group_1 clusters</p></td>
+    </tr>
+    <tr>
       <th>group_2</th>
       <td><p>group 2 cluster IDs from cluster_column for pairwise comparison</p></td>
+    </tr>
+    <tr>
+      <th>group_2_name</th>
+      <td><p>custom name for group_2 clusters</p></td>
     </tr>
     <tr>
       <th>min_expr_gini_score</th>
@@ -297,8 +307,12 @@ coefficient is based on the following steps/principles per feat:</p><ul>
 <p>As a results "top gini" feats are feats that are very selectivily expressed in a specific cluster,
 however not always expressed in all cells of that cluster. In other words highly specific, but
 not necessarily sensitive at the single-cell level.</p>
-<p>To perform differential expression between cluster groups you need to specificy cluster IDs
-to the parameters <em>group_1</em> and <em>group_2</em>.</p>
+<p>To perform differential expression between custom selected groups of cells
+you need to specify the cell_ID column to parameter <em>cluster_column</em>
+and provide the individual cell IDs to the parameters <em>group_1</em> and <em>group_2</em></p>
+<p>By default group names will be created by pasting the different id names within each selected group.
+When you have many different ids in a single group
+it is recommend to provide names for both groups to <em>group_1_name</em> and <em>group_2_name</em></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

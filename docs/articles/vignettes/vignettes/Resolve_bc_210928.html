@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.997</span>
       </span>
     </div>
 
@@ -189,7 +189,7 @@
 
 <span class="co"># 3. input features coordinates</span>
 <span class="va">tx_coord</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">data_path</span>, <span class="st">'/'</span>, <span class="st">'data_sample2.txt'</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">tx_coord</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'x'</span>, <span class="st">'y'</span>, <span class="st">'z'</span>, <span class="st">'gene_id'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">tx_coord</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'x'</span>, <span class="st">'y'</span>, <span class="st">'z'</span>, <span class="st">'gene_id'</span><span class="op">)</span>
 <span class="va">tx_coord</span> <span class="op">=</span> <span class="va">tx_coord</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">gene_id</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 </div>
 <div id="part-1-create-subcellular-giotto-object" class="section level2">
@@ -297,8 +297,8 @@
 <span class="va">subc_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">subc_test</span>, scalefactor <span class="op">=</span> <span class="fl">6000</span>, verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="va">subc_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/addStatistics.html">addStatistics</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">subc_test</span><span class="op">)</span>
 <span class="va">subc_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/adjustGiottoMatrix.html">adjustGiottoMatrix</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">subc_test</span>,
-                                expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>,
-                                covariate_columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'nr_feats'</span>, <span class="st">'total_expr'</span><span class="op">)</span><span class="op">)</span>
+                                expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>,
+                                covariate_columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'nr_feats'</span>, <span class="st">'total_expr'</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">subc_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">subc_test</span>, norm_methods <span class="op">=</span> <span class="st">'pearson_resid'</span>, update_slot <span class="op">=</span> <span class="st">'pearson'</span><span class="op">)</span>
 <span class="fu"><a href="../../../reference/showGiottoExpression.html">showGiottoExpression</a></span><span class="op">(</span><span class="va">subc_test</span><span class="op">)</span></code></pre></div>
@@ -403,7 +403,7 @@
 
 <span class="co"># all cells</span>
 <span class="fu"><a href="../../../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">testobj</span>,
-                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span><span class="op">)</span><span class="op">)</span>,
+                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span><span class="op">)</span><span class="op">)</span>,
                      point_size <span class="op">=</span> <span class="fl">0.2</span>,
                      show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,
                      polygon_feat_type <span class="op">=</span> <span class="st">'cell'</span>,
@@ -413,7 +413,7 @@
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># filtered cells</span>
 <span class="fu"><a href="../../../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">subc_test</span>,
-                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span><span class="op">)</span><span class="op">)</span>,
+                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span><span class="op">)</span><span class="op">)</span>,
                      point_size <span class="op">=</span> <span class="fl">0.2</span>,
                      show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,
                      polygon_feat_type <span class="op">=</span> <span class="st">'cell'</span>,
@@ -424,7 +424,7 @@
 <code class="sourceCode R"><span class="co"># faster plotting method if you have many points</span>
 <span class="fu"><a href="../../../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">subc_test</span>,
                      plot_method <span class="op">=</span> <span class="st">'scattermore'</span>,
-                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span><span class="op">)</span><span class="op">)</span>,
+                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span><span class="op">)</span><span class="op">)</span>,
                      point_size <span class="op">=</span> <span class="fl">0.2</span>,
                      show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,
                      polygon_feat_type <span class="op">=</span> <span class="st">'cell'</span>,
@@ -445,7 +445,7 @@
 
 <span class="co"># show subset of genes</span>
 <span class="fu"><a href="../../../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">subloc</span>,
-                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span><span class="op">)</span><span class="op">)</span>,
+                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span><span class="op">)</span><span class="op">)</span>,
                      point_size <span class="op">=</span> <span class="fl">0.6</span>,
                      show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,
                      polygon_feat_type <span class="op">=</span> <span class="st">'cell'</span>,
@@ -455,7 +455,7 @@
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># show subset of genes and color cells according to clusters</span>
 <span class="fu"><a href="../../../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">subloc</span>,
-                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span><span class="op">)</span><span class="op">)</span>,
+                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span><span class="op">)</span><span class="op">)</span>,
                      point_size <span class="op">=</span> <span class="fl">0.6</span>,
                      show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,
                      polygon_feat_type <span class="op">=</span> <span class="st">'cell'</span>,
@@ -471,7 +471,7 @@
 <span class="co"># use a faster and more efficient point plotting method = scattermore</span>
 <span class="fu"><a href="../../../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">subloc</span>,
                      plot_method <span class="op">=</span> <span class="st">'scattermore'</span>,
-                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span><span class="op">)</span><span class="op">)</span>,
+                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"MMP2"</span>, <span class="st">"VEGFA"</span>, <span class="st">"IGF1R"</span>, <span class="st">'CDH2'</span>, <span class="st">'MKI67'</span><span class="op">)</span><span class="op">)</span>,
                      point_size <span class="op">=</span> <span class="fl">0.6</span>,
                      show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,
                      polygon_feat_type <span class="op">=</span> <span class="st">'cell'</span>,
@@ -517,7 +517,7 @@
 <span class="va">test</span><span class="op">$</span><span class="va">CPGscores</span><span class="op">[</span><span class="va">type_int</span> <span class="op">==</span> <span class="st">'hetero'</span><span class="op">]</span>
 
 <span class="fu"><a href="../../../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">subc_test</span>,
-                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CTSD"</span>, <span class="st">"BMP1"</span><span class="op">)</span><span class="op">)</span>,
+                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"CTSD"</span>, <span class="st">"BMP1"</span><span class="op">)</span><span class="op">)</span>,
                      point_size <span class="op">=</span> <span class="fl">0.6</span>,
                      show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,
                      polygon_feat_type <span class="op">=</span> <span class="st">'cell'</span>,

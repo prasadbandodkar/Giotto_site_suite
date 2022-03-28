@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="addSpatialCentroidLocations — addSpatialCentroidLocations" />
-<meta property="og:description" content="Calculates the centroid locations for the giotto polygons" />
+<meta property="og:description" content="Calculates the centroid locations for the polygons within one or more selected layers" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.997</span>
       </span>
     </div>
 
@@ -197,7 +197,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Calculates the centroid locations for the giotto polygons</p>
+    <p>Calculates the centroid locations for the polygons within one or more selected layers</p>
     </div>
 
     <pre class="usage"><span class='fu'>addSpatialCentroidLocations</span><span class='op'>(</span>
@@ -205,7 +205,8 @@
   poly_info <span class='op'>=</span> <span class='st'>"cell"</span>,
   feat_type <span class='op'>=</span> <span class='cn'>NULL</span>,
   spat_loc_name <span class='op'>=</span> <span class='st'>"raw"</span>,
-  return_gobject <span class='op'>=</span> <span class='cn'>TRUE</span>
+  return_gobject <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -230,6 +231,10 @@
     <tr>
       <th>return_gobject</th>
       <td><p>return giotto object (default: TRUE)</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>be verbose</p></td>
     </tr>
     </table>
 

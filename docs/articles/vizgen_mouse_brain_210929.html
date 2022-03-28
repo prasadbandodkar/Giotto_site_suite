@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.997</span>
       </span>
     </div>
 
@@ -293,12 +293,12 @@
 <code class="sourceCode R"><span class="co"># get colors</span>
 <span class="va">cell_metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">vizgen</span><span class="op">)</span>
 <span class="va">leiden_names</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">cell_metadata</span><span class="op">$</span><span class="va">leiden</span><span class="op">)</span>
-<span class="va">leiden_colors</span> <span class="op">=</span> <span class="fu">Giotto</span><span class="fu">::</span><span class="fu"><a href="../reference/getDistinctColors.html">getDistinctColors</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">leiden_names</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">leiden_colors</span><span class="op">)</span> <span class="op">=</span> <span class="va">leiden_names</span>
+<span class="va">leiden_colors</span> <span class="op">=</span> <span class="fu">Giotto</span><span class="fu">::</span><span class="fu"><a href="../reference/getDistinctColors.html">getDistinctColors</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">length</a></span><span class="op">(</span><span class="va">leiden_names</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html">names</a></span><span class="op">(</span><span class="va">leiden_colors</span><span class="op">)</span> <span class="op">=</span> <span class="va">leiden_names</span>
 
 <span class="co"># reverse colors</span>
-<span class="va">leiden_rev_colors</span> <span class="op">=</span> <span class="fu">Giotto</span><span class="fu">::</span><span class="fu"><a href="../reference/getDistinctColors.html">getDistinctColors</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">leiden_names</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">leiden_rev_colors</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">leiden_names</span><span class="op">)</span>
+<span class="va">leiden_rev_colors</span> <span class="op">=</span> <span class="fu">Giotto</span><span class="fu">::</span><span class="fu"><a href="../reference/getDistinctColors.html">getDistinctColors</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">length</a></span><span class="op">(</span><span class="va">leiden_names</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html">names</a></span><span class="op">(</span><span class="va">leiden_rev_colors</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/flip.html">rev</a></span><span class="op">(</span><span class="va">leiden_names</span><span class="op">)</span>
 
 <span class="co"># visualize with reversed colors</span>
 <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen</span>, cell_color <span class="op">=</span> <span class="st">'leiden_clus'</span>, point_size <span class="op">=</span> <span class="fl">0.5</span>,
@@ -323,8 +323,8 @@
 
 <span class="co"># visualize spatial expression of selected genes obtained from binSpect</span>
 <span class="fu"><a href="../reference/spatFeatPlot2D.html">spatFeatPlot2D</a></span><span class="op">(</span><span class="va">vizgen</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>,
-               feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Slc47a1'</span>, <span class="st">'Slc17a7'</span>, <span class="st">'Th'</span>, <span class="st">'Npy2r'</span>, <span class="st">'Chrm1'</span>, <span class="st">'Gfap'</span><span class="op">)</span>,
-               cell_color_gradient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'blue'</span>, <span class="st">'white'</span>, <span class="st">'red'</span><span class="op">)</span>,
+               feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'Slc47a1'</span>, <span class="st">'Slc17a7'</span>, <span class="st">'Th'</span>, <span class="st">'Npy2r'</span>, <span class="st">'Chrm1'</span>, <span class="st">'Gfap'</span><span class="op">)</span>,
+               cell_color_gradient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'blue'</span>, <span class="st">'white'</span>, <span class="st">'red'</span><span class="op">)</span>,
                point_shape <span class="op">=</span> <span class="st">'border'</span>, point_border_stroke <span class="op">=</span> <span class="fl">0.01</span>,
                show_network <span class="op">=</span> <span class="cn">F</span>, network_color <span class="op">=</span> <span class="st">'lightgrey'</span>, point_size <span class="op">=</span> <span class="fl">0.2</span>,
                cow_n_col <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
@@ -351,7 +351,7 @@
 <span class="co"># read polygons and add them to Giotto</span>
 <span class="va">vizgen_subset</span> <span class="op">=</span> <span class="fu"><a href="../reference/readPolygonFilesVizgen.html">readPolygonFilesVizgen</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen_subset</span>,
                                        boundaries_path <span class="op">=</span> <span class="va">bound_path</span>,
-                                       polygon_feat_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">4</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                                       polygon_feat_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">4</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Giotto can also include information about the transcripts.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># add transcript coordinates</span>
@@ -375,7 +375,7 @@
 
 <span class="co"># visualize points from index z0</span>
 <span class="fu"><a href="../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">vizgen_subset</span>,
-                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Oxgr1"</span>, <span class="st">"Htr1a"</span>, <span class="st">"Gjc3"</span>, <span class="st">"Axl"</span>,
+                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"Oxgr1"</span>, <span class="st">"Htr1a"</span>, <span class="st">"Gjc3"</span>, <span class="st">"Axl"</span>,
                                             <span class="st">'Gfap'</span>, <span class="st">"Olig1"</span>, <span class="st">"Epha7"</span><span class="op">)</span><span class="op">)</span>,
                      polygon_feat_type <span class="op">=</span> <span class="st">'z0'</span>,
                      use_overlap <span class="op">=</span> <span class="cn">F</span>,
@@ -390,7 +390,7 @@
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualize points from index z6</span>
 <span class="fu"><a href="../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">vizgen_subset</span>,
-                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Oxgr1"</span>, <span class="st">"Htr1a"</span>, <span class="st">"Gjc3"</span>, <span class="st">"Axl"</span>,
+                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"Oxgr1"</span>, <span class="st">"Htr1a"</span>, <span class="st">"Gjc3"</span>, <span class="st">"Axl"</span>,
                                             <span class="st">'Gfap'</span>, <span class="st">"Olig1"</span>, <span class="st">"Epha7"</span><span class="op">)</span><span class="op">)</span>,
                      polygon_feat_type <span class="op">=</span> <span class="st">'z6'</span>,
                      use_overlap <span class="op">=</span> <span class="cn">F</span>,

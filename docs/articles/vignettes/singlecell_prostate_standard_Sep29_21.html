@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.997</span>
       </span>
     </div>
 
@@ -202,7 +202,7 @@
     expression_threshold <span class="op">=</span> <span class="fl">1</span>,
     feat_det_in_min_cells <span class="op">=</span> <span class="fl">50</span>,
     min_det_feats_per_cell <span class="op">=</span> <span class="fl">500</span>,
-    expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'raw'</span><span class="op">)</span>,
+    expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'raw'</span><span class="op">)</span>,
     verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 
 <span class="co">## normalize</span>
@@ -268,7 +268,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">markers_scran</span> <span class="op">=</span> <span class="fu"><a href="../../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject<span class="op">=</span><span class="va">giotto_SC</span>, method<span class="op">=</span><span class="st">"scran"</span>,
                                        expression_values<span class="op">=</span><span class="st">"normalized"</span>, cluster_column<span class="op">=</span><span class="st">'leiden_clus'</span>, min_feats<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
-<span class="va">markergenes_scran</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">markers_scran</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">3</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"cluster"</span><span class="op">]</span><span class="op">[[</span><span class="st">"genes"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+<span class="va">markergenes_scran</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">markers_scran</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">3</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"cluster"</span><span class="op">]</span><span class="op">[[</span><span class="st">"genes"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 
 <span class="fu"><a href="../../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">giotto_SC</span>, expression_values <span class="op">=</span> <span class="st">"normalized"</span>, metadata_cols <span class="op">=</span> <span class="st">'leiden_clus'</span>, 
                     selected_feats <span class="op">=</span> <span class="va">markergenes_scran</span>,
@@ -276,7 +276,7 @@
                     save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'5_a_metaheatmap'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_standard/vignette_sep29_2021/5_a_metaheatmap.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">topgenes_scran</span> <span class="op">=</span> <span class="va">markers_scran</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">1</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">genes</span>
+<code class="sourceCode R"><span class="va">topgenes_scran</span> <span class="op">=</span> <span class="va">markers_scran</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">1</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">genes</span>
 <span class="co"># violinplot</span>
 <span class="fu"><a href="../../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">giotto_SC</span>, genes <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">topgenes_scran</span><span class="op">)</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>,
            strip_text <span class="op">=</span> <span class="fl">10</span>, strip_position <span class="op">=</span> <span class="st">'right'</span>,
@@ -289,14 +289,14 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot known marker genes across different cell types. EPCAM for epithelial cells, </span>
 <span class="co"># DPP4(CD26) for Epithelial luminal cells, PECAM1(CD31) for Endothelial cells and CD3D for T cells</span>
-<span class="fu"><a href="../../reference/dimFeatPlot2D.html">dimFeatPlot2D</a></span><span class="op">(</span><span class="va">giotto_SC</span>, feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"EPCAM"</span>,<span class="st">"DPP4"</span>,<span class="st">"PECAM1"</span>,<span class="st">"CD3D"</span><span class="op">)</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"6_featureplot"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../../reference/dimFeatPlot2D.html">dimFeatPlot2D</a></span><span class="op">(</span><span class="va">giotto_SC</span>, feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"EPCAM"</span>,<span class="st">"DPP4"</span>,<span class="st">"PECAM1"</span>,<span class="st">"CD3D"</span><span class="op">)</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"6_featureplot"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_standard/vignette_sep29_2021/6_featureplot.png" style="width:50.0%"></p>
 </div>
 <div id="part-7-cell-type-annotation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#part-7-cell-type-annotation" class="anchor"></a>Part 7: Cell type annotation</h2>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">prostate_labels</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Endothelial cells"</span>,<span class="co">#1</span>
+<code class="sourceCode R"><span class="va">prostate_labels</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"Endothelial cells"</span>,<span class="co">#1</span>
                    <span class="st">"T cells"</span>,<span class="co">#2</span>
                    <span class="st">"Epithelial_basal"</span>,<span class="co">#3</span>
                    <span class="st">"Epithelial_luminal"</span>,<span class="co">#4</span>
@@ -309,7 +309,7 @@
                    <span class="st">"Mast cells"</span>,<span class="co">#11</span>
                    <span class="st">"Mesenchymal cells"</span>,<span class="co">#12</span>
                    <span class="st">"Neural Progenitor cells"</span><span class="op">)</span><span class="co">#13</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">prostate_labels</span><span class="op">)</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">:</span><span class="fl">13</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html">names</a></span><span class="op">(</span><span class="va">prostate_labels</span><span class="op">)</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">:</span><span class="fl">13</span>
 <span class="va">giotto_SC</span><span class="op">&lt;-</span><span class="fu"><a href="../../reference/annotateGiotto.html">annotateGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC</span>, annotation_vector <span class="op">=</span> <span class="va">prostate_labels</span> ,
                           cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>, name <span class="op">=</span> <span class="st">'prostate_labels'</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/dimPlot2D.html">dimPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC</span>,     dim_reduction_name <span class="op">=</span> <span class="st">'umap'</span>,
@@ -348,7 +348,7 @@
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">markers_scran_T</span> <span class="op">=</span> <span class="fu"><a href="../../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject<span class="op">=</span><span class="va">Subset_giotto_T</span>, method<span class="op">=</span><span class="st">"scran"</span>,
                                        expression_values<span class="op">=</span><span class="st">"normalized"</span>, cluster_column<span class="op">=</span><span class="st">'leiden_clus'</span>, min_feats<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
-<span class="va">markergenes_scran_T</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">markers_scran_T</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">5</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"cluster"</span><span class="op">]</span><span class="op">[[</span><span class="st">"genes"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+<span class="va">markergenes_scran_T</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">markers_scran_T</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">5</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"cluster"</span><span class="op">]</span><span class="op">[[</span><span class="st">"genes"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 
 <span class="fu"><a href="../../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">Subset_giotto_T</span>, expression_values <span class="op">=</span> <span class="st">"normalized"</span>, metadata_cols <span class="op">=</span> <span class="st">'leiden_clus'</span>, 
                     selected_feats <span class="op">=</span> <span class="va">markergenes_scran_T</span>,
@@ -356,12 +356,12 @@
                     save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'8_c_metaheatmap'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_standard/vignette_sep29_2021/8_c_metaheatmap.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">T_labels</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Naive T cells"</span>,<span class="co">#1</span>
+<code class="sourceCode R"><span class="va">T_labels</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"Naive T cells"</span>,<span class="co">#1</span>
             <span class="st">"Tfh cells"</span>,<span class="co">#2</span>
             <span class="st">"CD8 T cells"</span>,<span class="co">#3</span>
             <span class="st">"NK T cells"</span>,<span class="co">#4</span>
             <span class="st">"CD4 T cells"</span><span class="op">)</span><span class="co">#5</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">T_labels</span><span class="op">)</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html">names</a></span><span class="op">(</span><span class="va">T_labels</span><span class="op">)</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>
 <span class="va">Subset_giotto_T</span><span class="op">&lt;-</span><span class="fu"><a href="../../reference/annotateGiotto.html">annotateGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">Subset_giotto_T</span>, annotation_vector <span class="op">=</span> <span class="va">T_labels</span> ,
                           cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>, name <span class="op">=</span> <span class="st">'subset_labels'</span><span class="op">)</span>
 <span class="fu"><a href="../../reference/dimPlot2D.html">dimPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">Subset_giotto_T</span>,     dim_reduction_name <span class="op">=</span> <span class="st">'umap'</span>,

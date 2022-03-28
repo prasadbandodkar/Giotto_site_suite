@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.997</span>
       </span>
     </div>
 
@@ -200,12 +200,7 @@
     <p>Prints the available spatial networks that are attached to the Giotto object</p>
     </div>
 
-    <pre class="usage"><span class='fu'>showGiottoSpatNetworks</span><span class='op'>(</span>
-  <span class='va'>gobject</span>,
-  feat_type <span class='op'>=</span> <span class='cn'>NULL</span>,
-  spat_unit <span class='op'>=</span> <span class='cn'>NULL</span>,
-  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>showGiottoSpatNetworks</span><span class='op'>(</span><span class='va'>gobject</span>, nrows <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -215,22 +210,14 @@
       <td><p>a giotto object</p></td>
     </tr>
     <tr>
-      <th>feat_type</th>
-      <td><p>feature type</p></td>
-    </tr>
-    <tr>
-      <th>spat_unit</th>
-      <td><p>spatial unit</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>verbosity of function#'</p></td>
+      <th>nrows</th>
+      <td><p>number of rows to print</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>vector</p>
+    <p>prints names and small subset of available spatial network info</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

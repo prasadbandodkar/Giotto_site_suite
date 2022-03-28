@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.997</span>
       </span>
     </div>
 
@@ -195,9 +195,9 @@
 <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">setorder</a></span><span class="op">(</span><span class="va">SS_loc_annot</span>, <span class="va">ID</span><span class="op">)</span>
 
 <span class="co"># create file with offset information</span>
-<span class="va">my_offset_file</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span>field <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>,
-                                        x_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1654.97</span>, <span class="fl">1750.75</span>, <span class="fl">1674.35</span>, <span class="fl">675.5</span>, <span class="fl">2048</span>, <span class="fl">675</span><span class="op">)</span>,
-                                        y_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
+<span class="va">my_offset_file</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span>field <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>,
+                                        x_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1654.97</span>, <span class="fl">1750.75</span>, <span class="fl">1674.35</span>, <span class="fl">675.5</span>, <span class="fl">2048</span>, <span class="fl">675</span><span class="op">)</span>,
+                                        y_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># create a stitch file</span>
 <span class="va">stitch_file</span> <span class="op">=</span> <span class="fu"><a href="../../reference/stitchFieldCoordinates.html">stitchFieldCoordinates</a></span><span class="op">(</span>location_file <span class="op">=</span> <span class="va">SS_loc_annot</span>,
@@ -246,9 +246,9 @@
 <p><strong>filterCombinations</strong> can also be used to test how different filtering parameters will affect the number of cells and features in your dataset.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/filterCombinations.html">filterCombinations</a></span><span class="op">(</span><span class="va">testobj</span>,
-                   expression_thresholds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,
-                   feat_det_in_min_cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">200</span><span class="op">)</span>,
-                   min_det_feats_per_cell <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">25</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                   expression_thresholds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,
+                   feat_det_in_min_cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">200</span><span class="op">)</span>,
+                   min_det_feats_per_cell <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">25</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/11-filterCombinations.png" style="width:50.0%"></p>
 </div>
 <div id="normalization-of-raw-counts-data" class="section level2">
@@ -294,7 +294,7 @@
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># In this case, since there are no known batch effects I will be regressing out the number of features detected per cell</span>
 <span class="co"># So that covariate will not effect further analysis</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/adjustGiottoMatrix.html">adjustGiottoMatrix</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>,
+<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/adjustGiottoMatrix.html">adjustGiottoMatrix</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>,
                                  covariate_columns <span class="op">=</span> <span class="st">'nr_feats'</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="high-efficiency-data-processing" class="section level2">
@@ -305,7 +305,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/processGiotto.html">processGiotto</a></span><span class="op">(</span><span class="va">testobj</span>,filter_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>expression_threshold <span class="op">=</span> <span class="fl">1</span>,feat_det_in_min_cells <span class="op">=</span> <span class="fl">100</span>, min_det_feats_per_cell <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,
                       norm_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span> norm_methods <span class="op">=</span> <span class="st">'standard'</span>, scale_feats <span class="op">=</span> <span class="cn">TRUE</span>, scalefactor <span class="op">=</span> <span class="fl">6000</span><span class="op">)</span>,
                       stat_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="st">'normalized'</span><span class="op">)</span>,
-                      adjust_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>, covariate_columns <span class="op">=</span> <span class="st">'nr_feats'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                      adjust_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>, covariate_columns <span class="op">=</span> <span class="st">'nr_feats'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 

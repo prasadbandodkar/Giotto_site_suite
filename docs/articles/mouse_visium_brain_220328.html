@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.997</span>
       </span>
     </div>
 
@@ -204,7 +204,7 @@
 
 <span class="co">## show plot</span>
 <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>, cell_color <span class="op">=</span> <span class="st">'in_tissue'</span>, point_size <span class="op">=</span> <span class="fl">2</span>,
-           cell_color_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'0'</span> <span class="op">=</span> <span class="st">'lightgrey'</span>, <span class="st">'1'</span> <span class="op">=</span> <span class="st">'blue'</span><span class="op">)</span>, 
+           cell_color_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'0'</span> <span class="op">=</span> <span class="st">'lightgrey'</span>, <span class="st">'1'</span> <span class="op">=</span> <span class="st">'blue'</span><span class="op">)</span>, 
            show_image <span class="op">=</span> <span class="cn">T</span>, image_name <span class="op">=</span> <span class="st">'image'</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_brain/vignette_220328/0-spatPlot2D.png" style="width:50.0%"></p>
 </div>
@@ -222,7 +222,7 @@
                               expression_threshold <span class="op">=</span> <span class="fl">1</span>,
                               feat_det_in_min_cells <span class="op">=</span> <span class="fl">50</span>,
                               min_det_feats_per_cell <span class="op">=</span> <span class="fl">1000</span>,
-                              expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'raw'</span><span class="op">)</span>,
+                              expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'raw'</span><span class="op">)</span>,
                               verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 
 <span class="co">## normalize</span>
@@ -305,7 +305,7 @@
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span><span class="va">visium_brain</span>, cell_color <span class="op">=</span> <span class="st">'leiden_clus'</span>,
            select_cell_groups <span class="op">=</span> <span class="st">'8'</span>, coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>, show_other_cells <span class="op">=</span> <span class="cn">TRUE</span>,
-           cell_color_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'8'</span> <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span>, other_cell_color <span class="op">=</span> <span class="st">"grey"</span>, other_point_size <span class="op">=</span> <span class="fl">1.5</span>,
+           cell_color_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'8'</span> <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span>, other_cell_color <span class="op">=</span> <span class="st">"grey"</span>, other_point_size <span class="op">=</span> <span class="fl">1.5</span>,
            save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>base_width <span class="op">=</span> <span class="fl">7</span>, base_height <span class="op">=</span> <span class="fl">7</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_brain/vignette_220328/12-spatPlot2D.png" style="width:50.0%"></p>
 </div>
@@ -336,7 +336,7 @@
                                                   min_feats <span class="op">=</span> <span class="fl">20</span>,
                                                   min_expr_gini_score <span class="op">=</span> <span class="fl">0.5</span>,
                                                   min_det_gini_score <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
-<span class="va">topgenes_gini</span> <span class="op">=</span> <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>
+<span class="va">topgenes_gini</span> <span class="op">=</span> <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>
 
 <span class="co"># violinplot</span>
 <span class="fu"><a href="../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">visium_brain</span>, feats <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">topgenes_gini</span><span class="op">)</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>,
@@ -346,13 +346,13 @@
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># cluster heatmap</span>
 <span class="fu"><a href="../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">visium_brain</span>, selected_feats <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">topgenes_gini</span><span class="op">)</span>,
-                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'leiden_clus'</span><span class="op">)</span>,
+                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'leiden_clus'</span><span class="op">)</span>,
                     x_text_size <span class="op">=</span> <span class="fl">10</span>, y_text_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_brain/vignette_220328/15-plotMetaDataHeatmap.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># umap plots</span>
 <span class="fu"><a href="../reference/dimFeatPlot2D.html">dimFeatPlot2D</a></span><span class="op">(</span><span class="va">visium_brain</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>,
-              feats <span class="op">=</span> <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">1</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>,
+              feats <span class="op">=</span> <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">1</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>,
               cow_n_col <span class="op">=</span> <span class="fl">4</span>, point_size <span class="op">=</span> <span class="fl">0.75</span>,
               save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>base_width <span class="op">=</span> <span class="fl">8</span>, base_height <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_brain/vignette_220328/16-dimFeatPlot2D.png" style="width:50.0%"></p>
@@ -363,7 +363,7 @@
                                                    method <span class="op">=</span> <span class="st">'scran'</span>,
                                                    expression_values <span class="op">=</span> <span class="st">'normalized'</span>,
                                                    cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span><span class="op">)</span>
-<span class="va">topgenes_scran</span> <span class="op">=</span> <span class="va">scran_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>
+<span class="va">topgenes_scran</span> <span class="op">=</span> <span class="va">scran_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>
 
 <span class="co"># violinplot</span>
 <span class="fu"><a href="../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">visium_brain</span>, feats <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">topgenes_scran</span><span class="op">)</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>,
@@ -373,12 +373,12 @@
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># cluster heatmap</span>
 <span class="fu"><a href="../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">visium_brain</span>, selected_feats <span class="op">=</span> <span class="va">topgenes_scran</span>,
-                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'leiden_clus'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'leiden_clus'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_brain/vignette_220328/18-plotMetaDataHeatmap.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># umap plots</span>
 <span class="fu"><a href="../reference/dimFeatPlot2D.html">dimFeatPlot2D</a></span><span class="op">(</span><span class="va">visium_brain</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>,
-              feats <span class="op">=</span> <span class="va">scran_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">1</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>,
+              feats <span class="op">=</span> <span class="va">scran_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">1</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>,
               cow_n_col <span class="op">=</span> <span class="fl">3</span>, point_size <span class="op">=</span> <span class="fl">1</span>,
               save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>base_width <span class="op">=</span> <span class="fl">8</span>, base_height <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_brain/vignette_220328/19-dimFeatPlot2D.png" style="width:50.0%"></p>
@@ -401,19 +401,19 @@
 
 <span class="co"># 1.1 create binary matrix of cell signature genes</span>
 <span class="co"># small example #</span>
-<span class="va">gran_markers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Nr3c2"</span>, <span class="st">"Gabra5"</span>, <span class="st">"Tubgcp2"</span>, <span class="st">"Ahcyl2"</span>,
+<span class="va">gran_markers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"Nr3c2"</span>, <span class="st">"Gabra5"</span>, <span class="st">"Tubgcp2"</span>, <span class="st">"Ahcyl2"</span>,
                  <span class="st">"Islr2"</span>, <span class="st">"Rasl10a"</span>, <span class="st">"Tmem114"</span>, <span class="st">"Bhlhe22"</span>, 
                  <span class="st">"Ntf3"</span>, <span class="st">"C1ql2"</span><span class="op">)</span>
 
-<span class="va">oligo_markers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Efhd1"</span>, <span class="st">"H2-Ab1"</span>, <span class="st">"Enpp6"</span>, <span class="st">"Ninj2"</span>,
+<span class="va">oligo_markers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"Efhd1"</span>, <span class="st">"H2-Ab1"</span>, <span class="st">"Enpp6"</span>, <span class="st">"Ninj2"</span>,
                   <span class="st">"Bmp4"</span>, <span class="st">"Tnr"</span>, <span class="st">"Hapln2"</span>, <span class="st">"Neu4"</span>,
                   <span class="st">"Wfdc18"</span>, <span class="st">"Ccp110"</span><span class="op">)</span>        
 
-<span class="va">di_mesench_markers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cartpt"</span>, <span class="st">"Scn1a"</span>, <span class="st">"Lypd6b"</span>,  <span class="st">"Drd5"</span>,
+<span class="va">di_mesench_markers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"Cartpt"</span>, <span class="st">"Scn1a"</span>, <span class="st">"Lypd6b"</span>,  <span class="st">"Drd5"</span>,
                        <span class="st">"Gpr88"</span>, <span class="st">"Plcxd2"</span>, <span class="st">"Cpne7"</span>, <span class="st">"Pou4f1"</span>,
                        <span class="st">"Ctxn2"</span>, <span class="st">"Wnt4"</span><span class="op">)</span>
 
-<span class="va">PAGE_matrix_1</span> <span class="op">=</span> <span class="fu"><a href="../reference/makeSignMatrixPAGE.html">makeSignMatrixPAGE</a></span><span class="op">(</span>sign_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Granule_neurons'</span>,
+<span class="va">PAGE_matrix_1</span> <span class="op">=</span> <span class="fu"><a href="../reference/makeSignMatrixPAGE.html">makeSignMatrixPAGE</a></span><span class="op">(</span>sign_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'Granule_neurons'</span>,
                                                      <span class="st">'Oligo_dendrocytes'</span>,
                                                      <span class="st">'di_mesenchephalon'</span><span class="op">)</span>,
                                       sign_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">gran_markers</span>,
@@ -559,7 +559,7 @@
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 5. create metagene enrichment score for clusters</span>
 <span class="va">cluster_genes_DT</span> <span class="op">=</span> <span class="fu"><a href="../reference/showSpatialCorFeats.html">showSpatialCorFeats</a></span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, use_clus_name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>, show_top_feats <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">cluster_genes</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">clus</span>; <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">cluster_genes</span><span class="op">)</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">feat_ID</span>
+<span class="va">cluster_genes</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">clus</span>; <span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html">names</a></span><span class="op">(</span><span class="va">cluster_genes</span><span class="op">)</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">feat_ID</span>
 
 <span class="va">visium_brain</span> <span class="op">=</span> <span class="fu"><a href="../reference/createMetafeats.html">createMetafeats</a></span><span class="op">(</span><span class="va">visium_brain</span>, feat_clusters <span class="op">=</span> <span class="va">cluster_genes</span>, name <span class="op">=</span> <span class="st">'cluster_metagene'</span><span class="op">)</span>
 
@@ -577,10 +577,10 @@
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># top 30 genes per spatial co-expression cluster</span>
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">spat_cor_netw_DT</span><span class="op">$</span><span class="va">cor_clusters</span><span class="op">$</span><span class="va">spat_netw_clus</span><span class="op">)</span>
-<span class="va">coexpr_dt</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">spat_cor_netw_DT</span><span class="op">$</span><span class="va">cor_clusters</span><span class="op">$</span><span class="va">spat_netw_clus</span><span class="op">)</span>,
+<span class="va">coexpr_dt</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html">names</a></span><span class="op">(</span><span class="va">spat_cor_netw_DT</span><span class="op">$</span><span class="va">cor_clusters</span><span class="op">$</span><span class="va">spat_netw_clus</span><span class="op">)</span>,
                                    cluster <span class="op">=</span> <span class="va">spat_cor_netw_DT</span><span class="op">$</span><span class="va">cor_clusters</span><span class="op">$</span><span class="va">spat_netw_clus</span><span class="op">)</span>
 <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">setorder</a></span><span class="op">(</span><span class="va">coexpr_dt</span>, <span class="va">cluster</span><span class="op">)</span>
-<span class="va">top30_coexpr_dt</span> <span class="op">=</span> <span class="va">coexpr_dt</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">30</span><span class="op">)</span> , by <span class="op">=</span> <span class="va">cluster</span><span class="op">]</span>
+<span class="va">top30_coexpr_dt</span> <span class="op">=</span> <span class="va">coexpr_dt</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">30</span><span class="op">)</span> , by <span class="op">=</span> <span class="va">cluster</span><span class="op">]</span>
 <span class="va">my_spatial_genes</span> <span class="op">&lt;-</span> <span class="va">top30_coexpr_dt</span><span class="op">$</span><span class="va">genes</span>
 
 
@@ -602,8 +602,8 @@
 <span class="va">cell_meta</span> <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">visium_brain</span><span class="op">)</span>
 <span class="va">cell_clusters</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">cell_meta</span><span class="op">$</span><span class="va">custom_leiden</span><span class="op">)</span>
 
-<span class="va">selected_colors</span> <span class="op">=</span> <span class="fu"><a href="../reference/getDistinctColors.html">getDistinctColors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">cell_clusters</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">selected_colors</span><span class="op">)</span> <span class="op">=</span> <span class="va">cell_clusters</span>
+<span class="va">selected_colors</span> <span class="op">=</span> <span class="fu"><a href="../reference/getDistinctColors.html">getDistinctColors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">length</a></span><span class="op">(</span><span class="va">cell_clusters</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html">names</a></span><span class="op">(</span><span class="va">selected_colors</span><span class="op">)</span> <span class="op">=</span> <span class="va">cell_clusters</span>
 
 <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span><span class="va">visium_brain</span>, cell_color <span class="op">=</span> <span class="st">'custom_leiden'</span>, cell_color_code <span class="op">=</span> <span class="va">selected_colors</span>, coord_fix_ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_brain/vignette_220328/31-spatPlot2D.png" style="width:50.0%"></p>
@@ -623,11 +623,11 @@
                             expression_values <span class="op">=</span> <span class="st">'scaled'</span>,
                             spatial_genes <span class="op">=</span> <span class="va">my_spatial_genes</span>, k <span class="op">=</span> <span class="fl">20</span>,
                             spatial_network_name<span class="op">=</span><span class="st">"spatial_network"</span>,
-                            betas <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span>,
+                            betas <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span>,
                             output_folder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">hmrf_folder</span>, <span class="st">'/'</span>, <span class="st">'Spatial_genes/SG_topgenes_k20_scaled'</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">visium_brain</span> <span class="op">=</span> <span class="fu"><a href="../reference/addHMRF.html">addHMRF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>, HMRFoutput <span class="op">=</span> <span class="va">HMRF_spatial_genes</span>,
-                       k <span class="op">=</span> <span class="fl">20</span>, betas_to_add <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span><span class="op">)</span>,
+                       k <span class="op">=</span> <span class="fl">20</span>, betas_to_add <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span><span class="op">)</span>,
                        hmrf_name <span class="op">=</span> <span class="st">'HMRF'</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>, cell_color <span class="op">=</span> <span class="st">'HMRF_k20_b.40'</span><span class="op">)</span></code></pre></div>

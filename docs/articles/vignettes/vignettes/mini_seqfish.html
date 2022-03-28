@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.997</span>
       </span>
     </div>
 
@@ -219,8 +219,8 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <span class="va">seqfish_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>, scalefactor <span class="op">=</span> <span class="fl">6000</span>, verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="va">seqfish_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/addStatistics.html">addStatistics</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span><span class="op">)</span>
 <span class="va">seqfish_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/adjustGiottoMatrix.html">adjustGiottoMatrix</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>, 
-                                   expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>,
-                                   covariate_columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'nr_feats'</span>, <span class="st">'total_expr'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                                   expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>,
+                                   covariate_columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'nr_feats'</span>, <span class="st">'total_expr'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="dimension-reduction" class="section level2">
 <h2 class="hasAnchor">
@@ -281,21 +281,21 @@ Of note, the python path can only be set once in an R session. See the reticulat
                                                   min_det_gini_score <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
 
 <span class="co"># get top 2 genes per cluster and visualize with violinplot</span>
-<span class="va">topgenes_gini</span> <span class="op">=</span> <span class="va">gini_markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span>
+<span class="va">topgenes_gini</span> <span class="op">=</span> <span class="va">gini_markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span>
 <span class="fu"><a href="../../../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">seqfish_mini</span>, genes <span class="op">=</span> <span class="va">topgenes_gini</span><span class="op">$</span><span class="va">feats</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span><span class="op">)</span>
 
 <span class="co"># get top 6 genes per cluster and visualize with heatmap</span>
-<span class="va">topgenes_gini2</span> <span class="op">=</span> <span class="va">gini_markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">6</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span>
+<span class="va">topgenes_gini2</span> <span class="op">=</span> <span class="va">gini_markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">6</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span>
 <span class="fu"><a href="../../../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">seqfish_mini</span>, selected_genes <span class="op">=</span> <span class="va">topgenes_gini2</span><span class="op">$</span><span class="va">feats</span>,
-                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'leiden_clus'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'leiden_clus'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="cell-type-annotation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#cell-type-annotation" class="anchor"></a>6. cell type annotation</h2>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">clusters_cell_types</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'cell A'</span>, <span class="st">'cell B'</span>, <span class="st">'cell C'</span>, <span class="st">'cell D'</span>,
+<code class="sourceCode R"><span class="va">clusters_cell_types</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'cell A'</span>, <span class="st">'cell B'</span>, <span class="st">'cell C'</span>, <span class="st">'cell D'</span>,
                         <span class="st">'cell E'</span>, <span class="st">'cell F'</span>, <span class="st">'cell G'</span>, <span class="st">'cell H'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">clusters_cell_types</span><span class="op">)</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">8</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html">names</a></span><span class="op">(</span><span class="va">clusters_cell_types</span><span class="op">)</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">8</span>
 <span class="va">seqfish_mini</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/annotateGiotto.html">annotateGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>, 
                               annotation_vector <span class="op">=</span> <span class="va">clusters_cell_types</span>, 
                               cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>, 
@@ -308,7 +308,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
             spat_point_size <span class="op">=</span> <span class="fl">3</span>, dim_point_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 
 <span class="co"># heatmap</span>
-<span class="va">topgenes_heatmap</span> <span class="op">=</span> <span class="va">gini_markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">4</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span>
+<span class="va">topgenes_heatmap</span> <span class="op">=</span> <span class="va">gini_markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">4</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span>
 <span class="fu"><a href="../../../reference/plotHeatmap.html">plotHeatmap</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>,
             genes <span class="op">=</span> <span class="va">topgenes_heatmap</span><span class="op">$</span><span class="va">feats</span>, 
             gene_order <span class="op">=</span> <span class="st">'custom'</span>,
@@ -419,7 +419,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <span class="va">cluster_genes_DT</span> <span class="op">=</span> <span class="fu">showSpatialCorGenes</span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, 
                                        use_clus_name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>,
                                        show_top_genes <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">cluster_genes</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">clus</span>; <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">cluster_genes</span><span class="op">)</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">feat_ID</span>
+<span class="va">cluster_genes</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">clus</span>; <span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html">names</a></span><span class="op">(</span><span class="va">cluster_genes</span><span class="op">)</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">feat_ID</span>
 
 
 <span class="va">seqfish_mini</span> <span class="op">=</span> <span class="fu">createMetagenes</span><span class="op">(</span><span class="va">seqfish_mini</span>,
@@ -444,7 +444,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
                             spatial_genes <span class="op">=</span> <span class="va">my_spatial_genes</span>,
                             spatial_network_name <span class="op">=</span> <span class="st">'Delaunay_network'</span>,
                             k <span class="op">=</span> <span class="fl">9</span>,
-                            betas <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">28</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>,
+                            betas <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">28</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>,
                             output_folder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">hmrf_folder</span>, <span class="st">'/'</span>, <span class="st">'Spatial_genes/SG_top100_k9_scaled'</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># check and select hmrf</span>
@@ -457,12 +457,12 @@ Of note, the python path can only be set once in an R session. See the reticulat
 
 <span class="va">seqfish_mini</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/addHMRF.html">addHMRF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>,
                   HMRFoutput <span class="op">=</span> <span class="va">HMRF_spatial_genes</span>,
-                  k <span class="op">=</span> <span class="fl">9</span>, betas_to_add <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">28</span><span class="op">)</span>,
+                  k <span class="op">=</span> <span class="fl">9</span>, betas_to_add <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">28</span><span class="op">)</span>,
                   hmrf_name <span class="op">=</span> <span class="st">'HMRF'</span><span class="op">)</span>
 
 <span class="co"># visualize selected hmrf result</span>
 <span class="va">giotto_colors</span> <span class="op">=</span> <span class="fu">Giotto</span><span class="fu">:::</span><span class="fu"><a href="../../../reference/getDistinctColors.html">getDistinctColors</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">giotto_colors</span><span class="op">)</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">9</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html">names</a></span><span class="op">(</span><span class="va">giotto_colors</span><span class="op">)</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">9</span>
 <span class="fu"><a href="../../../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>, cell_color <span class="op">=</span> <span class="st">'HMRF_k9_b.28'</span>,
          point_size <span class="op">=</span> <span class="fl">3</span>, coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>, cell_color_code <span class="op">=</span> <span class="va">giotto_colors</span><span class="op">)</span></code></pre></div>
 </div>
@@ -483,8 +483,8 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <span class="co">## heatmap</span>
 <span class="fu"><a href="../../../reference/cellProximityHeatmap.html">cellProximityHeatmap</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>, CPscore <span class="op">=</span> <span class="va">cell_proximities</span>, 
                      order_cell_types <span class="op">=</span> <span class="cn">T</span>, scale <span class="op">=</span> <span class="cn">T</span>,
-                     color_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fl">0</span>, <span class="fl">1.5</span><span class="op">)</span>, 
-                     color_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'blue'</span>, <span class="st">'white'</span>, <span class="st">'red'</span><span class="op">)</span><span class="op">)</span>
+                     color_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fl">0</span>, <span class="fl">1.5</span><span class="op">)</span>, 
+                     color_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'blue'</span>, <span class="st">'white'</span>, <span class="st">'red'</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># network</span>
 <span class="fu"><a href="../../../reference/cellProximityNetwork.html">cellProximityNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>, CPscore <span class="op">=</span> <span class="va">cell_proximities</span>, 
@@ -496,8 +496,8 @@ Of note, the python path can only be set once in an R session. See the reticulat
                      only_show_enrichment_edges <span class="op">=</span> <span class="cn">F</span>,
                      rescale_edge_weights <span class="op">=</span> <span class="cn">T</span>,
                      node_size <span class="op">=</span> <span class="fl">8</span>,
-                     edge_weight_range_depletion <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,
-                     edge_weight_range_enrichment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                     edge_weight_range_depletion <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,
+                     edge_weight_range_enrichment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div id="visualization-of-specific-cell-types" class="section level3">
 <h3 class="hasAnchor">
 <a href="#visualization-of-specific-cell-types" class="anchor"></a>visualization of specific cell types</h3>
@@ -510,7 +510,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
                         show_network <span class="op">=</span> <span class="cn">T</span>,
                         cluster_column <span class="op">=</span> <span class="st">'cell_types'</span>,
                         cell_color <span class="op">=</span> <span class="st">'cell_types'</span>,
-                        cell_color_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'cell D'</span> <span class="op">=</span> <span class="st">'lightblue'</span>, <span class="st">'cell F'</span> <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span>,
+                        cell_color_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'cell D'</span> <span class="op">=</span> <span class="st">'lightblue'</span>, <span class="st">'cell F'</span> <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span>,
                         point_size_select <span class="op">=</span> <span class="fl">4</span>, point_size_other <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
 <span class="co"># Option 2: create additional metadata</span>
@@ -520,7 +520,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
                              cell_interaction <span class="op">=</span> <span class="va">spec_interaction</span>,
                              name <span class="op">=</span> <span class="st">'D_F_interactions'</span><span class="op">)</span>
 <span class="fu"><a href="../../../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">seqfish_mini</span>, cell_color <span class="op">=</span> <span class="st">'D_F_interactions'</span>, legend_symbol_size <span class="op">=</span> <span class="fl">3</span>,
-         select_cell_groups <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'other_cell D'</span>, <span class="st">'other_cell F'</span>, <span class="st">'select_cell D'</span>, <span class="st">'select_cell F'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+         select_cell_groups <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'other_cell D'</span>, <span class="st">'other_cell F'</span>, <span class="st">'select_cell D'</span>, <span class="st">'select_cell F'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="cell-neighborhood-interaction-changed-genes" class="section level3">
 <h3 class="hasAnchor">
@@ -529,10 +529,10 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <code class="sourceCode R">
 <span class="co">## select top 25th highest expressing genes</span>
 <span class="va">gene_metadata</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/fDataDT.html">fDataDT</a></span><span class="op">(</span><span class="va">seqfish_mini</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">gene_metadata</span><span class="op">$</span><span class="va">nr_cells</span>, <span class="va">gene_metadata</span><span class="op">$</span><span class="va">mean_expr</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">gene_metadata</span><span class="op">$</span><span class="va">nr_cells</span>, <span class="va">gene_metadata</span><span class="op">$</span><span class="va">mean_expr_det</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">gene_metadata</span><span class="op">$</span><span class="va">nr_cells</span>, <span class="va">gene_metadata</span><span class="op">$</span><span class="va">mean_expr</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">gene_metadata</span><span class="op">$</span><span class="va">nr_cells</span>, <span class="va">gene_metadata</span><span class="op">$</span><span class="va">mean_expr_det</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">gene_metadata</span><span class="op">$</span><span class="va">mean_expr_det</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/quantile.html">quantile</a></span><span class="op">(</span><span class="va">gene_metadata</span><span class="op">$</span><span class="va">mean_expr_det</span><span class="op">)</span>
 <span class="va">high_expressed_genes</span> <span class="op">=</span> <span class="va">gene_metadata</span><span class="op">[</span><span class="va">mean_expr_det</span> <span class="op">&gt;</span> <span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">gene_ID</span>
 
 <span class="co">## identify genes that are associated with proximity to other cell types</span>
@@ -553,14 +553,14 @@ Of note, the python path can only be set once in an R session. See the reticulat
                           min_spat_diff <span class="op">=</span> <span class="fl">0.1</span>, min_log2_fc <span class="op">=</span> <span class="fl">0.1</span>, min_zscore <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="co">## visualize subset of interaction changed genes (ICGs)</span>
-<span class="va">ICG_genes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Cpne2'</span>, <span class="st">'Scg3'</span>, <span class="st">'Cmtm3'</span>, <span class="st">'Cplx1'</span>, <span class="st">'Lingo1'</span><span class="op">)</span>
-<span class="va">ICG_genes_types</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'cell E'</span>, <span class="st">'cell D'</span>, <span class="st">'cell D'</span>, <span class="st">'cell G'</span>, <span class="st">'cell E'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">ICG_genes</span><span class="op">)</span> <span class="op">=</span> <span class="va">ICG_genes_types</span>
+<span class="va">ICG_genes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'Cpne2'</span>, <span class="st">'Scg3'</span>, <span class="st">'Cmtm3'</span>, <span class="st">'Cplx1'</span>, <span class="st">'Lingo1'</span><span class="op">)</span>
+<span class="va">ICG_genes_types</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'cell E'</span>, <span class="st">'cell D'</span>, <span class="st">'cell D'</span>, <span class="st">'cell G'</span>, <span class="st">'cell E'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html">names</a></span><span class="op">(</span><span class="va">ICG_genes</span><span class="op">)</span> <span class="op">=</span> <span class="va">ICG_genes_types</span>
 
 <span class="fu"><a href="../../../reference/plotICG.html">plotICG</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>,
         cpgObject <span class="op">=</span> <span class="va">CPGscoresHighGenes</span>,
         source_type <span class="op">=</span> <span class="st">'cell A'</span>,
-        source_markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Csf1r'</span>, <span class="st">'Laptm5'</span><span class="op">)</span>,
+        source_markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'Csf1r'</span>, <span class="st">'Laptm5'</span><span class="op">)</span>,
         ICG_genes <span class="op">=</span> <span class="va">ICG_genes</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -650,12 +650,12 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <span class="co"># select annotations, reductions and expression values to view in Giotto Viewer</span>
 <span class="fu"><a href="../../../reference/exportGiottoViewer.html">exportGiottoViewer</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>,
                    output_directory <span class="op">=</span> <span class="va">viewer_folder</span>,
-                   factor_annotations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'cell_types'</span>,
+                   factor_annotations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'cell_types'</span>,
                                           <span class="st">'leiden_clus'</span>,
                                           <span class="st">'HMRF_k9_b.28'</span><span class="op">)</span>,
                    numeric_annotations <span class="op">=</span> <span class="st">'total_expr'</span>,
-                   dim_reductions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'umap'</span><span class="op">)</span>,
-                   dim_reduction_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'umap'</span><span class="op">)</span>,
+                   dim_reductions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'umap'</span><span class="op">)</span>,
+                   dim_reduction_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'umap'</span><span class="op">)</span>,
                    expression_values <span class="op">=</span> <span class="st">'scaled'</span>,
                    expression_rounding <span class="op">=</span> <span class="fl">3</span>,
                    overwrite_dir <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>

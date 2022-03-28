@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.997</span>
       </span>
     </div>
 
@@ -215,7 +215,7 @@
 <span class="co"># x_padding determines how much distance is between each dataset</span>
 <span class="co"># if x_shift = NULL, then the total shift will be guessed from the giotto image</span>
 <span class="va">testcombo</span> <span class="op">=</span> <span class="fu"><a href="../reference/joinGiottoObjects.html">joinGiottoObjects</a></span><span class="op">(</span>gobject_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">N_pros</span>, <span class="va">C_pros</span><span class="op">)</span>,
-    gobject_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'NP'</span>, <span class="st">'CP'</span><span class="op">)</span>,
+    gobject_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'NP'</span>, <span class="st">'CP'</span><span class="op">)</span>,
     join_method <span class="op">=</span> <span class="st">'shift'</span>, x_padding <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
 
 
@@ -233,20 +233,20 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># this plots all the images by list_ID</span>
 <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testcombo</span>, cell_color <span class="op">=</span> <span class="st">'in_tissue'</span>,
-    show_image <span class="op">=</span> <span class="cn">T</span>, image_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NP-image"</span>, <span class="st">"CP-image"</span><span class="op">)</span>,
+    show_image <span class="op">=</span> <span class="cn">T</span>, image_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"NP-image"</span>, <span class="st">"CP-image"</span><span class="op">)</span>,
     group_by <span class="op">=</span> <span class="st">'list_ID'</span>, point_alpha <span class="op">=</span> <span class="fl">0.5</span>,
     save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"1a_plot"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/visium_prostate_integration/vignette_sep29_2021/1a_plot.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># this plots one selected image</span>
 <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testcombo</span>, cell_color <span class="op">=</span> <span class="st">'in_tissue'</span>,
-    show_image <span class="op">=</span> <span class="cn">T</span>, image_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NP-image"</span><span class="op">)</span>, point_alpha <span class="op">=</span> <span class="fl">0.3</span>,
+    show_image <span class="op">=</span> <span class="cn">T</span>, image_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"NP-image"</span><span class="op">)</span>, point_alpha <span class="op">=</span> <span class="fl">0.3</span>,
     save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"1b_plot"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/visium_prostate_integration/vignette_sep29_2021/1b_plot.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># this plots two selected images</span>
 <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testcombo</span>, cell_color <span class="op">=</span> <span class="st">'in_tissue'</span>,
-    show_image <span class="op">=</span> <span class="cn">T</span>, image_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span> <span class="st">"NP-image"</span>, <span class="st">"CP-image"</span><span class="op">)</span>,
+    show_image <span class="op">=</span> <span class="cn">T</span>, image_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span> <span class="st">"NP-image"</span>, <span class="st">"CP-image"</span><span class="op">)</span>,
     point_alpha <span class="op">=</span> <span class="fl">0.3</span>,
     save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"1c_plot"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/visium_prostate_integration/vignette_sep29_2021/1c_plot.png" style="width:50.0%"></p>
@@ -265,7 +265,7 @@
     expression_threshold <span class="op">=</span> <span class="fl">1</span>,
     feat_det_in_min_cells <span class="op">=</span> <span class="fl">50</span>,
     min_det_feats_per_cell <span class="op">=</span> <span class="fl">500</span>,
-    expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'raw'</span><span class="op">)</span>,
+    expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">'raw'</span><span class="op">)</span>,
     verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 
 <span class="co">## normalize</span>
@@ -429,10 +429,10 @@
 <span class="co"># markers_scran is generated from single cell analysis ()</span>
 <span class="va">markers_scran</span> <span class="op">=</span> <span class="fu"><a href="../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject<span class="op">=</span><span class="va">giotto_SC</span>, method<span class="op">=</span><span class="st">"scran"</span>,
                                        expression_values<span class="op">=</span><span class="st">"normalized"</span>, cluster_column<span class="op">=</span><span class="st">'prostate_labels'</span>, min_feats<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
-<span class="va">top_markers</span> <span class="op">&lt;-</span> <span class="va">markers_scran</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">10</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"cluster"</span><span class="op">]</span>
-<span class="va">celltypes</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">markers_scran</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span><span class="op">)</span>
+<span class="va">top_markers</span> <span class="op">&lt;-</span> <span class="va">markers_scran</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">10</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"cluster"</span><span class="op">]</span>
+<span class="va">celltypes</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/factors.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">markers_scran</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span><span class="op">)</span>
 <span class="va">sign_list</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
-<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">celltypes</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">length</a></span><span class="op">(</span><span class="va">celltypes</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
   <span class="va">sign_list</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">&lt;-</span><span class="va">top_markers</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">top_markers</span><span class="op">$</span><span class="va">cluster</span> <span class="op">==</span> <span class="va">celltypes</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>,<span class="op">]</span><span class="op">$</span><span class="va">feats</span>
 <span class="op">}</span>
 
@@ -476,7 +476,7 @@
 <span class="co"># A count matrix and a vector for all cell labels will be needed</span>
 <span class="va">rank_matrix</span> <span class="op">=</span> <span class="fu"><a href="../reference/makeSignMatrixRank.html">makeSignMatrixRank</a></span><span class="op">(</span>sc_matrix <span class="op">=</span> <span class="fu"><a href="../reference/get_expression_values.html">get_expression_values</a></span><span class="op">(</span><span class="va">giotto_SC</span>,values <span class="op">=</span> <span class="st">"normalized"</span><span class="op">)</span>,
                                  sc_cluster_ids <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">prostate_label</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">rank_matrix</span><span class="op">)</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">prostate_label</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">rank_matrix</span><span class="op">)</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/factors.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">prostate_label</span><span class="op">)</span><span class="op">)</span>
 <span class="va">testcombo</span> <span class="op">=</span> <span class="fu"><a href="../reference/runRankEnrich.html">runRankEnrich</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testcombo</span>, sign_matrix <span class="op">=</span> <span class="va">rank_matrix</span>,expression_values <span class="op">=</span> <span class="st">"normalized"</span><span class="op">)</span>
 
 <span class="co"># Plot Rank enrichment result</span>
@@ -502,7 +502,7 @@
 <span class="co"># Plot DWLS deconvolution result</span>
 <span class="fu"><a href="../reference/spatCellPlot2D.html">spatCellPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testcombo</span>,
                spat_enr_names <span class="op">=</span> <span class="st">'DWLS'</span>,
-               cell_annotation_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">prostate_label</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,
+               cell_annotation_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/factors.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">prostate_label</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,
                cow_n_col <span class="op">=</span> <span class="fl">2</span>,coord_fix_ratio <span class="op">=</span> <span class="cn">NULL</span>, point_size <span class="op">=</span> <span class="fl">1</span>,
                save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"5d_DWLS_plot"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/visium_prostate_integration/vignette_sep29_2021/5d_DWLS_plot.png" style="width:50.0%"></p>

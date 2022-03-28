@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.997</span>
       </span>
     </div>
 
@@ -215,12 +215,12 @@
   cell_color <span class='op'>=</span> <span class='cn'>NULL</span>,
   color_as_factor <span class='op'>=</span> <span class='cn'>T</span>,
   cell_color_code <span class='op'>=</span> <span class='cn'>NULL</span>,
-  cell_color_gradient <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"blue"</span>, <span class='st'>"white"</span>, <span class='st'>"red"</span><span class='op'>)</span>,
+  cell_color_gradient <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='st'>"blue"</span>, <span class='st'>"white"</span>, <span class='st'>"red"</span><span class='op'>)</span>,
   gradient_midpoint <span class='op'>=</span> <span class='cn'>NULL</span>,
   gradient_limits <span class='op'>=</span> <span class='cn'>NULL</span>,
   select_cell_groups <span class='op'>=</span> <span class='cn'>NULL</span>,
   select_cells <span class='op'>=</span> <span class='cn'>NULL</span>,
-  point_shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"border"</span>, <span class='st'>"no_border"</span>, <span class='st'>"voronoi"</span><span class='op'>)</span>,
+  point_shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='st'>"border"</span>, <span class='st'>"no_border"</span>, <span class='st'>"voronoi"</span><span class='op'>)</span>,
   point_size <span class='op'>=</span> <span class='fl'>3</span>,
   point_alpha <span class='op'>=</span> <span class='fl'>1</span>,
   point_border_col <span class='op'>=</span> <span class='st'>"black"</span>,
@@ -257,6 +257,7 @@
   show_plot <span class='op'>=</span> <span class='cn'>NA</span>,
   return_plot <span class='op'>=</span> <span class='cn'>NA</span>,
   save_plot <span class='op'>=</span> <span class='cn'>NA</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>,
   save_param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
   default_save_name <span class='op'>=</span> <span class='st'>"spatPlot2D_single"</span>
 <span class='op'>)</span></pre>
@@ -479,6 +480,10 @@
     <tr>
       <th>save_plot</th>
       <td><p>directly save the plot [boolean]</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>be verbose</p></td>
     </tr>
     <tr>
       <th>save_param</th>
