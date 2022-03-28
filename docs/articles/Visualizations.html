@@ -32,6 +32,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -44,7 +46,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0.991</span>
       </span>
     </div>
 
@@ -127,7 +129,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/RubD/Giotto/">
+  <a href="https://github.com/RubD/Giotto/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -142,13 +144,13 @@
 
       
 
-      </header><script src="Visualizations_files/header-attrs-2.13/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>How to make visualizations with Giotto?</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/master/vignettes/Visualizations.Rmd"><code>vignettes/Visualizations.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/HEAD/vignettes/Visualizations.Rmd" class="external-link"><code>vignettes/Visualizations.Rmd</code></a></small>
       <div class="hidden name"><code>Visualizations.Rmd</code></div>
 
     </div>
@@ -157,17 +159,17 @@
     
 <p>This tutorial will take you through some of the visualizations that are possible with Giotto. This includes dimension reduction visualizations (PCAs and UMAPs), heatmaps, violin plots as well as visualizations that are unique to giotto like spatial maps and networks.</p>
 <p>This tutorial uses a MerFish dataset of mouse hypothalamic preoptic regions. A complete walkthough of that dataset can be found <a href="./merFISH_hypoth_210924.html"><strong>here</strong></a>.</p>
-<div id="creating-your-giotto-object" class="section level2">
-<h2 class="hasAnchor">
-<a href="#creating-your-giotto-object" class="anchor"></a>Creating your Giotto Object</h2>
+<div class="section level3">
+<h3 id="creating-your-giotto-object">Creating your Giotto Object<a class="anchor" aria-label="anchor" href="#creating-your-giotto-object"></a>
+</h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/">Giotto</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span>
 <span class="va">my_working_dir</span> <span class="op">=</span> <span class="st">'/path/to/directory/'</span>
 
 <span class="co"># set python path to your preferred python version path</span>
 <span class="co"># set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment</span>
 <span class="va">python_path</span> <span class="op">=</span> <span class="cn">NULL</span> 
-<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">python_path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">python_path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span>force_environment <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="op">}</span>
 
@@ -181,9 +183,9 @@
                                   python_path <span class="op">=</span> <span class="va">python_path</span><span class="op">)</span>
 
 <span class="co"># 2. create giotto object from provided paths ####</span>
-<span class="va">expr_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"merFISH_3D_data_expression.txt.gz"</span><span class="op">)</span>
-<span class="va">loc_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"merFISH_3D_data_cell_locations.txt"</span><span class="op">)</span>
-<span class="va">meta_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"merFISH_3D_metadata.txt"</span><span class="op">)</span>
+<span class="va">expr_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"merFISH_3D_data_expression.txt.gz"</span><span class="op">)</span>
+<span class="va">loc_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"merFISH_3D_data_cell_locations.txt"</span><span class="op">)</span>
+<span class="va">meta_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"merFISH_3D_metadata.txt"</span><span class="op">)</span>
 
 <span class="co">## Part 2: Create Giotto Object &amp; Process Data</span>
 <span class="co">## create Giotto object</span>
@@ -193,19 +195,19 @@
 
 
 <span class="co">## add additional metadata if wanted</span>
-<span class="va">metadata</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="va">meta_path</span><span class="op">)</span>
+<span class="va">metadata</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">meta_path</span><span class="op">)</span>
 <span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">testobj</span>, new_metadata <span class="op">=</span> <span class="va">metadata</span><span class="op">$</span><span class="va">layer_ID</span>, vector_name <span class="op">=</span> <span class="st">'layer_ID'</span><span class="op">)</span>
 <span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">testobj</span>, new_metadata <span class="op">=</span> <span class="va">metadata</span><span class="op">$</span><span class="va">orig_cell_types</span>, vector_name <span class="op">=</span> <span class="st">'orig_cell_types'</span><span class="op">)</span>
 
 <span class="co"># Process the Giotto object, filtering, normalization, adding statistics and correcting for covariates</span>
-<span class="fu"><a href="../reference/processGiotto.html">processGiotto</a></span><span class="op">(</span><span class="va">testobj</span>,filter_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>expression_threshold <span class="op">=</span> <span class="fl">1</span>,feat_det_in_min_cells <span class="op">=</span> <span class="fl">0</span>, min_det_feats_per_cell <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,
-                      norm_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span> norm_methods <span class="op">=</span> <span class="st">'standard'</span>, scale_feats <span class="op">=</span> <span class="cn">TRUE</span>, scalefactor <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>,
-                      stat_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="st">'normalized'</span><span class="op">)</span>,
-                      adjust_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/processGiotto.html">processGiotto</a></span><span class="op">(</span><span class="va">testobj</span>,filter_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_threshold <span class="op">=</span> <span class="fl">1</span>,feat_det_in_min_cells <span class="op">=</span> <span class="fl">0</span>, min_det_feats_per_cell <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,
+                      norm_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span> norm_methods <span class="op">=</span> <span class="st">'standard'</span>, scale_feats <span class="op">=</span> <span class="cn">TRUE</span>, scalefactor <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>,
+                      stat_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="st">'normalized'</span><span class="op">)</span>,
+                      adjust_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="visualizing-your-dataset-" class="section level2">
-<h2 class="hasAnchor">
-<a href="#visualizing-your-dataset-" class="anchor"></a>1. Visualizing your Dataset.</h2>
+<div class="section level3">
+<h3 id="visualizing-your-dataset-">1. Visualizing your Dataset.<a class="anchor" aria-label="anchor" href="#visualizing-your-dataset-"></a>
+</h3>
 <p>This dataset includes eight sequential slices. As such it can be visualized both in 2D…</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 2D</span>
@@ -217,9 +219,9 @@
 <span class="fu"><a href="../reference/spatPlot3D.html">spatPlot3D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">merFISH_test</span>, point_size <span class="op">=</span> <span class="fl">2.0</span>, axis_scale <span class="op">=</span> <span class="st">'real'</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/MerFISH_hypoth/210924_results/4-spat3D.png" style="width:50.0%"></p>
 </div>
-<div id="visualizing-your-clusters" class="section level2">
-<h2 class="hasAnchor">
-<a href="#visualizing-your-clusters" class="anchor"></a>2. Visualizing your Clusters</h2>
+<div class="section level3">
+<h3 id="visualizing-your-clusters">2. Visualizing your Clusters<a class="anchor" aria-label="anchor" href="#visualizing-your-clusters"></a>
+</h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># After running dimension reduction, you are able to create a UMAP</span>
 <span class="co"># Run PCA</span>
@@ -245,19 +247,19 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">merFISH_test</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>, 
            cell_color <span class="op">=</span> <span class="st">'leiden_0.2'</span>, 
-           group_by <span class="op">=</span> <span class="st">'layer_ID'</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, group_by_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">160</span>, <span class="fl">60</span>, <span class="op">-</span><span class="fl">40</span>, <span class="op">-</span><span class="fl">140</span>, <span class="op">-</span><span class="fl">240</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+           group_by <span class="op">=</span> <span class="st">'layer_ID'</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, group_by_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">160</span>, <span class="fl">60</span>, <span class="op">-</span><span class="fl">40</span>, <span class="op">-</span><span class="fl">140</span>, <span class="op">-</span><span class="fl">240</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/MerFISH_hypoth/210927_results/8-spatPlot2D.png" style="width:50.0%"></p>
 <p>Visualize expression levels within the tissue</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># replace the cell color to represent the number of features/ cell ("nr_feats")</span>
 <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">merFISH_test</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>, 
            cell_color <span class="op">=</span> <span class="st">'nr_feats'</span>, color_as_factor <span class="op">=</span> <span class="cn">F</span>,
-           group_by <span class="op">=</span> <span class="st">'layer_ID'</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, group_by_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">160</span>, <span class="fl">60</span>, <span class="op">-</span><span class="fl">40</span>, <span class="op">-</span><span class="fl">140</span>, <span class="op">-</span><span class="fl">240</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+           group_by <span class="op">=</span> <span class="st">'layer_ID'</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, group_by_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">160</span>, <span class="fl">60</span>, <span class="op">-</span><span class="fl">40</span>, <span class="op">-</span><span class="fl">140</span>, <span class="op">-</span><span class="fl">240</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/MerFISH_hypoth/211001_results/4-spatPlot2D.png" style="width:50.0%"></p>
 </div>
-<div id="compare-clusters" class="section level2">
-<h2 class="hasAnchor">
-<a href="#compare-clusters" class="anchor"></a>3. Compare Clusters</h2>
+<div class="section level3">
+<h3 id="compare-clusters">3. Compare Clusters<a class="anchor" aria-label="anchor" href="#compare-clusters"></a>
+</h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot a heatmap of clusters</span>
 <span class="fu"><a href="../reference/showClusterHeatmap.html">showClusterHeatmap</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span><span class="op">)</span></code></pre></div>
@@ -267,41 +269,41 @@
 <span class="fu"><a href="../reference/showClusterDendrogram.html">showClusterDendrogram</a></span><span class="op">(</span><span class="va">testobj</span>, h <span class="op">=</span> <span class="fl">0.5</span>, rotate <span class="op">=</span> <span class="cn">T</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/MerFISH_hypoth/211001_results/6-showClusterDendrogram.png" style="width:50.0%"></p>
 </div>
-<div id="visualize-cell-markers-with-violin-plots-and-heatmaps" class="section level1">
-<h1 class="hasAnchor">
-<a href="#visualize-cell-markers-with-violin-plots-and-heatmaps" class="anchor"></a>Visualize Cell Markers with Violin Plots and Heatmaps</h1>
+<div class="section level2">
+<h2 id="visualize-cell-markers-with-violin-plots-and-heatmaps">Visualize Cell Markers with Violin Plots and Heatmaps<a class="anchor" aria-label="anchor" href="#visualize-cell-markers-with-violin-plots-and-heatmaps"></a>
+</h2>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">markers</span> <span class="op">=</span> <span class="fu"><a href="../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">merFISH_test</span>,
                                  method <span class="op">=</span> <span class="st">'gini'</span>,
                                  expression_values <span class="op">=</span> <span class="st">'normalized'</span>,
                                  cluster_column <span class="op">=</span> <span class="st">'leiden_0.2'</span>,
                                  min_feats <span class="op">=</span> <span class="fl">1</span>, rank_score <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="va">markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span>
+<span class="va">markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span>
 
 <span class="co"># Create a violinplot</span>
-<span class="va">topgini_genes</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>
+<span class="va">topgini_genes</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>
 <span class="fu"><a href="../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">merFISH_test</span>, feats <span class="op">=</span> <span class="va">topgini_genes</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_0.2'</span>, strip_position <span class="op">=</span> <span class="st">'right'</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/MerFISH_hypoth/210924_results/9-violinPlot.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create a heatmap</span>
- <span class="va">topgini_genes</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">6</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>
+ <span class="va">topgini_genes</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">6</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">merFISH_test</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>,
-                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'leiden_0.2'</span><span class="op">)</span>,
+                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'leiden_0.2'</span><span class="op">)</span>,
                     selected_feats <span class="op">=</span> <span class="va">topgini_genes</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/MerFISH_hypoth/210927_results/10-plotMetaDataHeatmap.png" style="width:50.0%"></p>
-<div id="visualize-cell-types-in-tissue" class="section level2">
-<h2 class="hasAnchor">
-<a href="#visualize-cell-types-in-tissue" class="anchor"></a>Visualize Cell Types in Tissue</h2>
+<div class="section level3">
+<h3 id="visualize-cell-types-in-tissue">Visualize Cell Types in Tissue<a class="anchor" aria-label="anchor" href="#visualize-cell-types-in-tissue"></a>
+</h3>
 <p>Annotate your clusters</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## name clusters</span>
-<span class="va">clusters_cell_types_hypo</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Inhibitory'</span>, <span class="st">'Inhibitory'</span>, <span class="st">'Excitatory'</span>, <span class="st">'Astrocyte'</span>,<span class="st">'OD Mature'</span>, <span class="st">'Endothelial'</span>,
+<span class="va">clusters_cell_types_hypo</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Inhibitory'</span>, <span class="st">'Inhibitory'</span>, <span class="st">'Excitatory'</span>, <span class="st">'Astrocyte'</span>,<span class="st">'OD Mature'</span>, <span class="st">'Endothelial'</span>,
                              <span class="st">'OD Mature'</span>, <span class="st">'OD Immature'</span>, <span class="st">'Ependymal'</span>, <span class="st">'Ambiguous'</span>, <span class="st">'Endothelial'</span>, <span class="st">'Microglia'</span>, <span class="st">'OD Mature'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">clusters_cell_types_hypo</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">cluster_order</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">clusters_cell_types_hypo</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">cluster_order</span><span class="op">)</span><span class="op">)</span>
 <span class="va">merFISH_test</span> <span class="op">=</span> <span class="fu"><a href="../reference/annotateGiotto.html">annotateGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">merFISH_test</span>, annotation_vector <span class="op">=</span> <span class="va">clusters_cell_types_hypo</span>,
                               cluster_column <span class="op">=</span> <span class="st">'leiden_0.2'</span>, name <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">)</span>
-<span class="va">mycolorcode</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'red'</span>, <span class="st">'lightblue'</span>, <span class="st">'yellowgreen'</span>,<span class="st">'purple'</span>, <span class="st">'darkred'</span>, <span class="st">'magenta'</span>, <span class="st">'mediumblue'</span>, <span class="st">'yellow'</span>, <span class="st">'gray'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mycolorcode</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Inhibitory'</span>, <span class="st">'Excitatory'</span>,<span class="st">'OD Mature'</span>, <span class="st">'OD Immature'</span>, <span class="st">'Astrocyte'</span>, <span class="st">'Microglia'</span>, <span class="st">'Ependymal'</span>,<span class="st">'Endothelial'</span>, <span class="st">'Ambiguous'</span><span class="op">)</span>
+<span class="va">mycolorcode</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'red'</span>, <span class="st">'lightblue'</span>, <span class="st">'yellowgreen'</span>,<span class="st">'purple'</span>, <span class="st">'darkred'</span>, <span class="st">'magenta'</span>, <span class="st">'mediumblue'</span>, <span class="st">'yellow'</span>, <span class="st">'gray'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mycolorcode</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Inhibitory'</span>, <span class="st">'Excitatory'</span>,<span class="st">'OD Mature'</span>, <span class="st">'OD Immature'</span>, <span class="st">'Astrocyte'</span>, <span class="st">'Microglia'</span>, <span class="st">'Ependymal'</span>,<span class="st">'Endothelial'</span>, <span class="st">'Ambiguous'</span><span class="op">)</span>
 
 <span class="co"># Visualize with UMAP</span>
 <span class="fu"><a href="../reference/plotUMAP_3D.html">plotUMAP_3D</a></span><span class="op">(</span><span class="va">merFISH_test</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>, cell_color_code <span class="op">=</span> <span class="va">mycolorcode</span><span class="op">)</span></code></pre></div>
@@ -310,7 +312,7 @@
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"> <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">merFISH_test</span>, point_size <span class="op">=</span> <span class="fl">1.0</span>,
            cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, cell_color_code <span class="op">=</span> <span class="va">mycolorcode</span>,
-           group_by <span class="op">=</span> <span class="st">'layer_ID'</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, group_by_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">260</span>, <span class="op">-</span><span class="fl">290</span>, <span class="op">-</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+           group_by <span class="op">=</span> <span class="st">'layer_ID'</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, group_by_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">260</span>, <span class="op">-</span><span class="fl">290</span>, <span class="op">-</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/MerFISH_hypoth/210927_results/16-spatPlot2D.png" style="width:50.0%"></p>
 <p>and in three</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -323,8 +325,8 @@
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">merFISH_test</span>, point_size <span class="op">=</span> <span class="fl">1.0</span>, 
            cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, cell_color_code <span class="op">=</span> <span class="va">mycolorcode</span>,
-           select_cell_groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Microglia'</span>, <span class="st">'Ependymal'</span>, <span class="st">'Endothelial'</span><span class="op">)</span>, show_other_cells <span class="op">=</span> <span class="cn">F</span>,
-           group_by <span class="op">=</span> <span class="st">'layer_ID'</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, group_by_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">260</span>, <span class="op">-</span><span class="fl">290</span>, <span class="op">-</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+           select_cell_groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Microglia'</span>, <span class="st">'Ependymal'</span>, <span class="st">'Endothelial'</span><span class="op">)</span>, show_other_cells <span class="op">=</span> <span class="cn">F</span>,
+           group_by <span class="op">=</span> <span class="st">'layer_ID'</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, group_by_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">260</span>, <span class="op">-</span><span class="fl">290</span>, <span class="op">-</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/MerFISH_hypoth/210927_results/24-spatPlot2D.png" style="width:50.0%"></p>
 <p>and in three</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -332,7 +334,7 @@
            cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, axis_scale <span class="op">=</span> <span class="st">'real'</span>,
            sdimx <span class="op">=</span> <span class="st">'sdimx'</span>, sdimy <span class="op">=</span> <span class="st">'sdimy'</span>, sdimz <span class="op">=</span> <span class="st">'sdimz'</span>,
            show_grid <span class="op">=</span> <span class="cn">F</span>, cell_color_code <span class="op">=</span> <span class="va">mycolorcode</span>,
-           select_cell_groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Microglia'</span>, <span class="st">'Ependymal'</span>, <span class="st">'Endothelial'</span><span class="op">)</span>, show_other_cells <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
+           select_cell_groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Microglia'</span>, <span class="st">'Ependymal'</span>, <span class="st">'Endothelial'</span><span class="op">)</span>, show_other_cells <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/MerFISH_hypoth/210927_results/23-spatplot3D.png" style="width:50.0%"> ## Visualize Cell Networks</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### Spatial Networks</span>
@@ -386,11 +388,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.drieslab.com/">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
+  <p></p>
+<p>Developed by <a href="https://www.drieslab.com/" class="external-link">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -398,6 +402,8 @@
 
   
 
+
+  
 
   </body>
 </html>

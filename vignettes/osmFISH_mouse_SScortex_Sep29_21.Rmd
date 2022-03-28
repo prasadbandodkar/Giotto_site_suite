@@ -59,7 +59,7 @@ meta_path = paste0(results_folder, "osmFISH_prep_cell_metadata.txt")
 ## Part 2: Create Giotto object & process data
 ```{r eval=FALSE}
 ## create
-osm_test <- createGiottoObject(raw_exprs = expr_path,
+osm_test <- createGiottoObject(expression = expr_path,
                               spatial_locs = loc_path,
                               instructions = instrs)
 
