@@ -32,8 +32,6 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -46,14 +44,14 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Start
      
     <span class="caret"></span>
@@ -74,7 +72,7 @@
   <a href="../reference/index.html">Documentation</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Datasets
      
     <span class="caret"></span>
@@ -101,7 +99,7 @@
   <a href="../articles/giotto_news.html">News</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     FAQ
      
     <span class="caret"></span>
@@ -116,7 +114,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Try Giotto
      
     <span class="caret"></span>
@@ -129,7 +127,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/RubD/Giotto/" class="external-link">
+  <a href="https://github.com/RubD/Giotto/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -144,31 +142,31 @@
 
       
 
-      </header><div class="row">
+      </header><script src="getting_started_gobject_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip></h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/HEAD/vignettes/getting_started_gobject.Rmd" class="external-link"><code>vignettes/getting_started_gobject.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/master/vignettes/getting_started_gobject.Rmd"><code>vignettes/getting_started_gobject.Rmd</code></a></small>
       <div class="hidden name"><code>getting_started_gobject.Rmd</code></div>
 
     </div>
 
     
     
-<div class="section level2">
-<h2 id="how-to-create-a-giotto-object">How to create a Giotto Object?<a class="anchor" aria-label="anchor" href="#how-to-create-a-giotto-object"></a>
-</h2>
-<div class="section level5">
-<h5 id="minimum-requirements">1. Minimum requirements<a class="anchor" aria-label="anchor" href="#minimum-requirements"></a>
-</h5>
+<div id="how-to-create-a-giotto-object" class="section level1">
+<h1 class="hasAnchor">
+<a href="#how-to-create-a-giotto-object" class="anchor"></a>How to create a Giotto Object?</h1>
+<div id="minimum-requirements" class="section level4">
+<h4 class="hasAnchor">
+<a href="#minimum-requirements" class="anchor"></a>1. Minimum requirements</h4>
 <ul>
 <li>expression matrix</li>
 <li>spatial locations (<em>unnecessary for scRNAseq analysis</em>)</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/">Giotto</a></span><span class="op">)</span>
 
 <span class="co"># 1. Directly from file path (dummy locations are used as examples here)</span>
 <span class="va">path_to_expression_file</span> <span class="op">=</span> <span class="st">"/local/path/to/expression/file.txt"</span>
@@ -179,7 +177,7 @@
 
 <span class="co"># 2. Use objects already loaded into environment</span>
 <span class="va">expression_matrix</span> <span class="op">=</span> <span class="fu"><a href="../reference/readExprMatrix.html">readExprMatrix</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">path_to_expression_file</span><span class="op">)</span> <span class="co"># fast method to read expression matrix</span>
-<span class="va">cell_locations</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">path_to_locations_file</span><span class="op">)</span>
+<span class="va">cell_locations</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">path_to_locations_file</span><span class="op">)</span>
 
 <span class="va">my_giotto_object</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">expression_matrix</span>,
                                       spatial_locs <span class="op">=</span> <span class="va">cell_locations</span><span class="op">)</span></code></pre></div>
@@ -317,9 +315,9 @@ Locations file formatting
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">spatial_locs =</span> cell_locations)</span></code></pre></div>
 <p><br></p>
 </div>
-<div class="section level5">
-<h5 id="additional-features">2. Additional features<a class="anchor" aria-label="anchor" href="#additional-features"></a>
-</h5>
+<div id="additional-features" class="section level4">
+<h4 class="hasAnchor">
+<a href="#additional-features" class="anchor"></a>2. Additional features</h4>
 <p>Other information can also be provided using the other function parameters<br>
 - add <strong>cell</strong> or <strong>gene metadata</strong><br>
 - add <strong>spatial networks</strong> or <strong>grids</strong><br>
@@ -331,7 +329,7 @@ Locations file formatting
 - determine output of plots (show in viewer, return as object, save as image)<br>
 - automatically save plots to selected directory</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/">Giotto</a></span><span class="op">)</span>
 
 <span class="co"># 1. Directly from file path (dummy locations are used as examples here)</span>
 <span class="va">path_to_expression_file</span> <span class="op">=</span> <span class="st">"/local/path/to/expression/file.txt"</span>
@@ -339,7 +337,7 @@ Locations file formatting
 
 <span class="co"># 2. Create your own instructions</span>
 <span class="va">path_to_python</span> <span class="op">=</span> <span class="st">'/usr/bin/python3'</span> <span class="co"># can be something else</span>
-<span class="va">working_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># this will use your current working directory</span>
+<span class="va">working_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># this will use your current working directory</span>
 <span class="va">my_instructions</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoInstructions.html">createGiottoInstructions</a></span><span class="op">(</span>python_path <span class="op">=</span> <span class="va">path_to_python</span>,
                                            save_dir <span class="op">=</span> <span class="va">working_directory</span><span class="op">)</span>
 
@@ -355,19 +353,19 @@ Locations file formatting
 <p><br></p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="giotto-object-structure">Giotto Object Structure<a class="anchor" aria-label="anchor" href="#giotto-object-structure"></a>
-</h2>
+<div id="giotto-object-structure" class="section level1">
+<h1 class="hasAnchor">
+<a href="#giotto-object-structure" class="anchor"></a>Giotto Object Structure</h1>
 <p><br> Usage of the Giotto package revolves around the <strong>giottoObject</strong>. This is an S4 object class that holds spatial expression data and facilitates its use with the Giotto package’s functions. Additional metadata and other certain outputs generated from Giotto functions that are used in downstream analyses will also be stored within this object. The self-contained nature of the Giotto object makes it a convenient representation of the entire spatial experiment and is why many of Giotto functions both take the <strong>giottoObject</strong> as input and feed into it as output.</p>
 <p>Data is organized within the <strong>giottoObject</strong> in defined <strong>slots</strong> as described in the diagram below.<br><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-01.svg" style="width:100.0%"><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-02.svg" style="width:100.0%"><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-03.svg" style="width:100.0%"></p>
-<div class="section level3">
-<h3 id="nested-organization-within-slots">Nested organization within slots<a class="anchor" aria-label="anchor" href="#nested-organization-within-slots"></a>
-</h3>
+<div id="nested-organization-within-slots" class="section level2">
+<h2 class="hasAnchor">
+<a href="#nested-organization-within-slots" class="anchor"></a>Nested organization within slots</h2>
 <p>Spatial data has a tiered organization and so does Giotto. Tissue regions can be divided down into individual cells and then further into organelles. The data structure of Giotto mirrors biological structure by nesting data within slots related to spatial data by <strong>spat_unit</strong> (spatial unit). Additonally, to facilitate the integration of multiple omic data, slots related to feature data will be nested with <strong>feat_type</strong> (feature type). <br><br>
 Included below is a description of this nesting and also, for advanced users and contributors/developers, accessor functions for the slots are also provided. <br></p>
-<div class="section level4">
-<h4 id="slots-and-subnesting">Slots and Subnesting<a class="anchor" aria-label="anchor" href="#slots-and-subnesting"></a>
-</h4>
+<div id="slots-and-subnesting" class="section level3">
+<h3 class="hasAnchor">
+<a href="#slots-and-subnesting" class="anchor"></a>Slots and Subnesting</h3>
 <table class="table">
 <thead><tr class="header">
 <th align="left">Slot</th>
@@ -532,13 +530,11 @@ Included below is a description of this nesting and also, for advanced users and
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by <a href="https://www.drieslab.com/" class="external-link">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
+  <p>Developed by <a href="https://www.drieslab.com/">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -546,8 +542,6 @@ Included below is a description of this nesting and also, for advanced users and
 
   
 
-
-  
 
   </body>
 </html>

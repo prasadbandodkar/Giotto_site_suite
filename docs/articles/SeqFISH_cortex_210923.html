@@ -32,8 +32,6 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -46,14 +44,14 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0.991</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Start
      
     <span class="caret"></span>
@@ -74,7 +72,7 @@
   <a href="../reference/index.html">Documentation</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Datasets
      
     <span class="caret"></span>
@@ -101,7 +99,7 @@
   <a href="../articles/giotto_news.html">News</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     FAQ
      
     <span class="caret"></span>
@@ -116,7 +114,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Try Giotto
      
     <span class="caret"></span>
@@ -129,7 +127,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/RubD/Giotto/" class="external-link">
+  <a href="https://github.com/RubD/Giotto/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -144,47 +142,47 @@
 
       
 
-      </header><div class="row">
+      </header><script src="SeqFISH_cortex_210923_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>SeqFish+ Mouse Cortex Example</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/HEAD/vignettes/SeqFISH_cortex_210923.Rmd" class="external-link"><code>vignettes/SeqFISH_cortex_210923.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/master/vignettes/SeqFISH_cortex_210923.Rmd"><code>vignettes/SeqFISH_cortex_210923.Rmd</code></a></small>
       <div class="hidden name"><code>SeqFISH_cortex_210923.Rmd</code></div>
 
     </div>
 
     
     
-<div class="section level2">
-<h2 id="start-giotto">Start Giotto<a class="anchor" aria-label="anchor" href="#start-giotto"></a>
-</h2>
+<div id="start-giotto" class="section level2">
+<h2 class="hasAnchor">
+<a href="#start-giotto" class="anchor"></a>Start Giotto</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/">Giotto</a></span><span class="op">)</span>
 <span class="va">my_working_dir</span> <span class="op">=</span> <span class="st">'/path/to/directory/'</span>
 
 <span class="co"># set python path to your preferred python version path</span>
 <span class="co"># set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment</span>
 <span class="va">python_path</span> <span class="op">=</span> <span class="cn">NULL</span> 
-<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">python_path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">python_path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span>force_environment <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="dataset-explanation">Dataset Explanation<a class="anchor" aria-label="anchor" href="#dataset-explanation"></a>
-</h2>
+<div id="dataset-explanation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#dataset-explanation" class="anchor"></a>Dataset Explanation</h2>
 <p>Several fields - containing 100’s of cells - in the mouse cortex and subventricular zone were imaged for seqFISH+. The coordinates of the cells within each field are independent of each other, so in order to visualize and process all cells together imaging fields will be stitched together by providing x and y-offset values specific to each field. These offset values are known or estimates based on the original raw image: <img src="../inst/images/general_figs/cortex_svz_location_fields.png" style="width:50.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="download-data">Download Data<a class="anchor" aria-label="anchor" href="#download-data"></a>
-</h2>
+<div id="download-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#download-data" class="anchor"></a>Download Data</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/getSpatialDataset.html">getSpatialDataset</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">'seqfish_SS_cortex'</span>, directory <span class="op">=</span> <span class="va">my_working_dir</span>, method <span class="op">=</span> <span class="st">'wget'</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="part-1--giotto-instructions-and-preparation">Part 1. Giotto Instructions and Preparation<a class="anchor" aria-label="anchor" href="#part-1--giotto-instructions-and-preparation"></a>
-</h2>
+<div id="part-1--giotto-instructions-and-preparation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-1--giotto-instructions-and-preparation" class="anchor"></a>Part 1. Giotto Instructions and Preparation</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#  set Giotto instructions</span>
 <span class="va">instrs</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoInstructions.html">createGiottoInstructions</a></span><span class="op">(</span>save_plot <span class="op">=</span> <span class="cn">TRUE</span>, 
@@ -193,24 +191,24 @@
                                   python_path <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
 
 <span class="co"># create giotto object from provided paths ####</span>
-<span class="va">expr_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"cortex_svz_expression.txt"</span><span class="op">)</span>
-<span class="va">loc_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"cortex_svz_centroids_coord.txt"</span><span class="op">)</span>
-<span class="va">meta_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"cortex_svz_centroids_annot.txt"</span><span class="op">)</span>
+<span class="va">expr_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"cortex_svz_expression.txt"</span><span class="op">)</span>
+<span class="va">loc_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"cortex_svz_centroids_coord.txt"</span><span class="op">)</span>
+<span class="va">meta_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"cortex_svz_centroids_annot.txt"</span><span class="op">)</span>
 
 
 <span class="co">#This dataset contains multiple field of views which need to be stitched together</span>
 
 <span class="co"># first merge location and additional metadata</span>
-<span class="va">SS_locations</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">loc_path</span><span class="op">)</span>
-<span class="va">cortex_fields</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">meta_path</span><span class="op">)</span>
-<span class="va">SS_loc_annot</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/merge.html" class="external-link">merge.data.table</a></span><span class="op">(</span><span class="va">SS_locations</span>, <span class="va">cortex_fields</span>, by <span class="op">=</span> <span class="st">'ID'</span><span class="op">)</span>
-<span class="va">SS_loc_annot</span><span class="op">[</span>, <span class="va">ID</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">ID</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'cell_'</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">913</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>
-<span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html" class="external-link">setorder</a></span><span class="op">(</span><span class="va">SS_loc_annot</span>, <span class="va">ID</span><span class="op">)</span>
+<span class="va">SS_locations</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="va">loc_path</span><span class="op">)</span>
+<span class="va">cortex_fields</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="va">meta_path</span><span class="op">)</span>
+<span class="va">SS_loc_annot</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/merge.html">merge.data.table</a></span><span class="op">(</span><span class="va">SS_locations</span>, <span class="va">cortex_fields</span>, by <span class="op">=</span> <span class="st">'ID'</span><span class="op">)</span>
+<span class="va">SS_loc_annot</span><span class="op">[</span>, <span class="va">ID</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">ID</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'cell_'</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">913</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>
+<span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">setorder</a></span><span class="op">(</span><span class="va">SS_loc_annot</span>, <span class="va">ID</span><span class="op">)</span>
 
 <span class="co"># create file with offset information</span>
-<span class="va">my_offset_file</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>field <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>,
-                                        x_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1654.97</span>, <span class="fl">1750.75</span>, <span class="fl">1674.35</span>, <span class="fl">675.5</span>, <span class="fl">2048</span>, <span class="fl">675</span><span class="op">)</span>,
-                                        y_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
+<span class="va">my_offset_file</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span>field <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>,
+                                        x_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1654.97</span>, <span class="fl">1750.75</span>, <span class="fl">1674.35</span>, <span class="fl">675.5</span>, <span class="fl">2048</span>, <span class="fl">675</span><span class="op">)</span>,
+                                        y_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># create a stitch file</span>
 <span class="va">stitch_file</span> <span class="op">=</span> <span class="fu"><a href="../reference/stitchFieldCoordinates.html">stitchFieldCoordinates</a></span><span class="op">(</span>location_file <span class="op">=</span> <span class="va">SS_loc_annot</span>,
@@ -223,9 +221,9 @@
 <span class="va">stitch_file</span>    <span class="op">=</span> <span class="va">stitch_file</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">ID</span>, <span class="va">X_final</span>, <span class="va">Y_final</span><span class="op">)</span><span class="op">]</span>
 <span class="va">my_offset_file</span> <span class="op">=</span> <span class="va">my_offset_file</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">field</span>, <span class="va">x_offset_final</span>, <span class="va">y_offset_final</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="part-2-create-giotto-object-process-data">Part 2: Create Giotto object &amp; process data<a class="anchor" aria-label="anchor" href="#part-2-create-giotto-object-process-data"></a>
-</h2>
+<div id="part-2-create-giotto-object-process-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-2-create-giotto-object-process-data" class="anchor"></a>Part 2: Create Giotto object &amp; process data</h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create Giotto object</span>
 <span class="va">SS_seqfish</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">expr_path</span>,
@@ -241,7 +239,7 @@
 
 <span class="co"># subset data to the cortex field of views</span>
 <span class="va">cell_metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">SS_seqfish</span><span class="op">)</span>
-<span class="va">cortex_cell_ids</span> <span class="op">=</span> <span class="va">cell_metadata</span><span class="op">[</span><span class="va">FOV</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span>
+<span class="va">cortex_cell_ids</span> <span class="op">=</span> <span class="va">cell_metadata</span><span class="op">[</span><span class="va">FOV</span> <span class="op">%in%</span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span>
 <span class="va">SS_seqfish</span> <span class="op">=</span> <span class="fu"><a href="../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">SS_seqfish</span>, cell_ids <span class="op">=</span> <span class="va">cortex_cell_ids</span><span class="op">)</span>
 
 <span class="co"># filter</span>
@@ -249,7 +247,7 @@
                            expression_threshold <span class="op">=</span> <span class="fl">1</span>,
                            feat_det_in_min_cells <span class="op">=</span> <span class="fl">10</span>,
                            min_det_feats_per_cell <span class="op">=</span> <span class="fl">10</span>,
-                           expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'raw'</span><span class="op">)</span>,
+                           expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'raw'</span><span class="op">)</span>,
                            verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 
 <span class="co"># normalize</span>
@@ -259,18 +257,18 @@
 <span class="va">SS_seqfish</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/addStatistics.html">addStatistics</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span><span class="op">)</span>
 
 <span class="co"># adjust expression matrix for technical or known variables</span>
-<span class="va">SS_seqfish</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/adjustGiottoMatrix.html">adjustGiottoMatrix</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>,
+<span class="va">SS_seqfish</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/adjustGiottoMatrix.html">adjustGiottoMatrix</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>,
                                  batch_columns <span class="op">=</span> <span class="cn">NULL</span>, 
                                  return_gobject <span class="op">=</span> <span class="cn">TRUE</span>,
-                                 update_slot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'custom'</span><span class="op">)</span><span class="op">)</span>
+                                 update_slot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'custom'</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># visualize</span>
 <span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/0-spatPlot2D.png" style="width:50.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="part-3-dimension-reduction">Part 3: Dimension Reduction<a class="anchor" aria-label="anchor" href="#part-3-dimension-reduction"></a>
-</h2>
+<div id="part-3-dimension-reduction" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-3-dimension-reduction" class="anchor"></a>Part 3: Dimension Reduction</h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## highly variable genes (HVF)</span>
 <span class="va">SS_seqfish</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateHVF.html">calculateHVF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, method <span class="op">=</span> <span class="st">'cov_loess'</span>, difference_in_cov <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></code></pre></div>
@@ -296,9 +294,9 @@
 <span class="fu"><a href="../reference/plotTSNE.html">plotTSNE</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/5-tSNE.png" style="width:50.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="part-4-cluster">Part 4: Cluster<a class="anchor" aria-label="anchor" href="#part-4-cluster"></a>
-</h2>
+<div id="part-4-cluster" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-4-cluster" class="anchor"></a>Part 4: Cluster</h2>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## sNN network (default)</span>
 <span class="va">SS_seqfish</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createNearestNetwork.html">createNearestNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">15</span>, k <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>
@@ -311,17 +309,17 @@
 <code class="sourceCode R"><span class="co">## Leiden subclustering for specified clusters</span>
 <span class="va">SS_seqfish</span> <span class="op">=</span> <span class="fu"><a href="../reference/doLeidenSubCluster.html">doLeidenSubCluster</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>,
                                 resolution <span class="op">=</span> <span class="fl">0.2</span>, k_neighbors <span class="op">=</span> <span class="fl">10</span>,
-                                hvf_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">'cov_loess'</span>, difference_in_cov <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,
-                                pca_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="st">'normalized'</span>, scale_unit <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>,
-                                nn_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>,
-                                selected_clusters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span><span class="op">)</span>,
+                                hvf_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">'cov_loess'</span>, difference_in_cov <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,
+                                pca_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="st">'normalized'</span>, scale_unit <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>,
+                                nn_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>,
+                                selected_clusters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span><span class="op">)</span>,
                                 name <span class="op">=</span> <span class="st">'sub_leiden_clus_select'</span><span class="op">)</span>
 
 <span class="co">## set colors for clusters</span>
-<span class="va">subleiden_order</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="fl">1.1</span>, <span class="fl">2.1</span>, <span class="fl">3.1</span>, <span class="fl">4.1</span>, <span class="fl">5.1</span>, <span class="fl">5.2</span>, 
+<span class="va">subleiden_order</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span> <span class="fl">1.1</span>, <span class="fl">2.1</span>, <span class="fl">3.1</span>, <span class="fl">4.1</span>, <span class="fl">5.1</span>, <span class="fl">5.2</span>, 
                      <span class="fl">6.1</span>, <span class="fl">6.2</span>, <span class="fl">7.1</span>,  <span class="fl">7.2</span>, <span class="fl">8.1</span>, <span class="fl">9.1</span><span class="op">)</span>
-<span class="va">subleiden_colors</span> <span class="op">=</span> <span class="fu">Giotto</span><span class="fu">:::</span><span class="fu"><a href="../reference/getDistinctColors.html">getDistinctColors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">subleiden_order</span><span class="op">)</span><span class="op">)</span> 
-<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">subleiden_colors</span><span class="op">)</span> <span class="op">=</span> <span class="va">subleiden_order</span>
+<span class="va">subleiden_colors</span> <span class="op">=</span> <span class="fu">Giotto</span><span class="fu">:::</span><span class="fu"><a href="../reference/getDistinctColors.html">getDistinctColors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">subleiden_order</span><span class="op">)</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">subleiden_colors</span><span class="op">)</span> <span class="op">=</span> <span class="va">subleiden_order</span>
 
 <span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>,
          cell_color <span class="op">=</span> <span class="st">'sub_leiden_clus_select'</span>, cell_color_code <span class="op">=</span> <span class="va">subleiden_colors</span>,
@@ -331,14 +329,14 @@
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## show cluster relationships</span>
 <span class="fu"><a href="../reference/showClusterHeatmap.html">showClusterHeatmap</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, cluster_column <span class="op">=</span> <span class="st">'sub_leiden_clus_select'</span>,
-                   row_names_gp <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>fontsize <span class="op">=</span> <span class="fl">9</span><span class="op">)</span>, column_names_gp <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>fontsize <span class="op">=</span> <span class="fl">9</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                   row_names_gp <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/gpar.html">gpar</a></span><span class="op">(</span>fontsize <span class="op">=</span> <span class="fl">9</span><span class="op">)</span>, column_names_gp <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/gpar.html">gpar</a></span><span class="op">(</span>fontsize <span class="op">=</span> <span class="fl">9</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/11-showClusterHeatmap.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">showClusterDendrogram</span>(SS_seqfish, <span class="at">h =</span> <span class="fl">0.5</span>, <span class="at">rotate =</span> T, <span class="at">cluster_column =</span> <span class="st">'sub_leiden_clus_select'</span></span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/12-showClusterDendrogram.png" style="width:50.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="part-5-visualize-spatial-and-expression-space">Part 5: Visualize Spatial and Expression Space<a class="anchor" aria-label="anchor" href="#part-5-visualize-spatial-and-expression-space"></a>
-</h2>
+<div id="part-5-visualize-spatial-and-expression-space" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-5-visualize-spatial-and-expression-space" class="anchor"></a>Part 5: Visualize Spatial and Expression Space</h2>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># expression and spatial</span>
 <span class="fu"><a href="../reference/spatDimPlot.html">spatDimPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, cell_color <span class="op">=</span> <span class="st">'sub_leiden_clus_select'</span>, 
@@ -347,17 +345,17 @@
 <p><img src="../inst/images/SeqFish_mouse_cortex/13-spatDimPlot2D.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># selected groups and provide new colors</span>
-<span class="va">groups_of_interest</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6.1</span>, <span class="fl">6.2</span>, <span class="fl">7.1</span>, <span class="fl">7.2</span><span class="op">)</span>
-<span class="va">group_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'red'</span>, <span class="st">'green'</span>, <span class="st">'blue'</span>, <span class="st">'purple'</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">group_colors</span><span class="op">)</span> <span class="op">=</span> <span class="va">groups_of_interest</span>
+<span class="va">groups_of_interest</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6.1</span>, <span class="fl">6.2</span>, <span class="fl">7.1</span>, <span class="fl">7.2</span><span class="op">)</span>
+<span class="va">group_colors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'red'</span>, <span class="st">'green'</span>, <span class="st">'blue'</span>, <span class="st">'purple'</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">group_colors</span><span class="op">)</span> <span class="op">=</span> <span class="va">groups_of_interest</span>
 
 <span class="fu"><a href="../reference/spatDimPlot.html">spatDimPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, cell_color <span class="op">=</span> <span class="st">'sub_leiden_clus_select'</span>, 
             dim_point_size <span class="op">=</span> <span class="fl">2</span>, spat_point_size <span class="op">=</span> <span class="fl">2</span>,
             select_cell_groups <span class="op">=</span> <span class="va">groups_of_interest</span>, cell_color_code <span class="op">=</span> <span class="va">group_colors</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/14-spatDimPlot2D.png" style="width:50.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="part-6-cell-type-marker-gene-detection">Part 6: Cell Type Marker Gene Detection<a class="anchor" aria-label="anchor" href="#part-6-cell-type-marker-gene-detection"></a>
-</h2>
+<div id="part-6-cell-type-marker-gene-detection" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-6-cell-type-marker-gene-detection" class="anchor"></a>Part 6: Cell Type Marker Gene Detection</h2>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## gini ##</span>
 <span class="va">gini_markers_subclusters</span> <span class="op">=</span> <span class="fu"><a href="../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>,
@@ -367,34 +365,34 @@
                                                   min_feats <span class="op">=</span> <span class="fl">20</span>,
                                                   min_expr_gini_score <span class="op">=</span> <span class="fl">0.5</span>,
                                                   min_det_gini_score <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
-<span class="va">topgenes_gini</span> <span class="op">=</span> <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span>
+<span class="va">topgenes_gini</span> <span class="op">=</span> <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span>
 
 <span class="co">## violinplot</span>
-<span class="fu"><a href="../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">SS_seqfish</span>, feats <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">topgenes_gini</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>, cluster_column <span class="op">=</span> <span class="st">'sub_leiden_clus_select'</span>,
-           strip_text <span class="op">=</span> <span class="fl">8</span>, strip_position <span class="op">=</span> <span class="st">'right'</span>, cluster_custom_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">topgenes_gini</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">SS_seqfish</span>, feats <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">topgenes_gini</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>, cluster_column <span class="op">=</span> <span class="st">'sub_leiden_clus_select'</span>,
+           strip_text <span class="op">=</span> <span class="fl">8</span>, strip_position <span class="op">=</span> <span class="st">'right'</span>, cluster_custom_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">topgenes_gini</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/15-violinPlot.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># cluster heatmap</span>
-<span class="va">topgenes_gini2</span> <span class="op">=</span> <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">6</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span>
-<span class="fu"><a href="../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">SS_seqfish</span>, selected_feats <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">topgenes_gini2</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>, 
-                    custom_feat_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">topgenes_gini2</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>,
-                    custom_cluster_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">topgenes_gini2</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span>,
-                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'sub_leiden_clus_select'</span><span class="op">)</span>, x_text_size <span class="op">=</span> <span class="fl">10</span>, y_text_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
+<span class="va">topgenes_gini2</span> <span class="op">=</span> <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">6</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span>
+<span class="fu"><a href="../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">SS_seqfish</span>, selected_feats <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">topgenes_gini2</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>, 
+                    custom_feat_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">topgenes_gini2</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>,
+                    custom_cluster_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">topgenes_gini2</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span>,
+                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'sub_leiden_clus_select'</span><span class="op">)</span>, x_text_size <span class="op">=</span> <span class="fl">10</span>, y_text_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/16-plotMetaDataHeatmap.png" style="width:50.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="part-7-cell-type-annotation">Part 7: Cell Type Annotation<a class="anchor" aria-label="anchor" href="#part-7-cell-type-annotation"></a>
-</h2>
+<div id="part-7-cell-type-annotation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-7-cell-type-annotation" class="anchor"></a>Part 7: Cell Type Annotation</h2>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## general cell types</span>
 <span class="co">## create vector with names</span>
-<span class="va">clusters_cell_types_cortex</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'L6 eNeuron'</span>, <span class="st">'L4 eNeuron'</span>, <span class="st">'L2/3 eNeuron'</span>, <span class="st">'L5 eNeuron'</span>, 
+<span class="va">clusters_cell_types_cortex</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'L6 eNeuron'</span>, <span class="st">'L4 eNeuron'</span>, <span class="st">'L2/3 eNeuron'</span>, <span class="st">'L5 eNeuron'</span>, 
                                <span class="st">'Lhx6 iNeuron'</span>, <span class="st">'Adarb2 iNeuron'</span>, 
                                <span class="st">'endothelial'</span>, <span class="st">'mural'</span>,
                                <span class="st">'OPC'</span>,<span class="st">'Olig'</span>,
                                <span class="st">'astrocytes'</span>, <span class="st">'microglia'</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">clusters_cell_types_cortex</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.1</span>, <span class="fl">2.1</span>, <span class="fl">3.1</span>, <span class="fl">4.1</span>,
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">clusters_cell_types_cortex</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.1</span>, <span class="fl">2.1</span>, <span class="fl">3.1</span>, <span class="fl">4.1</span>,
                                       <span class="fl">5.1</span>, <span class="fl">5.2</span>,
                                       <span class="fl">6.1</span>, <span class="fl">6.2</span>, 
                                       <span class="fl">7.1</span>, <span class="fl">7.2</span>,
@@ -404,17 +402,17 @@
                             cluster_column <span class="op">=</span> <span class="st">'sub_leiden_clus_select'</span>, name <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">)</span>
 
 <span class="co"># cell type order and colors</span>
-<span class="va">cell_type_order</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'L6 eNeuron'</span>, <span class="st">'L5 eNeuron'</span>, <span class="st">'L4 eNeuron'</span>, <span class="st">'L2/3 eNeuron'</span>,
+<span class="va">cell_type_order</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'L6 eNeuron'</span>, <span class="st">'L5 eNeuron'</span>, <span class="st">'L4 eNeuron'</span>, <span class="st">'L2/3 eNeuron'</span>,
                     <span class="st">'astrocytes'</span>, <span class="st">'Olig'</span>, <span class="st">'OPC'</span>,<span class="st">'Adarb2 iNeuron'</span>, <span class="st">'Lhx6 iNeuron'</span>,
                     <span class="st">'endothelial'</span>, <span class="st">'mural'</span>, <span class="st">'microglia'</span><span class="op">)</span>
 
 <span class="va">cell_type_colors</span> <span class="op">=</span> <span class="va">subleiden_colors</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">cell_type_colors</span><span class="op">)</span> <span class="op">=</span> <span class="va">clusters_cell_types_cortex</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">subleiden_colors</span><span class="op">)</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">cell_type_colors</span><span class="op">)</span> <span class="op">=</span> <span class="va">clusters_cell_types_cortex</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">subleiden_colors</span><span class="op">)</span><span class="op">]</span>
 <span class="va">cell_type_colors</span> <span class="op">=</span> <span class="va">cell_type_colors</span><span class="op">[</span><span class="va">cell_type_order</span><span class="op">]</span>
 
 
 <span class="co">## violinplot</span>
-<span class="fu"><a href="../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, feats <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">topgenes_gini</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>,
+<span class="fu"><a href="../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, feats <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">topgenes_gini</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>,
            strip_text <span class="op">=</span> <span class="fl">7</span>, strip_position <span class="op">=</span> <span class="st">'right'</span>, 
            cluster_custom_order <span class="op">=</span> <span class="va">cell_type_order</span>,
            cluster_column <span class="op">=</span> <span class="st">'cell_types'</span>, color_violin <span class="op">=</span> <span class="st">'cluster'</span><span class="op">)</span></code></pre></div>
@@ -427,32 +425,32 @@
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## heatmap genes vs cells</span>
 <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="va">cell_types</span> <span class="op">:=</span> <span class="va">clusters_cell_types_cortex</span><span class="op">[</span><span class="va">cluster</span><span class="op">]</span> <span class="op">]</span>
-<span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="va">cell_types</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cell_types</span>, <span class="va">cell_type_order</span><span class="op">)</span><span class="op">]</span>
-<span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html" class="external-link">setorder</a></span><span class="op">(</span><span class="va">gini_markers_subclusters</span>, <span class="va">cell_types</span><span class="op">)</span>
+<span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="va">cell_types</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">cell_types</span>, <span class="va">cell_type_order</span><span class="op">)</span><span class="op">]</span>
+<span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">setorder</a></span><span class="op">(</span><span class="va">gini_markers_subclusters</span>, <span class="va">cell_types</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/plotHeatmap.html">plotHeatmap</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>,
-            feats <span class="op">=</span> <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">3</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>, 
+            feats <span class="op">=</span> <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">3</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>, 
             feat_order <span class="op">=</span> <span class="st">'custom'</span>,
-            feat_custom_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">3</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>,
+            feat_custom_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">3</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>,
             cluster_column <span class="op">=</span> <span class="st">'cell_types'</span>, cluster_order <span class="op">=</span> <span class="st">'custom'</span>,
-            cluster_custom_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">3</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">]</span><span class="op">$</span><span class="va">cell_types</span><span class="op">)</span>, 
+            cluster_custom_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">3</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">]</span><span class="op">$</span><span class="va">cell_types</span><span class="op">)</span>, 
             legend_nrows <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/19-plotHeatmap.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/plotHeatmap.html">plotHeatmap</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>,
             cluster_color_code <span class="op">=</span> <span class="va">cell_type_colors</span>,
-            feats <span class="op">=</span> <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">6</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>,
+            feats <span class="op">=</span> <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">6</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>,
             feat_order <span class="op">=</span> <span class="st">'custom'</span>,
-            feat_label_selection <span class="op">=</span> <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>,
-            feat_custom_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">6</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>,
+            feat_label_selection <span class="op">=</span> <span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>,
+            feat_custom_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">6</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>,
             cluster_column <span class="op">=</span> <span class="st">'cell_types'</span>, cluster_order <span class="op">=</span> <span class="st">'custom'</span>,
-            cluster_custom_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">3</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">]</span><span class="op">$</span><span class="va">cell_types</span><span class="op">)</span>, 
+            cluster_custom_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">gini_markers_subclusters</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">3</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">]</span><span class="op">$</span><span class="va">cell_types</span><span class="op">)</span>, 
             legend_nrows <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/20-plotHeatmap.png" style="width:50.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="part-8-spatial-grid">Part 8: Spatial Grid<a class="anchor" aria-label="anchor" href="#part-8-spatial-grid"></a>
-</h2>
+<div id="part-8-spatial-grid" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-8-spatial-grid" class="anchor"></a>Part 8: Spatial Grid</h2>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">SS_seqfish</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createSpatialGrid.html">createSpatialGrid</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>,
                                 sdimx_stepsize <span class="op">=</span> <span class="fl">500</span>,
@@ -462,9 +460,9 @@
 <span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, show_grid <span class="op">=</span> <span class="cn">T</span>, point_size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/21-spatPlot2D.png" style="width:50.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="part-9-spatial-network">Part 9: Spatial Network<a class="anchor" aria-label="anchor" href="#part-9-spatial-network"></a>
-</h2>
+<div id="part-9-spatial-network" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-9-spatial-network" class="anchor"></a>Part 9: Spatial Network</h2>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## delaunay network: stats + creation</span>
 <span class="fu"><a href="../reference/plotStatDelaunayNetwork.html">plotStatDelaunayNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, maximum_distance <span class="op">=</span> <span class="fl">400</span>, save_plot <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
@@ -501,12 +499,12 @@
          point_size <span class="op">=</span> <span class="fl">2.5</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/25-spatPlot2D.png" style="width:50.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="part-10-spatial-genes">Part 10: Spatial Genes<a class="anchor" aria-label="anchor" href="#part-10-spatial-genes"></a>
-</h2>
-<div class="section level3">
-<h3 id="individual-spatial-genes">Individual spatial genes<a class="anchor" aria-label="anchor" href="#individual-spatial-genes"></a>
-</h3>
+<div id="part-10-spatial-genes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-10-spatial-genes" class="anchor"></a>Part 10: Spatial Genes</h2>
+<div id="individual-spatial-genes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#individual-spatial-genes" class="anchor"></a>Individual spatial genes</h3>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Individual spatial genes</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 new methods to identify spatial genes</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>km_spatialfeats <span class="ot">=</span> <span class="fu">binSpect</span>(SS_seqfish)</span>
@@ -517,9 +515,9 @@
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">cow_n_col =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/26-spatGenePlot2D.png" style="width:50.0%"></p>
 </div>
-<div class="section level3">
-<h3 id="spatial-genes-co-expression-modules">Spatial Genes Co-Expression Modules<a class="anchor" aria-label="anchor" href="#spatial-genes-co-expression-modules"></a>
-</h3>
+<div id="spatial-genes-co-expression-modules" class="section level3">
+<h3 class="hasAnchor">
+<a href="#spatial-genes-co-expression-modules" class="anchor"></a>Spatial Genes Co-Expression Modules</h3>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## spatial co-expression patterns ##</span>
 <span class="va">ext_spatial_genes</span> <span class="op">=</span> <span class="va">km_spatialfeats</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>
@@ -535,7 +533,7 @@
 <span class="va">spat_cor_netw_DT</span> <span class="op">=</span> <span class="fu"><a href="../reference/clusterSpatialCorFeats.html">clusterSpatialCorFeats</a></span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>, k <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/heatmSpatialCorFeats.html">heatmSpatialCorFeats</a></span><span class="op">(</span><span class="va">SS_seqfish</span>, spatCorObject <span class="op">=</span> <span class="va">spat_cor_netw_DT</span>, use_clus_name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>, 
-                     heatmap_legend_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                     heatmap_legend_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/27-heatmSpatialCorFeats.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 3. rank spatial correlated clusters and show genes for selected clusters</span>
@@ -547,7 +545,7 @@
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 4. create metagene enrichment score for clusters</span>
 <span class="va">cluster_genes_DT</span> <span class="op">=</span> <span class="fu"><a href="../reference/showSpatialCorFeats.html">showSpatialCorFeats</a></span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, use_clus_name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>, show_top_feats <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">cluster_genes</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">clus</span>; <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">cluster_genes</span><span class="op">)</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">feat_ID</span>
+<span class="va">cluster_genes</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">clus</span>; <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">cluster_genes</span><span class="op">)</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">feat_ID</span>
 
 <span class="va">SS_seqfish</span> <span class="op">=</span> <span class="fu"><a href="../reference/createMetafeats.html">createMetafeats</a></span><span class="op">(</span><span class="va">SS_seqfish</span>, feat_clusters <span class="op">=</span> <span class="va">cluster_genes</span>, name <span class="op">=</span> <span class="st">'cluster_metagene'</span><span class="op">)</span>
 
@@ -558,12 +556,12 @@
 <p><img src="../inst/images/SeqFish_mouse_cortex/29-spatCellPlot2D.png" style="width:50.0%"></p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="part-11-hmrf-spatial-domains">Part 11: HMRF Spatial Domains<a class="anchor" aria-label="anchor" href="#part-11-hmrf-spatial-domains"></a>
-</h2>
+<div id="part-11-hmrf-spatial-domains" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-11-hmrf-spatial-domains" class="anchor"></a>Part 11: HMRF Spatial Domains</h2>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hmrf_folder</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>,<span class="st">'/'</span>,<span class="st">'11_HMRF/'</span><span class="op">)</span>
-<span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="va">hmrf_folder</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">hmrf_folder</span>, recursive <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">hmrf_folder</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>,<span class="st">'/'</span>,<span class="st">'11_HMRF/'</span><span class="op">)</span>
+<span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span><span class="op">(</span><span class="va">hmrf_folder</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">hmrf_folder</span>, recursive <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 
 <span class="va">my_spatial_genes</span> <span class="op">=</span> <span class="va">km_spatialfeats</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>
 
@@ -573,12 +571,12 @@
                             spatial_genes <span class="op">=</span> <span class="va">my_spatial_genes</span>,
                             spatial_network_name <span class="op">=</span> <span class="st">'Delaunay_network'</span>,
                             k <span class="op">=</span> <span class="fl">9</span>,
-                            betas <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, 
-                            output_folder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">hmrf_folder</span>, <span class="st">'/'</span>, <span class="st">'Spatial_genes/SG_top100_k9_scaled'</span><span class="op">)</span><span class="op">)</span>
+                            betas <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">28</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, 
+                            output_folder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">hmrf_folder</span>, <span class="st">'/'</span>, <span class="st">'Spatial_genes/SG_top100_k9_scaled'</span><span class="op">)</span><span class="op">)</span>
 
 
 <span class="co">## view results of HMRF</span>
-<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">32</span>, by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">32</span>, by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="../reference/viewHMRFresults2D.html">viewHMRFresults2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>,
                     HMRFoutput <span class="op">=</span> <span class="va">HMRF_spatial_genes</span>,
                     k <span class="op">=</span> <span class="fl">9</span>, betas_to_view <span class="op">=</span> <span class="va">i</span>,
@@ -589,7 +587,7 @@
 <span class="co">## add HMRF of interest to giotto object</span>
 <span class="va">SS_seqfish</span> <span class="op">=</span> <span class="fu"><a href="../reference/addHMRF.html">addHMRF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>,
                      HMRFoutput <span class="op">=</span> <span class="va">HMRF_spatial_genes</span>,
-                     k <span class="op">=</span> <span class="fl">9</span>, betas_to_add <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span><span class="op">)</span>,
+                     k <span class="op">=</span> <span class="fl">9</span>, betas_to_add <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">28</span><span class="op">)</span>,
                      hmrf_name <span class="op">=</span> <span class="st">'HMRF_2'</span><span class="op">)</span>
 
 
@@ -597,9 +595,9 @@
 <span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, cell_color <span class="op">=</span> <span class="st">'HMRF_2_k9_b.28'</span>, point_size <span class="op">=</span> <span class="fl">3</span>, coord_fix_ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/30-spatPlot2D.png" style="width:50.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="part-12-cell-neighborhood-cell-typecell-type-interactions">Part 12: Cell Neighborhood: Cell-Type/Cell-Type Interactions<a class="anchor" aria-label="anchor" href="#part-12-cell-neighborhood-cell-typecell-type-interactions"></a>
-</h2>
+<div id="part-12-cell-neighborhood-cell-typecell-type-interactions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-12-cell-neighborhood-cell-typecell-type-interactions" class="anchor"></a>Part 12: Cell Neighborhood: Cell-Type/Cell-Type Interactions</h2>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cell_proximities</span> <span class="op">=</span> <span class="fu"><a href="../reference/cellProximityEnrichment.html">cellProximityEnrichment</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>,
                                            cluster_column <span class="op">=</span> <span class="st">'cell_types'</span>,
@@ -614,7 +612,7 @@
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## heatmap</span>
 <span class="fu"><a href="../reference/cellProximityHeatmap.html">cellProximityHeatmap</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, CPscore <span class="op">=</span> <span class="va">cell_proximities</span>, order_cell_types <span class="op">=</span> <span class="cn">T</span>, scale <span class="op">=</span> <span class="cn">T</span>,
-                     color_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fl">0</span>, <span class="fl">1.5</span><span class="op">)</span>, color_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'blue'</span>, <span class="st">'white'</span>, <span class="st">'red'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                     color_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fl">0</span>, <span class="fl">1.5</span><span class="op">)</span>, color_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'blue'</span>, <span class="st">'white'</span>, <span class="st">'red'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/32-cellProximityHeatmap.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## network</span>
@@ -628,8 +626,8 @@
                      only_show_enrichment_edges <span class="op">=</span> <span class="cn">F</span>,
                      rescale_edge_weights <span class="op">=</span> <span class="cn">T</span>,
                      node_size <span class="op">=</span> <span class="fl">8</span>,
-                     edge_weight_range_depletion <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,
-                     edge_weight_range_enrichment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                     edge_weight_range_depletion <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,
+                     edge_weight_range_enrichment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/12_d_network_cell_cell_enrichment_self.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## visualization of specific cell types</span>
@@ -640,7 +638,7 @@
                         show_network <span class="op">=</span> <span class="cn">T</span>,
                         cluster_column <span class="op">=</span> <span class="st">'cell_types'</span>,
                         cell_color <span class="op">=</span> <span class="st">'cell_types'</span>,
-                        cell_color_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>astrocytes <span class="op">=</span> <span class="st">'lightblue'</span>, Olig <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span>,
+                        cell_color_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>astrocytes <span class="op">=</span> <span class="st">'lightblue'</span>, Olig <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span>,
                         point_size_select <span class="op">=</span> <span class="fl">4</span>, point_size_other <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/34-cellProximitySpatPlot2D.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
@@ -651,21 +649,21 @@
                                 cell_interaction <span class="op">=</span> <span class="va">spec_interaction</span>,
                                 name <span class="op">=</span> <span class="st">'astro_olig_ints'</span><span class="op">)</span>
 <span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">SS_seqfish</span>, cell_color <span class="op">=</span> <span class="st">'astro_olig_ints'</span>,
-         select_cell_groups <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'other_astrocytes'</span>, <span class="st">'other_Olig'</span>, <span class="st">'select_astrocytes'</span>, <span class="st">'select_Olig'</span><span class="op">)</span>,
+         select_cell_groups <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'other_astrocytes'</span>, <span class="st">'other_Olig'</span>, <span class="st">'select_astrocytes'</span>, <span class="st">'select_Olig'</span><span class="op">)</span>,
          legend_symbol_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/35-spatPlot2D.png" style="width:50.0%"> ## Part 13: Cell Neighborhood: Interaction Changed Genes</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://future.futureverse.org" class="external-link">future</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://future.futureverse.org">future</a></span><span class="op">)</span>
 <span class="co">## select top 25th highest expressing genes</span>
 <span class="va">gene_metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/fDataDT.html">fDataDT</a></span><span class="op">(</span><span class="va">SS_seqfish</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gene_metadata</span><span class="op">$</span><span class="va">nr_cells</span>, <span class="va">gene_metadata</span><span class="op">$</span><span class="va">mean_expr</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gene_metadata</span><span class="op">$</span><span class="va">nr_cells</span>, <span class="va">gene_metadata</span><span class="op">$</span><span class="va">mean_expr_det</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">gene_metadata</span><span class="op">$</span><span class="va">nr_cells</span>, <span class="va">gene_metadata</span><span class="op">$</span><span class="va">mean_expr</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">gene_metadata</span><span class="op">$</span><span class="va">nr_cells</span>, <span class="va">gene_metadata</span><span class="op">$</span><span class="va">mean_expr_det</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">gene_metadata</span><span class="op">$</span><span class="va">mean_expr_det</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">gene_metadata</span><span class="op">$</span><span class="va">mean_expr_det</span><span class="op">)</span>
 <span class="va">high_expressed_genes</span> <span class="op">=</span> <span class="va">gene_metadata</span><span class="op">[</span><span class="va">mean_expr_det</span> <span class="op">&gt;</span> <span class="fl">3.5</span><span class="op">]</span><span class="op">$</span><span class="va">gene_ID</span>
 
 <span class="co">## identify genes that are associated with proximity to other cell types</span>
-<span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">'multisession'</span>, workers <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
+<span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="st">'multisession'</span>, workers <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
 <span class="va">ICGscoresHighGenes</span> <span class="op">=</span>  <span class="fu"><a href="../reference/findInteractionChangedFeats.html">findInteractionChangedFeats</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>,
                               selected_feats <span class="op">=</span> <span class="va">high_expressed_genes</span>,
                               spatial_network_name <span class="op">=</span> <span class="st">'Delaunay_network'</span>,
@@ -684,27 +682,27 @@
 <span class="va">ICGscoresFilt</span> <span class="op">=</span> <span class="fu"><a href="../reference/filterICF.html">filterICF</a></span><span class="op">(</span><span class="va">ICGscoresHighGenes</span><span class="op">)</span>
 
 <span class="co">## visualize subset of interaction changed genes (ICGs)</span>
-<span class="va">ICG_genes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Jakmip1'</span>, <span class="st">'Golgb1'</span>, <span class="st">'Dact2'</span>, <span class="st">'Ddx27'</span>, <span class="st">'Abl1'</span>, <span class="st">'Zswim8'</span><span class="op">)</span>
-<span class="va">ICG_genes_types</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Lhx6 iNeuron'</span>, <span class="st">'Lhx6 iNeuron'</span>, <span class="st">'L4 eNeuron'</span>, <span class="st">'L4 eNeuron'</span>, <span class="st">'astrocytes'</span>, <span class="st">'astrocytes'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ICG_genes</span><span class="op">)</span> <span class="op">=</span> <span class="va">ICG_genes_types</span>
+<span class="va">ICG_genes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Jakmip1'</span>, <span class="st">'Golgb1'</span>, <span class="st">'Dact2'</span>, <span class="st">'Ddx27'</span>, <span class="st">'Abl1'</span>, <span class="st">'Zswim8'</span><span class="op">)</span>
+<span class="va">ICG_genes_types</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Lhx6 iNeuron'</span>, <span class="st">'Lhx6 iNeuron'</span>, <span class="st">'L4 eNeuron'</span>, <span class="st">'L4 eNeuron'</span>, <span class="st">'astrocytes'</span>, <span class="st">'astrocytes'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">ICG_genes</span><span class="op">)</span> <span class="op">=</span> <span class="va">ICG_genes_types</span>
 
 <span class="fu">plotICF</span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>,
         cpgObject <span class="op">=</span> <span class="va">ICGscoresHighGenes</span>,
         source_type <span class="op">=</span> <span class="st">'endothelial'</span>,
-        source_markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Pltp'</span>, <span class="st">'Cldn5'</span>, <span class="st">'Apcdd1'</span><span class="op">)</span>,
+        source_markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Pltp'</span>, <span class="st">'Cldn5'</span>, <span class="st">'Apcdd1'</span><span class="op">)</span>,
         ICF_feats <span class="op">=</span> <span class="va">ICG_genes</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/37-plotICF.png" style="width:50.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="part-14-cell-neighborhood-ligand-receptor-cell-cell-communication">Part 14: Cell Neighborhood: Ligand-Receptor Cell-Cell Communication<a class="anchor" aria-label="anchor" href="#part-14-cell-neighborhood-ligand-receptor-cell-cell-communication"></a>
-</h2>
+<div id="part-14-cell-neighborhood-ligand-receptor-cell-cell-communication" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-14-cell-neighborhood-ligand-receptor-cell-cell-communication" class="anchor"></a>Part 14: Cell Neighborhood: Ligand-Receptor Cell-Cell Communication</h2>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## LR expression</span>
 <span class="co">## LR activity changes</span>
-<span class="va">LR_data</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"mouse_ligand_receptors.txt"</span>, package <span class="op">=</span> <span class="st">'Giotto'</span><span class="op">)</span><span class="op">)</span>
+<span class="va">LR_data</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"mouse_ligand_receptors.txt"</span>, package <span class="op">=</span> <span class="st">'Giotto'</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">LR_data</span><span class="op">[</span>, <span class="va">ligand_det</span> <span class="op">:=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">LR_data</span><span class="op">$</span><span class="va">mouseLigand</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">SS_seqfish</span><span class="op">@</span><span class="va">feat_ID</span><span class="op">$</span><span class="va">rna</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span><span class="op">]</span>
-<span class="va">LR_data</span><span class="op">[</span>, <span class="va">receptor_det</span> <span class="op">:=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">LR_data</span><span class="op">$</span><span class="va">mouseReceptor</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">SS_seqfish</span><span class="op">@</span><span class="va">feat_ID</span><span class="op">$</span><span class="va">rna</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span><span class="op">]</span>
+<span class="va">LR_data</span><span class="op">[</span>, <span class="va">ligand_det</span> <span class="op">:=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span><span class="op">(</span><span class="va">LR_data</span><span class="op">$</span><span class="va">mouseLigand</span> <span class="op">%in%</span> <span class="va">SS_seqfish</span><span class="op">@</span><span class="va">feat_ID</span><span class="op">$</span><span class="va">rna</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span><span class="op">]</span>
+<span class="va">LR_data</span><span class="op">[</span>, <span class="va">receptor_det</span> <span class="op">:=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span><span class="op">(</span><span class="va">LR_data</span><span class="op">$</span><span class="va">mouseReceptor</span> <span class="op">%in%</span> <span class="va">SS_seqfish</span><span class="op">@</span><span class="va">feat_ID</span><span class="op">$</span><span class="va">rna</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span><span class="op">]</span>
 <span class="va">LR_data_det</span> <span class="op">=</span> <span class="va">LR_data</span><span class="op">[</span><span class="va">ligand_det</span> <span class="op">==</span> <span class="cn">T</span> <span class="op">&amp;</span> <span class="va">receptor_det</span> <span class="op">==</span> <span class="cn">T</span><span class="op">]</span>
 <span class="va">select_ligands</span> <span class="op">=</span> <span class="va">LR_data_det</span><span class="op">$</span><span class="va">mouseLigand</span>
 <span class="va">select_receptors</span> <span class="op">=</span> <span class="va">LR_data_det</span><span class="op">$</span><span class="va">mouseReceptor</span>
@@ -732,11 +730,11 @@
 
 
 <span class="co">## select top LR ##</span>
-<span class="va">selected_spat</span> <span class="op">=</span> <span class="va">spatial_all_scores</span><span class="op">[</span><span class="va">p.adj</span> <span class="op">&lt;=</span> <span class="fl">0.01</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">log2fc</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.25</span> <span class="op">&amp;</span> <span class="va">lig_nr</span> <span class="op">&gt;=</span> <span class="fl">4</span> <span class="op">&amp;</span> <span class="va">rec_nr</span> <span class="op">&gt;=</span> <span class="fl">4</span><span class="op">]</span>
-<span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html" class="external-link">setorder</a></span><span class="op">(</span><span class="va">selected_spat</span>, <span class="op">-</span><span class="va">PI</span><span class="op">)</span>
+<span class="va">selected_spat</span> <span class="op">=</span> <span class="va">spatial_all_scores</span><span class="op">[</span><span class="va">p.adj</span> <span class="op">&lt;=</span> <span class="fl">0.01</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">log2fc</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.25</span> <span class="op">&amp;</span> <span class="va">lig_nr</span> <span class="op">&gt;=</span> <span class="fl">4</span> <span class="op">&amp;</span> <span class="va">rec_nr</span> <span class="op">&gt;=</span> <span class="fl">4</span><span class="op">]</span>
+<span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">setorder</a></span><span class="op">(</span><span class="va">selected_spat</span>, <span class="op">-</span><span class="va">PI</span><span class="op">)</span>
 
-<span class="va">top_LR_ints</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">selected_spat</span><span class="op">[</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html" class="external-link">order</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">PI</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">$</span><span class="va">LR_comb</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">33</span><span class="op">]</span>
-<span class="va">top_LR_cell_ints</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">selected_spat</span><span class="op">[</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html" class="external-link">order</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">PI</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">$</span><span class="va">LR_cell_comb</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">33</span><span class="op">]</span>
+<span class="va">top_LR_ints</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">selected_spat</span><span class="op">[</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">PI</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">$</span><span class="va">LR_comb</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">33</span><span class="op">]</span>
+<span class="va">top_LR_cell_ints</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">selected_spat</span><span class="op">[</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">PI</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">$</span><span class="va">LR_cell_comb</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">33</span><span class="op">]</span>
 
 <span class="fu"><a href="../reference/plotCCcomDotplot.html">plotCCcomDotplot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>,
                  comScores <span class="op">=</span> <span class="va">spatial_all_scores</span>,
@@ -767,22 +765,22 @@
              ground_truth <span class="op">=</span> <span class="st">'spatial'</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/40-plotRecovery.png" style="width:50.0%"></p>
 </div>
-<div class="section level2">
-<h2 id="part-15-export-giotto-analyzer-to-viewer">Part 15: Export Giotto Analyzer to Viewer<a class="anchor" aria-label="anchor" href="#part-15-export-giotto-analyzer-to-viewer"></a>
-</h2>
+<div id="part-15-export-giotto-analyzer-to-viewer" class="section level2">
+<h2 class="hasAnchor">
+<a href="#part-15-export-giotto-analyzer-to-viewer" class="anchor"></a>Part 15: Export Giotto Analyzer to Viewer</h2>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">viewer_folder</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">'/'</span>, <span class="st">'Mouse_cortex_viewer'</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">viewer_folder</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">'/'</span>, <span class="st">'Mouse_cortex_viewer'</span><span class="op">)</span>
 
 <span class="co">## select annotations, reductions and expression values to view in Giotto Viewer</span>
 <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">SS_seqfish</span><span class="op">)</span>
 <span class="fu"><a href="../reference/exportGiottoViewer.html">exportGiottoViewer</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span>, output_directory <span class="op">=</span> <span class="va">viewer_folder</span>,
-                   factor_annotations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'cell_types'</span>,
+                   factor_annotations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'cell_types'</span>,
                                           <span class="st">'leiden_clus'</span>,
                                           <span class="st">'sub_leiden_clus_select'</span>,
                                           <span class="st">'HMRF_2_k9_b.28'</span><span class="op">)</span>,
                    numeric_annotations <span class="op">=</span> <span class="st">'total_expr'</span>,
-                   dim_reductions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'umap'</span><span class="op">)</span>,
-                   dim_reduction_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'umap'</span><span class="op">)</span>,
+                   dim_reductions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'umap'</span><span class="op">)</span>,
+                   dim_reduction_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'umap'</span><span class="op">)</span>,
                    expression_values <span class="op">=</span> <span class="st">'scaled'</span>,
                    expression_rounding <span class="op">=</span> <span class="fl">3</span>,
                    overwrite_dir <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -800,13 +798,11 @@
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by <a href="https://www.drieslab.com/" class="external-link">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
+  <p>Developed by <a href="https://www.drieslab.com/">Ruben Dries</a>, Jiaji George Chen, Natalie Del Rossi, Emma Kelley, Junxiang Xu, Guo-Cheng Yuan.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -814,8 +810,6 @@
 
   
 
-
-  
 
   </body>
 </html>
