@@ -91,14 +91,14 @@ binSpect for a single spatial network and a provided expression matrix" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Start
      
     <span class="caret"></span>
@@ -119,7 +119,7 @@ binSpect for a single spatial network and a provided expression matrix" />
   <a href="../reference/index.html">Documentation</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Datasets
      
     <span class="caret"></span>
@@ -146,7 +146,7 @@ binSpect for a single spatial network and a provided expression matrix" />
   <a href="../articles/giotto_news.html">News</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     FAQ
      
     <span class="caret"></span>
@@ -161,7 +161,7 @@ binSpect for a single spatial network and a provided expression matrix" />
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Try Giotto
      
     <span class="caret"></span>
@@ -204,7 +204,7 @@ binSpect for a single spatial network and a provided expression matrix" />
 
     <pre class="usage"><span class='fu'>binSpectSingleMatrix</span><span class='op'>(</span>
   <span class='va'>expression_matrix</span>,
-  <span class='va'>spatial_network</span>,
+  spatial_network <span class='op'>=</span> <span class='cn'>NULL</span>,
   bin_matrix <span class='op'>=</span> <span class='cn'>NULL</span>,
   bin_method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"kmeans"</span>, <span class='st'>"rank"</span><span class='op'>)</span>,
   subset_feats <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -224,7 +224,7 @@ binSpect for a single spatial network and a provided expression matrix" />
   group_size <span class='op'>=</span> <span class='st'>"automatic"</span>,
   do_parallel <span class='op'>=</span> <span class='cn'>TRUE</span>,
   cores <span class='op'>=</span> <span class='cn'>NA</span>,
-  verbose <span class='op'>=</span> <span class='cn'>T</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   set.seed <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span>
 

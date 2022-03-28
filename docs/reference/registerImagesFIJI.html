@@ -90,14 +90,14 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Start
      
     <span class="caret"></span>
@@ -118,7 +118,7 @@
   <a href="../reference/index.html">Documentation</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Datasets
      
     <span class="caret"></span>
@@ -145,7 +145,7 @@
   <a href="../articles/giotto_news.html">News</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     FAQ
      
     <span class="caret"></span>
@@ -160,7 +160,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Try Giotto
      
     <span class="caret"></span>
@@ -201,15 +201,17 @@
     </div>
 
     <pre class="usage"><span class='fu'>registerImagesFIJI</span><span class='op'>(</span>
-  <span class='va'>source</span>,
-  <span class='va'>output</span>,
+  <span class='va'>source_img_dir</span>,
+  <span class='va'>output_img_dir</span>,
+  <span class='va'>transforms_save_dir</span>,
+  <span class='va'>ref_img_name</span>,
   init_gauss_blur <span class='op'>=</span> <span class='fl'>1.6</span>,
   steps_per_scale_octave <span class='op'>=</span> <span class='fl'>3</span>,
   min_img_size <span class='op'>=</span> <span class='fl'>64</span>,
   max_img_size <span class='op'>=</span> <span class='fl'>1024</span>,
   feat_desc_size <span class='op'>=</span> <span class='fl'>8</span>,
   feat_desc_orient_bins <span class='op'>=</span> <span class='fl'>8</span>,
-  closest_next_closest_Ratio <span class='op'>=</span> <span class='fl'>0.92</span>,
+  closest_next_closest_ratio <span class='op'>=</span> <span class='fl'>0.92</span>,
   max_align_err <span class='op'>=</span> <span class='fl'>25</span>,
   inlier_ratio <span class='op'>=</span> <span class='fl'>0.05</span>,
   headless <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -221,6 +223,7 @@
   fijiArgs <span class='op'>=</span> <span class='cn'>NULL</span>,
   javaArgs <span class='op'>=</span> <span class='cn'>NULL</span>,
   ijArgs <span class='op'>=</span> <span class='cn'>NULL</span>,
+  jython <span class='op'>=</span> <span class='cn'>FALSE</span>,
   fijiPath <span class='op'>=</span> <span class='fu'><a href='fiji.html'>fiji</a></span><span class='op'>(</span><span class='op'>)</span>,
   DryRun <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
@@ -229,12 +232,20 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>source</th>
+      <th>source_img_dir</th>
       <td><p>Folder containing images to be registered</p></td>
     </tr>
     <tr>
-      <th>output</th>
+      <th>output_img_dir</th>
       <td><p>Folder to save registered images to</p></td>
+    </tr>
+    <tr>
+      <th>transforms_save_dir</th>
+      <td><p>(jython implementation only) Folder to save transforms to</p></td>
+    </tr>
+    <tr>
+      <th>ref_img_name</th>
+      <td><p>(jython implementation only) File name of reference image for the registration</p></td>
     </tr>
     <tr>
       <th>init_gauss_blur</th>
@@ -258,10 +269,6 @@
     </tr>
     <tr>
       <th>feat_desc_orient_bins</th>
-      <td><p>Feature descriptor option</p></td>
-    </tr>
-    <tr>
-      <th>closest_next_closest_Ratio</th>
       <td><p>Feature descriptor option</p></td>
     </tr>
     <tr>
@@ -305,9 +312,13 @@
       <td><p>Arguments for ImageJ</p></td>
     </tr>
     <tr>
+      <th>jython</th>
+      <td><p>Use jython wrapper script</p></td>
+    </tr>
+    <tr>
       <th>fijiPath</th>
       <td><p>Path to fiji executable (can be set by
-<code><a href='https://rdrr.io/r/base/options.html'>options(giotto.fiji="/some/path")</a></code>)</p></td>
+<code>options(giotto.fiji="/some/path")</code>)</p></td>
     </tr>
     <tr>
       <th>DryRun</th>
@@ -315,12 +326,8 @@
 executing it.</p></td>
     </tr>
     <tr>
-      <th>transformSave</th>
-      <td><p>Folder to save transforms to</p></td>
-    </tr>
-    <tr>
-      <th>referenceImg</th>
-      <td><p>File name of reference image for the registration</p></td>
+      <th>closest_next_closest_Ratio</th>
+      <td><p>Feature descriptor option</p></td>
     </tr>
     </table>
 

@@ -6,7 +6,9 @@
 \usage{
 normalizeGiotto(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
+  expression_values = "raw",
   norm_methods = c("standard", "pearson_resid", "osmFISH"),
   library_size_norm = TRUE,
   scalefactor = 6000,
@@ -25,7 +27,11 @@ normalizeGiotto(
 \arguments{
 \item{gobject}{giotto object}
 
+\item{spat_unit}{spatial unit}
+
 \item{feat_type}{feature type}
+
+\item{expression_values}{expression values to use}
 
 \item{norm_methods}{normalization method to use}
 

@@ -6,8 +6,9 @@
 \usage{
 subsetGiotto(
   gobject,
-  cell_ids = NULL,
+  spat_unit = NULL,
   feat_type = NULL,
+  cell_ids = NULL,
   feat_ids = NULL,
   gene_ids = NULL,
   poly_info = NULL,
@@ -15,16 +16,18 @@ subsetGiotto(
   x_min = NULL,
   y_max = NULL,
   y_min = NULL,
-  verbose = FALSE,
+  verbose = TRUE,
   toplevel_params = 2
 )
 }
 \arguments{
 \item{gobject}{giotto object}
 
-\item{cell_ids}{cell IDs to keep}
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type to use}
+
+\item{cell_ids}{cell IDs to keep}
 
 \item{feat_ids}{feature IDs to keep}
 

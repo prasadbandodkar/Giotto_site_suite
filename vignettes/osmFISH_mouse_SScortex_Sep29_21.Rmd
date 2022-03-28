@@ -26,7 +26,7 @@ results_folder = 'path/to/result'
 # set python path to conda env/bin/ directory if manually installed Giotto python dependencies by conda
 # python_path = '/path_to_conda/.conda/envs/giotto/bin/python'
 # set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment
-python_path = null
+python_path = NULL
 if(is.null(python_path)) {
   installGiottoEnvironment()
 }
@@ -82,11 +82,11 @@ osm_test <- filterGiotto(gobject = osm_test,
 osm_test <- normalizeGiotto(gobject = osm_test)
 
 # 2. osmFISH way
-raw_expr_matrix = osm_test@expression$rna$raw
+raw_expr_matrix = get_expression_values(osm_test, values = "raw")
 norm_genes = (raw_expr_matrix/Giotto:::rowSums_flex(raw_expr_matrix)) * nrow(raw_expr_matrix)
 
 norm_genes_cells = Giotto:::t_flex((Giotto:::t_flex(norm_genes)/Giotto:::colSums_flex(norm_genes)) * ncol(raw_expr_matrix))
-osm_test@expression$rna$custom = norm_genes_cells
+osm_test = set_expression_values(osm_test, values = norm_genes_cells , name = "custom")
 
 ## add gene & cell statistics
 osm_test <- addStatistics(gobject = osm_test)
@@ -292,7 +292,7 @@ markers = findMarkers_one_vs_all(gobject = osm_test,
                                  cluster_column = 'leiden_clus_m',
                                  min_feats = 2, rank_score = 2)
 ## violinplot
-topgenes = markers[, head(.SD, 1), by = 'cluster']$genes
+topgenes = markers[, head(.SD, 1), by = 'cluster']$feats
 violinPlot(osm_test, feats = unique(topgenes), cluster_column = 'leiden_clus_m', expression_values = 'custom',
            strip_text = 5, strip_position = 'right',
            save_param = c(save_name = '6_a_violinplot'))
@@ -359,10 +359,10 @@ spatPlot2D(gobject = osm_test, show_network = T,
 kmtest = binSpect(osm_test, calc_hub = T, hub_min_int = 5,
                   bin_method = 'kmeans')
 
-spatDimGenePlot2D(osm_test, expression_values = 'scaled',
-                  genes = kmtest$feats[1:3], dim_point_shape ='no_border',
-                  plot_alignment = 'horizontal', cow_n_col = 1,
-                  save_param = c(save_name = '10_a_spatial_genes_km'))
+spatDimFeatPlot2D(osm_test, expression_values = 'scaled',
+               feats = kmtest$feats[1:3], plot_alignment = 'horizontal',
+               cow_n_col = 1,
+               save_param = c(save_name = '10_a_spatial_genes_km'))
 ```
 ![](../inst/images/osmFISH_mouse_SS_cortex/vignette_sep29_2021/10_a_spatial_genes_km.png){ width=50% }
 

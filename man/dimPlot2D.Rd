@@ -6,6 +6,7 @@
 \usage{
 dimPlot2D(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   group_by = NULL,
   group_by_subset = NULL,
@@ -61,6 +62,8 @@ dimPlot2D(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type}
 

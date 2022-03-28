@@ -45,8 +45,8 @@ plot_cell_polygon_layer = function(ggobject = NULL,
   # specific fill color for polygon shapes
   if(!is.null(fill)) {
     pl = pl + ggplot2::geom_polygon(data = polygon_dt,
-                                    ggplot2::aes_string(x = sdimx,
-                                                        y = sdimy,
+                                    ggplot2::aes_string(x = 'x',
+                                                        y = 'y',
                                                         group = polygon_grouping,
                                                         fill = 'final_fill'),
                                     alpha = alpha,
@@ -82,8 +82,8 @@ plot_cell_polygon_layer = function(ggobject = NULL,
 
   } else {
     pl = pl + ggplot2::geom_polygon(data = polygon_dt,
-                                    ggplot2::aes_string(x = sdimx,
-                                                        y = sdimy,
+                                    ggplot2::aes_string(x = 'x',
+                                                        y = 'y',
                                                         group = 'poly_ID'),
                                     fill = bg_color,
                                     alpha = alpha,
@@ -97,8 +97,65 @@ plot_cell_polygon_layer = function(ggobject = NULL,
 
 
 
+#' @name select_gimage
+#' @description selects and creates giotto images for plotting
+#' @keywords internal
+select_gimage = function(gobject,
+                         gimage = NULL,
+                         image_name = NULL,
+                         largeImage_name = NULL,
+                         spat_unit = NULL,
+                         spat_loc_name = NULL,
+                         feat_type = NULL) {
 
 
+  if(!is.null(gimage)) gimage = gimage
+
+
+  else if(!is.null(image_name)) {
+
+    if(length(image_name) == 1) {
+      gimage = gobject@images[[image_name]]
+      if(is.null(gimage)) warning('image_name: ', image_name, ' does not exists')
+    } else {
+      gimage = list()
+      for(gim in 1:length(image_name)) {
+        gimage[[gim]] = gobject@images[[gim]]
+        if(is.null(gimage[[gim]])) warning('image_name: ', gim, ' does not exists')
+      }
+    }
+
+  } else if(!is.null(largeImage_name)) {
+    # If there is input to largeImage_name arg
+
+    if(length(largeImage_name) == 1) {
+      gimage = plot_auto_largeImage_resample(gobject = gobject,
+                                             largeImage_name = largeImage_name,
+                                             spat_unit = spat_unit,
+                                             spat_loc_name = spat_loc_name,
+                                             include_image_in_border = TRUE)
+    } else {
+      gimage = list()
+      for(gim in 1:length(largeImage_name)) {
+        gimage[[gim]] = plot_auto_largeImage_resample(gobject = gobject,
+                                                      largeImage_name = largeImage_name[[gim]],
+                                                      spat_unit = spat_unit,
+                                                      spat_loc_name = spat_loc_name,
+                                                      include_image_in_border = TRUE)
+      }
+    }
+
+  } else {
+    # Default to first image available in images if no input given to image_name or largeImage_name args
+    image_name = names(gobject@images)[1]
+    gimage = gobject@images[[image_name]]
+
+    if(is.null(gimage)) warning('image_name: ', image_name, ' does not exist \n')
+  }
+
+  return(gimage)
+
+}
 
 
 #' @name plot_feature_points_layer
@@ -155,6 +212,12 @@ plot_feature_points_layer = function(ggobject,
 #' @name spatInSituPlotPoints
 #' @description Function to plot multiple features for multiple modalities at the spatial in situ level
 #' @param gobject giotto object
+#' @param show_image show a tissue background image
+#' @param gimage a giotto image
+#' @param image_name name of a giotto image
+#' @param largeImage_name name of a giottoLargeImage
+#' @param spat_unit spatial unit
+#' @param spat_loc_name name of spatial locations
 #' @param feats features to plot
 #' @param feat_type feature types of the feats
 #' @param feats_color_code code to color the provided features
@@ -162,7 +225,7 @@ plot_feature_points_layer = function(ggobject,
 #' @param sdimx spatial dimension x
 #' @param sdimy spatial dimension y
 #' @param point_size size of the points
-#' @param show_polygon overlay polygon information (cell shape)
+#' @param show_polygon overlay polygon information (e.g. cell shape)
 #' @param use_overlap use polygon and feature coordinates overlap results
 #' @param polygon_feat_type feature type associated with polygon information
 #' @param polygon_color color for polygon border
@@ -175,6 +238,7 @@ plot_feature_points_layer = function(ggobject,
 #' @param axis_text axis text size
 #' @param axis_title title text size
 #' @param legend_text legend text size
+#' @param coord_fix_ratio fix ratio of coordinates
 #' @param background_color background color
 #' @param show_legend show legend
 #' @param plot_method method to plot points
@@ -188,6 +252,12 @@ plot_feature_points_layer = function(ggobject,
 #' @family In Situ visualizations
 #' @export
 spatInSituPlotPoints = function(gobject,
+                                show_image = F,
+                                gimage = NULL,
+                                image_name = NULL,
+                                largeImage_name = NULL,
+                                spat_unit = NULL,
+                                spat_loc_name = NULL,
                                 feats = NULL,
                                 feat_type = 'rna',
                                 feats_color_code = NULL,
@@ -210,6 +280,7 @@ spatInSituPlotPoints = function(gobject,
                                 axis_text = 8,
                                 axis_title = 8,
                                 legend_text = 6,
+                                coord_fix_ratio = NULL,
                                 background_color = 'black',
                                 show_legend = TRUE,
                                 plot_method = c('ggplot', 'scattermore', 'scattermost'),
@@ -230,23 +301,63 @@ spatInSituPlotPoints = function(gobject,
   save_plot = ifelse(is.na(save_plot), readGiottoInstructions(gobject, param = 'save_plot'), save_plot)
   return_plot = ifelse(is.na(return_plot), readGiottoInstructions(gobject, param = 'return_plot'), return_plot)
 
+ print('ok 1')
+
+  ## giotto image ##
+  if(show_image == TRUE) {
+
+    gimage = select_gimage(gobject = gobject,
+                           gimage = gimage,
+                           image_name = image_name,
+                           largeImage_name = largeImage_name,
+                           spat_unit = spat_unit,
+                           spat_loc_name = spat_loc_name,
+                           feat_type = feat_type)
+
+  }
+
+
+ print('ok 2')
+
+
 
   # start plotting
   plot = ggplot2::ggplot()
 
+  ## 0. plot image ##
+  if(show_image == TRUE & !is.null(gimage)) {
+    plot = plot_spat_image_layer_ggplot(ggplot = plot,
+                                        gobject = gobject,
+                                        spat_unit = spat_unit,
+                                        feat_type = feat_type,
+                                        spat_loc_name = spat_loc_name,
+                                        gimage = gimage,
+                                        sdimx = 'sdimx',
+                                        sdimy = 'sdimy')
+  }
+
+  print('ok 3')
 
   ## 1. plot morphology first
   if(show_polygon == TRUE) {
 
-    if(is.null(polygon_feat_type)) {
-      polygon_feat_type = gobject@expression_feat[[1]]
-    }
+    # Set feat_type and spat_unit
+    polygon_feat_type = set_default_spat_unit(gobject = gobject,
+                                      spat_unit = polygon_feat_type)
+    feat_type = set_default_feat_type(gobject = gobject,
+                                      spat_unit = polygon_feat_type,
+                                      feat_type = feat_type)
 
+    #feat_type = set_default_feat_type(gobject = gobject, feat_type = feat_type)
+    #if(is.null(polygon_feat_type)) {
+    #  polygon_feat_type = gobject@expression_feat[[1]]
+    #}
 
     polygon_combo = combineCellData(gobject = gobject,
-                                  feat_type = feat_type,
-                                  include_poly_info = TRUE,
-                                  poly_info = polygon_feat_type)
+                                    spat_loc_name = spat_loc_name,
+                                    feat_type = feat_type,
+                                    include_poly_info = TRUE,
+                                    poly_info = polygon_feat_type)
     polygon_dt = polygon_combo[[feat_type]]
     data.table::setnames(polygon_dt, old = 'cell_ID', new = 'poly_ID')
 
@@ -254,7 +365,7 @@ spatInSituPlotPoints = function(gobject,
     #                                polygon_name = polygon_feat_type)
     #polygon_dt = spatVector_to_dt(polygon_info)
 
-    plot = plot_cell_polygon_layer(ggobject = gobject,
+    plot = plot_cell_polygon_layer(ggobject = plot,
                                    polygon_dt = polygon_dt,
                                    polygon_grouping = 'poly_ID',
                                    sdimx = sdimx,
@@ -272,6 +383,8 @@ spatInSituPlotPoints = function(gobject,
   }
 
 
+  print('ok 4')
+
   ## 2. plot features second
 
   if(!is.null(feats)) {
@@ -285,6 +398,7 @@ spatInSituPlotPoints = function(gobject,
                                                     poly_info = polygon_feat_type)
     } else {
       spatial_feat_info = combineFeatureData(gobject = gobject,
+                                             spat_unit =  polygon_feat_type,
                                              feat_type = feat_type,
                                              sel_feats = feats)
     }
@@ -303,9 +417,10 @@ spatInSituPlotPoints = function(gobject,
                                      point_size = point_size,
                                      show_legend = show_legend,
                                      plot_method = plot_method)
+
   }
 
-
+  print('ok 5')
 
 
   ## 3. adjust theme settings
@@ -318,6 +433,10 @@ spatInSituPlotPoints = function(gobject,
                                 panel.background = element_rect(fill = background_color))
 
 
+
+  if(!is.null(coord_fix_ratio)) {
+    plot = plot + ggplot2::coord_fixed(ratio = coord_fix_ratio)
+  }
 
 
   ## print plot

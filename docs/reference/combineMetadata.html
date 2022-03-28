@@ -91,14 +91,14 @@ enrichment results from runSpatialEnrich" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Start
      
     <span class="caret"></span>
@@ -119,7 +119,7 @@ enrichment results from runSpatialEnrich" />
   <a href="../reference/index.html">Documentation</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Datasets
      
     <span class="caret"></span>
@@ -146,7 +146,7 @@ enrichment results from runSpatialEnrich" />
   <a href="../articles/giotto_news.html">News</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     FAQ
      
     <span class="caret"></span>
@@ -161,7 +161,7 @@ enrichment results from runSpatialEnrich" />
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Try Giotto
      
     <span class="caret"></span>
@@ -204,6 +204,7 @@ enrichment results from <code><a href='runSpatialEnrich.html'>runSpatialEnrich</
 
     <pre class="usage"><span class='fu'>combineMetadata</span><span class='op'>(</span>
   <span class='va'>gobject</span>,
+  spat_unit <span class='op'>=</span> <span class='cn'>NULL</span>,
   feat_type <span class='op'>=</span> <span class='cn'>NULL</span>,
   spat_loc_name <span class='op'>=</span> <span class='st'>"raw"</span>,
   spat_enr_names <span class='op'>=</span> <span class='cn'>NULL</span>
@@ -215,6 +216,10 @@ enrichment results from <code><a href='runSpatialEnrich.html'>runSpatialEnrich</
     <tr>
       <th>gobject</th>
       <td><p>Giotto object</p></td>
+    </tr>
+    <tr>
+      <th>spat_unit</th>
+      <td><p>spatial unit</p></td>
     </tr>
     <tr>
       <th>feat_type</th>

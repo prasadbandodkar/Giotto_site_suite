@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="updateGiottoImage — updateGiottoImage" />
-<meta property="og:description" content="Updates the boundaries of a giotto image attached to a giotto object" />
+<meta property="og:description" content="Updates the boundaries of a giottoImage or giottoLargeImage attached to a giotto object" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -90,14 +90,14 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Start
      
     <span class="caret"></span>
@@ -118,7 +118,7 @@
   <a href="../reference/index.html">Documentation</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Datasets
      
     <span class="caret"></span>
@@ -145,7 +145,7 @@
   <a href="../articles/giotto_news.html">News</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     FAQ
      
     <span class="caret"></span>
@@ -160,7 +160,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Try Giotto
      
     <span class="caret"></span>
@@ -197,16 +197,26 @@
     </div>
 
     <div class="ref-description">
-    <p>Updates the boundaries of a giotto image attached to a giotto object</p>
+    <p>Updates the boundaries of a giottoImage or giottoLargeImage attached to a giotto object</p>
     </div>
 
     <pre class="usage"><span class='fu'>updateGiottoImage</span><span class='op'>(</span>
-  <span class='va'>gobject</span>,
-  <span class='va'>image_name</span>,
+  gobject <span class='op'>=</span> <span class='cn'>NULL</span>,
+  image_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  largeImage_name <span class='op'>=</span> <span class='cn'>NULL</span>,
   xmax_adj <span class='op'>=</span> <span class='fl'>0</span>,
   xmin_adj <span class='op'>=</span> <span class='fl'>0</span>,
   ymax_adj <span class='op'>=</span> <span class='fl'>0</span>,
   ymin_adj <span class='op'>=</span> <span class='fl'>0</span>,
+  x_shift <span class='op'>=</span> <span class='fl'>0</span>,
+  y_shift <span class='op'>=</span> <span class='fl'>0</span>,
+  scale_x <span class='op'>=</span> <span class='fl'>1</span>,
+  scale_y <span class='op'>=</span> <span class='fl'>1</span>,
+  order <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"first_adj"</span>, <span class='st'>"first_scale"</span><span class='op'>)</span>,
+  xmax_set <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xmin_set <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ymax_set <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ymin_set <span class='op'>=</span> <span class='cn'>NULL</span>,
   return_gobject <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
@@ -215,11 +225,15 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>gobject</th>
-      <td><p>giotto object</p></td>
+      <td><p>gobject containing giottoImage or giottoLargeImage</p></td>
     </tr>
     <tr>
       <th>image_name</th>
-      <td><p>spatial locations</p></td>
+      <td><p>name of giottoImage</p></td>
+    </tr>
+    <tr>
+      <th>largeImage_name</th>
+      <td><p>name of giottoLargeImage</p></td>
     </tr>
     <tr>
       <th>xmax_adj</th>
@@ -236,6 +250,42 @@
     <tr>
       <th>ymin_adj</th>
       <td><p>adjustment of the minimum y-value to align the image</p></td>
+    </tr>
+    <tr>
+      <th>x_shift</th>
+      <td><p>shift entire image in positive x direction</p></td>
+    </tr>
+    <tr>
+      <th>y_shift</th>
+      <td><p>shift entire image in positive y direction</p></td>
+    </tr>
+    <tr>
+      <th>scale_x</th>
+      <td><p>scale x axis image mapping from origin</p></td>
+    </tr>
+    <tr>
+      <th>scale_y</th>
+      <td><p>scale y axis image mapping from origin</p></td>
+    </tr>
+    <tr>
+      <th>order</th>
+      <td><p>perform fine adjustments (adjustments and shifts) or scaling first</p></td>
+    </tr>
+    <tr>
+      <th>xmax_set</th>
+      <td><p>set image xmax boundary. Overrides minmax values as spatial anchor.</p></td>
+    </tr>
+    <tr>
+      <th>xmin_set</th>
+      <td><p>set image xmin boundary. Overrides minmax values as spatial anchor.</p></td>
+    </tr>
+    <tr>
+      <th>ymax_set</th>
+      <td><p>set image ymax boundary. Overrides minmax values as spatial anchor.</p></td>
+    </tr>
+    <tr>
+      <th>ymin_set</th>
+      <td><p>set image ymin boundary. Overrides minmax values as spatial anchor.</p></td>
     </tr>
     <tr>
       <th>return_gobject</th>

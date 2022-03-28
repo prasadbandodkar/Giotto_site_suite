@@ -3,6 +3,7 @@
 #' @name doLeidenCluster
 #' @description cluster cells using a NN-network and the Leiden community detection algorithm
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
 #' @param feat_type feature type
 #' @param name name for cluster
 #' @param nn_network_to_use type of NN network to use (kNN vs sNN)
@@ -39,6 +40,7 @@
 #'
 #' @export
 doLeidenCluster = function(gobject,
+                           spat_unit = NULL,
                            feat_type = NULL,
                            name = 'leiden_clus',
                            nn_network_to_use = 'sNN',
@@ -55,18 +57,25 @@ doLeidenCluster = function(gobject,
                            seed_number = 1234) {
 
 
-  # specify feat_type
-  if(is.null(feat_type)) {
-    feat_type = gobject@expression_feat[[1]]
-  }
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+  feat_type = set_default_feat_type(gobject = gobject,
+                                    spat_unit = spat_unit,
+                                    feat_type = feat_type)
 
   ## get cell IDs ##
-  cell_ID_vec = gobject@cell_ID
+  cell_ID_vec = gobject@cell_ID[[spat_unit]]
 
   ## select network to use
-  igraph_object = get_NearestNetwork(gobject,
-                                        nn_network_to_use = nn_network_to_use,
-                                        network_name = network_name)
+  igraph_object = get_NearestNetwork(gobject = gobject,
+                                     spat_unit = spat_unit,
+                                     feat_type = feat_type,
+                                     nn_network_to_use = nn_network_to_use,
+                                     network_name = network_name,
+                                     output = 'igraph')
+
+  print(igraph_object)
 
   ## select partition type
   partition_type = match.arg(partition_type,
@@ -112,6 +121,8 @@ doLeidenCluster = function(gobject,
   }
 
 
+  print(network_edge_dt)
+
   ## do python leiden clustering
   reticulate::py_set_seed(seed = seed_number, disable_hash_randomization = TRUE)
   pyth_leid_result = python_leiden(df = network_edge_dt,
@@ -125,19 +136,26 @@ doLeidenCluster = function(gobject,
   ident_clusters_DT = data.table::data.table(cell_ID = pyth_leid_result[[1]], 'name' = pyth_leid_result[[2]])
   data.table::setnames(ident_clusters_DT, 'name', name)
 
+  print(ident_clusters_DT)
 
   ## add clusters to metadata ##
   if(return_gobject == TRUE) {
 
-    cluster_names = names(gobject@cell_metadata)
+
+    cluster_names = names(pDataDT(gobject = gobject,
+                                  spat_unit = spat_unit,
+                                  feat_type = feat_type))
+    #cluster_names = names(gobject@cell_metadata[[spat_unit]][[feat_type]])
+
     if(name %in% cluster_names) {
       cat('\n ', name, ' has already been used, will be overwritten \n')
-      cell_metadata = gobject@cell_metadata
+      cell_metadata = gobject@cell_metadata[[spat_unit]][[feat_type]]
       cell_metadata[, eval(name) := NULL]
-      gobject@cell_metadata = cell_metadata
+      gobject@cell_metadata[[spat_unit]][[feat_type]] = cell_metadata
     }
 
     gobject = addCellMetadata(gobject = gobject,
+                              spat_unit = spat_unit,
                               feat_type = feat_type,
                               new_metadata = ident_clusters_DT[, c('cell_ID', name), with = FALSE],
                               by_column = TRUE, column_cell_ID = 'cell_ID')
@@ -684,6 +702,7 @@ doSNNCluster <- function(gobject,
 #' @description cluster cells using kmeans algorithm
 #' @param gobject giotto object
 #' @param feat_type feature type
+#' @param spat_unit spatial unit
 #' @param expression_values expression values to use
 #' @param feats_to_use subset of features to use
 #' @param genes_to_use deprecated use feats_to_use
@@ -705,6 +724,7 @@ doSNNCluster <- function(gobject,
 #' @export
 doKmeans <- function(gobject,
                      feat_type = NULL,
+                     spat_unit = NULL,
                      expression_values = c('normalized', 'scaled', 'custom'),
                      feats_to_use = NULL,
                      genes_to_use = NULL,
@@ -731,6 +751,13 @@ doKmeans <- function(gobject,
     warning('genes_to_use is deprecated, use feats_to_use in the future \n')
   }
 
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+  feat_type = set_default_feat_type(gobject = gobject,
+                                    spat_unit = spat_unit,
+                                    feat_type = feat_type)
+
 
   dim_reduction_to_use = match.arg(dim_reduction_to_use, choices = c('cells', 'pca', 'umap', 'tsne'))
   distance_method = match.arg(distance_method, choices = c("original", "pearson", "spearman",
@@ -744,23 +771,27 @@ doKmeans <- function(gobject,
     ## TODO: check if reduction exists
 
     # use only available dimensions if dimensions < dimensions_to_use
-    dim_coord = gobject@dimension_reduction[['cells']][[dim_reduction_to_use]][[dim_reduction_name]][['coordinates']]
+    dim_coord = get_dimReduction(gobject = gobject,
+                                 spat_unit = spat_unit,
+                                 reduction = 'cells',
+                                 reduction_method = dim_reduction_to_use,
+                                 name = dim_reduction_name,
+                                 return_dimObj = FALSE)
+
+    #dim_coord = gobject@dimension_reduction[['cells']][[dim_reduction_to_use]][[dim_reduction_name]][['coordinates']]
+
     dimensions_to_use = dimensions_to_use[dimensions_to_use %in% 1:ncol(dim_coord)]
     matrix_to_use = dim_coord[, dimensions_to_use]
 
 
   } else {
 
-    # specify feat_type
-    if(is.null(feat_type)) {
-      feat_type = gobject@expression_feat[[1]]
-    }
-
     values = match.arg(expression_values, unique(c('normalized', 'scaled', 'custom', expression_values)))
 
 
     ## using original matrix ##
     expr_values = get_expression_values(gobject = gobject,
+                                        spat_unit = spat_unit,
                                         feat_type = feat_type,
                                         values = values)
 
@@ -811,16 +842,25 @@ doKmeans <- function(gobject,
   ## add clusters to metadata ##
   if(return_gobject == TRUE) {
 
-    cluster_names = names(gobject@cell_metadata)
+    #cluster_names = names(gobject@cell_metadata[[spat_unit]][[feat_type]])
+
+    cluster_names = names(pDataDT(gobject = gobject,
+                                  spat_unit = spat_unit,
+                                  feat_type = feat_type))
+
     if(name %in% cluster_names) {
       cat('\n ', name, ' has already been used, will be overwritten \n')
-      cell_metadata = gobject@cell_metadata
+      cell_metadata = gobject@cell_metadata[[spat_unit]][[feat_type]]
       cell_metadata[, eval(name) := NULL]
-      gobject@cell_metadata = cell_metadata
+      gobject@cell_metadata[[spat_unit]][[feat_type]] = cell_metadata
     }
 
-    gobject = addCellMetadata(gobject = gobject, new_metadata = ident_clusters_DT[, c('cell_ID', name), with = F],
-                              by_column = T, column_cell_ID = 'cell_ID')
+    gobject = addCellMetadata(gobject = gobject,
+                              spat_unit = spat_unit,
+                              feat_type = feat_type,
+                              new_metadata = ident_clusters_DT[, c('cell_ID', name), with = F],
+                              by_column = T,
+                              column_cell_ID = 'cell_ID')
 
     ## update parameters used ##
     gobject = update_giotto_params(gobject, description = '_kmeans_cluster')
@@ -842,6 +882,8 @@ doKmeans <- function(gobject,
 #' @name doHclust
 #' @description cluster cells using hierarchical clustering algorithm
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
+#' @param feat_type feature type
 #' @param expression_values expression values to use
 #' @param genes_to_use subset of genes to use
 #' @param dim_reduction_to_use dimension reduction to use
@@ -860,6 +902,8 @@ doKmeans <- function(gobject,
 #' @seealso  \code{\link[stats]{hclust}}
 #' @export
 doHclust <- function(gobject,
+                     spat_unit = NULL,
+                     feat_type = NULL,
                      expression_values = c('normalized', 'scaled', 'custom'),
                      genes_to_use = NULL,
                      dim_reduction_to_use = c('cells', 'pca', 'umap', 'tsne'),
@@ -880,6 +924,14 @@ doHclust <- function(gobject,
 
 
 
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+  feat_type = set_default_feat_type(gobject = gobject,
+                                    spat_unit = spat_unit,
+                                    feat_type = feat_type)
+
+
   dim_reduction_to_use = match.arg(dim_reduction_to_use, choices = c('cells', 'pca', 'umap', 'tsne'))
   distance_method = match.arg(distance_method, choices = c("pearson", "spearman",  "original",
                                                            "euclidean", "maximum", "manhattan",
@@ -896,14 +948,26 @@ doHclust <- function(gobject,
     ## TODO: check if reduction exists
 
     # use only available dimensions if dimensions < dimensions_to_use
-    dim_coord = gobject@dimension_reduction[['cells']][[dim_reduction_to_use]][[dim_reduction_name]][['coordinates']]
+    dim_coord = get_dimReduction(gobject = gobject,
+                                 feat_type = feat_type,
+                                 spat_unit = spat_unit,
+                                 reduction = 'cells',
+                                 reduction_method = dim_reduction_to_use,
+                                 name = dim_reduction_name,
+                                 return_dimObj = FALSE)
+
+    #dim_coord = gobject@dimension_reduction[['cells']][[dim_reduction_to_use]][[dim_reduction_name]][['coordinates']]
+
     dimensions_to_use = dimensions_to_use[dimensions_to_use %in% 1:ncol(dim_coord)]
     matrix_to_use = dim_coord[, dimensions_to_use]
 
 
   } else {
     ## using original matrix ##
-    expr_values = get_expression_values(gobject = gobject, values = values)
+    expr_values = get_expression_values(gobject = gobject,
+                                        spat_unit = spat_unit,
+                                        feat_type = feat_type,
+                                        values = values)
 
     # subset expression matrix
     if(!is.null(genes_to_use)) {
@@ -947,15 +1011,22 @@ doHclust <- function(gobject,
   ## add clusters to metadata ##
   if(return_gobject == TRUE) {
 
-    cluster_names = names(gobject@cell_metadata)
+    cluster_names = names(pDataDT(gobject = gobject,
+                                  spat_unit = spat_unit,
+                                  feat_type = feat_type))
+    #cluster_names = names(gobject@cell_metadata[[spat_unit]][[feat_type]])
+
     if(name %in% cluster_names) {
       cat('\n ', name, ' has already been used, will be overwritten \n')
-      cell_metadata = gobject@cell_metadata
+      cell_metadata = gobject@cell_metadata[[spat_unit]][[feat_type]]
       cell_metadata[, eval(name) := NULL]
-      gobject@cell_metadata = cell_metadata
+      gobject@cell_metadata[[spat_unit]][[feat_type]] = cell_metadata
     }
 
-    gobject = addCellMetadata(gobject = gobject, new_metadata = ident_clusters_DT[, c('cell_ID', name), with = F],
+    gobject = addCellMetadata(gobject = gobject,
+                              feat_type = feat_type,
+                              spat_unit = spat_unit,
+                              new_metadata = ident_clusters_DT[, c('cell_ID', name), with = F],
                               by_column = T, column_cell_ID = 'cell_ID')
 
 
@@ -2043,6 +2114,7 @@ subClusterCells <- function(gobject,
 #' @name getClusterSimilarity
 #' @description Creates data.table with pairwise correlation scores between each cluster.
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
 #' @param feat_type feature type
 #' @param expression_values expression values to use
 #' @param cluster_column name of column to use for clusters
@@ -2060,17 +2132,19 @@ subClusterCells <- function(gobject,
 #'                                             cluster_column = 'leiden_clus')
 #'
 getClusterSimilarity <- function(gobject,
+                                 spat_unit = NULL,
                                  feat_type = NULL,
                                  expression_values = c('normalized', 'scaled', 'custom'),
                                  cluster_column,
                                  cor = c('pearson', 'spearman')) {
 
 
-  # specify feat_type
-  if(is.null(feat_type)) {
-    feat_type = gobject@expression_feat[[1]]
-  }
-
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+  feat_type = set_default_feat_type(gobject = gobject,
+                                    spat_unit = spat_unit,
+                                    feat_type = feat_type)
 
   # data.table variables
   group1 = group2 = unified_group = value = NULL
@@ -2078,7 +2152,9 @@ getClusterSimilarity <- function(gobject,
   cor = match.arg(cor, c('pearson', 'spearman'))
   values = match.arg(expression_values, unique(c('normalized', 'scaled', 'custom', expression_values)))
 
-  metadata = pDataDT(gobject, feat_type = feat_type)
+  metadata = pDataDT(gobject,
+                     feat_type = feat_type,
+                     spat_unit = spat_unit)
 
   # get clustersize
   clustersize = metadata[, .N, by = cluster_column]
@@ -2091,6 +2167,7 @@ getClusterSimilarity <- function(gobject,
 
   # scores per cluster
   metatable = calculateMetaTable(gobject = gobject,
+                                 spat_unit = spat_unit,
                                  feat_type = feat_type,
                                  expression_values = values,
                                  metadata_cols = cluster_column)
@@ -2122,6 +2199,7 @@ getClusterSimilarity <- function(gobject,
 #' @name mergeClusters
 #' @description Merge selected clusters based on pairwise correlation scores and size of cluster.
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
 #' @param feat_type feature type
 #' @param expression_values expression values to use
 #' @param cluster_column name of column to use for clusters
@@ -2143,6 +2221,7 @@ getClusterSimilarity <- function(gobject,
 #' A giotto object is returned by default, if FALSE then the merging vector will be returned.
 #' @export
 mergeClusters <- function(gobject,
+                          spat_unit = NULL,
                           feat_type = NULL,
                           expression_values = c('normalized', 'scaled', 'custom'),
                           cluster_column,
@@ -2155,10 +2234,12 @@ mergeClusters <- function(gobject,
                           return_gobject = TRUE,
                           verbose = TRUE) {
 
-  # specify feat_type
-  if(is.null(feat_type)) {
-    feat_type = gobject@expression_feat[[1]]
-  }
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+  feat_type = set_default_feat_type(gobject = gobject,
+                                    spat_unit = spat_unit,
+                                    feat_type = feat_type)
 
   # expression values to be used
   values = match.arg(expression_values, unique(c('normalized', 'scaled', 'custom', expression_values)))
@@ -2168,6 +2249,7 @@ mergeClusters <- function(gobject,
 
   # calculate similarity data.table
   similarityDT = getClusterSimilarity(gobject = gobject,
+                                      spat_unit = spat_unit,
                                       feat_type = feat_type,
                                       expression_values = values,
                                       cluster_column = cluster_column,
@@ -2226,7 +2308,9 @@ mergeClusters <- function(gobject,
 
 
   ## update metadata
-  metadata = data.table::copy(pDataDT(gobject, feat_type = feat_type))
+  metadata = data.table::copy(pDataDT(gobject,
+                                      spat_unit = spat_unit,
+                                      feat_type = feat_type))
 
   finalvec = NULL
   for(ll in 1:length(finallist)) {
@@ -2243,15 +2327,21 @@ mergeClusters <- function(gobject,
 
   if(return_gobject == TRUE) {
 
-    cluster_names = names(gobject@cell_metadata[[feat_type]])
+    cluster_names = names(pDataDT(gobject = gobject,
+                                  spat_unit = spat_unit,
+                                  feat_type = feat_type))
+
+    #cluster_names = names(gobject@cell_metadata[[feat_type]][[spat_unit]])
+
     if(new_cluster_name %in% cluster_names) {
       cat('\n ', new_cluster_name, ' has already been used, will be overwritten \n')
-      cell_metadata = gobject@cell_metadata[[feat_type]]
+      cell_metadata = gobject@cell_metadata[[feat_type]][[spat_unit]]
       cell_metadata[, eval(new_cluster_name) := NULL]
-      gobject@cell_metadata[[feat_type]] = cell_metadata
+      gobject@cell_metadata[[feat_type]][[spat_unit]] = cell_metadata
     }
 
     gobject = addCellMetadata(gobject = gobject,
+                              spat_unit = spat_unit,
                               feat_type = feat_type,
                               new_metadata = metadata[, c('cell_ID', new_cluster_name), with = F],
                               by_column = T, column_cell_ID = 'cell_ID')
@@ -2371,6 +2461,7 @@ node_clusters = function(hclus_obj, verbose = TRUE) {
 #' @name getDendrogramSplits
 #' @description Split dendrogram at each node and keep the leave (label) information..
 #' @param gobject giotto object
+#' @param spat_unit spatial unit
 #' @param feat_type feature type
 #' @param expression_values expression values to use
 #' @param cluster_column name of column to use for clusters
@@ -2387,6 +2478,7 @@ node_clusters = function(hclus_obj, verbose = TRUE) {
 #' differentially expressed marker genes at each node.
 #' @export
 getDendrogramSplits = function(gobject,
+                               spat_unit = NULL,
                                feat_type = NULL,
                                expression_values = c('normalized', 'scaled', 'custom'),
                                cluster_column,
@@ -2398,10 +2490,12 @@ getDendrogramSplits = function(gobject,
                                verbose = TRUE) {
 
 
-  # specify feat_type
-  if(is.null(feat_type)) {
-    feat_type = gobject@expression_feat[[1]]
-  }
+  # Set feat_type and spat_unit
+  spat_unit = set_default_spat_unit(gobject = gobject,
+                                    spat_unit = spat_unit)
+  feat_type = set_default_feat_type(gobject = gobject,
+                                    spat_unit = spat_unit,
+                                    feat_type = feat_type)
 
   # package check for dendextend
   package_check(pkg_name = "dendextend", repository = "CRAN")
@@ -2414,6 +2508,7 @@ getDendrogramSplits = function(gobject,
 
   # create average expression matrix per cluster
   metatable = calculateMetaTable(gobject = gobject,
+                                 spat_unit = spat_unit,
                                  feat_type = feat_type,
                                  expression_values = values,
                                  metadata_cols = cluster_column)

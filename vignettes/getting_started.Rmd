@@ -50,10 +50,11 @@ For more information:
 Tutorials for Giotto specific tasks and functionalities.
 
 [![](../inst/images/icons/getting_started/icons_configuration.png){width=20%}](./getting_started_instructions.html)
-[![](../inst/images/icons/getting_started/icons_giotto.png){width=20%}](./temp_construction.html)
+[![](../inst/images/icons/getting_started/icons_giotto.png){width=20%}](./getting_started_gobject.html)
 [![](../inst/images/icons/getting_started/icons_processing.png){width=20%}](./data_processing.html)
 [![](../inst/images/icons/getting_started/icons_clustering.png){width=20%}](./Dimension_reduction.html)
 
+[![](../inst/images/icons/getting_started/icons_images.png){width=20%}](./getting_started_images.html)
 [![](../inst/images/icons/getting_started/icons_visualizations.png){width=20%}](./Visualizations.html)
 [![](../inst/images/icons/getting_started/icons_saving.png){width=20%}](./getting_started_saving.html)
  
@@ -70,7 +71,7 @@ Full dataset examples can be found in the [Datasets](../articles/datasets_overvi
 
 [![](../inst/images/icons/analyses/icons_image_analysis.png){width=30%}](./temp_construction.html)
 [![](../inst/images/icons/analyses/icons_cell_type.png){width=30%}](./temp_construction.html)
-[![](../inst/images/icons/analyses/icons_deconvolution.png){width=30%}](./temp_construction.html)    
+[![](../inst/images/icons/analyses/icons_deconvolution.png){width=30%}](./analyses_deconvolution_Oct2021.html)    
 
 [![](../inst/images/icons/analyses/icons_distribution.png){width=30%}](./temp_construction.html)
 [![](../inst/images/icons/analyses/icons_interaction.png){width=30%}](./temp_construction.html)

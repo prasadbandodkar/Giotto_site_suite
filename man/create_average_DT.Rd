@@ -6,6 +6,7 @@
 \usage{
 create_average_DT(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   meta_data_name,
   expression_values = c("normalized", "scaled", "custom")
@@ -13,6 +14,8 @@ create_average_DT(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type}
 

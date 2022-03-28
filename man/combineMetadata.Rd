@@ -6,6 +6,7 @@
 \usage{
 combineMetadata(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   spat_loc_name = "raw",
   spat_enr_names = NULL
@@ -13,6 +14,8 @@ combineMetadata(
 }
 \arguments{
 \item{gobject}{Giotto object}
+
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type}
 

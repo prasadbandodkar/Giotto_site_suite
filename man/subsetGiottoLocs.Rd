@@ -6,6 +6,9 @@
 \usage{
 subsetGiottoLocs(
   gobject,
+  spat_unit = NULL,
+  feat_type = NULL,
+  spat_loc_name = NULL,
   x_max = NULL,
   x_min = NULL,
   y_max = NULL,
@@ -13,12 +16,18 @@ subsetGiottoLocs(
   z_max = NULL,
   z_min = NULL,
   poly_info = "cell",
-  return_gobject = T,
+  return_gobject = TRUE,
   verbose = FALSE
 )
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
+
+\item{feat_type}{feature type to use}
+
+\item{spat_loc_name}{name of spatial locations to use}
 
 \item{x_max}{maximum x-coordinate}
 

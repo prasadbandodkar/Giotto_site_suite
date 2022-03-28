@@ -11,10 +11,13 @@ spatDimPlot(...)
   Arguments passed on to \code{\link[=spatDimPlot2D]{spatDimPlot2D}}
   \describe{
     \item{\code{gobject}}{giotto object}
+    \item{\code{spat_unit}}{spatial unit}
     \item{\code{feat_type}}{feature type}
     \item{\code{show_image}}{show a tissue background image}
     \item{\code{gimage}}{a giotto image}
     \item{\code{image_name}}{name of a giotto image}
+    \item{\code{largeImage_name}}{name of a giottoLargeImage}
+    \item{\code{spat_loc_name}}{name of spatial locations}
     \item{\code{plot_alignment}}{direction to align plot}
     \item{\code{dim_reduction_to_use}}{dimension reduction to use}
     \item{\code{dim_reduction_name}}{dimension reduction name}

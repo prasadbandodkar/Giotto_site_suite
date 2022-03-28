@@ -6,6 +6,8 @@
 \usage{
 plotMetaDataCellsHeatmap(
   gobject,
+  spat_unit = NULL,
+  feat_type = NULL,
   metadata_cols = NULL,
   spat_enr_names = NULL,
   value_cols = NULL,
@@ -32,6 +34,10 @@ plotMetaDataCellsHeatmap(
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
+
+\item{feat_type}{feature type}
 
 \item{metadata_cols}{annotation columns found in pDataDT(gobject)}
 

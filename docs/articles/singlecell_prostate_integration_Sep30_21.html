@@ -44,14 +44,14 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Start
      
     <span class="caret"></span>
@@ -72,7 +72,7 @@
   <a href="../reference/index.html">Documentation</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Datasets
      
     <span class="caret"></span>
@@ -99,7 +99,7 @@
   <a href="../articles/giotto_news.html">News</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     FAQ
      
     <span class="caret"></span>
@@ -114,7 +114,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Try Giotto
      
     <span class="caret"></span>
@@ -142,7 +142,7 @@
 
       
 
-      </header><script src="singlecell_prostate_integration_Sep30_21_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="singlecell_prostate_integration_Sep30_21_files/header-attrs-2.13/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Integration of single cell datasets</h1>
@@ -169,7 +169,7 @@
 <span class="co"># set python path to conda env/bin/ directory if manually installed Giotto python dependencies by conda</span>
 <span class="co"># python_path = '/path_to_conda/.conda/envs/giotto/bin/python'</span>
 <span class="co"># set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment</span>
-<span class="va">python_path</span> <span class="op">=</span> <span class="va">null</span>
+<span class="va">python_path</span> <span class="op">=</span> <span class="cn">NULL</span>
 <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">python_path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span>
 <span class="op">}</span>
@@ -183,22 +183,22 @@
 <div id="dataset-explanation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dataset-explanation" class="anchor"></a>Dataset explanation</h2>
-<p><a href="https://pubmed.ncbi.nlm.nih.gov/33032611/">Ma et al.</a> Processed 10X Single Cell RNAseq from two prostate cancer patients. The raw dataset can be found <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE157703">here</a></p>
+<p>This is a tutorial for Harmony integration of different single cell RNAseq datasets using two prostate cancer patient datasets. <a href="https://pubmed.ncbi.nlm.nih.gov/33032611/">Ma et al.</a> Processed 10X Single Cell RNAseq from two prostate cancer patients. The raw dataset can be found <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE157703">here</a></p>
 </div>
 <div id="part-1-create-giotto-object-from-10x-dataset-and-join" class="section level2">
 <h2 class="hasAnchor">
 <a href="#part-1-create-giotto-object-from-10x-dataset-and-join" class="anchor"></a>Part 1: Create Giotto object from 10X dataset and join</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">giotto_P1</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/create%20Giotto%20object.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="fu"><a href="../reference/get10Xmatrix.html">get10Xmatrix</a></span><span class="op">(</span><span class="st">"path/to/P1_result/outs/filtered_feature_bc_matrix"</span>, 
+<code class="sourceCode R"><span class="va">giotto_P1</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="fu"><a href="../reference/get10Xmatrix.html">get10Xmatrix</a></span><span class="op">(</span><span class="st">"path/to/P1_result/outs/filtered_feature_bc_matrix"</span>, 
                                 gene_column_index <span class="op">=</span> <span class="fl">2</span>, remove_zero_rows <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
                                 instructions <span class="op">=</span> <span class="va">instrs</span><span class="op">)</span> 
 
-<span class="va">giotto_P2</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/create%20Giotto%20object.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="fu"><a href="../reference/get10Xmatrix.html">get10Xmatrix</a></span><span class="op">(</span><span class="st">"path/to/P2_result/outs/filtered_feature_bc_matrix"</span>, 
+<span class="va">giotto_P2</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="fu"><a href="../reference/get10Xmatrix.html">get10Xmatrix</a></span><span class="op">(</span><span class="st">"path/to/P2_result/outs/filtered_feature_bc_matrix"</span>, 
                                                           gene_column_index <span class="op">=</span> <span class="fl">2</span>, remove_zero_rows <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
                                 instructions <span class="op">=</span> <span class="va">instrs</span><span class="op">)</span> 
 <span class="va">giotto_SC_join</span> <span class="op">=</span> <span class="fu"><a href="../reference/joinGiottoObjects.html">joinGiottoObjects</a></span><span class="op">(</span>gobject_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">giotto_P1</span>, <span class="va">giotto_P2</span><span class="op">)</span>,
-    gobject_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'P1'</span>, <span class="st">'P2'</span><span class="op">)</span>,
-    join_method <span class="op">=</span> <span class="st">'x_shift'</span>, x_shift <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></code></pre></div>
+                                   gobject_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'P1'</span>, <span class="st">'P2'</span><span class="op">)</span>,
+                                   join_method <span class="op">=</span> <span class="st">"z_stack"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="part-2-process-joined-object" class="section level2">
 <h2 class="hasAnchor">
@@ -217,20 +217,17 @@
 <span class="co">## add gene &amp; cell statistics</span>
 <span class="va">giotto_SC_join</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/addStatistics.html">addStatistics</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC_join</span>, expression_values <span class="op">=</span> <span class="st">'raw'</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="part-3-dimention-reduction" class="section level2">
+<div id="part-3-dimention-reduction-and-clustering" class="section level2">
 <h2 class="hasAnchor">
-<a href="#part-3-dimention-reduction" class="anchor"></a>Part 3: Dimention reduction</h2>
+<a href="#part-3-dimention-reduction-and-clustering" class="anchor"></a>Part 3: Dimention reduction and clustering</h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## PCA ##</span>
 <span class="va">giotto_SC_join</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateHVF.html">calculateHVF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC_join</span><span class="op">)</span>
 <span class="va">giotto_SC_join</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runPCA.html">runPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC_join</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale_unit <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="../reference/screePlot.html">screePlot</a></span><span class="op">(</span><span class="va">giotto_SC_join</span>, ncp <span class="op">=</span> <span class="fl">30</span>, save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'3_scree_plot'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-</div>
-<div id="part-4-cluster" class="section level2">
-<h2 class="hasAnchor">
-<a href="#part-4-cluster" class="anchor"></a>Part 4: Cluster</h2>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## WITHOUT INTEGRATION ##</span>
+<span class="co"># Check screeplot to select number of PCs for clustering</span>
+<span class="co"># screePlot(giotto_SC_join, ncp = 30, save_param = list(save_name = '3_scree_plot'))</span>
+
+<span class="co">## WITHOUT INTEGRATION ##</span>
 <span class="co"># --------------------- #</span>
 
 <span class="co">## cluster and run UMAP ##</span>
@@ -250,14 +247,14 @@
     cell_color <span class="op">=</span> <span class="st">'leiden_clus'</span>, show_NN_network <span class="op">=</span> <span class="cn">T</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>,
     save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"4_cluster_without_integration"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_integration/vignette_sep29_2021/4_cluster_without_integration.png" style="width:50.0%"></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/dimPlot2D.html">dimPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC_join</span>, dim_reduction_name <span class="op">=</span> <span class="st">'umap'</span>, point_shape <span class="op">=</span> <span class="st">'no_border'</span>,
     cell_color <span class="op">=</span> <span class="st">"leiden_clus"</span>, group_by <span class="op">=</span> <span class="st">"list_ID"</span>, show_NN_network <span class="op">=</span> <span class="cn">F</span>, point_size <span class="op">=</span> <span class="fl">0.5</span>, 
     show_center_label <span class="op">=</span> <span class="cn">F</span>, show_legend <span class="op">=</span><span class="cn">F</span>,
     save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"4_list_without_integration"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_integration/vignette_sep29_2021/4_list_without_integration.png" style="width:50.0%"></p>
 <p>Harmony is a integration algorithm developed by <a href="https://www.nature.com/articles/s41592-019-0619-0">Korsunsky, I. et al.</a>. It was designed for integration of single cell data but also work well on spatial datasets.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## WITH INTEGRATION ##</span>
 <span class="co"># --------------------- #</span>
 
@@ -290,7 +287,7 @@
     cell_color <span class="op">=</span> <span class="st">'leiden_harmony'</span>, show_NN_network <span class="op">=</span> <span class="cn">T</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>,
     save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"4_cluster_with_integration"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/singlecell_prostate_integration/vignette_sep29_2021/4_cluster_with_integration.png" style="width:50.0%"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/dimPlot2D.html">dimPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">giotto_SC_join</span>,     dim_reduction_name <span class="op">=</span> <span class="st">'umap_harmony'</span>, point_shape <span class="op">=</span> <span class="st">'no_border'</span>,
     cell_color <span class="op">=</span> <span class="st">"leiden_harmony"</span>, group_by <span class="op">=</span> <span class="st">"list_ID"</span>, show_NN_network <span class="op">=</span> <span class="cn">F</span>, point_size <span class="op">=</span> <span class="fl">0.5</span>, 
     show_center_label <span class="op">=</span> <span class="cn">F</span>, show_legend <span class="op">=</span><span class="cn">F</span> , save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"4_list_with_integration"</span><span class="op">)</span><span class="op">)</span></code></pre></div>

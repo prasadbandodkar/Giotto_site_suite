@@ -37,6 +37,7 @@ output: html_document
 
 [![](../inst/images/icons/datasets/vizgen_brain_summary.png){width=30%}](./vizgen_mouse_brain_210929.html)
 [![](../inst/images/icons/datasets/resolve_bioscience_cancer_summary.png){width=30%}](./Resolve_bc_210928.html)
+[![](../inst/images/icons/datasets/nanostring_overview_icon.png){width=30%}](./nanostring_examples_overview.html)
 
 <br>
 

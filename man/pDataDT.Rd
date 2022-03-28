@@ -4,10 +4,12 @@
 \alias{pDataDT}
 \title{pDataDT}
 \usage{
-pDataDT(gobject, feat_type = NULL)
+pDataDT(gobject, spat_unit = NULL, feat_type = NULL)
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type}
 }

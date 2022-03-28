@@ -6,10 +6,12 @@
 \usage{
 spatPlot2D(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   show_image = F,
   gimage = NULL,
-  image_name = "image",
+  image_name = NULL,
+  largeImage_name = NULL,
   group_by = NULL,
   group_by_subset = NULL,
   spat_loc_name = NULL,
@@ -47,7 +49,7 @@ spatPlot2D(
   other_cell_color = "lightgrey",
   other_point_size = 1,
   other_cells_alpha = 0.1,
-  coord_fix_ratio = NULL,
+  coord_fix_ratio = 1,
   title = NULL,
   show_legend = T,
   legend_text = 10,
@@ -72,6 +74,8 @@ spatPlot2D(
 \arguments{
 \item{gobject}{giotto object}
 
+\item{spat_unit}{spatial unit}
+
 \item{feat_type}{feature type}
 
 \item{show_image}{show a tissue background image}
@@ -79,6 +83,8 @@ spatPlot2D(
 \item{gimage}{a giotto image}
 
 \item{image_name}{name of a giotto image or multiple images with group_by}
+
+\item{largeImage_name}{name of a giottoLargeImage or multiple images with group_by}
 
 \item{group_by}{create multiple plots based on cell annotation column}
 
@@ -154,7 +160,7 @@ spatPlot2D(
 
 \item{other_cells_alpha}{alpha of not selected cells}
 
-\item{coord_fix_ratio}{fix ratio between x and y-axis}
+\item{coord_fix_ratio}{fix ratio between x and y-axis (default = 1)}
 
 \item{title}{title of plot}
 
@@ -202,6 +208,7 @@ Visualize cells according to spatial coordinates
 }
 \details{
 Description of parameters.
+coord_fix_ratio: set to NULL to use default ggplot parameters
 }
 \seealso{
 \code{\link{spatPlot3D}}

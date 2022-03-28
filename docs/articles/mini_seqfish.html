@@ -44,14 +44,14 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Start
      
     <span class="caret"></span>
@@ -72,7 +72,7 @@
   <a href="../reference/index.html">Documentation</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Datasets
      
     <span class="caret"></span>
@@ -99,7 +99,7 @@
   <a href="../articles/giotto_news.html">News</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     FAQ
      
     <span class="caret"></span>
@@ -114,7 +114,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Try Giotto
      
     <span class="caret"></span>
@@ -142,7 +142,7 @@
 
       
 
-      </header><script src="mini_seqfish_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="mini_seqfish_files/header-attrs-2.13/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>mini_seqfish</h1>
@@ -187,7 +187,7 @@
 <code class="sourceCode R"><span class="co"># giotto object </span>
 <span class="va">expr_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"seqfish_field_expr.txt.gz"</span>, package <span class="op">=</span> <span class="st">'Giotto'</span><span class="op">)</span>
 <span class="va">loc_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"seqfish_field_locs.txt"</span>, package <span class="op">=</span> <span class="st">'Giotto'</span><span class="op">)</span>
-<span class="va">seqfish_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create%20Giotto%20object.html">createGiottoObject</a></span><span class="op">(</span>raw_exprs <span class="op">=</span> <span class="va">expr_path</span>,
+<span class="va">seqfish_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>raw_exprs <span class="op">=</span> <span class="va">expr_path</span>,
                                    spatial_locs <span class="op">=</span> <span class="va">loc_path</span>,
                                    instructions <span class="op">=</span> <span class="va">myinstructions</span><span class="op">)</span></code></pre></div>
 <p>How to work with Giotto instructions that are part of your Giotto object:<br>
@@ -312,7 +312,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <span class="fu"><a href="../reference/plotHeatmap.html">plotHeatmap</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>,
             genes <span class="op">=</span> <span class="va">topgenes_heatmap</span><span class="op">$</span><span class="va">feats</span>, 
             gene_order <span class="op">=</span> <span class="st">'custom'</span>,
-            gene_custom_order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">topgenes_heatmap</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>,
+            gene_custom_order <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">topgenes_heatmap</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>,
             cluster_column <span class="op">=</span> <span class="st">'cell_types'</span>,
             legend_nrows <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 </div>
@@ -571,8 +571,8 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <code class="sourceCode R">
 <span class="va">LR_data</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"mouse_ligand_receptors.txt"</span>, package <span class="op">=</span> <span class="st">'Giotto'</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">LR_data</span><span class="op">[</span>, <span class="va">ligand_det</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">mouseLigand</span> <span class="op">%in%</span> <span class="va">seqfish_mini</span><span class="op">@</span><span class="va">feat_ID</span><span class="op">[[</span><span class="st">'rna'</span><span class="op">]</span><span class="op">]</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span><span class="op">]</span>
-<span class="va">LR_data</span><span class="op">[</span>, <span class="va">receptor_det</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">mouseReceptor</span> <span class="op">%in%</span> <span class="va">seqfish_mini</span><span class="op">@</span><span class="va">feat_ID</span><span class="op">[[</span><span class="st">'rna'</span><span class="op">]</span><span class="op">]</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span><span class="op">]</span>
+<span class="va">LR_data</span><span class="op">[</span>, <span class="va">ligand_det</span> <span class="op">:=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span><span class="op">(</span><span class="va">mouseLigand</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">seqfish_mini</span><span class="op">@</span><span class="va">feat_ID</span><span class="op">[[</span><span class="st">'rna'</span><span class="op">]</span><span class="op">]</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span><span class="op">]</span>
+<span class="va">LR_data</span><span class="op">[</span>, <span class="va">receptor_det</span> <span class="op">:=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span><span class="op">(</span><span class="va">mouseReceptor</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">seqfish_mini</span><span class="op">@</span><span class="va">feat_ID</span><span class="op">[[</span><span class="st">'rna'</span><span class="op">]</span><span class="op">]</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span><span class="op">]</span>
 <span class="va">LR_data_det</span> <span class="op">=</span> <span class="va">LR_data</span><span class="op">[</span><span class="va">ligand_det</span> <span class="op">==</span> <span class="cn">T</span> <span class="op">&amp;</span> <span class="va">receptor_det</span> <span class="op">==</span> <span class="cn">T</span><span class="op">]</span>
 <span class="va">select_ligands</span> <span class="op">=</span> <span class="va">LR_data_det</span><span class="op">$</span><span class="va">mouseLigand</span>
 <span class="va">select_receptors</span> <span class="op">=</span> <span class="va">LR_data_det</span><span class="op">$</span><span class="va">mouseReceptor</span>
@@ -604,8 +604,8 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <span class="va">selected_spat</span> <span class="op">=</span> <span class="va">spatial_all_scores</span><span class="op">[</span><span class="va">p.adj</span> <span class="op">&lt;=</span> <span class="fl">0.5</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">log2fc</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.1</span> <span class="op">&amp;</span> <span class="va">lig_nr</span> <span class="op">&gt;=</span> <span class="fl">2</span> <span class="op">&amp;</span> <span class="va">rec_nr</span> <span class="op">&gt;=</span> <span class="fl">2</span><span class="op">]</span>
 <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">setorder</a></span><span class="op">(</span><span class="va">selected_spat</span>, <span class="op">-</span><span class="va">PI</span><span class="op">)</span>
 
-<span class="va">top_LR_ints</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">selected_spat</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">PI</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">$</span><span class="va">LR_comb</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">33</span><span class="op">]</span>
-<span class="va">top_LR_cell_ints</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">selected_spat</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">PI</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">$</span><span class="va">LR_cell_comb</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">33</span><span class="op">]</span>
+<span class="va">top_LR_ints</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">selected_spat</span><span class="op">[</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">PI</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">$</span><span class="va">LR_comb</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">33</span><span class="op">]</span>
+<span class="va">top_LR_cell_ints</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/duplicated.html">unique</a></span><span class="op">(</span><span class="va">selected_spat</span><span class="op">[</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">PI</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">$</span><span class="va">LR_cell_comb</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">33</span><span class="op">]</span>
 
 <span class="fu"><a href="../reference/plotCCcomHeatmap.html">plotCCcomHeatmap</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>,
                  comScores <span class="op">=</span> <span class="va">spatial_all_scores</span>,

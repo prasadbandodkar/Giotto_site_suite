@@ -6,6 +6,7 @@
 \usage{
 binSpectSingle(
   gobject,
+  spat_unit = NULL,
   feat_type = NULL,
   bin_method = c("kmeans", "rank"),
   expression_values = c("normalized", "scaled", "custom"),
@@ -29,13 +30,15 @@ binSpectSingle(
   group_size = "automatic",
   do_parallel = TRUE,
   cores = NA,
-  verbose = T,
+  verbose = TRUE,
   set.seed = NULL,
   bin_matrix = NULL
 )
 }
 \arguments{
 \item{gobject}{giotto object}
+
+\item{spat_unit}{spatial unit}
 
 \item{feat_type}{feature type}
 

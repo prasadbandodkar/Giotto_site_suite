@@ -90,14 +90,14 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Giotto Suite</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.960</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0.991</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Start
      
     <span class="caret"></span>
@@ -118,7 +118,7 @@
   <a href="../reference/index.html">Documentation</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Datasets
      
     <span class="caret"></span>
@@ -145,7 +145,7 @@
   <a href="../articles/giotto_news.html">News</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     FAQ
      
     <span class="caret"></span>
@@ -160,7 +160,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Try Giotto
      
     <span class="caret"></span>
@@ -202,8 +202,9 @@
 
     <pre class="usage"><span class='fu'>subsetGiotto</span><span class='op'>(</span>
   <span class='va'>gobject</span>,
-  cell_ids <span class='op'>=</span> <span class='cn'>NULL</span>,
+  spat_unit <span class='op'>=</span> <span class='cn'>NULL</span>,
   feat_type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  cell_ids <span class='op'>=</span> <span class='cn'>NULL</span>,
   feat_ids <span class='op'>=</span> <span class='cn'>NULL</span>,
   gene_ids <span class='op'>=</span> <span class='cn'>NULL</span>,
   poly_info <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -211,7 +212,7 @@
   x_min <span class='op'>=</span> <span class='cn'>NULL</span>,
   y_max <span class='op'>=</span> <span class='cn'>NULL</span>,
   y_min <span class='op'>=</span> <span class='cn'>NULL</span>,
-  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   toplevel_params <span class='op'>=</span> <span class='fl'>2</span>
 <span class='op'>)</span></pre>
 
@@ -223,12 +224,16 @@
       <td><p>giotto object</p></td>
     </tr>
     <tr>
-      <th>cell_ids</th>
-      <td><p>cell IDs to keep</p></td>
+      <th>spat_unit</th>
+      <td><p>spatial unit</p></td>
     </tr>
     <tr>
       <th>feat_type</th>
       <td><p>feature type to use</p></td>
+    </tr>
+    <tr>
+      <th>cell_ids</th>
+      <td><p>cell IDs to keep</p></td>
     </tr>
     <tr>
       <th>feat_ids</th>
@@ -273,20 +278,21 @@
     <p>giotto object</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span><span class='op'>)</span>
-
-<span class='va'>random_cells</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'>slot</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span>, <span class='st'>'cell_ID'</span><span class='op'>)</span>, <span class='fl'>10</span><span class='op'>)</span>
-<span class='va'>random_genes</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'>slot</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span>, <span class='st'>'gene_ID'</span><span class='op'>)</span>, <span class='fl'>10</span><span class='op'>)</span>
-
-<span class='va'>subset_obj</span> <span class='op'>=</span> <span class='fu'>subsetGiotto</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span>,
-                         cell_ids <span class='op'>=</span> <span class='va'>random_cells</span>,
-                         feat_ids <span class='op'>=</span> <span class='va'>random_genes</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in subsetGiotto(mini_giotto_single_cell, cell_ids = random_cells,     feat_ids = random_genes): no slot of name "expression_feat" for this object of class "giotto"</span></div><div class='input'>
-<span class='co'># }</span>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>random_cells</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'>slot</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span>, <span class='st'>'cell_ID'</span><span class='op'>)</span>, <span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>random_genes</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'>slot</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span>, <span class='st'>'gene_ID'</span><span class='op'>)</span>, <span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>subset_obj</span> <span class='op'>=</span> <span class='fu'>subsetGiotto</span><span class='op'>(</span><span class='va'>mini_giotto_single_cell</span>,</span>
+<span class='r-in'>                         cell_ids <span class='op'>=</span> <span class='va'>random_cells</span>,</span>
+<span class='r-in'>                         feat_ids <span class='op'>=</span> <span class='va'>random_genes</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in set_default_spat_unit(gobject = gobject, spat_unit = spat_unit):</span> no slot of name "expression" for this object of class "giotto"</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># }</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -17,7 +17,7 @@ results_folder = 'path/to/result'
 # set python path to conda env/bin/ directory if manually installed Giotto python dependencies by conda
 # python_path = '/path_to_conda/.conda/envs/giotto/bin/python'
 # set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment
-python_path = null
+python_path = NULL
 if(is.null(python_path)) {
   installGiottoEnvironment()
 }
@@ -31,6 +31,7 @@ instrs = createGiottoInstructions(save_dir = results_folder,
 
 
 ## Dataset explanation
+This is a tutorial for Harmony integration of different single cell RNAseq datasets using two prostate cancer patient datasets.
 [Ma et al.](https://pubmed.ncbi.nlm.nih.gov/33032611/) Processed 10X Single Cell RNAseq from two prostate cancer patients. The raw dataset can be found [here](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE157703) 
 
 
@@ -45,8 +46,8 @@ giotto_P2<-createGiottoObject(expression = get10Xmatrix("path/to/P2_result/outs/
                                                           gene_column_index = 2, remove_zero_rows = TRUE),
                                 instructions = instrs) 
 giotto_SC_join = joinGiottoObjects(gobject_list = list(giotto_P1, giotto_P2),
-    gobject_names = c('P1', 'P2'),
-    join_method = 'x_shift', x_shift = 1000)
+                                   gobject_names = c('P1', 'P2'),
+                                   join_method = "z_stack")
 
 ```
 
@@ -67,16 +68,14 @@ giotto_SC_join <- normalizeGiotto(gobject = giotto_SC_join, scalefactor = 6000)
 giotto_SC_join <- addStatistics(gobject = giotto_SC_join, expression_values = 'raw')
 ```
 
-## Part 3: Dimention reduction
+## Part 3: Dimention reduction and clustering
 ```{r eval=FALSE}
 ## PCA ##
 giotto_SC_join <- calculateHVF(gobject = giotto_SC_join)
 giotto_SC_join <- runPCA(gobject = giotto_SC_join, center = TRUE, scale_unit = TRUE)
-screePlot(giotto_SC_join, ncp = 30, save_param = list(save_name = '3_scree_plot'))
-```
+# Check screeplot to select number of PCs for clustering
+# screePlot(giotto_SC_join, ncp = 30, save_param = list(save_name = '3_scree_plot'))
 
-## Part 4: Cluster
-```{r eval=FALSE}
 ## WITHOUT INTEGRATION ##
 # --------------------- #
 
