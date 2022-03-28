@@ -87,6 +87,7 @@ doHMRF <- function(gobject,
   }
   # folder path specified
   else if(!is.null(output_folder)) {
+    output_folder = path.expand(output_folder)
     if(!file.exists(output_folder)) {
       dir.create(path = output_folder, recursive = T)
     }
@@ -118,7 +119,12 @@ doHMRF <- function(gobject,
                                         feat_type = feat_type,
                                         values = values)
   }
-  expr_values = as.matrix(expr_values)
+
+  if(!'matrix' %in% class(expr_values)) {
+    warning('this matrix will be converted to a dense and memory intensive base matrix ...')
+    expr_values = as.matrix(expr_values)
+  }
+
 
   expression_file = paste0(output_folder,'/', 'expression_matrix.txt')
 
