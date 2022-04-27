@@ -19,7 +19,7 @@ Spatial Deconvolution:
 
 The deconvolution analysis is also a good way to integrate single cell RNAseq data with spatial transcriptomics datasets.   
 In this example, Corresponded Single cell dataset can be generated from [here](http://mousebrain.org/downloads.html).   
-Giotto_SC is processed from the downsampled [Loom](https://satijalab.org/loomr/loomr_tutorial) file and can also be downloaded from getSpatialDataset.   
+Giotto_SC is processed from the downsampled [Loom](https://satijalab.org/loomr/loomr_tutorial) file and can also be downloaded from getSpatialDataset.
 
 ```{r eval = FALSE}
 # download data to results directory ####
@@ -109,9 +109,11 @@ plotMetaDataCellsHeatmap(gobject = visium_brain,
 ```
 ![](../inst/images/mouse_visium_brain/vignette_220328/20-plotMetaDataCellsHeatmap.png){ width=50% } 
 
-PAGE enrichment stats will be stored in the giotto_object@spatial_enrichment$PAGE slot. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.
+PAGE enrichment stats will be stored in the giotto_object@spatial_enrichment slot and can be retrieved by get_spatial_enrichment. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.
 ```{r eval = FALSE}
 # 1.6 visualizations
+# Check PAGE enrichment result
+# get_spatial_enrichment(visium_brain,enrichm_name = "PAGE")
 spatCellPlot2D(gobject = visium_brain,
                spat_enr_names = 'PAGE',
                cell_annotation_values = cell_types_PAGE[1:4],
@@ -141,8 +143,10 @@ visium_brain = runHyperGeometricEnrich(gobject = visium_brain,
                                        sign_matrix = PAGE_matrix_2)
 ```
 
-HyperGeometric enrichment stats will be stored in the giotto_object@spatial_enrichment$hypergeometric slot. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.
+HyperGeometric enrichment stats will be stored in the giotto_object@spatial_enrichment slot and can be retrieved by get_spatial_enrichment. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.
 ```{r eval = FALSE}
+# Check HyperGeometric enrichment result
+# get_spatial_enrichment(visium_brain,enrichm_name = "hypergeometric")
 cell_types_HyperGeometric = colnames(PAGE_matrix_2)
 spatCellPlot(gobject = visium_brain,
              spat_enr_names = 'hypergeometric',
@@ -157,7 +161,7 @@ spatCellPlot(gobject = visium_brain,
 
 ### Rank
 This algorithm calculates gene signature enrichment scores per spatial position using a rank based approach.
-Rank enrichment stats will be stored in the giotto_object@spatial_enrichment$rank slot. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.
+Rank enrichment stats will be stored in the giotto_object@spatial_enrichment slot and can be retrieved by get_spatial_enrichment. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.
 ```{r eval = FALSE}
 # Create rank matrix, not that rank matrix is different from PAGE
 # A count matrix and a vector for all cell labels will be needed
@@ -165,6 +169,9 @@ rank_matrix = makeSignMatrixRank(sc_matrix = get_expression_values(giotto_SC,val
                                  sc_cluster_ids = pDataDT(giotto_SC)$Class)
 colnames(rank_matrix)<-levels(factor(pDataDT(giotto_SC)$Class))
 visium_brain = runRankEnrich(gobject = visium_brain, sign_matrix = rank_matrix,expression_values = "normalized")
+
+# Check Rank enrichment result
+# get_spatial_enrichment(visium_brain,enrichm_name = "rank")
 
 # Plot Rank enrichment result
 spatCellPlot2D(gobject = visium_brain,
@@ -176,7 +183,7 @@ spatCellPlot2D(gobject = visium_brain,
 ![](../inst/images/mouse_visium_brain/vignette_220426/spat_enr_Rank_plot.png){ width=50% } 
 
 ### Deconvolution
-DWLS deconvolution stats will be stored in the giotto_object@spatial_enrichment$DWLS slot. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.
+DWLS deconvolution stats will be also stored in the giotto_object@spatial_enrichment slot and can be retrieved by get_spatial_enrichment. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.
 ```{r eval = FALSE}
 # Create DWLS matrix, not that DWLS matrix is different from PAGE and rank
 # A count matrix a vector for a list of gene signatures and a vector for all cell labels will be needed
@@ -185,6 +192,8 @@ DWLS_matrix<-makeSignMatrixDWLSfromMatrix(matrix = as.matrix(get_expression_valu
                                           sign_gene = top_markers$feats)
 visium_brain = runDWLSDeconv(gobject = visium_brain, sign_matrix = DWLS_matrix)
 
+# Check DWLS deconvolution result
+# get_spatial_enrichment(visium_brain,enrichm_name = "DWLS")
 
 # Plot DWLS deconvolution result
 spatCellPlot2D(gobject = visium_brain,
