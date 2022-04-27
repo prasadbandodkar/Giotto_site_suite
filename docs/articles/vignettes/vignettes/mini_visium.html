@@ -428,21 +428,21 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <p>Visualize top 4 genes per method.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">km_spatialgenes</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/binSpect.html">binSpect</a></span><span class="op">(</span><span class="va">mini_visium</span><span class="op">)</span>
-<span class="fu">spatGenePlot</span><span class="op">(</span><span class="va">mini_visium</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>, 
+<span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/spatGenePlot.html" class="external-link">spatGenePlot</a></span><span class="op">(</span><span class="va">mini_visium</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>, 
              genes <span class="op">=</span> <span class="va">km_spatialgenes</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>,
              point_shape <span class="op">=</span> <span class="st">'border'</span>, point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,
              show_network <span class="op">=</span> <span class="cn">F</span>, network_color <span class="op">=</span> <span class="st">'lightgrey'</span>, point_size <span class="op">=</span> <span class="fl">2.5</span>,
              cow_n_col <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
 <span class="va">rank_spatialgenes</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/binSpect.html">binSpect</a></span><span class="op">(</span><span class="va">mini_visium</span>, bin_method <span class="op">=</span> <span class="st">'rank'</span><span class="op">)</span>
-<span class="fu">spatGenePlot</span><span class="op">(</span><span class="va">mini_visium</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>, 
+<span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/spatGenePlot.html" class="external-link">spatGenePlot</a></span><span class="op">(</span><span class="va">mini_visium</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>, 
              genes <span class="op">=</span> <span class="va">rank_spatialgenes</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>,
              point_shape <span class="op">=</span> <span class="st">'border'</span>, point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,
              show_network <span class="op">=</span> <span class="cn">F</span>, network_color <span class="op">=</span> <span class="st">'lightgrey'</span>, point_size <span class="op">=</span> <span class="fl">2.5</span>,
              cow_n_col <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 
 <span class="va">silh_spatialgenes</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/silhouetteRank.html">silhouetteRank</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">mini_visium</span><span class="op">)</span> <span class="co"># TODO: suppress print output</span>
-<span class="fu">spatGenePlot</span><span class="op">(</span><span class="va">mini_visium</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>, 
+<span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/spatGenePlot.html" class="external-link">spatGenePlot</a></span><span class="op">(</span><span class="va">mini_visium</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>, 
              genes <span class="op">=</span> <span class="va">silh_spatialgenes</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">genes</span>,
              point_shape <span class="op">=</span> <span class="st">'border'</span>, point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,
              show_network <span class="op">=</span> <span class="cn">F</span>, network_color <span class="op">=</span> <span class="st">'lightgrey'</span>, point_size <span class="op">=</span> <span class="fl">2.5</span>,

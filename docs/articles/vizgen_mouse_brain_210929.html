@@ -220,7 +220,7 @@
 <span class="va">spat_dt</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">spat_path</span><span class="op">)</span>
 
 <span class="co"># create giotto object</span>
-<span class="va">vizgen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="fu">Giotto</span><span class="fu">:::</span><span class="fu">t_flex</span><span class="op">(</span><span class="va">expr_matrix</span><span class="op">)</span>,
+<span class="va">vizgen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="fu">Giotto</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/t_flex.html" class="external-link">t_flex</a></span><span class="op">(</span><span class="va">expr_matrix</span><span class="op">)</span>,
                              spatial_locs <span class="op">=</span> <span class="va">spat_dt</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">center_x</span>, <span class="va">center_y</span>, <span class="va">V1</span><span class="op">)</span><span class="op">]</span>,
                              instructions <span class="op">=</span> <span class="va">instrs</span><span class="op">)</span>
 <span class="co"># add metadata of fov and volume</span>
