@@ -9,7 +9,7 @@ output: html_document
 #### Visium datasets
 
 [![](../inst/images/icons/datasets/visium_kidney_image_summary.png){width=30%}](./mouse_visium_kidney_210830.html)
-[![](../inst/images/icons/datasets/visium_brain_image_summary.png){width=30%}](./mouse_visium_brain_220328.html)
+[![](../inst/images/icons/datasets/visium_brain_image_summary.png){width=30%}](./mouse_visium_brain_220426.html)
 [![](../inst/images/icons/datasets/visium_prostate_summary.png){width=30%}](./Visium_prostate_integration_Sep30_21.html)
 
 #### Other technologies

@@ -19,8 +19,27 @@ Spatial Deconvolution:
 
 The deconvolution analysis is also a good way to integrate single cell RNAseq data with spatial transcriptomics datasets.   
 In this example, Corresponded Single cell dataset can be generated from [here](http://mousebrain.org/downloads.html).   
-Giotto_SC is processed from the downsampled [Loom](https://satijalab.org/loomr/loomr_tutorial) file.   
+Giotto_SC is processed from the downsampled [Loom](https://satijalab.org/loomr/loomr_tutorial) file and can also be downloaded from getSpatialDataset.   
 
+```{r eval = FALSE}
+# download data to results directory ####
+# if wget is installed, set method = 'wget'
+# if you run into authentication issues with wget, then add " extra = '--no-check-certificate' "
+getSpatialDataset(dataset = 'Mouse_brain_scRNAseq', directory = results_folder)
+
+sc_expression = paste0(results_folder, "/brain_sc_expression_matrix.txt.gz")
+sc_metadata = paste0(results_folder,"/brain_sc_metadata.csv")
+
+giotto_SC <- createGiottoObject(
+  expression = sc_expression,
+  instructions = instrs
+)
+
+giotto_SC <- addCellMetadata(giotto_SC, 
+                             new_metadata = data.table::fread(sc_metadata))
+
+giotto_SC<- normalizeGiotto(giotto_SC)
+```
 
 ###  PAGE enrichment 
 ```{r eval = FALSE}
@@ -42,11 +61,11 @@ di_mesench_markers = c("Cartpt", "Scn1a", "Lypd6b",  "Drd5",
                        "Ctxn2", "Wnt4")
 
 PAGE_matrix_1 = makeSignMatrixPAGE(sign_names = c('Granule_neurons',
-                                                     'Oligo_dendrocytes',
-                                                     'di_mesenchephalon'),
-                                      sign_list = list(gran_markers,
-                                                       oligo_markers,
-                                                       di_mesench_markers))
+                                                  'Oligo_dendrocytes',
+                                                  'di_mesenchephalon'),
+                                   sign_list = list(gran_markers,
+                                                    oligo_markers,
+                                                    di_mesench_markers))
 
 
 
@@ -63,22 +82,21 @@ rownames(PAGE_matrix_2) = brain_sc_markers$Event
 
 # 1.3 make PAGE matrix from single cell dataset
 markers_scran = findMarkers_one_vs_all(gobject=giotto_SC, method="scran",
-                                       expression_values="normalized", cluster_column='prostate_labels', min_feats=3)
+                                       expression_values="normalized", cluster_column = "Class", min_feats=3)
 top_markers <- markers_scran[, head(.SD, 10), by="cluster"]
 celltypes<-levels(factor(markers_scran$cluster)) 
 sign_list<-list()
 for (i in 1:length(celltypes)){
-    sign_list[[i]]<-top_markers[which(top_markers$cluster == celltypes[i]),]$gene
+  sign_list[[i]]<-top_markers[which(top_markers$cluster == celltypes[i]),]$feats
 }
 
 PAGE_matrix_3 = makeSignMatrixPAGE(sign_names = celltypes,
-                                      sign_list = sign_list)
+                                   sign_list = sign_list)
 
 # 1.4 enrichment test with PAGE
 
 # runSpatialEnrich() can also be used as a wrapper for all currently provided enrichment options
 visium_brain = runPAGEEnrich(gobject = visium_brain, sign_matrix = PAGE_matrix_2)
-
 
 # 1.5 heatmap of enrichment versus annotation (e.g. clustering result)
 cell_types_PAGE = colnames(PAGE_matrix_2)
@@ -86,56 +104,54 @@ plotMetaDataCellsHeatmap(gobject = visium_brain,
                          metadata_cols = 'leiden_clus',
                          value_cols = cell_types_PAGE,
                          spat_enr_names = 'PAGE',
-                         x_text_size = 8, 
-                         y_text_size = 8,
-                         save_param = list(save_name="7_a_metaheatmap"))
+                         x_text_size = 8,
+                         y_text_size = 8)
 ```
-![](../inst/images/mouse_visium_brain/vignette_sep29_2021/7_a_metaheatmap.png){ width=50% } 
+![](../inst/images/mouse_visium_brain/vignette_220328/20-plotMetaDataCellsHeatmap.png){ width=50% } 
 
 PAGE enrichment stats will be stored in the giotto_object@spatial_enrichment$PAGE slot. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.
 ```{r eval = FALSE}
 # 1.6 visualizations
-spatCellPlot2D(gobject = visium_brain, 
-             spat_enr_names = 'PAGE',
-             cell_annotation_values = cell_types_PAGE[1:4],
-             cow_n_col = 2,coord_fix_ratio = NULL, point_size = 0.75, show_legend = F,
-             save_param = list(save_name="7_b_spatcellplot_1"))
+spatCellPlot2D(gobject = visium_brain,
+               spat_enr_names = 'PAGE',
+               cell_annotation_values = cell_types_PAGE[1:4],
+               cow_n_col = 2,coord_fix_ratio = 1, point_size = 1.25, show_legend = T,
+               save_param = list(save_name="spat_enr_PAGE_spatcellplot"))
 ```
-![](../inst/images/mouse_visium_brain/vignette_sep29_2021/7_b_spatcellplot_1.png){ width=50% }  
+![](../inst/images/mouse_visium_brain/vignette_220328/21-spatCellPlot2D.png){ width=50% } 
 
 
 ```{r eval = FALSE}
-spatDimCellPlot2D(gobject = visium_brain, 
-                spat_enr_names = 'PAGE',
-                cell_annotation_values = cell_types_PAGE[1:4],
-                cow_n_col = 1, spat_point_size = 1, 
-                plot_alignment = 'horizontal', 
-                save_param = list(save_name="7_d_spatDimCellPlot", base_width=7, base_height=10))
+spatDimCellPlot2D(gobject = visium_brain,
+                  spat_enr_names = 'PAGE',
+                  cell_annotation_values = cell_types_PAGE[1:4],
+                  cow_n_col = 1, spat_point_size = 1,
+                  plot_alignment = 'horizontal',
+                  save_param = list(base_width=7, base_height=10, save_name="spat_enr_PAGE_spatdimplot"))
 ```
-![](../inst/images/mouse_visium_brain/vignette_sep29_2021/7_d_spatDimCellPlot.png){ width=50% } 
+![](../inst/images/mouse_visium_brain/vignette_220328/22-spatDimCellPlot2D.png){ width=50% } 
 
 
 
 ###  HyperGeometric test
 ```{r eval = FALSE}
 #Modify the sparse matrix in normalized slot
-visium_brain@expression$rna$normalized <- as.matrix(visium_brain@expression$rna$normalized)
 visium_brain = runHyperGeometricEnrich(gobject = visium_brain,
-                                    expression_values = "normalized",
-                                    sign_matrix = PAGE_matrix_3)
-cell_types_HyperGeometric = colnames(PAGE_matrix_3)
+                                       expression_values = "normalized",
+                                       sign_matrix = PAGE_matrix_2)
 ```
 
 HyperGeometric enrichment stats will be stored in the giotto_object@spatial_enrichment$hypergeometric slot. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.
 ```{r eval = FALSE}
-spatCellPlot(gobject = visium_brain, 
+cell_types_HyperGeometric = colnames(PAGE_matrix_2)
+spatCellPlot(gobject = visium_brain,
              spat_enr_names = 'hypergeometric',
              cell_annotation_values = cell_types_HyperGeometric[1:4],
-             cow_n_col = 2,coord_fix_ratio = NULL, point_size = 1.75,
-             save_param = list(save_name = "7.2b_HyperGeometric_plot"))
+             cow_n_col = 2,coord_fix_ratio = 1, point_size = 1.75,
+             save_param = list(save_name="spat_enr_HyperGeometric_spatplot"))
 
 ```
-![](../inst/images/mouse_visium_brain/vignette_sep29_2021/7.2b_HyperGeometric_plot.png){ width=50% } 
+![](../inst/images/mouse_visium_brain/vignette_220328/23-spatCellPlot2D.png){ width=50% } 
 
 
 
@@ -143,30 +159,38 @@ spatCellPlot(gobject = visium_brain,
 This algorithm calculates gene signature enrichment scores per spatial position using a rank based approach.
 Rank enrichment stats will be stored in the giotto_object@spatial_enrichment$rank slot. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.
 ```{r eval = FALSE}
-rank_matrix = makeSignMatrixRank(sc_matrix = as.matrix(giotto_SC@expression$rna$normalized),
+# Create rank matrix, not that rank matrix is different from PAGE
+# A count matrix and a vector for all cell labels will be needed
+rank_matrix = makeSignMatrixRank(sc_matrix = get_expression_values(giotto_SC,values = "normalized"),
                                  sc_cluster_ids = pDataDT(giotto_SC)$Class)
 colnames(rank_matrix)<-levels(factor(pDataDT(giotto_SC)$Class))
-
 visium_brain = runRankEnrich(gobject = visium_brain, sign_matrix = rank_matrix,expression_values = "normalized")
-spatCellPlot2D(gobject = visium_brain, 
-             spat_enr_names = 'rank',
-             cell_annotation_values = colnames(rank_matrix)[1:4],
-             cow_n_col = 2,coord_fix_ratio = NULL, point_size = 1,
-             save_param = list(save_name = "7.3a_Rank_plot"))
+
+# Plot Rank enrichment result
+spatCellPlot2D(gobject = visium_brain,
+               spat_enr_names = 'rank',
+               cell_annotation_values = colnames(rank_matrix)[1:4],
+               cow_n_col = 2,coord_fix_ratio = 1, point_size = 1,
+               save_param = list(save_name = "spat_enr_Rank_plot"))
 ```
-![](../inst/images/mouse_visium_brain/vignette_sep29_2021/7.3a_Rank_plot.png){ width=50% } 
+![](../inst/images/mouse_visium_brain/vignette_220426/spat_enr_Rank_plot.png){ width=50% } 
 
 ### Deconvolution
 DWLS deconvolution stats will be stored in the giotto_object@spatial_enrichment$DWLS slot. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.
 ```{r eval = FALSE}
-DWLS_matrix<-makeSignMatrixDWLSfromMatrix(matrix = as.matrix(giotto_SC@expression$rna$normalized), 
-                                cell_type = pDataDT(giotto_SC)$brain_label,
-                                sign_gene = top_markers$gene)
+# Create DWLS matrix, not that DWLS matrix is different from PAGE and rank
+# A count matrix a vector for a list of gene signatures and a vector for all cell labels will be needed
+DWLS_matrix<-makeSignMatrixDWLSfromMatrix(matrix = as.matrix(get_expression_values(giotto_SC,values = "normalized")),
+                                          cell_type = pDataDT(giotto_SC)$Class,
+                                          sign_gene = top_markers$feats)
 visium_brain = runDWLSDeconv(gobject = visium_brain, sign_matrix = DWLS_matrix)
-spatCellPlot2D(gobject = visium_brain, 
-             spat_enr_names = 'DWLS',
-             cell_annotation_values = colnames(DWLS_matrix)[1:4],
-             cow_n_col = 2,coord_fix_ratio = NULL, point_size = 1,
-             save_param = list(save_name = "7.4_DWLS_plot"))
+
+
+# Plot DWLS deconvolution result
+spatCellPlot2D(gobject = visium_brain,
+               spat_enr_names = 'DWLS',
+               cell_annotation_values = levels(factor(pDataDT(giotto_SC)$Class))[1:4],
+               cow_n_col = 2,coord_fix_ratio = 1, point_size = 1,
+               save_param = list(save_name = "DWLS_plot"))
 ```
-![](../inst/images/mouse_visium_brain/vignette_sep29_2021/7.4_DWLS_plot.png){ width=50% } 
+![](../inst/images/mouse_visium_brain/vignette_220426/DWLS_plot.png){ width=50% } 
