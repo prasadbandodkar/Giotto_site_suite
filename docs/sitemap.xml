@@ -85,6 +85,12 @@
     <loc>/articles/mouse_codex_spleen_Sep29_21.html</loc>
   </url>
   <url>
+    <loc>/articles/mouse_visium_brain_220328.html</loc>
+  </url>
+  <url>
+    <loc>/articles/mouse_visium_brain_220426.html</loc>
+  </url>
+  <url>
     <loc>/articles/mouse_visium_brain_Sep30_21.html</loc>
   </url>
   <url>
@@ -346,6 +352,9 @@
     <loc>/reference/addSpatialCentroidLocations.html</loc>
   </url>
   <url>
+    <loc>/reference/addSpatialCentroidLocationsLayer.html</loc>
+  </url>
+  <url>
     <loc>/reference/addStatistics.html</loc>
   </url>
   <url>
@@ -532,6 +541,9 @@
     <loc>/reference/createGiottoLargeImage.html</loc>
   </url>
   <url>
+    <loc>/reference/createGiottoLargeImageList.html</loc>
+  </url>
+  <url>
     <loc>/reference/createGiottoObject.html</loc>
   </url>
   <url>
@@ -701,6 +713,9 @@
   </url>
   <url>
     <loc>/reference/dimPlot_3D_plotly.html</loc>
+  </url>
+  <url>
+    <loc>/reference/doCellSegmentation.html</loc>
   </url>
   <url>
     <loc>/reference/doHMRF.html</loc>
@@ -1006,6 +1021,60 @@
     <loc>/reference/libNorm_giotto.html</loc>
   </url>
   <url>
+    <loc>/reference/list_dim_reductions.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_dim_reductions_names.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_expression.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_expression_names.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_feature_info.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_feature_info_names.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_giotto_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_image_names.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_spatial_enrichments.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_spatial_enrichments_names.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_spatial_grids.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_spatial_grids_names.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_spatial_info.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_spatial_info_names.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_spatial_locations.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_spatial_locations_names.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_spatial_networks.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_spatial_networks_names.html</loc>
+  </url>
+  <url>
     <loc>/reference/loadHMRF.html</loc>
   </url>
   <url>
@@ -1072,6 +1141,9 @@
     <loc>/reference/overlapToMatrix.html</loc>
   </url>
   <url>
+    <loc>/reference/overlapToMatrixMultiPoly.html</loc>
+  </url>
+  <url>
     <loc>/reference/pDataDT.html</loc>
   </url>
   <url>
@@ -1124,6 +1196,9 @@
   </url>
   <url>
     <loc>/reference/plotInteractionChangedGenes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plotInteractivePolygons.html</loc>
   </url>
   <url>
     <loc>/reference/plotMetaDataCellsHeatmap.html</loc>
@@ -1244,6 +1319,9 @@
   </url>
   <url>
     <loc>/reference/read_expression_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/reconnectGiottoImage.html</loc>
   </url>
   <url>
     <loc>/reference/reg_img_minmax_finder.html</loc>
@@ -1385,6 +1463,9 @@
   </url>
   <url>
     <loc>/reference/set_spatial_locations.html</loc>
+  </url>
+  <url>
+    <loc>/reference/seuratToGiotto.html</loc>
   </url>
   <url>
     <loc>/reference/show-methods.html</loc>
@@ -1601,6 +1682,9 @@
   </url>
   <url>
     <loc>/reference/subsetGiottoLocs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/subsetGiottoLocsMulti.html</loc>
   </url>
   <url>
     <loc>/reference/trakem2_rigid_transf_extract.html</loc>
