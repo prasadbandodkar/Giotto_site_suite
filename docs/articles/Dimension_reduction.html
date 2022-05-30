@@ -157,8 +157,12 @@
 
     
     
-<p>This tutorial will take you through the dimension reduction and clustering capabilities of Giotto. The starting point is a Giotto object that has already gone through data processing- more details on that process can be found in the data processing tutorial.</p>
-<p>This tutorial uses a SeqFISH+ dataset of a murine cortex and subventrical zone. A complete walkthough of that dataset can be found <a href="./SeqFISH_cortex_210923.html"><strong>here</strong></a>.</p>
+<p>This tutorial will take you through the dimension reduction and
+clustering capabilities of Giotto. The starting point is a Giotto object
+that has already gone through data processing- more details on that
+process can be found in the data processing tutorial.</p>
+<p>This tutorial uses a SeqFISH+ dataset of a murine cortex and
+subventrical zone. A complete walkthough of that dataset can be found <a href="./SeqFISH_cortex_210923.html"><strong>here</strong></a>.</p>
 <div class="section level2">
 <h2 id="creating-and-processing-a-giotto-object">Creating and Processing a Giotto Object<a class="anchor" aria-label="anchor" href="#creating-and-processing-a-giotto-object"></a>
 </h2>
@@ -237,7 +241,10 @@
 <div class="section level3">
 <h3 id="dimension-reduction-and-pca">1. Dimension Reduction and PCA<a class="anchor" aria-label="anchor" href="#dimension-reduction-and-pca"></a>
 </h3>
-<p>You can compute highly variable genes based on high coefficient of variance within groups, loess regression predictions, or variance of pearson residuals for each gene, based on which <strong>method</strong> is selected.</p>
+<p>You can compute highly variable genes based on high coefficient of
+variance within groups, loess regression predictions, or variance of
+pearson residuals for each gene, based on which <strong>method</strong>
+is selected.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#calculate HVF using the loess regression prediction model</span>
 <span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateHVF.html">calculateHVF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, method <span class="op">=</span> <span class="st">'cov_groups'</span><span class="op">)</span></code></pre></div>
@@ -250,7 +257,8 @@
 <code class="sourceCode R"><span class="co">#calculate HVF using the loess regression prediction model</span>
 <span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateHVF.html">calculateHVF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, method <span class="op">=</span> <span class="st">'var_p_resid'</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/1-HVFplot.png" style="width:50.0%"></p>
-<p>You can then run a PCA based on the highly variable genes. After the PCA you can run a TSNE, a UMAP, or both.</p>
+<p>You can then run a PCA based on the highly variable genes. After the
+PCA you can run a TSNE, a UMAP, or both.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## select genes based on HVG and gene statistics, both found in gene metadata</span>
 <span class="va">gene_metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/fDataDT.html">fDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span>
@@ -281,11 +289,14 @@
 <div class="section level3">
 <h3 id="clustering">2. Clustering<a class="anchor" aria-label="anchor" href="#clustering"></a>
 </h3>
-<p>Clustering your cells into distinct groups based on feature expression. The input is a Giotto object that has undergone either TSNE or UMAP dimension reduction.</p>
+<p>Clustering your cells into distinct groups based on feature
+expression. The input is a Giotto object that has undergone either TSNE
+or UMAP dimension reduction.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## create a shared nearest neighbor network (sNN), where k is the number of k niehgbors to use</span>
 <span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createNearestNetwork.html">createNearestNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">15</span>, k <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></code></pre></div>
-<p>Cells can be clustered in Giotto using k-means, Leiden, or Louvain clustering</p>
+<p>Cells can be clustered in Giotto using k-means, Leiden, or Louvain
+clustering</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## k-means clustering</span>
 <span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doKmeans.html">doKmeans</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, dim_reduction_to_use <span class="op">=</span> <span class="st">'pca'</span><span class="op">)</span>
@@ -300,7 +311,8 @@
 <span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>,
          cell_color <span class="op">=</span> <span class="st">'leiden_clus'</span>, show_NN_network <span class="op">=</span> <span class="cn">T</span>, point_size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/SeqFish_mouse_cortex/6-UMAP.png" style="width:50.0%"></p>
-<p>Clusters of interest can be further sub-clustered, choose your clusters with <strong>selected_clusters</strong></p>
+<p>Clusters of interest can be further sub-clustered, choose your
+clusters with <strong>selected_clusters</strong></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Leiden subclustering for specified clusters</span>
 <span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/doLeidenSubCluster.html">doLeidenSubCluster</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>,
@@ -335,7 +347,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

@@ -147,7 +147,8 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Integration between Multiple spatial datasets and single cell sequencing data</h1>
+      <h1 data-toc-skip>Integration between Multiple spatial datasets
+and single cell sequencing data</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/HEAD/vignettes/vignettes/vignettes/Visium_prostate_integration_Sep30_21.Rmd" class="external-link"><code>vignettes/vignettes/vignettes/Visium_prostate_integration_Sep30_21.Rmd</code></a></small>
@@ -185,8 +186,11 @@
 <div class="section level2">
 <h2 id="dataset-explanation">Dataset explanation<a class="anchor" aria-label="anchor" href="#dataset-explanation"></a>
 </h2>
-<p><a href="https://www.10xgenomics.com/spatial-transcriptomics/" class="external-link">10X genomics</a> recently launched a new platform to obtain spatial expression data using a Visium Spatial Gene Expression slide.</p>
-<p>The Visium Cancer Prostate data to run this tutorial can be found <a href="https://www.10xgenomics.com/resources/datasets/human-prostate-cancer-adenocarcinoma-with-invasive-carcinoma-ffpe-1-standard-1-3-0" class="external-link">here</a> The Visium Normal Prostate data to run this tutorial can be found <a href="https://www.10xgenomics.com/resources/datasets/normal-human-prostate-ffpe-1-standard-1-3-0" class="external-link">here</a></p>
+<p><a href="https://www.10xgenomics.com/spatial-transcriptomics/" class="external-link">10X
+genomics</a> recently launched a new platform to obtain spatial
+expression data using a Visium Spatial Gene Expression slide.</p>
+<p>The Visium Cancer Prostate data to run this tutorial can be found <a href="https://www.10xgenomics.com/resources/datasets/human-prostate-cancer-adenocarcinoma-with-invasive-carcinoma-ffpe-1-standard-1-3-0" class="external-link">here</a>
+The Visium Normal Prostate data to run this tutorial can be found <a href="https://www.10xgenomics.com/resources/datasets/normal-human-prostate-ffpe-1-standard-1-3-0" class="external-link">here</a></p>
 <p>Visium technology:<br><img src="../inst/images/general_figs/visium_technology.png" style="width:50.0%"></p>
 <p>High resolution png from original tissue:<br><img src="../inst/images/general_figs/Visium_FFPE_Human_Normal_Prostate_image.png" style="width:50.0%"><img src="../inst/images/general_figs/Visium_FFPE_Human_Prostate_Cancer_image.png" style="width:50.0%"></p>
 </div>
@@ -339,7 +343,9 @@
 <div class="section level3">
 <h3 id="with-harmony-integration">4.2 With Harmony integration<a class="anchor" aria-label="anchor" href="#with-harmony-integration"></a>
 </h3>
-<p>Harmony is a integration algorithm developed by <a href="https://www.nature.com/articles/s41592-019-0619-0" class="external-link">Korsunsky, I. et al.</a>. It was designed for integration of single cell data but also work well on spatial datasets.</p>
+<p>Harmony is a integration algorithm developed by <a href="https://www.nature.com/articles/s41592-019-0619-0" class="external-link">Korsunsky, I.
+et al.</a>. It was designed for integration of single cell data but also
+work well on spatial datasets.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## WITH INTEGRATION ##</span>
 <span class="co"># --------------------- #</span>
@@ -399,10 +405,18 @@
 <div class="section level2">
 <h2 id="part-5-cell-type-annotation">Part 5: Cell type annotation<a class="anchor" aria-label="anchor" href="#part-5-cell-type-annotation"></a>
 </h2>
-<p>Visium spatial transcriptomics does not provide single-cell resolution, making cell type annotation a harder problem. Giotto provides several ways to calculate enrichment of specific cell-type signature gene list:<br>
+<p>Visium spatial transcriptomics does not provide single-cell
+resolution, making cell type annotation a harder problem. Giotto
+provides several ways to calculate enrichment of specific cell-type
+signature gene list:<br>
 - PAGE<br>
-- hypergeometric test - Rank - <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02362-7" class="external-link">DWLS Deconvolution</a></p>
-<p>This is also the easiest way to integrate Visium datasets with single cell data. Example shown here is from <a href="https://pubmed.ncbi.nlm.nih.gov/33032611/" class="external-link">Ma et al.</a> from two prostate cancer patients. The raw dataset can be found <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE157703" class="external-link">here</a> Giotto_SC is processed variable in the <a href="https://giottosuite.com/articles/singlecell_prostate_standard_Sep29_21.html" class="external-link">single cell RNAseq tutorial</a></p>
+- hypergeometric test - Rank - <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02362-7" class="external-link">DWLS
+Deconvolution</a></p>
+<p>This is also the easiest way to integrate Visium datasets with single
+cell data. Example shown here is from <a href="https://pubmed.ncbi.nlm.nih.gov/33032611/" class="external-link">Ma et al.</a> from two
+prostate cancer patients. The raw dataset can be found <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE157703" class="external-link">here</a>
+Giotto_SC is processed variable in the <a href="https://giottosuite.com/articles/singlecell_prostate_standard_Sep29_21.html" class="external-link">single
+cell RNAseq tutorial</a></p>
 <div class="section level3">
 <h3 id="page-enrichment">5.1 PAGE enrichment<a class="anchor" aria-label="anchor" href="#page-enrichment"></a>
 </h3>
@@ -505,7 +519,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

@@ -163,7 +163,9 @@
 <div class="section level3">
 <h3 id="some-useful-commands">Some useful commands<a class="anchor" aria-label="anchor" href="#some-useful-commands"></a>
 </h3>
-<p>It is helpful if you provide any relevant information about the software and Giotto object you are using. See below for some tips to get this information.</p>
+<p>It is helpful if you provide any relevant information about the
+software and Giotto object you are using. See below for some tips to get
+this information.</p>
 <p><em><strong>What version of R are you using?</strong></em></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">R.version.string</span></code></pre></div>
@@ -172,13 +174,15 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"Giotto"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">2.0.0.9044</span></span></code></pre></div>
-<p><em><strong>Are you using the Giotto environment or your own python path?</strong></em></p>
+<p><em><strong>Are you using the Giotto environment or your own python
+path?</strong></em></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Check Giotto environment</span>
 <span class="fu">Giotto</span><span class="fu">:::</span><span class="fu"><a href="../../../reference/checkGiottoEnvironment.html">checkGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">giotto</span> environment found at </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">/Users/natalie_dr/Library/r-miniconda/envs/giotto_env/bin/pythonw</span> </span></code></pre></div>
-<p><em><strong>Show sequential processing steps/commands in the Giotto object</strong></em></p>
+<p><em><strong>Show sequential processing steps/commands in the Giotto
+object</strong></em></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">Giotto</span><span class="fu">:::</span><span class="fu"><a href="../../../reference/showProcessingSteps.html">showProcessingSteps</a></span><span class="op">(</span><span class="va">my_giotto_object</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Processing</span> steps: </span>
@@ -243,7 +247,8 @@
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Warning</span> message:</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">In</span> createGiottoObject<span class="er">(</span><span class="ex">raw_exprs</span> = <span class="st">"/Users/username/path/to/data"</span>,  :</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">raw_exprs</span> argument is deprecated, use expression argument in the future </span></code></pre></div>
-<p><em>Solution</em>: The code has still run and your object has been created, but in the future use the following command:</p>
+<p><em>Solution</em>: The code has still run and your object has been
+created, but in the future use the following command:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_giotto_object</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="st">"path/to/expression/data"</span>,
                                        spatial_locs <span class="op">=</span> <span class="st">"path/to/spatial/data"</span><span class="op">)</span></code></pre></div>
@@ -256,7 +261,9 @@
 <h5 id="is-this-an-error-from-giotto">Is this an error from Giotto?<a class="anchor" aria-label="anchor" href="#is-this-an-error-from-giotto"></a>
 </h5>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Error</span> in adjustGiottoMatrix<span class="er">(</span><span class="ex">gobject</span> = my_giotto_object, expression_values = c<span class="er">(</span><span class="st">"normalized"</span><span class="kw">)</span><span class="bu">:</span> covariate column name<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="ex">were</span> not found in the cell metadata </span></code></pre></div>
-<p><em>Solution</em>: In this case, you would need to check your cell metadata (<code>my_giotto_object@cell_metadata</code>) and make appropriate adjustments.</p>
+<p><em>Solution</em>: In this case, you would need to check your cell
+metadata (<code>my_giotto_object@cell_metadata</code>) and make
+appropriate adjustments.</p>
 </div>
 <div class="section level5">
 <h5 id="is-this-an-error-from-an-external-package">Is this an error from an external package?<a class="anchor" aria-label="anchor" href="#is-this-an-error-from-an-external-package"></a>
@@ -269,7 +276,8 @@
 <p><em><strong>Some steps before posting an issue</strong></em>:</p>
 <ul>
 <li><p>Google (or whichever search engine you prefer) the error</p></li>
-<li><p>Look up the documentation for the package the error came from</p></li>
+<li><p>Look up the documentation for the package the error came
+from</p></li>
 </ul>
 </div>
 </div>
@@ -277,12 +285,15 @@
 <h3 id="required-information-to-provide">Required information to provide:<a class="anchor" aria-label="anchor" href="#required-information-to-provide"></a>
 </h3>
 <ul>
-<li><p>What code/data did you use? (copy-pasted or an example is helpful)</p></li>
+<li><p>What code/data did you use? (copy-pasted or an example is
+helpful)</p></li>
 <li><p>What did you expect your result to be?</p></li>
 <li>
 <p>What was your result?</p>
 <ul>
-<li>If your result was an error message, please see the category on error messages to determine whether the source was Giotto or an external package.</li>
+<li>If your result was an error message, please see the category on
+error messages to determine whether the source was Giotto or an external
+package.</li>
 </ul>
 </li>
 </ul>
@@ -290,9 +301,14 @@
 <div class="section level3">
 <h3 id="how-to-create-a-reproducible-example">How to create a reproducible example<a class="anchor" aria-label="anchor" href="#how-to-create-a-reproducible-example"></a>
 </h3>
-<p>For us to be able to help you at the best of our ability, it’s helpful if you can provide a reproducible example. This just means that anyone who reads your GitHub issue should be able to accurately reproduce your error.</p>
-<p>For more information on minimal reproducible examples check out <a href="https://stackoverflow.com/help/minimal-reproducible-example" class="external-link">this link</a>.</p>
-<p>And to see what other people recommend, please check out <a href="https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example" class="external-link">this forum</a>.</p>
+<p>For us to be able to help you at the best of our ability, it’s
+helpful if you can provide a reproducible example. This just means that
+anyone who reads your GitHub issue should be able to accurately
+reproduce your error.</p>
+<p>For more information on minimal reproducible examples check out <a href="https://stackoverflow.com/help/minimal-reproducible-example" class="external-link">this
+link</a>.</p>
+<p>And to see what other people recommend, please check out <a href="https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example" class="external-link">this
+forum</a>.</p>
 </div>
 <div class="section level3">
 <h3 id="good-example-of-a-github-issue">Good example of a GitHub issue:<a class="anchor" aria-label="anchor" href="#good-example-of-a-github-issue"></a>
@@ -301,7 +317,8 @@
 <li>Provide a code example
 <ul>
 <li>
-<p>Please use the GitHub “insert code” function or wrap your code like so:</p>
+<p>Please use the GitHub “insert code” function or wrap your code
+like so:</p>
 <p>`x &lt;- “hello world”</p>
 <p>print(x)`</p>
 </li>
@@ -310,7 +327,8 @@
 </li>
 </ul>
 <blockquote>
-<p>I am having trouble adjusting my Giotto matix. I have inputted the following code:</p>
+<p>I am having trouble adjusting my Giotto matix. I have inputted the
+following code:</p>
 </blockquote>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_giotto_object</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/adjustGiottoMatrix.html">adjustGiottoMatrix</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">my_giotto_object</span>, 
@@ -318,18 +336,22 @@
                                        covariate_columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'nr_genes'</span>,
                                                              <span class="st">'total_expr'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <blockquote>
-<p>I expected that my matrix would be appropriately adjusted, but I got the following error:</p>
+<p>I expected that my matrix would be appropriately adjusted, but I got
+the following error:</p>
 </blockquote>
 <div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Error</span> in adjustGiottoMatrix<span class="er">(</span><span class="ex">gobject</span> = my_giotto_object, expression_values = c<span class="er">(</span><span class="st">"normalized"</span><span class="kw">)</span><span class="bu">:</span> covariate column name<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="ex">were</span> not found in the cell metadata </span></code></pre></div>
 <blockquote>
-<p>For more context, I am running R version 4.04 and Giotto version 2.0.0.9044. I can send you the data I used if necessary.</p>
+<p>For more context, I am running R version 4.04 and Giotto version
+2.0.0.9044. I can send you the data I used if necessary.</p>
 </blockquote>
 </div>
 <div class="section level3">
 <h3 id="bad-example-of-a-github-issue">Bad example of a GitHub issue:<a class="anchor" aria-label="anchor" href="#bad-example-of-a-github-issue"></a>
 </h3>
 <blockquote>
-<p>I am having trouble adjusting my Giotto matrix. My error says that the covariate column name(s) were not found in the cell meta data. What do I do?</p>
+<p>I am having trouble adjusting my Giotto matrix. My error says that
+the covariate column name(s) were not found in the cell meta data. What
+do I do?</p>
 </blockquote>
 </div>
 </div>
@@ -352,7 +374,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

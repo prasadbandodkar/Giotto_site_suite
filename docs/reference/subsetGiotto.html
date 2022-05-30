@@ -179,14 +179,17 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mini_giotto_single_cell</span><span class="op">)</span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>data set ‘mini_giotto_single_cell’ not found</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">random_cells</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu">slot</span><span class="op">(</span><span class="va">mini_giotto_single_cell</span>, <span class="st">'cell_ID'</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in slot(mini_giotto_single_cell, "cell_ID"):</span> object 'mini_giotto_single_cell' not found</span>
 <span class="r-in"><span class="va">random_genes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu">slot</span><span class="op">(</span><span class="va">mini_giotto_single_cell</span>, <span class="st">'gene_ID'</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in slot(mini_giotto_single_cell, "gene_ID"):</span> object 'mini_giotto_single_cell' not found</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">subset_obj</span> <span class="op">=</span> <span class="fu">subsetGiotto</span><span class="op">(</span><span class="va">mini_giotto_single_cell</span>,</span>
 <span class="r-in">                         cell_ids <span class="op">=</span> <span class="va">random_cells</span>,</span>
 <span class="r-in">                         feat_ids <span class="op">=</span> <span class="va">random_genes</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in set_default_spat_unit(gobject = gobject, spat_unit = spat_unit):</span> no slot of name "expression" for this object of class "giotto"</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in set_default_spat_unit(gobject = gobject, spat_unit = spat_unit):</span> object 'mini_giotto_single_cell' not found</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># }</span></span>
 <span class="r-in"></span>
@@ -204,7 +207,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>

@@ -157,18 +157,26 @@
 
     
     
-<p>Technologies like Visium spatial transcriptomics does not provide single-cell resolution, making cell type annotation a harder problem.<br>
-One barcode of these spatial datasets can be made up of different cell types.</p>
-<p>To solve this problem, Giotto provides several ways to calculate enrichment of specific cell-type signature gene list:<br>
+<p>Technologies like Visium spatial transcriptomics does not provide
+single-cell resolution, making cell type annotation a harder
+problem.<br>
+One barcode of these spatial datasets can be made up of different cell
+types.</p>
+<p>To solve this problem, Giotto provides several ways to calculate
+enrichment of specific cell-type signature gene list:<br>
 Spatial Enrichment:<br>
 - <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-6-144" class="external-link">PAGE</a><br>
 - hypergeometric test<br>
 - Rank<br>
 Spatial Deconvolution:<br>
-- <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02362-7" class="external-link">DWLS Deconvolution</a></p>
-<p>The deconvolution analysis is also a good way to integrate single cell RNAseq data with spatial transcriptomics datasets.<br>
-In this example, Corresponded Single cell dataset can be generated from <a href="http://mousebrain.org/downloads.html" class="external-link">here</a>.<br>
-Giotto_SC is processed from the downsampled <a href="https://satijalab.org/loomr/loomr_tutorial" class="external-link">Loom</a> file and can also be downloaded from getSpatialDataset.</p>
+- <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02362-7" class="external-link">DWLS
+Deconvolution</a></p>
+<p>The deconvolution analysis is also a good way to integrate single
+cell RNAseq data with spatial transcriptomics datasets.<br>
+In this example, Corresponded Single cell dataset can be generated from
+<a href="http://mousebrain.org/downloads.html" class="external-link">here</a>.<br>
+Giotto_SC is processed from the downsampled <a href="https://satijalab.org/loomr/loomr_tutorial" class="external-link">Loom</a> file and can
+also be downloaded from getSpatialDataset.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># download data to results directory ####</span>
 <span class="co"># if wget is installed, set method = 'wget'</span>
@@ -255,7 +263,9 @@ Giotto_SC is processed from the downsampled <a href="https://satijalab.org/loomr
                          x_text_size <span class="op">=</span> <span class="fl">8</span>,
                          y_text_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_brain/vignette_220328/20-plotMetaDataCellsHeatmap.png" style="width:50.0%"></p>
-<p>PAGE enrichment stats will be stored in the <a href="mailto:giotto_object@spatial_enrichment" class="email">giotto_object@spatial_enrichment</a> slot and can be retrieved by get_spatial_enrichment. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.</p>
+<p>PAGE enrichment stats will be stored in the <a href="mailto:giotto_object@spatial" class="email">giotto_object@spatial</a>_enrichment slot and can be
+retrieved by get_spatial_enrichment. The enrichment result can be
+visualized by spatplot by adding the spat_enr_names argument.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 1.6 visualizations</span>
 <span class="co"># Check PAGE enrichment result</span>
@@ -283,7 +293,9 @@ Giotto_SC is processed from the downsampled <a href="https://satijalab.org/loomr
 <span class="va">visium_brain</span> <span class="op">=</span> <span class="fu"><a href="../reference/runHyperGeometricEnrich.html">runHyperGeometricEnrich</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,
                                        expression_values <span class="op">=</span> <span class="st">"normalized"</span>,
                                        sign_matrix <span class="op">=</span> <span class="va">PAGE_matrix_2</span><span class="op">)</span></code></pre></div>
-<p>HyperGeometric enrichment stats will be stored in the <a href="mailto:giotto_object@spatial_enrichment" class="email">giotto_object@spatial_enrichment</a> slot and can be retrieved by get_spatial_enrichment. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.</p>
+<p>HyperGeometric enrichment stats will be stored in the <a href="mailto:giotto_object@spatial" class="email">giotto_object@spatial</a>_enrichment slot and can be
+retrieved by get_spatial_enrichment. The enrichment result can be
+visualized by spatplot by adding the spat_enr_names argument.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Check HyperGeometric enrichment result</span>
 <span class="co"># get_spatial_enrichment(visium_brain,enrichm_name = "hypergeometric")</span>
@@ -298,7 +310,11 @@ Giotto_SC is processed from the downsampled <a href="https://satijalab.org/loomr
 <div class="section level3">
 <h3 id="rank">Rank<a class="anchor" aria-label="anchor" href="#rank"></a>
 </h3>
-<p>This algorithm calculates gene signature enrichment scores per spatial position using a rank based approach. Rank enrichment stats will be stored in the <a href="mailto:giotto_object@spatial_enrichment" class="email">giotto_object@spatial_enrichment</a> slot and can be retrieved by get_spatial_enrichment. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.</p>
+<p>This algorithm calculates gene signature enrichment scores per
+spatial position using a rank based approach. Rank enrichment stats will
+be stored in the <a href="mailto:giotto_object@spatial" class="email">giotto_object@spatial</a>_enrichment slot and can be
+retrieved by get_spatial_enrichment. The enrichment result can be
+visualized by spatplot by adding the spat_enr_names argument.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create rank matrix, not that rank matrix is different from PAGE</span>
 <span class="co"># A count matrix and a vector for all cell labels will be needed</span>
@@ -321,7 +337,9 @@ Giotto_SC is processed from the downsampled <a href="https://satijalab.org/loomr
 <div class="section level3">
 <h3 id="deconvolution">Deconvolution<a class="anchor" aria-label="anchor" href="#deconvolution"></a>
 </h3>
-<p>DWLS deconvolution stats will be also stored in the <a href="mailto:giotto_object@spatial_enrichment" class="email">giotto_object@spatial_enrichment</a> slot and can be retrieved by get_spatial_enrichment. The enrichment result can be visualized by spatplot by adding the spat_enr_names argument.</p>
+<p>DWLS deconvolution stats will be also stored in the <a href="mailto:giotto_object@spatial" class="email">giotto_object@spatial</a>_enrichment slot and can be
+retrieved by get_spatial_enrichment. The enrichment result can be
+visualized by spatplot by adding the spat_enr_names argument.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create DWLS matrix, not that DWLS matrix is different from PAGE and rank</span>
 <span class="co"># A count matrix a vector for a list of gene signatures and a vector for all cell labels will be needed</span>
@@ -358,7 +376,7 @@ Giotto_SC is processed from the downsampled <a href="https://satijalab.org/loomr
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

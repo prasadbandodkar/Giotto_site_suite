@@ -162,10 +162,13 @@
 <div class="section level3">
 <h3 id="install-python-modules">Install Python modules<a class="anchor" aria-label="anchor" href="#install-python-modules"></a>
 </h3>
-<p>To run this vignette you need to install all the necessary Python modules.</p>
+<p>To run this vignette you need to install all the necessary Python
+modules.</p>
 <ol style="list-style-type: decimal">
 <li><p>This can be done manually, see <a href="https://rubd.github.io/Giotto_site/articles/installation_issues.html#python-manual-installation" class="external-link uri">https://rubd.github.io/Giotto_site/articles/installation_issues.html#python-manual-installation</a></p></li>
-<li><p>This can be done within R using our installation tools (installGiottoEnvironment), see <a href="https://rubd.github.io/Giotto_site/articles/tut0_giotto_environment.html" class="external-link uri">https://rubd.github.io/Giotto_site/articles/tut0_giotto_environment.html</a> for more information.</p></li>
+<li><p>This can be done within R using our installation tools
+(installGiottoEnvironment), see <a href="https://rubd.github.io/Giotto_site/articles/tut0_giotto_environment.html" class="external-link uri">https://rubd.github.io/Giotto_site/articles/tut0_giotto_environment.html</a>
+for more information.</p></li>
 </ol>
 </div>
 <div class="section level3">
@@ -192,12 +195,18 @@
 <span class="va">seqfish_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>raw_exprs <span class="op">=</span> <span class="va">expr_path</span>,
                                    spatial_locs <span class="op">=</span> <span class="va">loc_path</span>,
                                    instructions <span class="op">=</span> <span class="va">myinstructions</span><span class="op">)</span></code></pre></div>
-<p>How to work with Giotto instructions that are part of your Giotto object:<br>
-- show the instructions associated with your Giotto object with <strong>showGiottoInstructions</strong><br>
-- change one or more instructions with <strong>changeGiottoInstructions</strong><br>
-- replace all instructions at once with <strong>replaceGiottoInstructions</strong><br>
-- read or get a specific giotto instruction with <strong>readGiottoInstructions</strong><br>
-Of note, the python path can only be set once in an R session. See the reticulate package for more information.</p>
+<p>How to work with Giotto instructions that are part of your Giotto
+object:<br>
+- show the instructions associated with your Giotto object with
+<strong>showGiottoInstructions</strong><br>
+- change one or more instructions with
+<strong>changeGiottoInstructions</strong><br>
+- replace all instructions at once with
+<strong>replaceGiottoInstructions</strong><br>
+- read or get a specific giotto instruction with
+<strong>readGiottoInstructions</strong><br>
+Of note, the python path can only be set once in an R session. See the
+reticulate package for more information.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># show instructions associated with giotto object (seqfish_mini)</span>
 <span class="fu"><a href="../../../reference/showGiottoInstructions.html">showGiottoInstructions</a></span><span class="op">(</span><span class="va">seqfish_mini</span><span class="op">)</span></code></pre></div>
@@ -208,10 +217,13 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <ul>
 <li>filter genes and cells based on detection frequencies<br>
 </li>
-<li>normalize expression matrix (log transformation, scaling factor and/or z-scores)</li>
+<li>normalize expression matrix (log transformation, scaling factor
+and/or z-scores)</li>
 <li>add cell and gene statistics (optional)<br>
 </li>
-<li>adjust expression matrix for technical covariates or batches (optional). These results will be stored in the <em>custom</em> slot.</li>
+<li>adjust expression matrix for technical covariates or batches
+(optional). These results will be stored in the <em>custom</em>
+slot.</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">seqfish_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/filterGiotto.html">filterGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>, 
@@ -237,7 +249,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <li>run UMAP and/or TSNE on PCs (or directly on matrix)</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">seqfish_mini</span> <span class="op">&lt;-</span> <span class="fu">calculateHVG</span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">seqfish_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/calculateHVG.html" class="external-link">calculateHVG</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span><span class="op">)</span>
 <span class="va">seqfish_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/runPCA.html">runPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span><span class="op">)</span>
 <span class="fu"><a href="../../../reference/screePlot.html">screePlot</a></span><span class="op">(</span><span class="va">seqfish_mini</span>, ncp <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
 <span class="fu"><a href="../../../reference/jackstrawPlot.html">jackstrawPlot</a></span><span class="op">(</span><span class="va">seqfish_mini</span>, ncp <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
@@ -252,9 +264,11 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <h2 id="clustering">4. clustering<a class="anchor" aria-label="anchor" href="#clustering"></a>
 </h2>
 <ul>
-<li>create a shared (default) nearest network in PCA space (or directly on matrix)<br>
+<li>create a shared (default) nearest network in PCA space (or directly
+on matrix)<br>
 </li>
-<li>cluster on nearest network with Leiden or Louvan (kmeans and hclust are alternatives)</li>
+<li>cluster on nearest network with Leiden or Louvan (kmeans and hclust
+are alternatives)</li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">seqfish_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/createNearestNetwork.html">createNearestNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, k <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
@@ -327,7 +341,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
                               sdimx_stepsize <span class="op">=</span> <span class="fl">300</span>,
                               sdimy_stepsize <span class="op">=</span> <span class="fl">300</span>,
                               minimum_padding <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>
-<span class="fu">showGrids</span><span class="op">(</span><span class="va">seqfish_mini</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/showGrids.html" class="external-link">showGrids</a></span><span class="op">(</span><span class="va">seqfish_mini</span><span class="op">)</span>
 
 <span class="co"># visualize grid</span>
 <span class="fu"><a href="../../../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>, show_grid <span class="op">=</span> <span class="cn">T</span>, point_size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></code></pre></div>
@@ -348,7 +362,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
                                     maximum_distance_delaunay <span class="op">=</span> <span class="fl">400</span><span class="op">)</span>
 <span class="va">seqfish_mini</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/createSpatialNetwork.html">createSpatialNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>, minimum_k <span class="op">=</span> <span class="fl">2</span>, 
                                     method <span class="op">=</span> <span class="st">'kNN'</span>, k <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-<span class="fu">showNetworks</span><span class="op">(</span><span class="va">seqfish_mini</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/showNetworks.html" class="external-link">showNetworks</a></span><span class="op">(</span><span class="va">seqfish_mini</span><span class="op">)</span>
 
 <span class="co"># visualize the two different spatial networks  </span>
 <span class="fu"><a href="../../../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>, show_network <span class="op">=</span> <span class="cn">T</span>,
@@ -392,39 +406,40 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <div class="section level2">
 <h2 id="spatial-co-expression-patterns">10. spatial co-expression patterns<a class="anchor" aria-label="anchor" href="#spatial-co-expression-patterns"></a>
 </h2>
-<p>Identify robust spatial co-expression patterns using the spatial network or grid and a subset of individual spatial genes.<br>
+<p>Identify robust spatial co-expression patterns using the spatial
+network or grid and a subset of individual spatial genes.<br>
 1. calculate spatial correlation scores<br>
 2. cluster correlation scores</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># 1. calculate spatial correlation scores </span>
 <span class="va">ext_spatial_genes</span> <span class="op">=</span> <span class="va">km_spatialgenes</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span>
-<span class="va">spat_cor_netw_DT</span> <span class="op">=</span> <span class="fu">detectSpatialCorGenes</span><span class="op">(</span><span class="va">seqfish_mini</span>,
+<span class="va">spat_cor_netw_DT</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/detectSpatialCorGenes.html" class="external-link">detectSpatialCorGenes</a></span><span class="op">(</span><span class="va">seqfish_mini</span>,
                                          method <span class="op">=</span> <span class="st">'network'</span>, 
                                          spatial_network_name <span class="op">=</span> <span class="st">'Delaunay_network'</span>,
                                          subset_genes <span class="op">=</span> <span class="va">ext_spatial_genes</span><span class="op">)</span>
 
 <span class="co"># 2. cluster correlation scores</span>
-<span class="va">spat_cor_netw_DT</span> <span class="op">=</span> <span class="fu">clusterSpatialCorGenes</span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, 
+<span class="va">spat_cor_netw_DT</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/clusterSpatialCorGenes.html" class="external-link">clusterSpatialCorGenes</a></span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, 
                                           name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>, k <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>
-<span class="fu">heatmSpatialCorGenes</span><span class="op">(</span><span class="va">seqfish_mini</span>, spatCorObject <span class="op">=</span> <span class="va">spat_cor_netw_DT</span>, 
+<span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/heatmSpatialCorGenes.html" class="external-link">heatmSpatialCorGenes</a></span><span class="op">(</span><span class="va">seqfish_mini</span>, spatCorObject <span class="op">=</span> <span class="va">spat_cor_netw_DT</span>, 
                      use_clus_name <span class="op">=</span> <span class="st">'spat_netw_clus'</span><span class="op">)</span>
 
 <span class="va">netw_ranks</span> <span class="op">=</span> <span class="fu"><a href="../../../reference/rankSpatialCorGroups.html">rankSpatialCorGroups</a></span><span class="op">(</span><span class="va">seqfish_mini</span>, 
                                   spatCorObject <span class="op">=</span> <span class="va">spat_cor_netw_DT</span>, 
                                   use_clus_name <span class="op">=</span> <span class="st">'spat_netw_clus'</span><span class="op">)</span>
-<span class="va">top_netw_spat_cluster</span> <span class="op">=</span> <span class="fu">showSpatialCorGenes</span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, 
+<span class="va">top_netw_spat_cluster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/showSpatialCorGenes.html" class="external-link">showSpatialCorGenes</a></span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, 
                                             use_clus_name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>,
                                             selected_clusters <span class="op">=</span> <span class="fl">6</span>, 
                                             show_top_genes <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
-<span class="va">cluster_genes_DT</span> <span class="op">=</span> <span class="fu">showSpatialCorGenes</span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, 
+<span class="va">cluster_genes_DT</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/showSpatialCorGenes.html" class="external-link">showSpatialCorGenes</a></span><span class="op">(</span><span class="va">spat_cor_netw_DT</span>, 
                                        use_clus_name <span class="op">=</span> <span class="st">'spat_netw_clus'</span>,
                                        show_top_genes <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="va">cluster_genes</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">clus</span>; <span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">cluster_genes</span><span class="op">)</span> <span class="op">=</span> <span class="va">cluster_genes_DT</span><span class="op">$</span><span class="va">feat_ID</span>
 
 
-<span class="va">seqfish_mini</span> <span class="op">=</span> <span class="fu">createMetagenes</span><span class="op">(</span><span class="va">seqfish_mini</span>,
+<span class="va">seqfish_mini</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/createMetagenes.html" class="external-link">createMetagenes</a></span><span class="op">(</span><span class="va">seqfish_mini</span>,
                                gene_clusters <span class="op">=</span> <span class="va">cluster_genes</span>,
                                name <span class="op">=</span> <span class="st">'cluster_metagene'</span><span class="op">)</span>
 <span class="fu"><a href="../../../reference/spatCellPlot.html">spatCellPlot</a></span><span class="op">(</span><span class="va">seqfish_mini</span>,
@@ -538,7 +553,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <span class="va">high_expressed_genes</span> <span class="op">=</span> <span class="va">gene_metadata</span><span class="op">[</span><span class="va">mean_expr_det</span> <span class="op">&gt;</span> <span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">gene_ID</span>
 
 <span class="co">## identify genes that are associated with proximity to other cell types</span>
-<span class="va">CPGscoresHighGenes</span> <span class="op">=</span>  <span class="fu">findCPG</span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>,
+<span class="va">CPGscoresHighGenes</span> <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/findCPG.html" class="external-link">findCPG</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">seqfish_mini</span>,
                               selected_genes <span class="op">=</span> <span class="va">high_expressed_genes</span>,
                               spatial_network_name <span class="op">=</span> <span class="st">'Delaunay_network'</span>,
                               cluster_column <span class="op">=</span> <span class="st">'cell_types'</span>,
@@ -551,7 +566,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <span class="fu"><a href="../../../reference/plotCellProximityGenes.html">plotCellProximityGenes</a></span><span class="op">(</span><span class="va">seqfish_mini</span>, cpgObject <span class="op">=</span> <span class="va">CPGscoresHighGenes</span>, method <span class="op">=</span> <span class="st">'dotplot'</span><span class="op">)</span>
 
 <span class="co">## filter genes</span>
-<span class="va">CPGscoresFilt</span> <span class="op">=</span> <span class="fu">filterCPG</span><span class="op">(</span><span class="va">CPGscoresHighGenes</span>, min_cells <span class="op">=</span> <span class="fl">2</span>, min_int_cells <span class="op">=</span> <span class="fl">2</span>, min_fdr <span class="op">=</span> <span class="fl">0.1</span>,
+<span class="va">CPGscoresFilt</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/filterCPG.html" class="external-link">filterCPG</a></span><span class="op">(</span><span class="va">CPGscoresHighGenes</span>, min_cells <span class="op">=</span> <span class="fl">2</span>, min_int_cells <span class="op">=</span> <span class="fl">2</span>, min_fdr <span class="op">=</span> <span class="fl">0.1</span>,
                           min_spat_diff <span class="op">=</span> <span class="fl">0.1</span>, min_log2_fc <span class="op">=</span> <span class="fl">0.1</span>, min_zscore <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="co">## visualize subset of interaction changed genes (ICGs)</span>
@@ -681,7 +696,7 @@ Of note, the python path can only be set once in an R session. See the reticulat
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

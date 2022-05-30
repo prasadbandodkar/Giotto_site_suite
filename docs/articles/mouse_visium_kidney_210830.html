@@ -176,7 +176,9 @@
 <div class="section level2">
 <h2 id="dataset-explanation">Dataset explanation<a class="anchor" aria-label="anchor" href="#dataset-explanation"></a>
 </h2>
-<p><a href="https://www.10xgenomics.com/spatial-transcriptomics/" class="external-link">10X genomics</a> recently launched a new platform to obtain spatial expression data using a Visium Spatial Gene Expression slide.</p>
+<p><a href="https://www.10xgenomics.com/spatial-transcriptomics/" class="external-link">10X
+genomics</a> recently launched a new platform to obtain spatial
+expression data using a Visium Spatial Gene Expression slide.</p>
 <p>The Visium kidney data to run this tutorial can be found <a href="https://support.10xgenomics.com/spatial-gene-expression/datasets/1.0.0/V1_Mouse_Kidney" class="external-link">here</a></p>
 <p>Visium technology:<br><img src="../inst/images/general_figs/visium_technology.png" style="width:50.0%"></p>
 <p>High resolution png from original tissue:<br><img src="../inst/images/general_figs/mouse_kidney_highres.png" style="width:50.0%"></p>
@@ -361,11 +363,15 @@
 <div class="section level2">
 <h2 id="part-7-cell-type-annotation">part 7: cell-type annotation<a class="anchor" aria-label="anchor" href="#part-7-cell-type-annotation"></a>
 </h2>
-<p>Visium spatial transcriptomics does not provide single-cell resolution, making cell type annotation a harder problem. Giotto provides 3 ways to calculate enrichment of specific cell-type signature gene list:<br>
+<p>Visium spatial transcriptomics does not provide single-cell
+resolution, making cell type annotation a harder problem. Giotto
+provides 3 ways to calculate enrichment of specific cell-type signature
+gene list:<br>
 - PAGE<br>
 - rank<br>
 - hypergeometric test</p>
-<p>TO DO: See the <a href="./mouse_visium_brain_200325.html">mouse Visium brain dataset</a> for an example.</p>
+<p>TO DO: See the <a href="./mouse_visium_brain_200325.html">mouse
+Visium brain dataset</a> for an example.</p>
 </div>
 <div class="section level2">
 <h2 id="part-8-spatial-grid">part 8: spatial grid<a class="anchor" aria-label="anchor" href="#part-8-spatial-grid"></a>
@@ -388,7 +394,7 @@
 <p><img src="../inst/images/mouse_visium_kidney/210830_results/18-plotStatDelaunayNetwork.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">visium_kidney</span> <span class="op">=</span> <span class="fu"><a href="../reference/createSpatialNetwork.html">createSpatialNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_kidney</span>, minimum_k <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-<span class="fu">showNetworks</span><span class="op">(</span><span class="va">visium_kidney</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/showNetworks.html" class="external-link">showNetworks</a></span><span class="op">(</span><span class="va">visium_kidney</span><span class="op">)</span>
 <span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_kidney</span>, show_network <span class="op">=</span> <span class="cn">T</span>,
          network_color <span class="op">=</span> <span class="st">'blue'</span>, spatial_network_name <span class="op">=</span> <span class="st">'Delaunay_network'</span><span class="op">)</span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_kidney/210830_results/19-spatPlot2D.png" style="width:50.0%"></p>
@@ -552,7 +558,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

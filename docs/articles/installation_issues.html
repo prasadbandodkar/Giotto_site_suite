@@ -163,8 +163,12 @@
 <div class="section level4">
 <h4 id="package-development-prerequisites">Package development prerequisites<a class="anchor" aria-label="anchor" href="#package-development-prerequisites"></a>
 </h4>
-<p>If this is the first time you build and install an R package you can follow this <a href="https://support.rstudio.com/hc/en-us/articles/200486498-Package-Development-Prerequisites" class="external-link">link</a>, which has simple installation instructions for Windows, Mac OSX and Linux.</p>
-<p>To specifically install the command-line tools of Xcode for Mac OSX you might also need to run this line in terminal:</p>
+<p>If this is the first time you build and install an R package you can
+follow this <a href="https://support.rstudio.com/hc/en-us/articles/200486498-Package-Development-Prerequisites" class="external-link">link</a>,
+which has simple installation instructions for Windows, Mac OSX and
+Linux.</p>
+<p>To specifically install the command-line tools of Xcode for Mac OSX
+you might also need to run this line in terminal:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">xcode-select</span> <span class="at">--install</span></span></code></pre></div>
 <p> </p>
 </div>
@@ -181,9 +185,11 @@
 <div class="section level3">
 <h3 id="conda-install">Conda install<a class="anchor" aria-label="anchor" href="#conda-install"></a>
 </h3>
-<p>If pip install does not work, try installing them within a conda <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands" class="external-link">conda environment</a>. Something like this might work, see also this <a href="https://heartbeat.fritz.ai/creating-python-virtual-environments-with-conda-why-and-how-180ebd02d1db" class="external-link">link</a></p>
+<p>If pip install does not work, try installing them within a conda <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands" class="external-link">conda
+environment</a>. Something like this might work, see also this <a href="https://heartbeat.fritz.ai/creating-python-virtual-environments-with-conda-why-and-how-180ebd02d1db" class="external-link">link</a></p>
 <div class="section level5">
-<h5 id="create-yaml-file-e-g--environment-yml-with-the-following-information">1. create yaml file (e.g. environment.yml) with the following information:<a class="anchor" aria-label="anchor" href="#create-yaml-file-e-g--environment-yml-with-the-following-information"></a>
+<h5 id="create-yaml-file-e-g--environment-yml-with-the-following-information">1. create yaml file (e.g. environment.yml) with the following
+information:<a class="anchor" aria-label="anchor" href="#create-yaml-file-e-g--environment-yml-with-the-following-information"></a>
 </h5>
 <pre><code>name: giotto_env
 channels:
@@ -205,7 +211,8 @@ prefix: /Users/your_username/anaconda3/envs/giotto_env</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>conda env create <span class="op">-</span>f environment.yml</span></code></pre></div>
 </div>
 <div class="section level5">
-<h5 id="use-the-path-to-this-environment-when-you-create-the-giotto-instructions-or-giotto-object">3. Use the path to this environment when you create the Giotto instructions or Giotto object<a class="anchor" aria-label="anchor" href="#use-the-path-to-this-environment-when-you-create-the-giotto-instructions-or-giotto-object"></a>
+<h5 id="use-the-path-to-this-environment-when-you-create-the-giotto-instructions-or-giotto-object">3. Use the path to this environment when you create the Giotto
+instructions or Giotto object<a class="anchor" aria-label="anchor" href="#use-the-path-to-this-environment-when-you-create-the-giotto-instructions-or-giotto-object"></a>
 </h5>
 <p>for OSX:</p>
 <pre><code>/Users/your_username/anaconda3/envs/giotto_env/bin/pythonw</code></pre>
@@ -220,8 +227,10 @@ prefix: /Users/your_username/anaconda3/envs/giotto_env</code></pre>
 <div class="section level2">
 <h2 id="errors-on-macos">2. errors on MacOS<a class="anchor" aria-label="anchor" href="#errors-on-macos"></a>
 </h2>
-<p>Some of the errors outlined below might arise because of issues with building Giotto from source.<br>
-The Giotto branch <strong>cless</strong> is a version of Giotto without C++ code, which should fix many of the installation errors.</p>
+<p>Some of the errors outlined below might arise because of issues with
+building Giotto from source.<br>
+The Giotto branch <strong>cless</strong> is a version of Giotto without
+C++ code, which should fix many of the installation errors.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"RubD/Giotto@cless"</span><span class="op">)</span> </code></pre></div>
 <div class="section level3">
@@ -229,7 +238,8 @@ The Giotto branch <strong>cless</strong> is a version of Giotto without C++ code
 </h3>
 <p>If you see this error on your MacOS:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">clang:</span> error: unsupported option ‘-fopenmp’</span></code></pre></div>
-<p>You can install another clang and point R to use that clang, which supports the -fopenmp paramter. This solution was provided on <a href="https://stackoverflow.com/questions/43595457/alternate-compiler-for-installing-r-packages-clang-error-unsupported-option" class="external-link">stackoverflow</a></p>
+<p>You can install another clang and point R to use that clang, which
+supports the -fopenmp paramter. This solution was provided on <a href="https://stackoverflow.com/questions/43595457/alternate-compiler-for-installing-r-packages-clang-error-unsupported-option" class="external-link">stackoverflow</a></p>
 <ol style="list-style-type: decimal">
 <li>Install llvm on your mac</li>
 </ol>
@@ -242,17 +252,17 @@ The Giotto branch <strong>cless</strong> is a version of Giotto without C++ code
 <li>Add these lines to the Makevars file</li>
 </ol>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># comment out first line 'CC= ... if there are errors with compiling a package</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="va">CC=</span>/usr/local/opt/llvm/bin/clang <span class="ex">-fopenmp</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="va">CXX=</span>/usr/local/opt/llvm/bin/clang++</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="va">CC</span><span class="op">=</span>/usr/local/opt/llvm/bin/clang <span class="ex">-fopenmp</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="va">CXX</span><span class="op">=</span>/usr/local/opt/llvm/bin/clang++</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Also potentially CXX11 (for C++11 compiler)</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="va">CXX11=</span>/usr/local/opt/llvm/bin/clang++</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="va">CXX11</span><span class="op">=</span>/usr/local/opt/llvm/bin/clang++</span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># -O3 should be faster than -O2 (default) level optimisation ..</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="va">CFLAGS=</span>-g <span class="ex">-O3</span> <span class="at">-Wall</span> <span class="at">-pedantic</span> <span class="at">-std</span><span class="op">=</span>gnu99 <span class="at">-mtune</span><span class="op">=</span>native <span class="at">-pipe</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="va">CXXFLAGS=</span>-g <span class="ex">-O3</span> <span class="at">-Wall</span> <span class="at">-pedantic</span> <span class="at">-std</span><span class="op">=</span>c++11 <span class="at">-mtune</span><span class="op">=</span>native <span class="at">-pipe</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="va">LDFLAGS=</span>-L/usr/local/opt/gettext/lib <span class="ex">-L/usr/local/opt/llvm/lib</span> <span class="at">-Wl,-rpath,</span>/usr/local/opt/llvm/lib</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="va">CPPFLAGS=</span>-I/usr/local/opt/gettext/include <span class="ex">-I/usr/local/opt/llvm/include</span></span></code></pre></div>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="va">CFLAGS</span><span class="op">=</span>-g <span class="ex">-O3</span> <span class="at">-Wall</span> <span class="at">-pedantic</span> <span class="at">-std</span><span class="op">=</span>gnu99 <span class="at">-mtune</span><span class="op">=</span>native <span class="at">-pipe</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="va">CXXFLAGS</span><span class="op">=</span>-g <span class="ex">-O3</span> <span class="at">-Wall</span> <span class="at">-pedantic</span> <span class="at">-std</span><span class="op">=</span>c++11 <span class="at">-mtune</span><span class="op">=</span>native <span class="at">-pipe</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="va">LDFLAGS</span><span class="op">=</span>-L/usr/local/opt/gettext/lib <span class="ex">-L/usr/local/opt/llvm/lib</span> <span class="at">-Wl,-rpath,</span>/usr/local/opt/llvm/lib</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="va">CPPFLAGS</span><span class="op">=</span>-I/usr/local/opt/gettext/include <span class="ex">-I/usr/local/opt/llvm/include</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="issue-2-clang-error">2.2 issue 2: clang error<a class="anchor" aria-label="anchor" href="#issue-2-clang-error"></a>
@@ -264,18 +274,25 @@ The Giotto branch <strong>cless</strong> is a version of Giotto without C++ code
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="ex">ld:</span> library not found for <span class="at">-lgfortran</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">clang-9:</span> error: linker command failed with exit code 1 <span class="er">(</span><span class="ex">use</span> <span class="at">-v</span> to see invocation<span class="kw">)</span></span></code></pre></div>
 <p>solution: Installing the latest version of gofortran. <a href="https://github.com/fxcoudert/gfortran-for-macOS/releases/download/8.2/gfortran-8.2-Mojave.dmg" class="external-link uri">https://github.com/fxcoudert/gfortran-for-macOS/releases/download/8.2/gfortran-8.2-Mojave.dmg</a></p>
-<p>Reference: <a href="https://stackoverflow.com/questions/35999874/mac-os-x-r-error-ld-warning-directory-not-found-for-option" class="external-link uri">https://stackoverflow.com/questions/35999874/mac-os-x-r-error-ld-warning-directory-not-found-for-option</a> “I am having Mac OS Catalina and in my case installation of Homebrew, the newest gcc and Gfortran 8.2.0 solved the issue.” – Magda Orzechowska “This worked for me in Mac OS Catalina as well! I used the gfortran 8.2 Mojave installation github.com/fxcoudert/gfortran-for-macOS/releases” – Danny</p>
+<p>Reference: <a href="https://stackoverflow.com/questions/35999874/mac-os-x-r-error-ld-warning-directory-not-found-for-option" class="external-link uri">https://stackoverflow.com/questions/35999874/mac-os-x-r-error-ld-warning-directory-not-found-for-option</a>
+“I am having Mac OS Catalina and in my case installation of Homebrew,
+the newest gcc and Gfortran 8.2.0 solved the issue.” – Magda Orzechowska
+“This worked for me in Mac OS Catalina as well! I used the gfortran 8.2
+Mojave installation github.com/fxcoudert/gfortran-for-macOS/releases” –
+Danny</p>
 </div>
 <div class="section level3">
 <h3 id="issue-3-r-3-6-3-and-macos-catalina">2.3 issue 3 (R 3.6.3 and MacOS Catalina)<a class="anchor" aria-label="anchor" href="#issue-3-r-3-6-3-and-macos-catalina"></a>
 </h3>
-<p>If you use the latest MacOS ‘Catalina’ and the latest R version 3.6.3 then you need to install Clang 7.0.0 and GNU Fortran 6.1 as per <a href="https://cran.rstudio.com/bin/macosx/" class="external-link">instructions</a>.</p>
-<p>Additionally, you might have to specify some flags in “~/.R/Makevars”</p>
+<p>If you use the latest MacOS ‘Catalina’ and the latest R version 3.6.3
+then you need to install Clang 7.0.0 and GNU Fortran 6.1 as per <a href="https://cran.rstudio.com/bin/macosx/" class="external-link">instructions</a>.</p>
+<p>Additionally, you might have to specify some flags in
+“~/.R/Makevars”</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clang: start</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="va">CFLAGS=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="va">CCFLAGS=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="va">CXXFLAGS=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="va">CPPFLAGS=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="va">CFLAGS</span><span class="op">=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="va">CCFLAGS</span><span class="op">=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="va">CXXFLAGS</span><span class="op">=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="va">CPPFLAGS</span><span class="op">=</span>-isysroot <span class="ex">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># clang: end</span></span></code></pre></div>
 <p>We hope that these issues will be resolved soon.</p>
 </div>
@@ -286,7 +303,8 @@ The Giotto branch <strong>cless</strong> is a version of Giotto without C++ code
 <p>If you encounter this error:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">system</span>(cmd) <span class="sc">:</span> (converted from warning) ‘make’ not found</span></code></pre></div>
 <p>Solution:<br>
-Install the necessary <a href="https://support.rstudio.com/hc/en-us/articles/200486498-Package-Development-Prerequisites" class="external-link">package development tools</a>.</p>
+Install the necessary <a href="https://support.rstudio.com/hc/en-us/articles/200486498-Package-Development-Prerequisites" class="external-link">package
+development tools</a>.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## make sure Rtools is visible (from within R)</span>
 <span class="co">## you can set the paths manually</span>
@@ -329,7 +347,7 @@ Install the necessary <a href="https://support.rstudio.com/hc/en-us/articles/200
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

@@ -185,7 +185,11 @@
                                       spatial_locs <span class="op">=</span> <span class="va">cell_locations</span><span class="op">)</span></code></pre></div>
 <details><summary>
 Expression file formatting
-</summary><p><br> Expression count matrices accepted by Giotto should have columns correlating to individual cells (<strong>cell IDs</strong>) and rows to individual features (<strong>feature IDs</strong>).<br><strong>data.table</strong> objects and text-based files ie: (<strong>.csv, .tsv, .txt</strong>) to be read in should have column 1 be <strong>feature IDs</strong>.</p>
+</summary><p><br> Expression count matrices accepted by Giotto should have columns
+correlating to individual cells (<strong>cell IDs</strong>) and rows to
+individual features (<strong>feature IDs</strong>).<br><strong>data.table</strong> objects and text-based files ie:
+(<strong>.csv, .tsv, .txt</strong>) to be read in should have column 1
+be <strong>feature IDs</strong>.</p>
 <table class="table">
 <thead><tr class="header">
 <th></th>
@@ -230,7 +234,9 @@ Expression file formatting
 </tr>
 </tbody>
 </table>
-<p><br><strong>matrix</strong> and <strong>DelayedMatrix</strong> objects should have <strong>feature IDs</strong> already incorporated as the rownames.</p>
+<p><br><strong>matrix</strong> and <strong>DelayedMatrix</strong>
+objects should have <strong>feature IDs</strong> already incorporated as
+the rownames.</p>
 <table class="table">
 <thead><tr class="header">
 <th align="left"></th>
@@ -271,7 +277,9 @@ Expression file formatting
 </tbody>
 </table></details><details><summary>
 Locations file formatting
-</summary><p><br> Numerical columns will be interpreted in order of x, y, and (optionally) z coordinate. The first non-numerical column will be taken as <strong>cell IDs</strong></p>
+</summary><p><br> Numerical columns will be interpreted in order of x, y, and
+(optionally) z coordinate. The first non-numerical column will be taken
+as <strong>cell IDs</strong></p>
 <table class="table">
 <thead><tr class="header">
 <th></th>
@@ -310,7 +318,8 @@ Locations file formatting
 <td></td>
 </tr>
 </tbody>
-</table></details><p><strong>*Note:</strong> multiple expression files during can be given at once during Giotto object creation by using a named list.</p>
+</table></details><p><strong>*Note:</strong> multiple expression files during can be given
+at once during Giotto object creation by using a named list.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_giotto_object <span class="ot">=</span> <span class="fu">createGiottoObject</span>(<span class="at">expression =</span> <span class="fu">list</span>(<span class="at">raw =</span> matrix1</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                                                        <span class="at">scaled =</span> matrix2,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                                                        <span class="at">custom =</span> matrix3),</span>
@@ -320,15 +329,18 @@ Locations file formatting
 <div class="section level5">
 <h5 id="additional-features">2. Additional features<a class="anchor" aria-label="anchor" href="#additional-features"></a>
 </h5>
-<p>Other information can also be provided using the other function parameters<br>
+<p>Other information can also be provided using the other function
+parameters<br>
 - add <strong>cell</strong> or <strong>gene metadata</strong><br>
 - add <strong>spatial networks</strong> or <strong>grids</strong><br>
 - add <strong>dimension reduction</strong><br>
 - add <strong>images</strong><br>
 - add <strong>instructions</strong></p>
-<p>Usually specifying your own <strong>instructions</strong> can be most useful to:<br>
+<p>Usually specifying your own <strong>instructions</strong> can be most
+useful to:<br>
 - specify a python path<br>
-- determine output of plots (show in viewer, return as object, save as image)<br>
+- determine output of plots (show in viewer, return as object, save as
+image)<br>
 - automatically save plots to selected directory</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span>
@@ -358,13 +370,31 @@ Locations file formatting
 <div class="section level2">
 <h2 id="giotto-object-structure">Giotto Object Structure<a class="anchor" aria-label="anchor" href="#giotto-object-structure"></a>
 </h2>
-<p><br> Usage of the Giotto package revolves around the <strong>giottoObject</strong>. This is an S4 object class that holds spatial expression data and facilitates its use with the Giotto package’s functions. Additional metadata and other certain outputs generated from Giotto functions that are used in downstream analyses will also be stored within this object. The self-contained nature of the Giotto object makes it a convenient representation of the entire spatial experiment and is why many of Giotto functions both take the <strong>giottoObject</strong> as input and feed into it as output.</p>
-<p>Data is organized within the <strong>giottoObject</strong> in defined <strong>slots</strong> as described in the diagram below.<br><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-01.svg" style="width:100.0%"><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-02.svg" style="width:100.0%"><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-03.svg" style="width:100.0%"></p>
+<p><br> Usage of the Giotto package revolves around the
+<strong>giottoObject</strong>. This is an S4 object class that holds
+spatial expression data and facilitates its use with the Giotto
+package’s functions. Additional metadata and other certain outputs
+generated from Giotto functions that are used in downstream analyses
+will also be stored within this object. The self-contained nature of the
+Giotto object makes it a convenient representation of the entire spatial
+experiment and is why many of Giotto functions both take the
+<strong>giottoObject</strong> as input and feed into it as output.</p>
+<p>Data is organized within the <strong>giottoObject</strong> in defined
+<strong>slots</strong> as described in the diagram below.<br><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-01.svg" style="width:100.0%"><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-02.svg" style="width:100.0%"><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-03.svg" style="width:100.0%"></p>
 <div class="section level3">
 <h3 id="nested-organization-within-slots">Nested organization within slots<a class="anchor" aria-label="anchor" href="#nested-organization-within-slots"></a>
 </h3>
-<p>Spatial data has a tiered organization and so does Giotto. Tissue regions can be divided down into individual cells and then further into organelles. The data structure of Giotto mirrors biological structure by nesting data within slots related to spatial data by <strong>spat_unit</strong> (spatial unit). Additonally, to facilitate the integration of multiple omic data, slots related to feature data will be nested with <strong>feat_type</strong> (feature type). <br><br>
-Included below is a description of this nesting and also, for advanced users and contributors/developers, accessor functions for the slots are also provided. <br></p>
+<p>Spatial data has a tiered organization and so does Giotto. Tissue
+regions can be divided down into individual cells and then further into
+organelles. The data structure of Giotto mirrors biological structure by
+nesting data within slots related to spatial data by
+<strong>spat_unit</strong> (spatial unit). Additonally, to facilitate
+the integration of multiple omic data, slots related to feature data
+will be nested with <strong>feat_type</strong> (feature type).
+<br><br>
+Included below is a description of this nesting and also, for advanced
+users and contributors/developers, accessor functions for the slots are
+also provided. <br></p>
 <div class="section level4">
 <h4 id="slots-and-subnesting">Slots and Subnesting<a class="anchor" aria-label="anchor" href="#slots-and-subnesting"></a>
 </h4>
@@ -538,7 +568,7 @@ Included below is a description of this nesting and also, for advanced users and
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

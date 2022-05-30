@@ -13,7 +13,7 @@ Following a particular programming style will help programmers read and understa
 
 - **Indentation**
     - Use 4 spaces for indenting. No tabs.
-    - Prefereably no lines longer than 80 characters. This includes function documentations, examples, and vignette code chunks.  
+    - Preferably no lines longer than 80 characters. This includes function documentations, examples, and vignette code chunks.  
     
 - **Function names**
     - Use camelCase.
@@ -24,6 +24,8 @@ Following a particular programming style will help programmers read and understa
     - Do not place a space before a comma, but always place one after a comma. This: a, b, c.  
     - Always use space around “=” when using named arguments to functions. This: somefunc(a = 1, b = 2).
     
+- **Use of symbols**
+    - Do not use any non-ASCII characters
 
 
 $~$
@@ -57,7 +59,7 @@ The last function should be used within your contribution code. It has the addit
 $~$
 
 ### Getters and Setters
-Giotto stores information in different slots, which can be accessed through these getters and setters functions. They can be found in the [accessors.R](https://github.com/RubD/Giotto/blob/suite/R/accessors.R) file. 
+Giotto stores information in different [slots](getting_started_gobject.html#giotto-object-structure), which can be accessed through these getters and setters functions. They can be found in the [accessors.R](https://github.com/RubD/Giotto/blob/suite/R/accessors.R) file. 
 
 - **get_expression_values**: To select the expression matrix to use
 - **set_expression_values**: Sets a new expression matrix to the expression slot
@@ -82,6 +84,9 @@ Giotto stores information in different slots, which can be accessed through thes
 
 - **get_feature_info**: Gets spatial feature information
 - **set_feature_info**: Sets new spatial feature information
+
+- **get_spatial_enrichment**: Gets spatial enrichment information
+- **set_spatial_enrichment**: Sets new spatial enrichment information
 
 $~$
 
