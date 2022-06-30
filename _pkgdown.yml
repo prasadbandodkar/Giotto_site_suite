@@ -83,15 +83,36 @@ reference:
   - title: Images
     desc: functions to work with images for a Giotto object
     contents:
+    - giottoImage
+    - giottoLargeImage
+    - createGiottoImage
+    - createGiottoLargeImage
+    - createGiottoLargeImageList
     - estimateImageBg
     - changeImageBg
-    - createGiottoImage
-    - addGiottoImage
+    - addGiottoImageMG
     - addGiottoImageToSpatPlot
-    - showGiottoImageNames
-    - updateGiottoImage
-    - getGiottoImage
+    - updateGiottoImageMG
+    - stitchGiottoLargeImage
+    - cropGiottoLargeImage
+    - convertGiottoLargeImageToMG
+    - writeGiottoLargeImage
+    - updateGiottoLargeImage
+    - addGiottoLargeImage
     - plotGiottoImage
+    - addGiottoImage
+    - updateGiottoImage
+    - reconnectGiottoImage
+    - showGiottoImageNames
+
+  - title: Image registration
+    desc: functions to work with fiji images
+    contents:
+    - registerGiottoObjectList
+    - registerGiottoObjectListFiji
+    - registerGiottoObjectListRvision
+    - registerImagesFIJI
+    - fiji
 
   - title: Giotto object
     desc: Create Giotto objects
@@ -105,12 +126,23 @@ reference:
     contents:
     - pDataDT
     - fDataDT
+    - filterDistributions
+    - filterCombinations
     - showProcessingSteps
     - calculateMetaTable
     - calculateMetaTableCells
     - combineMetadata
     - createMetafeats
     - findNetworkNeighbors
+    - combineSpatialCellFeatureInfo
+    - combineSpatialCellMetadataInfo
+    - getDistinctColors
+    - stitchFieldCoordinates
+    - stitchTileCoordinates
+    - convertEnsemblToGeneSymbol
+    - readPolygonFilesVizgenHDF5
+    - readPolygonFilesVizgen
+
 
   - title: Giotto getters & setters
     desc: Low level functions to get, set and show Giotto slots
@@ -133,18 +165,38 @@ reference:
     - set_feature_info
     - get_spatial_enrichment
     - set_spatial_enrichment
+    - getSpatialDataset
+    - list_expression
+    - list_expression_names
+    - list_spatial_locations
+    - list_spatial_locations_names
+    - list_spatial_enrichments
+    - list_spatial_enrichments_names
+    - list_dim_reductions
+    - list_dim_reductions_names
+    - list_spatial_info
+    - list_spatial_info_names
+    - list_feature_info
+    - list_feature_info_names
+    - list_spatial_networks
+    - list_spatial_networks_names
+    - list_spatial_grids
+    - list_spatial_grids_names
+    - list_image_names
+    - get10Xmatrix
+    - get10Xmatrix_h5
 
   - title: Giotto show slots
     desc: Show what is available in different information slots
     contents:
     - showGiottoExpression
     - showGiottoSpatLocs
+    - showGiottoSpatEnrichments
     - showGiottoDimRed
-    - showGiottoSpatNetworks
-    - showGiottoSpatGrids
     - showGiottoSpatialInfo
     - showGiottoFeatInfo
-    - showGiottoSpatEnrichments
+    - showGiottoSpatNetworks
+    - showGiottoSpatGrids
 
   - title: Modify Giotto object
     desc: Modifications to the Giotto objects
@@ -152,9 +204,11 @@ reference:
     - filterGiotto
     - subsetGiotto
     - subsetGiottoLocs
+    - subsetGiottoLocsMulti
     - joinGiottoObjects
     - normalizeGiotto
     - adjustGiottoMatrix
+    - processGiotto
     - annotateGiotto
     - removeCellAnnotation
     - removeFeatAnnotation
@@ -176,23 +230,26 @@ reference:
     - runPCA
     - runUMAP
     - runtSNE
+    - runGiottoHarmony
 
   - title: Clustering
     desc: Functions to cluster cells
     contents:
-    - createNearestNetwork
-    - addNetworkLayout
-    - clusterCells
     - doLeidenCluster
     - doLouvainCluster
+    - doRandomWalkCluster
+    - doSNNCluster
     - doKmeans
     - doHclust
-    - subClusterCells
+    - clusterCells
     - doLeidenSubCluster
     - doLouvainSubCluster
+    - subClusterCells
     - getClusterSimilarity
     - mergeClusters
     - getDendrogramSplits
+    - createNearestNetwork
+    - addNetworkLayout
 
   - title: Marker genes
     desc: Functions to detect cell type / cluster specific marker genes
@@ -209,6 +266,7 @@ reference:
   - title: Auxiliary visualizations
     desc: Different visualization options to explore gene, cell or cluster characteristics
     contents:
+    - showSaveParameters
     - showClusterHeatmap
     - showClusterDendrogram
     - plotHeatmap
@@ -216,16 +274,39 @@ reference:
     - plotMetaDataCellsHeatmap
     - violinPlot
 
+  - title: Spatial structures
+    desc: functions to setup spatial structures
+    contents:
+    - spatNetwDistributionsDistance
+    - spatNetwDistributionsKneighbors
+    - spatNetwDistributions
+    - createSpatialDelaunayNetwork
+    - plotStatDelaunayNetwork
+    - createSpatialKNNnetwork
+    - createSpatialNetwork
+    - annotateSpatialNetwork
+    - createSpatialDefaultGrid
+    - createSpatialGrid
+    - annotateSpatialGrid
+
   - title: Spatial enrichment
     desc: algorithms to compute spatial enrichment of gene signatures or scRNA-seq matrix
     contents:
     - makeSignMatrixPAGE
+    - makeSignMatrixDWLSfromMatrix
+    - makeSignMatrixDWLS
     - makeSignMatrixRank
-    - runSpatialEnrich
+    - runPAGEEnrich_OLD
     - runPAGEEnrich
+    - PAGEEnrich
     - runRankEnrich
+    - rankEnrich
     - runHyperGeometricEnrich
-
+    - hyperGeometricEnrich
+    - runSpatialEnrich
+    - createSpatialEnrich
+    - runDWLSDeconv
+    - runSpatialDeconv
 
   - title: Spatial deconvolution
     desc: algorithms to perform spatial deconvolution based on gene signatures or single-cell RNAseq information
@@ -254,15 +335,23 @@ reference:
     contents:
     - binSpectSingleMatrix
     - binSpectSingle
-    - binSpectMultiMatrix
     - binSpectMulti
+    - binSpectMultiMatrix
     - binSpect
+    - silhouetteRank
+    - silhouetteRankTest
     - spatialDE
     - spatialAEH
     - trendSceek
     - spark
+    - detectSpatialPatterns
+    - showPattern2D
+    - showPattern
+    - showPattern3D
+    - showPatternGenes
+    - selectPatternGenes
 
-  - title: Simulate spatiial expression patterns
+  - title: Simulate spatial expression patterns
     desc: Function to simulate a user-defined pattern using the full complexity of the different gene distributions.
     contents:
     - simulateOneGenePatternGiottoObject
@@ -272,7 +361,41 @@ reference:
     desc: Method to detect spatially co-expressed feature modules
     contents:
     - ends_with("SpatialCorFeats")
+    - detectSpatialCorFeatsMatrix
+    - detectSpatialCorFeats
+    - showSpatialCorFeats
+    - clusterSpatialCorFeats
+    - heatmSpatialCorFeats
     - rankSpatialCorGroups
+
+  - title: Spatial in situ visuals
+    desc: Functions for spatial in situ visualization
+    contents:
+    - spatInSituPlotDensity
+    - spatInSituPlotHex
+    - spatInSituPlotPoints
+
+  - title: Spatial interaction visuals
+    desc: Functions for spatial interaction visualization
+    contents:
+    - cellProximityBarplot
+    - cellProximityHeatmap
+    - cellProximityNetwork
+    - cellProximityVisPlot
+    - plotCellProximityGenes
+    - combineCPG
+    - plotInteractionChangedGenes
+    - plotICG
+    - plotCombineInteractionChangedGenes
+    - plotCombineCellProximityGenes
+    - plotCombineICG
+    - plotCombineCPG
+    - plotCombineCellCellCommunication
+    - plotCombineCCcom
+    - plotCCcomHeatmap
+    - cellProximitySpatPlot
+    - cellProximitySpatPlot3D
+    - plotCPG
 
   - title: HMRF
     desc: Functions to identify spatial domains with HMRF
@@ -289,24 +412,35 @@ reference:
     desc: Visualization of expression space (e.g. UMAP) in 2D
     contents:
     - dimPlot
+    - dimPlot2D
+    - plotUMAP_2D
     - plotUMAP
+    - plotTSNE_2D
     - plotTSNE
+    - plotPCA_2D
     - plotPCA
-    - dimFeatPlot
+    - dimFeatPlot2D
+    - dimCellPlot2D
     - dimCellPlot
 
   - title: 2D visualization in spatial space
     desc: Visualization in 2D spatial space
     contents:
+    - spatPlot2D
     - spatPlot
-    - spatFeatPlot
+    - spatFeatPlot2D_single
+    - spatFeatPlot2D
+    - spatCellPlot2D
     - spatCellPlot
 
   - title: 2D visualization in spatial and expression space
     desc: Visualization in both 2D spatial and expression space
     contents:
+    - spatDeconvPlot
+    - spatDimPlot2D
     - spatDimPlot
-    - spatDimFeatPlot
+    - spatDimFeatPlot2D
+    - spatDimCellPlot2D
     - spatDimCellPlot
 
   - title: 3D dimension reduction visualization
@@ -316,24 +450,24 @@ reference:
     - plotUMAP_3D
     - plotTSNE_3D
     - plotPCA_3D
-    - dimFeatPlot3D
+    - dimGenePlot3D
 
   - title: 3D visualization in spatial space
     desc: Visualization in 3D spatial space
     contents:
     - spatPlot3D
-    - spatFeatPlot3D
 
   - title: 3D visualization in spatial and expression space
     desc: Visualization in both 3D spatial and expression space
     contents:
     - spatDimPlot3D
-    - spatDimFeatPlot3D
-
+    - spatGenePlot3D
+    - spatDimGenePlot3D
 
   - title: In silico cross sections
     desc: create in silico 2D cross sections from 3D data
     contents:
+    - create_crossSection_object
     - createCrossSection
     - crossSectionGenePlot
     - crossSectionPlot
@@ -352,17 +486,6 @@ reference:
     - cellProximitySpatPlot
     - cellProximitySpatPlot3D
 
-
-  - title: cell neighborhood; cell-type/cell-type enrichment
-    desc: calculate and visualize cell-type/cell-type spatial enrichment or depletion
-    contents:
-    - cellProximityEnrichment
-    - cellProximityBarplot
-    - cellProximityHeatmap
-    - cellProximityNetwork
-    - cellProximitySpatPlot
-    - cellProximitySpatPlot3D
-
   - title: cell neighborhood; spatial interaction changed genes
     desc: Identify and visualize genes that change in a source cell type due to interaction with another neighboring cell type
     contents:
@@ -370,27 +493,79 @@ reference:
     - findICF
     - filterInteractionChangedFeats
     - filterICF
-    - combineInteractionChangedFeats
-    - combineICF
-    - plotInteractionChangedFeats
-    - plotICF
-    - plotCombineInteractionChangedFeats
-    - plotCombineICF
+    - combineInteractionChangedGenes
+    - combineICG
+    - plotInteractionChangedGenes
+    - plotICG
+    - plotCombineInteractionChangedGenes
+    - plotCombineICG
 
   - title: cell neighborhood; ligand-receptor cell communication
     desc: Find putative increased spatial ligand-receptor activity between cells of pairs of cell types
     contents:
     - exprCellCellcom
+    - specificCellCellcommunicationScores
     - spatCellCellcom
+    - combCCcom
     - plotCCcomDotplot
     - plotRankSpatvsExpr
     - plotRecovery
+    - plotRecovery_sub
+
+  - title: Cell segmentation
+    desc: Functions for cell segmentation
+    contents:
+    - doCellSegmentation
 
   - title: Interoperability
     desc: Convert other type of objects into a Giotto object
     contents:
-    - anndataToGiotto
-    - giottoToSeurat
     - seuratToGiotto
 
+  - title: Giotto structures
+    desc: General Giotto object structure
+    contents:
+    - giottoPolygon
+    - createGiottoPolygonsFromMask
+    - createGiottoPolygonsFromDfr
+    - addGiottoPolygons
+    - smoothGiottoPolygons
+    - giottoPoints
+    - featureNetwork
+    - createGiottoPoints
+    - addGiottoPoints
+    - createSpatialFeaturesKNNnetwork
+    - addSpatialCentroidLocationsLayer
+    - addSpatialCentroidLocations
+    - calculateOverlapRaster
+    - calculateOverlapSerial
+    - calculateOverlapParallel
+    - overlapToMatrix
+    - overlapToMatrixMultiPoly
+    - combineCellData
+    - combineFeatureData
+    - combineFeatureOverlapData
 
+  - title: Interactive selection
+    desc: Interactive selection of cells and transcripts
+    contents:
+    - plotInteractivePolygons
+
+  - title: Python scrublet
+    desc: Run scrublet doublet detection for raw expression.
+    contents:
+    - doScrubletDetect
+
+  - title: Giotto viewer
+    desc: Export Giotto object to Giotto viewer format.
+    contents:
+    - exportGiottoViewer
+
+  - title: mini Giotto
+    desc: mini Giotto objects
+    contents:
+    - mini_giotto_3D
+    - mini_giotto_multi_cell
+    - mini_giotto_single_cell
+    - giotto-class
+    - show,giotto-method
