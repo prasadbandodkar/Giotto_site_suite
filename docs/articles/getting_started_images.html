@@ -161,42 +161,26 @@
 <h2 id="giotto-and-image-data">Giotto and Image Data<a class="anchor" aria-label="anchor" href="#giotto-and-image-data"></a>
 </h2>
 <p><br> Multiple images can be attached to your Giotto object. Spatial
-data can be overlaid over these images in order to gain further context.
-Additionally, images themselves are also a form of spatial information
-and the images themselves can also be used for downstream analyses.
-While Giotto attempts to automate the addition and alignment of images
-as much as possible, manual adjustments may sometimes be necessary, and
-this tutorial will be covering both topics.<br>
-Visium’s normal human prostate FFPE <a href="https://www.10xgenomics.com/resources/datasets/normal-human-prostate-ffpe-1-standard-1-3-0" class="external-link">dataset</a>
-dataset will be used as an example for both the Visium and manual
-adjustment workflows.<br>
-Additionally the Nanostring CosMx lung data will be used as an example
-of working with high definition images that may require ROI alignment
-and or stitching.</p>
+data can be overlaid over these images and the images themselves can
+also be used for downstream image analyses. While Giotto attempts to
+automate the addition and alignment of images as much as possible,
+manual adjustments may sometimes be necessary, and this tutorial will be
+covering both topics.<br>
+Examples will be worked using Visium’s normal human prostate FFPE <a href="https://www.10xgenomics.com/resources/datasets/normal-human-prostate-ffpe-1-standard-1-3-0" class="external-link">dataset</a>
+for both the Visium and manual adjustment workflows.</p>
 <div class="section level4">
 <h4 id="conceptual-overview">Conceptual Overview<a class="anchor" aria-label="anchor" href="#conceptual-overview"></a>
 </h4>
-<p>Giotto currently supports two types of image objects. For most
-purposes, images are loaded in through the <a href="https://rdrr.io/cran/terra/" class="external-link"><em>terra</em></a> package and then
-placed into <strong>giottoLargeImage</strong> objects to be worked with
-in Giotto. <strong>giottoLargeImage</strong> objects only load in
-sampled subsets of the original image that are needed to represent the
-image, making it very efficient for working with very high-resolution
-images.</p>
-<p>Smaller images can also be loaded in through the <a href="https://rdrr.io/cran/magick/" class="external-link"><em>magick</em></a> package and then
-placed into <strong>giottoImage</strong> objects. This offers direct
-access to the powerful image processing functionality in the
-<em>magick</em> package, but direct usage of this image class is mostly
-legacy. <strong>giottoLargeImage</strong> objects can be downsampled
-into <strong>giottoImage</strong> objects when necessary through use of
-the <strong>convertGiottoLargeImageToMG()</strong> function.</p>
+<p>Images are loaded in using the <a href="https://rdrr.io/cran/magick/" class="external-link"><strong>magick</strong></a> package
+and then placed into <strong>giottoImage</strong> objects to be worked
+with in Giotto.</p>
 <details><summary><strong>More about the giottoImage container</strong>
 </summary><hr>
 <p><strong>giottoImages</strong> are S4 class objects with slots that
 contain both the image itself, and all the metadata needed to plot them
-in the right position. The <em>magick</em> package allows easy access to
-image processing functions and also the ability to refer to images
-through pointers so that they are only loaded into memory when
+in the right position. The <strong>magick</strong> package allows easy
+access to image processing functions and also the ability to refer to
+images through pointers so that they are only loaded into memory when
 needed.</p>
 <p>When incorporated into a <strong>giottoObject</strong>,
 <strong>giottoImages</strong> are added into the <strong>images</strong>
@@ -336,9 +320,9 @@ you want to align the image to.</p>
 </h5>
 <p>giottoImages are created using the
 <strong>createGiottoImage()</strong> function. This function requires a
-<em>magick</em>-compatible image (eg. jpg, tiff, png) to be provided to
-the <strong>mg_object</strong> argument as either a filepath or already
-loaded in as a <em>magick</em> object.<br>
+<strong>magick</strong>-compatible image (eg. jpg, tiff, png) to be
+provided to the <strong>mg_object</strong> argument as either a filepath
+or already loaded in as a <strong>magick</strong> object.<br>
 Also required if automatic image alignment is desired is the
 <strong>scale_factor</strong> which is the scaling from the spatial
 locations to the image.<br><em>This is since spatial locations do not contain information for how
@@ -573,7 +557,7 @@ do not match up with the spatial coordinates for some reason.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer>

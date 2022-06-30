@@ -140,38 +140,69 @@
     <h2>Arguments</h2>
     <dl><dt>gobject</dt>
 <dd><p>giotto object</p></dd>
+
+
 <dt>method</dt>
 <dd><p>method to create kNN network</p></dd>
+
+
 <dt>spat_unit</dt>
 <dd><p>spatial unit</p></dd>
+
+
 <dt>feat_type</dt>
 <dd><p>feature type</p></dd>
+
+
 <dt>spat_loc_name</dt>
 <dd><p>name of spatial locations</p></dd>
+
+
 <dt>dimensions</dt>
 <dd><p>which spatial dimensions to use (default = all)</p></dd>
+
+
 <dt>name</dt>
 <dd><p>name for spatial network (default = 'spatial_network')</p></dd>
+
+
 <dt>k</dt>
 <dd><p>number of nearest neighbors based on physical distance</p></dd>
+
+
 <dt>maximum_distance</dt>
 <dd><p>distance cuttof for nearest neighbors to consider for kNN network</p></dd>
+
+
 <dt>minimum_k</dt>
 <dd><p>minimum nearest neigbhours if maximum_distance != NULL</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>verbose</p></dd>
+
+
 <dt>return_gobject</dt>
 <dd><p>boolean: return giotto object (default = TRUE)</p></dd>
+
+
 <dt>...</dt>
 <dd><p>additional arguments to the selected method function</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>giotto object with updated spatial network slot
-<strong>dimensions: </strong> default = 'all' which takes all possible dimensions.
+    
+
+<p>giotto object with updated spatial network slot</p>
+
+
+<p><strong>dimensions: </strong> default = 'all' which takes all possible dimensions.
 Alternatively you can provide a character vector that specififies the spatial dimensions to use, e.g. c("sdimx', "sdimy")
-or a numerical vector, e.g. 2:3
-<strong>maximum_distance: </strong> to create a network based on maximum distance only, you also need to set k to a very high value, e.g. k = 100</p>
+or a numerical vector, e.g. 2:3</p>
+
+
+<p><strong>maximum_distance: </strong> to create a network based on maximum distance only, you also need to set k to a very high value, e.g. k = 100</p>
     </div>
 
   </div>
@@ -186,7 +217,7 @@ or a numerical vector, e.g. 2:3
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
