@@ -259,14 +259,14 @@ Subcellular</h1>
 <h2 id="part-5-calculate-cell-shape-overlap">Part 5: Calculate Cell Shape Overlap<a class="anchor" aria-label="anchor" href="#part-5-calculate-cell-shape-overlap"></a>
 </h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span>
 <span class="va">testobj</span> <span class="op">=</span> <span class="fu">calculateOverlap</span><span class="op">(</span><span class="va">testobj</span>,
                            method <span class="op">=</span> <span class="st">'parallel'</span>,
                            x_step <span class="op">=</span> <span class="fl">1000</span>,
                            y_step <span class="op">=</span> <span class="fl">1000</span>,
                            poly_info <span class="op">=</span> <span class="st">'cell'</span>,
                            feat_info <span class="op">=</span> <span class="st">'rna'</span><span class="op">)</span>
-<span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#convert overlap to matrix </span>
 <span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/overlapToMatrix.html">overlapToMatrix</a></span><span class="op">(</span><span class="va">testobj</span>,
                           poly_info <span class="op">=</span> <span class="st">'cell'</span>,
@@ -551,7 +551,7 @@ Subcellular</h1>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer>
