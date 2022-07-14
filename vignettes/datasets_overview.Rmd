@@ -23,7 +23,7 @@ output: html_document
 
 #### 2D datasets
 
-[![](../inst/images/icons/datasets/cortex_image_summary.png){width=30%}](./mini_seqfish.html)
+[![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/icons/datasets/miniseqFISH.png?raw=true){width=30%}](./mini_seqfish.html)
 [![](../inst/images/icons/datasets/cortex_image_summary.png){width=30%}](./SeqFISH_cortex_210923.html)
 [![](../inst/images/icons/datasets/osmFISH_SS_cortex_image_summary.png){width=30%}](./osmFISH_mouse_SScortex_Sep29_21.html)
 
