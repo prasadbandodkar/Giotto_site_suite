@@ -186,122 +186,237 @@
     <h2>Arguments</h2>
     <dl><dt>gobject</dt>
 <dd><p>giotto object</p></dd>
+
+
 <dt>feat_type</dt>
 <dd><p>feature type</p></dd>
+
+
 <dt>spat_unit</dt>
 <dd><p>spatial unit</p></dd>
+
+
 <dt>show_image</dt>
 <dd><p>show a tissue background image</p></dd>
+
+
 <dt>gimage</dt>
 <dd><p>a giotto image</p></dd>
+
+
 <dt>image_name</dt>
 <dd><p>name of a giotto image</p></dd>
+
+
 <dt>largeImage_name</dt>
 <dd><p>name of a giottoLargeImage</p></dd>
+
+
 <dt>spat_loc_name</dt>
 <dd><p>name of spatial locations</p></dd>
+
+
 <dt>sdimx</dt>
 <dd><p>x-axis dimension name (default = 'sdimx')</p></dd>
+
+
 <dt>sdimy</dt>
 <dd><p>y-axis dimension name (default = 'sdimy')</p></dd>
+
+
 <dt>spat_enr_names</dt>
 <dd><p>names of spatial enrichment results to include</p></dd>
+
+
 <dt>cell_color</dt>
 <dd><p>color for cells (see details)</p></dd>
+
+
 <dt>color_as_factor</dt>
 <dd><p>convert color column to factor</p></dd>
+
+
 <dt>cell_color_code</dt>
 <dd><p>named vector with colors</p></dd>
+
+
 <dt>cell_color_gradient</dt>
 <dd><p>vector with 3 colors for numeric data</p></dd>
+
+
 <dt>gradient_midpoint</dt>
 <dd><p>midpoint for color gradient</p></dd>
+
+
 <dt>gradient_limits</dt>
 <dd><p>vector with lower and upper limits</p></dd>
+
+
 <dt>select_cell_groups</dt>
 <dd><p>select subset of cells/clusters based on cell_color parameter</p></dd>
+
+
 <dt>select_cells</dt>
 <dd><p>select subset of cells based on cell IDs</p></dd>
+
+
 <dt>point_shape</dt>
 <dd><p>shape of points (border, no_border or voronoi)</p></dd>
+
+
 <dt>point_size</dt>
 <dd><p>size of point (cell)</p></dd>
+
+
 <dt>point_alpha</dt>
 <dd><p>transparancy of point</p></dd>
+
+
 <dt>point_border_col</dt>
 <dd><p>color of border around points</p></dd>
+
+
 <dt>point_border_stroke</dt>
 <dd><p>stroke size of border around points</p></dd>
+
+
 <dt>show_cluster_center</dt>
 <dd><p>plot center of selected clusters</p></dd>
+
+
 <dt>show_center_label</dt>
 <dd><p>plot label of selected clusters</p></dd>
+
+
 <dt>center_point_size</dt>
 <dd><p>size of center points</p></dd>
+
+
 <dt>label_size</dt>
 <dd><p>size of labels</p></dd>
+
+
 <dt>label_fontface</dt>
 <dd><p>font of labels</p></dd>
+
+
 <dt>show_network</dt>
 <dd><p>show underlying spatial network</p></dd>
+
+
 <dt>spatial_network_name</dt>
 <dd><p>name of spatial network to use</p></dd>
+
+
 <dt>network_color</dt>
 <dd><p>color of spatial network</p></dd>
+
+
 <dt>network_alpha</dt>
 <dd><p>alpha of spatial network</p></dd>
+
+
 <dt>show_grid</dt>
 <dd><p>show spatial grid</p></dd>
+
+
 <dt>spatial_grid_name</dt>
 <dd><p>name of spatial grid to use</p></dd>
+
+
 <dt>grid_color</dt>
 <dd><p>color of spatial grid</p></dd>
+
+
 <dt>show_other_cells</dt>
 <dd><p>display not selected cells</p></dd>
+
+
 <dt>other_cell_color</dt>
 <dd><p>color of not selected cells</p></dd>
+
+
 <dt>other_point_size</dt>
 <dd><p>point size of not selected cells</p></dd>
+
+
 <dt>other_cells_alpha</dt>
 <dd><p>alpha of not selected cells</p></dd>
+
+
 <dt>coord_fix_ratio</dt>
 <dd><p>fix ratio between x and y-axis</p></dd>
+
+
 <dt>title</dt>
 <dd><p>title of plot</p></dd>
+
+
 <dt>show_legend</dt>
 <dd><p>show legend</p></dd>
+
+
 <dt>legend_text</dt>
 <dd><p>size of legend text</p></dd>
+
+
 <dt>legend_symbol_size</dt>
 <dd><p>size of legend symbols</p></dd>
+
+
 <dt>background_color</dt>
 <dd><p>color of plot background</p></dd>
+
+
 <dt>vor_border_color</dt>
 <dd><p>border colorr for voronoi plot</p></dd>
+
+
 <dt>vor_max_radius</dt>
 <dd><p>maximum radius for voronoi 'cells'</p></dd>
+
+
 <dt>vor_alpha</dt>
 <dd><p>transparancy of voronoi 'cells'</p></dd>
+
+
 <dt>axis_text</dt>
 <dd><p>size of axis text</p></dd>
+
+
 <dt>axis_title</dt>
 <dd><p>size of axis title</p></dd>
+
+
 <dt>show_plot</dt>
 <dd><p>show plot</p></dd>
+
+
 <dt>return_plot</dt>
 <dd><p>return ggplot object</p></dd>
+
+
 <dt>save_plot</dt>
 <dd><p>directly save the plot [boolean]</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>be verbose</p></dd>
+
+
 <dt>save_param</dt>
 <dd><p>list of saving parameters from <code><a href="all_plots_save_function.html">all_plots_save_function</a></code></p></dd>
+
+
 <dt>default_save_name</dt>
 <dd><p>default save name for saving, don't change, change save_name in save_param</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>ggplot</p>
+    
+
+<p>ggplot</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -324,7 +439,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

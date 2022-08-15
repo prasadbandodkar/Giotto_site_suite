@@ -1,5 +1,5 @@
 pandoc: '2.18'
-pkgdown: 2.0.3
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   Dimension_reduction: Dimension_reduction.html
@@ -90,5 +90,5 @@ articles:
   singlecell_prostate_standard_Sep29_21: vignettes/vignettes/singlecell_prostate_standard_Sep29_21.html
   temp_construction: vignettes/vignettes/temp_construction.html
   vizgen_mouse_brain_210929: vizgen_mouse_brain_210929.html
-last_built: 2022-08-15T16:01Z
+last_built: 2022-08-15T16:19Z
 

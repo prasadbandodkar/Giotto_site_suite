@@ -155,64 +155,121 @@
     <h2>Arguments</h2>
     <dl><dt>gobject</dt>
 <dd><p>giotto object</p></dd>
+
+
 <dt>spat_unit</dt>
 <dd><p>spatial unit</p></dd>
+
+
 <dt>feat_type</dt>
 <dd><p>feature type</p></dd>
+
+
 <dt>bin_method</dt>
 <dd><p>method to binarize gene expression</p></dd>
+
+
 <dt>expression_values</dt>
 <dd><p>expression values to use</p></dd>
+
+
 <dt>subset_feats</dt>
 <dd><p>only select a subset of features to test</p></dd>
+
+
 <dt>subset_genes</dt>
 <dd><p>deprecated, use subset_feats</p></dd>
+
+
 <dt>spatial_network_name</dt>
 <dd><p>name of spatial network to use (default = 'spatial_network')</p></dd>
+
+
 <dt>reduce_network</dt>
 <dd><p>default uses the full network</p></dd>
+
+
 <dt>kmeans_algo</dt>
 <dd><p>kmeans algorithm to use (kmeans, kmeans_arma, kmeans_arma_subset)</p></dd>
+
+
 <dt>nstart</dt>
 <dd><p>kmeans: nstart parameter</p></dd>
+
+
 <dt>iter_max</dt>
 <dd><p>kmeans: iter.max parameter</p></dd>
+
+
 <dt>extreme_nr</dt>
 <dd><p>number of top and bottom cells (see details)</p></dd>
+
+
 <dt>sample_nr</dt>
 <dd><p>total number of cells to sample (see details)</p></dd>
+
+
 <dt>percentage_rank</dt>
 <dd><p>percentage of top cells for binarization</p></dd>
+
+
 <dt>do_fisher_test</dt>
 <dd><p>perform fisher test</p></dd>
+
+
 <dt>adjust_method</dt>
 <dd><p>p-value adjusted method to use (see <code><a href="https://rdrr.io/r/stats/p.adjust.html" class="external-link">p.adjust</a></code>)</p></dd>
+
+
 <dt>calc_hub</dt>
 <dd><p>calculate the number of hub cells</p></dd>
+
+
 <dt>hub_min_int</dt>
 <dd><p>minimum number of cell-cell interactions for a hub cell</p></dd>
+
+
 <dt>get_av_expr</dt>
 <dd><p>calculate the average expression per gene of the high expressing cells</p></dd>
+
+
 <dt>get_high_expr</dt>
 <dd><p>calculate the number of high expressing cells  per gene</p></dd>
+
+
 <dt>implementation</dt>
 <dd><p>enrichment implementation (data.table, simple, matrix)</p></dd>
+
+
 <dt>group_size</dt>
 <dd><p>number of genes to process together with data.table implementation (default = automatic)</p></dd>
+
+
 <dt>do_parallel</dt>
 <dd><p>run calculations in parallel with mclapply</p></dd>
+
+
 <dt>cores</dt>
 <dd><p>number of cores to use if do_parallel = TRUE</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>be verbose</p></dd>
+
+
 <dt>set.seed</dt>
 <dd><p>set a seed before kmeans binarization</p></dd>
+
+
 <dt>bin_matrix</dt>
 <dd><p>a binarized matrix, when provided it will skip the binarization process</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>data.table with results (see details)</p>
+    
+
+<p>data.table with results (see details)</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -245,7 +302,7 @@ The data.table implementation might be more appropriate for large datasets by se
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
