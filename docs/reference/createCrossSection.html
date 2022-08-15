@@ -146,36 +146,20 @@
     <h2>Arguments</h2>
     <dl><dt>gobject</dt>
 <dd><p>giotto object</p></dd>
-
-
 <dt>spat_loc_name</dt>
 <dd><p>name of spatial locations</p></dd>
-
-
 <dt>name</dt>
 <dd><p>name of cress section object. (default = cross_sectino)</p></dd>
-
-
 <dt>spatial_network_name</dt>
 <dd><p>name of spatial network object. (default = Delaunay_network)</p></dd>
-
-
 <dt>thickness_unit</dt>
 <dd><p>unit of the virtual section thickness. If "cell", average size of the observed cells is used as length unit. If "natural", the unit of cell location coordinates is used.(default = cell)</p></dd>
-
-
 <dt>slice_thickness</dt>
 <dd><p>thickness of slice. default = 2</p></dd>
-
-
 <dt>cell_distance_estimate_method</dt>
 <dd><p>method to estimate average distance between neighobring cells. (default = mean)</p></dd>
-
-
 <dt>extend_ratio</dt>
 <dd><p>deciding the span of the cross section meshgrid, as a ratio of extension compared to the borders of the vitural tissue section. (default = 0.2)</p></dd>
-
-
 <dt>method</dt>
 <dd><p>method to define the cross section plane.
 If equation, the plane is defined by a four element numerical vector (equation) in the form of c(A,B,C,D), corresponding to a plane with equation Ax+By+Cz=D.
@@ -183,49 +167,28 @@ If 3 points, the plane is define by the coordinates of 3 points, as given by poi
 If point and norm vector, the plane is defined by the coordinates of one point (point1) in the plane and the coordinates of one norm vector (normVector) to the plane.
 If point and two plane vector, the plane is defined by the coordinates of one point (point1) in the plane and the coordinates of two vectors (planeVector1, planeVector2) in the plane.
 (default = equation)</p></dd>
-
-
 <dt>equation</dt>
 <dd><p>equation required by method "equation".equations needs to be a numerical vector of length 4, in the form of c(A,B,C,D), which defines plane Ax+By+Cz=D.</p></dd>
-
-
 <dt>point1</dt>
 <dd><p>coordinates of the first point required by method "3 points","point and norm vector", and "point and two plane vectors".</p></dd>
-
-
 <dt>point2</dt>
 <dd><p>coordinates of the second point required by method "3 points"</p></dd>
-
-
 <dt>point3</dt>
 <dd><p>coordinates of the third point required by method "3 points"</p></dd>
-
-
 <dt>normVector</dt>
 <dd><p>coordinates of the norm vector required by method "point and norm vector"</p></dd>
-
-
 <dt>planeVector1</dt>
 <dd><p>coordinates of the first plane vector required by method "point and two plane vectors"</p></dd>
-
-
 <dt>planeVector2</dt>
 <dd><p>coordinates of the second plane vector required by method "point and two plane vectors"</p></dd>
-
-
 <dt>mesh_grid_n</dt>
 <dd><p>numer of meshgrid lines to generate along both directions for the cross section plane.</p></dd>
-
-
 <dt>return_gobject</dt>
 <dd><p>boolean: return giotto object (default = TRUE)</p></dd>
-
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>giotto object with updated spatial network slot</p>
+    <p>giotto object with updated spatial network slot</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -244,7 +207,7 @@ If point and two plane vector, the plane is defined by the coordinates of one po
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>

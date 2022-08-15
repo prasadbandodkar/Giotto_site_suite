@@ -410,7 +410,7 @@ provide some comments within the code.</p>
   <span class="co"># Here we implemented spark according to their github example code: </span>
   
   <span class="co"># create SPARK object for analysis and filter out lowly expressed genes</span>
-  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu">CreateSPARKObject</span><span class="op">(</span>counts <span class="op">=</span> <span class="va">expr</span>,
+  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/SPARK/man/CreateSPARKObject.html" class="external-link">CreateSPARKObject</a></span><span class="op">(</span>counts <span class="op">=</span> <span class="va">expr</span>,
                                      location <span class="op">=</span> <span class="va">locs</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>,
                                      percentage <span class="op">=</span> <span class="va">percentage</span>,
                                      min_total_counts <span class="op">=</span> <span class="va">min_count</span><span class="op">)</span>
@@ -437,7 +437,7 @@ provide some comments within the code.</p>
   <span class="op">}</span>
 
   <span class="co"># Fit statistical model under null hypothesis</span>
-  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu">spark.vc</span><span class="op">(</span><span class="va">sobject</span>,
+  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/SPARK/man/spark.vc.html" class="external-link">spark.vc</a></span><span class="op">(</span><span class="va">sobject</span>,
                             covariates <span class="op">=</span> <span class="va">covariates</span>,
                             lib_size <span class="op">=</span> <span class="va">sobject</span><span class="op">@</span><span class="va">lib_size</span>,
                             num_core <span class="op">=</span> <span class="va">num_core</span>,
@@ -446,7 +446,7 @@ provide some comments within the code.</p>
 
   <span class="co"># test spatially expressed pattern genes</span>
   <span class="co"># calculating pval</span>
-  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu">spark.test</span><span class="op">(</span><span class="va">sobject</span>,
+  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/SPARK/man/spark.test.html" class="external-link">spark.test</a></span><span class="op">(</span><span class="va">sobject</span>,
                               check_positive <span class="op">=</span> <span class="cn">T</span>,
                               verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
 
@@ -483,7 +483,7 @@ provide some comments within the code.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

@@ -328,7 +328,7 @@ hypothalamic preoptic regions</p>
 <code class="sourceCode R"> <span class="co">## name clusters</span>
 <span class="va">clusters_cell_types_hypo</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Inhibitory'</span>, <span class="st">'Inhibitory'</span>, <span class="st">'Excitatory'</span>, <span class="st">'Astrocyte'</span>,<span class="st">'OD Mature'</span>, <span class="st">'Endothelial'</span>,
                              <span class="st">'OD Mature'</span>, <span class="st">'OD Immature'</span>, <span class="st">'Ependymal'</span>, <span class="st">'Ambiguous'</span>, <span class="st">'Endothelial'</span>, <span class="st">'Microglia'</span>, <span class="st">'OD Mature'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">clusters_cell_types_hypo</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">cluster_order</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">clusters_cell_types_hypo</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">cluster_order</span><span class="op">)</span><span class="op">)</span>
 <span class="va">merFISH_test</span> <span class="op">=</span> <span class="fu"><a href="../reference/annotateGiotto.html">annotateGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">merFISH_test</span>, annotation_vector <span class="op">=</span> <span class="va">clusters_cell_types_hypo</span>,
                               cluster_column <span class="op">=</span> <span class="st">'leiden_0.2'</span>, name <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">)</span>
 
@@ -450,7 +450,7 @@ hypothalamic preoptic regions</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
