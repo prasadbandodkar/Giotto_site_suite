@@ -4,21 +4,29 @@ output: html_document
 
 # How to create a Giotto Object?
 
+In this overview, we show the methodology and syntax to create a Giotto object. However, the code below does not create a Giotto Object as dummy locations are used for data paths.
+
 #### 1. Minimum requirements
- - expression matrix
- - spatial locations (*unnecessary for scRNAseq analysis*)    
+ - Expression matrix
+ - Spatial locations (*unnecessary for scRNAseq analysis*) 
+ 
+ Here, we show two examples of how to create a Giotto object with the minimum requirements.
+ Data formatting guidelines are shown below this code block.
 
 ```{r eval=FALSE, include=TRUE}
 library(Giotto)
 
-# 1. Directly from file path (dummy locations are used as examples here)
+# 1. Create a Giotto object using data directly from file paths 
+# (dummy locations are used as examples here)
 path_to_expression_file = "/local/path/to/expression/file.txt"
 path_to_locations_file = "/local/path/to/locations/file.txt"
 
 my_giotto_object = createGiottoObject(expression = path_to_expression_file,
                                       spatial_locs = path_to_locations_file)
 
-# 2. Use objects already loaded into environment
+
+
+# 2. Create a Giotto object using objects already loaded into workspace
 expression_matrix = readExprMatrix(path = path_to_expression_file) # fast method to read expression matrix
 cell_locations = data.table::fread(file = path_to_locations_file)
 
@@ -67,47 +75,58 @@ Numerical columns will be interpreted in order of x, y, and (optionally) z coord
 
 **\*Note:** multiple expression files during can be given at once during Giotto object creation by using a named list.
 ```{r eval=FALSE, include=TRUE}
-my_giotto_object = createGiottoObject(expression = list(raw = matrix1
-                                                        scaled = matrix2,
-                                                        custom = matrix3),
+my_giotto_object = createGiottoObject(expression = list(raw = raw_matrix,
+                                                        scaled = scaled_matrix,
+                                                        custom = custom_matrix),
                                       spatial_locs = cell_locations)
 ```
 <br>
 
 #### 2. Additional features
-Other information can also be provided using the other function parameters    
-- add **cell** or **gene metadata**    
-- add **spatial networks** or **grids**    
-- add **dimension reduction**    
-- add **images**    
-- add **instructions**    
+Other information may also be provided using the other function parameters    
+- Add **cell** or **feature (gene) metadata**    
+- Add **spatial networks** or **grids**    
+- Add **dimension reduction**    
+- Add **images**    
+- Add **instructions**    
 
-Usually specifying your own **instructions** can be most useful to:    
-- specify a python path     
-- determine output of plots (show in viewer, return as object, save as image)    
-- automatically save plots to selected directory    
+Usually providing **instructions** can be most useful to:    
+- Specify a python path     
+- Determine output of plots (show in viewer, return as object, save as image)    
+- Automatically save plots to selected directory
+
+Here, we show an example of creating a more customized Giotto object.
 
 ```{r eval=FALSE, include=TRUE}
-library(Giotto)
-
-# 1. Directly from file path (dummy locations are used as examples here)
+# 1. Create a Giotto object using data directly from file paths 
+# (dummy locations are used as examples here)
 path_to_expression_file = "/local/path/to/expression/file.txt"
 path_to_locations_file = "/local/path/to/locations/file.txt"
 
-# 2. Create your own instructions
-path_to_python = '/usr/bin/python3' # can be something else
-working_directory = getwd() # this will use your current working directory
-my_instructions = createGiottoInstructions(python_path = path_to_python,
-                                           save_dir = working_directory)
+path_to_cell_metadata_file = "/local/path/to/cell/metadata.txt"
+my_cell_metadata = data.table::fread(file = path_to_cell_metadata_file)
+
+path_to_feature_metadata_file = "/local/path/to/feature/metadata.txt"
+my_feat_metadata = data.table::fread(file = path_to_feature_metadata_file)
+
+# 2. Create instructions
+
+# Optional: Specify a Python path. If set to NULL (default), the previously installed
+# Giotto environment will be used.
+my_python_path = NULL # alternatively, "/your/python/path/" if desired.
+
+results_directory = getwd() # This will use your current working directory
+my_instructions = createGiottoInstructions(python_path = my_python_path,
+                                           save_dir = results_directory)
 
 # 3. Create your giotto object
 my_giotto_object = createGiottoObject(expression = path_to_expression_file,
                                       spatial_locs = path_to_locations_file,                                      
                                       cell_metadata = my_cell_metadata,
-                                      gene_metadata = my_gene_metadata,
+                                      feat_metadata = my_feat_metadata,
                                       instructions = my_instructions)
 
-# 4. check which giotto instructions are associated with your giotto object
+# 4. Check which Giotto instructions are associated with your Giotto object
 showGiottoInstructions(my_giotto_object)
 ```
 <br>
@@ -126,7 +145,7 @@ Data is organized within the **giottoObject** in defined **slots** as described 
 ## Nested organization within slots    
 Spatial data has a tiered organization and so does Giotto. Tissue regions can be divided down into individual cells and then further into organelles. 
 The data structure of Giotto mirrors biological structure by nesting data within slots related to spatial data by **spat_unit** (spatial unit). 
-Additonally, to facilitate the integration of multiple omic data, slots related to feature data will be nested with **feat_type** (feature type).
+Additonally, to facilitate the integration of multiple -omic data, slots related to feature data will be nested with **feat_type** (feature type).
 <br>    
 Included below is a description of this nesting and also, for advanced users and contributors/developers, accessor functions for the slots are also provided.
 <br>    
