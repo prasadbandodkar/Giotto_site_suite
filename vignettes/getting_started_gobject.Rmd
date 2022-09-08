@@ -4,34 +4,59 @@ output: html_document
 
 # How to create a Giotto Object?
 
-In this overview, we show the methodology and syntax to create a Giotto object. However, the code below does not create a Giotto Object as dummy locations are used for data paths.
+In this tutorial, the methodology and syntax to create a **giottoObject** is shown and osmFISH data is used throughout the tutorial.
 
-#### 1. Minimum requirements
+## Import Giotto and Download the Data
+
+To download this data, please ensure that [wget](https://www.gnu.org/software/wget/?) is installed locally.
+
+```{r, eval=FALSE}
+library(Giotto)
+
+genv_exists = checkGiottoEnvironment()
+if(!genv_exists){
+  # The following command need only be run once to install the Giotto environment.
+  installGiottoEnvironment()
+}
+
+# Specify path from which data may be retrieved/stored
+data_directory = paste0(getwd(),'/gobject_data/')
+# alternatively, "/path/to/where/your/data/lives/"
+
+# Specify path to which results may be saved
+results_directory = paste0(getwd(),'/gobject_results/') 
+# alternatively, "/path/to/store/your/results/"
+
+# Download osmFISH dataset to data_directory
+getSpatialDataset(dataset = 'osmfish_SS_cortex', directory = data_directory, method = 'wget')
+
+```
+
+
+## Minimum requirements for a Giotto Object
  - Expression matrix
  - Spatial locations (*unnecessary for scRNAseq analysis*) 
  
- Here, we show two examples of how to create a Giotto object with the minimum requirements.
+ Here, creating a **giottoObject** with the minimum requirements is shown in two examples.
  Data formatting guidelines are shown below this code block.
 
 ```{r eval=FALSE, include=TRUE}
-library(Giotto)
+# Example 1.
+# Create a Giotto object using data directly from file paths 
+osm_exprs = paste0(data_directory, "osmFISH_prep_expression.txt")
+osm_locs = paste0(data_directory, "osmFISH_prep_cell_coordinates.txt")
 
-# 1. Create a Giotto object using data directly from file paths 
-# (dummy locations are used as examples here)
-path_to_expression_file = "/local/path/to/expression/file.txt"
-path_to_locations_file = "/local/path/to/locations/file.txt"
+minimum_gobject1 = createGiottoObject(expression = osm_exprs,
+                                      spatial_locs = osm_locs)
 
-my_giotto_object = createGiottoObject(expression = path_to_expression_file,
-                                      spatial_locs = path_to_locations_file)
+# Example 2.
+# Create a Giotto object using objects already loaded into workspace
+expression_matrix = readExprMatrix(path = osm_exprs) # fast method to read expression matrix
+cell_locations = data.table::fread(file = osm_locs)
 
-
-
-# 2. Create a Giotto object using objects already loaded into workspace
-expression_matrix = readExprMatrix(path = path_to_expression_file) # fast method to read expression matrix
-cell_locations = data.table::fread(file = path_to_locations_file)
-
-my_giotto_object = createGiottoObject(expression = expression_matrix,
+minimum_gobject2 = createGiottoObject(expression = expression_matrix,
                                       spatial_locs = cell_locations)
+
 ```
 
 <details>
@@ -73,68 +98,156 @@ Numerical columns will be interpreted in order of x, y, and (optionally) z coord
 </details>    
     
 
-**\*Note:** multiple expression files during can be given at once during Giotto object creation by using a named list.
+**\*Note:** multiple expression files during can be given at once during Giotto object creation by using a named list. 
 ```{r eval=FALSE, include=TRUE}
-my_giotto_object = createGiottoObject(expression = list(raw = raw_matrix,
-                                                        scaled = scaled_matrix,
-                                                        custom = custom_matrix),
-                                      spatial_locs = cell_locations)
+# Arbitrary modifications
+scaled_matrix = expression_matrix * 1.2
+custom_matrix = expression_matrix * 0.5
+
+# Provide multiple expression matrices at once to the Giotto Object
+# If these matrices are stored in files rather than in the workspace,
+# file paths may be provided instead of variables
+multi_expr_gobject = createGiottoObject(expression = list(raw = expression_matrix,
+                                                          scaled = scaled_matrix,
+                                                          custom = custom_matrix),
+                                        spatial_locs = cell_locations)
 ```
 <br>
 
-#### 2. Additional features
-Other information may also be provided using the other function parameters    
-- Add **cell** or **feature (gene) metadata**    
-- Add **spatial networks** or **grids**    
-- Add **dimension reduction**    
-- Add **images**    
-- Add **instructions**    
+## Customizing the Giotto Object
+By providing values to other **createGiottoObject** parameters, it is possible to add:
+ - **Cell** or **feature (gene) metadata**
+     - See [**addCellMetadata**](http://giottosuite.com/reference/addCellMetadata.html) and [**addFeatMetadata**](https://giottosuite.com/reference/addFeatMetadata.html)
+ - **Spatial networks** or **grids**
+     - See [Visualizations](./Visualizations.html)
+ - **Dimension reduction**
+     - See [Clustering](./dimension_reduction.html)
+ - **Images** 
+     - See [Imaging](./getting_started_images.html)
+ - **giottoInstructions**
+     - See [**createGiottoInstructions**](http://giottosuite.com/reference/createGiottoInstructions.html) and below
 
-Usually providing **instructions** can be most useful to:    
-- Specify a python path     
-- Determine output of plots (show in viewer, return as object, save as image)    
-- Automatically save plots to selected directory
+Providing **giottoInstructions** allows the specification of:    
+ - An alternative python path if using the Giotto Environment (default) is not desired    
+ - A directory to which resulting plots will save
+ - Plot formatting    
 
-Here, we show an example of creating a more customized Giotto object.
+There are four functions to utilize when setting instructions:  
+ - **createGiottoInstructions**: creates instructions that are provided to **createGiottoObject**
+ - **showGiottoInstructions**: displays the instructions of a Giotto object  
+ - **changeGiottoInstructions**: replaces 1 or more of the instruction parameters (e.g. plotting format)  
+ - **replaceGiottoInstructions**: replaces all instructions with new instructions (e.g after subsetting)
+
+Here is an example of a more customized Giotto object.
 
 ```{r eval=FALSE, include=TRUE}
-# 1. Create a Giotto object using data directly from file paths 
-# (dummy locations are used as examples here)
-path_to_expression_file = "/local/path/to/expression/file.txt"
-path_to_locations_file = "/local/path/to/locations/file.txt"
+# Specify data with file paths 
+osm_exprs = paste0(data_directory, "osmFISH_prep_expression.txt")
+osm_locs = paste0(data_directory, "osmFISH_prep_cell_coordinates.txt")
+meta_path = paste0(data_directory, "osmFISH_prep_cell_metadata.txt")
 
-path_to_cell_metadata_file = "/local/path/to/cell/metadata.txt"
-my_cell_metadata = data.table::fread(file = path_to_cell_metadata_file)
-
-path_to_feature_metadata_file = "/local/path/to/feature/metadata.txt"
-my_feat_metadata = data.table::fread(file = path_to_feature_metadata_file)
-
-# 2. Create instructions
+# Create instructions
 
 # Optional: Specify a Python path. If set to NULL (default), the previously installed
 # Giotto environment will be used.
-my_python_path = NULL # alternatively, "/your/python/path/" if desired.
+my_python_path = NULL # alternatively, "/your/python/path/python" if desired.
 
-results_directory = getwd() # This will use your current working directory
-my_instructions = createGiottoInstructions(python_path = my_python_path,
-                                           save_dir = results_directory)
+instrs = createGiottoInstructions(python_path = my_python_path,
+                                  save_dir = results_directory,
+                                  plot_format = 'png',
+                                  dpi = 200,
+                                  height = 9,
+                                  width = 9)
 
-# 3. Create your giotto object
-my_giotto_object = createGiottoObject(expression = path_to_expression_file,
-                                      spatial_locs = path_to_locations_file,                                      
-                                      cell_metadata = my_cell_metadata,
-                                      feat_metadata = my_feat_metadata,
-                                      instructions = my_instructions)
+# Create Giotto object
+custom_gobject = createGiottoObject(expression = osm_exprs,
+                                    spatial_locs = osm_locs,                                      
+                                    instructions = instrs)
 
-# 4. Check which Giotto instructions are associated with your Giotto object
-showGiottoInstructions(my_giotto_object)
+# Add field annotations as cell metadata
+metadata = data.table::fread(file = meta_path)
+custom_gobject = addCellMetadata(custom_gobject, new_metadata = metadata,
+                                 by_column = T, column_cell_ID = 'CellID')
+
+# Check which Giotto instructions are associated with your Giotto object
+showGiottoInstructions(custom_gobject)
 ```
+
+Note that although parameters *show_plot*, *return_plot*, and *save_plot* were not specified within the call to **createGiottoInstructions**, default values were provided to these instruction parameters. All instruction parameters have default values, such that **createGiottoInstructions** may be called with some or no arguments yet all instruction parameters will have a value after its execution.
+
+Alternatively, a named list may also be provided to the *instructions* argument of **createGiottoObject**. However, ensure that all arguments to [**createGiottoInstructions**](http://giottosuite.com/reference/createGiottoInstructions.html) are defined when providing instructions as a named list, since default values are only applied to instructions when made with **createGiottoInstructions**. *Note that python_path must be specified when providing instructions as a named list, and may not be provided as NULL.*
+
+The **giottoInstructions** may be changed, or completely replaced:
+```{r, eval=FALSE}
+# Change a previously set parameter, e.g. change dpi = 200 to dpi = 300
+custom_gobject = changeGiottoInstructions(custom_gobject, 
+                                          param = 'dpi', 
+                                          new_value = 300)
+
+# Observe that the instructions have changed
+showGiottoInstructions(custom_gobject)
+
+# Create new instructions using a named list
+sub_results_directory = paste0(results_directory, 'specific_results/')
+my_python_path = custom_gobject@instructions$python_path
+new_instrs = list(python_path = my_python_path,
+                  show_plot = TRUE,
+                  return_plot = FALSE,
+                  save_plot = TRUE,
+                  save_dir = sub_results_directory,
+                  plot_format = 'jpg',
+                  dpi = 250,
+                  units = 'in',
+                  height = 12,
+                  width = 12,
+                  is_docker = FALSE)
+
+# Change all instructions
+custom_gobject = replaceGiottoInstructions(custom_gobject,
+                                           instructions = new_instrs)
+
+# Observe that the instructions have changed
+showGiottoInstructions(custom_gobject)
+
+```
+
+
 <br>
 
+## Plotting Data from a Giotto Object
+
+Each plotting function in Giotto has three important binary parameters:    
+- **show_plot**: print the plot to the console, default is TRUE  
+- **return_plot**: return the plot as an object, default is TRUE  
+- **save_plot**: automatically save the plot, default is FALSE 
+
+These parameters are stored within a **giottoObject** that was provided instructions from **createGiottoInstructions** and are provided to plotting functions accordingly. To change these parameters from the default values, the instructions may be changed or replaced, or these parameters may be *manually overwritten* within plotting functions. 
+
+See [showSaveParameters](http://giottosuite.com/reference/showSaveParameters.html) and the [Saving Options](./getting_started_saving.html) tutorial for alternative methods to save plots.
+
+```{r, eval=FALSE}
+# Plot according to Giotto Instructions (default)
+spatPlot(custom_gobject)
+
+# Plot clusters, create, and save to a new subdirectory, all while overwritting formatting
+spatPlot(custom_gobject, 
+         cell_color = 'ClusterName', 
+         save_plot = TRUE,
+         return_plot = TRUE,
+         show_plot = TRUE,
+         save_param = list(save_folder = 'plots/', # Create subdirectory
+                           save_name = 'cell_clusters', 
+                           save_format = 'png', 
+                           units = 'in',
+                           base_height = 9,
+                           base_width = 9))
+
+```
+![](../inst/images/getting_started_figs/getting_started_gobject/cell_clusters.png)
 
 # Giotto Object Structure
 <br>
-Usage of the Giotto package revolves around the **giottoObject**. This is an S4 object class that holds spatial expression data and facilitates its use with the Giotto package's functions. Additional metadata and other certain outputs generated from Giotto functions that are used in downstream analyses will also be stored within this object. The self-contained nature of the Giotto object makes it a convenient representation of the entire spatial experiment and is why many of Giotto functions both take the **giottoObject** as input and feed into it as output.    
+Usage of the Giotto package revolves around the **giottoObject**. This is an S4 object class that holds spatial expression data and facilitates its manipulation and visualization with the Giotto package's functions. Additional metadata and other outputs generated from certain Giotto functions, which may used in downstream analyses, are also be stored within the **giottoObject**. Its self-contained nature renders a convenient representation of the entire spatial experiment and is why most Giotto functions take a given **giottoObject** as input and return a **giottoObject** as output.    
 
 Data is organized within the **giottoObject** in defined **slots** as described in the diagram below.    
 <br>
@@ -142,8 +255,8 @@ Data is organized within the **giottoObject** in defined **slots** as described 
 ![](../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-02.svg){width=100%}  
 ![](../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-03.svg){width=100%}  
     
-## Nested organization within slots    
-Spatial data has a tiered organization and so does Giotto. Tissue regions can be divided down into individual cells and then further into organelles. 
+# Nested Organization of the Giotto Object
+Spatial data has tiered organization and thus so too does Giotto. Tissue regions can be divided down into individual cells and then further into organelles. 
 The data structure of Giotto mirrors biological structure by nesting data within slots related to spatial data by **spat_unit** (spatial unit). 
 Additonally, to facilitate the integration of multiple -omic data, slots related to feature data will be nested with **feat_type** (feature type).
 <br>    
