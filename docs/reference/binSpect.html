@@ -121,39 +121,39 @@ that identifies genes with a spatially coherent expression pattern.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">binSpect</span><span class="op">(</span>
-  <span class="va">gobject</span>,
-  spat_unit <span class="op">=</span> <span class="cn">NULL</span>,
-  feat_type <span class="op">=</span> <span class="cn">NULL</span>,
-  bin_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"kmeans"</span>, <span class="st">"rank"</span><span class="op">)</span>,
-  expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normalized"</span>, <span class="st">"scaled"</span>, <span class="st">"custom"</span><span class="op">)</span>,
-  subset_feats <span class="op">=</span> <span class="cn">NULL</span>,
-  subset_genes <span class="op">=</span> <span class="cn">NULL</span>,
-  spatial_network_name <span class="op">=</span> <span class="st">"Delaunay_network"</span>,
-  spatial_network_k <span class="op">=</span> <span class="cn">NULL</span>,
-  reduce_network <span class="op">=</span> <span class="cn">FALSE</span>,
-  kmeans_algo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"kmeans"</span>, <span class="st">"kmeans_arma"</span>, <span class="st">"kmeans_arma_subset"</span><span class="op">)</span>,
-  nstart <span class="op">=</span> <span class="fl">3</span>,
-  iter_max <span class="op">=</span> <span class="fl">10</span>,
-  extreme_nr <span class="op">=</span> <span class="fl">50</span>,
-  sample_nr <span class="op">=</span> <span class="fl">50</span>,
-  percentage_rank <span class="op">=</span> <span class="fl">30</span>,
-  do_fisher_test <span class="op">=</span> <span class="cn">TRUE</span>,
-  adjust_method <span class="op">=</span> <span class="st">"fdr"</span>,
-  calc_hub <span class="op">=</span> <span class="cn">FALSE</span>,
-  hub_min_int <span class="op">=</span> <span class="fl">3</span>,
-  get_av_expr <span class="op">=</span> <span class="cn">TRUE</span>,
-  get_high_expr <span class="op">=</span> <span class="cn">TRUE</span>,
-  implementation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data.table"</span>, <span class="st">"simple"</span>, <span class="st">"matrix"</span><span class="op">)</span>,
-  group_size <span class="op">=</span> <span class="st">"automatic"</span>,
-  do_parallel <span class="op">=</span> <span class="cn">TRUE</span>,
-  cores <span class="op">=</span> <span class="cn">NA</span>,
-  verbose <span class="op">=</span> <span class="cn">T</span>,
-  knn_params <span class="op">=</span> <span class="cn">NULL</span>,
-  set.seed <span class="op">=</span> <span class="cn">NULL</span>,
-  bin_matrix <span class="op">=</span> <span class="cn">NULL</span>,
-  summarize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p.value"</span>, <span class="st">"adj.p.value"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">binSpect</span><span class="op">(</span></span>
+<span>  <span class="va">gobject</span>,</span>
+<span>  spat_unit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  feat_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  bin_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"kmeans"</span>, <span class="st">"rank"</span><span class="op">)</span>,</span>
+<span>  expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normalized"</span>, <span class="st">"scaled"</span>, <span class="st">"custom"</span><span class="op">)</span>,</span>
+<span>  subset_feats <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  subset_genes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  spatial_network_name <span class="op">=</span> <span class="st">"Delaunay_network"</span>,</span>
+<span>  spatial_network_k <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  reduce_network <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  kmeans_algo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"kmeans"</span>, <span class="st">"kmeans_arma"</span>, <span class="st">"kmeans_arma_subset"</span><span class="op">)</span>,</span>
+<span>  nstart <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  iter_max <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  extreme_nr <span class="op">=</span> <span class="fl">50</span>,</span>
+<span>  sample_nr <span class="op">=</span> <span class="fl">50</span>,</span>
+<span>  percentage_rank <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  do_fisher_test <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  adjust_method <span class="op">=</span> <span class="st">"fdr"</span>,</span>
+<span>  calc_hub <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  hub_min_int <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  get_av_expr <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  get_high_expr <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  implementation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data.table"</span>, <span class="st">"simple"</span>, <span class="st">"matrix"</span><span class="op">)</span>,</span>
+<span>  group_size <span class="op">=</span> <span class="st">"automatic"</span>,</span>
+<span>  do_parallel <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  cores <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>  knn_params <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  set.seed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  bin_matrix <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  summarize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p.value"</span>, <span class="st">"adj.p.value"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">

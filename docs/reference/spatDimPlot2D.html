@@ -119,88 +119,88 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">spatDimPlot2D</span><span class="op">(</span>
-  <span class="va">gobject</span>,
-  spat_unit <span class="op">=</span> <span class="cn">NULL</span>,
-  feat_type <span class="op">=</span> <span class="cn">NULL</span>,
-  show_image <span class="op">=</span> <span class="cn">F</span>,
-  gimage <span class="op">=</span> <span class="cn">NULL</span>,
-  image_name <span class="op">=</span> <span class="cn">NULL</span>,
-  largeImage_name <span class="op">=</span> <span class="cn">NULL</span>,
-  spat_loc_name <span class="op">=</span> <span class="cn">NULL</span>,
-  plot_alignment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"vertical"</span>, <span class="st">"horizontal"</span><span class="op">)</span>,
-  dim_reduction_to_use <span class="op">=</span> <span class="st">"umap"</span>,
-  dim_reduction_name <span class="op">=</span> <span class="cn">NULL</span>,
-  dim1_to_use <span class="op">=</span> <span class="fl">1</span>,
-  dim2_to_use <span class="op">=</span> <span class="fl">2</span>,
-  sdimx <span class="op">=</span> <span class="st">"sdimx"</span>,
-  sdimy <span class="op">=</span> <span class="st">"sdimy"</span>,
-  spat_enr_names <span class="op">=</span> <span class="cn">NULL</span>,
-  cell_color <span class="op">=</span> <span class="cn">NULL</span>,
-  color_as_factor <span class="op">=</span> <span class="cn">T</span>,
-  cell_color_code <span class="op">=</span> <span class="cn">NULL</span>,
-  cell_color_gradient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"white"</span>, <span class="st">"red"</span><span class="op">)</span>,
-  gradient_midpoint <span class="op">=</span> <span class="cn">NULL</span>,
-  gradient_limits <span class="op">=</span> <span class="cn">NULL</span>,
-  select_cell_groups <span class="op">=</span> <span class="cn">NULL</span>,
-  select_cells <span class="op">=</span> <span class="cn">NULL</span>,
-  dim_point_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"border"</span>, <span class="st">"no_border"</span><span class="op">)</span>,
-  dim_point_size <span class="op">=</span> <span class="fl">1</span>,
-  dim_point_alpha <span class="op">=</span> <span class="fl">1</span>,
-  dim_point_border_col <span class="op">=</span> <span class="st">"black"</span>,
-  dim_point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,
-  spat_point_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"border"</span>, <span class="st">"no_border"</span>, <span class="st">"voronoi"</span><span class="op">)</span>,
-  spat_point_size <span class="op">=</span> <span class="fl">1</span>,
-  spat_point_alpha <span class="op">=</span> <span class="fl">1</span>,
-  spat_point_border_col <span class="op">=</span> <span class="st">"black"</span>,
-  spat_point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,
-  dim_show_cluster_center <span class="op">=</span> <span class="cn">F</span>,
-  dim_show_center_label <span class="op">=</span> <span class="cn">T</span>,
-  dim_center_point_size <span class="op">=</span> <span class="fl">4</span>,
-  dim_center_point_border_col <span class="op">=</span> <span class="st">"black"</span>,
-  dim_center_point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,
-  dim_label_size <span class="op">=</span> <span class="fl">4</span>,
-  dim_label_fontface <span class="op">=</span> <span class="st">"bold"</span>,
-  spat_show_cluster_center <span class="op">=</span> <span class="cn">F</span>,
-  spat_show_center_label <span class="op">=</span> <span class="cn">F</span>,
-  spat_center_point_size <span class="op">=</span> <span class="fl">4</span>,
-  spat_center_point_border_col <span class="op">=</span> <span class="st">"blue"</span>,
-  spat_center_point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,
-  spat_label_size <span class="op">=</span> <span class="fl">4</span>,
-  spat_label_fontface <span class="op">=</span> <span class="st">"bold"</span>,
-  show_NN_network <span class="op">=</span> <span class="cn">F</span>,
-  nn_network_to_use <span class="op">=</span> <span class="st">"sNN"</span>,
-  network_name <span class="op">=</span> <span class="st">"sNN.pca"</span>,
-  nn_network_alpha <span class="op">=</span> <span class="fl">0.05</span>,
-  show_spatial_network <span class="op">=</span> <span class="cn">F</span>,
-  spat_network_name <span class="op">=</span> <span class="st">"Delaunay_network"</span>,
-  spat_network_color <span class="op">=</span> <span class="st">"blue"</span>,
-  spat_network_alpha <span class="op">=</span> <span class="fl">0.5</span>,
-  show_spatial_grid <span class="op">=</span> <span class="cn">F</span>,
-  spat_grid_name <span class="op">=</span> <span class="st">"spatial_grid"</span>,
-  spat_grid_color <span class="op">=</span> <span class="st">"blue"</span>,
-  show_other_cells <span class="op">=</span> <span class="cn">T</span>,
-  other_cell_color <span class="op">=</span> <span class="st">"lightgrey"</span>,
-  dim_other_point_size <span class="op">=</span> <span class="fl">1</span>,
-  spat_other_point_size <span class="op">=</span> <span class="fl">1</span>,
-  spat_other_cells_alpha <span class="op">=</span> <span class="fl">0.5</span>,
-  dim_show_legend <span class="op">=</span> <span class="cn">F</span>,
-  spat_show_legend <span class="op">=</span> <span class="cn">F</span>,
-  legend_text <span class="op">=</span> <span class="fl">10</span>,
-  legend_symbol_size <span class="op">=</span> <span class="fl">2</span>,
-  dim_background_color <span class="op">=</span> <span class="st">"white"</span>,
-  spat_background_color <span class="op">=</span> <span class="st">"white"</span>,
-  vor_border_color <span class="op">=</span> <span class="st">"white"</span>,
-  vor_max_radius <span class="op">=</span> <span class="fl">200</span>,
-  vor_alpha <span class="op">=</span> <span class="fl">1</span>,
-  axis_text <span class="op">=</span> <span class="fl">8</span>,
-  axis_title <span class="op">=</span> <span class="fl">8</span>,
-  show_plot <span class="op">=</span> <span class="cn">NA</span>,
-  return_plot <span class="op">=</span> <span class="cn">NA</span>,
-  save_plot <span class="op">=</span> <span class="cn">NA</span>,
-  save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  default_save_name <span class="op">=</span> <span class="st">"spatDimPlot2D"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">spatDimPlot2D</span><span class="op">(</span></span>
+<span>  <span class="va">gobject</span>,</span>
+<span>  spat_unit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  feat_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  show_image <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  gimage <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  image_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  largeImage_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  spat_loc_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  plot_alignment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"vertical"</span>, <span class="st">"horizontal"</span><span class="op">)</span>,</span>
+<span>  dim_reduction_to_use <span class="op">=</span> <span class="st">"umap"</span>,</span>
+<span>  dim_reduction_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dim1_to_use <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  dim2_to_use <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  sdimx <span class="op">=</span> <span class="st">"sdimx"</span>,</span>
+<span>  sdimy <span class="op">=</span> <span class="st">"sdimy"</span>,</span>
+<span>  spat_enr_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cell_color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  color_as_factor <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>  cell_color_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cell_color_gradient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"white"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
+<span>  gradient_midpoint <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  gradient_limits <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  select_cell_groups <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  select_cells <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dim_point_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"border"</span>, <span class="st">"no_border"</span><span class="op">)</span>,</span>
+<span>  dim_point_size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  dim_point_alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  dim_point_border_col <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  dim_point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  spat_point_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"border"</span>, <span class="st">"no_border"</span>, <span class="st">"voronoi"</span><span class="op">)</span>,</span>
+<span>  spat_point_size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  spat_point_alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  spat_point_border_col <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  spat_point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  dim_show_cluster_center <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  dim_show_center_label <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>  dim_center_point_size <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  dim_center_point_border_col <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  dim_center_point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  dim_label_size <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  dim_label_fontface <span class="op">=</span> <span class="st">"bold"</span>,</span>
+<span>  spat_show_cluster_center <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  spat_show_center_label <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  spat_center_point_size <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  spat_center_point_border_col <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>  spat_center_point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  spat_label_size <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  spat_label_fontface <span class="op">=</span> <span class="st">"bold"</span>,</span>
+<span>  show_NN_network <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  nn_network_to_use <span class="op">=</span> <span class="st">"sNN"</span>,</span>
+<span>  network_name <span class="op">=</span> <span class="st">"sNN.pca"</span>,</span>
+<span>  nn_network_alpha <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  show_spatial_network <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  spat_network_name <span class="op">=</span> <span class="st">"Delaunay_network"</span>,</span>
+<span>  spat_network_color <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>  spat_network_alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  show_spatial_grid <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  spat_grid_name <span class="op">=</span> <span class="st">"spatial_grid"</span>,</span>
+<span>  spat_grid_color <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>  show_other_cells <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>  other_cell_color <span class="op">=</span> <span class="st">"lightgrey"</span>,</span>
+<span>  dim_other_point_size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  spat_other_point_size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  spat_other_cells_alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  dim_show_legend <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  spat_show_legend <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  legend_text <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  legend_symbol_size <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  dim_background_color <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  spat_background_color <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  vor_border_color <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  vor_max_radius <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>  vor_alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  axis_text <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>  axis_title <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>  show_plot <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  return_plot <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  save_plot <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  default_save_name <span class="op">=</span> <span class="st">"spatDimPlot2D"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">

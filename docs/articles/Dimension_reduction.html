@@ -157,175 +157,219 @@
 
     
     
-<p>This tutorial will take you through the dimension reduction and
-clustering capabilities of Giotto. The starting point is a Giotto object
-that has already gone through data processing- more details on that
-process can be found in the data processing tutorial.</p>
+<p>This tutorial walks through the dimension reduction and clustering
+capabilities of Giotto. We begin this tutorial with the Giotto Object
+processed in the previous tutorial, <a href="./data_processing.html">data processing</a>. For convenience, the
+code to create this object is provided below. However, we encourage new
+users to review the data processing tutorial prior to beginning this
+tutorial.</p>
 <p>This tutorial uses a SeqFISH+ dataset of a murine cortex and
-subventrical zone. A complete walkthough of that dataset can be found <a href="./SeqFISH_cortex_210923.html"><strong>here</strong></a>.</p>
+subventrical zone. A complete walkthrough of that dataset can be found
+<a href="./SeqFISH_cortex_210923.html"><strong>here</strong></a>. To
+download the data used to create the Giotto Object below, please ensure
+that <a href="https://www.gnu.org/software/wget/?" class="external-link">wget</a> is installed
+locally.</p>
 <div class="section level2">
 <h2 id="creating-and-processing-a-giotto-object">Creating and Processing a Giotto Object<a class="anchor" aria-label="anchor" href="#creating-and-processing-a-giotto-object"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span>
-<span class="va">my_working_dir</span> <span class="op">=</span> <span class="st">'/path/to/directory/'</span>
-
-<span class="co"># set python path to your preferred python version path</span>
-<span class="co"># set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment</span>
-<span class="va">python_path</span> <span class="op">=</span> <span class="cn">NULL</span> 
-<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">python_path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span>force_environment <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="fu"><a href="../reference/getSpatialDataset.html">getSpatialDataset</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">'seqfish_SS_cortex'</span>, directory <span class="op">=</span> <span class="va">my_working_dir</span>, method <span class="op">=</span> <span class="st">'wget'</span><span class="op">)</span>
-
-<span class="co">#  set Giotto instructions</span>
-<span class="va">instrs</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoInstructions.html">createGiottoInstructions</a></span><span class="op">(</span>save_plot <span class="op">=</span> <span class="cn">TRUE</span>, 
-                                  show_plot <span class="op">=</span> <span class="cn">FALSE</span>,
-                                  save_dir <span class="op">=</span> <span class="va">my_working_dir</span>, 
-                                  python_path <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-
-<span class="co"># create giotto object from provided paths ####</span>
-<span class="va">expr_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"cortex_svz_expression.txt"</span><span class="op">)</span>
-<span class="va">loc_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"cortex_svz_centroids_coord.txt"</span><span class="op">)</span>
-<span class="va">meta_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"cortex_svz_centroids_annot.txt"</span><span class="op">)</span>
-
-
-<span class="co">#This dataset contains multiple field of views which need to be stitched together</span>
-
-<span class="co"># first merge location and additional metadata</span>
-<span class="va">SS_locations</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">loc_path</span><span class="op">)</span>
-<span class="va">cortex_fields</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">meta_path</span><span class="op">)</span>
-<span class="va">SS_loc_annot</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/merge.html" class="external-link">merge.data.table</a></span><span class="op">(</span><span class="va">SS_locations</span>, <span class="va">cortex_fields</span>, by <span class="op">=</span> <span class="st">'ID'</span><span class="op">)</span>
-<span class="va">SS_loc_annot</span><span class="op">[</span>, <span class="va">ID</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">ID</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'cell_'</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">913</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>
-<span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html" class="external-link">setorder</a></span><span class="op">(</span><span class="va">SS_loc_annot</span>, <span class="va">ID</span><span class="op">)</span>
-
-<span class="co"># create file with offset information</span>
-<span class="va">my_offset_file</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>field <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>,
-                                        x_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1654.97</span>, <span class="fl">1750.75</span>, <span class="fl">1674.35</span>, <span class="fl">675.5</span>, <span class="fl">2048</span>, <span class="fl">675</span><span class="op">)</span>,
-                                        y_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># create a stitch file</span>
-<span class="va">stitch_file</span> <span class="op">=</span> <span class="fu"><a href="../reference/stitchFieldCoordinates.html">stitchFieldCoordinates</a></span><span class="op">(</span>location_file <span class="op">=</span> <span class="va">SS_loc_annot</span>,
-                                     offset_file <span class="op">=</span> <span class="va">my_offset_file</span>,
-                                     cumulate_offset_x <span class="op">=</span> <span class="cn">T</span>,
-                                     cumulate_offset_y <span class="op">=</span> <span class="cn">F</span>,
-                                     field_col <span class="op">=</span> <span class="st">'FOV'</span>,
-                                     reverse_final_x <span class="op">=</span> <span class="cn">F</span>,
-                                     reverse_final_y <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
-<span class="va">stitch_file</span>    <span class="op">=</span> <span class="va">stitch_file</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">ID</span>, <span class="va">X_final</span>, <span class="va">Y_final</span><span class="op">)</span><span class="op">]</span>
-<span class="va">my_offset_file</span> <span class="op">=</span> <span class="va">my_offset_file</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">field</span>, <span class="va">x_offset_final</span>, <span class="va">y_offset_final</span><span class="op">)</span><span class="op">]</span>
-
-<span class="co"># create Giotto object</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">expr_path</span>,
-                                 spatial_locs <span class="op">=</span> <span class="va">stitch_file</span>,
-                                 offset_file <span class="op">=</span> <span class="va">my_offset_file</span>,
-                                 instructions <span class="op">=</span> <span class="va">instrs</span><span class="op">)</span>
-
-<span class="co"># add additional annotation if wanted</span>
-<span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">testobj</span>,
-                             new_metadata <span class="op">=</span> <span class="va">cortex_fields</span>,
-                             by_column <span class="op">=</span> <span class="cn">T</span>,
-                             column_cell_ID <span class="op">=</span> <span class="st">'ID'</span><span class="op">)</span>
-
-<span class="co"># subset data to the cortex field of views</span>
-<span class="va">cell_metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span>
-<span class="va">cortex_cell_ids</span> <span class="op">=</span> <span class="va">cell_metadata</span><span class="op">[</span><span class="va">FOV</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span>
-<span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">testobj</span>, cell_ids <span class="op">=</span> <span class="va">cortex_cell_ids</span><span class="op">)</span>
-
-<span class="co"># Process the Giotto object, filtering, normalization, adding statistics and correcting for covariates</span>
-<span class="fu"><a href="../reference/processGiotto.html">processGiotto</a></span><span class="op">(</span><span class="va">testobj</span>,filter_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_threshold <span class="op">=</span> <span class="fl">1</span>,feat_det_in_min_cells <span class="op">=</span> <span class="fl">100</span>, min_det_feats_per_cell <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,
-                      norm_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span> norm_methods <span class="op">=</span> <span class="st">'standard'</span>, scale_feats <span class="op">=</span> <span class="cn">TRUE</span>, scalefactor <span class="op">=</span> <span class="fl">6000</span><span class="op">)</span>,
-                      stat_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="st">'normalized'</span><span class="op">)</span>,
-                      adjust_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
+<span><span class="va">data_directory</span> <span class="op">=</span> <span class="st">'/path/to/data/directory/'</span></span>
+<span><span class="va">results_directory</span> <span class="op">=</span> <span class="st">'/path/to/results/directory/'</span></span>
+<span></span>
+<span><span class="va">genv_exists</span> <span class="op">=</span> <span class="fu"><a href="../reference/checkGiottoEnvironment.html">checkGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">genv_exists</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="co"># The following command need only be run once to install the Giotto environment.</span></span>
+<span>  <span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Optional: Specify a Python path. If set to NULL (default), the previously installed</span></span>
+<span><span class="co"># Giotto environment will be used.</span></span>
+<span><span class="va">my_python_path</span> <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># alternatively, "/your/python/path/" if desired.</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/getSpatialDataset.html">getSpatialDataset</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">'seqfish_SS_cortex'</span>, directory <span class="op">=</span> <span class="va">data_directory</span>, method <span class="op">=</span> <span class="st">'wget'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set Giotto instructions</span></span>
+<span><span class="va">instrs</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoInstructions.html">createGiottoInstructions</a></span><span class="op">(</span>save_plot <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                                  show_plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                  save_dir <span class="op">=</span> <span class="va">results_directory</span>, </span>
+<span>                                  python_path <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create giotto object from provided paths</span></span>
+<span><span class="va">expr_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_directory</span>, <span class="st">"cortex_svz_expression.txt"</span><span class="op">)</span></span>
+<span><span class="va">loc_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_directory</span>, <span class="st">"cortex_svz_centroids_coord.txt"</span><span class="op">)</span></span>
+<span><span class="va">meta_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_directory</span>, <span class="st">"cortex_svz_centroids_annot.txt"</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># This dataset contains multiple field of views which need to be stitched together.</span></span>
+<span></span>
+<span><span class="co"># First, merge location and additional metadata</span></span>
+<span><span class="va">SS_locations</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">loc_path</span><span class="op">)</span></span>
+<span><span class="va">cortex_fields</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">meta_path</span><span class="op">)</span></span>
+<span><span class="va">SS_loc_annot</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/merge.html" class="external-link">merge.data.table</a></span><span class="op">(</span><span class="va">SS_locations</span>, <span class="va">cortex_fields</span>, by <span class="op">=</span> <span class="st">'ID'</span><span class="op">)</span></span>
+<span><span class="va">SS_loc_annot</span><span class="op">[</span>, <span class="va">ID</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">ID</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'cell_'</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">913</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html" class="external-link">setorder</a></span><span class="op">(</span><span class="va">SS_loc_annot</span>, <span class="va">ID</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create a file with offset information</span></span>
+<span><span class="va">my_offset_file</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>field <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>,</span>
+<span>                                        x_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1654.97</span>, <span class="fl">1750.75</span>, <span class="fl">1674.35</span>, <span class="fl">675.5</span>, <span class="fl">2048</span>, <span class="fl">675</span><span class="op">)</span>,</span>
+<span>                                        y_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create a file to stitch the multiple fields of view together</span></span>
+<span><span class="va">stitch_file</span> <span class="op">=</span> <span class="fu"><a href="../reference/stitchFieldCoordinates.html">stitchFieldCoordinates</a></span><span class="op">(</span>location_file <span class="op">=</span> <span class="va">SS_loc_annot</span>,</span>
+<span>                                     offset_file <span class="op">=</span> <span class="va">my_offset_file</span>,</span>
+<span>                                     cumulate_offset_x <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                                     cumulate_offset_y <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>                                     field_col <span class="op">=</span> <span class="st">'FOV'</span>,</span>
+<span>                                     reverse_final_x <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>                                     reverse_final_y <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">stitch_file</span>    <span class="op">=</span> <span class="va">stitch_file</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">ID</span>, <span class="va">X_final</span>, <span class="va">Y_final</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">stitch_file</span><span class="op">$</span><span class="va">ID</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">stitch_file</span><span class="op">$</span><span class="va">ID</span><span class="op">)</span> <span class="co"># ID must be a character vector</span></span>
+<span><span class="va">my_offset_file</span> <span class="op">=</span> <span class="va">my_offset_file</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">field</span>, <span class="va">x_offset_final</span>, <span class="va">y_offset_final</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Create Giotto object</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">expr_path</span>,</span>
+<span>                              spatial_locs <span class="op">=</span> <span class="va">stitch_file</span>,</span>
+<span>                              offset_file <span class="op">=</span> <span class="va">my_offset_file</span>,</span>
+<span>                              instructions <span class="op">=</span> <span class="va">instrs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Add additional annotation if wanted</span></span>
+<span><span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">testobj</span>,</span>
+<span>                          new_metadata <span class="op">=</span> <span class="va">cortex_fields</span>,</span>
+<span>                          by_column <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                          column_cell_ID <span class="op">=</span> <span class="st">'ID'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subset data to the cortex field of views in a new Giotto object</span></span>
+<span><span class="va">cell_metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span></span>
+<span><span class="va">cortex_cell_ids</span> <span class="op">=</span> <span class="va">cell_metadata</span><span class="op">[</span><span class="va">FOV</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span></span>
+<span><span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">testobj</span>, cell_ids <span class="op">=</span> <span class="va">cortex_cell_ids</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Process the Giotto object, filtering, normalization, adding statistics and correcting for covariates</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/processGiotto.html">processGiotto</a></span><span class="op">(</span><span class="va">testobj</span>,</span>
+<span>                         filter_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_threshold <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                                              feat_det_in_min_cells <span class="op">=</span> <span class="fl">100</span>, </span>
+<span>                                              min_det_feats_per_cell <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
+<span>                         norm_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>norm_methods <span class="op">=</span> <span class="st">'standard'</span>, </span>
+<span>                                            scale_feats <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                                            scalefactor <span class="op">=</span> <span class="fl">6000</span><span class="op">)</span>,</span>
+<span>                         stat_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="st">'normalized'</span><span class="op">)</span>,</span>
+<span>                         adjust_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>, </span>
+<span>                                              covariate_columns <span class="op">=</span> <span class="st">'nr_feats'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="dimension-reduction-and-pca">1. Dimension Reduction and PCA<a class="anchor" aria-label="anchor" href="#dimension-reduction-and-pca"></a>
 </h3>
-<p>You can compute highly variable genes based on high coefficient of
-variance within groups, loess regression predictions, or variance of
-pearson residuals for each gene, based on which <strong>method</strong>
-is selected.</p>
+<p>Highly variable features (genes) may be computed based on high
+coefficient of variance within groups, variance of pearson residuals for
+each gene, or loess regression predictions. Specify the desired
+computation with the <strong>method</strong> parameter.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#calculate HVF using the loess regression prediction model</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateHVF.html">calculateHVF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, method <span class="op">=</span> <span class="st">'cov_groups'</span><span class="op">)</span></code></pre></div>
-<p><img src="../inst/images/SeqFish_mouse_cortex/0-HVFplot.png" style="width:50.0%"></p>
+<code class="sourceCode R"><span><span class="co"># Calculate HVF using coefficient of variance within groups</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateHVF.html">calculateHVF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, method <span class="op">=</span> <span class="st">'cov_groups'</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/dimension_reduction/0-HVFplot_covgroups.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#calculate HVF using the loess regression prediction model</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateHVF.html">calculateHVF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, method <span class="op">=</span> <span class="st">'cov_loess'</span><span class="op">)</span></code></pre></div>
-<p><img src="../inst/images/SeqFish_mouse_cortex/2-HVFplot.png" style="width:50.0%"></p>
+<code class="sourceCode R"><span><span class="co"># Calculate HVF using variance of Pearson residuals</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateHVF.html">calculateHVF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, method <span class="op">=</span> <span class="st">'var_p_resid'</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/dimension_reduction/1-HVFplot_varpresid.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#calculate HVF using the loess regression prediction model</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateHVF.html">calculateHVF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, method <span class="op">=</span> <span class="st">'var_p_resid'</span><span class="op">)</span></code></pre></div>
-<p><img src="../inst/images/SeqFish_mouse_cortex/1-HVFplot.png" style="width:50.0%"></p>
-<p>You can then run a PCA based on the highly variable genes. After the
-PCA you can run a TSNE, a UMAP, or both.</p>
+<code class="sourceCode R"><span><span class="co">#calculate HVF using the loess regression prediction model</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateHVF.html">calculateHVF</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, method <span class="op">=</span> <span class="st">'cov_loess'</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/dimension_reduction/2-HVFplot_covloess.png" style="width:50.0%"></p>
+<p>PCA can be run based on the highly variable genes. After PCA, a tSNE,
+a UMAP, or both may be run. For this example, highly variable genes have
+been identified using Loess Regression predictions.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## select genes based on HVG and gene statistics, both found in gene metadata</span>
-<span class="va">gene_metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/fDataDT.html">fDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span>
-<span class="va">featgenes</span> <span class="op">=</span> <span class="va">gene_metadata</span><span class="op">[</span><span class="va">hvf</span> <span class="op">==</span> <span class="st">'yes'</span> <span class="op">&amp;</span> <span class="va">perc_cells</span> <span class="op">&gt;</span> <span class="fl">4</span> <span class="op">&amp;</span> <span class="va">mean_expr_det</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">]</span><span class="op">$</span><span class="va">gene_ID</span>
-
-<span class="co">## run PCA on expression values (default)</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runPCA.html">runPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, genes_to_use <span class="op">=</span> <span class="va">featgenes</span>, scale_unit <span class="op">=</span> <span class="cn">F</span>, center <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
-
-<span class="co"># plot a scree plot</span>
-<span class="fu"><a href="../reference/screePlot.html">screePlot</a></span><span class="op">(</span><span class="va">SS_seqfish</span><span class="op">)</span></code></pre></div>
-<p><img src="../inst/images/SeqFish_mouse_cortex/2-screePlot.png" style="width:50.0%"></p>
+<code class="sourceCode R"><span><span class="co">## Select genes highly variable genes that fit specified statistics</span></span>
+<span><span class="co"># These are both found within feature metadata</span></span>
+<span><span class="va">feature_metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/fDataDT.html">fDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span></span>
+<span><span class="va">featgenes</span> <span class="op">=</span> <span class="va">feature_metadata</span><span class="op">[</span><span class="va">hvf</span> <span class="op">==</span> <span class="st">'yes'</span> <span class="op">&amp;</span> <span class="va">perc_cells</span> <span class="op">&gt;</span> <span class="fl">4</span> <span class="op">&amp;</span> <span class="va">mean_expr_det</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">]</span><span class="op">$</span><span class="va">feat_ID</span></span>
+<span></span>
+<span><span class="co">## run PCA on expression values (default)</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runPCA.html">runPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, feats_to_use <span class="op">=</span> <span class="va">featgenes</span>, scale_unit <span class="op">=</span> <span class="cn">F</span>, center <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># plot a scree plot</span></span>
+<span><span class="fu"><a href="../reference/screePlot.html">screePlot</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/dimension_reduction/3-screePlot.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Plot a PCA</span>
-<span class="fu"><a href="../reference/plotPCA.html">plotPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span><span class="op">)</span></code></pre></div>
-<p><img src="../inst/images/SeqFish_mouse_cortex/3-PCA.png" style="width:50.0%"></p>
+<code class="sourceCode R"><span><span class="co"># Plot a PCA</span></span>
+<span><span class="fu"><a href="../reference/plotPCA.html">plotPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/dimension_reduction/4-PCA.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Run a TSNE based on PCA dimension reduction</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runtSNE.html">runtSNE</a></span><span class="op">(</span><span class="va">testobj</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">15</span><span class="op">)</span>
-<span class="fu"><a href="../reference/plotTSNE.html">plotTSNE</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">SS_seqfish</span><span class="op">)</span></code></pre></div>
-<p><img src="../inst/images/SeqFish_mouse_cortex/5-tSNE.png" style="width:50.0%"></p>
+<code class="sourceCode R"><span><span class="co"># Run a tSNE based on PCA dimension reduction</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runtSNE.html">runtSNE</a></span><span class="op">(</span><span class="va">testobj</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">15</span><span class="op">)</span></span>
+<span><span class="co"># Plot tSNE of data</span></span>
+<span><span class="fu"><a href="../reference/plotTSNE.html">plotTSNE</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/dimension_reduction/5-tSNE.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Run a UMAP based on PCA dimension reduction</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runUMAP.html">runUMAP</a></span><span class="op">(</span><span class="va">testobj</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">15</span><span class="op">)</span>
-<span class="co"># view pre-clustering UMAP</span>
-<span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span><span class="op">)</span></code></pre></div>
-<p><img src="../inst/images/SeqFish_mouse_cortex/4-UMAP.png" style="width:50.0%"></p>
+<code class="sourceCode R"><span><span class="co"># Run a UMAP based on PCA dimension reduction</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runUMAP.html">runUMAP</a></span><span class="op">(</span><span class="va">testobj</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">15</span><span class="op">)</span></span>
+<span><span class="co"># View pre-clustering UMAP</span></span>
+<span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/dimension_reduction/6-UMAP.png" style="width:50.0%"></p>
 </div>
 <div class="section level3">
 <h3 id="clustering">2. Clustering<a class="anchor" aria-label="anchor" href="#clustering"></a>
 </h3>
-<p>Clustering your cells into distinct groups based on feature
-expression. The input is a Giotto object that has undergone either TSNE
-or UMAP dimension reduction.</p>
+<p>Cells may be clustered into distinct groups based on feature
+expression. To cluster, the Giotto Object must contain data that has
+undergone PCA dimension reduction, either tSNE or UMAP dimension
+reduction, and have a neighbor network.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## create a shared nearest neighbor network (sNN), where k is the number of k niehgbors to use</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createNearestNetwork.html">createNearestNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">15</span>, k <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## create a shared nearest neighbor network (sNN), where k is the number of k neighbors to use</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createNearestNetwork.html">createNearestNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">15</span>, k <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
 <p>Cells can be clustered in Giotto using k-means, Leiden, or Louvain
-clustering</p>
+clustering. These clustering algorithms return cluster information
+within cell_metadata, which is named accordingly by default. The name
+may be changed by providing the name argument, as shown in the code
+chunk below.</p>
+<p>Naming clusters allows for clusters of various resolutions to be
+created if desired, and assists in visualization; cluster names may be
+provided as an argument to cell_color within plotUMAP for enhanced
+visualization.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## k-means clustering</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doKmeans.html">doKmeans</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, dim_reduction_to_use <span class="op">=</span> <span class="st">'pca'</span><span class="op">)</span>
-
-<span class="co">## Leiden clustering- increase the resolution to increase the number of clusters</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doLeidenCluster.html">doLeidenCluster</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, resolution <span class="op">=</span> <span class="fl">0.4</span>, n_iterations <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>
-
-<span class="co">## Louvain clustering- increase the resolution to increase the number of clusters</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doLeidenCluster.html">doLeidenCluster</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, version <span class="op">=</span> <span class="st">'community'</span>, resolution <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span>
-
-<span class="co">#Plot UMAP post-clustering to visualize clusters</span>
-<span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>,
-         cell_color <span class="op">=</span> <span class="st">'leiden_clus'</span>, show_NN_network <span class="op">=</span> <span class="cn">T</span>, point_size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span></code></pre></div>
-<p><img src="../inst/images/SeqFish_mouse_cortex/6-UMAP.png" style="width:50.0%"></p>
-<p>Clusters of interest can be further sub-clustered, choose your
-clusters with <strong>selected_clusters</strong></p>
+<code class="sourceCode R"><span><span class="co">## k-means clustering</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doKmeans.html">doKmeans</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, dim_reduction_to_use <span class="op">=</span> <span class="st">'pca'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Leiden clustering - increase the resolution to increase the number of clusters</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doLeidenCluster.html">doLeidenCluster</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
+<span>                           resolution <span class="op">=</span> <span class="fl">0.4</span>, </span>
+<span>                           n_iterations <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>                           name <span class="op">=</span> <span class="st">'leiden_0.4_1000'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Louvain clustering - increase the resolution to increase the number of clusters</span></span>
+<span><span class="co"># The version argument may be changed to 'multinet' to run a Louvain algorithm </span></span>
+<span><span class="co"># from the multinet package in R.</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doLouvainCluster.html">doLouvainCluster</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
+<span>                            version <span class="op">=</span> <span class="st">'community'</span>, </span>
+<span>                            resolution <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Plot UMAP post-clustering to visualize Leiden clusters</span></span>
+<span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>,</span>
+<span>         cell_color <span class="op">=</span> <span class="st">'leiden_0.4_1000'</span>, </span>
+<span>         show_NN_network <span class="op">=</span> <span class="cn">T</span>, </span>
+<span>         point_size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/dimension_reduction/7-UMAP.png" style="width:50.0%"></p>
+<p>Clusters of interest can be further sub-clustered. Choose the
+clusters to be sub-clustered with the <strong>selected_clusters</strong>
+argument. Note that the same HVF method selection and PCA parameters are
+used here for consistent sub-clustering.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Leiden subclustering for specified clusters</span>
-<span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/doLeidenSubCluster.html">doLeidenSubCluster</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_clus'</span>,
-                                resolution <span class="op">=</span> <span class="fl">0.2</span>, k_neighbors <span class="op">=</span> <span class="fl">10</span>,
-                                hvf_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">'cov_loess'</span>, difference_in_cov <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,
-                                pca_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="st">'normalized'</span>, scale_unit <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>,
-                                nn_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>,
-                                selected_clusters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span><span class="op">)</span>,
-                                name <span class="op">=</span> <span class="st">'sub_leiden_clus_select'</span><span class="op">)</span>
-
-<span class="co">#Plot a UMAP to visualize your sub-clustering</span>
-<span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, cell_color <span class="op">=</span> <span class="st">'sub_leiden_clus_select'</span>, show_NN_network <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
-<p><img src="../inst/images/SeqFish_mouse_cortex/10-UMAP.png" style="width:50.0%"></p>
+<code class="sourceCode R"><span><span class="co">## Leiden subclustering for specified clusters</span></span>
+<span><span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/doLeidenSubCluster.html">doLeidenSubCluster</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
+<span>                             cluster_column <span class="op">=</span> <span class="st">'leiden_0.4_1000'</span>,</span>
+<span>                             resolution <span class="op">=</span> <span class="fl">0.2</span>, </span>
+<span>                             k_neighbors <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>                             hvf_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">'cov_loess'</span>, </span>
+<span>                                              difference_in_cov <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,</span>
+<span>                             pca_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="st">'normalized'</span>, </span>
+<span>                                              scale_unit <span class="op">=</span> <span class="cn">F</span>, </span>
+<span>                                              center <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>,</span>
+<span>                             nn_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>,</span>
+<span>                             selected_clusters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span><span class="op">)</span>,</span>
+<span>                             name <span class="op">=</span> <span class="st">'sub_leiden_clus_select'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Plot a UMAP to visualize your sub-clustering</span></span>
+<span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, cell_color <span class="op">=</span> <span class="st">'sub_leiden_clus_select'</span>, show_NN_network <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/dimension_reduction/12-UMAP.png" style="width:50.0%"></p>
 </div>
 </div>
   </div>

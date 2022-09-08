@@ -4,43 +4,19 @@
     <loc>/404.html</loc>
   </url>
   <url>
-    <loc>/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Dimension_reduction.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Nanostring_Lung12_jan26_21.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Resolve_bc_210928.html</loc>
-  </url>
-  <url>
-    <loc>/articles/SeqFISH_cortex_210923.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Visium_prostate_integration_Sep30_21.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Visualizations.html</loc>
-  </url>
-  <url>
     <loc>/articles/analyses_deconvolution_Oct2021.html</loc>
   </url>
   <url>
     <loc>/articles/contribute.html</loc>
   </url>
   <url>
+    <loc>/articles/datasets_overview.html</loc>
+  </url>
+  <url>
     <loc>/articles/data_processing.html</loc>
   </url>
   <url>
-    <loc>/articles/datasets_overview.html</loc>
+    <loc>/articles/Dimension_reduction.html</loc>
   </url>
   <url>
     <loc>/articles/faqs.html</loc>
@@ -106,6 +82,9 @@
     <loc>/articles/nanostring_examples_overview.html</loc>
   </url>
   <url>
+    <loc>/articles/Nanostring_Lung12_jan26_21.html</loc>
+  </url>
+  <url>
     <loc>/articles/osmFISH_mouse_SScortex.html</loc>
   </url>
   <url>
@@ -118,6 +97,12 @@
     <loc>/articles/overview/temp_construction.html</loc>
   </url>
   <url>
+    <loc>/articles/Resolve_bc_210928.html</loc>
+  </url>
+  <url>
+    <loc>/articles/SeqFISH_cortex_210923.html</loc>
+  </url>
+  <url>
     <loc>/articles/singlecell_prostate_integration_Sep30_21.html</loc>
   </url>
   <url>
@@ -127,160 +112,10 @@
     <loc>/articles/temp_construction.html</loc>
   </url>
   <url>
-    <loc>/articles/vignettes/Dimension_reduction.html</loc>
+    <loc>/articles/Visium_prostate_integration_Sep30_21.html</loc>
   </url>
   <url>
-    <loc>/articles/vignettes/Resolve_bc_210928.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/SeqFISH_cortex_210923.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/Visium_prostate_integration_Sep30_21.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/contribute.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/data_processing.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/datasets_overview.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/faqs.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/getting_started.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/getting_started_instructions.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/getting_started_saving.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/giotto_news.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/github_issues.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/installation_issues.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/merFISH_hypoth_210924.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/mini_seqfish.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/mini_starmap.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/mini_visium.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/mouse_codex_spleen_Sep29_21.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/mouse_visium_brain_Sep30_21.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/mouse_visium_kidney_210830.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/osmFISH_mouse_SScortex_Sep29_21.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/singlecell_prostate_integration_Sep30_21.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/singlecell_prostate_standard_Sep29_21.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/temp_construction.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/Dimension_reduction.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/Resolve_bc_210928.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/SeqFISH_cortex_210923.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/Visium_prostate_integration_Sep30_21.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/contribute.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/data_processing.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/datasets_overview.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/faqs.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/getting_started.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/getting_started_instructions.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/getting_started_saving.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/giotto_news.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/github_issues.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/installation_issues.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/merFISH_hypoth_210924.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/mini_seqfish.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/mini_starmap.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/mini_visium.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/mouse_codex_spleen_Sep29_21.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/mouse_visium_brain_Sep30_21.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/mouse_visium_kidney_210830.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/osmFISH_mouse_SScortex_Sep29_21.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/overview/giotto_input.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/overview/temp_construction.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/singlecell_prostate_integration_Sep30_21.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/singlecell_prostate_standard_Sep29_21.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vignettes/vignettes/temp_construction.html</loc>
+    <loc>/articles/Visualizations.html</loc>
   </url>
   <url>
     <loc>/articles/vizgen_mouse_brain_210929.html</loc>
@@ -289,25 +124,19 @@
     <loc>/authors.html</loc>
   </url>
   <url>
+    <loc>/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>/LICENSE.html</loc>
+  </url>
+  <url>
     <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/DT_removeNA.html</loc>
-  </url>
-  <url>
-    <loc>/reference/FSV_show.html</loc>
-  </url>
-  <url>
-    <loc>/reference/OR_test_fnc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PAGEEnrich.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PAGE_DT_method.html</loc>
   </url>
   <url>
     <loc>/reference/adapt_aspect_ratio.html</loc>
@@ -325,10 +154,10 @@
     <loc>/reference/addFeatMetadata.html</loc>
   </url>
   <url>
-    <loc>/reference/addFeatStatistics.html</loc>
+    <loc>/reference/addFeatsPerc.html</loc>
   </url>
   <url>
-    <loc>/reference/addFeatsPerc.html</loc>
+    <loc>/reference/addFeatStatistics.html</loc>
   </url>
   <url>
     <loc>/reference/addGiottoImage.html</loc>
@@ -400,15 +229,6 @@
     <loc>/reference/binSpectSingleMatrix.html</loc>
   </url>
   <url>
-    <loc>/reference/calc_spatial_enrichment_DT.html</loc>
-  </url>
-  <url>
-    <loc>/reference/calc_spatial_enrichment_matrix.html</loc>
-  </url>
-  <url>
-    <loc>/reference/calc_spatial_enrichment_minimum.html</loc>
-  </url>
-  <url>
     <loc>/reference/calculateHVF.html</loc>
   </url>
   <url>
@@ -434,6 +254,15 @@
   </url>
   <url>
     <loc>/reference/calculate_distance_and_weight.html</loc>
+  </url>
+  <url>
+    <loc>/reference/calc_spatial_enrichment_DT.html</loc>
+  </url>
+  <url>
+    <loc>/reference/calc_spatial_enrichment_matrix.html</loc>
+  </url>
+  <url>
+    <loc>/reference/calc_spatial_enrichment_minimum.html</loc>
   </url>
   <url>
     <loc>/reference/cellProximityBarplot.html</loc>
@@ -487,13 +316,13 @@
     <loc>/reference/combCCcom.html</loc>
   </url>
   <url>
-    <loc>/reference/combineCPG.html</loc>
-  </url>
-  <url>
     <loc>/reference/combineCellData.html</loc>
   </url>
   <url>
     <loc>/reference/combineCellProximityGenes_per_interaction.html</loc>
+  </url>
+  <url>
+    <loc>/reference/combineCPG.html</loc>
   </url>
   <url>
     <loc>/reference/combineFeatureData.html</loc>
@@ -601,13 +430,10 @@
     <loc>/reference/create_2d_mesh_grid_line_obj.html</loc>
   </url>
   <url>
-    <loc>/reference/create_KNNnetwork_dbscan.html</loc>
+    <loc>/reference/create_average_detection_DT.html</loc>
   </url>
   <url>
     <loc>/reference/create_average_DT.html</loc>
-  </url>
-  <url>
-    <loc>/reference/create_average_detection_DT.html</loc>
   </url>
   <url>
     <loc>/reference/create_cell_type_random_cell_IDs.html</loc>
@@ -622,9 +448,6 @@
     <loc>/reference/create_delaunayNetwork3D.html</loc>
   </url>
   <url>
-    <loc>/reference/create_delaunayNetwork_RTriangle.html</loc>
-  </url>
-  <url>
     <loc>/reference/create_delaunayNetwork_deldir.html</loc>
   </url>
   <url>
@@ -634,6 +457,9 @@
     <loc>/reference/create_delaunayNetwork_geometry_3D.html</loc>
   </url>
   <url>
+    <loc>/reference/create_delaunayNetwork_RTriangle.html</loc>
+  </url>
+  <url>
     <loc>/reference/create_dimObject.html</loc>
   </url>
   <url>
@@ -641,6 +467,9 @@
   </url>
   <url>
     <loc>/reference/create_jackstrawplot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/create_KNNnetwork_dbscan.html</loc>
   </url>
   <url>
     <loc>/reference/create_mesh_grid_lines.html</loc>
@@ -724,10 +553,10 @@
     <loc>/reference/doCellSegmentation.html</loc>
   </url>
   <url>
-    <loc>/reference/doHMRF.html</loc>
+    <loc>/reference/doHclust.html</loc>
   </url>
   <url>
-    <loc>/reference/doHclust.html</loc>
+    <loc>/reference/doHMRF.html</loc>
   </url>
   <url>
     <loc>/reference/doKmeans.html</loc>
@@ -760,10 +589,10 @@
     <loc>/reference/doRandomWalkCluster.html</loc>
   </url>
   <url>
-    <loc>/reference/doSNNCluster.html</loc>
+    <loc>/reference/doScrubletDetect.html</loc>
   </url>
   <url>
-    <loc>/reference/doScrubletDetect.html</loc>
+    <loc>/reference/doSNNCluster.html</loc>
   </url>
   <url>
     <loc>/reference/do_page_permutation.html</loc>
@@ -773,6 +602,9 @@
   </url>
   <url>
     <loc>/reference/do_spatial_knn_smoothing.html</loc>
+  </url>
+  <url>
+    <loc>/reference/DT_removeNA.html</loc>
   </url>
   <url>
     <loc>/reference/dt_to_matrix.html</loc>
@@ -805,10 +637,10 @@
     <loc>/reference/exprCellCellcom.html</loc>
   </url>
   <url>
-    <loc>/reference/extend_vector.html</loc>
+    <loc>/reference/extended_gini_fun.html</loc>
   </url>
   <url>
-    <loc>/reference/extended_gini_fun.html</loc>
+    <loc>/reference/extend_vector.html</loc>
   </url>
   <url>
     <loc>/reference/fDataDT.html</loc>
@@ -892,6 +724,9 @@
     <loc>/reference/find_x_y_ranges.html</loc>
   </url>
   <url>
+    <loc>/reference/FSV_show.html</loc>
+  </url>
+  <url>
     <loc>/reference/general_save_function.html</loc>
   </url>
   <url>
@@ -916,12 +751,6 @@
     <loc>/reference/getSpatialDataset.html</loc>
   </url>
   <url>
-    <loc>/reference/get_GiottoLargeImage.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_NearestNetwork.html</loc>
-  </url>
-  <url>
     <loc>/reference/get_adj_rescale_img.html</loc>
   </url>
   <url>
@@ -940,10 +769,16 @@
     <loc>/reference/get_feature_info.html</loc>
   </url>
   <url>
+    <loc>/reference/get_GiottoLargeImage.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_img_corners.html</loc>
   </url>
   <url>
     <loc>/reference/get_img_minmax.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_NearestNetwork.html</loc>
   </url>
   <url>
     <loc>/reference/get_os.html</loc>
@@ -1117,6 +952,9 @@
     <loc>/reference/mini_giotto_single_cell.html</loc>
   </url>
   <url>
+    <loc>/reference/mygini_fun.html</loc>
+  </url>
+  <url>
     <loc>/reference/my_arowMeans.html</loc>
   </url>
   <url>
@@ -1124,9 +962,6 @@
   </url>
   <url>
     <loc>/reference/my_rowMeans.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mygini_fun.html</loc>
   </url>
   <url>
     <loc>/reference/nnDT_to_kNN.html</loc>
@@ -1144,19 +979,28 @@
     <loc>/reference/optimize_solveDampenedWLS.html</loc>
   </url>
   <url>
+    <loc>/reference/OR_test_fnc.html</loc>
+  </url>
+  <url>
     <loc>/reference/overlapToMatrix.html</loc>
   </url>
   <url>
     <loc>/reference/overlapToMatrixMultiPoly.html</loc>
   </url>
   <url>
-    <loc>/reference/pDataDT.html</loc>
-  </url>
-  <url>
     <loc>/reference/package_check.html</loc>
   </url>
   <url>
+    <loc>/reference/PAGEEnrich.html</loc>
+  </url>
+  <url>
+    <loc>/reference/PAGE_DT_method.html</loc>
+  </url>
+  <url>
     <loc>/reference/pca_giotto.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pDataDT.html</loc>
   </url>
   <url>
     <loc>/reference/pipe.html</loc>
@@ -1168,16 +1012,10 @@
     <loc>/reference/plotCCcomHeatmap.html</loc>
   </url>
   <url>
-    <loc>/reference/plotCPG.html</loc>
-  </url>
-  <url>
     <loc>/reference/plotCellProximityGenes.html</loc>
   </url>
   <url>
     <loc>/reference/plotCombineCCcom.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotCombineCPG.html</loc>
   </url>
   <url>
     <loc>/reference/plotCombineCellCellCommunication.html</loc>
@@ -1186,10 +1024,16 @@
     <loc>/reference/plotCombineCellProximityGenes.html</loc>
   </url>
   <url>
+    <loc>/reference/plotCombineCPG.html</loc>
+  </url>
+  <url>
     <loc>/reference/plotCombineICG.html</loc>
   </url>
   <url>
     <loc>/reference/plotCombineInteractionChangedGenes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plotCPG.html</loc>
   </url>
   <url>
     <loc>/reference/plotGiottoImage.html</loc>
@@ -1205,6 +1049,18 @@
   </url>
   <url>
     <loc>/reference/plotInteractivePolygons.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plotly_axis_scale_2D.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plotly_axis_scale_3D.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plotly_grid.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plotly_network.html</loc>
   </url>
   <url>
     <loc>/reference/plotMetaDataCellsHeatmap.html</loc>
@@ -1285,18 +1141,6 @@
     <loc>/reference/plot_spat_voronoi_layer_ggplot.html</loc>
   </url>
   <url>
-    <loc>/reference/plotly_axis_scale_2D.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotly_axis_scale_3D.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotly_grid.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotly_network.html</loc>
-  </url>
-  <url>
     <loc>/reference/processGiotto.html</loc>
   </url>
   <url>
@@ -1330,9 +1174,6 @@
     <loc>/reference/reconnectGiottoImage.html</loc>
   </url>
   <url>
-    <loc>/reference/reg_img_minmax_finder.html</loc>
-  </url>
-  <url>
     <loc>/reference/registerGiottoObjectList.html</loc>
   </url>
   <url>
@@ -1343,6 +1184,9 @@
   </url>
   <url>
     <loc>/reference/registerImagesFIJI.html</loc>
+  </url>
+  <url>
+    <loc>/reference/reg_img_minmax_finder.html</loc>
   </url>
   <url>
     <loc>/reference/removeCellAnnotation.html</loc>
@@ -1393,6 +1237,9 @@
     <loc>/reference/runPAGEEnrich_OLD.html</loc>
   </url>
   <url>
+    <loc>/reference/runPatternSimulation.html</loc>
+  </url>
+  <url>
     <loc>/reference/runPCA.html</loc>
   </url>
   <url>
@@ -1400,9 +1247,6 @@
   </url>
   <url>
     <loc>/reference/runPCA_prcomp_irlba.html</loc>
-  </url>
-  <url>
-    <loc>/reference/runPatternSimulation.html</loc>
   </url>
   <url>
     <loc>/reference/runRankEnrich.html</loc>
@@ -1414,6 +1258,9 @@
     <loc>/reference/runSpatialEnrich.html</loc>
   </url>
   <url>
+    <loc>/reference/runtSNE.html</loc>
+  </url>
+  <url>
     <loc>/reference/runUMAP.html</loc>
   </url>
   <url>
@@ -1423,9 +1270,6 @@
     <loc>/reference/run_spatial_sim_tests_one_rep.html</loc>
   </url>
   <url>
-    <loc>/reference/runtSNE.html</loc>
-  </url>
-  <url>
     <loc>/reference/scale_spatial_locations.html</loc>
   </url>
   <url>
@@ -1433,9 +1277,6 @@
   </url>
   <url>
     <loc>/reference/selectPatternGenes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_NearestNetwork.html</loc>
   </url>
   <url>
     <loc>/reference/set_default_feat_type.html</loc>
@@ -1454,6 +1295,9 @@
   </url>
   <url>
     <loc>/reference/set_giotto_python_path.html</loc>
+  </url>
+  <url>
+    <loc>/reference/set_NearestNetwork.html</loc>
   </url>
   <url>
     <loc>/reference/set_polygon_info.html</loc>
@@ -1504,13 +1348,13 @@
     <loc>/reference/showGiottoSpatGrids.html</loc>
   </url>
   <url>
+    <loc>/reference/showGiottoSpatialInfo.html</loc>
+  </url>
+  <url>
     <loc>/reference/showGiottoSpatLocs.html</loc>
   </url>
   <url>
     <loc>/reference/showGiottoSpatNetworks.html</loc>
-  </url>
-  <url>
-    <loc>/reference/showGiottoSpatialInfo.html</loc>
   </url>
   <url>
     <loc>/reference/showGrids.html</loc>
@@ -1555,10 +1399,10 @@
     <loc>/reference/smoothGiottoPolygons.html</loc>
   </url>
   <url>
-    <loc>/reference/solve_OLS_internal.html</loc>
+    <loc>/reference/solve_dampened_WLSj.html</loc>
   </url>
   <url>
-    <loc>/reference/solve_dampened_WLSj.html</loc>
+    <loc>/reference/solve_OLS_internal.html</loc>
   </url>
   <url>
     <loc>/reference/sort_combine_two_DT_columns.html</loc>
@@ -1609,6 +1453,12 @@
     <loc>/reference/spatGenePlot3D.html</loc>
   </url>
   <url>
+    <loc>/reference/spatialAEH.html</loc>
+  </url>
+  <url>
+    <loc>/reference/spatialDE.html</loc>
+  </url>
+  <url>
     <loc>/reference/spatInSituPlotDensity.html</loc>
   </url>
   <url>
@@ -1645,22 +1495,16 @@
     <loc>/reference/spatPlot_3D_plotly.html</loc>
   </url>
   <url>
-    <loc>/reference/spat_OR_func.html</loc>
-  </url>
-  <url>
-    <loc>/reference/spat_OR_func_DT.html</loc>
-  </url>
-  <url>
     <loc>/reference/spat_fish_func.html</loc>
   </url>
   <url>
     <loc>/reference/spat_fish_func_DT.html</loc>
   </url>
   <url>
-    <loc>/reference/spatialAEH.html</loc>
+    <loc>/reference/spat_OR_func.html</loc>
   </url>
   <url>
-    <loc>/reference/spatialDE.html</loc>
+    <loc>/reference/spat_OR_func_DT.html</loc>
   </url>
   <url>
     <loc>/reference/specificCellCellcommunicationScores.html</loc>

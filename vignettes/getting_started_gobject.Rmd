@@ -116,23 +116,25 @@ multi_expr_gobject = createGiottoObject(expression = list(raw = expression_matri
 
 ## Customizing the Giotto Object
 By providing values to other **createGiottoObject** parameters, it is possible to add:
- - **Cell** or **feature (gene) metadata**
-     - See [**addCellMetadata**](http://giottosuite.com/reference/addCellMetadata.html) and [**addFeatMetadata**](https://giottosuite.com/reference/addFeatMetadata.html)
- - **Spatial networks** or **grids**
-     - See [Visualizations](./Visualizations.html)
- - **Dimension reduction**
-     - See [Clustering](./dimension_reduction.html)
- - **Images** 
-     - See [Imaging](./getting_started_images.html)
- - **giottoInstructions**
-     - See [**createGiottoInstructions**](http://giottosuite.com/reference/createGiottoInstructions.html) and below
+ 
+ - **Cell** or **feature (gene) metadata**: see [**addCellMetadata**](../reference/addCellMetadata.html) and [**addFeatMetadata**](../reference/addFeatMetadata.html)
+ 
+ - **Spatial networks** or **grids**: see [Visualizations](./Visualizations.html)
+ 
+ - **Dimension reduction**: see [Clustering](./dimension_reduction.html)
+ 
+ - **Images**: see [Imaging](./getting_started_images.html)
+ 
+ - **giottoInstructions**: see [**createGiottoInstructions**](../docs/reference/createGiottoInstructions.html) and below
 
-Providing **giottoInstructions** allows the specification of:    
+Providing **giottoInstructions** allows the specification of:
+
  - An alternative python path if using the Giotto Environment (default) is not desired    
  - A directory to which resulting plots will save
  - Plot formatting    
 
-There are four functions to utilize when setting instructions:  
+There are four functions to utilize when setting instructions:
+
  - **createGiottoInstructions**: creates instructions that are provided to **createGiottoObject**
  - **showGiottoInstructions**: displays the instructions of a Giotto object  
  - **changeGiottoInstructions**: replaces 1 or more of the instruction parameters (e.g. plotting format)  
@@ -175,7 +177,7 @@ showGiottoInstructions(custom_gobject)
 
 Note that although parameters *show_plot*, *return_plot*, and *save_plot* were not specified within the call to **createGiottoInstructions**, default values were provided to these instruction parameters. All instruction parameters have default values, such that **createGiottoInstructions** may be called with some or no arguments yet all instruction parameters will have a value after its execution.
 
-Alternatively, a named list may also be provided to the *instructions* argument of **createGiottoObject**. However, ensure that all arguments to [**createGiottoInstructions**](http://giottosuite.com/reference/createGiottoInstructions.html) are defined when providing instructions as a named list, since default values are only applied to instructions when made with **createGiottoInstructions**. *Note that python_path must be specified when providing instructions as a named list, and may not be provided as NULL.*
+Alternatively, a named list may also be provided to the *instructions* argument of **createGiottoObject**. However, ensure that all arguments to [**createGiottoInstructions**](../docs/reference/createGiottoInstructions.html) are defined when providing instructions as a named list, since default values are only applied to instructions when made with **createGiottoInstructions**. *Note that python_path must be specified when providing instructions as a named list, and may not be provided as NULL.*
 
 The **giottoInstructions** may be changed, or completely replaced:
 ```{r, eval=FALSE}
@@ -216,20 +218,21 @@ showGiottoInstructions(custom_gobject)
 
 ## Plotting Data from a Giotto Object
 
-Each plotting function in Giotto has three important binary parameters:    
-- **show_plot**: print the plot to the console, default is TRUE  
-- **return_plot**: return the plot as an object, default is TRUE  
-- **save_plot**: automatically save the plot, default is FALSE 
+Each plotting function in Giotto has three important binary parameters:
+
+ - **show_plot**: print the plot to the console, default is TRUE  
+ - **return_plot**: return the plot as an object, default is TRUE  
+ - **save_plot**: automatically save the plot, default is FALSE 
 
 These parameters are stored within a **giottoObject** that was provided instructions from **createGiottoInstructions** and are provided to plotting functions accordingly. To change these parameters from the default values, the instructions may be changed or replaced, or these parameters may be *manually overwritten* within plotting functions. 
 
-See [showSaveParameters](http://giottosuite.com/reference/showSaveParameters.html) and the [Saving Options](./getting_started_saving.html) tutorial for alternative methods to save plots.
+See [showSaveParameters](../docs/reference/showSaveParameters.html) and the [Saving Options](./getting_started_saving.html) tutorial for alternative methods to save plots.
 
 ```{r, eval=FALSE}
 # Plot according to Giotto Instructions (default)
 spatPlot(custom_gobject)
 
-# Plot clusters, create, and save to a new subdirectory, all while overwritting formatting
+# Plot clusters, create, and save to a new subdirectory, all while overwriting formatting
 spatPlot(custom_gobject, 
          cell_color = 'ClusterName', 
          save_plot = TRUE,

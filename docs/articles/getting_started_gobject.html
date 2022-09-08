@@ -160,29 +160,60 @@
 <div class="section level2">
 <h2 id="how-to-create-a-giotto-object">How to create a Giotto Object?<a class="anchor" aria-label="anchor" href="#how-to-create-a-giotto-object"></a>
 </h2>
-<div class="section level5">
-<h5 id="minimum-requirements">1. Minimum requirements<a class="anchor" aria-label="anchor" href="#minimum-requirements"></a>
-</h5>
-<ul>
-<li>expression matrix</li>
-<li>spatial locations (<em>unnecessary for scRNAseq analysis</em>)</li>
-</ul>
+<p>In this tutorial, the methodology and syntax to create a
+<strong>giottoObject</strong> is shown and osmFISH data is used
+throughout the tutorial.</p>
+<div class="section level3">
+<h3 id="import-giotto-and-download-the-data">Import Giotto and Download the Data<a class="anchor" aria-label="anchor" href="#import-giotto-and-download-the-data"></a>
+</h3>
+<p>To download this data, please ensure that <a href="https://www.gnu.org/software/wget/?" class="external-link">wget</a> is installed
+locally.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span>
-
-<span class="co"># 1. Directly from file path (dummy locations are used as examples here)</span>
-<span class="va">path_to_expression_file</span> <span class="op">=</span> <span class="st">"/local/path/to/expression/file.txt"</span>
-<span class="va">path_to_locations_file</span> <span class="op">=</span> <span class="st">"/local/path/to/locations/file.txt"</span>
-
-<span class="va">my_giotto_object</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">path_to_expression_file</span>,
-                                      spatial_locs <span class="op">=</span> <span class="va">path_to_locations_file</span><span class="op">)</span>
-
-<span class="co"># 2. Use objects already loaded into environment</span>
-<span class="va">expression_matrix</span> <span class="op">=</span> <span class="fu"><a href="../reference/readExprMatrix.html">readExprMatrix</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">path_to_expression_file</span><span class="op">)</span> <span class="co"># fast method to read expression matrix</span>
-<span class="va">cell_locations</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">path_to_locations_file</span><span class="op">)</span>
-
-<span class="va">my_giotto_object</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">expression_matrix</span>,
-                                      spatial_locs <span class="op">=</span> <span class="va">cell_locations</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">genv_exists</span> <span class="op">=</span> <span class="fu"><a href="../reference/checkGiottoEnvironment.html">checkGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">genv_exists</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="co"># The following command need only be run once to install the Giotto environment.</span></span>
+<span>  <span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Specify path from which data may be retrieved/stored</span></span>
+<span><span class="va">data_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">'/gobject_data/'</span><span class="op">)</span></span>
+<span><span class="co"># alternatively, "/path/to/where/your/data/lives/"</span></span>
+<span></span>
+<span><span class="co"># Specify path to which results may be saved</span></span>
+<span><span class="va">results_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">'/gobject_results/'</span><span class="op">)</span> </span>
+<span><span class="co"># alternatively, "/path/to/store/your/results/"</span></span>
+<span></span>
+<span><span class="co"># Download osmFISH dataset to data_directory</span></span>
+<span><span class="fu"><a href="../reference/getSpatialDataset.html">getSpatialDataset</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">'osmfish_SS_cortex'</span>, directory <span class="op">=</span> <span class="va">data_directory</span>, method <span class="op">=</span> <span class="st">'wget'</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="minimum-requirements-for-a-giotto-object">Minimum requirements for a Giotto Object<a class="anchor" aria-label="anchor" href="#minimum-requirements-for-a-giotto-object"></a>
+</h3>
+<ul>
+<li>Expression matrix</li>
+<li>Spatial locations (<em>unnecessary for scRNAseq analysis</em>)</li>
+</ul>
+<p>Here, creating a <strong>giottoObject</strong> with the minimum
+requirements is shown in two examples. Data formatting guidelines are
+shown below this code block.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Example 1.</span></span>
+<span><span class="co"># Create a Giotto object using data directly from file paths </span></span>
+<span><span class="va">osm_exprs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_directory</span>, <span class="st">"osmFISH_prep_expression.txt"</span><span class="op">)</span></span>
+<span><span class="va">osm_locs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_directory</span>, <span class="st">"osmFISH_prep_cell_coordinates.txt"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">minimum_gobject1</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">osm_exprs</span>,</span>
+<span>                                      spatial_locs <span class="op">=</span> <span class="va">osm_locs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Example 2.</span></span>
+<span><span class="co"># Create a Giotto object using objects already loaded into workspace</span></span>
+<span><span class="va">expression_matrix</span> <span class="op">=</span> <span class="fu"><a href="../reference/readExprMatrix.html">readExprMatrix</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">osm_exprs</span><span class="op">)</span> <span class="co"># fast method to read expression matrix</span></span>
+<span><span class="va">cell_locations</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">osm_locs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">minimum_gobject2</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">expression_matrix</span>,</span>
+<span>                                      spatial_locs <span class="op">=</span> <span class="va">cell_locations</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Expression file formatting
 </summary><p><br> Expression count matrices accepted by Giotto should have columns
@@ -320,51 +351,165 @@ as <strong>cell IDs</strong></p>
 </tbody>
 </table></details><p><strong>*Note:</strong> multiple expression files during can be given
 at once during Giotto object creation by using a named list.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_giotto_object <span class="ot">=</span> <span class="fu">createGiottoObject</span>(<span class="at">expression =</span> <span class="fu">list</span>(<span class="at">raw =</span> matrix1</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                                                        <span class="at">scaled =</span> matrix2,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                                                        <span class="at">custom =</span> matrix3),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">spatial_locs =</span> cell_locations)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Arbitrary modifications</span></span>
+<span><span class="va">scaled_matrix</span> <span class="op">=</span> <span class="va">expression_matrix</span> <span class="op">*</span> <span class="fl">1.2</span></span>
+<span><span class="va">custom_matrix</span> <span class="op">=</span> <span class="va">expression_matrix</span> <span class="op">*</span> <span class="fl">0.5</span></span>
+<span></span>
+<span><span class="co"># Provide multiple expression matrices at once to the Giotto Object</span></span>
+<span><span class="co"># If these matrices are stored in files rather than in the workspace,</span></span>
+<span><span class="co"># file paths may be provided instead of variables</span></span>
+<span><span class="va">multi_expr_gobject</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>raw <span class="op">=</span> <span class="va">expression_matrix</span>,</span>
+<span>                                                          scaled <span class="op">=</span> <span class="va">scaled_matrix</span>,</span>
+<span>                                                          custom <span class="op">=</span> <span class="va">custom_matrix</span><span class="op">)</span>,</span>
+<span>                                        spatial_locs <span class="op">=</span> <span class="va">cell_locations</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 </div>
-<div class="section level5">
-<h5 id="additional-features">2. Additional features<a class="anchor" aria-label="anchor" href="#additional-features"></a>
-</h5>
-<p>Other information can also be provided using the other function
-parameters<br>
-- add <strong>cell</strong> or <strong>gene metadata</strong><br>
-- add <strong>spatial networks</strong> or <strong>grids</strong><br>
-- add <strong>dimension reduction</strong><br>
-- add <strong>images</strong><br>
-- add <strong>instructions</strong></p>
-<p>Usually specifying your own <strong>instructions</strong> can be most
-useful to:<br>
-- specify a python path<br>
-- determine output of plots (show in viewer, return as object, save as
-image)<br>
-- automatically save plots to selected directory</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span>
-
-<span class="co"># 1. Directly from file path (dummy locations are used as examples here)</span>
-<span class="va">path_to_expression_file</span> <span class="op">=</span> <span class="st">"/local/path/to/expression/file.txt"</span>
-<span class="va">path_to_locations_file</span> <span class="op">=</span> <span class="st">"/local/path/to/locations/file.txt"</span>
-
-<span class="co"># 2. Create your own instructions</span>
-<span class="va">path_to_python</span> <span class="op">=</span> <span class="st">'/usr/bin/python3'</span> <span class="co"># can be something else</span>
-<span class="va">working_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># this will use your current working directory</span>
-<span class="va">my_instructions</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoInstructions.html">createGiottoInstructions</a></span><span class="op">(</span>python_path <span class="op">=</span> <span class="va">path_to_python</span>,
-                                           save_dir <span class="op">=</span> <span class="va">working_directory</span><span class="op">)</span>
-
-<span class="co"># 3. Create your giotto object</span>
-<span class="va">my_giotto_object</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">path_to_expression_file</span>,
-                                      spatial_locs <span class="op">=</span> <span class="va">path_to_locations_file</span>,                                      
-                                      cell_metadata <span class="op">=</span> <span class="va">my_cell_metadata</span>,
-                                      gene_metadata <span class="op">=</span> <span class="va">my_gene_metadata</span>,
-                                      instructions <span class="op">=</span> <span class="va">my_instructions</span><span class="op">)</span>
-
-<span class="co"># 4. check which giotto instructions are associated with your giotto object</span>
-<span class="fu"><a href="../reference/showGiottoInstructions.html">showGiottoInstructions</a></span><span class="op">(</span><span class="va">my_giotto_object</span><span class="op">)</span></code></pre></div>
+<div class="section level3">
+<h3 id="customizing-the-giotto-object">Customizing the Giotto Object<a class="anchor" aria-label="anchor" href="#customizing-the-giotto-object"></a>
+</h3>
+<p>By providing values to other <strong>createGiottoObject</strong>
+parameters, it is possible to add: - <strong>Cell</strong> or
+<strong>feature (gene) metadata</strong> - See <a href="../reference/addCellMetadata.html"><strong>addCellMetadata</strong></a>
+and <a href="../reference/addFeatMetadata.html"><strong>addFeatMetadata</strong></a>
+- <strong>Spatial networks</strong> or <strong>grids</strong> - See <a href="./Visualizations.html">Visualizations</a> - <strong>Dimension
+reduction</strong> - See <a href="./dimension_reduction.html">Clustering</a> -
+<strong>Images</strong> - See <a href="./getting_started_images.html">Imaging</a> -
+<strong>giottoInstructions</strong> - See <a href="../docs/reference/createGiottoInstructions.html"><strong>createGiottoInstructions</strong></a>
+and below</p>
+<p>Providing <strong>giottoInstructions</strong> allows the
+specification of:<br>
+- An alternative python path if using the Giotto Environment (default)
+is not desired<br>
+- A directory to which resulting plots will save - Plot formatting</p>
+<p>There are four functions to utilize when setting instructions:<br>
+- <strong>createGiottoInstructions</strong>: creates instructions that
+are provided to <strong>createGiottoObject</strong> -
+<strong>showGiottoInstructions</strong>: displays the instructions of a
+Giotto object<br>
+- <strong>changeGiottoInstructions</strong>: replaces 1 or more of the
+instruction parameters (e.g. plotting format)<br>
+- <strong>replaceGiottoInstructions</strong>: replaces all instructions
+with new instructions (e.g after subsetting)</p>
+<p>Here is an example of a more customized Giotto object.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Specify data with file paths </span></span>
+<span><span class="va">osm_exprs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_directory</span>, <span class="st">"osmFISH_prep_expression.txt"</span><span class="op">)</span></span>
+<span><span class="va">osm_locs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_directory</span>, <span class="st">"osmFISH_prep_cell_coordinates.txt"</span><span class="op">)</span></span>
+<span><span class="va">meta_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_directory</span>, <span class="st">"osmFISH_prep_cell_metadata.txt"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create instructions</span></span>
+<span></span>
+<span><span class="co"># Optional: Specify a Python path. If set to NULL (default), the previously installed</span></span>
+<span><span class="co"># Giotto environment will be used.</span></span>
+<span><span class="va">my_python_path</span> <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># alternatively, "/your/python/path/python" if desired.</span></span>
+<span></span>
+<span><span class="va">instrs</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoInstructions.html">createGiottoInstructions</a></span><span class="op">(</span>python_path <span class="op">=</span> <span class="va">my_python_path</span>,</span>
+<span>                                  save_dir <span class="op">=</span> <span class="va">results_directory</span>,</span>
+<span>                                  plot_format <span class="op">=</span> <span class="st">'png'</span>,</span>
+<span>                                  dpi <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>                                  height <span class="op">=</span> <span class="fl">9</span>,</span>
+<span>                                  width <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create Giotto object</span></span>
+<span><span class="va">custom_gobject</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">osm_exprs</span>,</span>
+<span>                                    spatial_locs <span class="op">=</span> <span class="va">osm_locs</span>,                                      </span>
+<span>                                    instructions <span class="op">=</span> <span class="va">instrs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Add field annotations as cell metadata</span></span>
+<span><span class="va">metadata</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">meta_path</span><span class="op">)</span></span>
+<span><span class="va">custom_gobject</span> <span class="op">=</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">custom_gobject</span>, new_metadata <span class="op">=</span> <span class="va">metadata</span>,</span>
+<span>                                 by_column <span class="op">=</span> <span class="cn">T</span>, column_cell_ID <span class="op">=</span> <span class="st">'CellID'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Check which Giotto instructions are associated with your Giotto object</span></span>
+<span><span class="fu"><a href="../reference/showGiottoInstructions.html">showGiottoInstructions</a></span><span class="op">(</span><span class="va">custom_gobject</span><span class="op">)</span></span></code></pre></div>
+<p>Note that although parameters <em>show_plot</em>,
+<em>return_plot</em>, and <em>save_plot</em> were not specified within
+the call to <strong>createGiottoInstructions</strong>, default values
+were provided to these instruction parameters. All instruction
+parameters have default values, such that
+<strong>createGiottoInstructions</strong> may be called with some or no
+arguments yet all instruction parameters will have a value after its
+execution.</p>
+<p>Alternatively, a named list may also be provided to the
+<em>instructions</em> argument of <strong>createGiottoObject</strong>.
+However, ensure that all arguments to <a href="../docs/reference/createGiottoInstructions.html"><strong>createGiottoInstructions</strong></a>
+are defined when providing instructions as a named list, since default
+values are only applied to instructions when made with
+<strong>createGiottoInstructions</strong>. <em>Note that python_path
+must be specified when providing instructions as a named list, and may
+not be provided as NULL.</em></p>
+<p>The <strong>giottoInstructions</strong> may be changed, or completely
+replaced:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Change a previously set parameter, e.g. change dpi = 200 to dpi = 300</span></span>
+<span><span class="va">custom_gobject</span> <span class="op">=</span> <span class="fu"><a href="../reference/changeGiottoInstructions.html">changeGiottoInstructions</a></span><span class="op">(</span><span class="va">custom_gobject</span>, </span>
+<span>                                          param <span class="op">=</span> <span class="st">'dpi'</span>, </span>
+<span>                                          new_value <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Observe that the instructions have changed</span></span>
+<span><span class="fu"><a href="../reference/showGiottoInstructions.html">showGiottoInstructions</a></span><span class="op">(</span><span class="va">custom_gobject</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create new instructions using a named list</span></span>
+<span><span class="va">sub_results_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">results_directory</span>, <span class="st">'specific_results/'</span><span class="op">)</span></span>
+<span><span class="va">my_python_path</span> <span class="op">=</span> <span class="va">custom_gobject</span><span class="op">@</span><span class="va">instructions</span><span class="op">$</span><span class="va">python_path</span></span>
+<span><span class="va">new_instrs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>python_path <span class="op">=</span> <span class="va">my_python_path</span>,</span>
+<span>                  show_plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                  return_plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                  save_plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                  save_dir <span class="op">=</span> <span class="va">sub_results_directory</span>,</span>
+<span>                  plot_format <span class="op">=</span> <span class="st">'jpg'</span>,</span>
+<span>                  dpi <span class="op">=</span> <span class="fl">250</span>,</span>
+<span>                  units <span class="op">=</span> <span class="st">'in'</span>,</span>
+<span>                  height <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>                  width <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>                  is_docker <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Change all instructions</span></span>
+<span><span class="va">custom_gobject</span> <span class="op">=</span> <span class="fu"><a href="../reference/replaceGiottoInstructions.html">replaceGiottoInstructions</a></span><span class="op">(</span><span class="va">custom_gobject</span>,</span>
+<span>                                           instructions <span class="op">=</span> <span class="va">new_instrs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Observe that the instructions have changed</span></span>
+<span><span class="fu"><a href="../reference/showGiottoInstructions.html">showGiottoInstructions</a></span><span class="op">(</span><span class="va">custom_gobject</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
+</div>
+<div class="section level3">
+<h3 id="plotting-data-from-a-giotto-object">Plotting Data from a Giotto Object<a class="anchor" aria-label="anchor" href="#plotting-data-from-a-giotto-object"></a>
+</h3>
+<p>Each plotting function in Giotto has three important binary
+parameters:<br>
+- <strong>show_plot</strong>: print the plot to the console, default is
+TRUE<br>
+- <strong>return_plot</strong>: return the plot as an object, default is
+TRUE<br>
+- <strong>save_plot</strong>: automatically save the plot, default is
+FALSE</p>
+<p>These parameters are stored within a <strong>giottoObject</strong>
+that was provided instructions from
+<strong>createGiottoInstructions</strong> and are provided to plotting
+functions accordingly. To change these parameters from the default
+values, the instructions may be changed or replaced, or these parameters
+may be <em>manually overwritten</em> within plotting functions.</p>
+<p>See <a href="../docs/reference/showSaveParameters.html">showSaveParameters</a>
+and the <a href="./getting_started_saving.html">Saving Options</a>
+tutorial for alternative methods to save plots.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot according to Giotto Instructions (default)</span></span>
+<span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">custom_gobject</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot clusters, create, and save to a new subdirectory, all while overwritting formatting</span></span>
+<span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">custom_gobject</span>, </span>
+<span>         cell_color <span class="op">=</span> <span class="st">'ClusterName'</span>, </span>
+<span>         save_plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>         return_plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>         show_plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_folder <span class="op">=</span> <span class="st">'plots/'</span>, <span class="co"># Create subdirectory</span></span>
+<span>                           save_name <span class="op">=</span> <span class="st">'cell_clusters'</span>, </span>
+<span>                           save_format <span class="op">=</span> <span class="st">'png'</span>, </span>
+<span>                           units <span class="op">=</span> <span class="st">'in'</span>,</span>
+<span>                           base_height <span class="op">=</span> <span class="fl">9</span>,</span>
+<span>                           base_width <span class="op">=</span> <span class="fl">9</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/getting_started_gobject/cell_clusters.png"></p>
 </div>
 </div>
 <div class="section level2">
@@ -372,24 +517,26 @@ image)<br>
 </h2>
 <p><br> Usage of the Giotto package revolves around the
 <strong>giottoObject</strong>. This is an S4 object class that holds
-spatial expression data and facilitates its use with the Giotto
-package’s functions. Additional metadata and other certain outputs
-generated from Giotto functions that are used in downstream analyses
-will also be stored within this object. The self-contained nature of the
-Giotto object makes it a convenient representation of the entire spatial
-experiment and is why many of Giotto functions both take the
-<strong>giottoObject</strong> as input and feed into it as output.</p>
+spatial expression data and facilitates its manipulation and
+visualization with the Giotto package’s functions. Additional metadata
+and other outputs generated from certain Giotto functions, which may
+used in downstream analyses, are also be stored within the
+<strong>giottoObject</strong>. Its self-contained nature renders a
+convenient representation of the entire spatial experiment and is why
+most Giotto functions take a given <strong>giottoObject</strong> as
+input and return a <strong>giottoObject</strong> as output.</p>
 <p>Data is organized within the <strong>giottoObject</strong> in defined
 <strong>slots</strong> as described in the diagram below.<br><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-01.svg" style="width:100.0%"><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-02.svg" style="width:100.0%"><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-03.svg" style="width:100.0%"></p>
-<div class="section level3">
-<h3 id="nested-organization-within-slots">Nested organization within slots<a class="anchor" aria-label="anchor" href="#nested-organization-within-slots"></a>
-</h3>
-<p>Spatial data has a tiered organization and so does Giotto. Tissue
-regions can be divided down into individual cells and then further into
-organelles. The data structure of Giotto mirrors biological structure by
-nesting data within slots related to spatial data by
+</div>
+<div class="section level2">
+<h2 id="nested-organization-of-the-giotto-object">Nested Organization of the Giotto Object<a class="anchor" aria-label="anchor" href="#nested-organization-of-the-giotto-object"></a>
+</h2>
+<p>Spatial data has tiered organization and thus so too does Giotto.
+Tissue regions can be divided down into individual cells and then
+further into organelles. The data structure of Giotto mirrors biological
+structure by nesting data within slots related to spatial data by
 <strong>spat_unit</strong> (spatial unit). Additonally, to facilitate
-the integration of multiple omic data, slots related to feature data
+the integration of multiple -omic data, slots related to feature data
 will be nested with <strong>feat_type</strong> (feature type).
 <br><br>
 Included below is a description of this nesting and also, for advanced
@@ -546,7 +693,6 @@ also provided. <br></p>
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
   </div>

@@ -119,44 +119,44 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">spatPlot3D</span><span class="op">(</span>
-  <span class="va">gobject</span>,
-  spat_unit <span class="op">=</span> <span class="cn">NULL</span>,
-  feat_type <span class="op">=</span> <span class="cn">NULL</span>,
-  sdimx <span class="op">=</span> <span class="st">"sdimx"</span>,
-  sdimy <span class="op">=</span> <span class="st">"sdimy"</span>,
-  sdimz <span class="op">=</span> <span class="st">"sdimz"</span>,
-  spat_enr_names <span class="op">=</span> <span class="cn">NULL</span>,
-  point_size <span class="op">=</span> <span class="fl">3</span>,
-  cell_color <span class="op">=</span> <span class="cn">NULL</span>,
-  cell_color_code <span class="op">=</span> <span class="cn">NULL</span>,
-  select_cell_groups <span class="op">=</span> <span class="cn">NULL</span>,
-  select_cells <span class="op">=</span> <span class="cn">NULL</span>,
-  show_other_cells <span class="op">=</span> <span class="cn">T</span>,
-  other_cell_color <span class="op">=</span> <span class="st">"lightgrey"</span>,
-  other_point_size <span class="op">=</span> <span class="fl">0.5</span>,
-  other_cell_alpha <span class="op">=</span> <span class="fl">0.5</span>,
-  show_network <span class="op">=</span> <span class="cn">F</span>,
-  spatial_network_name <span class="op">=</span> <span class="st">"Delaunay_network"</span>,
-  network_color <span class="op">=</span> <span class="cn">NULL</span>,
-  network_alpha <span class="op">=</span> <span class="fl">1</span>,
-  show_grid <span class="op">=</span> <span class="cn">F</span>,
-  spatial_grid_name <span class="op">=</span> <span class="st">"spatial_grid"</span>,
-  grid_color <span class="op">=</span> <span class="cn">NULL</span>,
-  grid_alpha <span class="op">=</span> <span class="fl">1</span>,
-  title <span class="op">=</span> <span class="st">""</span>,
-  show_legend <span class="op">=</span> <span class="cn">T</span>,
-  axis_scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cube"</span>, <span class="st">"real"</span>, <span class="st">"custom"</span><span class="op">)</span>,
-  custom_ratio <span class="op">=</span> <span class="cn">NULL</span>,
-  x_ticks <span class="op">=</span> <span class="cn">NULL</span>,
-  y_ticks <span class="op">=</span> <span class="cn">NULL</span>,
-  z_ticks <span class="op">=</span> <span class="cn">NULL</span>,
-  show_plot <span class="op">=</span> <span class="cn">NA</span>,
-  return_plot <span class="op">=</span> <span class="cn">NA</span>,
-  save_plot <span class="op">=</span> <span class="cn">NA</span>,
-  save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  default_save_name <span class="op">=</span> <span class="st">"spat3D"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">spatPlot3D</span><span class="op">(</span></span>
+<span>  <span class="va">gobject</span>,</span>
+<span>  spat_unit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  feat_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sdimx <span class="op">=</span> <span class="st">"sdimx"</span>,</span>
+<span>  sdimy <span class="op">=</span> <span class="st">"sdimy"</span>,</span>
+<span>  sdimz <span class="op">=</span> <span class="st">"sdimz"</span>,</span>
+<span>  spat_enr_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  point_size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  cell_color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cell_color_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  select_cell_groups <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  select_cells <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  show_other_cells <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>  other_cell_color <span class="op">=</span> <span class="st">"lightgrey"</span>,</span>
+<span>  other_point_size <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  other_cell_alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  show_network <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  spatial_network_name <span class="op">=</span> <span class="st">"Delaunay_network"</span>,</span>
+<span>  network_color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  network_alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  show_grid <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  spatial_grid_name <span class="op">=</span> <span class="st">"spatial_grid"</span>,</span>
+<span>  grid_color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  grid_alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  show_legend <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>  axis_scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cube"</span>, <span class="st">"real"</span>, <span class="st">"custom"</span><span class="op">)</span>,</span>
+<span>  custom_ratio <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  x_ticks <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  y_ticks <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  z_ticks <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  show_plot <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  return_plot <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  save_plot <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  default_save_name <span class="op">=</span> <span class="st">"spat3D"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">

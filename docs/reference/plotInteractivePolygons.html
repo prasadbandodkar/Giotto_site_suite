@@ -119,7 +119,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">plotInteractivePolygons</span><span class="op">(</span><span class="va">x</span>, width <span class="op">=</span> <span class="st">"auto"</span>, height <span class="op">=</span> <span class="st">"auto"</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plotInteractivePolygons</span><span class="op">(</span><span class="va">x</span>, width <span class="op">=</span> <span class="st">"auto"</span>, height <span class="op">=</span> <span class="st">"auto"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -145,28 +145,28 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Using a ggplot2 plot</span></span>
-<span class="r-in"><span class="fu">libray</span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">my_plot</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">plotInteractivePolygons</span><span class="op">(</span><span class="va">my_plot</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Using a terra rast image</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/" class="external-link">terra</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"ex/elev.tif"</span>, package<span class="op">=</span><span class="st">"terra"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">plotInteractivePolygons</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">plotInteractivePolygons</span><span class="op">(</span><span class="va">r</span>, border <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Using an image contained in Giotto object</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">my_spatPlot</span> <span class="op">&lt;-</span> <span class="fu"><a href="spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">my_giotto_object</span>,</span>
-<span class="r-in">                          show_image <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">                          point_alpha <span class="op">=</span> <span class="fl">0.75</span>,</span>
-<span class="r-in">                          save_plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">plotInteractivePolygons</span><span class="op">(</span><span class="va">my_spatPlot</span>, height <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">my_polygon_coordinates</span> <span class="op">&lt;-</span> <span class="fu">plotInteractivePolygons</span><span class="op">(</span><span class="va">my_spatPlot</span>, height <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Using a ggplot2 plot</span></span></span>
+<span class="r-in"><span><span class="fu">libray</span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">my_plot</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">plotInteractivePolygons</span><span class="op">(</span><span class="va">my_plot</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Using a terra rast image</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/" class="external-link">terra</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"ex/elev.tif"</span>, package<span class="op">=</span><span class="st">"terra"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">plotInteractivePolygons</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">plotInteractivePolygons</span><span class="op">(</span><span class="va">r</span>, border <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Using an image contained in Giotto object</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">my_spatPlot</span> <span class="op">&lt;-</span> <span class="fu"><a href="spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">my_giotto_object</span>,</span></span>
+<span class="r-in"><span>                          show_image <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>                          point_alpha <span class="op">=</span> <span class="fl">0.75</span>,</span></span>
+<span class="r-in"><span>                          save_plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">plotInteractivePolygons</span><span class="op">(</span><span class="va">my_spatPlot</span>, height <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">my_polygon_coordinates</span> <span class="op">&lt;-</span> <span class="fu">plotInteractivePolygons</span><span class="op">(</span><span class="va">my_spatPlot</span>, height <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>

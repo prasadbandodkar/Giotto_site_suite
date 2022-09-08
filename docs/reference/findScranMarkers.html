@@ -119,20 +119,20 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">findScranMarkers</span><span class="op">(</span>
-  <span class="va">gobject</span>,
-  spat_unit <span class="op">=</span> <span class="cn">NULL</span>,
-  feat_type <span class="op">=</span> <span class="cn">NULL</span>,
-  expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normalized"</span>, <span class="st">"scaled"</span>, <span class="st">"custom"</span><span class="op">)</span>,
-  <span class="va">cluster_column</span>,
-  subset_clusters <span class="op">=</span> <span class="cn">NULL</span>,
-  group_1 <span class="op">=</span> <span class="cn">NULL</span>,
-  group_1_name <span class="op">=</span> <span class="cn">NULL</span>,
-  group_2 <span class="op">=</span> <span class="cn">NULL</span>,
-  group_2_name <span class="op">=</span> <span class="cn">NULL</span>,
-  verbose <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">findScranMarkers</span><span class="op">(</span></span>
+<span>  <span class="va">gobject</span>,</span>
+<span>  spat_unit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  feat_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normalized"</span>, <span class="st">"scaled"</span>, <span class="st">"custom"</span><span class="op">)</span>,</span>
+<span>  <span class="va">cluster_column</span>,</span>
+<span>  subset_clusters <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  group_1 <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  group_1_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  group_2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  group_2_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -194,7 +194,7 @@
     <div id="details">
     <h2>Details</h2>
     <p>This is a minimal convenience wrapper around
-the <code><a href="https://rdrr.io/pkg/scran/man/findMarkers.html" class="external-link">findMarkers</a></code> function from the scran package.</p>
+the <code>findMarkers</code> function from the scran package.</p>
 <p>To perform differential expression between custom selected groups of cells
 you need to specify the cell_ID column to parameter <em>cluster_column</em>
 and provide the individual cell IDs to the parameters <em>group_1</em> and <em>group_2</em></p>

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How to process your Giotto object? • Giotto Suite</title>
+<title>How to process a Giotto object? • Giotto Suite</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="How to process your Giotto object?">
+<script src="../pkgdown.js"></script><meta property="og:title" content="How to process a Giotto object?">
 <meta property="og:description" content="Giotto">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -147,7 +147,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>How to process your Giotto object?</h1>
+      <h1 data-toc-skip>How to process a Giotto object?</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/HEAD/vignettes/data_processing.Rmd" class="external-link"><code>vignettes/data_processing.Rmd</code></a></small>
@@ -157,167 +157,220 @@
 
     
     
-<p>After creating your Giotto object, it needs to be prepared for
-downstream analysis. This tutorials walks through filtering,
-normalization, adjusting for batch effects, and adding statistics and
-metadata to your Giotto object as well as high efficency options for
-data processing.</p>
+<p>After creating the Giotto object, it must be prepared for downstream
+analysis. This tutorial walks through filtering, normalizing, adjusting
+for batch effects, adding statistics and metadata to a Giotto object, as
+well as high efficiency options for data processing.</p>
 <p>This tutorial uses a SeqFISH+ dataset of a murine cortex and
-subventrical zone. A complete walkthough of that dataset can be found <a href="./SeqFISH_cortex_210923.html"><strong>here</strong></a>.</p>
+subventrical zone. A complete walkthrough of that dataset can be found
+<a href="./SeqFISH_cortex_210923.html"><strong>here</strong></a>. To
+download the data used to create the Giotto Object below, please ensure
+that <a href="https://www.gnu.org/software/wget/?" class="external-link">wget</a> is installed
+locally.</p>
+<p>This dataset contains multiple field of views; here, we illustrate a
+workflow to bring the FOVs together for holistic analysis, and then
+subset the Giotto Object to analyze the cortex.</p>
 <div class="section level2">
 <h2 id="creating-our-giotto-object">Creating our Giotto Object<a class="anchor" aria-label="anchor" href="#creating-our-giotto-object"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span>
-<span class="va">my_working_dir</span> <span class="op">=</span> <span class="st">'/path/to/directory/'</span>
-
-<span class="co"># set python path to your preferred python version path</span>
-<span class="co"># set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment</span>
-<span class="va">python_path</span> <span class="op">=</span> <span class="cn">NULL</span> 
-<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">python_path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span>force_environment <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="fu"><a href="../reference/getSpatialDataset.html">getSpatialDataset</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">'seqfish_SS_cortex'</span>, directory <span class="op">=</span> <span class="va">my_working_dir</span>, method <span class="op">=</span> <span class="st">'wget'</span><span class="op">)</span>
-
-<span class="co">#  set Giotto instructions</span>
-<span class="va">instrs</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoInstructions.html">createGiottoInstructions</a></span><span class="op">(</span>save_plot <span class="op">=</span> <span class="cn">TRUE</span>, 
-                                  show_plot <span class="op">=</span> <span class="cn">FALSE</span>,
-                                  save_dir <span class="op">=</span> <span class="va">my_working_dir</span>, 
-                                  python_path <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-
-<span class="co"># create giotto object from provided paths ####</span>
-<span class="va">expr_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"cortex_svz_expression.txt"</span><span class="op">)</span>
-<span class="va">loc_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"cortex_svz_centroids_coord.txt"</span><span class="op">)</span>
-<span class="va">meta_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">my_working_dir</span>, <span class="st">"cortex_svz_centroids_annot.txt"</span><span class="op">)</span>
-
-
-<span class="co">#This dataset contains multiple field of views which need to be stitched together</span>
-
-<span class="co"># first merge location and additional metadata</span>
-<span class="va">SS_locations</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">loc_path</span><span class="op">)</span>
-<span class="va">cortex_fields</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">meta_path</span><span class="op">)</span>
-<span class="va">SS_loc_annot</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/merge.html" class="external-link">merge.data.table</a></span><span class="op">(</span><span class="va">SS_locations</span>, <span class="va">cortex_fields</span>, by <span class="op">=</span> <span class="st">'ID'</span><span class="op">)</span>
-<span class="va">SS_loc_annot</span><span class="op">[</span>, <span class="va">ID</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">ID</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'cell_'</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">913</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>
-<span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html" class="external-link">setorder</a></span><span class="op">(</span><span class="va">SS_loc_annot</span>, <span class="va">ID</span><span class="op">)</span>
-
-<span class="co"># create file with offset information</span>
-<span class="va">my_offset_file</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>field <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>,
-                                        x_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1654.97</span>, <span class="fl">1750.75</span>, <span class="fl">1674.35</span>, <span class="fl">675.5</span>, <span class="fl">2048</span>, <span class="fl">675</span><span class="op">)</span>,
-                                        y_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># create a stitch file</span>
-<span class="va">stitch_file</span> <span class="op">=</span> <span class="fu"><a href="../reference/stitchFieldCoordinates.html">stitchFieldCoordinates</a></span><span class="op">(</span>location_file <span class="op">=</span> <span class="va">SS_loc_annot</span>,
-                                     offset_file <span class="op">=</span> <span class="va">my_offset_file</span>,
-                                     cumulate_offset_x <span class="op">=</span> <span class="cn">T</span>,
-                                     cumulate_offset_y <span class="op">=</span> <span class="cn">F</span>,
-                                     field_col <span class="op">=</span> <span class="st">'FOV'</span>,
-                                     reverse_final_x <span class="op">=</span> <span class="cn">F</span>,
-                                     reverse_final_y <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
-<span class="va">stitch_file</span>    <span class="op">=</span> <span class="va">stitch_file</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">ID</span>, <span class="va">X_final</span>, <span class="va">Y_final</span><span class="op">)</span><span class="op">]</span>
-<span class="va">my_offset_file</span> <span class="op">=</span> <span class="va">my_offset_file</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">field</span>, <span class="va">x_offset_final</span>, <span class="va">y_offset_final</span><span class="op">)</span><span class="op">]</span>
-
-<span class="co"># create Giotto object</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">expr_path</span>,
-                                 spatial_locs <span class="op">=</span> <span class="va">stitch_file</span>,
-                                 offset_file <span class="op">=</span> <span class="va">my_offset_file</span>,
-                                 instructions <span class="op">=</span> <span class="va">instrs</span><span class="op">)</span>
-
-<span class="co"># add additional annotation if wanted</span>
-<span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">testobj</span>,
-                             new_metadata <span class="op">=</span> <span class="va">cortex_fields</span>,
-                             by_column <span class="op">=</span> <span class="cn">T</span>,
-                             column_cell_ID <span class="op">=</span> <span class="st">'ID'</span><span class="op">)</span>
-
-<span class="co"># subset data to the cortex field of views</span>
-<span class="va">cell_metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span>
-<span class="va">cortex_cell_ids</span> <span class="op">=</span> <span class="va">cell_metadata</span><span class="op">[</span><span class="va">FOV</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span>
-<span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">testobj</span>, cell_ids <span class="op">=</span> <span class="va">cortex_cell_ids</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
+<span><span class="va">data_directory</span> <span class="op">=</span> <span class="st">'/path/to/data/directory/'</span></span>
+<span><span class="va">results_directory</span> <span class="op">=</span> <span class="st">'/path/to/results/directory/'</span></span>
+<span></span>
+<span><span class="va">genv_exists</span> <span class="op">=</span> <span class="fu"><a href="../reference/checkGiottoEnvironment.html">checkGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">genv_exists</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="co"># The following command need only be run once to install the Giotto environment.</span></span>
+<span>  <span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Optional: Specify a Python path. If set to NULL (default), the previously installed</span></span>
+<span><span class="co"># Giotto environment will be used.</span></span>
+<span><span class="va">my_python_path</span> <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># alternatively, "/your/python/path/" if desired.</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/getSpatialDataset.html">getSpatialDataset</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">'seqfish_SS_cortex'</span>, directory <span class="op">=</span> <span class="va">data_directory</span>, method <span class="op">=</span> <span class="st">'wget'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set Giotto instructions</span></span>
+<span><span class="va">instrs</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoInstructions.html">createGiottoInstructions</a></span><span class="op">(</span>save_plot <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                                  show_plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                                  save_dir <span class="op">=</span> <span class="va">results_directory</span>, </span>
+<span>                                  python_path <span class="op">=</span> <span class="va">my_python_path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create Giotto object by providing paths</span></span>
+<span><span class="va">expr_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_directory</span>, <span class="st">"cortex_svz_expression.txt"</span><span class="op">)</span></span>
+<span><span class="va">loc_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_directory</span>, <span class="st">"cortex_svz_centroids_coord.txt"</span><span class="op">)</span></span>
+<span><span class="va">meta_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_directory</span>, <span class="st">"cortex_svz_centroids_annot.txt"</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># This dataset contains multiple field of views which need to be stitched together.</span></span>
+<span></span>
+<span><span class="co"># First, merge location and additional metadata</span></span>
+<span><span class="va">SS_locations</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">loc_path</span><span class="op">)</span></span>
+<span><span class="va">cortex_fields</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">meta_path</span><span class="op">)</span></span>
+<span><span class="va">SS_loc_annot</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/merge.html" class="external-link">merge.data.table</a></span><span class="op">(</span><span class="va">SS_locations</span>, <span class="va">cortex_fields</span>, by <span class="op">=</span> <span class="st">'ID'</span><span class="op">)</span></span>
+<span><span class="va">SS_loc_annot</span><span class="op">[</span>, <span class="va">ID</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">ID</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'cell_'</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">913</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html" class="external-link">setorder</a></span><span class="op">(</span><span class="va">SS_loc_annot</span>, <span class="va">ID</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create a file with offset information</span></span>
+<span><span class="va">my_offset_file</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>field <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>,</span>
+<span>                                        x_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1654.97</span>, <span class="fl">1750.75</span>, <span class="fl">1674.35</span>, <span class="fl">675.5</span>, <span class="fl">2048</span>, <span class="fl">675</span><span class="op">)</span>,</span>
+<span>                                        y_offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="op">-</span><span class="fl">1438.02</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create a file to stitch the multiple fields of view together</span></span>
+<span><span class="va">stitch_file</span> <span class="op">=</span> <span class="fu"><a href="../reference/stitchFieldCoordinates.html">stitchFieldCoordinates</a></span><span class="op">(</span>location_file <span class="op">=</span> <span class="va">SS_loc_annot</span>,</span>
+<span>                                     offset_file <span class="op">=</span> <span class="va">my_offset_file</span>,</span>
+<span>                                     cumulate_offset_x <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                                     cumulate_offset_y <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>                                     field_col <span class="op">=</span> <span class="st">'FOV'</span>,</span>
+<span>                                     reverse_final_x <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>                                     reverse_final_y <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">stitch_file</span>    <span class="op">=</span> <span class="va">stitch_file</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">ID</span>, <span class="va">X_final</span>, <span class="va">Y_final</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">stitch_file</span><span class="op">$</span><span class="va">ID</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">stitch_file</span><span class="op">$</span><span class="va">ID</span><span class="op">)</span> <span class="co"># ID must be a character vector</span></span>
+<span><span class="va">my_offset_file</span> <span class="op">=</span> <span class="va">my_offset_file</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">field</span>, <span class="va">x_offset_final</span>, <span class="va">y_offset_final</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Create Giotto object</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">expr_path</span>,</span>
+<span>                              spatial_locs <span class="op">=</span> <span class="va">stitch_file</span>,</span>
+<span>                              offset_file <span class="op">=</span> <span class="va">my_offset_file</span>,</span>
+<span>                              instructions <span class="op">=</span> <span class="va">instrs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Add additional annotation if wanted</span></span>
+<span><span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">testobj</span>,</span>
+<span>                          new_metadata <span class="op">=</span> <span class="va">cortex_fields</span>,</span>
+<span>                          by_column <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                          column_cell_ID <span class="op">=</span> <span class="st">'ID'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subset data to the cortex field of views in a new Giotto object</span></span>
+<span><span class="va">cell_metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span></span>
+<span><span class="va">cortex_cell_ids</span> <span class="op">=</span> <span class="va">cell_metadata</span><span class="op">[</span><span class="va">FOV</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span></span>
+<span><span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">testobj</span>, cell_ids <span class="op">=</span> <span class="va">cortex_cell_ids</span><span class="op">)</span></span></code></pre></div>
+<p>Since <strong>subsetGiotto</strong> returns a Giotto object, multiple
+different objects may be created to store subsets. For the purposes of
+this tutorial, we will focus only on the cortex FOVs, which is why the
+original Giotto Object has been overwritten upon calling
+<strong>subsetGiotto</strong>.</p>
 </div>
 <div class="section level2">
 <h2 id="filtering-the-giotto-object">1. Filtering the Giotto Object<a class="anchor" aria-label="anchor" href="#filtering-the-giotto-object"></a>
 </h2>
-<p>You can filter a Giotto object to based on expression thresholds.
--<strong>feat_det_in_min_cells</strong> sets a threshold of the number
-of cells that must include a feature, to keep that feature in the
-dataset -<strong>min_det_feats_per_cell</strong> sets a threshold of the
-number of features expressed by a cell to keep that cell in the
-dataset.</p>
+<p>The Giotto object may be filtered based on:</p>
+<p>-<strong>expression_thresholds</strong> sets a minimum threshold
+expression level</p>
+<p>-<strong>feat_det_in_min_cells</strong> sets a threshold of the
+number of cells that must include a feature in order to keep that
+feature in the dataset</p>
+<p>-<strong>min_det_feats_per_cell</strong> sets a threshold of the
+number of features expressed by a cell in order to keep that cell in the
+dataset</p>
+<p>The distribution of feature expression can inform stringency of
+filter parameters, and can be displayed for both cells and features by
+calling <strong>filterDistributions</strong> and specifying the
+‘detection’ parameter accordingly:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filterGiotto.html">filterGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>,
-                          expression_threshold <span class="op">=</span> <span class="fl">1</span>,
-                          feat_det_in_min_cells <span class="op">=</span> <span class="fl">100</span>,
-                          min_det_feats_per_cell <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
-<p>If you are not sure how stringent your filters should be, you can
-check the distribution of feature expression</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/filterDistributions.html">filterDistributions</a></span><span class="op">(</span><span class="va">testobj</span>, detection <span class="op">=</span> <span class="st">'cells'</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/data_processing/0-filterDistributions_cells.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/filterDistributions.html">filterDistributions</a></span><span class="op">(</span><span class="va">testobj</span>, detection <span class="op">=</span> <span class="st">'feats'</span><span class="op">)</span></code></pre></div>
-<p><img src="../inst/images/SeqFish_mouse_cortex/0-filterDistributions.png" style="width:50.0%"></p>
+<code class="sourceCode R"><span> <span class="fu"><a href="../reference/filterDistributions.html">filterDistributions</a></span><span class="op">(</span><span class="va">testobj</span>, detection <span class="op">=</span> <span class="st">'feats'</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/data_processing/1-filterDistributions_feats.png" style="width:50.0%"></p>
+<p><strong>filterCombinations</strong> may be used to test how different
+filtering parameters will affect the number of cells and features in the
+filtered data:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"> <span class="fu"><a href="../reference/filterDistributions.html">filterDistributions</a></span><span class="op">(</span><span class="va">testobj</span>, detection <span class="op">=</span> <span class="st">'cells'</span><span class="op">)</span></code></pre></div>
-<p><img src="../inst/images/SeqFish_mouse_cortex/1-filterDistributions.png" style="width:50.0%"></p>
-<p><strong>filterCombinations</strong> can also be used to test how
-different filtering parameters will affect the number of cells and
-features in your dataset.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/filterCombinations.html">filterCombinations</a></span><span class="op">(</span><span class="va">testobj</span>,</span>
+<span>                   expression_thresholds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>                   feat_det_in_min_cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">200</span><span class="op">)</span>,</span>
+<span>                   min_det_feats_per_cell <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">25</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/data_processing/2-filterCombinations.png" style="width:50.0%"> When a consensus on appropriate filtering
+parameters has been reached, provide the arguments to
+<strong>filterGiotto</strong>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/filterCombinations.html">filterCombinations</a></span><span class="op">(</span><span class="va">testobj</span>,
-                   expression_thresholds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,
-                   feat_det_in_min_cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">200</span><span class="op">)</span>,
-                   min_det_feats_per_cell <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">25</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="../inst/images/SeqFish_mouse_cortex/11-filterCombinations.png" style="width:50.0%"></p>
+<code class="sourceCode R"><span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filterGiotto.html">filterGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>,</span>
+<span>                        expression_threshold <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                        feat_det_in_min_cells <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>                        min_det_feats_per_cell <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="normalization-of-raw-counts-data">2. Normalization of Raw Counts Data<a class="anchor" aria-label="anchor" href="#normalization-of-raw-counts-data"></a>
 </h2>
-<p>There are two methods of normalization supported by Giotto. Method A
-normalizes the data by total library size and a custom scale factor,
-then log transforms the data and z-scores the data by genes and or
-cells.</p>
+<p>There are three methods of normalization supported by Giotto.</p>
+<p>The ‘standard’ method (default) normalizes the data by total library
+size and a custom scale factor, then log transforms and z-scores the
+data by cells or genes, specified by scale_order.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># normalize to scale expression values of the Giotto object using method A and z-scoring feats over cells</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, norm_methods <span class="op">=</span> <span class="st">'standard'</span>, scale_feats <span class="op">=</span> <span class="cn">TRUE</span>, scalefactor <span class="op">=</span> <span class="fl">6000</span>, verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
-<p>Method B uses the Lause/Kobak et al. method. Fist, expected values
-are calculated based on Pearson correlations. Next, z-scores are
-calculated based on observed and expected values.</p>
+<code class="sourceCode R"><span><span class="co"># normalize to scale expression values of the Giotto object using the standard method, z-scoring feats over cells</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
+<span>                           norm_methods <span class="op">=</span> <span class="st">'standard'</span>, </span>
+<span>                           scale_feats <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                           scalefactor <span class="op">=</span> <span class="fl">6000</span>,</span>
+<span>                           scale_order <span class="op">=</span> <span class="st">'first_feats'</span>, <span class="co"># Default, alternatively 'first_cells'</span></span>
+<span>                           verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<p>The ‘pearson_resid’ method uses the Lause/Kobak et al. method. Fist,
+expected values are calculated based on Pearson correlations. Next,
+z-scores are calculated based on observed and expected values.</p>
+<p>It should be noted that normalizing with this method will save the
+data within the “scaled” expression slot, NOT the “normalized” slot.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># normalize to scale expression values of the Giotto object using method B </span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, norm_methods <span class="op">=</span> <span class="st">'pearson_resid'</span>, scale_feats <span class="op">=</span> <span class="cn">TRUE</span>, scalefactor <span class="op">=</span> <span class="fl">6000</span>, verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># normalize to scale expression values of the Giotto object using method B </span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
+<span>                           norm_methods <span class="op">=</span> <span class="st">'pearson_resid'</span>, </span>
+<span>                           scale_feats <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                           scalefactor <span class="op">=</span> <span class="fl">6000</span>, </span>
+<span>                           verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<p>The ‘osmFISH’ method is intended for in-situ RNA data and uses the
+normalization method described by <a href="https://www.nature.com/articles/s41592-018-0175-z.pdf?proof=t" class="external-link">Codeluppi
+et al.</a> Feature (gene) counts are individually normalized by the
+total feature count, and then are multiplied by the total number of
+features. Then, cells are individually normalized by dividing the
+normalized feature counts by the total feature counts per cell, and then
+are scaled by the total number of cells.</p>
+<p>Since the data in this tutorial is not in-situ RNA data, we will not
+show this method here. It may be utilized by specifying the norm_methods
+argument as ‘osmFISH’.</p>
 </div>
 <div class="section level2">
 <h2 id="add-statistics-and-metadata">3. Add Statistics and Metadata<a class="anchor" aria-label="anchor" href="#add-statistics-and-metadata"></a>
 </h2>
-<p>Addiing statistics will add the following statistics to cell metadata
--<strong>nr_feats</strong>: Denotes in how many features are detected
-per cell</p>
-<p>-<strong>perc_feats</strong>: Denotes what percentage of features is
-detected per cell</p>
-<p>-<strong>total_expr</strong>: Shows the total sum of feature
-expression per cell</p>
-<p>as well as the following statistics to feature metadata
--<strong>nr_cells</strong>: Denotes in how many cells the feature is
-detected</p>
-<p>-<strong>per_cells</strong>: Denotes in what percentage of cells the
-feature is detected</p>
-<p>-<strong>total_expr</strong>: Shows the total sum of feature
-expression in all cells</p>
-<p>-<strong>mean_expr</strong>: Average feature expression in all
-cells</p>
-<p>-<strong>mean_expr_det</strong>: Average feature expression in cells
-with detectable levels of the gen</p>
+<p>The function <strong>addStatistics</strong> will add the following
+statistics to cell metadata:</p>
+<ul>
+<li><p><strong>nr_feats</strong>: Denotes how many features are detected
+per cell</p></li>
+<li><p><strong>perc_feats</strong>: Denotes the percentage of features
+detected per cell</p></li>
+<li><p><strong>total_expr</strong>: Shows the total sum of feature
+expression per cell</p></li>
+</ul>
+<p>It will also add the following statistics to feature metadata:</p>
+<ul>
+<li><p><strong>nr_cells</strong>: Denotes how many cells in which the
+feature is detected</p></li>
+<li><p><strong>per_cells</strong>: Denotes the percentage of cells in
+which the feature is detected</p></li>
+<li><p><strong>total_expr</strong>: Shows the total sum of feature
+expression in all cells</p></li>
+<li><p><strong>mean_expr</strong>: Average feature expression in all
+cells</p></li>
+<li><p><strong>mean_expr_det</strong>: Average feature expression in
+cells with detectable levels of the feature</p></li>
+</ul>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># add gene &amp; cell statistics to the giotto object</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/addStatistics.html">addStatistics</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, expression_values <span class="op">=</span> <span class="st">'normalized'</span><span class="op">)</span>
-<span class="va">testobj</span><span class="op">@</span><span class="va">cell_metadata</span><span class="op">$</span><span class="va">rna</span>
-<span class="va">testobj</span><span class="op">@</span><span class="va">feat_metadata</span><span class="op">$</span><span class="va">rna</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Add gene &amp; cell statistics to the Giotto object using the data normalized with method A (above)</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/addStatistics.html">addStatistics</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, expression_values <span class="op">=</span> <span class="st">'normalized'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Accessors:</span></span>
+<span><span class="va">cell_metadata_cortex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span></span>
+<span><span class="va">feature_metadata_cortex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fDataDT.html">fDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span></span></code></pre></div>
 <p><strong>addFeatsPerc</strong> can be used to detect the percentage of
 features in each cell within a given gene family (ie. mitochondrial
 genes, ribosomal genes)</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#Calculate the percentage of BMP genes per cell</span>
-<span class="va">featdata</span> <span class="op">=</span> <span class="fu"><a href="../reference/fDataDT.html">fDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span>
-<span class="va">bmp_genes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">'Bmp'</span>, x <span class="op">=</span> <span class="va">featdata</span><span class="op">$</span><span class="va">feat_ID</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/addFeatsPerc.html">addFeatsPerc</a></span><span class="op">(</span><span class="va">testobj</span>, expression_values <span class="op">=</span> <span class="st">'normalized'</span>, feats <span class="op">=</span> <span class="va">bmp_genes</span>, 
-                        vector_name <span class="op">=</span> <span class="st">"perc_bmp"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#Calculate the percentage of BMP genes per cell</span></span>
+<span><span class="va">bmp_genes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">'Bmp'</span>, x <span class="op">=</span> <span class="va">feature_metadata_cortex</span><span class="op">$</span><span class="va">feat_ID</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/addFeatsPerc.html">addFeatsPerc</a></span><span class="op">(</span><span class="va">testobj</span>, </span>
+<span>                        expression_values <span class="op">=</span> <span class="st">'normalized'</span>, </span>
+<span>                        feats <span class="op">=</span> <span class="va">bmp_genes</span>, </span>
+<span>                        vector_name <span class="op">=</span> <span class="st">"perc_bmp"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="adjust-expression-matrix">4. Adjust Expression Matrix<a class="anchor" aria-label="anchor" href="#adjust-expression-matrix"></a>
@@ -325,22 +378,34 @@ genes, ribosomal genes)</p>
 <p>Adjust expression matrix for known batch effects or technological
 covariates</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># In this case, since there are no known batch effects I will be regressing out the number of features detected per cell</span>
-<span class="co"># So that covariate will not effect further analysis</span>
-<span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/adjustGiottoMatrix.html">adjustGiottoMatrix</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>,
-                                 covariate_columns <span class="op">=</span> <span class="st">'nr_feats'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Since there are no known batch effects, the number of features detected per cell</span></span>
+<span><span class="co"># will be regressed out so that covariates will not effect further analyses.</span></span>
+<span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/adjustGiottoMatrix.html">adjustGiottoMatrix</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
+<span>                              expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>,</span>
+<span>                              covariate_columns <span class="op">=</span> <span class="st">'nr_feats'</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="high-efficiency-data-processing">5. High Efficiency Data Processing<a class="anchor" aria-label="anchor" href="#high-efficiency-data-processing"></a>
 </h2>
 <p><strong>processGiotto</strong> completes the filtering,
 normalization, statistical, and adjustment steps of processing in one
-single step. This is ideal for faster processing.</p>
+single step, ideal for faster processing.</p>
+<p>Since adjustment is not necessary for every dataset, it may be set to
+NULL to skip this processing step. All other arguments are
+user-determined; default arguments will apply to all steps if no
+arguments are provided.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/processGiotto.html">processGiotto</a></span><span class="op">(</span><span class="va">testobj</span>,filter_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_threshold <span class="op">=</span> <span class="fl">1</span>,feat_det_in_min_cells <span class="op">=</span> <span class="fl">100</span>, min_det_feats_per_cell <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,
-                      norm_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span> norm_methods <span class="op">=</span> <span class="st">'standard'</span>, scale_feats <span class="op">=</span> <span class="cn">TRUE</span>, scalefactor <span class="op">=</span> <span class="fl">6000</span><span class="op">)</span>,
-                      stat_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="st">'normalized'</span><span class="op">)</span>,
-                      adjust_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>, covariate_columns <span class="op">=</span> <span class="st">'nr_feats'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/processGiotto.html">processGiotto</a></span><span class="op">(</span><span class="va">testobj</span>,</span>
+<span>                         filter_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_threshold <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                                              feat_det_in_min_cells <span class="op">=</span> <span class="fl">100</span>, </span>
+<span>                                              min_det_feats_per_cell <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
+<span>                         norm_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>norm_methods <span class="op">=</span> <span class="st">'standard'</span>, </span>
+<span>                                            scale_feats <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                                            scalefactor <span class="op">=</span> <span class="fl">6000</span><span class="op">)</span>,</span>
+<span>                         stat_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="st">'normalized'</span><span class="op">)</span>,</span>
+<span>                         adjust_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>, </span>
+<span>                                              covariate_columns <span class="op">=</span> <span class="st">'nr_feats'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
   </div>
 

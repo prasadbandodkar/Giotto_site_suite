@@ -119,45 +119,45 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">dimFeatPlot2D</span><span class="op">(</span>
-  <span class="va">gobject</span>,
-  spat_unit <span class="op">=</span> <span class="cn">NULL</span>,
-  feat_type <span class="op">=</span> <span class="cn">NULL</span>,
-  expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normalized"</span>, <span class="st">"scaled"</span>, <span class="st">"custom"</span><span class="op">)</span>,
-  feats <span class="op">=</span> <span class="cn">NULL</span>,
-  dim_reduction_to_use <span class="op">=</span> <span class="st">"umap"</span>,
-  dim_reduction_name <span class="op">=</span> <span class="cn">NULL</span>,
-  dim1_to_use <span class="op">=</span> <span class="fl">1</span>,
-  dim2_to_use <span class="op">=</span> <span class="fl">2</span>,
-  show_NN_network <span class="op">=</span> <span class="cn">F</span>,
-  nn_network_to_use <span class="op">=</span> <span class="st">"sNN"</span>,
-  network_name <span class="op">=</span> <span class="st">"sNN.pca"</span>,
-  network_color <span class="op">=</span> <span class="st">"lightgray"</span>,
-  edge_alpha <span class="op">=</span> <span class="cn">NULL</span>,
-  scale_alpha_with_expression <span class="op">=</span> <span class="cn">FALSE</span>,
-  point_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"border"</span>, <span class="st">"no_border"</span><span class="op">)</span>,
-  point_size <span class="op">=</span> <span class="fl">1</span>,
-  point_alpha <span class="op">=</span> <span class="fl">1</span>,
-  cell_color_gradient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"white"</span>, <span class="st">"red"</span><span class="op">)</span>,
-  gradient_midpoint <span class="op">=</span> <span class="cn">NULL</span>,
-  gradient_limits <span class="op">=</span> <span class="cn">NULL</span>,
-  point_border_col <span class="op">=</span> <span class="st">"black"</span>,
-  point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,
-  show_legend <span class="op">=</span> <span class="cn">T</span>,
-  legend_text <span class="op">=</span> <span class="fl">10</span>,
-  background_color <span class="op">=</span> <span class="st">"white"</span>,
-  axis_text <span class="op">=</span> <span class="fl">8</span>,
-  axis_title <span class="op">=</span> <span class="fl">8</span>,
-  cow_n_col <span class="op">=</span> <span class="fl">2</span>,
-  cow_rel_h <span class="op">=</span> <span class="fl">1</span>,
-  cow_rel_w <span class="op">=</span> <span class="fl">1</span>,
-  cow_align <span class="op">=</span> <span class="st">"h"</span>,
-  show_plot <span class="op">=</span> <span class="cn">NA</span>,
-  return_plot <span class="op">=</span> <span class="cn">NA</span>,
-  save_plot <span class="op">=</span> <span class="cn">NA</span>,
-  save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  default_save_name <span class="op">=</span> <span class="st">"dimFeatPlot2D"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dimFeatPlot2D</span><span class="op">(</span></span>
+<span>  <span class="va">gobject</span>,</span>
+<span>  spat_unit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  feat_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normalized"</span>, <span class="st">"scaled"</span>, <span class="st">"custom"</span><span class="op">)</span>,</span>
+<span>  feats <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dim_reduction_to_use <span class="op">=</span> <span class="st">"umap"</span>,</span>
+<span>  dim_reduction_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dim1_to_use <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  dim2_to_use <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  show_NN_network <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  nn_network_to_use <span class="op">=</span> <span class="st">"sNN"</span>,</span>
+<span>  network_name <span class="op">=</span> <span class="st">"sNN.pca"</span>,</span>
+<span>  network_color <span class="op">=</span> <span class="st">"lightgray"</span>,</span>
+<span>  edge_alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  scale_alpha_with_expression <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  point_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"border"</span>, <span class="st">"no_border"</span><span class="op">)</span>,</span>
+<span>  point_size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  point_alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  cell_color_gradient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"white"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
+<span>  gradient_midpoint <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  gradient_limits <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  point_border_col <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  point_border_stroke <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  show_legend <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>  legend_text <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  background_color <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  axis_text <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>  axis_title <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>  cow_n_col <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  cow_rel_h <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  cow_rel_w <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  cow_align <span class="op">=</span> <span class="st">"h"</span>,</span>
+<span>  show_plot <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  return_plot <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  save_plot <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  default_save_name <span class="op">=</span> <span class="st">"dimFeatPlot2D"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">

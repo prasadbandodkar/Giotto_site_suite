@@ -119,51 +119,51 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">clusterCells</span><span class="op">(</span>
-  <span class="va">gobject</span>,
-  cluster_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"leiden"</span>, <span class="st">"louvain_community"</span>, <span class="st">"louvain_multinet"</span>, <span class="st">"randomwalk"</span>,
-    <span class="st">"sNNclust"</span>, <span class="st">"kmeans"</span>, <span class="st">"hierarchical"</span><span class="op">)</span>,
-  name <span class="op">=</span> <span class="st">"cluster_name"</span>,
-  nn_network_to_use <span class="op">=</span> <span class="st">"sNN"</span>,
-  network_name <span class="op">=</span> <span class="st">"sNN.pca"</span>,
-  pyth_leid_resolution <span class="op">=</span> <span class="fl">1</span>,
-  pyth_leid_weight_col <span class="op">=</span> <span class="st">"weight"</span>,
-  pyth_leid_part_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"RBConfigurationVertexPartition"</span>,
-    <span class="st">"ModularityVertexPartition"</span><span class="op">)</span>,
-  pyth_leid_init_memb <span class="op">=</span> <span class="cn">NULL</span>,
-  pyth_leid_iterations <span class="op">=</span> <span class="fl">1000</span>,
-  pyth_louv_resolution <span class="op">=</span> <span class="fl">1</span>,
-  pyth_louv_weight_col <span class="op">=</span> <span class="cn">NULL</span>,
-  python_louv_random <span class="op">=</span> <span class="cn">F</span>,
-  python_path <span class="op">=</span> <span class="cn">NULL</span>,
-  louvain_gamma <span class="op">=</span> <span class="fl">1</span>,
-  louvain_omega <span class="op">=</span> <span class="fl">1</span>,
-  walk_steps <span class="op">=</span> <span class="fl">4</span>,
-  walk_clusters <span class="op">=</span> <span class="fl">10</span>,
-  walk_weights <span class="op">=</span> <span class="cn">NA</span>,
-  sNNclust_k <span class="op">=</span> <span class="fl">20</span>,
-  sNNclust_eps <span class="op">=</span> <span class="fl">4</span>,
-  sNNclust_minPts <span class="op">=</span> <span class="fl">16</span>,
-  borderPoints <span class="op">=</span> <span class="cn">TRUE</span>,
-  expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normalized"</span>, <span class="st">"scaled"</span>, <span class="st">"custom"</span><span class="op">)</span>,
-  genes_to_use <span class="op">=</span> <span class="cn">NULL</span>,
-  dim_reduction_to_use <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cells"</span>, <span class="st">"pca"</span>, <span class="st">"umap"</span>, <span class="st">"tsne"</span><span class="op">)</span>,
-  dim_reduction_name <span class="op">=</span> <span class="st">"pca"</span>,
-  dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,
-  distance_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"original"</span>, <span class="st">"pearson"</span>, <span class="st">"spearman"</span>, <span class="st">"euclidean"</span>, <span class="st">"maximum"</span>,
-    <span class="st">"manhattan"</span>, <span class="st">"canberra"</span>, <span class="st">"binary"</span>, <span class="st">"minkowski"</span><span class="op">)</span>,
-  km_centers <span class="op">=</span> <span class="fl">10</span>,
-  km_iter_max <span class="op">=</span> <span class="fl">100</span>,
-  km_nstart <span class="op">=</span> <span class="fl">1000</span>,
-  km_algorithm <span class="op">=</span> <span class="st">"Hartigan-Wong"</span>,
-  hc_agglomeration_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ward.D2"</span>, <span class="st">"ward.D"</span>, <span class="st">"single"</span>, <span class="st">"complete"</span>, <span class="st">"average"</span>,
-    <span class="st">"mcquitty"</span>, <span class="st">"median"</span>, <span class="st">"centroid"</span><span class="op">)</span>,
-  hc_k <span class="op">=</span> <span class="fl">10</span>,
-  hc_h <span class="op">=</span> <span class="cn">NULL</span>,
-  return_gobject <span class="op">=</span> <span class="cn">TRUE</span>,
-  set_seed <span class="op">=</span> <span class="cn">T</span>,
-  seed_number <span class="op">=</span> <span class="fl">1234</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">clusterCells</span><span class="op">(</span></span>
+<span>  <span class="va">gobject</span>,</span>
+<span>  cluster_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"leiden"</span>, <span class="st">"louvain_community"</span>, <span class="st">"louvain_multinet"</span>, <span class="st">"randomwalk"</span>,</span>
+<span>    <span class="st">"sNNclust"</span>, <span class="st">"kmeans"</span>, <span class="st">"hierarchical"</span><span class="op">)</span>,</span>
+<span>  name <span class="op">=</span> <span class="st">"cluster_name"</span>,</span>
+<span>  nn_network_to_use <span class="op">=</span> <span class="st">"sNN"</span>,</span>
+<span>  network_name <span class="op">=</span> <span class="st">"sNN.pca"</span>,</span>
+<span>  pyth_leid_resolution <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  pyth_leid_weight_col <span class="op">=</span> <span class="st">"weight"</span>,</span>
+<span>  pyth_leid_part_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"RBConfigurationVertexPartition"</span>,</span>
+<span>    <span class="st">"ModularityVertexPartition"</span><span class="op">)</span>,</span>
+<span>  pyth_leid_init_memb <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pyth_leid_iterations <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  pyth_louv_resolution <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  pyth_louv_weight_col <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  python_louv_random <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  python_path <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  louvain_gamma <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  louvain_omega <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  walk_steps <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  walk_clusters <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  walk_weights <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  sNNclust_k <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  sNNclust_eps <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  sNNclust_minPts <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>  borderPoints <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normalized"</span>, <span class="st">"scaled"</span>, <span class="st">"custom"</span><span class="op">)</span>,</span>
+<span>  genes_to_use <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dim_reduction_to_use <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cells"</span>, <span class="st">"pca"</span>, <span class="st">"umap"</span>, <span class="st">"tsne"</span><span class="op">)</span>,</span>
+<span>  dim_reduction_name <span class="op">=</span> <span class="st">"pca"</span>,</span>
+<span>  dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,</span>
+<span>  distance_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"original"</span>, <span class="st">"pearson"</span>, <span class="st">"spearman"</span>, <span class="st">"euclidean"</span>, <span class="st">"maximum"</span>,</span>
+<span>    <span class="st">"manhattan"</span>, <span class="st">"canberra"</span>, <span class="st">"binary"</span>, <span class="st">"minkowski"</span><span class="op">)</span>,</span>
+<span>  km_centers <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  km_iter_max <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  km_nstart <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  km_algorithm <span class="op">=</span> <span class="st">"Hartigan-Wong"</span>,</span>
+<span>  hc_agglomeration_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ward.D2"</span>, <span class="st">"ward.D"</span>, <span class="st">"single"</span>, <span class="st">"complete"</span>, <span class="st">"average"</span>,</span>
+<span>    <span class="st">"mcquitty"</span>, <span class="st">"median"</span>, <span class="st">"centroid"</span><span class="op">)</span>,</span>
+<span>  hc_k <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  hc_h <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  return_gobject <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  set_seed <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>  seed_number <span class="op">=</span> <span class="fl">1234</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">

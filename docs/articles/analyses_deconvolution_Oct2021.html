@@ -178,133 +178,133 @@ In this example, Corresponded Single cell dataset can be generated from
 Giotto_SC is processed from the downsampled <a href="https://satijalab.org/loomr/loomr_tutorial" class="external-link">Loom</a> file and can
 also be downloaded from getSpatialDataset.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># download data to results directory ####</span>
-<span class="co"># if wget is installed, set method = 'wget'</span>
-<span class="co"># if you run into authentication issues with wget, then add " extra = '--no-check-certificate' "</span>
-<span class="fu"><a href="../reference/getSpatialDataset.html">getSpatialDataset</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">'Mouse_brain_scRNAseq'</span>, directory <span class="op">=</span> <span class="va">results_folder</span><span class="op">)</span>
-
-<span class="va">sc_expression</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">results_folder</span>, <span class="st">"/brain_sc_expression_matrix.txt.gz"</span><span class="op">)</span>
-<span class="va">sc_metadata</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">results_folder</span>,<span class="st">"/brain_sc_metadata.csv"</span><span class="op">)</span>
-
-<span class="va">giotto_SC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>
-  expression <span class="op">=</span> <span class="va">sc_expression</span>,
-  instructions <span class="op">=</span> <span class="va">instrs</span>
-<span class="op">)</span>
-
-<span class="va">giotto_SC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">giotto_SC</span>, 
-                             new_metadata <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">sc_metadata</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">giotto_SC</span><span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># download data to results directory ####</span></span>
+<span><span class="co"># if wget is installed, set method = 'wget'</span></span>
+<span><span class="co"># if you run into authentication issues with wget, then add " extra = '--no-check-certificate' "</span></span>
+<span><span class="fu"><a href="../reference/getSpatialDataset.html">getSpatialDataset</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">'Mouse_brain_scRNAseq'</span>, directory <span class="op">=</span> <span class="va">results_folder</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">sc_expression</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">results_folder</span>, <span class="st">"/brain_sc_expression_matrix.txt.gz"</span><span class="op">)</span></span>
+<span><span class="va">sc_metadata</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">results_folder</span>,<span class="st">"/brain_sc_metadata.csv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">giotto_SC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span></span>
+<span>  expression <span class="op">=</span> <span class="va">sc_expression</span>,</span>
+<span>  instructions <span class="op">=</span> <span class="va">instrs</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">giotto_SC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">giotto_SC</span>, </span>
+<span>                             new_metadata <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">sc_metadata</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">giotto_SC</span><span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="page-enrichment">PAGE enrichment<a class="anchor" aria-label="anchor" href="#page-enrichment"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Create PAGE matrix</span>
-<span class="co"># PAGE matrix should be a binary matrix with each row represent a gene marker and each column represent a cell type</span>
-<span class="co"># There are several ways to create PAGE matrix</span>
-<span class="co"># 1.1 create binary matrix of cell signature genes</span>
-<span class="co"># small example #</span>
-<span class="va">gran_markers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nr3c2"</span>, <span class="st">"Gabra5"</span>, <span class="st">"Tubgcp2"</span>, <span class="st">"Ahcyl2"</span>,
-                 <span class="st">"Islr2"</span>, <span class="st">"Rasl10a"</span>, <span class="st">"Tmem114"</span>, <span class="st">"Bhlhe22"</span>, 
-                 <span class="st">"Ntf3"</span>, <span class="st">"C1ql2"</span><span class="op">)</span>
-
-<span class="va">oligo_markers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Efhd1"</span>, <span class="st">"H2-Ab1"</span>, <span class="st">"Enpp6"</span>, <span class="st">"Ninj2"</span>,
-                  <span class="st">"Bmp4"</span>, <span class="st">"Tnr"</span>, <span class="st">"Hapln2"</span>, <span class="st">"Neu4"</span>,
-                  <span class="st">"Wfdc18"</span>, <span class="st">"Ccp110"</span><span class="op">)</span>        
-
-<span class="va">di_mesench_markers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cartpt"</span>, <span class="st">"Scn1a"</span>, <span class="st">"Lypd6b"</span>,  <span class="st">"Drd5"</span>,
-                       <span class="st">"Gpr88"</span>, <span class="st">"Plcxd2"</span>, <span class="st">"Cpne7"</span>, <span class="st">"Pou4f1"</span>,
-                       <span class="st">"Ctxn2"</span>, <span class="st">"Wnt4"</span><span class="op">)</span>
-
-<span class="va">PAGE_matrix_1</span> <span class="op">=</span> <span class="fu"><a href="../reference/makeSignMatrixPAGE.html">makeSignMatrixPAGE</a></span><span class="op">(</span>sign_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Granule_neurons'</span>,
-                                                  <span class="st">'Oligo_dendrocytes'</span>,
-                                                  <span class="st">'di_mesenchephalon'</span><span class="op">)</span>,
-                                   sign_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">gran_markers</span>,
-                                                    <span class="va">oligo_markers</span>,
-                                                    <span class="va">di_mesench_markers</span><span class="op">)</span><span class="op">)</span>
-
-
-
-<span class="co"># ----</span>
-
-<span class="co"># 1.2 [shortcut] fully pre-prepared matrix for all cell types</span>
-<span class="va">sign_matrix_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sig_matrix.txt"</span>, package <span class="op">=</span> <span class="st">'Giotto'</span><span class="op">)</span>
-<span class="va">brain_sc_markers</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">sign_matrix_path</span><span class="op">)</span> 
-<span class="va">PAGE_matrix_2</span> <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">brain_sc_markers</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">PAGE_matrix_2</span><span class="op">)</span> <span class="op">=</span> <span class="va">brain_sc_markers</span><span class="op">$</span><span class="va">Event</span>
-
-
-<span class="co"># ---</span>
-
-<span class="co"># 1.3 make PAGE matrix from single cell dataset</span>
-<span class="va">markers_scran</span> <span class="op">=</span> <span class="fu"><a href="../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject<span class="op">=</span><span class="va">giotto_SC</span>, method<span class="op">=</span><span class="st">"scran"</span>,
-                                       expression_values<span class="op">=</span><span class="st">"normalized"</span>, cluster_column <span class="op">=</span> <span class="st">"Class"</span>, min_feats<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
-<span class="va">top_markers</span> <span class="op">&lt;-</span> <span class="va">markers_scran</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">10</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"cluster"</span><span class="op">]</span>
-<span class="va">celltypes</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/factors.html" class="external-link">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">markers_scran</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span><span class="op">)</span> 
-<span class="va">sign_list</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
-<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">length</a></span><span class="op">(</span><span class="va">celltypes</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
-  <span class="va">sign_list</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">&lt;-</span><span class="va">top_markers</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">top_markers</span><span class="op">$</span><span class="va">cluster</span> <span class="op">==</span> <span class="va">celltypes</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>,<span class="op">]</span><span class="op">$</span><span class="va">feats</span>
-<span class="op">}</span>
-
-<span class="va">PAGE_matrix_3</span> <span class="op">=</span> <span class="fu"><a href="../reference/makeSignMatrixPAGE.html">makeSignMatrixPAGE</a></span><span class="op">(</span>sign_names <span class="op">=</span> <span class="va">celltypes</span>,
-                                   sign_list <span class="op">=</span> <span class="va">sign_list</span><span class="op">)</span>
-
-<span class="co"># 1.4 enrichment test with PAGE</span>
-
-<span class="co"># runSpatialEnrich() can also be used as a wrapper for all currently provided enrichment options</span>
-<span class="va">visium_brain</span> <span class="op">=</span> <span class="fu"><a href="../reference/runPAGEEnrich.html">runPAGEEnrich</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>, sign_matrix <span class="op">=</span> <span class="va">PAGE_matrix_2</span><span class="op">)</span>
-
-<span class="co"># 1.5 heatmap of enrichment versus annotation (e.g. clustering result)</span>
-<span class="va">cell_types_PAGE</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">PAGE_matrix_2</span><span class="op">)</span>
-<span class="fu"><a href="../reference/plotMetaDataCellsHeatmap.html">plotMetaDataCellsHeatmap</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,
-                         metadata_cols <span class="op">=</span> <span class="st">'leiden_clus'</span>,
-                         value_cols <span class="op">=</span> <span class="va">cell_types_PAGE</span>,
-                         spat_enr_names <span class="op">=</span> <span class="st">'PAGE'</span>,
-                         x_text_size <span class="op">=</span> <span class="fl">8</span>,
-                         y_text_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Create PAGE matrix</span></span>
+<span><span class="co"># PAGE matrix should be a binary matrix with each row represent a gene marker and each column represent a cell type</span></span>
+<span><span class="co"># There are several ways to create PAGE matrix</span></span>
+<span><span class="co"># 1.1 create binary matrix of cell signature genes</span></span>
+<span><span class="co"># small example #</span></span>
+<span><span class="va">gran_markers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nr3c2"</span>, <span class="st">"Gabra5"</span>, <span class="st">"Tubgcp2"</span>, <span class="st">"Ahcyl2"</span>,</span>
+<span>                 <span class="st">"Islr2"</span>, <span class="st">"Rasl10a"</span>, <span class="st">"Tmem114"</span>, <span class="st">"Bhlhe22"</span>, </span>
+<span>                 <span class="st">"Ntf3"</span>, <span class="st">"C1ql2"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">oligo_markers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Efhd1"</span>, <span class="st">"H2-Ab1"</span>, <span class="st">"Enpp6"</span>, <span class="st">"Ninj2"</span>,</span>
+<span>                  <span class="st">"Bmp4"</span>, <span class="st">"Tnr"</span>, <span class="st">"Hapln2"</span>, <span class="st">"Neu4"</span>,</span>
+<span>                  <span class="st">"Wfdc18"</span>, <span class="st">"Ccp110"</span><span class="op">)</span>        </span>
+<span></span>
+<span><span class="va">di_mesench_markers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cartpt"</span>, <span class="st">"Scn1a"</span>, <span class="st">"Lypd6b"</span>,  <span class="st">"Drd5"</span>,</span>
+<span>                       <span class="st">"Gpr88"</span>, <span class="st">"Plcxd2"</span>, <span class="st">"Cpne7"</span>, <span class="st">"Pou4f1"</span>,</span>
+<span>                       <span class="st">"Ctxn2"</span>, <span class="st">"Wnt4"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">PAGE_matrix_1</span> <span class="op">=</span> <span class="fu"><a href="../reference/makeSignMatrixPAGE.html">makeSignMatrixPAGE</a></span><span class="op">(</span>sign_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Granule_neurons'</span>,</span>
+<span>                                                  <span class="st">'Oligo_dendrocytes'</span>,</span>
+<span>                                                  <span class="st">'di_mesenchephalon'</span><span class="op">)</span>,</span>
+<span>                                   sign_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">gran_markers</span>,</span>
+<span>                                                    <span class="va">oligo_markers</span>,</span>
+<span>                                                    <span class="va">di_mesench_markers</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span></span>
+<span><span class="co"># ----</span></span>
+<span></span>
+<span><span class="co"># 1.2 [shortcut] fully pre-prepared matrix for all cell types</span></span>
+<span><span class="va">sign_matrix_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sig_matrix.txt"</span>, package <span class="op">=</span> <span class="st">'Giotto'</span><span class="op">)</span></span>
+<span><span class="va">brain_sc_markers</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">sign_matrix_path</span><span class="op">)</span> </span>
+<span><span class="va">PAGE_matrix_2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">brain_sc_markers</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">PAGE_matrix_2</span><span class="op">)</span> <span class="op">=</span> <span class="va">brain_sc_markers</span><span class="op">$</span><span class="va">Event</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># ---</span></span>
+<span></span>
+<span><span class="co"># 1.3 make PAGE matrix from single cell dataset</span></span>
+<span><span class="va">markers_scran</span> <span class="op">=</span> <span class="fu"><a href="../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject<span class="op">=</span><span class="va">giotto_SC</span>, method<span class="op">=</span><span class="st">"scran"</span>,</span>
+<span>                                       expression_values<span class="op">=</span><span class="st">"normalized"</span>, cluster_column <span class="op">=</span> <span class="st">"Class"</span>, min_feats<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">top_markers</span> <span class="op">&lt;-</span> <span class="va">markers_scran</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/headtail.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">10</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"cluster"</span><span class="op">]</span></span>
+<span><span class="va">celltypes</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/factors.html" class="external-link">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">markers_scran</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="va">sign_list</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">celltypes</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">sign_list</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">&lt;-</span><span class="va">top_markers</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">top_markers</span><span class="op">$</span><span class="va">cluster</span> <span class="op">==</span> <span class="va">celltypes</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>,<span class="op">]</span><span class="op">$</span><span class="va">feats</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">PAGE_matrix_3</span> <span class="op">=</span> <span class="fu"><a href="../reference/makeSignMatrixPAGE.html">makeSignMatrixPAGE</a></span><span class="op">(</span>sign_names <span class="op">=</span> <span class="va">celltypes</span>,</span>
+<span>                                   sign_list <span class="op">=</span> <span class="va">sign_list</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 1.4 enrichment test with PAGE</span></span>
+<span></span>
+<span><span class="co"># runSpatialEnrich() can also be used as a wrapper for all currently provided enrichment options</span></span>
+<span><span class="va">visium_brain</span> <span class="op">=</span> <span class="fu"><a href="../reference/runPAGEEnrich.html">runPAGEEnrich</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>, sign_matrix <span class="op">=</span> <span class="va">PAGE_matrix_2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 1.5 heatmap of enrichment versus annotation (e.g. clustering result)</span></span>
+<span><span class="va">cell_types_PAGE</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">PAGE_matrix_2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plotMetaDataCellsHeatmap.html">plotMetaDataCellsHeatmap</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,</span>
+<span>                         metadata_cols <span class="op">=</span> <span class="st">'leiden_clus'</span>,</span>
+<span>                         value_cols <span class="op">=</span> <span class="va">cell_types_PAGE</span>,</span>
+<span>                         spat_enr_names <span class="op">=</span> <span class="st">'PAGE'</span>,</span>
+<span>                         x_text_size <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>                         y_text_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_brain/vignette_220328/20-plotMetaDataCellsHeatmap.png" style="width:50.0%"></p>
 <p>PAGE enrichment stats will be stored in the <a href="mailto:giotto_object@spatial" class="email">giotto_object@spatial</a>_enrichment slot and can be
 retrieved by get_spatial_enrichment. The enrichment result can be
 visualized by spatplot by adding the spat_enr_names argument.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 1.6 visualizations</span>
-<span class="co"># Check PAGE enrichment result</span>
-<span class="co"># get_spatial_enrichment(visium_brain,enrichm_name = "PAGE")</span>
-<span class="fu"><a href="../reference/spatCellPlot2D.html">spatCellPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,
-               spat_enr_names <span class="op">=</span> <span class="st">'PAGE'</span>,
-               cell_annotation_values <span class="op">=</span> <span class="va">cell_types_PAGE</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,
-               cow_n_col <span class="op">=</span> <span class="fl">2</span>,coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>, point_size <span class="op">=</span> <span class="fl">1.25</span>, show_legend <span class="op">=</span> <span class="cn">T</span>,
-               save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name<span class="op">=</span><span class="st">"spat_enr_PAGE_spatcellplot"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># 1.6 visualizations</span></span>
+<span><span class="co"># Check PAGE enrichment result</span></span>
+<span><span class="co"># get_spatial_enrichment(visium_brain,enrichm_name = "PAGE")</span></span>
+<span><span class="fu"><a href="../reference/spatCellPlot2D.html">spatCellPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,</span>
+<span>               spat_enr_names <span class="op">=</span> <span class="st">'PAGE'</span>,</span>
+<span>               cell_annotation_values <span class="op">=</span> <span class="va">cell_types_PAGE</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,</span>
+<span>               cow_n_col <span class="op">=</span> <span class="fl">2</span>,coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>, point_size <span class="op">=</span> <span class="fl">1.25</span>, show_legend <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>               save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name<span class="op">=</span><span class="st">"spat_enr_PAGE_spatcellplot"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_brain/vignette_220328/21-spatCellPlot2D.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/spatDimCellPlot2D.html">spatDimCellPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,
-                  spat_enr_names <span class="op">=</span> <span class="st">'PAGE'</span>,
-                  cell_annotation_values <span class="op">=</span> <span class="va">cell_types_PAGE</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,
-                  cow_n_col <span class="op">=</span> <span class="fl">1</span>, spat_point_size <span class="op">=</span> <span class="fl">1</span>,
-                  plot_alignment <span class="op">=</span> <span class="st">'horizontal'</span>,
-                  save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>base_width<span class="op">=</span><span class="fl">7</span>, base_height<span class="op">=</span><span class="fl">10</span>, save_name<span class="op">=</span><span class="st">"spat_enr_PAGE_spatdimplot"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatDimCellPlot2D.html">spatDimCellPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,</span>
+<span>                  spat_enr_names <span class="op">=</span> <span class="st">'PAGE'</span>,</span>
+<span>                  cell_annotation_values <span class="op">=</span> <span class="va">cell_types_PAGE</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,</span>
+<span>                  cow_n_col <span class="op">=</span> <span class="fl">1</span>, spat_point_size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                  plot_alignment <span class="op">=</span> <span class="st">'horizontal'</span>,</span>
+<span>                  save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>base_width<span class="op">=</span><span class="fl">7</span>, base_height<span class="op">=</span><span class="fl">10</span>, save_name<span class="op">=</span><span class="st">"spat_enr_PAGE_spatdimplot"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_brain/vignette_220328/22-spatDimCellPlot2D.png" style="width:50.0%"></p>
 </div>
 <div class="section level3">
 <h3 id="hypergeometric-test">HyperGeometric test<a class="anchor" aria-label="anchor" href="#hypergeometric-test"></a>
 </h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#Modify the sparse matrix in normalized slot</span>
-<span class="va">visium_brain</span> <span class="op">=</span> <span class="fu"><a href="../reference/runHyperGeometricEnrich.html">runHyperGeometricEnrich</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,
-                                       expression_values <span class="op">=</span> <span class="st">"normalized"</span>,
-                                       sign_matrix <span class="op">=</span> <span class="va">PAGE_matrix_2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#Modify the sparse matrix in normalized slot</span></span>
+<span><span class="va">visium_brain</span> <span class="op">=</span> <span class="fu"><a href="../reference/runHyperGeometricEnrich.html">runHyperGeometricEnrich</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,</span>
+<span>                                       expression_values <span class="op">=</span> <span class="st">"normalized"</span>,</span>
+<span>                                       sign_matrix <span class="op">=</span> <span class="va">PAGE_matrix_2</span><span class="op">)</span></span></code></pre></div>
 <p>HyperGeometric enrichment stats will be stored in the <a href="mailto:giotto_object@spatial" class="email">giotto_object@spatial</a>_enrichment slot and can be
 retrieved by get_spatial_enrichment. The enrichment result can be
 visualized by spatplot by adding the spat_enr_names argument.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Check HyperGeometric enrichment result</span>
-<span class="co"># get_spatial_enrichment(visium_brain,enrichm_name = "hypergeometric")</span>
-<span class="va">cell_types_HyperGeometric</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">PAGE_matrix_2</span><span class="op">)</span>
-<span class="fu"><a href="../reference/spatCellPlot.html">spatCellPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,
-             spat_enr_names <span class="op">=</span> <span class="st">'hypergeometric'</span>,
-             cell_annotation_values <span class="op">=</span> <span class="va">cell_types_HyperGeometric</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,
-             cow_n_col <span class="op">=</span> <span class="fl">2</span>,coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>, point_size <span class="op">=</span> <span class="fl">1.75</span>,
-             save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name<span class="op">=</span><span class="st">"spat_enr_HyperGeometric_spatplot"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Check HyperGeometric enrichment result</span></span>
+<span><span class="co"># get_spatial_enrichment(visium_brain,enrichm_name = "hypergeometric")</span></span>
+<span><span class="va">cell_types_HyperGeometric</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">PAGE_matrix_2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/spatCellPlot.html">spatCellPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,</span>
+<span>             spat_enr_names <span class="op">=</span> <span class="st">'hypergeometric'</span>,</span>
+<span>             cell_annotation_values <span class="op">=</span> <span class="va">cell_types_HyperGeometric</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,</span>
+<span>             cow_n_col <span class="op">=</span> <span class="fl">2</span>,coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>, point_size <span class="op">=</span> <span class="fl">1.75</span>,</span>
+<span>             save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name<span class="op">=</span><span class="st">"spat_enr_HyperGeometric_spatplot"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_brain/vignette_220328/23-spatCellPlot2D.png" style="width:50.0%"></p>
 </div>
 <div class="section level3">
@@ -316,22 +316,22 @@ be stored in the <a href="mailto:giotto_object@spatial" class="email">giotto_obj
 retrieved by get_spatial_enrichment. The enrichment result can be
 visualized by spatplot by adding the spat_enr_names argument.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Create rank matrix, not that rank matrix is different from PAGE</span>
-<span class="co"># A count matrix and a vector for all cell labels will be needed</span>
-<span class="va">rank_matrix</span> <span class="op">=</span> <span class="fu"><a href="../reference/makeSignMatrixRank.html">makeSignMatrixRank</a></span><span class="op">(</span>sc_matrix <span class="op">=</span> <span class="fu"><a href="../reference/get_expression_values.html">get_expression_values</a></span><span class="op">(</span><span class="va">giotto_SC</span>,values <span class="op">=</span> <span class="st">"normalized"</span><span class="op">)</span>,
-                                 sc_cluster_ids <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">Class</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">rank_matrix</span><span class="op">)</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/factors.html" class="external-link">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">Class</span><span class="op">)</span><span class="op">)</span>
-<span class="va">visium_brain</span> <span class="op">=</span> <span class="fu"><a href="../reference/runRankEnrich.html">runRankEnrich</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>, sign_matrix <span class="op">=</span> <span class="va">rank_matrix</span>,expression_values <span class="op">=</span> <span class="st">"normalized"</span><span class="op">)</span>
-
-<span class="co"># Check Rank enrichment result</span>
-<span class="co"># get_spatial_enrichment(visium_brain,enrichm_name = "rank")</span>
-
-<span class="co"># Plot Rank enrichment result</span>
-<span class="fu"><a href="../reference/spatCellPlot2D.html">spatCellPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,
-               spat_enr_names <span class="op">=</span> <span class="st">'rank'</span>,
-               cell_annotation_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">rank_matrix</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,
-               cow_n_col <span class="op">=</span> <span class="fl">2</span>,coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>, point_size <span class="op">=</span> <span class="fl">1</span>,
-               save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"spat_enr_Rank_plot"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Create rank matrix, not that rank matrix is different from PAGE</span></span>
+<span><span class="co"># A count matrix and a vector for all cell labels will be needed</span></span>
+<span><span class="va">rank_matrix</span> <span class="op">=</span> <span class="fu"><a href="../reference/makeSignMatrixRank.html">makeSignMatrixRank</a></span><span class="op">(</span>sc_matrix <span class="op">=</span> <span class="fu"><a href="../reference/get_expression_values.html">get_expression_values</a></span><span class="op">(</span><span class="va">giotto_SC</span>,values <span class="op">=</span> <span class="st">"normalized"</span><span class="op">)</span>,</span>
+<span>                                 sc_cluster_ids <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">Class</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">rank_matrix</span><span class="op">)</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/factors.html" class="external-link">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">Class</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">visium_brain</span> <span class="op">=</span> <span class="fu"><a href="../reference/runRankEnrich.html">runRankEnrich</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>, sign_matrix <span class="op">=</span> <span class="va">rank_matrix</span>,expression_values <span class="op">=</span> <span class="st">"normalized"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Check Rank enrichment result</span></span>
+<span><span class="co"># get_spatial_enrichment(visium_brain,enrichm_name = "rank")</span></span>
+<span></span>
+<span><span class="co"># Plot Rank enrichment result</span></span>
+<span><span class="fu"><a href="../reference/spatCellPlot2D.html">spatCellPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,</span>
+<span>               spat_enr_names <span class="op">=</span> <span class="st">'rank'</span>,</span>
+<span>               cell_annotation_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">rank_matrix</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,</span>
+<span>               cow_n_col <span class="op">=</span> <span class="fl">2</span>,coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>, point_size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>               save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"spat_enr_Rank_plot"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_brain/vignette_220426/spat_enr_Rank_plot.png" style="width:50.0%"></p>
 </div>
 <div class="section level3">
@@ -341,22 +341,22 @@ visualized by spatplot by adding the spat_enr_names argument.</p>
 retrieved by get_spatial_enrichment. The enrichment result can be
 visualized by spatplot by adding the spat_enr_names argument.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Create DWLS matrix, not that DWLS matrix is different from PAGE and rank</span>
-<span class="co"># A count matrix a vector for a list of gene signatures and a vector for all cell labels will be needed</span>
-<span class="va">DWLS_matrix</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/makeSignMatrixDWLSfromMatrix.html">makeSignMatrixDWLSfromMatrix</a></span><span class="op">(</span>matrix <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_expression_values.html">get_expression_values</a></span><span class="op">(</span><span class="va">giotto_SC</span>,values <span class="op">=</span> <span class="st">"normalized"</span><span class="op">)</span><span class="op">)</span>,
-                                          cell_type <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">Class</span>,
-                                          sign_gene <span class="op">=</span> <span class="va">top_markers</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span>
-<span class="va">visium_brain</span> <span class="op">=</span> <span class="fu"><a href="../reference/runDWLSDeconv.html">runDWLSDeconv</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>, sign_matrix <span class="op">=</span> <span class="va">DWLS_matrix</span><span class="op">)</span>
-
-<span class="co"># Check DWLS deconvolution result</span>
-<span class="co"># get_spatial_enrichment(visium_brain,enrichm_name = "DWLS")</span>
-
-<span class="co"># Plot DWLS deconvolution result</span>
-<span class="fu"><a href="../reference/spatCellPlot2D.html">spatCellPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,
-               spat_enr_names <span class="op">=</span> <span class="st">'DWLS'</span>,
-               cell_annotation_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/factors.html" class="external-link">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">Class</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,
-               cow_n_col <span class="op">=</span> <span class="fl">2</span>,coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>, point_size <span class="op">=</span> <span class="fl">1</span>,
-               save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"DWLS_plot"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Create DWLS matrix, not that DWLS matrix is different from PAGE and rank</span></span>
+<span><span class="co"># A count matrix a vector for a list of gene signatures and a vector for all cell labels will be needed</span></span>
+<span><span class="va">DWLS_matrix</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/makeSignMatrixDWLSfromMatrix.html">makeSignMatrixDWLSfromMatrix</a></span><span class="op">(</span>matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_expression_values.html">get_expression_values</a></span><span class="op">(</span><span class="va">giotto_SC</span>,values <span class="op">=</span> <span class="st">"normalized"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                                          cell_type <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">Class</span>,</span>
+<span>                                          sign_gene <span class="op">=</span> <span class="va">top_markers</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span></span>
+<span><span class="va">visium_brain</span> <span class="op">=</span> <span class="fu"><a href="../reference/runDWLSDeconv.html">runDWLSDeconv</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>, sign_matrix <span class="op">=</span> <span class="va">DWLS_matrix</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Check DWLS deconvolution result</span></span>
+<span><span class="co"># get_spatial_enrichment(visium_brain,enrichm_name = "DWLS")</span></span>
+<span></span>
+<span><span class="co"># Plot DWLS deconvolution result</span></span>
+<span><span class="fu"><a href="../reference/spatCellPlot2D.html">spatCellPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">visium_brain</span>,</span>
+<span>               spat_enr_names <span class="op">=</span> <span class="st">'DWLS'</span>,</span>
+<span>               cell_annotation_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/factors.html" class="external-link">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">giotto_SC</span><span class="op">)</span><span class="op">$</span><span class="va">Class</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,</span>
+<span>               cow_n_col <span class="op">=</span> <span class="fl">2</span>,coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>, point_size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>               save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">"DWLS_plot"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_visium_brain/vignette_220426/DWLS_plot.png" style="width:50.0%"></p>
 </div>
   </div>

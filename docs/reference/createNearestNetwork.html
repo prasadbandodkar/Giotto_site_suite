@@ -119,25 +119,25 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">createNearestNetwork</span><span class="op">(</span>
-  <span class="va">gobject</span>,
-  spat_unit <span class="op">=</span> <span class="cn">NULL</span>,
-  feat_type <span class="op">=</span> <span class="cn">NULL</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sNN"</span>, <span class="st">"kNN"</span><span class="op">)</span>,
-  dim_reduction_to_use <span class="op">=</span> <span class="st">"pca"</span>,
-  dim_reduction_name <span class="op">=</span> <span class="cn">NULL</span>,
-  dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,
-  feats_to_use <span class="op">=</span> <span class="cn">NULL</span>,
-  genes_to_use <span class="op">=</span> <span class="cn">NULL</span>,
-  expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normalized"</span>, <span class="st">"scaled"</span>, <span class="st">"custom"</span><span class="op">)</span>,
-  name <span class="op">=</span> <span class="st">"sNN.pca"</span>,
-  return_gobject <span class="op">=</span> <span class="cn">TRUE</span>,
-  k <span class="op">=</span> <span class="fl">30</span>,
-  minimum_shared <span class="op">=</span> <span class="fl">5</span>,
-  top_shared <span class="op">=</span> <span class="fl">3</span>,
-  verbose <span class="op">=</span> <span class="cn">T</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">createNearestNetwork</span><span class="op">(</span></span>
+<span>  <span class="va">gobject</span>,</span>
+<span>  spat_unit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  feat_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sNN"</span>, <span class="st">"kNN"</span><span class="op">)</span>,</span>
+<span>  dim_reduction_to_use <span class="op">=</span> <span class="st">"pca"</span>,</span>
+<span>  dim_reduction_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,</span>
+<span>  feats_to_use <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  genes_to_use <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normalized"</span>, <span class="st">"scaled"</span>, <span class="st">"custom"</span><span class="op">)</span>,</span>
+<span>  name <span class="op">=</span> <span class="st">"sNN.pca"</span>,</span>
+<span>  return_gobject <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  k <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  minimum_shared <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  top_shared <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -239,14 +239,14 @@ how the networks are created.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mini_giotto_single_cell</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>data set ‘mini_giotto_single_cell’ not found</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">mini_giotto_single_cell</span> <span class="op">&lt;-</span> <span class="fu">createNearestNetwork</span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">mini_giotto_single_cell</span>,</span>
-<span class="r-in">                                                dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mini_giotto_single_cell</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>data set 'mini_giotto_single_cell' not found</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">mini_giotto_single_cell</span> <span class="op">&lt;-</span> <span class="fu">createNearestNetwork</span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">mini_giotto_single_cell</span>,</span></span>
+<span class="r-in"><span>                                                dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in set_default_spat_unit(gobject = gobject, spat_unit = spat_unit):</span> object 'mini_giotto_single_cell' not found</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
