@@ -119,46 +119,46 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">spatInSituPlotPoints</span><span class="op">(</span>
-  <span class="va">gobject</span>,
-  show_image <span class="op">=</span> <span class="cn">F</span>,
-  gimage <span class="op">=</span> <span class="cn">NULL</span>,
-  image_name <span class="op">=</span> <span class="cn">NULL</span>,
-  largeImage_name <span class="op">=</span> <span class="cn">NULL</span>,
-  spat_unit <span class="op">=</span> <span class="cn">NULL</span>,
-  spat_loc_name <span class="op">=</span> <span class="cn">NULL</span>,
-  feats <span class="op">=</span> <span class="cn">NULL</span>,
-  feat_type <span class="op">=</span> <span class="st">"rna"</span>,
-  feats_color_code <span class="op">=</span> <span class="cn">NULL</span>,
-  feat_shape_code <span class="op">=</span> <span class="cn">NULL</span>,
-  sdimx <span class="op">=</span> <span class="st">"x"</span>,
-  sdimy <span class="op">=</span> <span class="st">"y"</span>,
-  point_size <span class="op">=</span> <span class="fl">1.5</span>,
-  show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,
-  use_overlap <span class="op">=</span> <span class="cn">TRUE</span>,
-  polygon_feat_type <span class="op">=</span> <span class="st">"cell"</span>,
-  polygon_color <span class="op">=</span> <span class="st">"black"</span>,
-  polygon_bg_color <span class="op">=</span> <span class="st">"black"</span>,
-  polygon_fill <span class="op">=</span> <span class="cn">NULL</span>,
-  polygon_fill_gradient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"white"</span>, <span class="st">"red"</span><span class="op">)</span>,
-  polygon_fill_gradient_midpoint <span class="op">=</span> <span class="cn">NULL</span>,
-  polygon_fill_as_factor <span class="op">=</span> <span class="cn">NULL</span>,
-  polygon_fill_code <span class="op">=</span> <span class="cn">NULL</span>,
-  polygon_alpha <span class="op">=</span> <span class="fl">0.5</span>,
-  polygon_line_size <span class="op">=</span> <span class="fl">2</span>,
-  axis_text <span class="op">=</span> <span class="fl">8</span>,
-  axis_title <span class="op">=</span> <span class="fl">8</span>,
-  legend_text <span class="op">=</span> <span class="fl">6</span>,
-  coord_fix_ratio <span class="op">=</span> <span class="cn">NULL</span>,
-  background_color <span class="op">=</span> <span class="st">"black"</span>,
-  show_legend <span class="op">=</span> <span class="cn">TRUE</span>,
-  plot_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ggplot"</span>, <span class="st">"scattermore"</span>, <span class="st">"scattermost"</span><span class="op">)</span>,
-  show_plot <span class="op">=</span> <span class="cn">NA</span>,
-  return_plot <span class="op">=</span> <span class="cn">NA</span>,
-  save_plot <span class="op">=</span> <span class="cn">NA</span>,
-  save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  default_save_name <span class="op">=</span> <span class="st">"spatInSituPlotPoints"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">spatInSituPlotPoints</span><span class="op">(</span></span>
+<span>  <span class="va">gobject</span>,</span>
+<span>  show_image <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  gimage <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  image_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  largeImage_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  spat_unit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  spat_loc_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  feats <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  feat_type <span class="op">=</span> <span class="st">"rna"</span>,</span>
+<span>  feats_color_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  feat_shape_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sdimx <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>  sdimy <span class="op">=</span> <span class="st">"y"</span>,</span>
+<span>  point_size <span class="op">=</span> <span class="fl">1.5</span>,</span>
+<span>  show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  use_overlap <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  polygon_feat_type <span class="op">=</span> <span class="st">"cell"</span>,</span>
+<span>  polygon_color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  polygon_bg_color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  polygon_fill <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  polygon_fill_gradient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"white"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
+<span>  polygon_fill_gradient_midpoint <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  polygon_fill_as_factor <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  polygon_fill_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  polygon_alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  polygon_line_size <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  axis_text <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>  axis_title <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>  legend_text <span class="op">=</span> <span class="fl">6</span>,</span>
+<span>  coord_fix_ratio <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  background_color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  show_legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  plot_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ggplot"</span>, <span class="st">"scattermore"</span>, <span class="st">"scattermost"</span><span class="op">)</span>,</span>
+<span>  show_plot <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  return_plot <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  save_plot <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  default_save_name <span class="op">=</span> <span class="st">"spatInSituPlotPoints"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">

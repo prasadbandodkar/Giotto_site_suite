@@ -119,34 +119,34 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">doLeidenSubCluster</span><span class="op">(</span>
-  <span class="va">gobject</span>,
-  feat_type <span class="op">=</span> <span class="cn">NULL</span>,
-  name <span class="op">=</span> <span class="st">"sub_pleiden_clus"</span>,
-  cluster_column <span class="op">=</span> <span class="cn">NULL</span>,
-  selected_clusters <span class="op">=</span> <span class="cn">NULL</span>,
-  hvf_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>reverse_log_scale <span class="op">=</span> <span class="cn">T</span>, difference_in_cov <span class="op">=</span> <span class="fl">1</span>, expression_values <span class="op">=</span>
-    <span class="st">"normalized"</span><span class="op">)</span>,
-  hvg_param <span class="op">=</span> <span class="cn">NULL</span>,
-  hvf_min_perc_cells <span class="op">=</span> <span class="fl">5</span>,
-  hvg_min_perc_cells <span class="op">=</span> <span class="cn">NULL</span>,
-  hvf_mean_expr_det <span class="op">=</span> <span class="fl">1</span>,
-  hvg_mean_expr_det <span class="op">=</span> <span class="cn">NULL</span>,
-  use_all_feats_as_hvf <span class="op">=</span> <span class="cn">FALSE</span>,
-  use_all_genes_as_hvg <span class="op">=</span> <span class="cn">NULL</span>,
-  min_nr_of_hvf <span class="op">=</span> <span class="fl">5</span>,
-  min_nr_of_hvg <span class="op">=</span> <span class="cn">NULL</span>,
-  pca_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="st">"normalized"</span>, scale_unit <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,
-  nn_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span>,
-  k_neighbors <span class="op">=</span> <span class="fl">10</span>,
-  resolution <span class="op">=</span> <span class="fl">0.5</span>,
-  n_iterations <span class="op">=</span> <span class="fl">500</span>,
-  python_path <span class="op">=</span> <span class="cn">NULL</span>,
-  nn_network_to_use <span class="op">=</span> <span class="st">"sNN"</span>,
-  network_name <span class="op">=</span> <span class="st">"sNN.pca"</span>,
-  return_gobject <span class="op">=</span> <span class="cn">TRUE</span>,
-  verbose <span class="op">=</span> <span class="cn">T</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">doLeidenSubCluster</span><span class="op">(</span></span>
+<span>  <span class="va">gobject</span>,</span>
+<span>  feat_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  name <span class="op">=</span> <span class="st">"sub_pleiden_clus"</span>,</span>
+<span>  cluster_column <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  selected_clusters <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hvf_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>reverse_log_scale <span class="op">=</span> <span class="cn">T</span>, difference_in_cov <span class="op">=</span> <span class="fl">1</span>, expression_values <span class="op">=</span></span>
+<span>    <span class="st">"normalized"</span><span class="op">)</span>,</span>
+<span>  hvg_param <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hvf_min_perc_cells <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  hvg_min_perc_cells <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hvf_mean_expr_det <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  hvg_mean_expr_det <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  use_all_feats_as_hvf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  use_all_genes_as_hvg <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_nr_of_hvf <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  min_nr_of_hvg <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pca_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="st">"normalized"</span>, scale_unit <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,</span>
+<span>  nn_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span>,</span>
+<span>  k_neighbors <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  resolution <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  n_iterations <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>  python_path <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  nn_network_to_use <span class="op">=</span> <span class="st">"sNN"</span>,</span>
+<span>  network_name <span class="op">=</span> <span class="st">"sNN.pca"</span>,</span>
+<span>  return_gobject <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">T</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">

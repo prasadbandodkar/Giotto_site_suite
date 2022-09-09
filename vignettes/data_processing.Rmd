@@ -16,11 +16,17 @@ This tutorial uses a SeqFISH+ dataset of a murine cortex and subventrical zone. 
 
 This dataset contains multiple field of views; here, we illustrate a workflow to bring the FOVs together for holistic analysis, and then subset the Giotto Object to analyze the cortex. 
 
-## Creating our Giotto Object
+## Create the Giotto Object
 ```{r, eval=FALSE}
 library(Giotto)
-data_directory = '/path/to/data/directory/'
-results_directory = '/path/to/results/directory/'
+
+# Specify path from which data may be retrieved/stored
+data_directory = paste0(getwd(),'/gobject_processing_data/')
+# alternatively, "/path/to/where/your/data/lives/"
+
+# Specify path to which results may be saved
+results_directory = paste0(getwd(),'/gobject_processing_results/') 
+# alternatively, "/path/to/store/your/results/"
 
 genv_exists = checkGiottoEnvironment()
 if(!genv_exists){
@@ -92,16 +98,16 @@ testobj = subsetGiotto(testobj, cell_ids = cortex_cell_ids)
 
 ```
 
-Since **subsetGiotto** returns a Giotto object, multiple different objects may be created to store subsets. For the purposes of this tutorial, we will focus only on the cortex FOVs, which is why the original Giotto Object has been overwritten upon calling **subsetGiotto**.
+Since **subsetGiotto** returns a Giotto object, multiple different objects may be created to store subsets. For the purposes of this tutorial, only the cortex FOVs will be considered, which is why the original Giotto Object has been overwritten upon calling **subsetGiotto**.
 
-## 1. Filtering the Giotto Object
+## Filter the Giotto Object
 The Giotto object may be filtered based on: 
 
--**expression_thresholds** sets a minimum threshold expression level
+ - **expression_thresholds** sets a minimum threshold expression level
+ 
+ - **feat_det_in_min_cells** sets a threshold of the number of cells that must include a feature in order to keep that feature in the dataset
 
--**feat_det_in_min_cells** sets a threshold of the number of cells that must include a feature in order to keep that feature in the dataset
-
--**min_det_feats_per_cell** sets a threshold of the number of features expressed by a cell in order to keep that cell in the dataset
+ - **min_det_feats_per_cell** sets a threshold of the number of features expressed by a cell in order to keep that cell in the dataset
 
 
 The distribution of feature expression can inform stringency of filter parameters, and can be displayed for both cells and features by calling **filterDistributions** and specifying the 'detection' parameter accordingly:
@@ -125,6 +131,7 @@ filterCombinations(testobj,
                    min_det_feats_per_cell = c(5, 10, 25))
 ```
 ![](../inst/images/getting_started_figs/data_processing/2-filterCombinations.png){ width=50% }
+
 When a consensus on appropriate filtering parameters has been reached, provide the arguments to **filterGiotto**.
 
 ```{r, eval=FALSE}
@@ -135,7 +142,7 @@ testobj <- filterGiotto(gobject = testobj,
 
 ```
 
-## 2. Normalization of Raw Counts Data
+## Normalize Raw Counts Data
 There are three methods of normalization supported by Giotto. 
 
 The 'standard' method (default) normalizes the data by total library size and a custom scale factor, then log transforms and z-scores the data by cells or genes, specified by scale_order.
@@ -149,13 +156,10 @@ testobj <- normalizeGiotto(gobject = testobj,
                            verbose = T)
 ```
 
-The 'pearson_resid' method uses the Lause/Kobak et al. method. Fist, expected values are calculated based on Pearson correlations. Next, z-scores are calculated based on observed and expected values.
-
-It should be noted that normalizing with this method will save the data within the "scaled" expression slot,
-NOT the "normalized" slot.
+The 'pearson_resid' method uses the Lause/Kobak et al. method. Fist, expected values are calculated based on Pearson correlations. Next, z-scores are calculated based on observed and expected values. *Note that normalizing with this method will save the data within the "scaled" expression slot, NOT the "normalized" slot.*
 
 ```{r, eval=FALSE}
-# normalize to scale expression values of the Giotto object using method B 
+# normalize to scale expression values of the Giotto object using the pearson residual method 
 testobj <- normalizeGiotto(gobject = testobj, 
                            norm_methods = 'pearson_resid', 
                            scale_feats = TRUE, 
@@ -169,7 +173,7 @@ Since the data in this tutorial is not in-situ RNA data, we will not show this m
 
 
 
-## 3. Add Statistics and Metadata
+## Add Statistics and Metadata to the Giotto Object
 The function **addStatistics** will add the following statistics to cell metadata:
 
 - **nr_feats**: Denotes how many features are detected per cell
@@ -191,7 +195,7 @@ It will also add the following statistics to feature metadata:
 - **mean_expr_det**: Average feature expression in cells with detectable levels of the feature
 
 ```{r, eval=FALSE}
-# Add gene & cell statistics to the Giotto object using the data normalized with method A (above)
+# Add gene & cell statistics to the Giotto object using the data normalized with the standard method
 testobj <- addStatistics(gobject = testobj, expression_values = 'normalized')
 
 # Accessors:
@@ -212,7 +216,7 @@ testobj <- addFeatsPerc(testobj,
 ```
 
 
-## 4. Adjust Expression Matrix
+## Adjust Expression Matrix
 Adjust expression matrix for known batch effects or technological covariates
 ```{r, eval=FALSE}
 # Since there are no known batch effects, the number of features detected per cell
@@ -225,10 +229,10 @@ testobj <- adjustGiottoMatrix(gobject = testobj,
 ```
 
 
-## 5. High Efficiency Data Processing
-**processGiotto** completes the filtering, normalization, statistical, and adjustment steps of processing in one single step, ideal for faster processing. 
+## High Efficiency Data Processing
+**processGiotto** completes the filtering, normalization, statistical, and adjustment steps of data processing in one single step; this is ideal for faster processing. 
 
-Since adjustment is not necessary for every dataset, it may be set to NULL to skip this processing step. All other arguments are user-determined; default arguments will apply to all steps if no arguments are provided.
+Since adjustment is not necessary for every dataset, *adjust_params* may be set to NULL to skip this processing step. All other arguments are user-determined; default arguments will apply to all steps if no arguments are provided.
 ```{r, eval=FALSE}
 testobj <- processGiotto(testobj,
                          filter_params = list(expression_threshold = 1,
