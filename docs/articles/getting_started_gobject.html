@@ -369,28 +369,45 @@ at once during Giotto object creation by using a named list.</p>
 <h3 id="customizing-the-giotto-object">Customizing the Giotto Object<a class="anchor" aria-label="anchor" href="#customizing-the-giotto-object"></a>
 </h3>
 <p>By providing values to other <strong>createGiottoObject</strong>
-parameters, it is possible to add: - <strong>Cell</strong> or
-<strong>feature (gene) metadata</strong> - See <a href="../reference/addCellMetadata.html"><strong>addCellMetadata</strong></a>
-and <a href="../reference/addFeatMetadata.html"><strong>addFeatMetadata</strong></a>
-- <strong>Spatial networks</strong> or <strong>grids</strong> - See <a href="./Visualizations.html">Visualizations</a> - <strong>Dimension
-reduction</strong> - See <a href="./dimension_reduction.html">Clustering</a> -
-<strong>Images</strong> - See <a href="./getting_started_images.html">Imaging</a> -
-<strong>giottoInstructions</strong> - See <a href="../docs/reference/createGiottoInstructions.html"><strong>createGiottoInstructions</strong></a>
-and below</p>
+parameters, it is possible to add:</p>
+<ul>
+<li><p><strong>Cell</strong> or <strong>feature (gene)
+metadata</strong>: see <a href="../reference/addCellMetadata.html"><strong>addCellMetadata</strong></a>
+and <a href="../reference/addFeatMetadata.html"><strong>addFeatMetadata</strong></a></p></li>
+<li><p><strong>Spatial networks</strong> or <strong>grids</strong>: see
+<a href="./Visualizations.html">Visualizations</a></p></li>
+<li><p><strong>Dimension reduction</strong>: see <a href="./dimension_reduction.html">Clustering</a></p></li>
+<li><p><strong>Images</strong>: see <a href="./getting_started_images.html">Imaging</a></p></li>
+<li><p><strong>giottoInstructions</strong>: see <a href="../docs/reference/createGiottoInstructions.html"><strong>createGiottoInstructions</strong></a>
+and below</p></li>
+</ul>
 <p>Providing <strong>giottoInstructions</strong> allows the
-specification of:<br>
-- An alternative python path if using the Giotto Environment (default)
+specification of:</p>
+<ul>
+<li>An alternative python path if using the Giotto Environment (default)
 is not desired<br>
-- A directory to which resulting plots will save - Plot formatting</p>
-<p>There are four functions to utilize when setting instructions:<br>
-- <strong>createGiottoInstructions</strong>: creates instructions that
-are provided to <strong>createGiottoObject</strong> -
-<strong>showGiottoInstructions</strong>: displays the instructions of a
-Giotto object<br>
-- <strong>changeGiottoInstructions</strong>: replaces 1 or more of the
+</li>
+<li>A directory to which resulting plots will save</li>
+<li>Plot formatting</li>
+</ul>
+<p>There are four functions to utilize when setting instructions:</p>
+<ul>
+<li>
+<strong>createGiottoInstructions</strong>: creates instructions that
+are provided to <strong>createGiottoObject</strong>
+</li>
+<li>
+<strong>showGiottoInstructions</strong>: displays the instructions
+of a Giotto object<br>
+</li>
+<li>
+<strong>changeGiottoInstructions</strong>: replaces 1 or more of the
 instruction parameters (e.g. plotting format)<br>
-- <strong>replaceGiottoInstructions</strong>: replaces all instructions
-with new instructions (e.g after subsetting)</p>
+</li>
+<li>
+<strong>replaceGiottoInstructions</strong>: replaces all
+instructions with new instructions (e.g after subsetting)</li>
+</ul>
 <p>Here is an example of a more customized Giotto object.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Specify data with file paths </span></span>
@@ -477,13 +494,20 @@ replaced:</p>
 <h3 id="plotting-data-from-a-giotto-object">Plotting Data from a Giotto Object<a class="anchor" aria-label="anchor" href="#plotting-data-from-a-giotto-object"></a>
 </h3>
 <p>Each plotting function in Giotto has three important binary
-parameters:<br>
-- <strong>show_plot</strong>: print the plot to the console, default is
-TRUE<br>
-- <strong>return_plot</strong>: return the plot as an object, default is
-TRUE<br>
-- <strong>save_plot</strong>: automatically save the plot, default is
-FALSE</p>
+parameters:</p>
+<ul>
+<li>
+<strong>show_plot</strong>: print the plot to the console, default
+is TRUE<br>
+</li>
+<li>
+<strong>return_plot</strong>: return the plot as an object, default
+is TRUE<br>
+</li>
+<li>
+<strong>save_plot</strong>: automatically save the plot, default is
+FALSE</li>
+</ul>
 <p>These parameters are stored within a <strong>giottoObject</strong>
 that was provided instructions from
 <strong>createGiottoInstructions</strong> and are provided to plotting
@@ -497,7 +521,7 @@ tutorial for alternative methods to save plots.</p>
 <code class="sourceCode R"><span><span class="co"># Plot according to Giotto Instructions (default)</span></span>
 <span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">custom_gobject</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Plot clusters, create, and save to a new subdirectory, all while overwritting formatting</span></span>
+<span><span class="co"># Plot clusters, create, and save to a new subdirectory, all while overwriting formatting</span></span>
 <span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">custom_gobject</span>, </span>
 <span>         cell_color <span class="op">=</span> <span class="st">'ClusterName'</span>, </span>
 <span>         save_plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
