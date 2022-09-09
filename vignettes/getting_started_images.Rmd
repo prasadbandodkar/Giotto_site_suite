@@ -1,9 +1,17 @@
 ---
-output: html_document
+title: "Imaging"
+output: 
+  html_document:
+    toc: yes
+    toc_depth: '3'
+    df_print: paged
+  github_document:
+    toc: yes
+    toc_depth: 3
+date: "2022-09-09"
 ---
 
-# Giotto and Image Data
-<br>
+## Giotto and Image Data
 
 Multiple images may be attached to the Giotto object. Spatial data can be overlaid upon these images which may then be used for downstream analyses. While Giotto attempts to automate the addition and alignment of images as much as possible, manual adjustments may sometimes be necessary. This tutorial will be covering both automatic and manual adjustment.  
 
@@ -11,7 +19,7 @@ The examples in this tutorial will be worked using Visium's normal human prostat
 
 For an example of working with high definition images that may require ROI alignment and or stitching, please see the Nanostring CosMx lung data [analysis](https://giottosuite.com/articles/Nanostring_Lung12_jan26_21.html).
 
-### Conceptual Overview
+## Conceptual Overview
 Giotto currently supports two types of image objects. For most purposes, images are loaded in using [*terra*](https://rdrr.io/cran/terra/) and are then placed into **giottoLargeImage** objects. **giottoLargeImage** objects only load in sampled subsets of the original image that are needed to represent the image, increasing efficiency for analysis of very high-resolution images.
 
 Alternatively, smaller images are loaded in using the [*magick*](https://rdrr.io/cran/magick/) package and are then placed into **giottoImage** objects. This offers direct access to the powerful image processing functionality in the *magick* package among other Giotto functions for analysis and viewing. **giottoLargeImage** objects can be downsampled into **giottoImage** objects when necessary through use of the **convertGiottoLargeImageToMG()** function.
@@ -96,7 +104,7 @@ GImage
 Further intuition for defining these parameters in this way is detailed within the **Why this inversion is necessary** dropdown text beneath Standard workflow.
 <br>
   
-### Visium workflow only (Automated):
+## Visium Workflow (Automated):
 Assembly of Giotto object as well as the reading in and alignment of the tissue staining image from the Visium spatial subdirectory is done automatically using **createGiottoVisiumObject()**. 
 
 Note that in order to run the following code, the Output Files "Feature / barcode matrix (raw)" and "Spatial imaging data" from the [dataset](https://www.10xgenomics.com/resources/datasets/normal-human-prostate-ffpe-1-standard-1-3-0) must be downloaded and extracted into a structured Visium directory. 
@@ -155,8 +163,8 @@ spatPlot2D(FFPE_prostate,
 ![](../inst/images/getting_started_figs/getting_started_images/high_res_IT.png){width=50%}  
 <br>
   
-### Standard workflow
-#### Step 0 - Inverting Y-Values
+## Standard Workflow
+### Step 1: Invert Y-Values
 Before beginning, it is important to acknowledge that differences may exist in the conventions for defining coordinates within images and plots. As a result, it is often required to make the spatial location y values negative. This inversion is necessary for the spatial locations to appear in the same orientation as the image. This transformation of the spatial locations is automatically done for Visium datasets during **createGiottoVisiumObject()**. In the standard workflow, it is important to determine if this is necessary for your data.
 
 <details>
@@ -189,7 +197,7 @@ my_gobject <- set_spatial_locations(gobject = my_gobject,
 </details>
 <br>
 
-#### Step 1 - giottoImage Creation
+### Step 2: Create giottoImage
 
 giottoImages are created using the **createGiottoImage()** function. This function requires a **magick**-compatible image (eg. jpg, tiff, png) to be provided to the **mg_object** argument as either a filepath or a **magick** object.  
 If automatic image alignment is desired, the **scale_factor** parameter is required, which scales the spatial locations to the image. *This parameter is required since spatial locations do not contain information about the size of the image is past the spatial xmax and ymin values. Those two image bounds are instead inferred by scaling up the current image dimensions to those of the spatial locations.*  
@@ -296,7 +304,11 @@ lowResG_img_no_locs
 *Note that only default values are given to minmax and boundaries in this case.*
 <hr>
 </details>
+
+<br>
 (**Optional**) Providing spatial location information through either of the **gobject** parameters **spat_loc_name** or **spatial_locs** will populate the minmax and boundary slots in an attempt to auto-align the image with the spatial locations. The auto-alignment can be bypassed by using **do_manual_adj = TRUE** and only the minmax slot will be populated.  
+<br>
+
 <details>
 <summary>**With spatial locations, but also with do_manual_adj = TRUE**</summary>
 <hr>
@@ -350,11 +362,12 @@ lowResG_img_manual
 ```
 <hr>
 </details>
+<br>
 *When **do_manual_adj = TRUE**, automatic alignment is bypassed in favor of the four manual adjustment values.*  
 *These values (Boundary adjustment) default to 0.*  
 <br>
 
-#### Step 2 - Add giottoImage to giottoObject and Visualize
+### Step 3: Add giottoImage to giottoObject and Visualize
 **addGiottoImage()** adds a **list** of images to the **giottoObject** specified. The name that the image is referred to as within the **images** slot is inherited from the **name** argument during **createGiottoImage()**. The default name is "image."  
 ```{r eval=FALSE}
 
@@ -372,11 +385,11 @@ spatPlot2D(gobject = FFPE_prostate,
   ![](../inst/images/getting_started_figs/getting_started_images/low_res_IT.png){width=50%}  
 
 
-### Manual Adjustment
+## Manual Adjustment
 Manually adjusting the plotting of images comes either during **createGiottoImage()** using **do_manual_adj = TRUE** and the four adjustment values **(xmin_adj, xmax_adj, ymin_adj, ymax_adj)** or after **giottoImage** creation using **updateGiottoImage()**.  
 This method is performed by eye and may be necessary depending on preference or if despite accounting for scaling, the image coordinates do not match up with the spatial coordinates for some reason.  
 
-#### During giottoImage creation
+### During giottoImage creation
 ```{r eval=FALSE}
 # createGiottoImage with manually defined adjustment values
 lowResG_img_update_manual <- createGiottoImage(gobject = FFPE_prostate,
@@ -400,7 +413,7 @@ spatPlot2D(gobject = FFPE_prostate,
 ```
 ![](../inst/images/getting_started_figs/getting_started_images/low_res_update_manual_IT.png){width=50%}  
 
-#### After giottoImage creation; update within the giottoObject
+### After giottoImage creation, within the giottoObject
 ```{r eval=FALSE}
 # createGiottoImage with manually defined adjustment values
 lowResG_img_to_update <- createGiottoImage(gobject = FFPE_prostate,

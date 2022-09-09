@@ -1,12 +1,21 @@
 ---
-output: github_document
+title: "Saving Options"
+output: 
+  html_document:
+    toc: yes
+    toc_depth: '3'
+    df_print: paged
+  github_document:
+    toc: yes
+    toc_depth: 3
+date: "2022-09-09"
 ---
 
-# Different ways to save plots
+## Saving Spatial Data in Plots
 
 *Please see the [Configuration]() and [Giotto Object](./getting_started_gobject.html) vignettes before walking through this tutorial.*
 
-R/Rstudio and Giotto provide different ways to save your spatial data. Here, we will create a **giottoObject** without using **giottoInstructions** so that the save parameters for plotting functions within Giotto as well as the default saving methods built into R/Rstudio may be emphasized here. Note that for plotting functions, all parameters available to the save_param argument may be found by running **showSaveParameters()**.
+R/Rstudio and Giotto provide different ways to save your spatial data. Here, we will create a **giottoObject** without using **giottoInstructions** so that the save parameters for plotting functions within Giotto as well as the default saving methods built into R/Rstudio may be emphasized here. Note that for plotting functions, all parameters available to the *save_param* argument may be found by running **showSaveParameters()**.
 
 ## Creating the Giotto Object without Instructions:
 
@@ -41,7 +50,7 @@ my_gobject = addCellMetadata(my_gobject, new_metadata = metadata,
 ```
 
 
-## Examples :  
+## Examples 
 
 ### 1. Standard R save methods
 Note that by default, plotting functions will return a plot object that may be saved or further manipulated.
