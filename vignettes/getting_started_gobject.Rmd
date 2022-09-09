@@ -1,8 +1,17 @@
 ---
-output: html_document
+title: "The Giotto Object"
+output: 
+  html_document:
+    toc: yes
+    toc_depth: '3'
+    df_print: paged
+  github_document:
+    toc: yes
+    toc_depth: 3
+date: "2022-09-09"
 ---
 
-# How to create a Giotto Object?
+# How to create a Giotto Object
 
 In this tutorial, the methodology and syntax to create a **giottoObject** is shown and osmFISH data is used throughout the tutorial.
 
