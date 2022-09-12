@@ -1,5 +1,5 @@
 ---
-title: How to make visualizations with Giotto?
+title: "Data Visualization"
 output:
   html_document:
     toc: yes
@@ -10,7 +10,7 @@ output:
     toc_depth: 2
 ---
 
-This tutorial walks through the visualization capabilities of Giotto. We will revisit dimension reduction visualizations (PCAs and UMAPs) that we created in the previous tutorial, [dimension reduction](./dimension_reduction.html). We will then explore how to create heatmaps, violin plots, and visualizations that are unique to Giotto: spatial maps and networks.
+This tutorial walks through the visualization capabilities of Giotto. Dimension reductions (PCAs and UMAPs), focused on within the previous tutorial, [dimension reduction](./dimension_reduction.html), will be revisited. Then explore how to create heatmaps, violin plots, and visualizations that are unique to Giotto: spatial maps and networks.
 
 This tutorial uses a MerFish dataset of mouse hypothalamic preoptic regions. A complete walkthough of that dataset can be found [**here**](./merFISH_hypoth_210924.html). To download the data used to create the Giotto Object below, please ensure that [wget](https://www.gnu.org/software/wget/?) is installed locally.
 

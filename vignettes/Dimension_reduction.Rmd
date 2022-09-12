@@ -1,5 +1,5 @@
 ---
-title: How to cluster my Giotto object?
+title: "Dimension Reduction and Clustering"
 output:
   html_document:
     toc: yes
@@ -11,7 +11,7 @@ output:
 ---
 
 
-This tutorial walks through the dimension reduction and clustering capabilities of Giotto. We begin this tutorial with the Giotto Object processed in the previous tutorial, [data processing](./data_processing.html). For convenience, the code to create this object is provided below. However, we encourage new users to review the data processing tutorial prior to beginning this tutorial.
+This tutorial walks through the dimension reduction and clustering capabilities of Giotto and begins with the Giotto Object processed in the previous tutorial, [data processing](./data_processing.html). For convenience, the code to create this object is provided below. However, encourage new users are encouraged to review the data processing tutorial prior to beginning this tutorial.
 
 This tutorial uses a SeqFISH+ dataset of a murine cortex and subventrical zone. A complete walkthrough of that dataset can be found [**here**](./SeqFISH_cortex_210923.html). To download the data used to create the Giotto Object below, please ensure that [wget](https://www.gnu.org/software/wget/?) is installed locally.
 
