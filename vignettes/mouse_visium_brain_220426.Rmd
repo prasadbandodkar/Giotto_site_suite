@@ -17,10 +17,15 @@ results_folder = 'path/to/result'
 # set python path to conda env/bin/ directory if manually installed Giotto python dependencies by conda
 # python_path = '/path_to_conda/.conda/envs/giotto/bin/python'
 # set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment
-python_path = null
-if(is.null(python_path)) {
-  installGiottoEnvironment()
-}
+# python_path = NULL
+# if(is.null(python_path)) {
+#  installGiottoEnvironment()
+#}
+
+# 3. Create Giotto Instructions
+instrs = createGiottoInstructions(save_dir = results_folder,
+                                  save_plot = TRUE,
+                                  show_plot = FALSE)
 ```
 
 ## Dataset explanation
@@ -103,7 +108,7 @@ featgenes = gene_metadata[hvf == 'yes' & perc_cells > 3 & mean_expr_det > 0.4]$f
 
 ## run PCA on expression values (default)
 visium_brain <- runPCA(gobject = visium_brain,
-                       genes_to_use = featgenes)
+                       feats_to_use = featgenes)
 
 screePlot(visium_brain, ncp = 30)
 ```
@@ -111,7 +116,7 @@ screePlot(visium_brain, ncp = 30)
 ![](../inst/images/mouse_visium_brain/vignette_220328/3-screePlot.png){ width=50% } 
 
 ```{r eval = FALSE}
-plotPCA(gobject = visium_brain)
+dimPlot2D(gobject = visium_brain,dim_reduction_to_use = "pca")
 ```
 
 ![](../inst/images/mouse_visium_brain/vignette_220328/4-PCA.png){ width=50% } 
@@ -560,7 +565,7 @@ cluster_genes = cluster_genes_DT$clus; names(cluster_genes) = cluster_genes_DT$f
 
 visium_brain = createMetafeats(visium_brain, feat_clusters = cluster_genes, name = 'cluster_metagene')
 
-showGiottoSpatEnrichments(visium_brain)
+#showGiottoSpatEnrichments(visium_brain)
 
 spatCellPlot(visium_brain,
              spat_enr_names = 'cluster_metagene',

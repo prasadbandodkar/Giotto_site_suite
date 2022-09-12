@@ -18,10 +18,10 @@ results_folder = 'path/to/result'
 # set python path to conda env/bin/ directory if manually installed Giotto python dependencies by conda
 # python_path = '/path_to_conda/.conda/envs/giotto/bin/python'
 # set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment
-python_path = NULL
-if(is.null(python_path)) {
-  installGiottoEnvironment()
-}
+# python_path = NULL
+#if(is.null(python_path)) {
+#  installGiottoEnvironment()
+#}
 
 # 3. create giotto instructions
 instrs = createGiottoInstructions(save_dir = results_folder,
