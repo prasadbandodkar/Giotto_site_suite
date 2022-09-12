@@ -10,8 +10,7 @@ output:
     toc_depth: 2
 ---
 
-
-## Start Giotto 
+## Start Giotto
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -20,73 +19,70 @@ knitr::opts_chunk$set(
 )
 ```
 
-To run the current vignette you need to install the Giotto suite branch. 
+To run the current vignette you need to install the Giotto Suite branch.
 
 ```{r setup, eval=FALSE}
 if (!"Giotto" %in% installed.packages()) {
   remotes::install_github("RubD/Giotto@suite")
 } 
-
 library(Giotto)
 ```
 
-
 ### Install Python modules
 
-To run this vignette you need to install all the necessary Python modules.  
+To run this vignette you need to install all the necessary Python modules.
 
-1. This can be done manually, see https://rubd.github.io/Giotto_site/articles/installation_issues.html#python-manual-installation  
+1.  This can be done manually, see <https://rubd.github.io/Giotto_site/articles/installation_issues.html#python-manual-installation>
 
-2. This can be done within R using our installation tools (installGiottoEnvironment), see  https://rubd.github.io/Giotto_site/articles/tut0_giotto_environment.html for more information.  
+2.  This can be done within R using our installation tools (installGiottoEnvironment), see <https://rubd.github.io/Giotto_site/articles/tut0_giotto_environment.html> for more information.
 
+### Set Giotto instructions (optional)
 
-### (optional) set giotto instructions
 ```{r, eval=FALSE}
 # to automatically save figures in save_dir set save_plot to TRUE
 temp_dir = getwd()
-#temp_dir = '~/Temp/'
-myinstructions = createGiottoInstructions(save_dir = temp_dir,
+myinstructions = createGiottoInstructions(save_dir = temp_dir, 
                                           save_plot = FALSE, 
-                                          show_plot = F)
+                                          show_plot = TRUE)
 ```
 
+## 1. Create a Giotto object
 
-## 1. Create a Giotto object  
-minimum requirements:  
-- matrix with expression information (or path to)  
-- x,y(,z) coordinates for cells or spots (or path to)
+The minimum requirements are
+
+-   matrix with expression information (or path to)
+-   x,y(,z) coordinates for cells or spots (or path to)
 
 ```{r, eval=FALSE}
 # download data
 data_directory = paste0(temp_dir, '/data/')
 getSpatialDataset(dataset = 'mini_seqFISH', directory = data_directory, method = 'wget')
-
 # giotto object 
 expr_path = paste0(data_directory, "seqfish_field_expr.txt.gz")
 loc_path = paste0(data_directory, "seqfish_field_locs.txt")
-seqfish_mini = createGiottoObject(expression = expr_path,
-                                   spatial_locs = loc_path,
+seqfish_mini = createGiottoObject(expression = expr_path, 
+                                   spatial_locs = loc_path, 
                                    instructions = myinstructions)
 ```
 
+How to work with Giotto instructions that are part of your Giotto object:
 
-How to work with Giotto instructions that are part of your Giotto object:  
-- show the instructions associated with your Giotto object with **showGiottoInstructions**  
-- change one or more instructions with **changeGiottoInstructions**  
-- replace all instructions at once with **replaceGiottoInstructions**  
-- read or get a specific giotto instruction with **readGiottoInstructions**  
-Of note, the python path can only be set once in an R session. See the reticulate package for more information.  
+-   show the instructions associated with your Giotto object with **showGiottoInstructions()**
+-   change one or more instructions with **changeGiottoInstructions()**
+-   replace all instructions at once with **replaceGiottoInstructions()**
+-   read or get a specific Giotto instruction with **readGiottoInstructions()**
+
 ```{r, eval=FALSE}
 # show instructions associated with giotto object (seqfish_mini)
 showGiottoInstructions(seqfish_mini)
 ```
 
+## 2. Processing steps
 
-## 2. processing steps
-- filter genes and cells based on detection frequencies  
-- normalize expression matrix (log transformation, scaling factor and/or z-scores) 
-- add cell and gene statistics (optional)  
-- adjust expression matrix for technical covariates or batches (optional). These results will be stored in the *custom* slot. 
+-   filter genes and cells based on detection frequencies
+-   normalize expression matrix (log transformation, scaling factor and/or z-scores)
+-   add cell and gene statistics (optional)
+-   adjust expression matrix for technical covariates or batches (optional). These results will be stored in the *custom* slot.
 
 ```{r, eval=FALSE}
 seqfish_mini = filterGiotto(gobject = seqfish_mini, 
@@ -96,13 +92,13 @@ seqfish_mini = filterGiotto(gobject = seqfish_mini,
 seqfish_mini = normalizeGiotto(gobject = seqfish_mini, scalefactor = 6000, verbose = T)
 seqfish_mini = addStatistics(gobject = seqfish_mini)
 seqfish_mini = adjustGiottoMatrix(gobject = seqfish_mini, 
-                                   expression_values = c('normalized'),
+                                   expression_values = c('normalized'), 
                                    covariate_columns = c('nr_feats', 'total_expr'))
 ```
 
+## 3. Dimension reduction
 
-## 3. dimension reduction
-- identify highly variable genes (HVG) 
+-   identify highly variable features (HVF)
 
 ```{r, eval=FALSE}
 seqfish_mini = calculateHVF(gobject = seqfish_mini)
@@ -110,8 +106,8 @@ seqfish_mini = calculateHVF(gobject = seqfish_mini)
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/0-HVFplot.png?raw=true){ width=50% }
 
-- perform PCA  
-- identify number of significant prinicipal components (PCs)  
+-   perform PCA
+-   identify number of significant principal components (PCs)
 
 ```{r, eval=FALSE}
 seqfish_mini = runPCA(gobject = seqfish_mini)
@@ -121,18 +117,12 @@ screePlot(seqfish_mini, ncp = 20)
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/1-screePlot.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
-jackstrawPlot(seqfish_mini, ncp = 20)
-```
-
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/2-jackstrawPlot.png?raw=true){ width=50% }
-
-```{r, eval=FALSE}
 plotPCA(seqfish_mini)
 ```
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/3-PCA.png?raw=true){ width=50% }
 
-- run UMAP and/or TSNE on PCs  (or directly on matrix)  
+-   run UMAP and/or t-SNE on PCs (or directly on matrix)
 
 ```{r, eval=FALSE}
 seqfish_mini = runUMAP(seqfish_mini, dimensions_to_use = 1:5, n_threads = 2)
@@ -148,15 +138,14 @@ plotTSNE(gobject = seqfish_mini)
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/5-tSNE.png?raw=true){ width=50% }
 
+## 4. Clustering
 
-## 4. clustering
-- create a shared (default) nearest network in PCA space (or directly on matrix)  
-- cluster on nearest network with Leiden or Louvan (kmeans and hclust are alternatives) 
+-   create a shared (default) nearest network in PCA space (or directly on matrix)
+-   cluster on nearest network with Leiden or Louvain (k-means and hclust are alternatives)
 
 ```{r, eval=FALSE}
 seqfish_mini = createNearestNetwork(gobject = seqfish_mini, dimensions_to_use = 1:5, k = 5)
 seqfish_mini = doLeidenCluster(gobject = seqfish_mini, resolution = 0.4, n_iterations = 1000)
-
 # visualize UMAP cluster results
 plotUMAP(gobject = seqfish_mini, cell_color = 'leiden_clus', show_NN_network = T, point_size = 2.5)
 ```
@@ -177,14 +166,18 @@ showClusterHeatmap(gobject = seqfish_mini, cluster_column = 'leiden_clus')
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/8-showClusterHeatmap.png?raw=true){ width=50% }
 
+The following step requires the installation of {ggdendro}.
+
 ```{r, eval=FALSE}
+# install.packages('ggdendro')
+library(ggdendro)
 showClusterDendrogram(seqfish_mini, h = 0.5, rotate = T, cluster_column = 'leiden_clus')
 ```
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/9-showClusterDendrogram.png?raw=true){ width=50% }
 
+## 5. Differential expression
 
-## 5. differential expression
 ```{r, eval=FALSE}
 gini_markers = findMarkers_one_vs_all(gobject = seqfish_mini,
                                       method = 'gini',
@@ -193,8 +186,7 @@ gini_markers = findMarkers_one_vs_all(gobject = seqfish_mini,
                                       min_feats = 20,
                                       min_expr_gini_score = 0.5,
                                       min_det_gini_score = 0.5)
-
-# get top 2 genes per cluster and visualize with violinplot
+# get top 2 genes per cluster and visualize with violin plot
 topgenes_gini = gini_markers[, head(.SD, 2), by = 'cluster']
 violinPlot(seqfish_mini, feats = topgenes_gini$feats[1:4], cluster_column = 'leiden_clus')
 ```
@@ -210,8 +202,8 @@ plotMetaDataHeatmap(seqfish_mini, selected_feats = topgenes_gini2$feats,
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/11-plotMetaDataHeatmap.png?raw=true){ width=50% }
 
+## 6. Cell type annotation
 
-## 6. cell type annotation
 ```{r, eval=FALSE}
 clusters_cell_types = c('cell A', 'cell B', 'cell C', 'cell D',
                         'cell E', 'cell F', 'cell G', 'cell H')
@@ -222,14 +214,12 @@ seqfish_mini = annotateGiotto(gobject = seqfish_mini,
                               name = 'cell_types')
 # check new cell metadata
 pDataDT(seqfish_mini)
-
 # visualize annotations
 spatDimPlot(gobject = seqfish_mini, cell_color = 'cell_types', 
             spat_point_size = 3, dim_point_size = 3)
 ```
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/12-spatDimPlot2D.png?raw=true){ width=50% }
-
 
 ```{r, eval=FALSE}
 # heatmap
@@ -244,32 +234,33 @@ plotHeatmap(gobject = seqfish_mini,
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/13-plotHeatmap.png?raw=true){ width=50% }
 
+## 7. Spatial grid
 
-## 7. spatial grid
-Create a grid based on defined stepsizes in the x,y(,z) axes.  
+-   Create a grid based on defined step sizes in the x,y(,z) axes.
+
 ```{r, eval=FALSE}
 seqfish_mini = createSpatialGrid(gobject = seqfish_mini,
                                   sdimx_stepsize = 300,
                                   sdimy_stepsize = 300,
                                   minimum_padding = 50)
 showGiottoSpatGrids(seqfish_mini)
-
 # visualize grid
 spatPlot(gobject = seqfish_mini, show_grid = T, point_size = 1.5)
 ```
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/14-spatPlot2D.png?raw=true){ width=50% }
 
-## 8. spatial network
-- visualize information about the default Delaunay network  
-- create a spatial Delaunay network (default)  
-- create a spatial kNN network   
+## 8. Spatial network
+
+-   visualize information about the default Delaunay network  
+-   create a spatial Delaunay network (default)  
+-   create a spatial kNN network
+
 ```{r, eval=FALSE}
 plotStatDelaunayNetwork(gobject = seqfish_mini, maximum_distance = 400)
 ```
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/15-plotStatDelaunayNetwork.png?raw=true){ width=50% }
-
 
 ```{r, eval=FALSE}
 seqfish_mini = createSpatialNetwork(gobject = seqfish_mini, minimum_k = 2, 
@@ -277,7 +268,6 @@ seqfish_mini = createSpatialNetwork(gobject = seqfish_mini, minimum_k = 2,
 seqfish_mini = createSpatialNetwork(gobject = seqfish_mini, minimum_k = 2, 
                                     method = 'kNN', k = 10)
 showGiottoSpatNetworks(seqfish_mini)
-
 # visualize the two different spatial networks  
 spatPlot(gobject = seqfish_mini, show_network = T,
          network_color = 'blue', spatial_network_name = 'Delaunay_network',
@@ -285,7 +275,6 @@ spatPlot(gobject = seqfish_mini, show_network = T,
 ```
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/16-spatPlot2D.png?raw=true){ width=50% }
-
 
 ```{r, eval=FALSE}
 spatPlot(gobject = seqfish_mini, show_network = T,
@@ -295,14 +284,16 @@ spatPlot(gobject = seqfish_mini, show_network = T,
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/17-spatPlot2D.png?raw=true){ width=50% }
 
+## 9. Spatial genes
 
-## 9. spatial genes
-Identify spatial genes with 3 different methods:  
-- binSpect with kmeans binarization (default)  
-- binSpect with rank binarization  
-- silhouetteRank  
+Identify spatial genes with 3 different methods:
 
-Visualize top 4 genes per method.  
+-   binSpect with k-means binarization (default)
+-   binSpect with rank binarization
+-   silhouetteRank
+
+Visualize top 4 genes per method.
+
 ```{r, eval=FALSE, fig.width=10, fig.height=10}
 km_spatialgenes = binSpect(seqfish_mini)
 spatFeatPlot2D(seqfish_mini, expression_values = 'scaled', 
@@ -325,7 +316,6 @@ spatFeatPlot2D(seqfish_mini, expression_values = 'scaled',
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/19-spatFeatPlot2D.png?raw=true){ width=50% }
 
-
 ```{r, eval=FALSE}
 silh_spatialgenes = silhouetteRank(gobject = seqfish_mini) # TODO: suppress print output
 spatFeatPlot2D(seqfish_mini, expression_values = 'scaled', 
@@ -337,21 +327,20 @@ spatFeatPlot2D(seqfish_mini, expression_values = 'scaled',
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/20-spatFeatPlot2D.png?raw=true){ width=50% }
 
+## 10. Spatial co-expression patterns
 
-## 10. spatial co-expression patterns
-Identify robust spatial co-expression patterns using the spatial network or grid 
-and a subset of individual spatial genes.  
-1. calculate spatial correlation scores  
-2. cluster correlation scores
+Identify robust spatial co-expression patterns using the spatial network or grid and a subset of individual spatial genes.
+
+1.  calculate spatial correlation scores
+2.  cluster correlation scores
+
 ```{r, eval=FALSE, fig.width=10, fig.height=10}
-
 # 1. calculate spatial correlation scores 
 ext_spatial_genes = km_spatialgenes[1:500]$feats
 spat_cor_netw_DT = detectSpatialCorFeats(seqfish_mini,
                                          method = 'network', 
                                          spatial_network_name = 'Delaunay_network',
                                          subset_feats = ext_spatial_genes)
-
 # 2. cluster correlation scores
 spat_cor_netw_DT = clusterSpatialCorFeats(spat_cor_netw_DT, 
                                           name = 'spat_netw_clus', k = 8)
@@ -360,7 +349,6 @@ heatmSpatialCorFeats(seqfish_mini, spatCorObject = spat_cor_netw_DT,
 ```
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/21-heatmSpatialCorFeats.png?raw=true){ width=50% }
-
 
 ```{r, eval=FALSE}
 netw_ranks = rankSpatialCorGroups(seqfish_mini, 
@@ -375,13 +363,10 @@ top_netw_spat_cluster = showSpatialCorFeats(spat_cor_netw_DT,
                                             use_clus_name = 'spat_netw_clus',
                                             selected_clusters = 6, 
                                             show_top_feats = 1)
-
 cluster_genes_DT = showSpatialCorFeats(spat_cor_netw_DT, 
                                        use_clus_name = 'spat_netw_clus',
                                        show_top_feats = 1)
-
 cluster_genes = cluster_genes_DT$clus; names(cluster_genes) = cluster_genes_DT$feat_ID
-
 seqfish_mini = createMetafeats(seqfish_mini,
                                feat_clusters = cluster_genes,
                                name = 'cluster_metagene')
@@ -391,15 +376,18 @@ spatCellPlot(seqfish_mini,
              point_size = 1.5, cow_n_col = 3)
 ```
 
-
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/23-spatCellPlot2D.png?raw=true){ width=50% }
 
+## 11. Spatial HMRF domains
 
-## 11. spatial HMRF domains
+The following HMRF function requires {smfishHmrf} .
+
 ```{r, eval=FALSE}
+# remotes::install_bitbucket(repo = 'qzhudfci/smfishhmrf-r', ref='master')
+library(smfishHmrf)
+
 hmrf_folder = paste0(temp_dir,'/','11_HMRF/')
 if(!file.exists(hmrf_folder)) dir.create(hmrf_folder, recursive = T)
-
 # perform hmrf
 my_spatial_genes = km_spatialgenes[1:100]$feats
 HMRF_spatial_genes = doHMRF(gobject = seqfish_mini,
@@ -409,7 +397,6 @@ HMRF_spatial_genes = doHMRF(gobject = seqfish_mini,
                             k = 9,
                             betas = c(28,2,2),
                             output_folder = paste0(hmrf_folder, '/', 'Spatial_genes/SG_top100_k9_scaled'))
-
 # check and select hmrf
 for(i in seq(28, 30, by = 2)) {
   viewHMRFresults2D(gobject = seqfish_mini,
@@ -417,12 +404,10 @@ for(i in seq(28, 30, by = 2)) {
                     k = 9, betas_to_view = i,
                     point_size = 2)
 }
-
 seqfish_mini = addHMRF(gobject = seqfish_mini,
                        HMRFoutput = HMRF_spatial_genes,
                        k = 9, betas_to_add = c(28),
                        hmrf_name = 'HMRF')
-
 # visualize selected hmrf result
 giotto_colors = Giotto:::getDistinctColors(9)
 names(giotto_colors) = 1:9
@@ -432,8 +417,8 @@ spatPlot(gobject = seqfish_mini, cell_color = 'HMRF_k9_b.28',
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/24-spatPlot2D.png?raw=true){ width=50% }
 
+## 12. Cell neighborhood: cell-type/cell-type interactions
 
-## 12. cell neighborhood: cell-type/cell-type interactions
 ```{r, eval=FALSE}
 set.seed(seed = 2841)
 cell_proximities = cellProximityEnrichment(gobject = seqfish_mini,
@@ -448,7 +433,6 @@ cellProximityBarplot(gobject = seqfish_mini,
 ```
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/25-cellProximityBarplot.png?raw=true){ width=50% }
-
 
 ```{r, eval=FALSE}
 ## heatmap
@@ -481,8 +465,8 @@ cellProximityNetwork(gobject = seqfish_mini, CPscore = cell_proximities,
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/28-cellProximityNetwork.png?raw=true){ width=50% }
 
+### Visualization of specific cell types
 
-### visualization of specific cell types
 ```{r, eval=FALSE}
 # Option 1
 spec_interaction = "cell D--cell F"
@@ -496,7 +480,6 @@ cellProximitySpatPlot2D(gobject = seqfish_mini,
 ```
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/29-cellProximitySpatPlot2D.png?raw=true){ width=50% }
-
 
 ```{r, eval=FALSE}
 # Option 2: create additional metadata
@@ -512,14 +495,13 @@ spatPlot(seqfish_mini, cell_color = 'D_F_interactions', legend_symbol_size = 3,
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/30-spatPlot2D.png?raw=true){ width=50% }
 
+### 13. Cell neighborhood: interaction changed genes
 
-### 13. cell neighborhood: interaction changed genes
 ```{r, eval=FALSE}
-## select top 25th highest expressing genes
+## select top 25 highest expressing genes
 gene_metadata = fDataDT(seqfish_mini)
 plot(gene_metadata$nr_cells, gene_metadata$mean_expr)
 plot(gene_metadata$nr_cells, gene_metadata$mean_expr_det)
-
 quantile(gene_metadata$mean_expr_det)
 high_expressed_genes = gene_metadata[mean_expr_det > 4]$feat_ID
 
@@ -532,24 +514,20 @@ ICFscoresHighGenes =  findICF(gobject = seqfish_mini,
                               adjust_method = 'fdr',
                               nr_permutations = 500,
                               do_parallel = T)
-
 ## visualize all genes
 plotCellProximityGenes(seqfish_mini, cpgObject = ICFscoresHighGenes, method = 'dotplot')
 ```
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/31-plotCellProximityGenes.png?raw=true){ width=50% }
 
-
 ```{r, eval=FALSE}
 ## filter genes
 ICFscoresFilt = filterICF(ICFscoresHighGenes, min_cells = 2, min_int_cells = 2, min_fdr = 0.1,
                           min_spat_diff = 0.1, min_log2_fc = 0.1, min_zscore = 1)
-
 ## visualize subset of interaction changed genes (ICGs)
 ICF_genes = c('Cpne2', 'Scg3', 'Cmtm3', 'Cplx1', 'Lingo1')
 ICF_genes_types = c('cell E', 'cell D', 'cell D', 'cell G', 'cell E')
 names(ICF_genes) = ICF_genes_types
-
 plotICF(gobject = seqfish_mini,
         cpgObject = ICFscoresHighGenes,
         source_type = 'cell A',
@@ -559,24 +537,21 @@ plotICF(gobject = seqfish_mini,
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/32-plotICF.png?raw=true){ width=50% }
 
+## 14. Cell neighborhood: ligand-receptor cell-cell communication
 
-## 14. cell neighborhood:  ligand-receptor cell-cell communication
 ```{r, eval=FALSE}
 LR_data = data.table::fread(paste0(data_directory, "mouse_ligand_receptors.txt"))
-
 LR_data[, ligand_det := ifelse(mouseLigand %in% seqfish_mini@feat_ID[['rna']], T, F)]
 LR_data[, receptor_det := ifelse(mouseReceptor %in% seqfish_mini@feat_ID[['rna']], T, F)]
 LR_data_det = LR_data[ligand_det == T & receptor_det == T]
 select_ligands = LR_data_det$mouseLigand
 select_receptors = LR_data_det$mouseReceptor
-
 ## get statistical significance of gene pair expression changes based on expression ##
 expr_only_scores = exprCellCellcom(gobject = seqfish_mini,
                                    cluster_column = 'cell_types',
                                    random_iter = 50,
                                    feat_set_1 = select_ligands,
                                    feat_set_2 = select_receptors)
-
 ## get statistical significance of gene pair expression changes upon cell-cell interaction
 spatial_all_scores = spatCellCellcom(seqfish_mini,
                                      spat_unit = 'cell',
@@ -590,16 +565,12 @@ spatial_all_scores = spatCellCellcom(seqfish_mini,
                                      do_parallel = T,
                                      cores = 4,
                                      verbose = 'none')
-
 ## * plot communication scores ####
-
 ## select top LR ##
 selected_spat = spatial_all_scores[p.adj <= 0.5 & abs(log2fc) > 0.1 & lig_nr >= 2 & rec_nr >= 2]
 data.table::setorder(selected_spat, -PI)
-
 top_LR_ints = unique(selected_spat[order(-abs(PI))]$LR_comb)[1:33]
 top_LR_cell_ints = unique(selected_spat[order(-abs(PI))]$LR_cell_comb)[1:33]
-
 plotCCcomHeatmap(gobject = seqfish_mini,
                  comScores = spatial_all_scores,
                  selected_LR = top_LR_ints,
@@ -608,7 +579,6 @@ plotCCcomHeatmap(gobject = seqfish_mini,
 ```
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/33-plotCCcomHeatmap.png?raw=true){ width=50% }
-
 
 ```{r, eval=FALSE}
 plotCCcomDotplot(gobject = seqfish_mini,
@@ -624,7 +594,6 @@ plotCCcomDotplot(gobject = seqfish_mini,
 ## * spatial vs rank ####
 comb_comm = combCCcom(spatialCC = spatial_all_scores,
                       exprCC = expr_only_scores)
-
 # top differential activity levels for ligand receptor pairs
 plotRankSpatvsExpr(gobject = seqfish_mini,
                    comb_comm,
@@ -647,11 +616,10 @@ plotRecovery(gobject = seqfish_mini,
 
 ![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/36-plotRecovery.png?raw=true){ width=50% }
 
+## 15. Export Giotto Analyzer to Viewer
 
-## 15. export Giotto Analyzer to Viewer
 ```{r, eval=FALSE}
 viewer_folder = paste0(temp_dir, '/', 'Mouse_cortex_viewer')
-
 # select annotations, reductions and expression values to view in Giotto Viewer
 exportGiottoViewer(gobject = seqfish_mini,
                    output_directory = viewer_folder,
@@ -665,4 +633,3 @@ exportGiottoViewer(gobject = seqfish_mini,
                    expression_rounding = 3,
                    overwrite_dir = T)
 ```
-
