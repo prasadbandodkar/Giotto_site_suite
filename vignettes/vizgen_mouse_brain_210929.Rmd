@@ -35,7 +35,13 @@ tx_det_preview = data.frame(V1 = c(0,1,2,3),
                             y = c(159.9814, 1209.3922, 1201.0283, 858.8855),
                             fov = c(0,0,0,0),
                             gene = c('Htr1b', 'Htr1b', 'Htr6', 'Adora1'))
-transform_DT = data.table::fread('../inst/images/vizgen_mouse_brain//transform.csv')
+transform_DT = data.table::data.table(V1 = c(9.205861,0,0),
+                                      V2 = c(0,9.20585,0),
+                                      V3 = c(279.2204,349.8105,1.0000))
+km_spatialgenes = list(feats = c("Slc47a1","Chat","Th","Insrr","Slc17a7","Pln","Lmod1","Blank-119",
+                       "Hcar1","Glp1r","Ptgdr","Avpr2","Gpr20","Myh11","Glp2r","Npy2r","Gpr182",
+                       "Chrm1","Adgrd1","Mrgprf","Trhr","Gfap","Slc17a8","Nmbr","Pth2r","Rxfp1",
+                       "Musk","F2rl1","Dgkk","Chrm5"))
 ```
 
 Updated `9/12/2022`. *Giotto* version `2.0.0.998`.
@@ -48,7 +54,7 @@ Please check the version you are using to get the same results.
 library(Giotto)
 
 # 1. set working directory where project outputs will be saved to
-results_folder = '/path/to/directory/'
+results_folder = '/path/to/save/directory/'
 
 # 2. set giotto python path
 # set python path to your preferred python version path
@@ -104,7 +110,7 @@ Transcripts are captured at the single-molecule level with subcellular spatial r
 
 ## 3. Giotto global instructions and preparations
 
-Define plot saving behavior
+Define plot saving behavior and project data paths
 
 ```{r, eval=FALSE}
 # Directly saving plots to the working directory without rendering them in the editor saves time.
@@ -112,6 +118,16 @@ instrs = createGiottoInstructions(save_dir = results_folder,
                                   save_plot = TRUE,
                                   show_plot = FALSE,
                                   return_plot = FALSE)
+
+# Add Needed paths below:
+# provide path to pre-aggregated information
+expr_path = '/path/to/datasets_mouse_brain_map_BrainReceptorShowcase_Slice1_Replicate1_cell_by_gene_S1R1.csv'
+# provide path to metadata (includes spatial locations of aggregated expression)
+meta_path = '/path/to/datasets_mouse_brain_map_BrainReceptorShowcase_Slice1_Replicate1_cell_metadata_S1R1.csv'
+# provide path to the detected transcripts (single molecule level transcript spatial information)
+tx_path = '/path/to/datasets_mouse_brain_map_BrainReceptorShowcase_Slice1_Replicate1_detected_transcripts_S1R1.csv'
+# provide path to the dapi image of slice 1 replicate 1
+img_path = 'path/to/mosaic_DAPI_z0.tif'
 ```
 
 ## 4. Create Giotto object from aggregated data
@@ -124,14 +140,9 @@ Along with the count matrix, metadata information about the field of view (FOV),
 *Addtionally for this dataset, y values should be inverted when loaded to match the included images. [For more information](https://giottosuite.com/articles/getting_started_images.html#standard-workflow)
 
 ```{r, eval=FALSE}
-# provide path to cell by gene matrix
-expr_path = '/path/to/datasets_mouse_brain_map_BrainReceptorShowcase_Slice1_Replicate1_cell_by_gene_S1R1.csv'
-# provide path to metadata
-spat_path = '/path/to/datasets_mouse_brain_map_BrainReceptorShowcase_Slice1_Replicate1_cell_metadata_S1R1.csv'
-
 # read expression matrix and metadata
 expr_matrix = readExprMatrix(expr_path)
-spat_dt = data.table::fread(spat_path)
+spat_dt = data.table::fread(meta_path)
 
 # create giotto object
 vizgen <- createGiottoObject(expression = Giotto:::t_flex(expr_matrix),
@@ -175,8 +186,6 @@ print(transform_DT)
 Here we will attach the z0 dapi image to the Giotto object.
 Note: *It is recommended for the image files to be local. Placing the images on the cloud or network may be very slow.*
 ```{r, eval=FALSE}
-img_path = 'path/to/mosaic_DAPI_z0.tif'
-
 # Load in image as a giottoLargeImage object that maps spatial coordinates 1:1 with pixel coordinates
 dapi0 = createGiottoLargeImage(raster_object = img_path,
                                name = 'image')
@@ -347,11 +356,17 @@ vizgen = createSpatialNetwork(gobject = vizgen,
 
 # perform Binary Spatial Extraction of genes
 km_spatialgenes = binSpect(vizgen)
+```
 
-# visualize spatial expression of selected genes obtained from binSpect
+```{r, echo=TRUE}
+print(km_spatialgenes$feats[1:30])
+```
+
+```{r, eval=FALSE}
+# visualize spatial expression of select genes obtained from binSpect
 spatFeatPlot2D(vizgen,
                expression_values = 'scaled',
-               feats = km_spatialgenes$feats[1:6],
+               feats = km_spatialgenes$feats[c(1,2,3,5,18,22)],
                cell_color_gradient = c('blue', 'white', 'red'),
                point_shape = 'border',
                point_border_col = 'grey',
@@ -398,8 +413,6 @@ vizgen_subset = readPolygonFilesVizgen(gobject = vizgen_subset,
 Giotto can also work with the single molecule transcript level spatial data.
 
 ```{r, eval=FALSE}
-# add transcript coordinates
-tx_path = '/path/to/datasets_mouse_brain_map_BrainReceptorShowcase_Slice1_Replicate1_detected_transcripts_S1R1.csv'
 tx_dt = data.table::fread(tx_path)
 # select transcripts in FOVs
 selected_fovs = unique(pDataDT(vizgen_subset)$fov)

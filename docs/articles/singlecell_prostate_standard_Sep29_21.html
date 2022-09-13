@@ -185,12 +185,15 @@
 <div class="section level2">
 <h2 id="dataset-explanation">Dataset explanation<a class="anchor" aria-label="anchor" href="#dataset-explanation"></a>
 </h2>
-<p><a href="https://pubmed.ncbi.nlm.nih.gov/33032611/" class="external-link">Ma et al.</a> Processed 10X Single Cell RNAseq from two prostate cancer patients. The raw dataset can be found <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE157703" class="external-link">here</a></p>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/33032611/" class="external-link">Ma et al.</a>
+Processed 10X Single Cell RNAseq from two prostate cancer patients. The
+raw dataset can be found <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE157703" class="external-link">here</a></p>
 </div>
 <div class="section level2">
 <h2 id="part-1-create-giotto-object-from-10x-dataset">Part 1: Create Giotto object from 10X dataset<a class="anchor" aria-label="anchor" href="#part-1-create-giotto-object-from-10x-dataset"></a>
 </h2>
-<p>Note that you will need an input directory for barcodes.tsv(.gz) features.tsv(.gz) matrix.mtx(.gz)</p>
+<p>Note that you will need an input directory for barcodes.tsv(.gz)
+features.tsv(.gz) matrix.mtx(.gz)</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">giotto_SC</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="fu"><a href="../reference/get10Xmatrix.html">get10Xmatrix</a></span><span class="op">(</span><span class="st">"/path/to/filtered_feature_bc_matrix"</span>, </span>
 <span>                              gene_column_index <span class="op">=</span> <span class="fl">2</span>, remove_zero_rows <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
