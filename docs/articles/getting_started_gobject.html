@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> • Giotto Suite</title>
+<title>The Giotto Object • Giotto Suite</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="">
+<script src="../pkgdown.js"></script><meta property="og:title" content="The Giotto Object">
 <meta property="og:description" content="Giotto">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -147,8 +147,9 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip></h1>
+      <h1 data-toc-skip>The Giotto Object</h1>
             
+            <h4 data-toc-skip class="date">2022-09-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/HEAD/vignettes/getting_started_gobject.Rmd" class="external-link"><code>vignettes/getting_started_gobject.Rmd</code></a></small>
       <div class="hidden name"><code>getting_started_gobject.Rmd</code></div>
@@ -158,16 +159,13 @@
     
     
 <div class="section level2">
-<h2 id="how-to-create-a-giotto-object">How to create a Giotto Object?<a class="anchor" aria-label="anchor" href="#how-to-create-a-giotto-object"></a>
+<h2 id="how-to-create-a-giotto-object">How to create a Giotto Object<a class="anchor" aria-label="anchor" href="#how-to-create-a-giotto-object"></a>
 </h2>
-<p>In this tutorial, the methodology and syntax to create a
-<strong>giottoObject</strong> is shown and osmFISH data is used
-throughout the tutorial.</p>
+<p>In this tutorial, the methodology and syntax to create a <strong>giottoObject</strong> is shown and osmFISH data is used throughout the tutorial.</p>
 <div class="section level3">
 <h3 id="import-giotto-and-download-the-data">Import Giotto and Download the Data<a class="anchor" aria-label="anchor" href="#import-giotto-and-download-the-data"></a>
 </h3>
-<p>To download this data, please ensure that <a href="https://www.gnu.org/software/wget/?" class="external-link">wget</a> is installed
-locally.</p>
+<p>To download this data, please ensure that <a href="https://www.gnu.org/software/wget/?" class="external-link">wget</a> is installed locally.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
 <span></span>
@@ -195,9 +193,7 @@ locally.</p>
 <li>Expression matrix</li>
 <li>Spatial locations (<em>unnecessary for scRNAseq analysis</em>)</li>
 </ul>
-<p>Here, creating a <strong>giottoObject</strong> with the minimum
-requirements is shown in two examples. Data formatting guidelines are
-shown below this code block.</p>
+<p>Here, creating a <strong>giottoObject</strong> with the minimum requirements is shown in two examples. Data formatting guidelines are shown below this code block.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Example 1.</span></span>
 <span><span class="co"># Create a Giotto object using data directly from file paths </span></span>
@@ -216,11 +212,7 @@ shown below this code block.</p>
 <span>                                      spatial_locs <span class="op">=</span> <span class="va">cell_locations</span><span class="op">)</span></span></code></pre></div>
 <details><summary>
 Expression file formatting
-</summary><p><br> Expression count matrices accepted by Giotto should have columns
-correlating to individual cells (<strong>cell IDs</strong>) and rows to
-individual features (<strong>feature IDs</strong>).<br><strong>data.table</strong> objects and text-based files ie:
-(<strong>.csv, .tsv, .txt</strong>) to be read in should have column 1
-be <strong>feature IDs</strong>.</p>
+</summary><p><br> Expression count matrices accepted by Giotto should have columns correlating to individual cells (<strong>cell IDs</strong>) and rows to individual features (<strong>feature IDs</strong>).<br><strong>data.table</strong> objects and text-based files ie: (<strong>.csv, .tsv, .txt</strong>) to be read in should have column 1 be <strong>feature IDs</strong>.</p>
 <table class="table">
 <thead><tr class="header">
 <th></th>
@@ -265,9 +257,7 @@ be <strong>feature IDs</strong>.</p>
 </tr>
 </tbody>
 </table>
-<p><br><strong>matrix</strong> and <strong>DelayedMatrix</strong>
-objects should have <strong>feature IDs</strong> already incorporated as
-the rownames.</p>
+<p><br><strong>matrix</strong> and <strong>DelayedMatrix</strong> objects should have <strong>feature IDs</strong> already incorporated as the rownames.</p>
 <table class="table">
 <thead><tr class="header">
 <th align="left"></th>
@@ -308,9 +298,7 @@ the rownames.</p>
 </tbody>
 </table></details><details><summary>
 Locations file formatting
-</summary><p><br> Numerical columns will be interpreted in order of x, y, and
-(optionally) z coordinate. The first non-numerical column will be taken
-as <strong>cell IDs</strong></p>
+</summary><p><br> Numerical columns will be interpreted in order of x, y, and (optionally) z coordinate. The first non-numerical column will be taken as <strong>cell IDs</strong></p>
 <table class="table">
 <thead><tr class="header">
 <th></th>
@@ -349,8 +337,7 @@ as <strong>cell IDs</strong></p>
 <td></td>
 </tr>
 </tbody>
-</table></details><p><strong>*Note:</strong> multiple expression files during can be given
-at once during Giotto object creation by using a named list.</p>
+</table></details><p><strong>*Note:</strong> multiple expression files during can be given at once during Giotto object creation by using a named list.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Arbitrary modifications</span></span>
 <span><span class="va">scaled_matrix</span> <span class="op">=</span> <span class="va">expression_matrix</span> <span class="op">*</span> <span class="fl">1.2</span></span>
@@ -368,24 +355,17 @@ at once during Giotto object creation by using a named list.</p>
 <div class="section level3">
 <h3 id="customizing-the-giotto-object">Customizing the Giotto Object<a class="anchor" aria-label="anchor" href="#customizing-the-giotto-object"></a>
 </h3>
-<p>By providing values to other <strong>createGiottoObject</strong>
-parameters, it is possible to add:</p>
+<p>By providing values to other <strong>createGiottoObject</strong> parameters, it is possible to add:</p>
 <ul>
-<li><p><strong>Cell</strong> or <strong>feature (gene)
-metadata</strong>: see <a href="../reference/addCellMetadata.html"><strong>addCellMetadata</strong></a>
-and <a href="../reference/addFeatMetadata.html"><strong>addFeatMetadata</strong></a></p></li>
-<li><p><strong>Spatial networks</strong> or <strong>grids</strong>: see
-<a href="./Visualizations.html">Visualizations</a></p></li>
+<li><p><strong>Cell</strong> or <strong>feature (gene) metadata</strong>: see <a href="../reference/addCellMetadata.html"><strong>addCellMetadata</strong></a> and <a href="../reference/addFeatMetadata.html"><strong>addFeatMetadata</strong></a></p></li>
+<li><p><strong>Spatial networks</strong> or <strong>grids</strong>: see <a href="./Visualizations.html">Visualizations</a></p></li>
 <li><p><strong>Dimension reduction</strong>: see <a href="./dimension_reduction.html">Clustering</a></p></li>
 <li><p><strong>Images</strong>: see <a href="./getting_started_images.html">Imaging</a></p></li>
-<li><p><strong>giottoInstructions</strong>: see <a href="../docs/reference/createGiottoInstructions.html"><strong>createGiottoInstructions</strong></a>
-and below</p></li>
+<li><p><strong>giottoInstructions</strong>: see <a href="../docs/reference/createGiottoInstructions.html"><strong>createGiottoInstructions</strong></a> and below</p></li>
 </ul>
-<p>Providing <strong>giottoInstructions</strong> allows the
-specification of:</p>
+<p>Providing <strong>giottoInstructions</strong> allows the specification of:</p>
 <ul>
-<li>An alternative python path if using the Giotto Environment (default)
-is not desired<br>
+<li>An alternative python path if using the Giotto Environment (default) is not desired<br>
 </li>
 <li>A directory to which resulting plots will save</li>
 <li>Plot formatting</li>
@@ -393,20 +373,16 @@ is not desired<br>
 <p>There are four functions to utilize when setting instructions:</p>
 <ul>
 <li>
-<strong>createGiottoInstructions</strong>: creates instructions that
-are provided to <strong>createGiottoObject</strong>
+<strong>createGiottoInstructions</strong>: creates instructions that are provided to <strong>createGiottoObject</strong>
 </li>
 <li>
-<strong>showGiottoInstructions</strong>: displays the instructions
-of a Giotto object<br>
+<strong>showGiottoInstructions</strong>: displays the instructions of a Giotto object<br>
 </li>
 <li>
-<strong>changeGiottoInstructions</strong>: replaces 1 or more of the
-instruction parameters (e.g. plotting format)<br>
+<strong>changeGiottoInstructions</strong>: replaces 1 or more of the instruction parameters (e.g. plotting format)<br>
 </li>
 <li>
-<strong>replaceGiottoInstructions</strong>: replaces all
-instructions with new instructions (e.g after subsetting)</li>
+<strong>replaceGiottoInstructions</strong>: replaces all instructions with new instructions (e.g after subsetting)</li>
 </ul>
 <p>Here is an example of a more customized Giotto object.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -440,24 +416,9 @@ instructions with new instructions (e.g after subsetting)</li>
 <span></span>
 <span><span class="co"># Check which Giotto instructions are associated with your Giotto object</span></span>
 <span><span class="fu"><a href="../reference/showGiottoInstructions.html">showGiottoInstructions</a></span><span class="op">(</span><span class="va">custom_gobject</span><span class="op">)</span></span></code></pre></div>
-<p>Note that although parameters <em>show_plot</em>,
-<em>return_plot</em>, and <em>save_plot</em> were not specified within
-the call to <strong>createGiottoInstructions</strong>, default values
-were provided to these instruction parameters. All instruction
-parameters have default values, such that
-<strong>createGiottoInstructions</strong> may be called with some or no
-arguments yet all instruction parameters will have a value after its
-execution.</p>
-<p>Alternatively, a named list may also be provided to the
-<em>instructions</em> argument of <strong>createGiottoObject</strong>.
-However, ensure that all arguments to <a href="../docs/reference/createGiottoInstructions.html"><strong>createGiottoInstructions</strong></a>
-are defined when providing instructions as a named list, since default
-values are only applied to instructions when made with
-<strong>createGiottoInstructions</strong>. <em>Note that python_path
-must be specified when providing instructions as a named list, and may
-not be provided as NULL.</em></p>
-<p>The <strong>giottoInstructions</strong> may be changed, or completely
-replaced:</p>
+<p>Note that although parameters <em>show_plot</em>, <em>return_plot</em>, and <em>save_plot</em> were not specified within the call to <strong>createGiottoInstructions</strong>, default values were provided to these instruction parameters. All instruction parameters have default values, such that <strong>createGiottoInstructions</strong> may be called with some or no arguments yet all instruction parameters will have a value after its execution.</p>
+<p>Alternatively, a named list may also be provided to the <em>instructions</em> argument of <strong>createGiottoObject</strong>. However, ensure that all arguments to <a href="../docs/reference/createGiottoInstructions.html"><strong>createGiottoInstructions</strong></a> are defined when providing instructions as a named list, since default values are only applied to instructions when made with <strong>createGiottoInstructions</strong>. <em>Note that python_path must be specified when providing instructions as a named list, and may not be provided as NULL.</em></p>
+<p>The <strong>giottoInstructions</strong> may be changed, or completely replaced:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Change a previously set parameter, e.g. change dpi = 200 to dpi = 300</span></span>
 <span><span class="va">custom_gobject</span> <span class="op">=</span> <span class="fu"><a href="../reference/changeGiottoInstructions.html">changeGiottoInstructions</a></span><span class="op">(</span><span class="va">custom_gobject</span>, </span>
@@ -493,30 +454,19 @@ replaced:</p>
 <div class="section level3">
 <h3 id="plotting-data-from-a-giotto-object">Plotting Data from a Giotto Object<a class="anchor" aria-label="anchor" href="#plotting-data-from-a-giotto-object"></a>
 </h3>
-<p>Each plotting function in Giotto has three important binary
-parameters:</p>
+<p>Each plotting function in Giotto has three important binary parameters:</p>
 <ul>
 <li>
-<strong>show_plot</strong>: print the plot to the console, default
-is TRUE<br>
+<strong>show_plot</strong>: print the plot to the console, default is TRUE<br>
 </li>
 <li>
-<strong>return_plot</strong>: return the plot as an object, default
-is TRUE<br>
+<strong>return_plot</strong>: return the plot as an object, default is TRUE<br>
 </li>
 <li>
-<strong>save_plot</strong>: automatically save the plot, default is
-FALSE</li>
+<strong>save_plot</strong>: automatically save the plot, default is FALSE</li>
 </ul>
-<p>These parameters are stored within a <strong>giottoObject</strong>
-that was provided instructions from
-<strong>createGiottoInstructions</strong> and are provided to plotting
-functions accordingly. To change these parameters from the default
-values, the instructions may be changed or replaced, or these parameters
-may be <em>manually overwritten</em> within plotting functions.</p>
-<p>See <a href="../docs/reference/showSaveParameters.html">showSaveParameters</a>
-and the <a href="./getting_started_saving.html">Saving Options</a>
-tutorial for alternative methods to save plots.</p>
+<p>These parameters are stored within a <strong>giottoObject</strong> that was provided instructions from <strong>createGiottoInstructions</strong> and are provided to plotting functions accordingly. To change these parameters from the default values, the instructions may be changed or replaced, or these parameters may be <em>manually overwritten</em> within plotting functions.</p>
+<p>See <a href="../docs/reference/showSaveParameters.html">showSaveParameters</a> and the <a href="./getting_started_saving.html">Saving Options</a> tutorial for alternative methods to save plots.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot according to Giotto Instructions (default)</span></span>
 <span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">custom_gobject</span><span class="op">)</span></span>
@@ -539,33 +489,14 @@ tutorial for alternative methods to save plots.</p>
 <div class="section level2">
 <h2 id="giotto-object-structure">Giotto Object Structure<a class="anchor" aria-label="anchor" href="#giotto-object-structure"></a>
 </h2>
-<p><br> Usage of the Giotto package revolves around the
-<strong>giottoObject</strong>. This is an S4 object class that holds
-spatial expression data and facilitates its manipulation and
-visualization with the Giotto package’s functions. Additional metadata
-and other outputs generated from certain Giotto functions, which may
-used in downstream analyses, are also be stored within the
-<strong>giottoObject</strong>. Its self-contained nature renders a
-convenient representation of the entire spatial experiment and is why
-most Giotto functions take a given <strong>giottoObject</strong> as
-input and return a <strong>giottoObject</strong> as output.</p>
-<p>Data is organized within the <strong>giottoObject</strong> in defined
-<strong>slots</strong> as described in the diagram below.<br><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-01.svg" style="width:100.0%"><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-02.svg" style="width:100.0%"><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-03.svg" style="width:100.0%"></p>
+<p><br> Usage of the Giotto package revolves around the <strong>giottoObject</strong>. This is an S4 object class that holds spatial expression data and facilitates its manipulation and visualization with the Giotto package’s functions. Additional metadata and other outputs generated from certain Giotto functions, which may used in downstream analyses, are also be stored within the <strong>giottoObject</strong>. Its self-contained nature renders a convenient representation of the entire spatial experiment and is why most Giotto functions take a given <strong>giottoObject</strong> as input and return a <strong>giottoObject</strong> as output.</p>
+<p>Data is organized within the <strong>giottoObject</strong> in defined <strong>slots</strong> as described in the diagram below.<br><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-01.svg" style="width:100.0%"><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-02.svg" style="width:100.0%"><br><img src="../inst/images/getting_started_figs/getting_started_gobject/Giotto_suite_object-03.svg" style="width:100.0%"></p>
 </div>
 <div class="section level2">
 <h2 id="nested-organization-of-the-giotto-object">Nested Organization of the Giotto Object<a class="anchor" aria-label="anchor" href="#nested-organization-of-the-giotto-object"></a>
 </h2>
-<p>Spatial data has tiered organization and thus so too does Giotto.
-Tissue regions can be divided down into individual cells and then
-further into organelles. The data structure of Giotto mirrors biological
-structure by nesting data within slots related to spatial data by
-<strong>spat_unit</strong> (spatial unit). Additonally, to facilitate
-the integration of multiple -omic data, slots related to feature data
-will be nested with <strong>feat_type</strong> (feature type).
-<br><br>
-Included below is a description of this nesting and also, for advanced
-users and contributors/developers, accessor functions for the slots are
-also provided. <br></p>
+<p>Spatial data has tiered organization and thus so too does Giotto. Tissue regions can be divided down into individual cells and then further into organelles. The data structure of Giotto mirrors biological structure by nesting data within slots related to spatial data by <strong>spat_unit</strong> (spatial unit). Additonally, to facilitate the integration of multiple -omic data, slots related to feature data will be nested with <strong>feat_type</strong> (feature type). <br><br>
+Included below is a description of this nesting and also, for advanced users and contributors/developers, accessor functions for the slots are also provided. <br></p>
 <div class="section level4">
 <h4 id="slots-and-subnesting">Slots and Subnesting<a class="anchor" aria-label="anchor" href="#slots-and-subnesting"></a>
 </h4>
