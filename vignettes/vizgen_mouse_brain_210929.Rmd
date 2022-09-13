@@ -383,6 +383,7 @@ spatPlot2D(gobject = vizgen_subset,
 
 ![](../inst/images/vizgen_mouse_brain//12-spatPlot2D.png){width="50%"}
 
+These steps may require a strong computer.  
 Giotto can also work with the polygon annotations provided by Vizgen. Since we are working with a subset of the data, it is only necessary to read the polygons that are present in the current FOV(s).
 
 ```{r, eval=FALSE}
@@ -443,10 +444,5 @@ spatInSituPlotPoints(vizgen_subset,
 
 ![](../inst/images/vizgen_mouse_brain//12-spatInSituPlotPoints.png){width="50%"}
 
-<details>
-<summary>Session Info</summary>
-```{r}
-sessionInfo()
-```
-</details>  
+
 

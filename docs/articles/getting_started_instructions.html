@@ -160,47 +160,25 @@
 <div class="section level2">
 <h2 id="how-to-visualize-and-save-plots-in-giotto">How to visualize and save plots in Giotto?<a class="anchor" aria-label="anchor" href="#how-to-visualize-and-save-plots-in-giotto"></a>
 </h2>
-<p>Each Giotto function that creates a plot has 3 important
-parameters:<br>
-- <strong>show_plot</strong>: to print the plot to the console, default
-is TRUE<br>
-- <strong>return_plot</strong>: to return the plot as an object, default
-is TRUE<br>
-- <strong>save_plot</strong>: to automatically save the plot, default is
-FALSE</p>
-<p>These default parameters are automatically stored within the Giotto
-object by <strong>createGiottoObject</strong> and are then provided to
-plotting functions. To change these parameters, among others, use
-<strong>createGiottoInstructions</strong> to specify the changes, then
-supply the returned list to the “instructions” argument within
-<strong>createGiottoObject</strong>. Alternatively, a named list can be
-provided to the “instructions” argument of
-<strong>createGiottoObject</strong> to specify parameters.</p>
-<p>Besides the three aforementioned plotting parameters,
-<strong>createGiottoInstructions</strong> allows the specification of
-many general Giotto parameters: a preferred python path, a directory to
-which plots and images will be saved, plot size, plot format, etc.</p>
+<p>Each Giotto function that creates a plot has 3 important parameters:<br>
+- <strong>show_plot</strong>: to print the plot to the console, default is TRUE<br>
+- <strong>return_plot</strong>: to return the plot as an object, default is TRUE<br>
+- <strong>save_plot</strong>: to automatically save the plot, default is FALSE</p>
+<p>These default parameters are automatically stored within the Giotto object by <strong>createGiottoObject</strong> and are then provided to plotting functions. To change these parameters, among others, use <strong>createGiottoInstructions</strong> to specify the changes, then supply the returned list to the “instructions” argument within <strong>createGiottoObject</strong>. Alternatively, a named list can be provided to the “instructions” argument of <strong>createGiottoObject</strong> to specify parameters.</p>
+<p>Besides the three aforementioned plotting parameters, <strong>createGiottoInstructions</strong> allows the specification of many general Giotto parameters: a preferred python path, a directory to which plots and images will be saved, plot size, plot format, etc.</p>
 <p>There are four functions to utilize when setting instructions:<br>
-- <strong>createGiottoInstructions</strong>: creates instructions that
-can be provided to createGiottoObject<br>
-- <strong>showGiottoInstructions</strong>: displays the instructions of
-a Giotto object<br>
-- <strong>changeGiottoInstructions</strong>: replaces 1 or more of the
-instruction parameters (e.g. plotting format)<br>
-- <strong>replaceGiottoInstructions</strong>: replaces all instructions
-with new instructions (e.g after subsetting)</p>
-<p>Additionally, plot parameters can always be <em>manually
-overwritten</em> within the plotting function itself.</p>
+- <strong>createGiottoInstructions</strong>: creates instructions that can be provided to createGiottoObject<br>
+- <strong>showGiottoInstructions</strong>: displays the instructions of a Giotto object<br>
+- <strong>changeGiottoInstructions</strong>: replaces 1 or more of the instruction parameters (e.g. plotting format)<br>
+- <strong>replaceGiottoInstructions</strong>: replaces all instructions with new instructions (e.g after subsetting)</p>
+<p>Additionally, plot parameters can always be <em>manually overwritten</em> within the plotting function itself.</p>
 <p>Here, we use osmFISH data as an example:</p>
 <div class="section level3">
 <h3 id="create-giotto-instructions-and-giotto-object">1. Create Giotto instructions and Giotto object<a class="anchor" aria-label="anchor" href="#create-giotto-instructions-and-giotto-object"></a>
 </h3>
-<p>Here, we: - Set show_plot = FALSE to override automatically showing
-plots - Keep return_plot = TRUE to store plots and modify them if
-necessary<br>
+<p>Here, we: - Set show_plot = FALSE to override automatically showing plots - Keep return_plot = TRUE to store plots and modify them if necessary<br>
 - Set save_plot = TRUE to automatically save each plot</p>
-<p>We also specify some other plotting parameters for the automatic
-saving functionality.</p>
+<p>We also specify some other plotting parameters for the automatic saving functionality.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
 <span></span>
@@ -233,12 +211,8 @@ saving functionality.</p>
 <div class="section level3">
 <h3 id="create-giotto-object">2.Create Giotto object<a class="anchor" aria-label="anchor" href="#create-giotto-object"></a>
 </h3>
-<p>To download the data used to create the Giotto Object below, please
-ensure that <a href="https://www.gnu.org/software/wget/?" class="external-link">wget</a> is
-installed locally. To create the Giotto Object, here we: - Provide an
-expression matrix<br>
-- Provide the cell locations - Provide the previously generated
-instructions file (or an appropriately named list)</p>
+<p>To download the data used to create the Giotto Object below, please ensure that <a href="https://www.gnu.org/software/wget/?" class="external-link">wget</a> is installed locally. To create the Giotto Object, here we: - Provide an expression matrix<br>
+- Provide the cell locations - Provide the previously generated instructions file (or an appropriately named list)</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## PREPARE osmFISH DATA ####</span></span>
 <span></span>
@@ -280,15 +254,10 @@ instructions file (or an appropriately named list)</p>
 <div class="section level3">
 <h3 id="different-ways-to-save-a-plot">4. Different ways to save a plot<a class="anchor" aria-label="anchor" href="#different-ways-to-save-a-plot"></a>
 </h3>
-<p>Here we will show a couple of methods to save plots. Check out
-<strong>all_plots_save_function</strong> to access all potential
-arguments for save_param. The following examples illustrate:</p>
+<p>Here we will show a couple of methods to save plots. Check out <strong>all_plots_save_function</strong> to access all potential arguments for save_param. The following examples illustrate:</p>
 <ol style="list-style-type: decimal">
-<li>Saving according to the Giotto instructions (default), if save_plot
-= TRUE (2 &amp; 3) Changing default parameters by providing a named list
-to the save_param parameter</li>
-<li>Blocking automatic saving, but modifying and then saving the
-returned ggplot object</li>
+<li>Saving according to the Giotto instructions (default), if save_plot = TRUE (2 &amp; 3) Changing default parameters by providing a named list to the save_param parameter</li>
+<li>Blocking automatic saving, but modifying and then saving the returned ggplot object</li>
 </ol>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1.Create a plot according to your instructions from the Giotto object (default)</span></span>
