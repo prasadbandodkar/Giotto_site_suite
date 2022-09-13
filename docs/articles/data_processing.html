@@ -157,9 +157,19 @@
 
     
     
-<p>After creating the Giotto object, it must be prepared for downstream analysis. This tutorial walks through filtering, normalizing, adjusting for batch effects, adding statistics and metadata to a Giotto object, as well as high efficiency options for data processing.</p>
-<p>This tutorial uses a SeqFISH+ dataset of a murine cortex and subventrical zone. A complete walkthrough of that dataset can be found <a href="./SeqFISH_cortex_210923.html"><strong>here</strong></a>. To download the data used to create the Giotto Object below, please ensure that <a href="https://www.gnu.org/software/wget/?" class="external-link">wget</a> is installed locally.</p>
-<p>This dataset contains multiple field of views; here, we illustrate a workflow to bring the FOVs together for holistic analysis, and then subset the Giotto Object to analyze the cortex.</p>
+<p>After creating the Giotto object, it must be prepared for downstream
+analysis. This tutorial walks through filtering, normalizing, adjusting
+for batch effects, adding statistics and metadata to a Giotto object, as
+well as high efficiency options for data processing.</p>
+<p>This tutorial uses a SeqFISH+ dataset of a murine cortex and
+subventrical zone. A complete walkthrough of that dataset can be found
+<a href="./SeqFISH_cortex_210923.html"><strong>here</strong></a>. To
+download the data used to create the Giotto Object below, please ensure
+that <a href="https://www.gnu.org/software/wget/?" class="external-link">wget</a> is installed
+locally.</p>
+<p>This dataset contains multiple field of views; here, we illustrate a
+workflow to bring the FOVs together for holistic analysis, and then
+subset the Giotto Object to analyze the cortex.</p>
 <div class="section level2">
 <h2 id="create-the-giotto-object">Create the Giotto Object<a class="anchor" aria-label="anchor" href="#create-the-giotto-object"></a>
 </h2>
@@ -241,32 +251,47 @@
 <span><span class="va">cell_metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span></span>
 <span><span class="va">cortex_cell_ids</span> <span class="op">=</span> <span class="va">cell_metadata</span><span class="op">[</span><span class="va">FOV</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span></span>
 <span><span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">testobj</span>, cell_ids <span class="op">=</span> <span class="va">cortex_cell_ids</span><span class="op">)</span></span></code></pre></div>
-<p>Since <strong>subsetGiotto</strong> returns a Giotto object, multiple different objects may be created to store subsets. For the purposes of this tutorial, only the cortex FOVs will be considered, which is why the original Giotto Object has been overwritten upon calling <strong>subsetGiotto</strong>.</p>
+<p>Since <strong>subsetGiotto</strong> returns a Giotto object, multiple
+different objects may be created to store subsets. For the purposes of
+this tutorial, only the cortex FOVs will be considered, which is why the
+original Giotto Object has been overwritten upon calling
+<strong>subsetGiotto</strong>.</p>
 </div>
 <div class="section level2">
 <h2 id="filter-the-giotto-object">Filter the Giotto Object<a class="anchor" aria-label="anchor" href="#filter-the-giotto-object"></a>
 </h2>
 <p>The Giotto object may be filtered based on:</p>
 <ul>
-<li><p><strong>expression_thresholds</strong> sets a minimum threshold expression level</p></li>
-<li><p><strong>feat_det_in_min_cells</strong> sets a threshold of the number of cells that must include a feature in order to keep that feature in the dataset</p></li>
-<li><p><strong>min_det_feats_per_cell</strong> sets a threshold of the number of features expressed by a cell in order to keep that cell in the dataset</p></li>
+<li><p><strong>expression_thresholds</strong> sets a minimum threshold
+expression level</p></li>
+<li><p><strong>feat_det_in_min_cells</strong> sets a threshold of the
+number of cells that must include a feature in order to keep that
+feature in the dataset</p></li>
+<li><p><strong>min_det_feats_per_cell</strong> sets a threshold of the
+number of features expressed by a cell in order to keep that cell in the
+dataset</p></li>
 </ul>
-<p>The distribution of feature expression can inform stringency of filter parameters, and can be displayed for both cells and features by calling <strong>filterDistributions</strong> and specifying the ‘detection’ parameter accordingly:</p>
+<p>The distribution of feature expression can inform stringency of
+filter parameters, and can be displayed for both cells and features by
+calling <strong>filterDistributions</strong> and specifying the
+‘detection’ parameter accordingly:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/filterDistributions.html">filterDistributions</a></span><span class="op">(</span><span class="va">testobj</span>, detection <span class="op">=</span> <span class="st">'cells'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/getting_started_figs/data_processing/0-filterDistributions_cells.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span> <span class="fu"><a href="../reference/filterDistributions.html">filterDistributions</a></span><span class="op">(</span><span class="va">testobj</span>, detection <span class="op">=</span> <span class="st">'feats'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/getting_started_figs/data_processing/1-filterDistributions_feats.png" style="width:50.0%"></p>
-<p><strong>filterCombinations</strong> may be used to test how different filtering parameters will affect the number of cells and features in the filtered data:</p>
+<p><strong>filterCombinations</strong> may be used to test how different
+filtering parameters will affect the number of cells and features in the
+filtered data:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/filterCombinations.html">filterCombinations</a></span><span class="op">(</span><span class="va">testobj</span>,</span>
 <span>                   expression_thresholds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>                   feat_det_in_min_cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">200</span><span class="op">)</span>,</span>
 <span>                   min_det_feats_per_cell <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">25</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/getting_started_figs/data_processing/2-filterCombinations.png" style="width:50.0%"></p>
-<p>When a consensus on appropriate filtering parameters has been reached, provide the arguments to <strong>filterGiotto</strong>.</p>
+<p>When a consensus on appropriate filtering parameters has been
+reached, provide the arguments to <strong>filterGiotto</strong>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filterGiotto.html">filterGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>,</span>
 <span>                        expression_threshold <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -277,7 +302,9 @@
 <h2 id="normalize-raw-counts-data">Normalize Raw Counts Data<a class="anchor" aria-label="anchor" href="#normalize-raw-counts-data"></a>
 </h2>
 <p>There are three methods of normalization supported by Giotto.</p>
-<p>The ‘standard’ method (default) normalizes the data by total library size and a custom scale factor, then log transforms and z-scores the data by cells or genes, specified by scale_order.</p>
+<p>The ‘standard’ method (default) normalizes the data by total library
+size and a custom scale factor, then log transforms and z-scores the
+data by cells or genes, specified by scale_order.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># normalize to scale expression values of the Giotto object using the standard method, z-scoring feats over cells</span></span>
 <span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
@@ -286,7 +313,11 @@
 <span>                           scalefactor <span class="op">=</span> <span class="fl">6000</span>,</span>
 <span>                           scale_order <span class="op">=</span> <span class="st">'first_feats'</span>, <span class="co"># Default, alternatively 'first_cells'</span></span>
 <span>                           verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
-<p>The ‘pearson_resid’ method uses the Lause/Kobak et al. method. Fist, expected values are calculated based on Pearson correlations. Next, z-scores are calculated based on observed and expected values. <em>Note that normalizing with this method will save the data within the “scaled” expression slot, NOT the “normalized” slot.</em></p>
+<p>The ‘pearson_resid’ method uses the Lause/Kobak et al. method. Fist,
+expected values are calculated based on Pearson correlations. Next,
+z-scores are calculated based on observed and expected values. <em>Note
+that normalizing with this method will save the data within the “scaled”
+expression slot, NOT the “normalized” slot.</em></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># normalize to scale expression values of the Giotto object using the pearson residual method </span></span>
 <span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
@@ -294,25 +325,42 @@
 <span>                           scale_feats <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                           scalefactor <span class="op">=</span> <span class="fl">6000</span>, </span>
 <span>                           verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
-<p>The ‘osmFISH’ method is intended for in-situ RNA data and uses the normalization method described by <a href="https://www.nature.com/articles/s41592-018-0175-z.pdf?proof=t" class="external-link">Codeluppi et al.</a> Feature (gene) counts are individually normalized by the total feature count, and then are multiplied by the total number of features. Then, cells are individually normalized by dividing the normalized feature counts by the total feature counts per cell, and then are scaled by the total number of cells.</p>
-<p>Since the data in this tutorial is not in-situ RNA data, we will not show this method here. It may be utilized by specifying the norm_methods argument as ‘osmFISH’.</p>
+<p>The ‘osmFISH’ method is intended for in-situ RNA data and uses the
+normalization method described by <a href="https://www.nature.com/articles/s41592-018-0175-z.pdf?proof=t" class="external-link">Codeluppi
+et al.</a> Feature (gene) counts are individually normalized by the
+total feature count, and then are multiplied by the total number of
+features. Then, cells are individually normalized by dividing the
+normalized feature counts by the total feature counts per cell, and then
+are scaled by the total number of cells.</p>
+<p>Since the data in this tutorial is not in-situ RNA data, we will not
+show this method here. It may be utilized by specifying the norm_methods
+argument as ‘osmFISH’.</p>
 </div>
 <div class="section level2">
 <h2 id="add-statistics-and-metadata-to-the-giotto-object">Add Statistics and Metadata to the Giotto Object<a class="anchor" aria-label="anchor" href="#add-statistics-and-metadata-to-the-giotto-object"></a>
 </h2>
-<p>The function <strong>addStatistics</strong> will add the following statistics to cell metadata:</p>
+<p>The function <strong>addStatistics</strong> will add the following
+statistics to cell metadata:</p>
 <ul>
-<li><p><strong>nr_feats</strong>: Denotes how many features are detected per cell</p></li>
-<li><p><strong>perc_feats</strong>: Denotes the percentage of features detected per cell</p></li>
-<li><p><strong>total_expr</strong>: Shows the total sum of feature expression per cell</p></li>
+<li><p><strong>nr_feats</strong>: Denotes how many features are detected
+per cell</p></li>
+<li><p><strong>perc_feats</strong>: Denotes the percentage of features
+detected per cell</p></li>
+<li><p><strong>total_expr</strong>: Shows the total sum of feature
+expression per cell</p></li>
 </ul>
 <p>It will also add the following statistics to feature metadata:</p>
 <ul>
-<li><p><strong>nr_cells</strong>: Denotes how many cells in which the feature is detected</p></li>
-<li><p><strong>per_cells</strong>: Denotes the percentage of cells in which the feature is detected</p></li>
-<li><p><strong>total_expr</strong>: Shows the total sum of feature expression in all cells</p></li>
-<li><p><strong>mean_expr</strong>: Average feature expression in all cells</p></li>
-<li><p><strong>mean_expr_det</strong>: Average feature expression in cells with detectable levels of the feature</p></li>
+<li><p><strong>nr_cells</strong>: Denotes how many cells in which the
+feature is detected</p></li>
+<li><p><strong>per_cells</strong>: Denotes the percentage of cells in
+which the feature is detected</p></li>
+<li><p><strong>total_expr</strong>: Shows the total sum of feature
+expression in all cells</p></li>
+<li><p><strong>mean_expr</strong>: Average feature expression in all
+cells</p></li>
+<li><p><strong>mean_expr_det</strong>: Average feature expression in
+cells with detectable levels of the feature</p></li>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Add gene &amp; cell statistics to the Giotto object using the data normalized with the standard method</span></span>
@@ -321,7 +369,9 @@
 <span><span class="co"># Accessors:</span></span>
 <span><span class="va">cell_metadata_cortex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span></span>
 <span><span class="va">feature_metadata_cortex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fDataDT.html">fDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span></span></code></pre></div>
-<p><strong>addFeatsPerc</strong> can be used to detect the percentage of features in each cell within a given gene family (ie. mitochondrial genes, ribosomal genes)</p>
+<p><strong>addFeatsPerc</strong> can be used to detect the percentage of
+features in each cell within a given gene family (ie. mitochondrial
+genes, ribosomal genes)</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Calculate the percentage of BMP genes per cell</span></span>
 <span><span class="va">bmp_genes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">'Bmp'</span>, x <span class="op">=</span> <span class="va">feature_metadata_cortex</span><span class="op">$</span><span class="va">feat_ID</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -333,7 +383,8 @@
 <div class="section level2">
 <h2 id="adjust-expression-matrix">Adjust Expression Matrix<a class="anchor" aria-label="anchor" href="#adjust-expression-matrix"></a>
 </h2>
-<p>Adjust expression matrix for known batch effects or technological covariates</p>
+<p>Adjust expression matrix for known batch effects or technological
+covariates</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Since there are no known batch effects, the number of features detected per cell</span></span>
 <span><span class="co"># will be regressed out so that covariates will not effect further analyses.</span></span>
@@ -345,8 +396,13 @@
 <div class="section level2">
 <h2 id="high-efficiency-data-processing">High Efficiency Data Processing<a class="anchor" aria-label="anchor" href="#high-efficiency-data-processing"></a>
 </h2>
-<p><strong>processGiotto</strong> completes the filtering, normalization, statistical, and adjustment steps of data processing in one single step; this is ideal for faster processing.</p>
-<p>Since adjustment is not necessary for every dataset, <em>adjust_params</em> may be set to NULL to skip this processing step. All other arguments are user-determined; default arguments will apply to all steps if no arguments are provided.</p>
+<p><strong>processGiotto</strong> completes the filtering,
+normalization, statistical, and adjustment steps of data processing in
+one single step; this is ideal for faster processing.</p>
+<p>Since adjustment is not necessary for every dataset,
+<em>adjust_params</em> may be set to NULL to skip this processing step.
+All other arguments are user-determined; default arguments will apply to
+all steps if no arguments are provided.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/processGiotto.html">processGiotto</a></span><span class="op">(</span><span class="va">testobj</span>,</span>
 <span>                         filter_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_threshold <span class="op">=</span> <span class="fl">1</span>,</span>

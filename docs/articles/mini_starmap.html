@@ -162,10 +162,13 @@
 <div class="section level3">
 <h3 id="install-python-modules">Install Python modules<a class="anchor" aria-label="anchor" href="#install-python-modules"></a>
 </h3>
-<p>To run this vignette you need to install all the necessary Python modules.</p>
+<p>To run this vignette you need to install all the necessary Python
+modules.</p>
 <ol style="list-style-type: decimal">
 <li><p>This can be done manually, see <a href="https://rubd.github.io/Giotto_site/articles/installation_issues.html#python-manual-installation" class="external-link uri">https://rubd.github.io/Giotto_site/articles/installation_issues.html#python-manual-installation</a></p></li>
-<li><p>This can be done within R using our installation tools (installGiottoEnvironment), see <a href="https://rubd.github.io/Giotto_site/articles/tut0_giotto_environment.html" class="external-link uri">https://rubd.github.io/Giotto_site/articles/tut0_giotto_environment.html</a> for more information.</p></li>
+<li><p>This can be done within R using our installation tools
+(installGiottoEnvironment), see <a href="https://rubd.github.io/Giotto_site/articles/tut0_giotto_environment.html" class="external-link uri">https://rubd.github.io/Giotto_site/articles/tut0_giotto_environment.html</a>
+for more information.</p></li>
 </ol>
 </div>
 <div class="section level3">
@@ -191,12 +194,18 @@
 <span><span class="va">starmap_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>raw_exprs <span class="op">=</span> <span class="va">expr_path</span>,</span>
 <span>                                   spatial_locs <span class="op">=</span> <span class="va">loc_path</span>,</span>
 <span>                                   instructions <span class="op">=</span> <span class="va">myinstructions</span><span class="op">)</span></span></code></pre></div>
-<p>How to work with Giotto instructions that are part of your Giotto object:<br>
-- show the instructions associated with your Giotto object with <strong>showGiottoInstructions</strong><br>
-- change one or more instructions with <strong>changeGiottoInstructions</strong><br>
-- replace all instructions at once with <strong>replaceGiottoInstructions</strong><br>
-- read or get a specific giotto instruction with <strong>readGiottoInstructions</strong><br>
-Of note, the python path can only be set once in an R session. See the reticulate package for more information.</p>
+<p>How to work with Giotto instructions that are part of your Giotto
+object:<br>
+- show the instructions associated with your Giotto object with
+<strong>showGiottoInstructions</strong><br>
+- change one or more instructions with
+<strong>changeGiottoInstructions</strong><br>
+- replace all instructions at once with
+<strong>replaceGiottoInstructions</strong><br>
+- read or get a specific giotto instruction with
+<strong>readGiottoInstructions</strong><br>
+Of note, the python path can only be set once in an R session. See the
+reticulate package for more information.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># show instructions associated with giotto object (starmap_mini)</span></span>
 <span><span class="fu"><a href="../reference/showGiottoInstructions.html">showGiottoInstructions</a></span><span class="op">(</span><span class="va">starmap_mini</span><span class="op">)</span></span></code></pre></div>
@@ -207,10 +216,13 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <ul>
 <li>filter genes and cells based on detection frequencies<br>
 </li>
-<li>normalize expression matrix (log transformation, scaling factor and/or z-scores)</li>
+<li>normalize expression matrix (log transformation, scaling factor
+and/or z-scores)</li>
 <li>add cell and gene statistics (optional)<br>
 </li>
-<li>adjust expression matrix for technical covariates or batches (optional). These results will be stored in the <em>custom</em> slot.</li>
+<li>adjust expression matrix for technical covariates or batches
+(optional). These results will be stored in the <em>custom</em>
+slot.</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/filterDistributions.html">filterDistributions</a></span><span class="op">(</span><span class="va">starmap_mini</span>, detection <span class="op">=</span> <span class="st">'genes'</span><span class="op">)</span></span>
@@ -233,7 +245,8 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <h2 id="dimension-reduction">3. dimension reduction<a class="anchor" aria-label="anchor" href="#dimension-reduction"></a>
 </h2>
 <ul>
-<li>identify highly variable genes (HVG) will not be performed here, because there are only few genes<br>
+<li>identify highly variable genes (HVG) will not be performed here,
+because there are only few genes<br>
 </li>
 <li>perform PCA<br>
 </li>
@@ -262,9 +275,11 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <h2 id="clustering">4. clustering<a class="anchor" aria-label="anchor" href="#clustering"></a>
 </h2>
 <ul>
-<li>create a shared (default) nearest network in PCA space (or directly on matrix)<br>
+<li>create a shared (default) nearest network in PCA space (or directly
+on matrix)<br>
 </li>
-<li>cluster on nearest network with Leiden or Louvan (kmeans and hclust are alternatives)</li>
+<li>cluster on nearest network with Leiden or Louvan (kmeans and hclust
+are alternatives)</li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">starmap_mini</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createNearestNetwork.html">createNearestNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">starmap_mini</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, k <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></span>
@@ -360,7 +375,8 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <div class="section level2">
 <h2 id="spatial-network">8. spatial network<a class="anchor" aria-label="anchor" href="#spatial-network"></a>
 </h2>
-<p>Only the <em>method = delaunayn_geometry</em> can make 3D Delaunay networks. This requires the package geometry to be installed.</p>
+<p>Only the <em>method = delaunayn_geometry</em> can make 3D Delaunay
+networks. This requires the package geometry to be installed.</p>
 <ul>
 <li>visualize information about the default Delaunay network<br>
 </li>
@@ -423,7 +439,8 @@ Of note, the python path can only be set once in an R session. See the reticulat
 <div class="section level2">
 <h2 id="spatial-co-expression-patterns">10. spatial co-expression patterns<a class="anchor" aria-label="anchor" href="#spatial-co-expression-patterns"></a>
 </h2>
-<p>Identify robust spatial co-expression patterns using the spatial network or grid and a subset of individual spatial genes.<br>
+<p>Identify robust spatial co-expression patterns using the spatial
+network or grid and a subset of individual spatial genes.<br>
 1. calculate spatial correlation scores<br>
 2. cluster correlation scores</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
