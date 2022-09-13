@@ -160,49 +160,34 @@
 <div class="section level2">
 <h2 id="how-to-contribute">How to contribute<a class="anchor" aria-label="anchor" href="#how-to-contribute"></a>
 </h2>
-<p>We welcome contributions or suggestions from other developers and
-here we provide a number of rules, suggestions and tips to help you
-contribute to Giotto in a sustainable manner. Please contact us if you
-have questions or would like to discuss an addition or major
-modifications to the Giotto main code.</p>
+<p>We welcome contributions or suggestions from other developers and here we provide a number of rules, suggestions and tips to help you contribute to Giotto in a sustainable manner. Please contact us if you have questions or would like to discuss an addition or major modifications to the Giotto main code.</p>
 <p><span class="math inline">\(~\)</span></p>
 <div class="section level3">
 <h3 id="coding-style">Coding Style<a class="anchor" aria-label="anchor" href="#coding-style"></a>
 </h3>
-<p>Following a particular programming style will help programmers read
-and understand source code conforming to the style, and help to avoid
-introducing errors. Here we present a small list of guidelines on what
-is considered a good practice when writing R codes in Giotto package.
-Most of them are adapted from <a href="https://bioconductor.org/developers/how-to/coding-style/" class="external-link">Bioconductor
-- coding style</a> or <a href="https://google.github.io/styleguide/Rguide.xml" class="external-link">Google’s R Style
-Guide</a>. These guidelines are preferences and strongly encouraged!</p>
+<p>Following a particular programming style will help programmers read and understand source code conforming to the style, and help to avoid introducing errors. Here we present a small list of guidelines on what is considered a good practice when writing R codes in Giotto package. Most of them are adapted from <a href="https://bioconductor.org/developers/how-to/coding-style/" class="external-link">Bioconductor - coding style</a> or <a href="https://google.github.io/styleguide/Rguide.xml" class="external-link">Google’s R Style Guide</a>. These guidelines are preferences and strongly encouraged!</p>
 <ul>
 <li>
 <strong>Indentation</strong>
 <ul>
 <li>Use 4 spaces for indenting. No tabs.</li>
-<li>Preferably no lines longer than 80 characters. This includes
-function documentations, examples, and vignette code chunks.</li>
+<li>Preferably no lines longer than 80 characters. This includes function documentations, examples, and vignette code chunks.</li>
 </ul>
 </li>
 <li>
 <strong>Function names</strong>
 <ul>
 <li>Use camelCase.</li>
-<li>Do not use “.” (in the S3 class system, some(x) where x is class A
-will dispatch to some.A).</li>
-<li>Use underscores for non-exported functions, like
-‘non_exported_function’.</li>
+<li>Do not use “.” (in the S3 class system, some(x) where x is class A will dispatch to some.A).</li>
+<li>Use underscores for non-exported functions, like ‘non_exported_function’.</li>
 </ul>
 </li>
 <li>
 <strong>Use of space</strong>
 <ul>
-<li>Do not place a space before a comma, but always place one after a
-comma. This: a, b, c.<br>
+<li>Do not place a space before a comma, but always place one after a comma. This: a, b, c.<br>
 </li>
-<li>Always use space around “=” when using named arguments to functions.
-This: somefunc(a = 1, b = 2).</li>
+<li>Always use space around “=” when using named arguments to functions. This: somefunc(a = 1, b = 2).</li>
 </ul>
 </li>
 <li>
@@ -217,11 +202,7 @@ This: somefunc(a = 1, b = 2).</li>
 <div class="section level3">
 <h3 id="stat-functions">Stat functions<a class="anchor" aria-label="anchor" href="#stat-functions"></a>
 </h3>
-<p>Most Giotto commands can accept several matrix classes
-(DelayedMatrix, SparseM, Matrix or base matrix). To facilitate this we
-provide <strong>flexible</strong> wrappers that work on any type of
-matrix class. They can be found in the <a href="https://github.com/RubD/Giotto/blob/suite/R/utilities.R" class="external-link">utilities.R</a>
-file.</p>
+<p>Most Giotto commands can accept several matrix classes (DelayedMatrix, SparseM, Matrix or base matrix). To facilitate this we provide <strong>flexible</strong> wrappers that work on any type of matrix class. They can be found in the <a href="https://github.com/RubD/Giotto/blob/suite/R/utilities.R" class="external-link">utilities.R</a> file.</p>
 <ul>
 <li>
 <strong>mean_flex</strong>: analogous to mean()<br>
@@ -249,96 +230,60 @@ file.</p>
 <div class="section level3">
 <h3 id="auxiliary-functions">Auxiliary functions<a class="anchor" aria-label="anchor" href="#auxiliary-functions"></a>
 </h3>
-<p>Giotto has a number of auxiliary or convenience functions that might
-help you to adapt your code or write new code for Giotto. We encourage
-you to use these small functions to maintain uniformity throughout the
-code.</p>
+<p>Giotto has a number of auxiliary or convenience functions that might help you to adapt your code or write new code for Giotto. We encourage you to use these small functions to maintain uniformity throughout the code.</p>
 <ul>
 <li>
-<strong>lapply_flex</strong>: analogous to lapply() and works for
-both windows and unix systems<br>
+<strong>lapply_flex</strong>: analogous to lapply() and works for both windows and unix systems<br>
 </li>
 <li>
-<strong>all_plots_save_function</strong>: compatible with Giotto
-instructions and helps to automatically save generated plots<br>
+<strong>all_plots_save_function</strong>: compatible with Giotto instructions and helps to automatically save generated plots<br>
 </li>
 <li>
-<strong>determine_cores</strong>: to determine the number of cores
-to use if a user does not set this explicitly<br>
+<strong>determine_cores</strong>: to determine the number of cores to use if a user does not set this explicitly<br>
 </li>
 <li>
 <strong>get_os</strong>: to identify the operating system<br>
 </li>
 <li>
-<strong>update_giotto_params</strong>: will catch and store the
-parameters for each used command on a giotto object</li>
+<strong>update_giotto_params</strong>: will catch and store the parameters for each used command on a giotto object</li>
 <li>
-<strong>package_check</strong>: to check if a package exists, works
-for packages on CRAN, Bioconductor and Github.</li>
+<strong>package_check</strong>: to check if a package exists, works for packages on CRAN, Bioconductor and Github.</li>
 </ul>
-<p>The last function should be used within your contribution code. It
-has the additional benefit that it will suggest the user how to download
-the package if it is not available. To keep the size of Giotto within
-limits we prefer not to add too many new dependencies.</p>
+<p>The last function should be used within your contribution code. It has the additional benefit that it will suggest the user how to download the package if it is not available. To keep the size of Giotto within limits we prefer not to add too many new dependencies.</p>
 <p><span class="math inline">\(~\)</span></p>
 </div>
 <div class="section level3">
 <h3 id="getters-and-setters">Getters and Setters<a class="anchor" aria-label="anchor" href="#getters-and-setters"></a>
 </h3>
-<p>Giotto stores information in different <a href="getting_started_gobject.html#giotto-object-structure">slots</a>,
-which can be accessed through these getters and setters functions. They
-can be found in the <a href="https://github.com/RubD/Giotto/blob/suite/R/accessors.R" class="external-link">accessors.R</a>
-file.</p>
+<p>Giotto stores information in different <a href="getting_started_gobject.html#giotto-object-structure">slots</a>, which can be accessed through these getters and setters functions. They can be found in the <a href="https://github.com/RubD/Giotto/blob/suite/R/accessors.R" class="external-link">accessors.R</a> file.</p>
 <ul>
-<li><p><strong>get_expression_values</strong>: To select the expression
-matrix to use</p></li>
-<li><p><strong>set_expression_values</strong>: Sets a new expression
-matrix to the expression slot</p></li>
-<li><p><strong>get_spatial_locations</strong>: Get spatial locations to
-use</p></li>
-<li><p><strong>set_spatial_locations</strong>: Sets new spatial
-locations</p></li>
-<li><p><strong>get_dimReduction</strong>: To select the dimension
-reduction values to use<br></p></li>
-<li><p><strong>set_dimReduction</strong>: Sets new dimension reduction
-object</p></li>
-<li><p><strong>get_NearestNetwork</strong>: To select the nearest
-neighbor network (kNN or sNN) to use<br></p></li>
-<li><p><strong>set_NearestNetwork</strong>: Sets a new nearest neighbor
-network (kNN or sNN)</p></li>
-<li><p><strong>get_spatialNetwork</strong>: To select the spatial
-network to use<br></p></li>
-<li><p><strong>set_spatialNetwork</strong>: Sets a new spatial
-network</p></li>
-<li><p><strong>get_spatialGrid</strong>: To select the spatial grid to
-use</p></li>
-<li><p><strong>set_spatialGrid</strong>: Sets a new spatial
-grid</p></li>
-<li><p><strong>get_polygon_info</strong>: Gets spatial polygon
-information</p></li>
-<li><p><strong>set_polygon_info</strong>: Set new spatial polygon
-information</p></li>
-<li><p><strong>get_feature_info</strong>: Gets spatial feature
-information</p></li>
-<li><p><strong>set_feature_info</strong>: Sets new spatial feature
-information</p></li>
-<li><p><strong>get_spatial_enrichment</strong>: Gets spatial enrichment
-information</p></li>
-<li><p><strong>set_spatial_enrichment</strong>: Sets new spatial
-enrichment information</p></li>
+<li><p><strong>get_expression_values</strong>: To select the expression matrix to use</p></li>
+<li><p><strong>set_expression_values</strong>: Sets a new expression matrix to the expression slot</p></li>
+<li><p><strong>get_spatial_locations</strong>: Get spatial locations to use</p></li>
+<li><p><strong>set_spatial_locations</strong>: Sets new spatial locations</p></li>
+<li><p><strong>get_dimReduction</strong>: To select the dimension reduction values to use<br></p></li>
+<li><p><strong>set_dimReduction</strong>: Sets new dimension reduction object</p></li>
+<li><p><strong>get_NearestNetwork</strong>: To select the nearest neighbor network (kNN or sNN) to use<br></p></li>
+<li><p><strong>set_NearestNetwork</strong>: Sets a new nearest neighbor network (kNN or sNN)</p></li>
+<li><p><strong>get_spatialNetwork</strong>: To select the spatial network to use<br></p></li>
+<li><p><strong>set_spatialNetwork</strong>: Sets a new spatial network</p></li>
+<li><p><strong>get_spatialGrid</strong>: To select the spatial grid to use</p></li>
+<li><p><strong>set_spatialGrid</strong>: Sets a new spatial grid</p></li>
+<li><p><strong>get_polygon_info</strong>: Gets spatial polygon information</p></li>
+<li><p><strong>set_polygon_info</strong>: Set new spatial polygon information</p></li>
+<li><p><strong>get_feature_info</strong>: Gets spatial feature information</p></li>
+<li><p><strong>set_feature_info</strong>: Sets new spatial feature information</p></li>
+<li><p><strong>get_spatial_enrichment</strong>: Gets spatial enrichment information</p></li>
+<li><p><strong>set_spatial_enrichment</strong>: Sets new spatial enrichment information</p></li>
 </ul>
 <p><span class="math inline">\(~\)</span></p>
 </div>
 <div class="section level3">
 <h3 id="python-code">Python code<a class="anchor" aria-label="anchor" href="#python-code"></a>
 </h3>
-<p>To use Python code we prefer to create a python wrapper/functions
-around the python code, which can then be sourced by reticulate. As an
-example we show the basic principles of how we implemented the Leiden
-clustering algorithm.</p>
+<p>To use Python code we prefer to create a python wrapper/functions around the python code, which can then be sourced by reticulate. As an example we show the basic principles of how we implemented the Leiden clustering algorithm.</p>
 <ol style="list-style-type: decimal">
-<li>write python wrapper and store as python_leiden.py in
-<em>/inst/python</em>:</li>
+<li>write python wrapper and store as python_leiden.py in <em>/inst/python</em>:</li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> igraph <span class="im">as</span> ig</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> leidenalg <span class="im">as</span> la</span>
@@ -379,9 +324,7 @@ See <strong>doLeidenCLuster</strong> for more detailed information.</li>
 <div class="section level3">
 <h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h3>
-<p>As an example we show the implementation of SPARK, which is a recent
-method developed by <a href="https://doi.org/10.1038/s41592-019-0701-7" class="external-link">Sun et al</a> and
-provide some comments within the code.</p>
+<p>As an example we show the implementation of SPARK, which is a recent method developed by <a href="https://doi.org/10.1038/s41592-019-0701-7" class="external-link">Sun et al</a> and provide some comments within the code.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spark</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">gobject</span>,</span>
 <span>                 <span class="va">percentage</span> <span class="op">=</span> <span class="fl">0.1</span>,</span>
@@ -421,7 +364,7 @@ provide some comments within the code.</p>
 <span>  <span class="co"># Here we implemented spark according to their github example code: </span></span>
 <span>  </span>
 <span>  <span class="co"># create SPARK object for analysis and filter out lowly expressed genes</span></span>
-<span>  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/SPARK/man/CreateSPARKObject.html" class="external-link">CreateSPARKObject</a></span><span class="op">(</span>counts <span class="op">=</span> <span class="va">expr</span>,</span>
+<span>  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu">CreateSPARKObject</span><span class="op">(</span>counts <span class="op">=</span> <span class="va">expr</span>,</span>
 <span>                                     location <span class="op">=</span> <span class="va">locs</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>,</span>
 <span>                                     percentage <span class="op">=</span> <span class="va">percentage</span>,</span>
 <span>                                     min_total_counts <span class="op">=</span> <span class="va">min_count</span><span class="op">)</span></span>
@@ -448,7 +391,7 @@ provide some comments within the code.</p>
 <span>  <span class="op">}</span></span>
 <span></span>
 <span>  <span class="co"># Fit statistical model under null hypothesis</span></span>
-<span>  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/SPARK/man/spark.vc.html" class="external-link">spark.vc</a></span><span class="op">(</span><span class="va">sobject</span>,</span>
+<span>  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu">spark.vc</span><span class="op">(</span><span class="va">sobject</span>,</span>
 <span>                            covariates <span class="op">=</span> <span class="va">covariates</span>,</span>
 <span>                            lib_size <span class="op">=</span> <span class="va">sobject</span><span class="op">@</span><span class="va">lib_size</span>,</span>
 <span>                            num_core <span class="op">=</span> <span class="va">num_core</span>,</span>
@@ -457,7 +400,7 @@ provide some comments within the code.</p>
 <span></span>
 <span>  <span class="co"># test spatially expressed pattern genes</span></span>
 <span>  <span class="co"># calculating pval</span></span>
-<span>  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/SPARK/man/spark.test.html" class="external-link">spark.test</a></span><span class="op">(</span><span class="va">sobject</span>,</span>
+<span>  <span class="va">sobject</span> <span class="op">=</span> <span class="fu">SPARK</span><span class="fu">::</span><span class="fu">spark.test</span><span class="op">(</span><span class="va">sobject</span>,</span>
 <span>                              check_positive <span class="op">=</span> <span class="cn">T</span>,</span>
 <span>                              verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span></span>

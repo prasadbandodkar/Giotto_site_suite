@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> • Giotto Suite</title>
+<title>Imaging • Giotto Suite</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Imaging">
 <meta property="og:description" content="Giotto">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -147,8 +147,9 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip></h1>
+      <h1 data-toc-skip>Imaging</h1>
             
+            <h4 data-toc-skip class="date">2022-09-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/HEAD/vignettes/getting_started_images.Rmd" class="external-link"><code>vignettes/getting_started_images.Rmd</code></a></small>
       <div class="hidden name"><code>getting_started_images.Rmd</code></div>
@@ -160,99 +161,36 @@
 <div class="section level2">
 <h2 id="giotto-and-image-data">Giotto and Image Data<a class="anchor" aria-label="anchor" href="#giotto-and-image-data"></a>
 </h2>
-<p><br></p>
-<p>Multiple images may be attached to the Giotto object. Spatial data
-can be overlaid upon these images which may then be used for downstream
-analyses. While Giotto attempts to automate the addition and alignment
-of images as much as possible, manual adjustments may sometimes be
-necessary. This tutorial will be covering both automatic and manual
-adjustment.</p>
-<p>The examples in this tutorial will be worked using Visium’s normal
-human prostate FFPE <a href="https://www.10xgenomics.com/resources/datasets/normal-human-prostate-ffpe-1-standard-1-3-0" class="external-link">dataset</a>
-for both the Visium (automatic) and manual adjustment workflows.</p>
-<p>For an example of working with high definition images that may
-require ROI alignment and or stitching, please see the Nanostring CosMx
-lung data <a href="https://giottosuite.com/articles/Nanostring_Lung12_jan26_21.html" class="external-link">analysis</a>.</p>
-<div class="section level4">
-<h4 id="conceptual-overview">Conceptual Overview<a class="anchor" aria-label="anchor" href="#conceptual-overview"></a>
-</h4>
-<p>Giotto currently supports two types of image objects. For most
-purposes, images are loaded in using <a href="https://rdrr.io/cran/terra/" class="external-link"><em>terra</em></a> and are then
-placed into <strong>giottoLargeImage</strong> objects.
-<strong>giottoLargeImage</strong> objects only load in sampled subsets
-of the original image that are needed to represent the image, increasing
-efficiency for analysis of very high-resolution images.</p>
-<p>Alternatively, smaller images are loaded in using the <a href="https://rdrr.io/cran/magick/" class="external-link"><em>magick</em></a> package and are
-then placed into <strong>giottoImage</strong> objects. This offers
-direct access to the powerful image processing functionality in the
-<em>magick</em> package among other Giotto functions for analysis and
-viewing. <strong>giottoLargeImage</strong> objects can be downsampled
-into <strong>giottoImage</strong> objects when necessary through use of
-the <strong>convertGiottoLargeImageToMG()</strong> function.</p>
+<p>Multiple images may be attached to the Giotto object. Spatial data can be overlaid upon these images which may then be used for downstream analyses. While Giotto attempts to automate the addition and alignment of images as much as possible, manual adjustments may sometimes be necessary. This tutorial will be covering both automatic and manual adjustment.</p>
+<p>The examples in this tutorial will be worked using Visium’s normal human prostate FFPE <a href="https://www.10xgenomics.com/resources/datasets/normal-human-prostate-ffpe-1-standard-1-3-0" class="external-link">dataset</a> for both the Visium (automatic) and manual adjustment workflows.</p>
+<p>For an example of working with high definition images that may require ROI alignment and or stitching, please see the Nanostring CosMx lung data <a href="https://giottosuite.com/articles/Nanostring_Lung12_jan26_21.html" class="external-link">analysis</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="conceptual-overview">Conceptual Overview<a class="anchor" aria-label="anchor" href="#conceptual-overview"></a>
+</h2>
+<p>Giotto currently supports two types of image objects. For most purposes, images are loaded in using <a href="https://rdrr.io/cran/terra/" class="external-link"><em>terra</em></a> and are then placed into <strong>giottoLargeImage</strong> objects. <strong>giottoLargeImage</strong> objects only load in sampled subsets of the original image that are needed to represent the image, increasing efficiency for analysis of very high-resolution images.</p>
+<p>Alternatively, smaller images are loaded in using the <a href="https://rdrr.io/cran/magick/" class="external-link"><em>magick</em></a> package and are then placed into <strong>giottoImage</strong> objects. This offers direct access to the powerful image processing functionality in the <em>magick</em> package among other Giotto functions for analysis and viewing. <strong>giottoLargeImage</strong> objects can be downsampled into <strong>giottoImage</strong> objects when necessary through use of the <strong>convertGiottoLargeImageToMG()</strong> function.</p>
 <details><summary><strong>More about the giottoImage container</strong>
 </summary><hr>
-<p><strong>giottoImages</strong> are S4 class objects with slots
-containing the image itself and the metadata necessary to plot it
-properly. The <strong>magick</strong> package allows easy access to
-image processing functions as well as the ability to access images
-through pointers, so the images are only loaded into memory when
-needed.</p>
-<p>Please note that as a result of using pointers to access the image,
-<strong>giottoImages</strong> will not be saved between sessions, since
-the pointer will die after a given R session is closed. However, the
-information used to create the image will be retained within the
-<strong>giottoObject</strong> in the <strong>images</strong> slot, as
-described below.</p>
-<p>When incorporated into a <strong>giottoObject</strong>,
-<strong>giottoImages</strong> are added into the <strong>images</strong>
-slot of the <strong>giottoObject</strong>. The <strong>images</strong>
-slot is organized as a <strong>list()</strong> so multiple
-<strong>giottoImages</strong> may be added and then referred to
-individually using the <strong>name</strong> which they have been
-given.<br><br><strong>giottoImage Structure</strong><br>
-- name - <em>name of the giottoImage, does not need to match the name of
-the variable which stores the giotto image. Default is ‘image’.</em> -
-mg_object - <em>image loaded in as magick object (pointer)</em><br>
-- minmax - <em>x and y minimum and maximum values found from spatial
-locations*</em><br>
-- boundaries - <em>adjustment values for stretching the image based on
-minmax values</em><br>
-- scale_factor - <em>scale factor of spatial locations to
-image</em><br>
+<p><strong>giottoImages</strong> are S4 class objects with slots containing the image itself and the metadata necessary to plot it properly. The <strong>magick</strong> package allows easy access to image processing functions as well as the ability to access images through pointers, so the images are only loaded into memory when needed.</p>
+<p>Please note that as a result of using pointers to access the image, <strong>giottoImages</strong> will not be saved between sessions, since the pointer will die after a given R session is closed. However, the information used to create the image will be retained within the <strong>giottoObject</strong> in the <strong>images</strong> slot, as described below.</p>
+<p>When incorporated into a <strong>giottoObject</strong>, <strong>giottoImages</strong> are added into the <strong>images</strong> slot of the <strong>giottoObject</strong>. The <strong>images</strong> slot is organized as a <strong>list()</strong> so multiple <strong>giottoImages</strong> may be added and then referred to individually using the <strong>name</strong> which they have been given.<br><br><strong>giottoImage Structure</strong><br>
+- name - <em>name of the giottoImage, does not need to match the name of the variable which stores the giotto image. Default is ‘image’.</em> - mg_object - <em>image loaded in as magick object (pointer)</em><br>
+- minmax - <em>x and y minimum and maximum values found from spatial locations*</em><br>
+- boundaries - <em>adjustment values for stretching the image based on minmax values</em><br>
+- scale_factor - <em>scale factor of spatial locations to image</em><br>
 - resolution - <em>spatial location units covered per pixel</em><br>
 - OS_platform - <em>computer environment</em></p>
-<p>*Note that <strong>minmax</strong> refers to the relevant values of
-the associated spatial locations rather than those of the image. These
-values are given either by providing spatial locations directly when
-calling <strong>createGiottoImage()</strong> or in later steps that
-involve a <strong>giottoObjects</strong> with associated spatial
-locations.</p>
-<hr></details><p><br> For maximum flexibility, Giotto plots images and spatial data on
-different layers that are largely independent of each other. The spatial
-data is plotted first, essentially serving as an anchor <strong>(xmin,
-xmax, ymin, ymax)</strong>. The image, no matter its actual dimensions
-or resolution, is then <strong>stretched</strong> to fit on the plot
-according to accompanying metadata <strong>(xmin_adj, xmax_adj,
-ymin_adj, ymax_adj)</strong> which can be edited by the user.<br><br><img src="../inst/images/getting_started_figs/getting_started_images/images_adjust.png" style="width:60.0%"><br>
-Calling the <strong>giottoImage</strong> by itself will display its
-class and name, followed the values that occupy its minmax, boundary
-adjustment, scale_factor, and resolution slots. The actual image
-boundaries are displayed as spatial values, which detail the points to
-which the image’s edges will be stretched.</p>
-<p>Most spatial datasets currently generate spatial locations based on
-how they map onto an original image. Although this brief explanation is
-somewhat simplified, Giotto’s automatic alignment works as
-follows:<br>
-- Scale image dimensions to original dimensions by dividing by the
-<strong>scaling_factor</strong><br>
+<p>*Note that <strong>minmax</strong> refers to the relevant values of the associated spatial locations rather than those of the image. These values are given either by providing spatial locations directly when calling <strong>createGiottoImage()</strong> or in later steps that involve a <strong>giottoObjects</strong> with associated spatial locations.</p>
+<hr></details><p><br> For maximum flexibility, Giotto plots images and spatial data on different layers that are largely independent of each other. The spatial data is plotted first, essentially serving as an anchor <strong>(xmin, xmax, ymin, ymax)</strong>. The image, no matter its actual dimensions or resolution, is then <strong>stretched</strong> to fit on the plot according to accompanying metadata <strong>(xmin_adj, xmax_adj, ymin_adj, ymax_adj)</strong> which can be edited by the user.<br><br><img src="../inst/images/getting_started_figs/getting_started_images/images_adjust.png" style="width:60.0%"><br>
+Calling the <strong>giottoImage</strong> by itself will display its class and name, followed the values that occupy its minmax, boundary adjustment, scale_factor, and resolution slots. The actual image boundaries are displayed as spatial values, which detail the points to which the image’s edges will be stretched.</p>
+<p>Most spatial datasets currently generate spatial locations based on how they map onto an original image. Although this brief explanation is somewhat simplified, Giotto’s automatic alignment works as follows:<br>
+- Scale image dimensions to original dimensions by dividing by the <strong>scaling_factor</strong><br>
 - <strong>xmin_adj</strong> = (spatial location xmin) - 0<br>
-- <strong>xmax_adj</strong> = (xmax image bound in original dimensions)
-- (spatial location xmax)<br>
-- <strong>ymin_adj</strong> = (spatial location ymin) - (ymin image
-bound in original dimensions)<br>
+- <strong>xmax_adj</strong> = (xmax image bound in original dimensions) - (spatial location xmax)<br>
+- <strong>ymin_adj</strong> = (spatial location ymin) - (ymin image bound in original dimensions)<br>
 - <strong>ymax_adj</strong> = 0 - (spatial location ymax)</p>
-<p>For instance, assume we have already created a
-<strong>giottoImage</strong> object named GImage:</p>
+<p>For instance, assume we have already created a <strong>giottoImage</strong> object named GImage:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">GImage</span></span>
 <span></span>
@@ -288,44 +226,25 @@ bound in original dimensions)<br>
 <span><span class="co">#</span></span>
 <span><span class="co"># File Path: </span></span>
 <span><span class="co"># [1] "/path/to/directory/tissue_image.png"</span></span></code></pre></div>
-<p><br> Further intuition for defining these parameters in this way is
-detailed within the <strong>Why this inversion is necessary</strong>
-dropdown text beneath Standard workflow. <br></p>
+<p><br> Further intuition for defining these parameters in this way is detailed within the <strong>Why this inversion is necessary</strong> dropdown text beneath Standard workflow. <br></p>
 </div>
-<div class="section level4">
-<h4 id="visium-workflow-only-automated">Visium workflow only (Automated):<a class="anchor" aria-label="anchor" href="#visium-workflow-only-automated"></a>
-</h4>
-<p>Assembly of Giotto object as well as the reading in and alignment of
-the tissue staining image from the Visium spatial subdirectory is done
-automatically using <strong>createGiottoVisiumObject()</strong>.</p>
-<p>Note that in order to run the following code, the Output Files
-“Feature / barcode matrix (raw)” and “Spatial imaging data” from the <a href="https://www.10xgenomics.com/resources/datasets/normal-human-prostate-ffpe-1-standard-1-3-0" class="external-link">dataset</a>
-must be downloaded and extracted into a structured Visium directory.</p>
+<div class="section level2">
+<h2 id="visium-workflow-automated">Visium Workflow (Automated):<a class="anchor" aria-label="anchor" href="#visium-workflow-automated"></a>
+</h2>
+<p>Assembly of Giotto object as well as the reading in and alignment of the tissue staining image from the Visium spatial subdirectory is done automatically using <strong>createGiottoVisiumObject()</strong>.</p>
+<p>Note that in order to run the following code, the Output Files “Feature / barcode matrix (raw)” and “Spatial imaging data” from the <a href="https://www.10xgenomics.com/resources/datasets/normal-human-prostate-ffpe-1-standard-1-3-0" class="external-link">dataset</a> must be downloaded and extracted into a structured Visium directory.</p>
 <details><summary><strong>Visium Directory Structure Details</strong>
 </summary><hr>
-<p>Here, details on how to structure the Visium Directory for creating a
-Giotto object using <strong>createGiottoVisiumObject()</strong> for the
-purposes of this tutorial will be shown. Nonetheless, this procedure is
-standard practice for using Giotto with Visium Data.</p>
-<p>First create a new directory. This will be your Visium Directory.
-Then, open a terminal within that directory, and enter the following
-commands:</p>
+<p>Here, details on how to structure the Visium Directory for creating a Giotto object using <strong>createGiottoVisiumObject()</strong> for the purposes of this tutorial will be shown. Nonetheless, this procedure is standard practice for using Giotto with Visium Data.</p>
+<p>First create a new directory. This will be your Visium Directory. Then, open a terminal within that directory, and enter the following commands:</p>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  wget https<span class="sc">:</span><span class="er">//</span>cf<span class="fl">.10</span>xgenomics.com<span class="sc">/</span>samples<span class="sc">/</span>spatial<span class="sc">-</span>exp<span class="sc">/</span><span class="dv">1</span>.<span class="fl">3.0</span><span class="sc">/</span>Visium_FFPE_Human_Normal_Prostate<span class="sc">/</span>Visium_FFPE_Human_Normal_Prostate_raw_feature_bc_matrix.tar.gz</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  tar <span class="sc">-</span>xzvf Visium_FFPE_Human_Normal_Prostate_raw_feature_bc_matrix.tar.gz</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  wget https<span class="sc">:</span><span class="er">//</span>cf<span class="fl">.10</span>xgenomics.com<span class="sc">/</span>samples<span class="sc">/</span>spatial<span class="sc">-</span>exp<span class="sc">/</span><span class="dv">1</span>.<span class="fl">3.0</span><span class="sc">/</span>Visium_FFPE_Human_Normal_Prostate<span class="sc">/</span>Visium_FFPE_Human_Normal_Prostate_spatial.tar.gz</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  tar <span class="sc">-</span>xzvf Visium_FFPE_Human_Normal_Prostate_spatial.tar.gz</span></code></pre></div>
 <p><br></p>
-<p>This will create two subdirectories within your Visium Directory,
-titled “raw_feature_bc_matrix” and “spatial”. These subdirectories will
-contain barcode and expression information, or images and scaling
-information, respectively. Now, your Visium Directory may be inputted to
-<strong>createGiottoVisiumObject()</strong>!</p>
-<hr></details><p>A giotto object using either the hires or lowres image will be loaded
-depending on whether “<strong>tissue_hires_image.png”</strong> or
-<strong>“tissue_lowres_image.png”</strong> is provided to the
-<strong>png_name</strong> argument. In this example, we will use and
-plot the hires image.</p>
+<p>This will create two subdirectories within your Visium Directory, titled “raw_feature_bc_matrix” and “spatial”. These subdirectories will contain barcode and expression information, or images and scaling information, respectively. Now, your Visium Directory may be inputted to <strong>createGiottoVisiumObject()</strong>!</p>
+<hr></details><p>A giotto object using either the hires or lowres image will be loaded depending on whether “<strong>tissue_hires_image.png”</strong> or <strong>“tissue_lowres_image.png”</strong> is provided to the <strong>png_name</strong> argument. In this example, we will use and plot the hires image.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
 <span><span class="va">VisiumDir</span> <span class="op">=</span> <span class="st">'/path/to/visium/directory/'</span></span>
@@ -354,39 +273,18 @@ plot the hires image.</p>
 <span>           save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'high_res_IT'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/getting_started_figs/getting_started_images/high_res_IT.png" style="width:50.0%"><br><br></p>
 </div>
-<div class="section level4">
-<h4 id="standard-workflow">Standard workflow<a class="anchor" aria-label="anchor" href="#standard-workflow"></a>
-</h4>
-<div class="section level5">
-<h5 id="step-0---inverting-y-values">Step 0 - Inverting Y-Values<a class="anchor" aria-label="anchor" href="#step-0---inverting-y-values"></a>
-</h5>
-<p>Before beginning, it is important to acknowledge that differences may
-exist in the conventions for defining coordinates within images and
-plots. As a result, it is often required to make the spatial location y
-values negative. This inversion is necessary for the spatial locations
-to appear in the same orientation as the image. This transformation of
-the spatial locations is automatically done for Visium datasets during
-<strong>createGiottoVisiumObject()</strong>. In the standard workflow,
-it is important to determine if this is necessary for your data.</p>
+<div class="section level2">
+<h2 id="standard-workflow">Standard Workflow<a class="anchor" aria-label="anchor" href="#standard-workflow"></a>
+</h2>
+<div class="section level3">
+<h3 id="step-1-invert-y-values">Step 1: Invert Y-Values<a class="anchor" aria-label="anchor" href="#step-1-invert-y-values"></a>
+</h3>
+<p>Before beginning, it is important to acknowledge that differences may exist in the conventions for defining coordinates within images and plots. As a result, it is often required to make the spatial location y values negative. This inversion is necessary for the spatial locations to appear in the same orientation as the image. This transformation of the spatial locations is automatically done for Visium datasets during <strong>createGiottoVisiumObject()</strong>. In the standard workflow, it is important to determine if this is necessary for your data.</p>
 <details><summary><strong>Why this inversion is necessary</strong>
 </summary><hr>
 <p><strong>Image Coordinates vs Plotting Coordinates</strong><br>
-By convention, the origin of image coordinates is defined in the upper
-left, and coordinates increase rightward (x coordinate) and downward (y
-coordinate). Many spatial methods inherit this convention when
-generating spatial location data. However, Giotto plots with the
-coordinates originating from the lower left. Thus, without inversion of
-the y coordinates, the <strong>spatial locations are displayed as
-vertically flipped compared to how they are intended to be
-seen</strong>. <img src="../inst/images/getting_started_figs/getting_started_images/images_coord_diffs.png" style="width:70.0%"><br><strong>The fix for this is to multiply all the Y-values in spatial
-locations by -1, inverting them.</strong> This may be done prior to
-creation of the giotto object by multiplying the y values within the
-spatial location matrix by -1. If the giotto object has already been
-created, yet the spatial data still needs inversion, running the
-following commands will invert the y coordinates.</p>
-<p>Here, my_gobject refers to the <strong>giottoObject</strong> and
-my_spatlocs refers to the name of the <strong>spatial locations</strong>
-to which the image will be aligned.</p>
+By convention, the origin of image coordinates is defined in the upper left, and coordinates increase rightward (x coordinate) and downward (y coordinate). Many spatial methods inherit this convention when generating spatial location data. However, Giotto plots with the coordinates originating from the lower left. Thus, without inversion of the y coordinates, the <strong>spatial locations are displayed as vertically flipped compared to how they are intended to be seen</strong>. <img src="../inst/images/getting_started_figs/getting_started_images/images_coord_diffs.png" style="width:70.0%"><br><strong>The fix for this is to multiply all the Y-values in spatial locations by -1, inverting them.</strong> This may be done prior to creation of the giotto object by multiplying the y values within the spatial location matrix by -1. If the giotto object has already been created, yet the spatial data still needs inversion, running the following commands will invert the y coordinates.</p>
+<p>Here, my_gobject refers to the <strong>giottoObject</strong> and my_spatlocs refers to the name of the <strong>spatial locations</strong> to which the image will be aligned.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Retreive original spatial location data</span></span>
 <span><span class="va">spatlocs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_spatial_locations.html">get_spatial_locations</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">my_gobject</span>,</span>
@@ -401,28 +299,15 @@ to which the image will be aligned.</p>
 <p><img src="../inst/images/getting_started_figs/getting_started_images/images_inverty.png" style="width:70.0%"></p>
 <hr></details><p><br></p>
 </div>
-<div class="section level5">
-<h5 id="step-1---giottoimage-creation">Step 1 - giottoImage Creation<a class="anchor" aria-label="anchor" href="#step-1---giottoimage-creation"></a>
-</h5>
-<p>giottoImages are created using the
-<strong>createGiottoImage()</strong> function. This function requires a
-<strong>magick</strong>-compatible image (eg. jpg, tiff, png) to be
-provided to the <strong>mg_object</strong> argument as either a filepath
-or a <strong>magick</strong> object.<br>
-If automatic image alignment is desired, the
-<strong>scale_factor</strong> parameter is required, which scales the
-spatial locations to the image. <em>This parameter is required since
-spatial locations do not contain information about the size of the image
-is past the spatial xmax and ymin values. Those two image bounds are
-instead inferred by scaling up the current image dimensions to those of
-the spatial locations.</em></p>
-<p>For Visium datasets, scaling information is available in the
-<strong>scalefactors_json.json</strong> file found within the
-<strong>spatial</strong> subdirectory.</p>
+<div class="section level3">
+<h3 id="step-2-create-giottoimage">Step 2: Create giottoImage<a class="anchor" aria-label="anchor" href="#step-2-create-giottoimage"></a>
+</h3>
+<p>giottoImages are created using the <strong>createGiottoImage()</strong> function. This function requires a <strong>magick</strong>-compatible image (eg. jpg, tiff, png) to be provided to the <strong>mg_object</strong> argument as either a filepath or a <strong>magick</strong> object.<br>
+If automatic image alignment is desired, the <strong>scale_factor</strong> parameter is required, which scales the spatial locations to the image. <em>This parameter is required since spatial locations do not contain information about the size of the image is past the spatial xmax and ymin values. Those two image bounds are instead inferred by scaling up the current image dimensions to those of the spatial locations.</em></p>
+<p>For Visium datasets, scaling information is available in the <strong>scalefactors_json.json</strong> file found within the <strong>spatial</strong> subdirectory.</p>
 <p><strong>scalefactors_json.json</strong> for this <a href="https://www.10xgenomics.com/resources/datasets/normal-human-prostate-ffpe-1-standard-1-3-0" class="external-link">dataset</a>:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>{<span class="st">"tissue_hires_scalef"</span><span class="sc">:</span> <span class="fl">0.072809346</span>, <span class="st">"tissue_lowres_scalef"</span><span class="sc">:</span> <span class="fl">0.021842804</span>, <span class="st">"fiducial_diameter_fullres"</span><span class="sc">:</span> <span class="fl">304.63145798068047</span>, <span class="st">"spot_diameter_fullres"</span><span class="sc">:</span> <span class="fl">188.58137874994503</span>}</span></code></pre></div>
-<p>Providing the appropriate factor to the <strong>scale_factor</strong>
-parameter will result in automatic alignment.</p>
+<p>Providing the appropriate factor to the <strong>scale_factor</strong> parameter will result in automatic alignment.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lowResPath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">VisiumDir</span>,<span class="st">"Spatial/tissue_lowres_image.png"</span><span class="op">)</span></span>
 <span><span class="va">lowResG_img</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoImage.html">createGiottoImage</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">FFPE_prostate</span>,</span>
@@ -507,17 +392,9 @@ parameter will result in automatic alignment.</p>
 <span><span class="co">#</span></span>
 <span><span class="co"># File Path: </span></span>
 <span><span class="co"># [1] "/path/to/visium/directory/Spatial/tissue_lowres_image.png"</span></span></code></pre></div>
-<em>Note that only default values are given to minmax and boundaries in
-this case.</em>
-<hr></details>
-(<strong>Optional</strong>) Providing spatial location information
-through either of the <strong>gobject</strong> parameters
-<strong>spat_loc_name</strong> or <strong>spatial_locs</strong> will
-populate the minmax and boundary slots in an attempt to auto-align the
-image with the spatial locations. The auto-alignment can be bypassed by
-using <strong>do_manual_adj = TRUE</strong> and only the minmax slot
-will be populated.<br><details><summary><strong>With spatial locations, but also with do_manual_adj =
-TRUE</strong>
+<em>Note that only default values are given to minmax and boundaries in this case.</em>
+<hr></details><p><br> (<strong>Optional</strong>) Providing spatial location information through either of the <strong>gobject</strong> parameters <strong>spat_loc_name</strong> or <strong>spatial_locs</strong> will populate the minmax and boundary slots in an attempt to auto-align the image with the spatial locations. The auto-alignment can be bypassed by using <strong>do_manual_adj = TRUE</strong> and only the minmax slot will be populated.<br><br></p>
+<details><summary><strong>With spatial locations, but also with do_manual_adj = TRUE</strong>
 </summary><hr>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lowResG_img_manual</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoImage.html">createGiottoImage</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">FFPE_prostate</span>,</span>
@@ -565,17 +442,12 @@ TRUE</strong>
 <span><span class="co">#</span></span>
 <span><span class="co"># File Path: </span></span>
 <span><span class="co"># [1] "/path/to/visium/directory/Spatial/tissue_lowres_image.png"</span></span></code></pre></div>
-<hr></details><p><em>When <strong>do_manual_adj = TRUE</strong>, automatic alignment
-is bypassed in favor of the four manual adjustment values.</em><br><em>These values (Boundary adjustment) default to 0.</em><br><br></p>
+<hr></details><p><br><em>When <strong>do_manual_adj = TRUE</strong>, automatic alignment is bypassed in favor of the four manual adjustment values.</em><br><em>These values (Boundary adjustment) default to 0.</em><br><br></p>
 </div>
-<div class="section level5">
-<h5 id="step-2---add-giottoimage-to-giottoobject-and-visualize">Step 2 - Add giottoImage to giottoObject and Visualize<a class="anchor" aria-label="anchor" href="#step-2---add-giottoimage-to-giottoobject-and-visualize"></a>
-</h5>
-<p><strong>addGiottoImage()</strong> adds a <strong>list</strong> of
-images to the <strong>giottoObject</strong> specified. The name that the
-image is referred to as within the <strong>images</strong> slot is
-inherited from the <strong>name</strong> argument during
-<strong>createGiottoImage()</strong>. The default name is “image.”</p>
+<div class="section level3">
+<h3 id="step-3-add-giottoimage-to-giottoobject-and-visualize">Step 3: Add giottoImage to giottoObject and Visualize<a class="anchor" aria-label="anchor" href="#step-3-add-giottoimage-to-giottoobject-and-visualize"></a>
+</h3>
+<p><strong>addGiottoImage()</strong> adds a <strong>list</strong> of images to the <strong>giottoObject</strong> specified. The name that the image is referred to as within the <strong>images</strong> slot is inherited from the <strong>name</strong> argument during <strong>createGiottoImage()</strong>. The default name is “image.”</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Since lowResG_img_no_locs is not associated with the gobject FFPE_prostate, it</span></span>
 <span><span class="co"># may not be added to the gobject.</span></span>
@@ -590,21 +462,14 @@ inherited from the <strong>name</strong> argument during
 <p><img src="../inst/images/getting_started_figs/getting_started_images/low_res_IT.png" style="width:50.0%"></p>
 </div>
 </div>
-<div class="section level4">
-<h4 id="manual-adjustment">Manual Adjustment<a class="anchor" aria-label="anchor" href="#manual-adjustment"></a>
-</h4>
-<p>Manually adjusting the plotting of images comes either during
-<strong>createGiottoImage()</strong> using <strong>do_manual_adj =
-TRUE</strong> and the four adjustment values <strong>(xmin_adj,
-xmax_adj, ymin_adj, ymax_adj)</strong> or after
-<strong>giottoImage</strong> creation using
-<strong>updateGiottoImage()</strong>.<br>
-This method is performed by eye and may be necessary depending on
-preference or if despite accounting for scaling, the image coordinates
-do not match up with the spatial coordinates for some reason.</p>
-<div class="section level5">
-<h5 id="during-giottoimage-creation">During giottoImage creation<a class="anchor" aria-label="anchor" href="#during-giottoimage-creation"></a>
-</h5>
+<div class="section level2">
+<h2 id="manual-adjustment">Manual Adjustment<a class="anchor" aria-label="anchor" href="#manual-adjustment"></a>
+</h2>
+<p>Manually adjusting the plotting of images comes either during <strong>createGiottoImage()</strong> using <strong>do_manual_adj = TRUE</strong> and the four adjustment values <strong>(xmin_adj, xmax_adj, ymin_adj, ymax_adj)</strong> or after <strong>giottoImage</strong> creation using <strong>updateGiottoImage()</strong>.<br>
+This method is performed by eye and may be necessary depending on preference or if despite accounting for scaling, the image coordinates do not match up with the spatial coordinates for some reason.</p>
+<div class="section level3">
+<h3 id="during-giottoimage-creation">During giottoImage creation<a class="anchor" aria-label="anchor" href="#during-giottoimage-creation"></a>
+</h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># createGiottoImage with manually defined adjustment values</span></span>
 <span><span class="va">lowResG_img_update_manual</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoImage.html">createGiottoImage</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">FFPE_prostate</span>,</span>
@@ -627,9 +492,9 @@ do not match up with the spatial coordinates for some reason.</p>
 <span>           save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'low_res_update_manual_IT'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/getting_started_figs/getting_started_images/low_res_update_manual_IT.png" style="width:50.0%"></p>
 </div>
-<div class="section level5">
-<h5 id="after-giottoimage-creation-update-within-the-giottoobject">After giottoImage creation; update within the giottoObject<a class="anchor" aria-label="anchor" href="#after-giottoimage-creation-update-within-the-giottoobject"></a>
-</h5>
+<div class="section level3">
+<h3 id="after-giottoimage-creation-within-the-giottoobject">After giottoImage creation, within the giottoObject<a class="anchor" aria-label="anchor" href="#after-giottoimage-creation-within-the-giottoobject"></a>
+</h3>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># createGiottoImage with manually defined adjustment values</span></span>
 <span><span class="va">lowResG_img_to_update</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoImage.html">createGiottoImage</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">FFPE_prostate</span>,</span>
@@ -666,7 +531,6 @@ do not match up with the spatial coordinates for some reason.</p>
 <span>           cell_color <span class="op">=</span> <span class="st">"in_tissue"</span>,</span>
 <span>           save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'low_res_after_update_IT'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/getting_started_figs/getting_started_images/low_res_after_update_IT.png" style="width:50.0%"></p>
-</div>
 </div>
 </div>
   </div>

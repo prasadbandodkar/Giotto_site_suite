@@ -1,17 +1,13 @@
-pandoc: '2.18'
+pandoc: 2.14.0.3
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
-  Dimension_reduction: Dimension_reduction.html
-  Nanostring_Lung12_jan26_21: Nanostring_Lung12_jan26_21.html
-  Resolve_bc_210928: Resolve_bc_210928.html
-  SeqFISH_cortex_210923: SeqFISH_cortex_210923.html
-  Visium_prostate_integration_Sep30_21: Visium_prostate_integration_Sep30_21.html
-  Visualizations: Visualizations.html
   analyses_deconvolution_Oct2021: analyses_deconvolution_Oct2021.html
+  configuration: configuration.html
   contribute: contribute.html
-  data_processing: data_processing.html
   datasets_overview: datasets_overview.html
+  data_processing: data_processing.html
+  Dimension_reduction: Dimension_reduction.html
   faqs: faqs.html
   getting_started: getting_started.html
   getting_started_gobject: getting_started_gobject.html
@@ -21,6 +17,7 @@ articles:
   giotto_news: giotto_news.html
   github_issues: github_issues.html
   installation_issues: installation_issues.html
+  Installation_issues_python_env: Installation_issues_python_env.html
   merFISH_hypoth_210924: merFISH_hypoth_210924.html
   mini_seqfish: mini_seqfish.html
   mini_starmap: mini_starmap.html
@@ -31,12 +28,17 @@ articles:
   mouse_visium_brain_Sep30_21: mouse_visium_brain_Sep30_21.html
   mouse_visium_kidney_210830: mouse_visium_kidney_210830.html
   nanostring_examples_overview: nanostring_examples_overview.html
+  Nanostring_Lung12_jan26_21: Nanostring_Lung12_jan26_21.html
   osmFISH_mouse_SScortex_Sep29_21: osmFISH_mouse_SScortex_Sep29_21.html
   giotto_input: overview/giotto_input.html
   temp_construction: overview/temp_construction.html
+  Resolve_bc_210928: Resolve_bc_210928.html
+  SeqFISH_cortex_210923: SeqFISH_cortex_210923.html
   singlecell_prostate_integration_Sep30_21: singlecell_prostate_integration_Sep30_21.html
   singlecell_prostate_standard_Sep29_21: singlecell_prostate_standard_Sep29_21.html
   temp_construction: temp_construction.html
+  Visium_prostate_integration_Sep30_21: Visium_prostate_integration_Sep30_21.html
+  Visualizations: Visualizations.html
   vizgen_mouse_brain_210929: vizgen_mouse_brain_210929.html
-last_built: 2022-09-09T00:31Z
+last_built: 2022-09-13T02:12Z
 
