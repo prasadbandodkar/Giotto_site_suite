@@ -30,11 +30,11 @@ if(!genv_exists){
 
 # Specify path from which data may be retrieved/stored
 data_directory = paste0(getwd(),'/gobject_data/')
-# alternatively, "/path/to/where/your/data/lives/"
+# alternatively, "/path/to/where/the/data/lives/"
 
 # Specify path to which results may be saved
 results_directory = paste0(getwd(),'/gobject_results/') 
-# alternatively, "/path/to/store/your/results/"
+# alternatively, "/path/to/store/the/results/"
 
 # Download osmFISH dataset to data_directory
 getSpatialDataset(dataset = 'osmfish_SS_cortex', directory = data_directory, method = 'wget')
@@ -159,9 +159,10 @@ meta_path = paste0(data_directory, "osmFISH_prep_cell_metadata.txt")
 
 # Create instructions
 
-# Optional: Specify a Python path. If set to NULL (default), the previously installed
-# Giotto environment will be used.
-my_python_path = NULL # alternatively, "/your/python/path/python" if desired.
+# Optional: Specify a path to a Python executable within a conda or miniconda 
+# environment. If set to NULL (default), the Python executable within the previously
+# installed Giotto environment will be used.
+my_python_path = NULL # alternatively, "/local/python/path/python" if desired.
 
 instrs = createGiottoInstructions(python_path = my_python_path,
                                   save_dir = results_directory,
@@ -180,7 +181,7 @@ metadata = data.table::fread(file = meta_path)
 custom_gobject = addCellMetadata(custom_gobject, new_metadata = metadata,
                                  by_column = T, column_cell_ID = 'CellID')
 
-# Check which Giotto instructions are associated with your Giotto object
+# Check which Giotto instructions are associated with the Giotto object
 showGiottoInstructions(custom_gobject)
 ```
 

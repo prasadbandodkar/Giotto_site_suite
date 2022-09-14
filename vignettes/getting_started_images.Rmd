@@ -61,7 +61,7 @@ Most spatial datasets currently generate spatial locations based on how they map
 - **ymin_adj** = (spatial location ymin) - (ymin image bound in original dimensions)  
 - **ymax_adj** = 0 - (spatial location ymax)  
 
-For instance, assume we have already created a **giottoImage** object named GImage:
+For instance, assume a **giottoImage** object named GImage has already been created:
 
 ```{r eval=FALSE}
 GImage
@@ -115,7 +115,7 @@ Note that in order to run the following code, the Output Files "Feature / barcod
   
   Here, details on how to structure the Visium Directory for creating a Giotto object using **createGiottoVisiumObject()** for the purposes of this tutorial will be shown. Nonetheless, this procedure is standard practice for using Giotto with Visium Data.
   
-  First create a new directory. This will be your Visium Directory. Then, open a terminal within that directory, and enter the following commands:
+  First create a new directory. This will be the Visium Directory. Then, open a terminal within that directory, and enter the following commands:
   
   <br>
 ```{bash, eval=FALSE}
@@ -126,21 +126,23 @@ Note that in order to run the following code, the Output Files "Feature / barcod
 ```
   <br>
   
-  This will create two subdirectories within your Visium Directory, titled "raw_feature_bc_matrix" and "spatial". These subdirectories will contain  barcode and expression information, or images and scaling information, respectively. Now, your Visium Directory may be inputted to **createGiottoVisiumObject()**!
+  This will create two subdirectories within the Visium Directory, titled "raw_feature_bc_matrix" and "spatial". These subdirectories will contain  barcode and expression information, or images and scaling information, respectively. Now, the Visium Directory may be inputted to **createGiottoVisiumObject()**!
 
   <hr>
 </details>  
 
-A giotto object using either the hires or lowres image will be loaded depending on whether "**tissue_hires_image.png"** or **"tissue_lowres_image.png"** is provided to the **png_name** argument. In this example, we will use and plot the hires image.  
+A giotto object using either the hires or lowres image will be loaded depending on whether "**tissue_hires_image.png"** or **"tissue_lowres_image.png"** is provided to the **png_name** argument. In this example, the hires image will be plotted.  
   
 ```{r eval=FALSE}
 library(Giotto)
-VisiumDir = '/path/to/visium/directory/'
-results_directory = '/path/to/results/directory/'
 
-# Optional: Specify a Python path. If set to NULL (default), the previously installed
-# Giotto environment will be used.
-my_python_path = NULL # alternatively, "/your/python/path/" if desired.
+VisiumDir = '/path/to/visium/directory/'
+results_directory = paste0(getwd(),'/gobject_imaging_results/')
+
+# Optional: Specify a path to a Python executable within a conda or miniconda 
+# environment. If set to NULL (default), the Python executable within the previously
+# installed Giotto environment will be used.
+my_python_path = NULL # alternatively, "/local/python/path/python" if desired.
 
 # Optional: Set Giotto instructions
 instrs = createGiottoInstructions(save_plot = TRUE, 
@@ -165,7 +167,7 @@ spatPlot2D(FFPE_prostate,
   
 ## Standard Workflow
 ### Step 1: Invert Y-Values
-Before beginning, it is important to acknowledge that differences may exist in the conventions for defining coordinates within images and plots. As a result, it is often required to make the spatial location y values negative. This inversion is necessary for the spatial locations to appear in the same orientation as the image. This transformation of the spatial locations is automatically done for Visium datasets during **createGiottoVisiumObject()**. In the standard workflow, it is important to determine if this is necessary for your data.
+Before beginning, it is important to acknowledge that differences may exist in the conventions for defining coordinates within images and plots. As a result, it is often required to make the spatial location y values negative. This inversion is necessary for the spatial locations to appear in the same orientation as the image. This transformation of the spatial locations is automatically done for Visium datasets during **createGiottoVisiumObject()**. In the standard workflow, it is important to determine if this is necessary for the data at hand.
 
 <details>
 <summary>**Why this inversion is necessary**</summary>

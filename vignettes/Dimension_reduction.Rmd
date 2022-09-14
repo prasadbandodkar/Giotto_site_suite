@@ -11,7 +11,7 @@ output:
 ---
 
 
-This tutorial walks through the dimension reduction and clustering capabilities of Giotto and begins with the Giotto Object processed in the previous tutorial, [data processing](./data_processing.html). For convenience, the code to create this object is provided below. However, encourage new users are encouraged to review the data processing tutorial prior to beginning this tutorial.
+This tutorial walks through the dimension reduction and clustering capabilities of Giotto and begins with the Giotto Object processed in the previous tutorial, [data processing](./data_processing.html). For convenience, the code to create this object is provided below. However, new users are encouraged to review the data processing tutorial prior to beginning this tutorial.
 
 This tutorial uses a SeqFISH+ dataset of a murine cortex and subventrical zone. A complete walkthrough of that dataset can be found [**here**](./SeqFISH_cortex_210923.html). To download the data used to create the Giotto Object below, please ensure that [wget](https://www.gnu.org/software/wget/?) is installed locally.
 
@@ -19,18 +19,26 @@ This tutorial uses a SeqFISH+ dataset of a murine cortex and subventrical zone. 
 
 ```{r, eval=FALSE}
 library(Giotto)
-data_directory = '/path/to/data/directory/'
-results_directory = '/path/to/results/directory/'
 
+# Specify path from which data may be retrieved/stored
+data_directory = paste0(getwd(),'/gobject_clustering_data/')
+# alternatively, "/path/to/where/the/data/lives/"
+
+# Specify path to which results may be saved
+results_directory = paste0(getwd(),'/gobject_clustering_results/') 
+# alternatively, "/path/to/store/the/results/"
+
+# Ensure Giotto environment lives local to the machine
 genv_exists = checkGiottoEnvironment()
 if(!genv_exists){
   # The following command need only be run once to install the Giotto environment.
   installGiottoEnvironment()
 }
 
-# Optional: Specify a Python path. If set to NULL (default), the previously installed
-# Giotto environment will be used.
-my_python_path = NULL # alternatively, "/your/python/path/" if desired.
+# Optional: Specify a path to a Python executable within a conda or miniconda 
+# environment. If set to NULL (default), the Python executable within the previously
+# installed Giotto environment will be used.
+my_python_path = NULL # alternatively, "/local/python/path/python" if desired.
 
 getSpatialDataset(dataset = 'seqfish_SS_cortex', directory = data_directory, method = 'wget')
 
@@ -217,7 +225,7 @@ testobj = doLeidenSubCluster(gobject = testobj,
                              selected_clusters = c(5, 6, 7),
                              name = 'sub_leiden_clus_select')
 
-#Plot a UMAP to visualize your sub-clustering
+#Plot a UMAP to visualize sub-clusters
 plotUMAP(gobject = testobj, cell_color = 'sub_leiden_clus_select', show_NN_network = T)
 
 ```

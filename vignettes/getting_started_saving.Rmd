@@ -15,7 +15,7 @@ date: "2022-09-09"
 
 *Please see the [Configuration]() and [Giotto Object](./getting_started_gobject.html) vignettes before walking through this tutorial.*
 
-R/Rstudio and Giotto provide different ways to save your spatial data. Here, we will create a **giottoObject** without using **giottoInstructions** so that the save parameters for plotting functions within Giotto as well as the default saving methods built into R/Rstudio may be emphasized here. Note that for plotting functions, all parameters available to the *save_param* argument may be found by running **showSaveParameters()**.
+R/Rstudio and Giotto provide different ways to save spatial data. Here, a **giottoObject** will be created without using **giottoInstructions** so that the save parameters for plotting functions within Giotto as well as the default saving methods built into R/Rstudio may be emphasized here. Note that for plotting functions, all parameters available to the *save_param* argument may be found by running **showSaveParameters()**.
 
 ## Creating the Giotto Object without Instructions:
 
