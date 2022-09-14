@@ -160,7 +160,12 @@
 <div class="section level2">
 <h2 id="install-giotto-python-environment-within-r">1. Install Giotto python Environment within R<a class="anchor" aria-label="anchor" href="#install-giotto-python-environment-within-r"></a>
 </h2>
-<p>In terms of Giotto Suite, the best way to install and load Giotto python Environment is to use the installGiottoEnvironment() function and activate the Giotto Environment via createGiottoInstructions(). The installGiottoEnvironment function will install required packages from r-miniconda and createGiottoInstructions will search for giotto environment and load it into R.</p>
+<p>In terms of Giotto Suite, the best way to install and load Giotto
+python Environment is to use the installGiottoEnvironment() function and
+activate the Giotto Environment via createGiottoInstructions(). The
+installGiottoEnvironment function will install required packages from
+r-miniconda and createGiottoInstructions will search for giotto
+environment and load it into R.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -171,7 +176,11 @@
 <div class="section level2">
 <h2 id="manually-installation-of-python-environment-with-conda-">2. Manually installation of python Environment with conda.<a class="anchor" aria-label="anchor" href="#manually-installation-of-python-environment-with-conda-"></a>
 </h2>
-<p>Unfortunately, sometimes r-miniconda may have a problem or something else happens. A manually installation of required python package via miniconda is needed. Before you try to install python packages, make sure you have the <a href="https://docs.conda.io/en/latest/miniconda.html" class="external-link">miniconda</a> installed</p>
+<p>Unfortunately, sometimes r-miniconda may have a problem or something
+else happens. A manually installation of required python package via
+miniconda is needed. Before you try to install python packages, make
+sure you have the <a href="https://docs.conda.io/en/latest/miniconda.html" class="external-link">miniconda</a>
+installed</p>
 <div class="section level4">
 <h4 id="create-conda-environment-and-install-required-packages">2.1 Create conda environment and install required packages<a class="anchor" aria-label="anchor" href="#create-conda-environment-and-install-required-packages"></a>
 </h4>
@@ -183,10 +192,13 @@
 <h4 id="check-the-conda-environment-location">2.2 Check the conda environment location<a class="anchor" aria-label="anchor" href="#check-the-conda-environment-location"></a>
 </h4>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> info</span></code></pre></div>
-<p>You should be able to find the conda environment path/to/conda/envs/giotto from the listed active env location</p>
+<p>You should be able to find the conda environment
+path/to/conda/envs/giotto from the listed active env location</p>
 </div>
 <div class="section level4">
-<h4 id="determine-the-path-to-this-environment-when-you-create-the-giotto-instructions-or-giotto-object--please-double-check-the-name-of-the-path--some-macos-system-has-the-same-folder-structure-as-linux-">2.3 Determine the path to this environment when you create the Giotto instructions or Giotto object. Please double check the name of the path. Some MacOS system has the same folder structure as linux.<a class="anchor" aria-label="anchor" href="#determine-the-path-to-this-environment-when-you-create-the-giotto-instructions-or-giotto-object--please-double-check-the-name-of-the-path--some-macos-system-has-the-same-folder-structure-as-linux-"></a>
+<h4 id="determine-the-path-to-this-environment-when-you-create-the-giotto-instructions-or-giotto-object--please-double-check-the-name-of-the-path--some-macos-system-has-the-same-folder-structure-as-linux-">2.3 Determine the path to this environment when you create the
+Giotto instructions or Giotto object. Please double check the name of
+the path. Some MacOS system has the same folder structure as linux.<a class="anchor" aria-label="anchor" href="#determine-the-path-to-this-environment-when-you-create-the-giotto-instructions-or-giotto-object--please-double-check-the-name-of-the-path--some-macos-system-has-the-same-folder-structure-as-linux-"></a>
 </h4>
 <p>for OSX:</p>
 <pre><code><span><span class="va">path</span><span class="op">/</span><span class="va">to</span><span class="op">/</span><span class="va">conda</span><span class="op">/</span><span class="va">envs</span><span class="op">/</span><span class="va">giotto</span><span class="op">/</span><span class="va">bin</span><span class="op">/</span><span class="va">pythonw</span></span></code></pre>
@@ -196,18 +208,25 @@
 <pre><code><span><span class="va">path</span><span class="op">/</span><span class="va">to</span><span class="op">/</span><span class="va">conda</span><span class="op">/</span><span class="va">envs</span><span class="op">/</span><span class="va">giotto</span><span class="op">/</span><span class="va">python.exe</span></span></code></pre>
 </div>
 <div class="section level4">
-<h4 id="load-the-python-path-to-r-session--note-you-need-to-change-the-path-to-the-actual-location-of-the-installed-python-environment">2.4 load the python path to R session. Note you need to change the path to the actual location of the installed python environment<a class="anchor" aria-label="anchor" href="#load-the-python-path-to-r-session--note-you-need-to-change-the-path-to-the-actual-location-of-the-installed-python-environment"></a>
+<h4 id="load-the-python-path-to-r-session--note-you-need-to-change-the-path-to-the-actual-location-of-the-installed-python-environment">2.4 load the python path to R session. Note you need to change the
+path to the actual location of the installed python environment<a class="anchor" aria-label="anchor" href="#load-the-python-path-to-r-session--note-you-need-to-change-the-path-to-the-actual-location-of-the-installed-python-environment"></a>
 </h4>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
 <span><span class="va">intrs</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoInstructions.html">createGiottoInstructions</a></span><span class="op">(</span>python_path <span class="op">=</span> <span class="st">"path/to/conda/envs/giotto/bin/python"</span><span class="op">)</span></span></code></pre></div>
-<p>Alternatively, load the python path directly from reticulate would also work:</p>
+<p>Alternatively, load the python path directly from reticulate would
+also work:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/use_python.html" class="external-link">use_python</a></span><span class="op">(</span><span class="st">"path/to/conda/envs/giotto/bin/python"</span><span class="op">)</span></span></code></pre></div>
-<p>Or this should also work: note the conda_install_location path should be able to found by “conda av data dir” from conda info</p>
+<p>Or this should also work: note the conda_install_location path should
+be able to found by “conda av data dir” from conda info</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/use_python.html" class="external-link">use_condaenv</a></span><span class="op">(</span>conda <span class="op">=</span> <span class="va">conda_install_location</span>, condaenv <span class="op">=</span> <span class="st">"giotto"</span><span class="op">)</span></span></code></pre></div>
-<p>Note that load library(reticulate) might result in loading the first python environment on the machine and the loaded python cannot be overwritten until a new R session was created. So avoid loading the reticulate library before a giotto python environment is loaded. You can always check if the correct python was loaded:</p>
+<p>Note that load library(reticulate) might result in loading the first
+python environment on the machine and the loaded python cannot be
+overwritten until a new R session was created. So avoid loading the
+reticulate library before a giotto python environment is loaded. You can
+always check if the correct python was loaded:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_config.html" class="external-link">py_config</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>

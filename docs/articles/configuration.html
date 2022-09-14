@@ -161,7 +161,14 @@
 <div class="section level2">
 <h2 id="configuring-the-giotto-environment">Configuring the Giotto Environment<a class="anchor" aria-label="anchor" href="#configuring-the-giotto-environment"></a>
 </h2>
-<p>Giotto contains several functions that contain wrappers to Python code and thus requires an environment containing Python. Utilizing the functionality of the <a href="https://rstudio.github.io/reticulate/" class="external-link"><strong>reticulate</strong></a> package, Giotto contains a function which sets up a miniconda environment and installs the required Python packages within that environment. Once this function, <a href="../reference/installGiottoEnvironment.html"><strong>installGiottoEnvironment</strong></a> has been run, Giotto will automatically default to utilizing this environment.</p>
+<p>Giotto contains several functions that contain wrappers to Python
+code and thus requires an environment containing Python. Utilizing the
+functionality of the <a href="https://rstudio.github.io/reticulate/" class="external-link"><strong>reticulate</strong></a>
+package, Giotto contains a function which sets up a miniconda
+environment and installs the required Python packages within that
+environment. Once this function, <a href="../reference/installGiottoEnvironment.html"><strong>installGiottoEnvironment</strong></a>
+has been run, Giotto will automatically default to utilizing this
+environment.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
 <span></span>
@@ -170,17 +177,25 @@
 <span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">already_installed</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>The function <a href="../reference/installGiottoEnvironment.html"><strong>installGiottoEnvironment</strong></a> two particular arguments that are most useful for reinstallation, if necessary:</p>
+<p>The function <a href="../reference/installGiottoEnvironment.html"><strong>installGiottoEnvironment</strong></a>
+two particular arguments that are most useful for reinstallation, if
+necessary:</p>
 <ul>
 <li>
-<strong>force_miniconda</strong>: force reinstallation of miniconda, default is FALSE</li>
+<strong>force_miniconda</strong>: force reinstallation of miniconda,
+default is FALSE</li>
 <li>
-<strong>force_environment</strong>: force reinstallation of the Giotto environment, default is FALSE</li>
+<strong>force_environment</strong>: force reinstallation of the
+Giotto environment, default is FALSE</li>
 </ul>
-<p><strong>Note that, by default, <a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a> installs a specific version of Python and each required package. At the time of this tutorial’s creation, the following versions are utilized:</strong></p>
+<p><strong>Note that, by default, <a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a>
+installs a specific version of Python and each required package. At the
+time of this tutorial’s creation, the following versions are
+utilized:</strong></p>
 <ul>
 <li>
-<a href="https://www.python.org/" class="external-link"><strong>Python</strong></a> 3.6</li>
+<a href="https://www.python.org/" class="external-link"><strong>Python</strong></a>
+3.6</li>
 <li>
 <a href="https://pandas.pydata.org/" class="external-link">pandas</a> 1.1.5</li>
 <li>
@@ -188,22 +203,37 @@
 <li>
 <a href="https://igraph.org/python/" class="external-link">python-igraph</a> 0.9.6</li>
 <li>
-<a href="https://leidenalg.readthedocs.io/en/latest/" class="external-link">leidenalg</a> 0.8.7</li>
+<a href="https://leidenalg.readthedocs.io/en/latest/" class="external-link">leidenalg</a>
+0.8.7</li>
 <li>
-<a href="https://python-louvain.readthedocs.io/en/latest/" class="external-link">python-louvain</a> 0.15</li>
+<a href="https://python-louvain.readthedocs.io/en/latest/" class="external-link">python-louvain</a>
+0.15</li>
 <li>
-<a href="https://github.com/conda-forge/python.app-feedstock" class="external-link">python.app</a> (Mac only) 2</li>
+<a href="https://github.com/conda-forge/python.app-feedstock" class="external-link">python.app</a>
+(Mac only) 2</li>
 <li>
-<a href="https://scikit-learn.org/stable/" class="external-link">scikit-learn</a> 0.24.2</li>
+<a href="https://scikit-learn.org/stable/" class="external-link">scikit-learn</a>
+0.24.2</li>
 <li>
-<a href="https://pypi.org/project/smfishHmrf/" class="external-link">smfishHmrf</a> 1.3.3</li>
+<a href="https://pypi.org/project/smfishHmrf/" class="external-link">smfishHmrf</a>
+1.3.3</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="customizing-the-giotto-installation">Customizing the Giotto Installation<a class="anchor" aria-label="anchor" href="#customizing-the-giotto-installation"></a>
 </h2>
-<p>If different versions of Python or packages are necessary for a workflow, Giotto may be installed accordingly. Ensure that all required packages, which have been listed above, are accounted for when installing. Simply specify the desired version numbers for each package within a vector, and provide that vector to the <em>packages_to_install</em> argument within <strong>installGiottoEnvironment</strong>.</p>
-<p>Note that machine type is not relevant when providing <em>packages_to_install</em> to <strong>installGiottoEnvironment</strong>; this function will identify the OS in use and install/not install packages (i.e. python.app) accordingly.</p>
+<p>If different versions of Python or packages are necessary for a
+workflow, Giotto may be installed accordingly. Ensure that all required
+packages, which have been listed above, are accounted for when
+installing. Simply specify the desired version numbers for each package
+within a vector, and provide that vector to the
+<em>packages_to_install</em> argument within
+<strong>installGiottoEnvironment</strong>.</p>
+<p>Note that machine type is not relevant when providing
+<em>packages_to_install</em> to
+<strong>installGiottoEnvironment</strong>; this function will identify
+the OS in use and install/not install packages (i.e. python.app)
+accordingly.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Note that the following code has been provided to indicate how to install</span></span>
 <span><span class="co">### Giotto with customized Python and Python package versions. It has been </span></span>
@@ -231,13 +261,25 @@
 <div class="section level2">
 <h2 id="using-a-non-default-conda-environment-with-giotto">Using a non-default Conda Environment with Giotto<a class="anchor" aria-label="anchor" href="#using-a-non-default-conda-environment-with-giotto"></a>
 </h2>
-<p>Inherently as a result of the interface with reticulate, it is not possible to install the Giotto environment at a specified location. For this reason, the specific packages and versions used in the default Giotto installation have been provided so that custom Conda environments may also be used. <strong>Note that the installation of all aforementioned packages is necessary for the full functionality of Giotto</strong>.</p>
-<p>To use a specific Conda environment, a path to a system-specific python executable within a conda/miniconda environment must be provided to <a href="../reference/createGiottoInstructions.html"><strong>createGiottoInstructions</strong></a>. This will direct reticulate to activate and utilize that environment within that R session. See <a href="./getting_started_gobject.html"><strong>How to Create a Giotto Object</strong></a> for more details.</p>
+<p>Inherently as a result of the interface with reticulate, it is not
+possible to install the Giotto environment at a specified location. For
+this reason, the specific packages and versions used in the default
+Giotto installation have been provided so that custom Conda environments
+may also be used. <strong>Note that the installation of all
+aforementioned packages is necessary for the full functionality of
+Giotto</strong>.</p>
+<p>To use a specific Conda environment, a path to a system-specific
+python executable within a conda/miniconda environment must be provided
+to <a href="../reference/createGiottoInstructions.html"><strong>createGiottoInstructions</strong></a>.
+This will direct reticulate to activate and utilize that environment
+within that R session. See <a href="./getting_started_gobject.html"><strong>How to Create a Giotto
+Object</strong></a> for more details.</p>
 </div>
 <div class="section level2">
 <h2 id="package-accessibility">Package Accessibility<a class="anchor" aria-label="anchor" href="#package-accessibility"></a>
 </h2>
-<p>Giotto makes use of the following Python packages (and their respective dependencies) for full functionality:</p>
+<p>Giotto makes use of the following Python packages (and their
+respective dependencies) for full functionality:</p>
 <ul>
 <li><a href="https://pandas.pydata.org/" class="external-link">pandas</a></li>
 <li><a href="https://networkx.org/" class="external-link">networkx</a></li>
@@ -245,12 +287,15 @@
 <li><a href="https://leidenalg.readthedocs.io/en/latest/" class="external-link">leidenalg</a></li>
 <li><a href="https://python-louvain.readthedocs.io/en/latest/" class="external-link">python-louvain</a></li>
 <li>
-<a href="https://github.com/conda-forge/python.app-feedstock" class="external-link">python.app</a> (Mac only)</li>
+<a href="https://github.com/conda-forge/python.app-feedstock" class="external-link">python.app</a>
+(Mac only)</li>
 <li><a href="https://scikit-learn.org/stable/" class="external-link">scikit-learn</a></li>
 <li><a href="https://pypi.org/project/smfishHmrf/" class="external-link">smfishHmrf</a></li>
 </ul>
-<p>Here is a brief troubleshooting workflow to investigate if <a href="https://rstudio.github.io/reticulate/" class="external-link"><strong>reticulate</strong></a> can access them.</p>
-<p><em>Note that “community” and “sklearn” are aliases of “python-louvain” and “scikit-learn”, respectively.</em></p>
+<p>Here is a brief troubleshooting workflow to investigate if <a href="https://rstudio.github.io/reticulate/" class="external-link"><strong>reticulate</strong></a>
+can access them.</p>
+<p><em>Note that “community” and “sklearn” are aliases of
+“python-louvain” and “scikit-learn”, respectively.</em></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Creating Giotto Instructions without specifying a Python path will make </span></span>
 <span><span class="co"># reticulate activate the default Giotto environment. </span></span>
@@ -286,7 +331,9 @@
 <span></span>
 <span><span class="fu">pkg_check</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <details><summary><strong>Troubleshooting Packages not Found</strong>
-</summary><p><br> In the event that packages are inaccessible in the default installation of the Giotto miniconda environment, one troubleshooting method is provided here.</p>
+</summary><p><br> In the event that packages are inaccessible in the default
+installation of the Giotto miniconda environment, one troubleshooting
+method is provided here.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Restart the R session, while maintaining workspace variables.</span></span>
 <span><span class="co"># If using RStudio, the following command will do exactly that:</span></span>
@@ -373,18 +420,21 @@
 <span>    </span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>If this does not fix the issue at hand, here are some potential action items:</p>
+<p>If this does not fix the issue at hand, here are some potential
+action items:</p>
 <ul>
 <li>Remove and attempt to reinstall the Giotto environment.
 <ul>
-<li>Run <a href="../reference/removeGiottoEnvironment.html">removeGiottoEnvironment</a>, then terminate R.</li>
+<li>Run <a href="../reference/removeGiottoEnvironment.html">removeGiottoEnvironment</a>,
+then terminate R.</li>
 <li>Open a completely new R session, and run <a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a>
 </li>
 </ul>
 </li>
 <li>Post to an issue to the Giotto GitHub page <a href="https://github.com/RubD/Giotto" class="external-link">here</a>.
 <ul>
-<li>Please include the version numbers of R, Giotto, and the OS in use at the time of the issue.</li>
+<li>Please include the version numbers of R, Giotto, and the OS in use
+at the time of the issue.</li>
 </ul>
 </li>
 <li>See <a href="./FAQ.html">FAQ</a>.</li>

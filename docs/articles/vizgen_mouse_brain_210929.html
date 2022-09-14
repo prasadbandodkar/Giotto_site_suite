@@ -148,7 +148,8 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Vizgen Mouse Brain Receptor Map</h1>
-                        <h4 data-toc-skip class="author">Rafael Peixoto</h4>
+                        <h4 data-toc-skip class="author">Rafael
+Peixoto</h4>
             
             <h4 data-toc-skip class="date">9/29/2021</h4>
       
@@ -159,7 +160,8 @@
 
     
     
-<p>Updated <code>9/12/2022</code>. <em>Giotto</em> version <code>2.0.0.998</code>.</p>
+<p>Updated <code>9/12/2022</code>. <em>Giotto</em> version
+<code>2.0.0.998</code>.</p>
 <p>Please check the version you are using to get the same results.</p>
 <div class="section level2">
 <h2 id="set-up-giotto">1. Set up Giotto<a class="anchor" aria-label="anchor" href="#set-up-giotto"></a>
@@ -168,7 +170,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># 1. set working directory where project outputs will be saved to</span></span>
-<span><span class="va">results_folder</span> <span class="op">=</span> <span class="st">'/path/to/directory/'</span></span>
+<span><span class="va">results_folder</span> <span class="op">=</span> <span class="st">'/path/to/save/directory/'</span></span>
 <span></span>
 <span><span class="co"># 2. set giotto python path</span></span>
 <span><span class="co"># set python path to your preferred python version path</span></span>
@@ -181,12 +183,20 @@
 <div class="section level2">
 <h2 id="dataset-explanation">2. Dataset explanation<a class="anchor" aria-label="anchor" href="#dataset-explanation"></a>
 </h2>
-<p>This vignette covers Giotto object creation and exploratory analysis with the subcellular <a href="https://vizgen.com/applications/neuroscience-showcase/" class="external-link">MERFISH Mouse Brain Receptor Map dataset</a> provided by Vizgen with their MERSCOPE platform.</p>
-<p>Transcripts are captured at the single-molecule level with subcellular spatial resolution (≤100nm). This dataset includes information from 9 full coronal mouse brain slices (3 positions with 3 biological replicates) that were profiled for 483 genes. This vignette works with slice 1, replicate 1.</p>
+<p>This vignette covers Giotto object creation and exploratory analysis
+with the subcellular <a href="https://vizgen.com/applications/neuroscience-showcase/" class="external-link">MERFISH
+Mouse Brain Receptor Map dataset</a> provided by Vizgen with their
+MERSCOPE platform.</p>
+<p>Transcripts are captured at the single-molecule level with
+subcellular spatial resolution (≤100nm). This dataset includes
+information from 9 full coronal mouse brain slices (3 positions with 3
+biological replicates) that were profiled for 483 genes. This vignette
+works with slice 1, replicate 1.</p>
 <p><strong>Provided Outputs:</strong></p>
 <ul>
 <li>
-<p>List of all <strong>detected transcripts</strong> and their spatial locations in three dimensions (CSV)</p>
+<p>List of all <strong>detected transcripts</strong> and their
+spatial locations in three dimensions (CSV)</p>
 <details><summary><p>Show first 4 rows</p>
 </summary><pre><code><span><span class="co">##   V1 barcode_id global_x global_y global_z        x         y fov   gene</span></span>
 <span><span class="co">## 1  0          2 159.9778 4208.468        4 1762.116  159.9814   0  Htr1b</span></span>
@@ -199,7 +209,8 @@
 <p>Output from the cell segmentation analysis:</p>
 <ul>
 <li>
-<p><strong>transcripts</strong> (cols) per <strong>cell</strong> (rows) aggregated count matrix (CSV)</p>
+<p><strong>transcripts</strong> (cols) per <strong>cell</strong>
+(rows) aggregated count matrix (CSV)</p>
 <details><summary><p>Show first 4 rows and columns</p>
 </summary><pre><code><span><span class="co">##                                        V1 Oxgr1 Htr1a Htr1b</span></span>
 <span><span class="co">## 1 110883424764611924400221639916314253469     0     0     0</span></span>
@@ -226,37 +237,59 @@
 <li><p><strong>cell boundaries</strong> (HDF5)</p></li>
 </ul>
 </li>
-<li><p>The <strong>DAPI</strong> and <strong>Poly T mosaic images</strong> (TIFF)</p></li>
+<li><p>The <strong>DAPI</strong> and <strong>Poly T mosaic
+images</strong> (TIFF)</p></li>
 </ul>
 <p><code>Vizgen Data Release V1.0. May 2021</code></p>
 </div>
 <div class="section level2">
 <h2 id="giotto-global-instructions-and-preparations">3. Giotto global instructions and preparations<a class="anchor" aria-label="anchor" href="#giotto-global-instructions-and-preparations"></a>
 </h2>
-<p>Define plot saving behavior</p>
+<p>Define plot saving behavior and project data paths</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Directly saving plots to the working directory without rendering them in the editor saves time.</span></span>
 <span><span class="va">instrs</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoInstructions.html">createGiottoInstructions</a></span><span class="op">(</span>save_dir <span class="op">=</span> <span class="va">results_folder</span>,</span>
 <span>                                  save_plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                  show_plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>                                  return_plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span>                                  return_plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Add Needed paths below:</span></span>
+<span><span class="co"># provide path to pre-aggregated information</span></span>
+<span><span class="va">expr_path</span> <span class="op">=</span> <span class="st">'/path/to/datasets_mouse_brain_map_BrainReceptorShowcase_Slice1_Replicate1_cell_by_gene_S1R1.csv'</span></span>
+<span><span class="co"># provide path to metadata (includes spatial locations of aggregated expression)</span></span>
+<span><span class="va">meta_path</span> <span class="op">=</span> <span class="st">'/path/to/datasets_mouse_brain_map_BrainReceptorShowcase_Slice1_Replicate1_cell_metadata_S1R1.csv'</span></span>
+<span><span class="co"># provide path to the detected transcripts (single molecule level transcript spatial information)</span></span>
+<span><span class="va">tx_path</span> <span class="op">=</span> <span class="st">'/path/to/datasets_mouse_brain_map_BrainReceptorShowcase_Slice1_Replicate1_detected_transcripts_S1R1.csv'</span></span>
+<span><span class="co"># provide path to the dapi image of slice 1 replicate 1</span></span>
+<span><span class="va">img_path</span> <span class="op">=</span> <span class="st">'path/to/mosaic_DAPI_z0.tif'</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="create-giotto-object-from-aggregated-data">4. Create Giotto object from aggregated data<a class="anchor" aria-label="anchor" href="#create-giotto-object-from-aggregated-data"></a>
 </h2>
-<p>Vizgen provides a cell by transcript output matrix (<code>cell_by_gene.csv</code>) with the subcellular spatial transcript information already aggregated by the provided polygon cell annotations into a count matrix.<br>
-Along with the count matrix, metadata information about the field of view (FOV), spatial location, and volume of the cell (annotation polygons) is also provided through the <code>cell_metadata.csv</code>.</p>
-<p><strong>Pre-aggregated</strong> information can be loaded into Giotto with the usual generic <code><a href="../reference/createGiottoObject.html">createGiottoObject()</a></code> function. For starting from the raw subcellular information, skip to <a href="">step 10</a>. To create the Giotto object, the <code>cell_by_gene</code> expression matrix and the <code>cell_metadata</code> information are first read into R. Since Giotto accepts the expression information with features (in this case genes/transcript counts) as rows and cells as columns, the expression matrix must first be transposed to create the object.</p>
-<p>*Addtionally for this dataset, y values should be inverted when loaded to match the included images. <a href="https://giottosuite.com/articles/getting_started_images.html#standard-workflow" class="external-link">For more information</a></p>
+<p>Vizgen provides a cell by transcript output matrix
+(<code>cell_by_gene.csv</code>) with the subcellular spatial transcript
+information already aggregated by the provided polygon cell annotations
+into a count matrix.<br>
+Along with the count matrix, metadata information about the field of
+view (FOV), spatial location, and volume of the cell (annotation
+polygons) is also provided through the
+<code>cell_metadata.csv</code>.</p>
+<p><strong>Pre-aggregated</strong> information can be loaded into Giotto
+with the usual generic <code><a href="../reference/createGiottoObject.html">createGiottoObject()</a></code> function. For
+starting from the raw subcellular information, skip to <a href="">step
+10</a>. To create the Giotto object, the <code>cell_by_gene</code>
+expression matrix and the <code>cell_metadata</code> information are
+first read into R. Since Giotto accepts the expression information with
+features (in this case genes/transcript counts) as rows and cells as
+columns, the expression matrix must first be transposed to create the
+object.</p>
+<p>*Addtionally for this dataset, y values should be inverted when
+loaded to match the included images. <a href="https://giottosuite.com/articles/getting_started_images.html#standard-workflow" class="external-link">For
+more information</a></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># provide path to cell by gene matrix</span></span>
-<span><span class="va">expr_path</span> <span class="op">=</span> <span class="st">'/path/to/datasets_mouse_brain_map_BrainReceptorShowcase_Slice1_Replicate1_cell_by_gene_S1R1.csv'</span></span>
-<span><span class="co"># provide path to metadata</span></span>
-<span><span class="va">spat_path</span> <span class="op">=</span> <span class="st">'/path/to/datasets_mouse_brain_map_BrainReceptorShowcase_Slice1_Replicate1_cell_metadata_S1R1.csv'</span></span>
-<span></span>
-<span><span class="co"># read expression matrix and metadata</span></span>
+<code class="sourceCode R"><span><span class="co"># read expression matrix and metadata</span></span>
 <span><span class="va">expr_matrix</span> <span class="op">=</span> <span class="fu"><a href="../reference/readExprMatrix.html">readExprMatrix</a></span><span class="op">(</span><span class="va">expr_path</span><span class="op">)</span></span>
-<span><span class="va">spat_dt</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">spat_path</span><span class="op">)</span></span>
+<span><span class="va">spat_dt</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">meta_path</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># create giotto object</span></span>
 <span><span class="va">vizgen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="fu">Giotto</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/t_flex.html" class="external-link">t_flex</a></span><span class="op">(</span><span class="va">expr_matrix</span><span class="op">)</span>,</span>
@@ -286,25 +319,31 @@ Along with the count matrix, metadata information about the field of view (FOV),
 <div class="section level2">
 <h2 id="attaching-images">5. Attaching images<a class="anchor" aria-label="anchor" href="#attaching-images"></a>
 </h2>
-Images for confocal planes z0 to z6 are provided for both <strong>DAPI</strong> (cell nucleus staining) and <strong>polyT</strong> for all datasets.<br>
-A <code>micron_to_mosaic_pixel_transform.csv</code> is included within the <code>images</code> folder that provides scaling factors to map the image to the spatial coordinates. For this dataset:<br><details><summary>
+Images for confocal planes z0 to z6 are provided for both
+<strong>DAPI</strong> (cell nucleus staining) and <strong>polyT</strong>
+for all datasets.<br>
+A <code>micron_to_mosaic_pixel_transform.csv</code> is included within
+the <code>images</code> folder that provides scaling factors to map the
+image to the spatial coordinates. For this dataset:<br><details><summary>
 micron_to_mosaic_pixel_transform.csv
 </summary><pre><code><span><span class="co">##          V1      V2       V3</span></span>
 <span><span class="co">## 1: 9.205861 0.00000 279.2204</span></span>
 <span><span class="co">## 2: 0.000000 9.20585 349.8105</span></span>
 <span><span class="co">## 3: 0.000000 0.00000   1.0000</span></span></code></pre>
-</details><p><br> Here we will attach the z0 dapi image to the Giotto object. Note: <em>It is recommended for the image files to be local. Placing the images on the cloud or network may be very slow.</em></p>
+</details><p><br> Here we will attach the z0 dapi image to the Giotto object.
+Note: <em>It is recommended for the image files to be local. Placing the
+images on the cloud or network may be very slow.</em></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">img_path</span> <span class="op">=</span> <span class="st">'path/to/mosaic_DAPI_z0.tif'</span></span>
-<span></span>
-<span><span class="co"># Load in image as a giottoLargeImage object that maps spatial coordinates 1:1 with pixel coordinates</span></span>
+<code class="sourceCode R"><span><span class="co"># Load in image as a giottoLargeImage object that maps spatial coordinates 1:1 with pixel coordinates</span></span>
 <span><span class="va">dapi0</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoLargeImage.html">createGiottoLargeImage</a></span><span class="op">(</span>raster_object <span class="op">=</span> <span class="va">img_path</span>,</span>
 <span>                               name <span class="op">=</span> <span class="st">'image'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Preview image</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/plot-generic.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dapi0</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/vizgen_mouse_brain//2-dapi0_preview.png" style="width:65.0%"></p>
-<p>Attaching the <code>giottoLargeImage</code> to our Giotto object (provided as a list of 1) and then updating it to map the image to the spatial coordinates which are in microns.</p>
+<p>Attaching the <code>giottoLargeImage</code> to our Giotto object
+(provided as a list of 1) and then updating it to map the image to the
+spatial coordinates which are in microns.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Adds the giottoLargeImage object to giotto object while also shifting values into the negatives</span></span>
 <span><span class="va">vizgen</span> <span class="op">=</span> <span class="fu"><a href="../reference/addGiottoImage.html">addGiottoImage</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen</span>,</span>
@@ -388,7 +427,8 @@ micron_to_mosaic_pixel_transform.csv
 <div class="section level2">
 <h2 id="dimension-reduction">7. Dimension reduction<a class="anchor" aria-label="anchor" href="#dimension-reduction"></a>
 </h2>
-<p>Skipping highly variable feature (HVF) detection. PCA will be calculated based on all available genes.</p>
+<p>Skipping highly variable feature (HVF) detection. PCA will be
+calculated based on all available genes.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vizgen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runPCA.html">runPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen</span>,</span>
 <span>                 center <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -421,7 +461,8 @@ micron_to_mosaic_pixel_transform.csv
 <span><span class="va">vizgen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doLeidenCluster.html">doLeidenCluster</a></span><span class="op">(</span><span class="va">vizgen</span>,</span>
 <span>                          resolution <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>                          n_iterations <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
-<p>Visualize clusters in reduced dimension. The default cell color is ‘leiden_clus’.</p>
+<p>Visualize clusters in reduced dimension. The default cell color is
+‘leiden_clus’.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span><span class="va">vizgen</span>,</span>
 <span>         cell_color <span class="op">=</span> <span class="st">'leiden_clus'</span>,</span>
@@ -438,7 +479,9 @@ micron_to_mosaic_pixel_transform.csv
 <div class="section level2">
 <h2 id="spatial-expression-patterns">9. Spatial expression patterns<a class="anchor" aria-label="anchor" href="#spatial-expression-patterns"></a>
 </h2>
-<p>Spatially interesting gene expression can be detected by first generating a spatial network then performing Binary Spatial Extraction of genes.</p>
+<p>Spatially interesting gene expression can be detected by first
+generating a spatial network then performing Binary Spatial Extraction
+of genes.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create spatial network based on physical distance of cell centroids</span></span>
 <span><span class="va">vizgen</span> <span class="op">=</span> <span class="fu"><a href="../reference/createSpatialNetwork.html">createSpatialNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen</span>,</span>
@@ -446,12 +489,19 @@ micron_to_mosaic_pixel_transform.csv
 <span>                              maximum_distance_delaunay <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># perform Binary Spatial Extraction of genes</span></span>
-<span><span class="va">km_spatialgenes</span> <span class="op">=</span> <span class="fu"><a href="../reference/binSpect.html">binSpect</a></span><span class="op">(</span><span class="va">vizgen</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># visualize spatial expression of selected genes obtained from binSpect</span></span>
+<span><span class="va">km_spatialgenes</span> <span class="op">=</span> <span class="fu"><a href="../reference/binSpect.html">binSpect</a></span><span class="op">(</span><span class="va">vizgen</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">km_spatialgenes</span><span class="op">$</span><span class="va">feats</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##  [1] "Slc47a1"   "Chat"      "Th"        "Insrr"     "Slc17a7"   "Pln"      </span></span>
+<span><span class="co">##  [7] "Lmod1"     "Blank-119" "Hcar1"     "Glp1r"     "Ptgdr"     "Avpr2"    </span></span>
+<span><span class="co">## [13] "Gpr20"     "Myh11"     "Glp2r"     "Npy2r"     "Gpr182"    "Chrm1"    </span></span>
+<span><span class="co">## [19] "Adgrd1"    "Mrgprf"    "Trhr"      "Gfap"      "Slc17a8"   "Nmbr"     </span></span>
+<span><span class="co">## [25] "Pth2r"     "Rxfp1"     "Musk"      "F2rl1"     "Dgkk"      "Chrm5"</span></span></code></pre>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># visualize spatial expression of select genes obtained from binSpect</span></span>
 <span><span class="fu"><a href="../reference/spatFeatPlot2D.html">spatFeatPlot2D</a></span><span class="op">(</span><span class="va">vizgen</span>,</span>
 <span>               expression_values <span class="op">=</span> <span class="st">'scaled'</span>,</span>
-<span>               feats <span class="op">=</span> <span class="va">km_spatialgenes</span><span class="op">$</span><span class="va">feats</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>,</span>
+<span>               feats <span class="op">=</span> <span class="va">km_spatialgenes</span><span class="op">$</span><span class="va">feats</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">18</span>,<span class="fl">22</span><span class="op">)</span><span class="op">]</span>,</span>
 <span>               cell_color_gradient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'blue'</span>, <span class="st">'white'</span>, <span class="st">'red'</span><span class="op">)</span>,</span>
 <span>               point_shape <span class="op">=</span> <span class="st">'border'</span>,</span>
 <span>               point_border_col <span class="op">=</span> <span class="st">'grey'</span>,</span>
@@ -463,32 +513,35 @@ micron_to_mosaic_pixel_transform.csv
 <div class="section level2">
 <h2 id="working-with-subcellular-information">10. Working with subcellular information<a class="anchor" aria-label="anchor" href="#working-with-subcellular-information"></a>
 </h2>
-<p>Subsetting to work with a smaller area since subcellular data is dense.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<p>Subsetting to work with a smaller area since subcellular data is
+dense.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vizgen_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/subsetGiottoLocs.html">subsetGiottoLocs</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen</span>,</span>
 <span>                                  x_min <span class="op">=</span> <span class="fl">2000</span>, x_max <span class="op">=</span> <span class="fl">3000</span>,</span>
 <span>                                  y_max <span class="op">=</span> <span class="op">-</span><span class="fl">2500</span>, y_min <span class="op">=</span> <span class="op">-</span><span class="fl">3500</span><span class="op">)</span></span></code></pre></div>
-<p>The visualization functions can also be applied to the subset version.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<p>The visualization functions can also be applied to the subset
+version.</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen_subset</span>,</span>
 <span>           largeImage_name <span class="op">=</span> <span class="st">'image'</span>,</span>
 <span>           cell_color <span class="op">=</span> <span class="st">'leiden_clus'</span>,</span>
 <span>           point_size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/vizgen_mouse_brain//12-spatPlot2D.png" style="width:50.0%"></p>
 <p>These steps may require a strong computer.<br>
-Giotto can also work with the polygon annotations provided by Vizgen. Since we are working with a subset of the data, it is only necessary to read the polygons that are present in the current FOV(s).</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+Giotto can also work with the polygon annotations provided by Vizgen.
+Since we are working with a subset of the data, it is only necessary to
+read the polygons that are present in the current FOV(s).</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define path to cell boundaries folder</span></span>
 <span><span class="va">bound_path</span> <span class="op">=</span> <span class="st">'/path/to/cell_boundaries'</span></span>
 <span><span class="co"># read polygons and add them to Giotto</span></span>
 <span><span class="va">vizgen_subset</span> <span class="op">=</span> <span class="fu"><a href="../reference/readPolygonFilesVizgen.html">readPolygonFilesVizgen</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen_subset</span>,</span>
 <span>                                       boundaries_path <span class="op">=</span> <span class="va">bound_path</span>,</span>
 <span>                                       polygon_feat_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">4</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Giotto can also work with the single molecule transcript level spatial data.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># add transcript coordinates</span></span>
-<span><span class="va">tx_path</span> <span class="op">=</span> <span class="st">'/path/to/datasets_mouse_brain_map_BrainReceptorShowcase_Slice1_Replicate1_detected_transcripts_S1R1.csv'</span></span>
-<span><span class="va">tx_dt</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">tx_path</span><span class="op">)</span></span>
+<p>Giotto can also work with the single molecule transcript level
+spatial data.</p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tx_dt</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">tx_path</span><span class="op">)</span></span>
 <span><span class="co"># select transcripts in FOVs</span></span>
 <span><span class="va">selected_fovs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">vizgen_subset</span><span class="op">)</span><span class="op">$</span><span class="va">fov</span><span class="op">)</span></span>
 <span><span class="va">tx_dt_selected</span> <span class="op">=</span> <span class="va">tx_dt</span><span class="op">[</span><span class="va">fov</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="va">selected_fovs</span><span class="op">]</span></span>
@@ -515,7 +568,7 @@ Giotto can also work with the polygon annotations provided by Vizgen. Since we a
 <span>                     show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                     polygon_color <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/vizgen_mouse_brain//11-spatInSituPlotPoints.png" style="width:50.0%"></p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># visualize points with polygons from z6 (confocal plane)</span></span>
 <span><span class="fu"><a href="../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">vizgen_subset</span>,</span>
 <span>                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Oxgr1"</span>, <span class="st">"Htr1a"</span>, <span class="st">"Gjc3"</span>, <span class="st">"Axl"</span>,</span>

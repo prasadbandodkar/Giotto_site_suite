@@ -161,13 +161,24 @@
 <div class="section level2">
 <h2 id="saving-spatial-data-in-plots">Saving Spatial Data in Plots<a class="anchor" aria-label="anchor" href="#saving-spatial-data-in-plots"></a>
 </h2>
-<p><em>Please see the <a href="">Configuration</a> and <a href="./getting_started_gobject.html">Giotto Object</a> vignettes before walking through this tutorial.</em></p>
-<p>R/Rstudio and Giotto provide different ways to save your spatial data. Here, we will create a <strong>giottoObject</strong> without using <strong>giottoInstructions</strong> so that the save parameters for plotting functions within Giotto as well as the default saving methods built into R/Rstudio may be emphasized here. Note that for plotting functions, all parameters available to the <em>save_param</em> argument may be found by running <strong>showSaveParameters()</strong>.</p>
+<p><em>Please see the <a href="">Configuration</a> and <a href="./getting_started_gobject.html">Giotto Object</a> vignettes before
+walking through this tutorial.</em></p>
+<p>R/Rstudio and Giotto provide different ways to save your spatial
+data. Here, we will create a <strong>giottoObject</strong> without using
+<strong>giottoInstructions</strong> so that the save parameters for
+plotting functions within Giotto as well as the default saving methods
+built into R/Rstudio may be emphasized here. Note that for plotting
+functions, all parameters available to the <em>save_param</em> argument
+may be found by running <strong>showSaveParameters()</strong>.</p>
 </div>
 <div class="section level2">
 <h2 id="creating-the-giotto-object-without-instructions">Creating the Giotto Object without Instructions:<a class="anchor" aria-label="anchor" href="#creating-the-giotto-object-without-instructions"></a>
 </h2>
-<p>Since the focus of this vignette is saving methods, the <strong>giottoObject</strong> will not be created with <strong>giottoInstructions</strong>. See <a href="./getting_started_gobject.html">Giotto Object</a> for further intuition on working with a <strong>giottoObject</strong> that has been provided instructions.</p>
+<p>Since the focus of this vignette is saving methods, the
+<strong>giottoObject</strong> will not be created with
+<strong>giottoInstructions</strong>. See <a href="./getting_started_gobject.html">Giotto Object</a> for further
+intuition on working with a <strong>giottoObject</strong> that has been
+provided instructions.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
 <span></span>
@@ -201,7 +212,8 @@
 <div class="section level3">
 <h3 id="standard-r-save-methods">1. Standard R save methods<a class="anchor" aria-label="anchor" href="#standard-r-save-methods"></a>
 </h3>
-<p>Note that by default, plotting functions will return a plot object that may be saved or further manipulated.</p>
+<p>Note that by default, plotting functions will return a plot object
+that may be saved or further manipulated.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Manually save plot as a PDF in the current working directory:</span></span>
 <span><span class="va">save_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">'/first_plot.pdf'</span><span class="op">)</span></span>
@@ -239,7 +251,11 @@
 <div class="section level3">
 <h3 id="save-plot-directly-to-the-default-folder">2. Save plot directly to the default folder<a class="anchor" aria-label="anchor" href="#save-plot-directly-to-the-default-folder"></a>
 </h3>
-<p>The default save folder is the current working directory. This will be the case if instructions are not provided, or if a <em>save_dir</em> is not specified within <strong>giottoInstructions</strong>. See the <a href="http://giottosuite.com/reference/createGiottoInstructions.html" class="external-link"><strong>createGiottoInstructions</strong> documentation</a> and <a href="./getting_started_gobject.html">Giotto Object</a> for default arguments and more details.</p>
+<p>The default save folder is the current working directory. This will
+be the case if instructions are not provided, or if a <em>save_dir</em>
+is not specified within <strong>giottoInstructions</strong>. See the <a href="http://giottosuite.com/reference/createGiottoInstructions.html" class="external-link"><strong>createGiottoInstructions</strong>
+documentation</a> and <a href="./getting_started_gobject.html">Giotto
+Object</a> for default arguments and more details.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot clusters and save to default folder</span></span>
 <span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span><span class="va">my_gobject</span>, </span>
@@ -250,9 +266,15 @@
 <div class="section level3">
 <h3 id="save-plot-directly-but-overwrite-default-save-parameters">3. Save plot directly, but overwrite default save parameters<a class="anchor" aria-label="anchor" href="#save-plot-directly-but-overwrite-default-save-parameters"></a>
 </h3>
-<p>In this example, assume it is desired that the plot is: - Shown in the console - Not returned as an object from the plotting function call - Saved in a subdirectory of the current working directory as a .png file with a dpi of 200, height of 9 inches, and width of 9 inches. - Saved with the file name “my_name”</p>
-<p>See <a href="./getting_started_gobject.html">Giotto Object</a> for more details.<br>
-Run the command <strong>showSaveParameters()</strong> to see all available parameters.</p>
+<p>In this example, assume it is desired that the plot is: - Shown in
+the console - Not returned as an object from the plotting function call
+- Saved in a subdirectory of the current working directory as a .png
+file with a dpi of 200, height of 9 inches, and width of 9 inches. -
+Saved with the file name “my_name”</p>
+<p>See <a href="./getting_started_gobject.html">Giotto Object</a> for
+more details.<br>
+Run the command <strong>showSaveParameters()</strong> to see all
+available parameters.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Specify new subdirectory name</span></span>
 <span><span class="va">results_directory</span> <span class="op">=</span>  <span class="st">'my_subfolder/'</span></span>
@@ -273,7 +295,8 @@ Run the command <strong>showSaveParameters()</strong> to see all available param
 <div class="section level3">
 <h3 id="just-view-the-plot">4. Just view the plot<a class="anchor" aria-label="anchor" href="#just-view-the-plot"></a>
 </h3>
-<p>See <a href="./getting_started_gobject.html">Giotto Object</a> for more details.<br>
+<p>See <a href="./getting_started_gobject.html">Giotto Object</a> for
+more details.<br>
 Set both <em>save_plot</em> and <em>return_plot</em> to FALSE.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot without saving</span></span>
@@ -284,7 +307,8 @@ Set both <em>save_plot</em> and <em>return_plot</em> to FALSE.</p>
 <div class="section level3">
 <h3 id="just-save-the-plot-fastest-for-large-datasets">5. Just save the plot (FASTEST for large datasets!)<a class="anchor" aria-label="anchor" href="#just-save-the-plot-fastest-for-large-datasets"></a>
 </h3>
-<p>See <a href="./getting_started_gobject.html">Giotto Object</a> for more details.<br>
+<p>See <a href="./getting_started_gobject.html">Giotto Object</a> for
+more details.<br>
 Set show_plot and return_plot to FALSE, set save_plot to TRUE.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># only saves the plot</span></span>
