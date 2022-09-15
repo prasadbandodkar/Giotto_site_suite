@@ -61,8 +61,8 @@ getSpatialDataset(dataset = 'mini_seqFISH', directory = data_directory, method =
 expr_path = paste0(data_directory, "seqfish_field_expr.txt.gz")
 loc_path = paste0(data_directory, "seqfish_field_locs.txt")
 seqfish_mini = createGiottoObject(expression = expr_path, 
-                                   spatial_locs = loc_path, 
-                                   instructions = myinstructions)
+                                  spatial_locs = loc_path, 
+                                  instructions = myinstructions)
 ```
 
 How to work with Giotto instructions that are part of your Giotto object:
@@ -86,14 +86,14 @@ showGiottoInstructions(seqfish_mini)
 
 ```{r, eval=FALSE}
 seqfish_mini = filterGiotto(gobject = seqfish_mini, 
-                             expression_threshold = 0.5, 
-                             feat_det_in_min_cells = 20, 
-                             min_det_feats_per_cell = 0)
+                            expression_threshold = 0.5, 
+                            feat_det_in_min_cells = 20, 
+                            min_det_feats_per_cell = 0)
 seqfish_mini = normalizeGiotto(gobject = seqfish_mini, scalefactor = 6000, verbose = T)
 seqfish_mini = addStatistics(gobject = seqfish_mini)
 seqfish_mini = adjustGiottoMatrix(gobject = seqfish_mini, 
-                                   expression_values = c('normalized'), 
-                                   covariate_columns = c('nr_feats', 'total_expr'))
+                                  expression_values = c('normalized'), 
+                                  covariate_columns = c('nr_feats', 'total_expr'))
 ```
 
 ## 3. Dimension reduction
@@ -104,7 +104,7 @@ seqfish_mini = adjustGiottoMatrix(gobject = seqfish_mini,
 seqfish_mini = calculateHVF(gobject = seqfish_mini)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/0-HVFplot.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/0-HVFplot.png?raw=true){ width=50% }
 
 -   perform PCA
 -   identify number of significant principal components (PCs)
@@ -114,13 +114,13 @@ seqfish_mini = runPCA(gobject = seqfish_mini)
 screePlot(seqfish_mini, ncp = 20)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/1-screePlot.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/1-screePlot.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 plotPCA(seqfish_mini)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/3-PCA.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/2-PCA.png?raw=true){ width=50% }
 
 -   run UMAP and/or t-SNE on PCs (or directly on matrix)
 
@@ -129,14 +129,14 @@ seqfish_mini = runUMAP(seqfish_mini, dimensions_to_use = 1:5, n_threads = 2)
 plotUMAP(gobject = seqfish_mini)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/4-UMAP.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/3-UMAP.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 seqfish_mini = runtSNE(seqfish_mini, dimensions_to_use = 1:5)
 plotTSNE(gobject = seqfish_mini)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/5-tSNE.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/4-tSNE.png?raw=true){ width=50% }
 
 ## 4. Clustering
 
@@ -150,21 +150,21 @@ seqfish_mini = doLeidenCluster(gobject = seqfish_mini, resolution = 0.4, n_itera
 plotUMAP(gobject = seqfish_mini, cell_color = 'leiden_clus', show_NN_network = T, point_size = 2.5)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/6-UMAP.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/5-UMAP.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 # visualize UMAP and spatial results
 spatDimPlot(gobject = seqfish_mini, cell_color = 'leiden_clus', spat_point_shape = 'voronoi')
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/7-spatDimPlot2D.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/6-spatDimPlot2D.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 # heatmap and dendrogram
 showClusterHeatmap(gobject = seqfish_mini, cluster_column = 'leiden_clus')
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/8-showClusterHeatmap.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/7-showClusterHeatmap.png?raw=true){ width=50% }
 
 The following step requires the installation of {ggdendro}.
 
@@ -174,7 +174,7 @@ library(ggdendro)
 showClusterDendrogram(seqfish_mini, h = 0.5, rotate = T, cluster_column = 'leiden_clus')
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/9-showClusterDendrogram.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/8-showClusterDendrogram.png?raw=true){ width=50% }
 
 ## 5. Differential expression
 
@@ -191,7 +191,7 @@ topgenes_gini = gini_markers[, head(.SD, 2), by = 'cluster']
 violinPlot(seqfish_mini, feats = topgenes_gini$feats[1:4], cluster_column = 'leiden_clus')
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/10-violinPlot.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/9-violinPlot.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 # get top 6 genes per cluster and visualize with heatmap
@@ -200,7 +200,7 @@ plotMetaDataHeatmap(seqfish_mini, selected_feats = topgenes_gini2$feats,
                     metadata_cols = c('leiden_clus'))
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/11-plotMetaDataHeatmap.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/10-plotMetaDataHeatmap.png?raw=true){ width=50% }
 
 ## 6. Cell type annotation
 
@@ -219,7 +219,7 @@ spatDimPlot(gobject = seqfish_mini, cell_color = 'cell_types',
             spat_point_size = 3, dim_point_size = 3)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/12-spatDimPlot2D.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/11-spatDimPlot2D.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 # heatmap
@@ -232,7 +232,7 @@ plotHeatmap(gobject = seqfish_mini,
             legend_nrows = 1)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/13-plotHeatmap.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/12-plotHeatmap.png?raw=true){ width=50% }
 
 ## 7. Spatial grid
 
@@ -240,15 +240,15 @@ plotHeatmap(gobject = seqfish_mini,
 
 ```{r, eval=FALSE}
 seqfish_mini = createSpatialGrid(gobject = seqfish_mini,
-                                  sdimx_stepsize = 300,
-                                  sdimy_stepsize = 300,
-                                  minimum_padding = 50)
+                                 sdimx_stepsize = 300,
+                                 sdimy_stepsize = 300,
+                                 minimum_padding = 50)
 showGiottoSpatGrids(seqfish_mini)
 # visualize grid
 spatPlot(gobject = seqfish_mini, show_grid = T, point_size = 1.5)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/14-spatPlot2D.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/13-spatPlot2D.png?raw=true){ width=50% }
 
 ## 8. Spatial network
 
@@ -260,7 +260,7 @@ spatPlot(gobject = seqfish_mini, show_grid = T, point_size = 1.5)
 plotStatDelaunayNetwork(gobject = seqfish_mini, maximum_distance = 400)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/15-plotStatDelaunayNetwork.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/14-plotStatDelaunayNetwork.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 seqfish_mini = createSpatialNetwork(gobject = seqfish_mini, minimum_k = 2, 
@@ -274,7 +274,7 @@ spatPlot(gobject = seqfish_mini, show_network = T,
          point_size = 2.5, cell_color = 'leiden_clus')
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/16-spatPlot2D.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/15-spatPlot2D.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 spatPlot(gobject = seqfish_mini, show_network = T,
@@ -282,7 +282,7 @@ spatPlot(gobject = seqfish_mini, show_network = T,
          point_size = 2.5, cell_color = 'leiden_clus')
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/17-spatPlot2D.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/16-spatPlot2D.png?raw=true){ width=50% }
 
 ## 9. Spatial genes
 
@@ -303,7 +303,7 @@ spatFeatPlot2D(seqfish_mini, expression_values = 'scaled',
                cow_n_col = 2)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/18-spatFeatPlot2D.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/17-spatFeatPlot2D.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 rank_spatialgenes = binSpect(seqfish_mini, bin_method = 'rank')
@@ -314,7 +314,7 @@ spatFeatPlot2D(seqfish_mini, expression_values = 'scaled',
                cow_n_col = 2)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/19-spatFeatPlot2D.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/18-spatFeatPlot2D.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 silh_spatialgenes = silhouetteRank(gobject = seqfish_mini) # TODO: suppress print output
@@ -325,7 +325,7 @@ spatFeatPlot2D(seqfish_mini, expression_values = 'scaled',
                cow_n_col = 2)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/20-spatFeatPlot2D.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/19-spatFeatPlot2D.png?raw=true){ width=50% }
 
 ## 10. Spatial co-expression patterns
 
@@ -348,7 +348,7 @@ heatmSpatialCorFeats(seqfish_mini, spatCorObject = spat_cor_netw_DT,
                      use_clus_name = 'spat_netw_clus')
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/21-heatmSpatialCorFeats.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/20-heatmSpatialCorFeats.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 netw_ranks = rankSpatialCorGroups(seqfish_mini, 
@@ -356,7 +356,7 @@ netw_ranks = rankSpatialCorGroups(seqfish_mini,
                                   use_clus_name = 'spat_netw_clus')
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/22-rankSpatialCorGroups.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/21-rankSpatialCorGroups.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 top_netw_spat_cluster = showSpatialCorFeats(spat_cor_netw_DT, 
@@ -376,7 +376,7 @@ spatCellPlot(seqfish_mini,
              point_size = 1.5, cow_n_col = 3)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/23-spatCellPlot2D.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/22-spatCellPlot2D.png?raw=true){ width=50% }
 
 ## 11. Spatial HMRF domains
 
@@ -415,7 +415,7 @@ spatPlot(gobject = seqfish_mini, cell_color = 'HMRF_k9_b.28',
          point_size = 3, coord_fix_ratio = 1, cell_color_code = giotto_colors)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/24-spatPlot2D.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/23-spatPlot2D.png?raw=true){ width=50% }
 
 ## 12. Cell neighborhood: cell-type/cell-type interactions
 
@@ -432,7 +432,7 @@ cellProximityBarplot(gobject = seqfish_mini,
                      min_orig_ints = 5, min_sim_ints = 5, p_val = 0.5)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/25-cellProximityBarplot.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/24-cellProximityBarplot.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 ## heatmap
@@ -442,7 +442,7 @@ cellProximityHeatmap(gobject = seqfish_mini, CPscore = cell_proximities,
                      color_names = c('blue', 'white', 'red'))
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/26-cellProximityHeatmap.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/25-cellProximityHeatmap.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 # network
@@ -450,7 +450,8 @@ cellProximityNetwork(gobject = seqfish_mini, CPscore = cell_proximities,
                      remove_self_edges = T, only_show_enrichment_edges = T)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/27-cellProximityNetwork.png?raw=true){ width=50% }
+
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/26-cellProximityNetwork.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 # network with self-edges
@@ -463,7 +464,7 @@ cellProximityNetwork(gobject = seqfish_mini, CPscore = cell_proximities,
                      edge_weight_range_enrichment = c(2,5))
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/28-cellProximityNetwork.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/27-cellProximityNetwork.png?raw=true){ width=50% }
 
 ### Visualization of specific cell types
 
@@ -479,7 +480,7 @@ cellProximitySpatPlot2D(gobject = seqfish_mini,
                         point_size_select = 4, point_size_other = 2)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/29-cellProximitySpatPlot2D.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/28-cellProximitySpatPlot2D.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 # Option 2: create additional metadata
@@ -493,7 +494,7 @@ spatPlot(seqfish_mini, cell_color = 'D_F_interactions', legend_symbol_size = 3,
          select_cell_groups =  c('other_cell D', 'other_cell F', 'select_cell D', 'select_cell F'))
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/30-spatPlot2D.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/29-spatPlot2D.png?raw=true){ width=50% }
 
 ### 13. Cell neighborhood: interaction changed genes
 
@@ -506,19 +507,19 @@ quantile(gene_metadata$mean_expr_det)
 high_expressed_genes = gene_metadata[mean_expr_det > 4]$feat_ID
 
 ## identify genes that are associated with proximity to other cell types
-ICFscoresHighGenes =  findICF(gobject = seqfish_mini,
-                              selected_feats = high_expressed_genes,
-                              spatial_network_name = 'Delaunay_network',
-                              cluster_column = 'cell_types',
-                              diff_test = 'permutation',
-                              adjust_method = 'fdr',
-                              nr_permutations = 500,
-                              do_parallel = T)
+ICFscoresHighGenes = findICF(gobject = seqfish_mini,
+                             selected_feats = high_expressed_genes,
+                             spatial_network_name = 'Delaunay_network',
+                             cluster_column = 'cell_types',
+                             diff_test = 'permutation',
+                             adjust_method = 'fdr',
+                             nr_permutations = 500,
+                             do_parallel = T)
 ## visualize all genes
 plotCellProximityGenes(seqfish_mini, cpgObject = ICFscoresHighGenes, method = 'dotplot')
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/31-plotCellProximityGenes.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/30-plotCellProximityGenes.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 ## filter genes
@@ -535,7 +536,7 @@ plotICF(gobject = seqfish_mini,
         ICF_feats = ICF_genes)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/32-plotICF.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/31-plotICF.png?raw=true){ width=50% }
 
 ## 14. Cell neighborhood: ligand-receptor cell-cell communication
 
@@ -546,12 +547,14 @@ LR_data[, receptor_det := ifelse(mouseReceptor %in% seqfish_mini@feat_ID[['rna']
 LR_data_det = LR_data[ligand_det == T & receptor_det == T]
 select_ligands = LR_data_det$mouseLigand
 select_receptors = LR_data_det$mouseReceptor
+
 ## get statistical significance of gene pair expression changes based on expression ##
 expr_only_scores = exprCellCellcom(gobject = seqfish_mini,
                                    cluster_column = 'cell_types',
                                    random_iter = 50,
                                    feat_set_1 = select_ligands,
                                    feat_set_2 = select_receptors)
+
 ## get statistical significance of gene pair expression changes upon cell-cell interaction
 spatial_all_scores = spatCellCellcom(seqfish_mini,
                                      spat_unit = 'cell',
@@ -565,6 +568,7 @@ spatial_all_scores = spatCellCellcom(seqfish_mini,
                                      do_parallel = T,
                                      cores = 4,
                                      verbose = 'none')
+
 ## * plot communication scores ####
 ## select top LR ##
 selected_spat = spatial_all_scores[p.adj <= 0.5 & abs(log2fc) > 0.1 & lig_nr >= 2 & rec_nr >= 2]
@@ -578,7 +582,7 @@ plotCCcomHeatmap(gobject = seqfish_mini,
                  show = 'LR_expr')
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/33-plotCCcomHeatmap.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/32-plotCCcomHeatmap.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 plotCCcomDotplot(gobject = seqfish_mini,
@@ -588,7 +592,7 @@ plotCCcomDotplot(gobject = seqfish_mini,
                  cluster_on = 'PI')
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/34-plotCCcomDotplot.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/33-plotCCcomDotplot.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 ## * spatial vs rank ####
@@ -602,7 +606,7 @@ plotRankSpatvsExpr(gobject = seqfish_mini,
                    midpoint = 10)
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/35-plotRankSpatvsExpr.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/34-plotRankSpatvsExpr.png?raw=true){ width=50% }
 
 ```{r, eval=FALSE}
 ## * recovery ####
@@ -614,7 +618,7 @@ plotRecovery(gobject = seqfish_mini,
              ground_truth = 'spatial')
 ```
 
-![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220616_results/36-plotRecovery.png?raw=true){ width=50% }
+![](https://github.com/drieslab/Giotto_site_suite/blob/master/inst/images/mini_seqFISH/220915_results/35-plotRecovery.png?raw=true){ width=50% }
 
 ## 15. Export Giotto Analyzer to Viewer
 
