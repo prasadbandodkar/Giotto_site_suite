@@ -12,7 +12,7 @@ output:
 
 This tutorial walks through the visualization capabilities of Giotto. The clustering and dimension reduction methods focused on within the previous tutorial, [dimension reduction](./dimension_reduction.html), will be revisited and utilized to create heatmaps, violin plots, and visualizations that are unique to Giotto: spatial maps and networks.
 
-This tutorial uses a merFISH dataset of mouse hypothalamic preoptic regions from [Moffitt et al.](https://doi.org/10.1126/science.aau5324) A complete walkthrough of that dataset can be found [**here**](./merFISH_hypoth_210924.html). To download the data used to create the Giotto Object below, please ensure that [wget](https://www.gnu.org/software/wget/?) is installed locally.
+This tutorial uses a merFISH dataset of mouse hypothalamic preoptic regions from [Moffitt et al.](https://doi.org/10.1126/science.aau5324) A complete walkthrough of that dataset can be found [**here**](./merFISH_hypoth_220915.html). To download the data used to create the Giotto Object below, please ensure that [wget](https://www.gnu.org/software/wget/?) is installed locally.
 
 ## Create the Giotto Object
 ```{r, eval=FALSE}
