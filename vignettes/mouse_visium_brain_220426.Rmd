@@ -17,15 +17,16 @@ results_folder = 'path/to/result'
 # set python path to conda env/bin/ directory if manually installed Giotto python dependencies by conda
 # python_path = '/path_to_conda/.conda/envs/giotto/bin/python'
 # set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment
-# python_path = NULL
-# if(is.null(python_path)) {
-#  installGiottoEnvironment()
-#}
+python_path = NULL
+if(is.null(python_path)) {
+  installGiottoEnvironment()
+}
 
 # 3. Create Giotto Instructions
 instrs = createGiottoInstructions(save_dir = results_folder,
                                   save_plot = TRUE,
-                                  show_plot = FALSE)
+                                  show_plot = FALSE,
+                                  python_path = python_path)
 ```
 
 ## Dataset explanation
@@ -293,7 +294,7 @@ Visium spatial transcriptomics does not provide single-cell resolution, making c
 - hypergeometric test   
 - Rank   
 - [DWLS Deconvolution](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02362-7) 
-Corresponded Single cell dataset can be generated from [here](http://mousebrain.org/downloads.html).
+Corresponded Single cell dataset can be generated from [here](http://mousebrain.org/).
 Giotto_SC is processed from the downsampled [Loom](https://satijalab.org/loomr/loomr_tutorial) file and can also be downloaded from getSpatialDataset.
 
 ```{r eval = FALSE}
