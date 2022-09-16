@@ -572,17 +572,18 @@ FOVs needed
 <p>Cell boundary annotations are represented in Giotto as
 <code>giottoPolygon</code> objects which can be previewed by directly
 plotting them.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read polygons and add them to Giotto</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># fovs param is optional</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># polygon_feat_types determines which Vizgen polygon z slices are loaded (There are z0 - z6)</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>polys <span class="ot">=</span> <span class="fu">readPolygonFilesVizgenHDF5</span>(<span class="at">boundaries_path =</span> bound_path,</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">polygon_feat_types =</span> <span class="fu">c</span>(<span class="st">'z0'</span>,<span class="st">'z6'</span>)</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">flip_y_axis =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">fovs =</span> subsetFOVs)</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co"># polys is produced as a list of 2 giottoPolygon objects (z0 and z6)</span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co"># previewing the first one...</span></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(polys[[<span class="dv">1</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># read polygons and add them to Giotto</span></span>
+<span><span class="co"># fovs param is optional</span></span>
+<span><span class="co"># polygon_feat_types determines which Vizgen polygon z slices are loaded (There are z0 - z6)</span></span>
+<span><span class="va">polys</span> <span class="op">=</span> <span class="fu"><a href="../reference/readPolygonFilesVizgenHDF5.html">readPolygonFilesVizgenHDF5</a></span><span class="op">(</span>boundaries_path <span class="op">=</span> <span class="va">bound_path</span>,</span>
+<span>                                   polygon_feat_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'z0'</span>,<span class="st">'z6'</span><span class="op">)</span>,</span>
+<span>                                   flip_y_axis <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                   fovs <span class="op">=</span> <span class="va">subsetFOVs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># polys is produced as a list of 2 giottoPolygon objects (z0 and z6)</span></span>
+<span><span class="co"># previewing the first one...</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/plot-generic.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">polys</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/vizgen_mouse_brain//13-poly.png" style="width:50.0%"></p>
 </div>
 <div class="section level3">

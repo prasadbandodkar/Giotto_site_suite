@@ -227,7 +227,9 @@ sample “BALBc-3” were selected for the analysis.</p>
 <span><span class="va">xtilespan</span> <span class="op">=</span> <span class="fl">1344</span>;</span>
 <span><span class="va">ytilespan</span> <span class="op">=</span> <span class="fl">1008</span>;</span>
 <span><span class="co"># TODO: expand the documentation and input format of stitchTileCoordinates. Probably not enough information for new users.</span></span>
-<span><span class="va">stitch_file</span> <span class="op">=</span> <span class="fu"><a href="../reference/stitchTileCoordinates.html">stitchTileCoordinates</a></span><span class="op">(</span>location_file <span class="op">=</span> <span class="va">codex_metadata</span>, Xtilespan <span class="op">=</span> <span class="va">xtilespan</span>, Ytilespan <span class="op">=</span> <span class="va">ytilespan</span><span class="op">)</span>;</span>
+<span><span class="va">stitch_file</span> <span class="op">=</span> <span class="fu"><a href="../reference/stitchTileCoordinates.html">stitchTileCoordinates</a></span><span class="op">(</span>location_file <span class="op">=</span> <span class="va">codex_metadata</span>,</span>
+<span>                                    Xtilespan <span class="op">=</span> <span class="va">xtilespan</span>,</span>
+<span>                                    Ytilespan <span class="op">=</span> <span class="va">ytilespan</span><span class="op">)</span></span>
 <span><span class="va">codex_locations</span> <span class="op">=</span> <span class="va">stitch_file</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">Xcoord</span>, <span class="va">Ycoord</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># create Giotto object</span></span>
@@ -236,11 +238,13 @@ sample “BALBc-3” were selected for the analysis.</p>
 <span>                                 instructions <span class="op">=</span> <span class="va">instrs</span><span class="op">)</span></span>
 <span><span class="va">codex_metadata</span><span class="op">$</span><span class="va">cell_ID</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">codex_metadata</span><span class="op">$</span><span class="va">cellID</span><span class="op">)</span></span>
 <span><span class="va">codex_test</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">codex_test</span>, new_metadata <span class="op">=</span> <span class="va">codex_metadata</span>,</span>
-<span>                           by_column <span class="op">=</span> <span class="cn">T</span>, column_cell_ID <span class="op">=</span> <span class="st">"cell_ID"</span><span class="op">)</span></span>
+<span>                           by_column <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                           column_cell_ID <span class="op">=</span> <span class="st">"cell_ID"</span><span class="op">)</span></span>
 <span><span class="co"># subset Giotto object</span></span>
 <span><span class="va">cell_meta</span> <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">codex_test</span><span class="op">)</span></span>
 <span><span class="va">cell_IDs_to_keep</span> <span class="op">=</span> <span class="va">cell_meta</span><span class="op">[</span><span class="va">Imaging_phenotype_cell_type</span> <span class="op">!=</span> <span class="st">"dirt"</span> <span class="op">&amp;</span> <span class="va">Imaging_phenotype_cell_type</span> <span class="op">!=</span> <span class="st">"noid"</span> <span class="op">&amp;</span> <span class="va">Imaging_phenotype_cell_type</span> <span class="op">!=</span> <span class="st">"capsule"</span>,<span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span></span>
-<span><span class="va">codex_test</span> <span class="op">=</span> <span class="fu"><a href="../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">codex_test</span>, cell_ids <span class="op">=</span> <span class="va">cell_IDs_to_keep</span><span class="op">)</span></span>
+<span><span class="va">codex_test</span> <span class="op">=</span> <span class="fu"><a href="../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">codex_test</span>,</span>
+<span>                          cell_ids <span class="op">=</span> <span class="va">cell_IDs_to_keep</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## filter</span></span>
 <span><span class="va">codex_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filterGiotto.html">filterGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
@@ -250,9 +254,13 @@ sample “BALBc-3” were selected for the analysis.</p>
 <span>                           expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'raw'</span><span class="op">)</span>,</span>
 <span>                           verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">codex_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, scalefactor <span class="op">=</span> <span class="fl">6000</span>, verbose <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>                              log_norm <span class="op">=</span> <span class="cn">FALSE</span>,library_size_norm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>                              scale_feats <span class="op">=</span> <span class="cn">FALSE</span>, scale_cells <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">codex_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeGiotto.html">normalizeGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
+<span>                              scalefactor <span class="op">=</span> <span class="fl">6000</span>,</span>
+<span>                              verbose <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                              log_norm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                              library_size_norm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                              scale_feats <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                              scale_cells <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## add gene &amp; cell statistics</span></span>
 <span><span class="va">codex_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/addStatistics.html">addStatistics</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,expression_values <span class="op">=</span> <span class="st">"normalized"</span><span class="op">)</span></span>
@@ -260,7 +268,7 @@ sample “BALBc-3” were selected for the analysis.</p>
 <span><span class="co">## adjust expression matrix for technical or known variables</span></span>
 <span><span class="va">codex_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/adjustGiottoMatrix.html">adjustGiottoMatrix</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, </span>
 <span>                                 expression_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'normalized'</span><span class="op">)</span>,</span>
-<span>                                 batch_columns <span class="op">=</span> <span class="cn">NULL</span>, </span>
+<span>                                 batch_columns <span class="op">=</span> <span class="st">'sample_Xtile_Ytile'</span>, </span>
 <span>                                 covariate_columns <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>                                 return_gobject <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                 update_slot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'custom'</span><span class="op">)</span><span class="op">)</span></span>
@@ -272,9 +280,12 @@ sample “BALBc-3” were selected for the analysis.</p>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/2_a_spatPlot.png" style="width:50.0%"></p>
 <p>Show different regions of the dataset</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
-<span>         coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>, cell_color <span class="op">=</span> <span class="st">'sample_Xtile_Ytile'</span>,</span>
-<span>         legend_symbol_size <span class="op">=</span> <span class="fl">3</span>,legend_text <span class="op">=</span> <span class="fl">5</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
+<span>         point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>         coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>         cell_color <span class="op">=</span> <span class="st">'sample_Xtile_Ytile'</span>,</span>
+<span>         legend_symbol_size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>         legend_text <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'2_b_spatPlot'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/2_b_spatPlot.png" style="width:50.0%"></p>
 </div>
@@ -285,18 +296,30 @@ sample “BALBc-3” were selected for the analysis.</p>
 <code class="sourceCode R"><span><span class="co"># use all Abs</span></span>
 <span></span>
 <span><span class="co"># PCA</span></span>
-<span><span class="va">codex_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runPCA.html">runPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, expression_values <span class="op">=</span> <span class="st">'normalized'</span>, scale_unit <span class="op">=</span> <span class="cn">T</span>, method <span class="op">=</span> <span class="st">"factominer"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/signPCA.html">signPCA</a></span><span class="op">(</span><span class="va">codex_test</span>, scale_unit <span class="op">=</span> <span class="cn">T</span>, scree_ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span><span class="va">codex_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runPCA.html">runPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
+<span>                     expression_values <span class="op">=</span> <span class="st">'normalized'</span>,</span>
+<span>                     scale_unit <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                     method <span class="op">=</span> <span class="st">"factominer"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/signPCA.html">signPCA</a></span><span class="op">(</span><span class="va">codex_test</span>,</span>
+<span>        scale_unit <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>        scree_ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>        save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'3_a_spatPlot'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/3_a_spatPlot.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotPCA.html">plotPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, point_shape <span class="op">=</span> <span class="st">'no_border'</span>, point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotPCA.html">plotPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
+<span>        point_shape <span class="op">=</span> <span class="st">'no_border'</span>,</span>
+<span>        point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>        save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'3_b_PCA'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/3_b_PCA.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># UMAP</span></span>
-<span><span class="va">codex_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runUMAP.html">runUMAP</a></span><span class="op">(</span><span class="va">codex_test</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">14</span>, n_components <span class="op">=</span> <span class="fl">2</span>, n_threads <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, point_shape <span class="op">=</span> <span class="st">'no_border'</span>, point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span><span class="va">codex_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runUMAP.html">runUMAP</a></span><span class="op">(</span><span class="va">codex_test</span>,</span>
+<span>                      dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">14</span>,</span>
+<span>                      n_components <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>                      n_threads <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
+<span>         point_shape <span class="op">=</span> <span class="st">'no_border'</span>,</span>
+<span>         point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'3_c_UMAP'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/3_c_UMAP.png" style="width:50.0%"></p>
 </div>
@@ -305,23 +328,37 @@ sample “BALBc-3” were selected for the analysis.</p>
 </h2>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## sNN network (default)</span></span>
-<span><span class="va">codex_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createNearestNetwork.html">createNearestNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">14</span>, k <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="va">codex_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createNearestNetwork.html">createNearestNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
+<span>                                   dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">14</span>,</span>
+<span>                                   k <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## 0.1 resolution</span></span>
-<span><span class="va">codex_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doLeidenCluster.html">doLeidenCluster</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, resolution <span class="op">=</span> <span class="fl">0.5</span>, n_iterations <span class="op">=</span> <span class="fl">100</span>, name <span class="op">=</span> <span class="st">'leiden'</span><span class="op">)</span></span>
+<span><span class="va">codex_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doLeidenCluster.html">doLeidenCluster</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
+<span>                              resolution <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>                              n_iterations <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>                              name <span class="op">=</span> <span class="st">'leiden'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">codex_metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">codex_test</span><span class="op">)</span></span>
 <span><span class="va">leiden_colors</span> <span class="op">=</span> <span class="fu">Giotto</span><span class="fu">:::</span><span class="fu"><a href="../reference/getDistinctColors.html">getDistinctColors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">codex_metadata</span><span class="op">$</span><span class="va">leiden</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">leiden_colors</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">codex_metadata</span><span class="op">$</span><span class="va">leiden</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, </span>
-<span>         cell_color <span class="op">=</span> <span class="st">'leiden'</span>, point_shape <span class="op">=</span> <span class="st">'no_border'</span>, point_size <span class="op">=</span> <span class="fl">0.2</span>, cell_color_code <span class="op">=</span> <span class="va">leiden_colors</span>,</span>
+<span>         cell_color <span class="op">=</span> <span class="st">'leiden'</span>,</span>
+<span>         point_shape <span class="op">=</span> <span class="st">'no_border'</span>,</span>
+<span>         point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>         cell_color_code <span class="op">=</span> <span class="va">leiden_colors</span>,</span>
 <span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'4_a_UMAP'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/4_a_UMAP.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, cell_color <span class="op">=</span> <span class="st">'leiden'</span>, point_shape <span class="op">=</span> <span class="st">'no_border'</span>, point_size <span class="op">=</span> <span class="fl">0.2</span>, </span>
-<span>         cell_color_code <span class="op">=</span> <span class="va">leiden_colors</span>, coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>,label_size <span class="op">=</span><span class="fl">2</span>,</span>
-<span>         legend_text <span class="op">=</span> <span class="fl">5</span>,legend_symbol_size <span class="op">=</span> <span class="fl">2</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
+<span>         cell_color <span class="op">=</span> <span class="st">'leiden'</span>,</span>
+<span>         point_shape <span class="op">=</span> <span class="st">'no_border'</span>,</span>
+<span>         point_size <span class="op">=</span> <span class="fl">0.2</span>, </span>
+<span>         cell_color_code <span class="op">=</span> <span class="va">leiden_colors</span>,</span>
+<span>         coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>         label_size <span class="op">=</span><span class="fl">2</span>,</span>
+<span>         legend_text <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>         legend_symbol_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'4_b_spatplot'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/4_b_spatplot.png" style="width:50.0%"></p>
 </div>
@@ -329,9 +366,14 @@ sample “BALBc-3” were selected for the analysis.</p>
 <h2 id="part-5-co-visualize">Part 5: Co-visualize<a class="anchor" aria-label="anchor" href="#part-5-co-visualize"></a>
 </h2>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatDimPlot2D.html">spatDimPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, cell_color <span class="op">=</span> <span class="st">'leiden'</span>, spat_point_shape <span class="op">=</span> <span class="st">'no_border'</span>, </span>
-<span>              spat_point_size <span class="op">=</span> <span class="fl">0.2</span>, dim_point_shape <span class="op">=</span> <span class="st">'no_border'</span>, dim_point_size <span class="op">=</span> <span class="fl">0.2</span>, </span>
-<span>              cell_color_code <span class="op">=</span> <span class="va">leiden_colors</span>,plot_alignment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"horizontal"</span><span class="op">)</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatDimPlot2D.html">spatDimPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
+<span>              cell_color <span class="op">=</span> <span class="st">'leiden'</span>,</span>
+<span>              spat_point_shape <span class="op">=</span> <span class="st">'no_border'</span>, </span>
+<span>              spat_point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>              dim_point_shape <span class="op">=</span> <span class="st">'no_border'</span>,</span>
+<span>              dim_point_size <span class="op">=</span> <span class="fl">0.2</span>, </span>
+<span>              cell_color_code <span class="op">=</span> <span class="va">leiden_colors</span>,</span>
+<span>              plot_alignment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"horizontal"</span><span class="op">)</span>,</span>
 <span>              save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'5_a_spatdimplot'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/5_a_spatdimplot.png" style="width:50.0%"></p>
 </div>
@@ -340,35 +382,54 @@ sample “BALBc-3” were selected for the analysis.</p>
 </h2>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cluster_column</span> <span class="op">=</span> <span class="st">'leiden'</span></span>
-<span><span class="va">markers_scran</span> <span class="op">=</span> <span class="fu"><a href="../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject<span class="op">=</span><span class="va">codex_test</span>, method<span class="op">=</span><span class="st">"scran"</span>,</span>
-<span>                                       expression_values<span class="op">=</span><span class="st">"normalized"</span>, cluster_column<span class="op">=</span><span class="va">cluster_column</span>, min_feats<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">markers_scran</span> <span class="op">=</span> <span class="fu"><a href="../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject<span class="op">=</span><span class="va">codex_test</span>,</span>
+<span>                                       method<span class="op">=</span><span class="st">"scran"</span>,</span>
+<span>                                       expression_values<span class="op">=</span><span class="st">"normalized"</span>,</span>
+<span>                                       cluster_column<span class="op">=</span><span class="va">cluster_column</span>,</span>
+<span>                                       min_feats<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">markergenes_scran</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">markers_scran</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">5</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"cluster"</span><span class="op">]</span><span class="op">[[</span><span class="st">"feats"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">codex_test</span>, expression_values <span class="op">=</span> <span class="st">"normalized"</span>, metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cluster_column</span><span class="op">)</span>, </span>
+<span><span class="fu"><a href="../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">codex_test</span>,</span>
+<span>                    expression_values <span class="op">=</span> <span class="st">"normalized"</span>,</span>
+<span>                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cluster_column</span><span class="op">)</span>, </span>
 <span>                    selected_feats <span class="op">=</span> <span class="va">markergenes_scran</span>,</span>
-<span>                    y_text_size <span class="op">=</span> <span class="fl">8</span>, show_values <span class="op">=</span> <span class="st">'zscores_rescaled'</span>,</span>
+<span>                    y_text_size <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>                    show_values <span class="op">=</span> <span class="st">'zscores_rescaled'</span>,</span>
 <span>                    save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'6_a_metaheatmap'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/6_a_metaheatmap.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">topgenes_scran</span> <span class="op">=</span> <span class="va">markers_scran</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">1</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span></span>
-<span><span class="fu"><a href="../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">codex_test</span>, feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">topgenes_scran</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, cluster_column <span class="op">=</span> <span class="va">cluster_column</span>,</span>
-<span>           strip_text <span class="op">=</span> <span class="fl">8</span>, strip_position <span class="op">=</span> <span class="st">'right'</span>,</span>
+<span><span class="fu"><a href="../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">codex_test</span>,</span>
+<span>           feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">topgenes_scran</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>,</span>
+<span>           cluster_column <span class="op">=</span> <span class="va">cluster_column</span>,</span>
+<span>           strip_text <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>           strip_position <span class="op">=</span> <span class="st">'right'</span>,</span>
 <span>           save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'6_b_violinplot'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/6_b_violinplot.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># gini</span></span>
-<span><span class="va">markers_gini</span> <span class="op">=</span> <span class="fu"><a href="../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject<span class="op">=</span><span class="va">codex_test</span>, method<span class="op">=</span><span class="st">"gini"</span>, expression_values<span class="op">=</span><span class="st">"normalized"</span>,</span>
-<span>                                      cluster_column<span class="op">=</span><span class="va">cluster_column</span>, min_feats<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
-<span><span class="va">markergenes_gini</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">markers_gini</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">5</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"cluster"</span><span class="op">]</span><span class="op">[[</span><span class="st">"feats"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">codex_test</span>, expression_values <span class="op">=</span> <span class="st">"normalized"</span>, </span>
-<span>                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cluster_column</span><span class="op">)</span>, selected_feats <span class="op">=</span> <span class="va">markergenes_gini</span>,</span>
+<span><span class="va">markers_gini</span> <span class="op">=</span> <span class="fu"><a href="../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
+<span>                                      method <span class="op">=</span> <span class="st">"gini"</span>,</span>
+<span>                                      expression_values <span class="op">=</span> <span class="st">"normalized"</span>,</span>
+<span>                                      cluster_column <span class="op">=</span> <span class="va">cluster_column</span>,</span>
+<span>                                      min_feats<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">markergenes_gini</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">markers_gini</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">5</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"cluster"</span><span class="op">]</span><span class="op">[[</span><span class="st">"feats"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">codex_test</span>,</span>
+<span>                    expression_values <span class="op">=</span> <span class="st">"normalized"</span>, </span>
+<span>                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cluster_column</span><span class="op">)</span>,</span>
+<span>                    selected_feats <span class="op">=</span> <span class="va">markergenes_gini</span>,</span>
 <span>                    show_values <span class="op">=</span> <span class="st">'zscores_rescaled'</span>,</span>
 <span>                    save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'6_c_metaheatmap'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/6_c_metaheatmap.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">topgenes_gini</span> <span class="op">=</span> <span class="va">markers_gini</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">1</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span></span>
-<span><span class="fu"><a href="../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">codex_test</span>, feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">topgenes_gini</span><span class="op">)</span>, cluster_column <span class="op">=</span> <span class="va">cluster_column</span>,</span>
-<span>           strip_text <span class="op">=</span> <span class="fl">8</span>, strip_position <span class="op">=</span> <span class="st">'right'</span>,</span>
+<span><span class="fu"><a href="../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">codex_test</span>,</span>
+<span>           feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">topgenes_gini</span><span class="op">)</span>,</span>
+<span>           cluster_column <span class="op">=</span> <span class="va">cluster_column</span>,</span>
+<span>           strip_text <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>           strip_position <span class="op">=</span> <span class="st">'right'</span>,</span>
 <span>           save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'6_d_violinplot'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/6_d_violinplot.png" style="width:50.0%"></p>
 </div>
@@ -380,30 +441,42 @@ sample “BALBc-3” were selected for the analysis.</p>
 <span>                       <span class="st">"macrophages"</span>,<span class="st">"erythroblasts"</span>,<span class="st">"erythroblasts"</span>,<span class="st">"erythroblasts"</span>,<span class="st">"CD8 + T cells"</span>,</span>
 <span>                       <span class="st">"Naive T cells"</span>,<span class="st">"CD4+ T cells"</span>,<span class="st">"Naive T cells"</span>, <span class="st">"CD4+ T cells"</span>,<span class="st">"Dendritic cells"</span>,</span>
 <span>                       <span class="st">"NK cells"</span>,<span class="st">"Dendritic cells"</span>,<span class="st">"Plasma cells"</span>,<span class="st">"endothelial cells"</span>,<span class="st">"monocytes"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">clusters_cell_types</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">15</span>,<span class="fl">13</span>,<span class="fl">5</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">19</span>,<span class="fl">1</span>,<span class="fl">10</span>,<span class="fl">3</span>,<span class="fl">12</span>,<span class="fl">14</span>,<span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">16</span>,<span class="fl">17</span>,<span class="fl">18</span>,<span class="fl">11</span>,<span class="fl">20</span><span class="op">)</span></span>
-<span><span class="va">codex_test</span> <span class="op">=</span> <span class="fu"><a href="../reference/annotateGiotto.html">annotateGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, annotation_vector <span class="op">=</span> <span class="va">clusters_cell_types</span>,</span>
+<span></span>
+<span><span class="va">codex_test</span> <span class="op">=</span> <span class="fu"><a href="../reference/annotateGiotto.html">annotateGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
+<span>                            annotation_vector <span class="op">=</span> <span class="va">clusters_cell_types</span>,</span>
 <span>                            cluster_column <span class="op">=</span> <span class="st">'leiden'</span>, name <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span>,point_shape <span class="op">=</span> <span class="st">'no_border'</span>,   point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
+<span>         cell_color <span class="op">=</span> <span class="st">'cell_types'</span>,</span>
+<span>         point_shape <span class="op">=</span> <span class="st">'no_border'</span>,</span>
+<span>         point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>         show_center_label <span class="op">=</span> <span class="cn">F</span>,</span>
-<span>         label_size <span class="op">=</span><span class="fl">2</span>,</span>
+<span>         label_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         legend_text <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>         legend_symbol_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'7_a_umap_celltypes'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/7_a_umap_celltypes.png" style="width:50.0%"></p>
 <p>Or, this dataset comes with the imaging phenotype annotation</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, cell_color <span class="op">=</span> <span class="st">'Imaging_phenotype_cell_type'</span>,point_shape <span class="op">=</span> <span class="st">'no_border'</span>,   point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
+<span>         cell_color <span class="op">=</span> <span class="st">'Imaging_phenotype_cell_type'</span>,</span>
+<span>         point_shape <span class="op">=</span> <span class="st">'no_border'</span>,</span>
+<span>         point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>         show_center_label <span class="op">=</span> <span class="cn">F</span>,</span>
-<span>         label_size <span class="op">=</span><span class="fl">2</span>,</span>
+<span>         label_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         legend_text <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>         legend_symbol_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'7_b_umap'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/7_b_umap.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>, cell_color <span class="op">=</span> <span class="st">'Imaging_phenotype_cell_type'</span>, point_shape <span class="op">=</span> <span class="st">'no_border'</span>, point_size <span class="op">=</span> <span class="fl">0.2</span>, </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test</span>,</span>
+<span>         cell_color <span class="op">=</span> <span class="st">'Imaging_phenotype_cell_type'</span>,</span>
+<span>         point_shape <span class="op">=</span> <span class="st">'no_border'</span>,</span>
+<span>         point_size <span class="op">=</span> <span class="fl">0.2</span>, </span>
 <span>         coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>         label_size <span class="op">=</span><span class="fl">2</span>,</span>
+<span>         label_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         legend_text <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>         legend_symbol_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'7_c_spatplot'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -417,21 +490,26 @@ zones<a class="anchor" aria-label="anchor" href="#part-8-visualize-cell-types-an
 <code class="sourceCode R"><span><span class="va">cell_metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">codex_test</span><span class="op">)</span></span>
 <span><span class="va">subset_cell_ids</span> <span class="op">=</span> <span class="va">cell_metadata</span><span class="op">[</span><span class="va">sample_Xtile_Ytile</span><span class="op">==</span><span class="st">"BALBc-3_X04_Y08"</span><span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span></span>
 <span></span>
-<span><span class="va">codex_test_zone1</span> <span class="op">=</span> <span class="fu"><a href="../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">codex_test</span>, cell_ids <span class="op">=</span> <span class="va">subset_cell_ids</span><span class="op">)</span></span>
+<span><span class="va">codex_test_zone1</span> <span class="op">=</span> <span class="fu"><a href="../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">codex_test</span>,</span>
+<span>                                cell_ids <span class="op">=</span> <span class="va">subset_cell_ids</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test_zone1</span>, </span>
-<span>         cell_color <span class="op">=</span> <span class="st">'Imaging_phenotype_cell_type'</span>, point_shape <span class="op">=</span> <span class="st">'no_border'</span>,   point_size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>         cell_color <span class="op">=</span> <span class="st">'Imaging_phenotype_cell_type'</span>,</span>
+<span>         point_shape <span class="op">=</span> <span class="st">'no_border'</span>,</span>
+<span>         point_size <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>         show_center_label <span class="op">=</span> <span class="cn">F</span>,</span>
-<span>         label_size <span class="op">=</span><span class="fl">2</span>,</span>
+<span>         label_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         legend_text <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>         legend_symbol_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'8_a_umap'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/8_a_umap.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test_zone1</span>, </span>
-<span>         cell_color <span class="op">=</span> <span class="st">'Imaging_phenotype_cell_type'</span>, point_shape <span class="op">=</span> <span class="st">'no_border'</span>, point_size <span class="op">=</span> <span class="fl">1</span>, </span>
+<span>         cell_color <span class="op">=</span> <span class="st">'Imaging_phenotype_cell_type'</span>,</span>
+<span>         point_shape <span class="op">=</span> <span class="st">'no_border'</span>,</span>
+<span>         point_size <span class="op">=</span> <span class="fl">1</span>, </span>
 <span>         coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>         label_size <span class="op">=</span><span class="fl">2</span>,</span>
+<span>         label_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         legend_text <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>         legend_symbol_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'8_b_spatplot'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -452,17 +530,23 @@ zones<a class="anchor" aria-label="anchor" href="#part-8-visualize-cell-types-an
 <span></span>
 <span><span class="va">codex_test_zone2</span> <span class="op">=</span> <span class="fu"><a href="../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">codex_test</span>, cell_ids <span class="op">=</span> <span class="va">subset_cell_ids</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test_zone2</span>, cell_color <span class="op">=</span> <span class="st">'Imaging_phenotype_cell_type'</span>,point_shape <span class="op">=</span> <span class="st">'no_border'</span>,   point_size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test_zone2</span>,</span>
+<span>         cell_color <span class="op">=</span> <span class="st">'Imaging_phenotype_cell_type'</span>,</span>
+<span>         point_shape <span class="op">=</span> <span class="st">'no_border'</span>,</span>
+<span>         point_size <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>         show_center_label <span class="op">=</span> <span class="cn">F</span>,</span>
-<span>         label_size <span class="op">=</span><span class="fl">2</span>,</span>
+<span>         label_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         legend_text <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>         legend_symbol_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'8_d_umap'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/mouse_codex_spleen/vignette_sep29_2021/8_d_umap.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test_zone2</span>, cell_color <span class="op">=</span> <span class="st">'Imaging_phenotype_cell_type'</span>, point_shape <span class="op">=</span> <span class="st">'no_border'</span>, point_size <span class="op">=</span> <span class="fl">1</span>, </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">codex_test_zone2</span>,</span>
+<span>         cell_color <span class="op">=</span> <span class="st">'Imaging_phenotype_cell_type'</span>,</span>
+<span>         point_shape <span class="op">=</span> <span class="st">'no_border'</span>,</span>
+<span>         point_size <span class="op">=</span> <span class="fl">1</span>, </span>
 <span>         coord_fix_ratio <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>         label_size <span class="op">=</span><span class="fl">2</span>,</span>
+<span>         label_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         legend_text <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>         legend_symbol_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'8_e_spatPlot'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>

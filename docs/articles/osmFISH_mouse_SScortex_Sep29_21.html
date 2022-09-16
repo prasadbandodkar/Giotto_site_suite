@@ -492,7 +492,7 @@ metadata.</p>
 <p><img src="../inst/images/osmFISH_mouse_SS_cortex/vignette_sep29_2021/12_b_heatmap_cell_cell_enrichment.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## network</span></span>
-<span><span class="fu"><a href="../reference/cellProximityNetwork.html">cellProximityNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">osm_test</span>, CPscore <span class="op">=</span> <span class="va">cell_proximities</span>, remove_self_edges <span class="op">=</span> <span class="cn">T</span>, only_show_enrichment_edges <span class="op">=</span> <span class="cn">T</span>,</span>
+<span><span class="fu"><a href="../reference/cellProximityNetwork.html">cellProximityNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">osm_test</span>, CPscore <span class="op">=</span> <span class="va">cell_proximities</span>, remove_self_edges <span class="op">=</span> <span class="cn">F</span>, only_show_enrichment_edges <span class="op">=</span> <span class="cn">T</span>,</span>
 <span>                     save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'12_c_network_cell_cell_enrichment'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/osmFISH_mouse_SS_cortex/vignette_sep29_2021/12_c_network_cell_cell_enrichment.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
