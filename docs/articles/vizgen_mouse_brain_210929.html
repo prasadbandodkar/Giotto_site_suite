@@ -183,8 +183,8 @@ Peixoto</h4>
 <div class="section level2">
 <h2 id="dataset-explanation">2. Dataset explanation<a class="anchor" aria-label="anchor" href="#dataset-explanation"></a>
 </h2>
-<p>This vignette covers Giotto object creation and exploratory analysis
-with the subcellular <a href="https://vizgen.com/applications/neuroscience-showcase/" class="external-link">MERFISH
+<p>This vignette covers Giotto object creation and simple exploratory
+analysis with the subcellular <a href="https://vizgen.com/applications/neuroscience-showcase/" class="external-link">MERFISH
 Mouse Brain Receptor Map dataset</a> provided by Vizgen with their
 MERSCOPE platform.</p>
 <p>Transcripts are captured at the single-molecule level with
@@ -260,6 +260,10 @@ images</strong> (TIFF)</p></li>
 <span><span class="va">meta_path</span> <span class="op">=</span> <span class="st">'/path/to/datasets_mouse_brain_map_BrainReceptorShowcase_Slice1_Replicate1_cell_metadata_S1R1.csv'</span></span>
 <span><span class="co"># provide path to the detected transcripts (single molecule level transcript spatial information)</span></span>
 <span><span class="va">tx_path</span> <span class="op">=</span> <span class="st">'/path/to/datasets_mouse_brain_map_BrainReceptorShowcase_Slice1_Replicate1_detected_transcripts_S1R1.csv'</span></span>
+<span><span class="co"># define path to cell boundaries folder</span></span>
+<span><span class="va">bound_path</span> <span class="op">=</span> <span class="st">'/path/to/cell_boundaries'</span></span>
+<span><span class="co"># path to image scale conversion values</span></span>
+<span><span class="va">img_scale_path</span> <span class="op">=</span> <span class="st">'path/to/micron_to_mosaic_pixel_transform.csv'</span></span>
 <span><span class="co"># provide path to the dapi image of slice 1 replicate 1</span></span>
 <span><span class="va">img_path</span> <span class="op">=</span> <span class="st">'path/to/mosaic_DAPI_z0.tif'</span></span></code></pre></div>
 </div>
@@ -289,15 +293,15 @@ more information</a></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># read expression matrix and metadata</span></span>
 <span><span class="va">expr_matrix</span> <span class="op">=</span> <span class="fu"><a href="../reference/readExprMatrix.html">readExprMatrix</a></span><span class="op">(</span><span class="va">expr_path</span><span class="op">)</span></span>
-<span><span class="va">spat_dt</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">meta_path</span><span class="op">)</span></span>
+<span><span class="va">meta_dt</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">meta_path</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># create giotto object</span></span>
 <span><span class="va">vizgen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="fu">Giotto</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/t_flex.html" class="external-link">t_flex</a></span><span class="op">(</span><span class="va">expr_matrix</span><span class="op">)</span>,</span>
-<span>                             spatial_locs <span class="op">=</span> <span class="va">spat_dt</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">center_x</span>, <span class="op">-</span><span class="va">center_y</span>, <span class="va">V1</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>                             spatial_locs <span class="op">=</span> <span class="va">meta_dt</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">center_x</span>, <span class="op">-</span><span class="va">center_y</span>, <span class="va">V1</span><span class="op">)</span><span class="op">]</span>,</span>
 <span>                             instructions <span class="op">=</span> <span class="va">instrs</span><span class="op">)</span></span>
 <span><span class="co"># add metadata of fov and volume</span></span>
 <span><span class="va">vizgen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">vizgen</span>,</span>
-<span>                          new_metadata <span class="op">=</span> <span class="va">spat_dt</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">fov</span>, <span class="va">volume</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<span>                          new_metadata <span class="op">=</span> <span class="va">meta_dt</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">fov</span>, <span class="va">volume</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="visualize-cells-in-space-">Visualize cells in space.<a class="anchor" aria-label="anchor" href="#visualize-cells-in-space-"></a>
 </h3>
@@ -310,10 +314,18 @@ more information</a></p>
 <h3 id="visualize-cells-by-fov-">Visualize cells by FOV.<a class="anchor" aria-label="anchor" href="#visualize-cells-by-fov-"></a>
 </h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span><span class="va">vizgen</span>, point_size <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<code class="sourceCode R"><span><span class="co"># FOVs as a factor</span></span>
+<span><span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span><span class="va">vizgen</span>, point_size <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>           cell_color <span class="op">=</span> <span class="st">'fov'</span>,</span>
+<span>           show_legend <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># FOVs sequentially</span></span>
+<span><span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span><span class="va">vizgen</span>, point_size <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>           cell_color <span class="op">=</span> <span class="st">'fov'</span>,</span>
+<span>           color_as_factor <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>           cell_color_gradient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'white'</span>, <span class="st">'pink'</span>, <span class="st">'red'</span><span class="op">)</span>,</span>
 <span>           show_legend <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/vizgen_mouse_brain//1-FOVs.png" style="width:60.0%"></p>
+<p><img src="../inst/images/vizgen_mouse_brain//1-FOVs.png" style="width:49.0%"><img src="../inst/images/vizgen_mouse_brain//1b-FOVs.png" style="width:49.0%"></p>
 </div>
 </div>
 <div class="section level2">
@@ -350,8 +362,7 @@ spatial coordinates which are in microns.</p>
 <span>                        largeImages <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">dapi0</span><span class="op">)</span>,</span>
 <span>                        negative_y <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">img_scale_path</span> <span class="op">=</span> <span class="st">'path/to/micron_to_mosaic_pixel_transform.csv'</span></span>
-<span></span>
+<span><span class="co"># Read in image scale transform values</span></span>
 <span><span class="va">img_scale_DT</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">img_scale_path</span><span class="op">)</span></span>
 <span><span class="va">x_scale</span> <span class="op">=</span> <span class="va">img_scale_DT</span><span class="op">$</span><span class="va">V1</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="va">y_scale</span> <span class="op">=</span> <span class="va">img_scale_DT</span><span class="op">$</span><span class="va">V2</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
@@ -458,18 +469,36 @@ calculated based on all available genes.</p>
 <span>                               dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,</span>
 <span>                               k <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># Default name for the results is 'leiden_clus' which is then appended to the cell metadata</span></span>
 <span><span class="va">vizgen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doLeidenCluster.html">doLeidenCluster</a></span><span class="op">(</span><span class="va">vizgen</span>,</span>
 <span>                          resolution <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>                          n_iterations <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
-<p>Visualize clusters in reduced dimension. The default cell color is
-‘leiden_clus’.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<details><summary>
+Cell Metadata Preview
+</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">vizgen</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>                                       cell_ID  fov    volume leiden_clus</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span><span class="sc">:</span> <span class="dv">110883424764611924400221639916314253469</span>    <span class="dv">0</span>  <span class="fl">432.1414</span>           <span class="dv">9</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span><span class="sc">:</span> <span class="dv">135188247894899244046039873973964001182</span>    <span class="dv">0</span> <span class="fl">1351.8026</span>           <span class="dv">9</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span><span class="sc">:</span> <span class="dv">164766962839370328502017156371562646881</span>    <span class="dv">0</span> <span class="fl">1080.6533</span>           <span class="dv">9</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span><span class="sc">:</span> <span class="dv">165747897693809971960756442245389760838</span>    <span class="dv">0</span> <span class="fl">1652.0007</span>           <span class="dv">9</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span><span class="sc">:</span> <span class="dv">260943245639750847364278545493286724628</span>    <span class="dv">0</span> <span class="fl">1343.3786</span>           <span class="dv">9</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>   <span class="sc">---</span>                                                                   </span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="dv">78258</span><span class="sc">:</span> <span class="dv">165273009496786595275688065919008183969</span> <span class="dv">1225</span> <span class="fl">1159.6232</span>           <span class="dv">9</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="dv">78259</span><span class="sc">:</span> <span class="dv">250474226357477911702383283537224741401</span> <span class="dv">1225</span> <span class="fl">1058.0623</span>           <span class="dv">9</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="dv">78260</span><span class="sc">:</span>  <span class="dv">66106840181174834341279408890707577820</span> <span class="dv">1225</span> <span class="fl">1155.3068</span>           <span class="dv">9</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="dv">78261</span><span class="sc">:</span>  <span class="dv">66165211106933093510165165316573672348</span> <span class="dv">1225</span>  <span class="fl">394.8081</span>           <span class="dv">9</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="dv">78262</span><span class="sc">:</span>  <span class="dv">71051447268015582817266088343399517927</span> <span class="dv">1225</span>  <span class="fl">798.6088</span>           <span class="dv">9</span></span></code></pre></div>
+</details><p><br></p>
+<p>Visualize the leiden clustering results (‘leiden_clus’) mapped onto
+the UMAP dimension reduction.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span><span class="va">vizgen</span>,</span>
 <span>         cell_color <span class="op">=</span> <span class="st">'leiden_clus'</span>,</span>
 <span>         point_size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/vizgen_mouse_brain//9-UMAP.png" style="width:50.0%"></p>
-<p>Visualize in spatial dimensions.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<p>Visualize the leiden clustering mapped onto the spatial data.</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen</span>,</span>
 <span>           cell_color <span class="op">=</span> <span class="st">'leiden_clus'</span>,</span>
 <span>           point_size <span class="op">=</span> <span class="fl">0.5</span>,</span>
@@ -482,7 +511,7 @@ calculated based on all available genes.</p>
 <p>Spatially interesting gene expression can be detected by first
 generating a spatial network then performing Binary Spatial Extraction
 of genes.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create spatial network based on physical distance of cell centroids</span></span>
 <span><span class="va">vizgen</span> <span class="op">=</span> <span class="fu"><a href="../reference/createSpatialNetwork.html">createSpatialNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen</span>,</span>
 <span>                              minimum_k <span class="op">=</span> <span class="fl">2</span>,</span>
@@ -490,70 +519,145 @@ of genes.</p>
 <span></span>
 <span><span class="co"># perform Binary Spatial Extraction of genes</span></span>
 <span><span class="va">km_spatialgenes</span> <span class="op">=</span> <span class="fu"><a href="../reference/binSpect.html">binSpect</a></span><span class="op">(</span><span class="va">vizgen</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<details><summary>
+Preview km_spatialgenes
+</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">km_spatialgenes</span><span class="op">$</span><span class="va">feats</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "Slc47a1"   "Chat"      "Th"        "Insrr"     "Slc17a7"   "Pln"      </span></span>
 <span><span class="co">##  [7] "Lmod1"     "Blank-119" "Hcar1"     "Glp1r"     "Ptgdr"     "Avpr2"    </span></span>
 <span><span class="co">## [13] "Gpr20"     "Myh11"     "Glp2r"     "Npy2r"     "Gpr182"    "Chrm1"    </span></span>
 <span><span class="co">## [19] "Adgrd1"    "Mrgprf"    "Trhr"      "Gfap"      "Slc17a8"   "Nmbr"     </span></span>
 <span><span class="co">## [25] "Pth2r"     "Rxfp1"     "Musk"      "F2rl1"     "Dgkk"      "Chrm5"</span></span></code></pre>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+</details><p><br></p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># visualize spatial expression of select genes obtained from binSpect</span></span>
 <span><span class="fu"><a href="../reference/spatFeatPlot2D.html">spatFeatPlot2D</a></span><span class="op">(</span><span class="va">vizgen</span>,</span>
 <span>               expression_values <span class="op">=</span> <span class="st">'scaled'</span>,</span>
-<span>               feats <span class="op">=</span> <span class="va">km_spatialgenes</span><span class="op">$</span><span class="va">feats</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">18</span>,<span class="fl">22</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>               feats <span class="op">=</span> <span class="va">km_spatialgenes</span><span class="op">$</span><span class="va">feats</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">16</span>,<span class="fl">22</span><span class="op">)</span><span class="op">]</span>,</span>
 <span>               cell_color_gradient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'blue'</span>, <span class="st">'white'</span>, <span class="st">'red'</span><span class="op">)</span>,</span>
 <span>               point_shape <span class="op">=</span> <span class="st">'border'</span>,</span>
 <span>               point_border_col <span class="op">=</span> <span class="st">'grey'</span>,</span>
 <span>               point_border_stroke <span class="op">=</span> <span class="fl">0.01</span>,</span>
 <span>               point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>               cow_n_col <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/vizgen_mouse_brain//11-spatFeatPlot2D.png" style="width:60.0%"></p>
+<p><img src="../inst/images/vizgen_mouse_brain//11-spatFeatPlot2D.png" style="width:60.0%"><br></p>
 </div>
 <div class="section level2">
 <h2 id="working-with-subcellular-information">10. Working with subcellular information<a class="anchor" aria-label="anchor" href="#working-with-subcellular-information"></a>
 </h2>
-<p>Subsetting to work with a smaller area since subcellular data is
-dense.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vizgen_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/subsetGiottoLocs.html">subsetGiottoLocs</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen</span>,</span>
-<span>                                  x_min <span class="op">=</span> <span class="fl">2000</span>, x_max <span class="op">=</span> <span class="fl">3000</span>,</span>
-<span>                                  y_max <span class="op">=</span> <span class="op">-</span><span class="fl">2500</span>, y_min <span class="op">=</span> <span class="op">-</span><span class="fl">3500</span><span class="op">)</span></span></code></pre></div>
-<p>The visualization functions can also be applied to the subset
-version.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<p><em>These steps may require a strong computer.</em><br>
+Vizgen provides the raw information used to generate the aggregated data
+through the detected_transcripts.csv and cell_boundaries hdf5 files.
+Giotto can also work directly with this information.</p>
+<div class="section level3">
+<h3 id="optional-define-region-of-interest-and-find-fovs-needed">(Optional) Define region of interest and find FOVs needed<a class="anchor" aria-label="anchor" href="#optional-define-region-of-interest-and-find-fovs-needed"></a>
+</h3>
+<p>Loading information by only grabbing the needed FOVs can cut down on
+computational requirements.</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">subsetFOVs</span> <span class="op">=</span> <span class="va">meta_dt</span><span class="op">[</span><span class="va">center_x</span> <span class="op">&gt;</span> <span class="fl">2000</span> <span class="op">&amp;</span> <span class="va">center_x</span> <span class="op">&lt;</span> <span class="fl">3100</span> <span class="op">&amp;</span></span>
+<span>                     <span class="va">center_y</span> <span class="op">&gt;</span> <span class="fl">2500</span> <span class="op">&amp;</span> <span class="va">center_y</span> <span class="op">&lt;</span> <span class="fl">3500</span><span class="op">]</span><span class="op">$</span><span class="va">fov</span></span>
+<span><span class="va">subsetFOVs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">subsetFOVs</span><span class="op">)</span></span></code></pre></div>
+<details><summary>
+FOVs needed
+</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">subsetFOVs</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##  [1] 220 221 222 223 224 225 245 246 247 248 249 250 275 276 277 278 279 280 302</span></span>
+<span><span class="co">## [20] 303 304 305 306 307 330 331 332 333 334 335 358 359 360 361 362 363</span></span></code></pre>
+</details>
+</div>
+<div class="section level3">
+<h3 id="creating-a-giottopolygon-object">Creating a giottoPolygon object<a class="anchor" aria-label="anchor" href="#creating-a-giottopolygon-object"></a>
+</h3>
+<p>Cell boundary annotations are represented in Giotto as
+<code>giottoPolygon</code> objects which can be previewed by directly
+plotting them.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read polygons and add them to Giotto</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># fovs param is optional</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># polygon_feat_types determines which Vizgen polygon z slices are loaded (There are z0 - z6)</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>polys <span class="ot">=</span> <span class="fu">readPolygonFilesVizgenHDF5</span>(<span class="at">boundaries_path =</span> bound_path,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">polygon_feat_types =</span> <span class="fu">c</span>(<span class="st">'z0'</span>,<span class="st">'z6'</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">flip_y_axis =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">fovs =</span> subsetFOVs)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co"># polys is produced as a list of 2 giottoPolygon objects (z0 and z6)</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co"># previewing the first one...</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(polys[[<span class="dv">1</span>]])</span></code></pre></div>
+<p><img src="../inst/images/vizgen_mouse_brain//13-poly.png" style="width:50.0%"></p>
+</div>
+<div class="section level3">
+<h3 id="creating-a-giottopoints-object">Creating a giottoPoints object<a class="anchor" aria-label="anchor" href="#creating-a-giottopoints-object"></a>
+</h3>
+<p>Giotto represents single-molecule transcript level spatial data as
+<code>giottoPoints</code> objects.</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tx_dt</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">tx_path</span><span class="op">)</span></span>
+<span><span class="co"># select transcripts in FOVs</span></span>
+<span><span class="va">tx_dt_selected</span> <span class="op">=</span> <span class="va">tx_dt</span><span class="op">[</span><span class="va">fov</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="va">subsetFOVs</span><span class="op">]</span></span>
+<span><span class="va">tx_dt_selected</span><span class="op">$</span><span class="va">global_y</span> <span class="op">=</span> <span class="op">-</span><span class="va">tx_dt_selected</span><span class="op">$</span><span class="va">global_y</span></span>
+<span><span class="co"># (note the inverted y is the same as when spatial locations were loaded)</span></span>
+<span></span>
+<span><span class="co"># create Giotto points from transcripts </span></span>
+<span><span class="va">gpoints</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoPoints.html">createGiottoPoints</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">tx_dt_selected</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">global_x</span>, <span class="va">global_y</span>, <span class="va">gene</span>, <span class="va">global_z</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># preview the giottoPoints object (Including specific feats to plot is highly recommended)</span></span>
+<span><span class="co"># Not providing the feats param will plot ALL features detected</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/Giotto/man/plot-generic.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gpoints</span>,</span>
+<span>     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Gfap'</span>, <span class="st">'Ackr1'</span><span class="op">)</span>,</span>
+<span>     point_size <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/vizgen_mouse_brain//14-point.png" style="width:65.0%"></p>
+</div>
+<div class="section level3">
+<h3 id="creating-a-subcellular-giotto-object">Creating a subcellular Giotto object<a class="anchor" aria-label="anchor" href="#creating-a-subcellular-giotto-object"></a>
+</h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new giotto instructions to set different save directory if desired</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># instrs_sub = createGiottoInstructions(show_plot = FALSE,</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                                       return_plot = FALSE,</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                                       save_plot = TRUE,</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co">#                                       save_dir = "path/to/subcellular/save/folder")</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>vizgen_subcellular <span class="ot">=</span> <span class="fu">createGiottoObjectSubcellular</span>(<span class="at">gpoints =</span> <span class="fu">list</span>(<span class="at">rna =</span> gpoints),</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">gpolygons =</span> polys,</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>                                                   <span class="co"># instructions = instrs_sub</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>                                                   )</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Find polygon centroids and generate associated spatial locations</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>vizgen_subcellular <span class="ot">=</span> <span class="fu">addSpatialCentroidLocations</span>(vizgen_subcellular,</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">poly_info =</span> <span class="fu">c</span>(<span class="st">'z0'</span>, <span class="st">'z6))</span></span></code></pre></div>
+<details><summary>
+Alternatively to append subcellular data to existing giotto object…
+</summary><p><br></p>
+<p>The subcellular information can also be attached to giotto objects
+built with the pre-aggregated information.
+<!-- Moving forward, it might be better practice to keep objects created using aggregated data separate from those generated from the subcellular information to avoid confusion. --></p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Subset dataset to work with smaller area</span></span>
+<span><span class="va">vizgen_subset</span> <span class="op">=</span> <span class="fu"><a href="../reference/subsetGiottoLocs.html">subsetGiottoLocs</a></span><span class="op">(</span><span class="va">vizgen</span>,</span>
+<span>                                 x_min <span class="op">=</span> <span class="fl">2000</span>, x_max <span class="op">=</span> <span class="fl">3000</span>,</span>
+<span>                                 y_min <span class="op">=</span> <span class="op">-</span><span class="fl">3500</span>, y_max <span class="op">=</span> <span class="op">-</span><span class="fl">2500</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># add points to Giotto object</span></span>
+<span><span class="va">vizgen_subset</span> <span class="op">=</span> <span class="fu"><a href="../reference/addGiottoPoints.html">addGiottoPoints</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen_subset</span>,</span>
+<span>                                gpoints <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>rna <span class="op">=</span> <span class="va">gpoints</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># There will be a warning that 14 features are not present in vizgen_subset</span></span>
+<span><span class="co"># (They were previously removed during data processing in step 6)</span></span>
+<span></span>
+<span><span class="co"># add polygons to Giotto object</span></span>
+<span><span class="va">vizgen_subset</span> <span class="op">=</span> <span class="fu"><a href="../reference/addGiottoPolygons.html">addGiottoPolygons</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen_subset</span>,</span>
+<span>                                  gpolygons <span class="op">=</span> <span class="va">polys</span><span class="op">)</span></span>
+<span><span class="co"># If the polygons had not already been read readPolygonFilesVizgen() should be used instead</span></span>
+<span><span class="co"># vizgen_subset = readPolygonFilesVizgen(gobject = vizgen_subset,</span></span>
+<span>                                       <span class="co"># boundaries_path = bound_path,</span></span>
+<span>                                       <span class="co"># polygon_feat_types = c(0,6)) # Defines which z slices (polys) are read in</span></span></code></pre></div>
+<p><strong>Visualize subset</strong></p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen_subset</span>,</span>
 <span>           largeImage_name <span class="op">=</span> <span class="st">'image'</span>,</span>
 <span>           cell_color <span class="op">=</span> <span class="st">'leiden_clus'</span>,</span>
 <span>           point_size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/vizgen_mouse_brain//12-spatPlot2D.png" style="width:50.0%"></p>
-<p>These steps may require a strong computer.<br>
-Giotto can also work with the polygon annotations provided by Vizgen.
-Since we are working with a subset of the data, it is only necessary to
-read the polygons that are present in the current FOV(s).</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># define path to cell boundaries folder</span></span>
-<span><span class="va">bound_path</span> <span class="op">=</span> <span class="st">'/path/to/cell_boundaries'</span></span>
-<span><span class="co"># read polygons and add them to Giotto</span></span>
-<span><span class="va">vizgen_subset</span> <span class="op">=</span> <span class="fu"><a href="../reference/readPolygonFilesVizgen.html">readPolygonFilesVizgen</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen_subset</span>,</span>
-<span>                                       boundaries_path <span class="op">=</span> <span class="va">bound_path</span>,</span>
-<span>                                       polygon_feat_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">4</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Giotto can also work with the single molecule transcript level
-spatial data.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tx_dt</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">tx_path</span><span class="op">)</span></span>
-<span><span class="co"># select transcripts in FOVs</span></span>
-<span><span class="va">selected_fovs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">vizgen_subset</span><span class="op">)</span><span class="op">$</span><span class="va">fov</span><span class="op">)</span></span>
-<span><span class="va">tx_dt_selected</span> <span class="op">=</span> <span class="va">tx_dt</span><span class="op">[</span><span class="va">fov</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html" class="external-link">%in%</a></span> <span class="va">selected_fovs</span><span class="op">]</span></span>
-<span></span>
-<span><span class="co"># create Giotto points from transcripts</span></span>
-<span><span class="va">gpoints</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoPoints.html">createGiottoPoints</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">tx_dt_selected</span><span class="op">[</span>,<span class="fu">.</span><span class="op">(</span><span class="va">global_x</span>,<span class="op">-</span><span class="va">global_y</span>, <span class="va">gene</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># add points to Giotto</span></span>
-<span><span class="va">vizgen_subset</span> <span class="op">=</span> <span class="fu"><a href="../reference/addGiottoPoints.html">addGiottoPoints</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">vizgen_subset</span>,</span>
-<span>                                gpoints <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">gpoints</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># identify genes for visualization</span></span>
+<p><img src="../inst/images/vizgen_mouse_brain//12-spatPlot2D.png" style="width:65.0%"></p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># identify genes for visualization</span></span>
 <span><span class="va">gene_meta</span> <span class="op">=</span> <span class="fu"><a href="../reference/fDataDT.html">fDataDT</a></span><span class="op">(</span><span class="va">vizgen_subset</span><span class="op">)</span></span>
 <span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html" class="external-link">setorder</a></span><span class="op">(</span><span class="va">gene_meta</span>, <span class="va">perc_cells</span><span class="op">)</span></span>
 <span><span class="va">gene_meta</span><span class="op">[</span><span class="va">perc_cells</span> <span class="op">&gt;</span> <span class="fl">25</span> <span class="op">&amp;</span> <span class="va">perc_cells</span> <span class="op">&lt;</span> <span class="fl">50</span><span class="op">]</span></span>
@@ -563,22 +667,82 @@ spatial data.</p>
 <span>                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Oxgr1"</span>, <span class="st">"Htr1a"</span>, <span class="st">"Gjc3"</span>, <span class="st">"Axl"</span>,</span>
 <span>                                            <span class="st">'Gfap'</span>, <span class="st">"Olig1"</span>, <span class="st">"Epha7"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                     polygon_feat_type <span class="op">=</span> <span class="st">'z0'</span>,</span>
-<span>                     use_overlap <span class="op">=</span> <span class="cn">F</span>,</span>
-<span>                     point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>                     use_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                     point_size <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>                     polygon_line_size <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                     show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                     polygon_bg_color <span class="op">=</span> <span class="st">'white'</span>,</span>
 <span>                     polygon_color <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/vizgen_mouse_brain//11-spatInSituPlotPoints.png" style="width:50.0%"></p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># visualize points with polygons from z6 (confocal plane)</span></span>
-<span><span class="fu"><a href="../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">vizgen_subset</span>,</span>
+<p><img src="../inst/images/vizgen_mouse_brain//12b-spatInSituPlotPoints.png" style="width:65.0%"></p>
+<center>
+———————— <strong>end dropdown</strong> ————————
+</center>
+</details><p><br></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># identify genes for visualization</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>gene_meta <span class="ot">=</span> <span class="fu">fDataDT</span>(vizgen_subset)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">setorder</span>(gene_meta, perc_cells)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>gene_meta[perc_cells <span class="sc">&gt;</span> <span class="dv">25</span> <span class="sc">&amp;</span> perc_cells <span class="sc">&lt;</span> <span class="dv">50</span>]</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co"># visualize points with z0 polygons (confocal plane)</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">spatInSituPlotPoints</span>(gsub,</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">feats =</span> <span class="fu">list</span>(<span class="st">'rna'</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Oxgr1"</span>, <span class="st">"Htr1a"</span>, <span class="st">"Gjc3"</span>, <span class="st">"Axl"</span>,</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">'Gfap'</span>, <span class="st">"Olig1"</span>, <span class="st">"Epha7"</span>)),</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">polygon_feat_type =</span> <span class="st">'z0'</span>,</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">use_overlap =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">point_size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>                       <span class="at">polygon_line_size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">show_polygon =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>                       <span class="at">polygon_bg_color =</span> <span class="st">'white'</span>,</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">polygon_color =</span> <span class="st">'white'</span>,</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coord_fix_ratio =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">save_param =</span> <span class="fu">list</span>(<span class="at">base_height =</span> <span class="dv">10</span>,</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">base_width =</span> <span class="dv">10</span>))</span></code></pre></div>
+<p><img src="../inst/images/vizgen_mouse_brain//15-spatInSituPlotPoints.png" style="width:100.0%"></p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Zoom in further and visualize with image</span></span>
+<span><span class="va">vizgen_subcellular_zoom</span> <span class="op">=</span> <span class="fu"><a href="../reference/subsetGiottoLocs.html">subsetGiottoLocs</a></span><span class="op">(</span><span class="va">vizgen_subcellular</span>,</span>
+<span>                                           x_min <span class="op">=</span> <span class="fl">2400</span>, x_max <span class="op">=</span> <span class="fl">2600</span>,</span>
+<span>                                           y_min <span class="op">=</span> <span class="op">-</span><span class="fl">3200</span>, y_max <span class="op">=</span> <span class="op">-</span><span class="fl">3000</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">vizgen_subcellular_zoom</span>,</span>
 <span>                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Oxgr1"</span>, <span class="st">"Htr1a"</span>, <span class="st">"Gjc3"</span>, <span class="st">"Axl"</span>,</span>
 <span>                                            <span class="st">'Gfap'</span>, <span class="st">"Olig1"</span>, <span class="st">"Epha7"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                     polygon_feat_type <span class="op">=</span> <span class="st">'z6'</span>,</span>
-<span>                     use_overlap <span class="op">=</span> <span class="cn">F</span>,</span>
-<span>                     point_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>                     polygon_feat_type <span class="op">=</span> <span class="st">'z0'</span>,</span>
+<span>                     use_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                     point_size <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>                     polygon_line_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>                     show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                     polygon_color <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/vizgen_mouse_brain//12-spatInSituPlotPoints.png" style="width:50.0%"></p>
+<span>                     polygon_bg_color <span class="op">=</span> <span class="st">'white'</span>,</span>
+<span>                     polygon_color <span class="op">=</span> <span class="st">'white'</span>,</span>
+<span>                     polygon_alpha <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>                     show_image <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                     largeImage_name <span class="op">=</span> <span class="st">'image'</span>,</span>
+<span>                     coord_fix_ratio <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                     save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>base_height <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>                                       base_width <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/vizgen_mouse_brain//16-spatInSituPlotPoints.png" style="width:80.0%"></p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatInSituPlotPoints.html">spatInSituPlotPoints</a></span><span class="op">(</span><span class="va">vizgen_subcellular_zoom</span>,</span>
+<span>                     feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'rna'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Oxgr1"</span>, <span class="st">"Htr1a"</span>, <span class="st">"Gjc3"</span>, <span class="st">"Axl"</span>,</span>
+<span>                                            <span class="st">'Gfap'</span>, <span class="st">"Olig1"</span>, <span class="st">"Epha7"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                     polygon_feat_type <span class="op">=</span> <span class="st">'z6'</span>, <span class="co"># Use polygon from z slice 6 this time</span></span>
+<span>                     use_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                     point_size <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>                     polygon_line_size <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>                     show_polygon <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                     polygon_bg_color <span class="op">=</span> <span class="st">'white'</span>,</span>
+<span>                     polygon_color <span class="op">=</span> <span class="st">'white'</span>,</span>
+<span>                     polygon_alpha <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>                     show_image <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                     largeImage_name <span class="op">=</span> <span class="st">'image'</span>,</span>
+<span>                     coord_fix_ratio <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                     save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>base_height <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>                                       base_width <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/vizgen_mouse_brain//17-spatInSituPlotPoints.png" style="width:80.0%"><!-- Note that feature points will end sharply after a spatial subset, but the polygons and images are not cut off by default. --></p>
+<!-- <details> -->
+<!-- <summary>session_info</summary> -->
+<!-- </details> -->
+</div>
 </div>
   </div>
 

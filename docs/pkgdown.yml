@@ -24,6 +24,7 @@ articles:
   github_issues: github_issues.html
   installation_issues: installation_issues.html
   merFISH_hypoth_210924: merFISH_hypoth_210924.html
+  merFISH_hypoth_220915: merFISH_hypoth_220915.html
   mini_seqfish: mini_seqfish.html
   mini_starmap: mini_starmap.html
   mini_visium: mini_visium.html
@@ -40,5 +41,5 @@ articles:
   singlecell_prostate_standard_Sep29_21: singlecell_prostate_standard_Sep29_21.html
   temp_construction: temp_construction.html
   vizgen_mouse_brain_210929: vizgen_mouse_brain_210929.html
-last_built: 2022-09-13T17:27Z
+last_built: 2022-09-16T13:40Z
 

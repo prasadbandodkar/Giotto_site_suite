@@ -167,9 +167,9 @@ subventrical zone. A complete walkthrough of that dataset can be found
 download the data used to create the Giotto Object below, please ensure
 that <a href="https://www.gnu.org/software/wget/?" class="external-link">wget</a> is installed
 locally.</p>
-<p>This dataset contains multiple field of views; here, we illustrate a
-workflow to bring the FOVs together for holistic analysis, and then
-subset the Giotto Object to analyze the cortex.</p>
+<p>This dataset contains multiple field of views; here, a workflow to
+bring the FOVs together for holistic analysis is illustrated, and then a
+subset of the Giotto Object is taken to analyze the cortex.</p>
 <div class="section level2">
 <h2 id="create-the-giotto-object">Create the Giotto Object<a class="anchor" aria-label="anchor" href="#create-the-giotto-object"></a>
 </h2>
@@ -178,11 +178,11 @@ subset the Giotto Object to analyze the cortex.</p>
 <span></span>
 <span><span class="co"># Specify path from which data may be retrieved/stored</span></span>
 <span><span class="va">data_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">'/gobject_processing_data/'</span><span class="op">)</span></span>
-<span><span class="co"># alternatively, "/path/to/where/your/data/lives/"</span></span>
+<span><span class="co"># alternatively, "/path/to/where/the/data/lives/"</span></span>
 <span></span>
 <span><span class="co"># Specify path to which results may be saved</span></span>
 <span><span class="va">results_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">'/gobject_processing_results/'</span><span class="op">)</span> </span>
-<span><span class="co"># alternatively, "/path/to/store/your/results/"</span></span>
+<span><span class="co"># alternatively, "/path/to/store/the/results/"</span></span>
 <span></span>
 <span><span class="va">genv_exists</span> <span class="op">=</span> <span class="fu"><a href="../reference/checkGiottoEnvironment.html">checkGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">genv_exists</span><span class="op">)</span><span class="op">{</span></span>
@@ -190,9 +190,10 @@ subset the Giotto Object to analyze the cortex.</p>
 <span>  <span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="co"># Optional: Specify a Python path. If set to NULL (default), the previously installed</span></span>
-<span><span class="co"># Giotto environment will be used.</span></span>
-<span><span class="va">my_python_path</span> <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># alternatively, "/your/python/path/" if desired.</span></span>
+<span><span class="co"># Optional: Specify a path to a Python executable within a conda or miniconda </span></span>
+<span><span class="co"># environment. If set to NULL (default), the Python executable within the previously</span></span>
+<span><span class="co"># installed Giotto environment will be used.</span></span>
+<span><span class="va">my_python_path</span> <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># alternatively, "/local/python/path/python" if desired.</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/getSpatialDataset.html">getSpatialDataset</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">'seqfish_SS_cortex'</span>, directory <span class="op">=</span> <span class="va">data_directory</span>, method <span class="op">=</span> <span class="st">'wget'</span><span class="op">)</span></span>
 <span></span>
@@ -332,9 +333,9 @@ total feature count, and then are multiplied by the total number of
 features. Then, cells are individually normalized by dividing the
 normalized feature counts by the total feature counts per cell, and then
 are scaled by the total number of cells.</p>
-<p>Since the data in this tutorial is not in-situ RNA data, we will not
-show this method here. It may be utilized by specifying the norm_methods
-argument as ‘osmFISH’.</p>
+<p>Since the data in this tutorial is not in-situ RNA data, this method
+will not be shown here. It may be utilized by specifying the
+norm_methods argument as ‘osmFISH’.</p>
 </div>
 <div class="section level2">
 <h2 id="add-statistics-and-metadata-to-the-giotto-object">Add Statistics and Metadata to the Giotto Object<a class="anchor" aria-label="anchor" href="#add-statistics-and-metadata-to-the-giotto-object"></a>

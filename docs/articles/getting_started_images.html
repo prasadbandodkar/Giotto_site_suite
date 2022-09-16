@@ -252,8 +252,8 @@ follows:<br>
 - <strong>ymin_adj</strong> = (spatial location ymin) - (ymin image
 bound in original dimensions)<br>
 - <strong>ymax_adj</strong> = 0 - (spatial location ymax)</p>
-<p>For instance, assume we have already created a
-<strong>giottoImage</strong> object named GImage:</p>
+<p>For instance, assume a <strong>giottoImage</strong> object named
+GImage has already been created:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">GImage</span></span>
 <span></span>
@@ -308,33 +308,35 @@ must be downloaded and extracted into a structured Visium directory.</p>
 Giotto object using <strong>createGiottoVisiumObject()</strong> for the
 purposes of this tutorial will be shown. Nonetheless, this procedure is
 standard practice for using Giotto with Visium Data.</p>
-<p>First create a new directory. This will be your Visium Directory.
+<p>First create a new directory. This will be the Visium Directory.
 Then, open a terminal within that directory, and enter the following
 commands:</p>
 <p><br></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  wget https<span class="sc">:</span><span class="er">//</span>cf<span class="fl">.10</span>xgenomics.com<span class="sc">/</span>samples<span class="sc">/</span>spatial<span class="sc">-</span>exp<span class="sc">/</span><span class="dv">1</span>.<span class="fl">3.0</span><span class="sc">/</span>Visium_FFPE_Human_Normal_Prostate<span class="sc">/</span>Visium_FFPE_Human_Normal_Prostate_raw_feature_bc_matrix.tar.gz</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  tar <span class="sc">-</span>xzvf Visium_FFPE_Human_Normal_Prostate_raw_feature_bc_matrix.tar.gz</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  wget https<span class="sc">:</span><span class="er">//</span>cf<span class="fl">.10</span>xgenomics.com<span class="sc">/</span>samples<span class="sc">/</span>spatial<span class="sc">-</span>exp<span class="sc">/</span><span class="dv">1</span>.<span class="fl">3.0</span><span class="sc">/</span>Visium_FFPE_Human_Normal_Prostate<span class="sc">/</span>Visium_FFPE_Human_Normal_Prostate_spatial.tar.gz</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  tar <span class="sc">-</span>xzvf Visium_FFPE_Human_Normal_Prostate_spatial.tar.gz</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wget</span> https://cf.10xgenomics.com/samples/spatial-exp/1.3.0/Visium_FFPE_Human_Normal_Prostate/Visium_FFPE_Human_Normal_Prostate_raw_feature_bc_matrix.tar.gz</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar</span> <span class="at">-xzvf</span> Visium_FFPE_Human_Normal_Prostate_raw_feature_bc_matrix.tar.gz</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wget</span> https://cf.10xgenomics.com/samples/spatial-exp/1.3.0/Visium_FFPE_Human_Normal_Prostate/Visium_FFPE_Human_Normal_Prostate_spatial.tar.gz</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar</span> <span class="at">-xzvf</span> Visium_FFPE_Human_Normal_Prostate_spatial.tar.gz</span></code></pre></div>
 <p><br></p>
-<p>This will create two subdirectories within your Visium Directory,
+<p>This will create two subdirectories within the Visium Directory,
 titled “raw_feature_bc_matrix” and “spatial”. These subdirectories will
 contain barcode and expression information, or images and scaling
-information, respectively. Now, your Visium Directory may be inputted to
+information, respectively. Now, the Visium Directory may be inputted to
 <strong>createGiottoVisiumObject()</strong>!</p>
 <hr></details><p>A giotto object using either the hires or lowres image will be loaded
 depending on whether “<strong>tissue_hires_image.png”</strong> or
 <strong>“tissue_lowres_image.png”</strong> is provided to the
-<strong>png_name</strong> argument. In this example, we will use and
-plot the hires image.</p>
+<strong>png_name</strong> argument. In this example, the hires image
+will be plotted.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
-<span><span class="va">VisiumDir</span> <span class="op">=</span> <span class="st">'/path/to/visium/directory/'</span></span>
-<span><span class="va">results_directory</span> <span class="op">=</span> <span class="st">'/path/to/results/directory/'</span></span>
 <span></span>
-<span><span class="co"># Optional: Specify a Python path. If set to NULL (default), the previously installed</span></span>
-<span><span class="co"># Giotto environment will be used.</span></span>
-<span><span class="va">my_python_path</span> <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># alternatively, "/your/python/path/" if desired.</span></span>
+<span><span class="va">VisiumDir</span> <span class="op">=</span> <span class="st">'/path/to/visium/directory/'</span></span>
+<span><span class="va">results_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">'/gobject_imaging_results/'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Optional: Specify a path to a Python executable within a conda or miniconda </span></span>
+<span><span class="co"># environment. If set to NULL (default), the Python executable within the previously</span></span>
+<span><span class="co"># installed Giotto environment will be used.</span></span>
+<span><span class="va">my_python_path</span> <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># alternatively, "/local/python/path/python" if desired.</span></span>
 <span></span>
 <span><span class="co"># Optional: Set Giotto instructions</span></span>
 <span><span class="va">instrs</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoInstructions.html">createGiottoInstructions</a></span><span class="op">(</span>save_plot <span class="op">=</span> <span class="cn">TRUE</span>, </span>
@@ -368,7 +370,8 @@ values negative. This inversion is necessary for the spatial locations
 to appear in the same orientation as the image. This transformation of
 the spatial locations is automatically done for Visium datasets during
 <strong>createGiottoVisiumObject()</strong>. In the standard workflow,
-it is important to determine if this is necessary for your data.</p>
+it is important to determine if this is necessary for the data at
+hand.</p>
 <details><summary><strong>Why this inversion is necessary</strong>
 </summary><hr>
 <p><strong>Image Coordinates vs Plotting Coordinates</strong><br>

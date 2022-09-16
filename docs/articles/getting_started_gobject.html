@@ -180,11 +180,11 @@ locally.</p>
 <span></span>
 <span><span class="co"># Specify path from which data may be retrieved/stored</span></span>
 <span><span class="va">data_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">'/gobject_data/'</span><span class="op">)</span></span>
-<span><span class="co"># alternatively, "/path/to/where/your/data/lives/"</span></span>
+<span><span class="co"># alternatively, "/path/to/where/the/data/lives/"</span></span>
 <span></span>
 <span><span class="co"># Specify path to which results may be saved</span></span>
 <span><span class="va">results_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">'/gobject_results/'</span><span class="op">)</span> </span>
-<span><span class="co"># alternatively, "/path/to/store/your/results/"</span></span>
+<span><span class="co"># alternatively, "/path/to/store/the/results/"</span></span>
 <span></span>
 <span><span class="co"># Download osmFISH dataset to data_directory</span></span>
 <span><span class="fu"><a href="../reference/getSpatialDataset.html">getSpatialDataset</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">'osmfish_SS_cortex'</span>, directory <span class="op">=</span> <span class="va">data_directory</span>, method <span class="op">=</span> <span class="st">'wget'</span><span class="op">)</span></span></code></pre></div>
@@ -418,9 +418,10 @@ instructions with new instructions (e.g after subsetting)</li>
 <span></span>
 <span><span class="co"># Create instructions</span></span>
 <span></span>
-<span><span class="co"># Optional: Specify a Python path. If set to NULL (default), the previously installed</span></span>
-<span><span class="co"># Giotto environment will be used.</span></span>
-<span><span class="va">my_python_path</span> <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># alternatively, "/your/python/path/python" if desired.</span></span>
+<span><span class="co"># Optional: Specify a path to a Python executable within a conda or miniconda </span></span>
+<span><span class="co"># environment. If set to NULL (default), the Python executable within the previously</span></span>
+<span><span class="co"># installed Giotto environment will be used.</span></span>
+<span><span class="va">my_python_path</span> <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># alternatively, "/local/python/path/python" if desired.</span></span>
 <span></span>
 <span><span class="va">instrs</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoInstructions.html">createGiottoInstructions</a></span><span class="op">(</span>python_path <span class="op">=</span> <span class="va">my_python_path</span>,</span>
 <span>                                  save_dir <span class="op">=</span> <span class="va">results_directory</span>,</span>
@@ -439,7 +440,7 @@ instructions with new instructions (e.g after subsetting)</li>
 <span><span class="va">custom_gobject</span> <span class="op">=</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">custom_gobject</span>, new_metadata <span class="op">=</span> <span class="va">metadata</span>,</span>
 <span>                                 by_column <span class="op">=</span> <span class="cn">T</span>, column_cell_ID <span class="op">=</span> <span class="st">'CellID'</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Check which Giotto instructions are associated with your Giotto object</span></span>
+<span><span class="co"># Check which Giotto instructions are associated with the Giotto object</span></span>
 <span><span class="fu"><a href="../reference/showGiottoInstructions.html">showGiottoInstructions</a></span><span class="op">(</span><span class="va">custom_gobject</span><span class="op">)</span></span></code></pre></div>
 <p>Note that although parameters <em>show_plot</em>,
 <em>return_plot</em>, and <em>save_plot</em> were not specified within

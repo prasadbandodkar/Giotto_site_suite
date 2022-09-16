@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How to make visualizations with Giotto? • Giotto Suite</title>
+<title>Data Visualization • Giotto Suite</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="How to make visualizations with Giotto?">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Data Visualization">
 <meta property="og:description" content="Giotto">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -147,7 +147,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>How to make visualizations with Giotto?</h1>
+      <h1 data-toc-skip>Data Visualization</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/HEAD/vignettes/Visualizations.Rmd" class="external-link"><code>vignettes/Visualizations.Rmd</code></a></small>
@@ -158,257 +158,368 @@
     
     
 <p>This tutorial walks through the visualization capabilities of Giotto.
-We will revisit dimension reduction visualizations (PCAs and UMAPs) that
-we created in the previous tutorial, <a href="./dimension_reduction.html">dimension reduction</a>. We will then
-explore how to create heatmaps, violin plots, and visualizations that
-are unique to Giotto: spatial maps and networks.</p>
-<p>This tutorial uses a MerFish dataset of mouse hypothalamic preoptic
-regions. A complete walkthough of that dataset can be found <a href="./merFISH_hypoth_210924.html"><strong>here</strong></a>. To
+The clustering and dimension reduction methods focused on within the
+previous tutorial, <a href="./dimension_reduction.html">dimension
+reduction</a>, will be revisited and utilized to create heatmaps, violin
+plots, and visualizations that are unique to Giotto: spatial maps and
+networks.</p>
+<p>This tutorial uses a merFISH dataset of mouse hypothalamic preoptic
+regions from <a href="https://doi.org/10.1126/science.aau5324" class="external-link">Moffitt
+et al.</a> A complete walkthrough of that dataset can be found <a href="./merFISH_hypoth_220915.html"><strong>here</strong></a>. To
 download the data used to create the Giotto Object below, please ensure
 that <a href="https://www.gnu.org/software/wget/?" class="external-link">wget</a> is installed
 locally.</p>
-<div class="section level3">
-<h3 id="creating-your-giotto-object">Creating your Giotto Object<a class="anchor" aria-label="anchor" href="#creating-your-giotto-object"></a>
-</h3>
+<div class="section level2">
+<h2 id="create-the-giotto-object">Create the Giotto Object<a class="anchor" aria-label="anchor" href="#create-the-giotto-object"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
-<span><span class="va">data_directory</span> <span class="op">=</span> <span class="st">'/path/to/data/directory/'</span></span>
-<span><span class="va">results_directory</span> <span class="op">=</span> <span class="st">'/path/to/results/directory/'</span></span>
 <span></span>
+<span><span class="co"># Specify path from which data may be retrieved/stored</span></span>
+<span><span class="va">data_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">'/gobject_visual_data/'</span><span class="op">)</span></span>
+<span><span class="co"># alternatively, "/path/to/where/the/data/lives/"</span></span>
+<span></span>
+<span><span class="co"># Specify path to which results may be saved</span></span>
+<span><span class="va">results_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">'/gobject_visual_results/'</span><span class="op">)</span> </span>
+<span><span class="co"># alternatively, "/path/to/store/the/results/"</span></span>
+<span></span>
+<span><span class="co"># Ensure Giotto environment lives local to the machine</span></span>
 <span><span class="va">genv_exists</span> <span class="op">=</span> <span class="fu"><a href="../reference/checkGiottoEnvironment.html">checkGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">genv_exists</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="co"># The following command need only be run once to install the Giotto environment.</span></span>
 <span>  <span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="co"># Optional: Specify a Python path. If set to NULL (default), the previously installed</span></span>
-<span><span class="co"># Giotto environment will be used.</span></span>
-<span><span class="va">my_python_path</span> <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># alternatively, "/your/python/path/" if desired.</span></span>
+<span><span class="co"># Optional: Specify a path to a Python executable within a conda or miniconda </span></span>
+<span><span class="co"># environment. If set to NULL (default), the Python executable within the previously</span></span>
+<span><span class="co"># installed Giotto environment will be used.</span></span>
+<span><span class="va">my_python_path</span> <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># alternatively, "/local/python/path/python" if desired.</span></span>
 <span></span>
 <span><span class="co"># Get the dataset</span></span>
 <span><span class="fu"><a href="../reference/getSpatialDataset.html">getSpatialDataset</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">'merfish_preoptic'</span>, directory <span class="op">=</span> <span class="va">data_directory</span>, method <span class="op">=</span> <span class="st">'wget'</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## Part 1: Giotto global instructions and preparations</span></span>
-<span><span class="co"># 1. Optional: Set Giotto instructions</span></span>
+<span><span class="co">### Giotto instructions and data preparation</span></span>
+<span><span class="co"># Optional: Set Giotto instructions</span></span>
 <span><span class="va">instrs</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoInstructions.html">createGiottoInstructions</a></span><span class="op">(</span>save_plot <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                                  show_plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                  save_dir <span class="op">=</span> <span class="va">results_directory</span>, </span>
 <span>                                  python_path <span class="op">=</span> <span class="va">my_python_path</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># 2. Create file paths to feed data into Giotto object </span></span>
+<span><span class="co"># Create file paths to feed data into Giotto object </span></span>
 <span><span class="va">expr_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_directory</span>, <span class="st">"merFISH_3D_data_expression.txt.gz"</span><span class="op">)</span></span>
 <span><span class="va">loc_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_directory</span>, <span class="st">"merFISH_3D_data_cell_locations.txt"</span><span class="op">)</span></span>
 <span><span class="va">meta_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">data_directory</span>, <span class="st">"merFISH_3D_metadata.txt"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## Part 2: Create Giotto Object &amp; Process Data</span></span>
-<span><span class="co">## Create Giotto object</span></span>
+<span><span class="co">### Create Giotto object</span></span>
 <span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createGiottoObject.html">createGiottoObject</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">expr_path</span>,</span>
 <span>                              spatial_locs <span class="op">=</span> <span class="va">loc_path</span>,</span>
 <span>                              instructions <span class="op">=</span> <span class="va">instrs</span><span class="op">)</span></span>
 <span></span>
 <span></span>
-<span><span class="co">## Add additional metadata if wanted</span></span>
+<span><span class="co"># Add additional metadata</span></span>
 <span><span class="va">metadata</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">meta_path</span><span class="op">)</span></span>
-<span><span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">testobj</span>, new_metadata <span class="op">=</span> <span class="va">metadata</span><span class="op">$</span><span class="va">layer_ID</span>, vector_name <span class="op">=</span> <span class="st">'layer_ID'</span><span class="op">)</span></span>
-<span><span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">testobj</span>, new_metadata <span class="op">=</span> <span class="va">metadata</span><span class="op">$</span><span class="va">orig_cell_types</span>, vector_name <span class="op">=</span> <span class="st">'orig_cell_types'</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Process the Giotto object, filtering, normalization, and adding statistics.</span></span>
+<span><span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">testobj</span>, </span>
+<span>                          new_metadata <span class="op">=</span> <span class="va">metadata</span><span class="op">$</span><span class="va">layer_ID</span>, </span>
+<span>                          vector_name <span class="op">=</span> <span class="st">'layer_ID'</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Note that for the purposes of this tutorial, we want to visualize the entire dataset. </span></span>
-<span>  <span class="co"># Thus, our filter parameters are set to 0, so as to not remove any cells.</span></span>
+<span><span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/addCellMetadata.html">addCellMetadata</a></span><span class="op">(</span><span class="va">testobj</span>, </span>
+<span>                          new_metadata <span class="op">=</span> <span class="va">metadata</span><span class="op">$</span><span class="va">orig_cell_types</span>, </span>
+<span>                          vector_name <span class="op">=</span> <span class="st">'orig_cell_types'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Process the Giotto Object</span></span>
+<span><span class="co"># Note that for the purposes of this tutorial, the entire dataset will be visualized. </span></span>
+<span><span class="co"># Thus, filter parameters are set to 0, so as to not remove any cells.</span></span>
 <span><span class="co"># Note that since adjustment is not required, adjust_params is set to NULL.</span></span>
 <span></span>
 <span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/processGiotto.html">processGiotto</a></span><span class="op">(</span><span class="va">testobj</span>,</span>
-<span>                         filter_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_threshold <span class="op">=</span> <span class="fl">0</span>,feat_det_in_min_cells <span class="op">=</span> <span class="fl">0</span>, min_det_feats_per_cell <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
-<span>                         norm_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span> norm_methods <span class="op">=</span> <span class="st">'standard'</span>, scale_feats <span class="op">=</span> <span class="cn">TRUE</span>, scalefactor <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>,</span>
+<span>                         filter_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_threshold <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>                                              feat_det_in_min_cells <span class="op">=</span> <span class="fl">0</span>, </span>
+<span>                                              min_det_feats_per_cell <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
+<span>                         norm_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>norm_methods <span class="op">=</span> <span class="st">'standard'</span>, </span>
+<span>                                            scale_feats <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                                            scalefactor <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>,</span>
 <span>                         stat_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>expression_values <span class="op">=</span> <span class="st">'normalized'</span><span class="op">)</span>,</span>
 <span>                         adjust_params <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
 </div>
-<div class="section level3">
-<h3 id="visualizing-your-dataset-">1. Visualizing your Dataset.<a class="anchor" aria-label="anchor" href="#visualizing-your-dataset-"></a>
-</h3>
+<div class="section level2">
+<h2 id="visualize-the-dataset">Visualize the Dataset<a class="anchor" aria-label="anchor" href="#visualize-the-dataset"></a>
+</h2>
 <p>This dataset includes eight sequential slices. As such it can be
-visualized both in 2D…</p>
+visualized both in 2D and 3D.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 2D</span></span>
 <span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, point_size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/getting_started_figs/visualizations/0-spatPlot2D.png" style="width:50.0%"></p>
-<p>and 3D</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 3D</span></span>
 <span><span class="fu"><a href="../reference/spatPlot3D.html">spatPlot3D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, point_size <span class="op">=</span> <span class="fl">1</span>, axis_scale <span class="op">=</span> <span class="st">'real'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/getting_started_figs/visualizations/1-spatPlot3D.png" style="width:50.0%"></p>
+<p><img src="../inst/images/getting_started_figs/visualizations/1-spat3D.png" style="width:150.0%"><br></p>
 </div>
-<div class="section level3">
-<h3 id="visualizing-your-clusters">2. Visualizing your Clusters<a class="anchor" aria-label="anchor" href="#visualizing-your-clusters"></a>
-</h3>
+<div class="section level2">
+<h2 id="create-and-visualize-clusters">Create and Visualize Clusters<a class="anchor" aria-label="anchor" href="#create-and-visualize-clusters"></a>
+</h2>
+<p>First, run a PCA on the data. For the purposes of this tutorial, no
+highly variable genes will be identified or used in the reduction. The
+data will simply undergo a dimension reduction through PCA. Then, run a
+UMAP on the data for pre-clustering visualization. The UMAP may be
+plotted in 2D and 3D.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># After running dimension reduction, you are able to create a UMAP</span></span>
-<span><span class="co"># Run PCA</span></span>
+<code class="sourceCode R"><span><span class="co"># Run PCA</span></span>
 <span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runPCA.html">runPCA</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, feats_to_use <span class="op">=</span> <span class="cn">NULL</span>, scale_unit <span class="op">=</span> <span class="cn">FALSE</span>, center <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co"># Run UMAP</span></span>
 <span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/runUMAP.html">runUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, n_components <span class="op">=</span> <span class="fl">3</span>, n_threads <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="co"># Plot UMAP 2D</span></span>
+<span><span class="co"># Plot UMAP in 2D</span></span>
 <span><span class="fu"><a href="../reference/plotUMAP_2D.html">plotUMAP_2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, point_size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> </span></code></pre></div>
 <p><img src="../inst/images/getting_started_figs/visualizations/2-UMAP_2D.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot UMAP 3D</span></span>
 <span><span class="fu"><a href="../reference/plotUMAP_3D.html">plotUMAP_3D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, point_size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> </span></code></pre></div>
-<p><img src="../inst/images/getting_started_figs/visualizations/3-UMAP_3D.png" style="width:33.0%"></p>
-<p>Please note that this 3D UMAP plot is shown as such to convey as much
-information as possible in 2D. Plots shown below will be shown at
-different angles for the same reasoning.</p>
+<p><img src="../inst/images/getting_started_figs/visualizations/3-UMAP_3D.png"><br> Now, the data may be clustered. Create a nearest network, and then
+create Leiden clusters. The clusters may be visualized in 2D or 3D, as
+well as upon the UMAP and within the tissue.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a k Nearest Network for clustering</span></span>
-<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createNearestNetwork.html">createNearestNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, k <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createNearestNetwork.html">createNearestNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, dimensions_to_use <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, k <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## Preform Leiden clustering</span></span>
+<span><span class="co"># Preform Leiden clustering</span></span>
 <span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/doLeidenCluster.html">doLeidenCluster</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
-<span>                           resolution <span class="op">=</span> <span class="fl">0.2</span>, </span>
+<span>                           resolution <span class="op">=</span> <span class="fl">0.25</span>, </span>
 <span>                           n_iterations <span class="op">=</span> <span class="fl">200</span>, </span>
-<span>                           name <span class="op">=</span> <span class="st">'leiden_0.2.200'</span><span class="op">)</span></span>
+<span>                           name <span class="op">=</span> <span class="st">'leiden_0.25.200'</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#Plot the clusters</span></span>
-<span><span class="fu"><a href="../reference/plotUMAP_3D.html">plotUMAP_3D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, cell_color <span class="op">=</span> <span class="st">'leiden_0.2.200'</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>, show_center_label <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/getting_started_figs/visualizations/4-UMAP_3D.png" style="width:33.0%"></p>
-<p>Visualize the cell clusters within the tissue by grouping by
-layer_ID</p>
+<span><span class="co"># Plot the clusters upon the UMAP</span></span>
+<span><span class="fu"><a href="../reference/plotUMAP_3D.html">plotUMAP_3D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, cell_color <span class="op">=</span> <span class="st">'leiden_0.25.200'</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>,</span>
+<span>            show_center_label <span class="op">=</span> <span class="cn">F</span>, save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'leiden_0.25.200_UMAP_3D'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/visualizations/leiden_0.25.200_UMAP_3D.png"></p>
+<p>Visualize Leiden clusters within the tissue by creating a Spatial
+Plot, grouping by layer_ID.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
 <span>           point_size <span class="op">=</span> <span class="fl">1.0</span>, </span>
-<span>           cell_color <span class="op">=</span> <span class="st">'leiden_0.2.200'</span>, </span>
+<span>           cell_color <span class="op">=</span> <span class="st">'leiden_0.25.200'</span>, </span>
 <span>           group_by <span class="op">=</span> <span class="st">'layer_ID'</span>, </span>
 <span>           cow_n_col <span class="op">=</span> <span class="fl">2</span>, </span>
 <span>           group_by_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">160</span>, <span class="fl">60</span>, <span class="op">-</span><span class="fl">40</span>, <span class="op">-</span><span class="fl">140</span>, <span class="op">-</span><span class="fl">240</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/210927_results/8-spatPlot2D.png" style="width:50.0%"></p>
-<p>Visualize expression levels within the tissue</p>
+<p><img src="../inst/images/getting_started_figs/visualizations/4-spatPlot2D.png" style="width:50.0%"></p>
+<p>Visualize expression levels within the tissue by creating a Spatial
+Plot, grouping by layer_ID, and specifying <em>cell_color</em> as the
+number of features detected per cell.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># replace the cell color to represent the number of features/ cell ("nr_feats")</span></span>
+<code class="sourceCode R"><span><span class="co"># Plot cell_color as a representation of the number of features/ cell ("nr_feats")</span></span>
 <span><span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>, </span>
 <span>           cell_color <span class="op">=</span> <span class="st">'nr_feats'</span>, color_as_factor <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>           group_by <span class="op">=</span> <span class="st">'layer_ID'</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, group_by_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">160</span>, <span class="fl">60</span>, <span class="op">-</span><span class="fl">40</span>, <span class="op">-</span><span class="fl">140</span>, <span class="op">-</span><span class="fl">240</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/211001_results/4-spatPlot2D.png" style="width:50.0%"></p>
-</div>
-<div class="section level3">
-<h3 id="compare-clusters">3. Compare Clusters<a class="anchor" aria-label="anchor" href="#compare-clusters"></a>
-</h3>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Plot a heatmap of clusters</span></span>
-<span><span class="fu"><a href="../reference/showClusterHeatmap.html">showClusterHeatmap</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_0.2.200'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/211001_results/22-showClusterHeatmap.png" style="width:50.0%"></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Plot a dendogram to explore cluster similarity</span></span>
-<span><span class="fu"><a href="../reference/showClusterDendrogram.html">showClusterDendrogram</a></span><span class="op">(</span><span class="va">testobj</span>, h <span class="op">=</span> <span class="fl">0.5</span>, rotate <span class="op">=</span> <span class="cn">T</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_0.2.200'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/211001_results/6-showClusterDendrogram.png" style="width:50.0%"></p>
+<p><img src="../inst/images/getting_started_figs/visualizations/5-spatPlot2D.png" style="width:50.0%"><br></p>
 </div>
 <div class="section level2">
-<h2 id="visualize-cell-markers-with-violin-plots-and-heatmaps">Visualize Cell Markers with Violin Plots and Heatmaps<a class="anchor" aria-label="anchor" href="#visualize-cell-markers-with-violin-plots-and-heatmaps"></a>
+<h2 id="compare-clusters">Compare Clusters<a class="anchor" aria-label="anchor" href="#compare-clusters"></a>
 </h2>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot a heatmap of clusters</span></span>
+<span><span class="fu"><a href="../reference/showClusterHeatmap.html">showClusterHeatmap</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_0.25.200'</span>, save_plot <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/visualizations/6-showClusterHeatmap.png" style="width:50.0%"></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot a dendogram to explore cluster similarity</span></span>
+<span><span class="fu"><a href="../reference/showClusterDendrogram.html">showClusterDendrogram</a></span><span class="op">(</span><span class="va">testobj</span>, h <span class="op">=</span> <span class="fl">0.5</span>, rotate <span class="op">=</span> <span class="cn">T</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_0.25.200'</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/visualizations/7-showClusterDendrogram.png" style="width:50.0%"><br></p>
+</div>
+<div class="section level2">
+<h2 id="visualize-cell-markers">Visualize Cell Markers<a class="anchor" aria-label="anchor" href="#visualize-cell-markers"></a>
+</h2>
+<p>Marker features may be identified by calling
+<strong>findMarkers_one_vs_all</strong>. This function detects
+differentially expressed features by comparing a single cluster to all
+others. Currently, three methods are supported: “<em>scran</em>”,
+“<em>gini</em>”, and “<em>mast</em>”. Here, the “<em>gini</em>” method
+is employed; details on the gini method may be found <a href="../docs/reference/findGiniMarkers.html">here</a>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">markers</span> <span class="op">=</span> <span class="fu"><a href="../reference/findMarkers_one_vs_all.html">findMarkers_one_vs_all</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>,</span>
 <span>                                 method <span class="op">=</span> <span class="st">'gini'</span>,</span>
 <span>                                 expression_values <span class="op">=</span> <span class="st">'normalized'</span>,</span>
-<span>                                 cluster_column <span class="op">=</span> <span class="st">'leiden_0.2.200'</span>,</span>
+<span>                                 cluster_column <span class="op">=</span> <span class="st">'leiden_0.25.200'</span>,</span>
 <span>                                 min_feats <span class="op">=</span> <span class="fl">1</span>, rank_score <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># Create a violinplot</span></span>
 <span><span class="va">topgini_genes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="fl">2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'cluster'</span><span class="op">]</span><span class="op">$</span><span class="va">feats</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">testobj</span>, feats <span class="op">=</span> <span class="va">topgini_genes</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_0.2.200'</span>, strip_position <span class="op">=</span> <span class="st">'right'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/210924_results/9-violinPlot.png" style="width:50.0%"></p>
+<span><span class="fu"><a href="../reference/violinPlot.html">violinPlot</a></span><span class="op">(</span><span class="va">testobj</span>, feats <span class="op">=</span> <span class="va">topgini_genes</span>, cluster_column <span class="op">=</span> <span class="st">'leiden_0.25.200'</span>, strip_position <span class="op">=</span> <span class="st">'right'</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/visualizations/8-violinPlot.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a heatmap of top gini genes by cluster</span></span>
 <span><span class="fu"><a href="../reference/plotMetaDataHeatmap.html">plotMetaDataHeatmap</a></span><span class="op">(</span><span class="va">testobj</span>, expression_values <span class="op">=</span> <span class="st">'scaled'</span>,</span>
-<span>                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'leiden_0.2.200'</span><span class="op">)</span>,</span>
+<span>                    metadata_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'leiden_0.25.200'</span><span class="op">)</span>,</span>
 <span>                    selected_feats <span class="op">=</span> <span class="va">topgini_genes</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/210927_results/10-plotMetaDataHeatmap.png" style="width:50.0%"></p>
-<div class="section level3">
-<h3 id="visualize-cell-types-in-tissue">Visualize Cell Types in Tissue<a class="anchor" aria-label="anchor" href="#visualize-cell-types-in-tissue"></a>
-</h3>
-<p>Annotate your clusters</p>
+<p><img src="../inst/images/getting_started_figs/visualizations/9-plotMetaDataHeatmap.png" style="width:50.0%"><br></p>
+</div>
+<div class="section level2">
+<h2 id="visualize-cell-types-in-tissue">Visualize Cell Types in Tissue<a class="anchor" aria-label="anchor" href="#visualize-cell-types-in-tissue"></a>
+</h2>
+<p>To do this, the Leiden clusters must be annotated. Leveraging the
+provided cell metadata and Giotto Spatial Plots, Leiden clusters may be
+manually assigned a cell type. Alternative approaches (i.e. in the
+absence of cell metadata with cell type identification ) could involve
+the analysis of each cluster for enrichment in cell-specific marker
+genes.</p>
+<p>Since cell type annotations are included within the metadata that was
+loaded into the Giotto Object, the UMAP may be plotted with cell-type
+annotations. If cell types are known, Leiden clusters may be manually
+assigned to a cell type, as will be done here.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## name clusters</span></span>
-<span><span class="va">clusters_cell_types_hypo</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Inhibitory'</span>, <span class="st">'Inhibitory'</span>, <span class="st">'Excitatory'</span>, <span class="st">'Astrocyte'</span>,<span class="st">'OD Mature'</span>, <span class="st">'Endothelial'</span>,</span>
-<span>                             <span class="st">'OD Mature'</span>, <span class="st">'OD Immature'</span>, <span class="st">'Ependymal'</span>, <span class="st">'Ambiguous'</span>, <span class="st">'Endothelial'</span>, <span class="st">'Microglia'</span>, <span class="st">'OD Mature'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Plot the UMAP, annotated by cell type. </span></span>
+<span><span class="fu"><a href="../reference/plotUMAP_3D.html">plotUMAP_3D</a></span><span class="op">(</span><span class="va">testobj</span>, </span>
+<span>            cell_color <span class="op">=</span> <span class="st">'orig_cell_types'</span>, </span>
+<span>            save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'Original_Cell_Types_UMAP_3D'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/visualizations/Original_Cell_Types_UMAP_3D.png"></p>
+<p><br></p>
+<p>Manually assign cell types to clusters via inspection of UMAP plots.
+Specifically, the UMAP plots saved as <em>“leiden_0.25.200_UMAP3D”</em>
+and <em>“Original_Cell_Types_UMAP3D”</em> are being compared for
+assignment.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Manually assign Leiden clusters to a cell type</span></span>
+<span><span class="va">cluster_range</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">@</span><span class="va">cell_metadata</span><span class="op">$</span><span class="va">cell</span><span class="op">$</span><span class="va">rna</span><span class="op">$</span><span class="va">leiden_0.25.200</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">clusters_cell_types_hypo</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">cluster_order</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Note that cell types were condensed (i.e. "Endothelial 1", "Endothelial 2", ... were</span></span>
+<span><span class="co"># combined into one cell type "Endothelial")</span></span>
+<span><span class="va">manual_cluster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Inhibitory'</span>, <span class="st">'Excitatory'</span>, <span class="st">'Inhibitory'</span>, <span class="st">'Astrocyte'</span>, <span class="st">'OD Mature'</span>, </span>
+<span>                   <span class="st">'Endothelial'</span>, <span class="st">'Microglia'</span>, <span class="st">'OD Mature'</span>, <span class="st">'OD Immature'</span>, <span class="st">'Astrocyte'</span>,</span>
+<span>                   <span class="st">'Ependymal'</span>, <span class="st">'Pericytes'</span>, <span class="st">'Ambiguous'</span>, <span class="st">'Microglia'</span>, <span class="st">'Inhibitory'</span>, <span class="st">'Inhibitory'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">manual_cluster</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">cluster_range</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/annotateGiotto.html">annotateGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
-<span>                         annotation_vector <span class="op">=</span> <span class="va">clusters_cell_types_hypo</span>,</span>
-<span>                         cluster_column <span class="op">=</span> <span class="st">'leiden_0.2.200'</span>, </span>
+<span>                         annotation_vector <span class="op">=</span> <span class="va">manual_cluster</span>,</span>
+<span>                         cluster_column <span class="op">=</span> <span class="st">'leiden_0.25.200'</span>, </span>
 <span>                         name <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">mycolorcode</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'red'</span>, <span class="st">'lightblue'</span>, <span class="st">'yellowgreen'</span>,<span class="st">'purple'</span>, <span class="st">'darkred'</span>, <span class="st">'magenta'</span>, <span class="st">'mediumblue'</span>, <span class="st">'yellow'</span>, <span class="st">'gray'</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mycolorcode</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Inhibitory'</span>, <span class="st">'Excitatory'</span>,<span class="st">'OD Mature'</span>, <span class="st">'OD Immature'</span>, <span class="st">'Astrocyte'</span>, <span class="st">'Microglia'</span>, <span class="st">'Ependymal'</span>,<span class="st">'Endothelial'</span>, <span class="st">'Ambiguous'</span><span class="op">)</span></span>
+<span><span class="va">cell_types_in_plot</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Inhibitory'</span>, <span class="st">'Excitatory'</span>,<span class="st">'OD Mature'</span>, <span class="st">'OD Immature'</span>, </span>
+<span>                       <span class="st">'Astrocyte'</span>, <span class="st">'Microglia'</span>, <span class="st">'Ependymal'</span>,<span class="st">'Endothelial'</span>,</span>
+<span>                       <span class="st">'Pericytes'</span>, <span class="st">'Ambiguous'</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Visualize with UMAP</span></span>
-<span><span class="fu"><a href="../reference/plotUMAP_3D.html">plotUMAP_3D</a></span><span class="op">(</span><span class="va">testobj</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>, cell_color_code <span class="op">=</span> <span class="va">mycolorcode</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/210927_results/14-UMAP3D.png" style="width:50.0%"></p>
-<p>View cells types in tissue in two dimensions…</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span> <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, point_size <span class="op">=</span> <span class="fl">1.0</span>,</span>
-<span>           cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, cell_color_code <span class="op">=</span> <span class="va">mycolorcode</span>,</span>
-<span>           group_by <span class="op">=</span> <span class="st">'layer_ID'</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, group_by_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">260</span>, <span class="op">-</span><span class="fl">290</span>, <span class="op">-</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/210927_results/16-spatPlot2D.png" style="width:50.0%"></p>
-<p>and in three</p>
+<span><span class="co"># This Giotto function will provide a distinct color palette. Colors </span></span>
+<span><span class="co"># may change each time the function is run. </span></span>
+<span><span class="va">mycolorcode</span> <span class="op">=</span> <span class="fu"><a href="../reference/getDistinctColors.html">getDistinctColors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">cell_types_in_plot</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mycolorcode</span><span class="op">)</span> <span class="op">=</span> <span class="va">cell_types_in_plot</span></span>
+<span></span>
+<span><span class="co"># Visualize the assigned types in the UMAP</span></span>
+<span><span class="fu"><a href="../reference/plotUMAP_3D.html">plotUMAP_3D</a></span><span class="op">(</span><span class="va">testobj</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, point_size <span class="op">=</span> <span class="fl">1.5</span>, </span>
+<span>            cell_color_code <span class="op">=</span> <span class="va">mycolorcode</span>,</span>
+<span>            save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'manual_cluster_typing_UMAP_3D'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/visualizations/manual_cluster_typing_UMAP_3D.png"></p>
+<p>Now that each Leiden cluster has an associated cell type, cell types
+may be viewed in tissue in 2D and in 3D within a Spatial Plot by
+specifying the <em>cell_color</em> parameter as the name of the
+annotation, ‘cell_types’.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span> <span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, point_size <span class="op">=</span> <span class="fl">1.0</span>,</span>
+<span>           cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, group_by <span class="op">=</span> <span class="st">'layer_ID'</span>, </span>
+<span>           cell_color_code <span class="op">=</span> <span class="va">mycolorcode</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, </span>
+<span>           group_by_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">260</span>, <span class="op">-</span><span class="fl">290</span>, <span class="op">-</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/visualizations/10-spatPlot2D.png" style="width:50.0%"></p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot3D.html">spatPlot3D</a></span><span class="op">(</span><span class="va">testobj</span>,</span>
 <span>           cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, axis_scale <span class="op">=</span> <span class="st">'real'</span>,</span>
 <span>           sdimx <span class="op">=</span> <span class="st">'sdimx'</span>, sdimy <span class="op">=</span> <span class="st">'sdimy'</span>, sdimz <span class="op">=</span> <span class="st">'sdimz'</span>,</span>
 <span>           show_grid <span class="op">=</span> <span class="cn">F</span>, cell_color_code <span class="op">=</span> <span class="va">mycolorcode</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/210927_results/15-spatplot3D.png" style="width:50.0%"></p>
-<p>Subset by cell type in two dimensions…</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<p><img src="../inst/images/getting_started_figs/visualizations/11-spat3D.png"></p>
+<p><br></p>
+<p>The plots may be subset by cell type in 2D and 3D.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot2D.html">spatPlot2D</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, point_size <span class="op">=</span> <span class="fl">1.0</span>, </span>
 <span>           cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, cell_color_code <span class="op">=</span> <span class="va">mycolorcode</span>,</span>
 <span>           select_cell_groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Microglia'</span>, <span class="st">'Ependymal'</span>, <span class="st">'Endothelial'</span><span class="op">)</span>, show_other_cells <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>           group_by <span class="op">=</span> <span class="st">'layer_ID'</span>, cow_n_col <span class="op">=</span> <span class="fl">2</span>, group_by_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">260</span>, <span class="op">-</span><span class="fl">290</span>, <span class="op">-</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/210927_results/24-spatPlot2D.png" style="width:50.0%"></p>
-<p>and in three</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<p><img src="../inst/images/getting_started_figs/visualizations/12-spatPlot2D.png" style="width:50.0%"></p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot3D.html">spatPlot3D</a></span><span class="op">(</span><span class="va">testobj</span>,</span>
 <span>           cell_color <span class="op">=</span> <span class="st">'cell_types'</span>, axis_scale <span class="op">=</span> <span class="st">'real'</span>,</span>
 <span>           sdimx <span class="op">=</span> <span class="st">'sdimx'</span>, sdimy <span class="op">=</span> <span class="st">'sdimy'</span>, sdimz <span class="op">=</span> <span class="st">'sdimz'</span>,</span>
 <span>           show_grid <span class="op">=</span> <span class="cn">F</span>, cell_color_code <span class="op">=</span> <span class="va">mycolorcode</span>,</span>
 <span>           select_cell_groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Microglia'</span>, <span class="st">'Ependymal'</span>, <span class="st">'Endothelial'</span><span class="op">)</span>, show_other_cells <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/210927_results/23-spatplot3D.png" style="width:50.0%"> ## Visualize Cell Networks</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<p><img src="../inst/images/getting_started_figs/visualizations/13-spat3D.png"><br></p>
+</div>
+<div class="section level2">
+<h2 id="visualize-cell-networks">Visualize Cell Networks<a class="anchor" aria-label="anchor" href="#visualize-cell-networks"></a>
+</h2>
+<p>It is preferred to use Delaunay geometry to create spatial networks.
+In other cases, k-nearest neighbor may be used to create a spatial
+network. Specifying the <em>method</em> parameter within <a href="../docs/reference/createSpatialNetwork.html"><strong>createSpatialNetwork</strong></a>
+will accomplish this. By default, this function runs the Delaunay
+method. Here, both methods, as well as potential modifications to the
+k-nearest networks, will be shown.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Spatial Networks</span></span>
-<span><span class="co"># since this is a #D datase the delaunayn_geometry method must be used to create spatial networks</span></span>
-<span><span class="fu"><a href="../reference/plotStatDelaunayNetwork.html">plotStatDelaunayNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, method <span class="op">=</span> <span class="st">'delaunayn_geometry'</span>, maximum_distance <span class="op">=</span> <span class="fl">400</span>, save_plot <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
-<span><span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/createSpatialNetwork.html">createSpatialNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, delaunay_method <span class="op">=</span> <span class="st">'delaunayn_geometry'</span>, minimum_k <span class="op">=</span> <span class="fl">2</span>, maximum_distance_delaunay <span class="op">=</span> <span class="fl">400</span><span class="op">)</span></span>
+<span><span class="co"># The following fuction provides insight to the Delaunay Network. It has been </span></span>
+<span><span class="co"># omitted graphically for the sake of this tutorial, but will be shown in-console</span></span>
+<span><span class="co"># if this command is run.</span></span>
+<span><span class="fu"><a href="../reference/plotStatDelaunayNetwork.html">plotStatDelaunayNetwork</a></span><span class="op">(</span>gobject<span class="op">=</span> <span class="va">testobj</span>, </span>
+<span>                        method <span class="op">=</span> <span class="st">'delaunayn_geometry'</span>, </span>
+<span>                        maximum_distance <span class="op">=</span> <span class="fl">50</span>, </span>
+<span>                        show_plot <span class="op">=</span> <span class="cn">T</span>, </span>
+<span>                        save_plot <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## create spatial networks based on k and/or distance from centroid</span></span>
-<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createSpatialNetwork.html">createSpatialNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, method <span class="op">=</span> <span class="st">'kNN'</span>, k <span class="op">=</span> <span class="fl">5</span>, name <span class="op">=</span> <span class="st">'spatial_network'</span><span class="op">)</span></span>
-<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createSpatialNetwork.html">createSpatialNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, method <span class="op">=</span> <span class="st">'kNN'</span>, k <span class="op">=</span> <span class="fl">10</span>, name <span class="op">=</span> <span class="st">'large_network'</span><span class="op">)</span></span>
-<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createSpatialNetwork.html">createSpatialNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, method <span class="op">=</span> <span class="st">'kNN'</span>, k <span class="op">=</span> <span class="fl">100</span>,</span>
-<span>                                   maximum_distance_knn <span class="op">=</span> <span class="fl">200</span>, minimum_k <span class="op">=</span> <span class="fl">2</span>, name <span class="op">=</span> <span class="st">'distance_network'</span><span class="op">)</span></span>
+<span><span class="co"># Create Spatial Network using Delaunay geometry</span></span>
+<span><span class="va">testobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/createSpatialNetwork.html">createSpatialNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
+<span>                               delaunay_method <span class="op">=</span> <span class="st">'delaunayn_geometry'</span>, </span>
+<span>                               minimum_k <span class="op">=</span> <span class="fl">2</span>, </span>
+<span>                               maximum_distance_delaunay <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## visualize different spatial networks in one layer of the dataset</span></span>
-<span><span class="co"># I selected layer 260, and am only including high expressing cells</span></span>
+<span><span class="co"># Create Spatial Networks using k-nearest neighbor with varying specifications</span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createSpatialNetwork.html">createSpatialNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
+<span>                                method <span class="op">=</span> <span class="st">'kNN'</span>, </span>
+<span>                                k <span class="op">=</span> <span class="fl">5</span>, </span>
+<span>                                name <span class="op">=</span> <span class="st">'spatial_network'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createSpatialNetwork.html">createSpatialNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
+<span>                                method <span class="op">=</span> <span class="st">'kNN'</span>, </span>
+<span>                                k <span class="op">=</span> <span class="fl">10</span>, </span>
+<span>                                name <span class="op">=</span> <span class="st">'large_network'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">testobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createSpatialNetwork.html">createSpatialNetwork</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, </span>
+<span>                                method <span class="op">=</span> <span class="st">'kNN'</span>, </span>
+<span>                                k <span class="op">=</span> <span class="fl">100</span>, </span>
+<span>                                maximum_distance_knn <span class="op">=</span> <span class="fl">200</span>, </span>
+<span>                                minimum_k <span class="op">=</span> <span class="fl">2</span>, </span>
+<span>                                name <span class="op">=</span> <span class="st">'distance_network'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Now, visualize the different spatial networks in one layer of the dataset</span></span>
+<span><span class="co"># Here layer 260 is selected, and only high expressing cells are included</span></span>
 <span><span class="va">cell_metadata</span> <span class="op">=</span> <span class="fu"><a href="../reference/pDataDT.html">pDataDT</a></span><span class="op">(</span><span class="va">testobj</span><span class="op">)</span></span>
 <span><span class="va">highexp_ids</span> <span class="op">=</span> <span class="va">cell_metadata</span><span class="op">[</span><span class="va">layer_ID</span><span class="op">==</span><span class="fl">260</span><span class="op">]</span><span class="op">[</span><span class="va">total_expr</span><span class="op">&gt;=</span><span class="fl">100</span><span class="op">]</span><span class="op">$</span><span class="va">cell_ID</span></span>
 <span><span class="va">subtestobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/subsetGiotto.html">subsetGiotto</a></span><span class="op">(</span><span class="va">testobj</span>, cell_ids <span class="op">=</span> <span class="va">highexp_ids</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># Re-annotate the subset Giotto Object</span></span>
+<span><span class="va">subtestobj</span> <span class="op">=</span> <span class="fu"><a href="../reference/annotateGiotto.html">annotateGiotto</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">subtestobj</span>, </span>
+<span>                            annotation_vector <span class="op">=</span> <span class="va">manual_cluster</span>,</span>
+<span>                            cluster_column <span class="op">=</span> <span class="st">'leiden_0.25.200'</span>, </span>
+<span>                            name <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">subtestobj</span>, show_network <span class="op">=</span> <span class="cn">T</span>,</span>
 <span>         network_color <span class="op">=</span> <span class="st">'blue'</span>, spatial_network_name <span class="op">=</span> <span class="st">'Delaunay_network'</span>,</span>
-<span>         point_size <span class="op">=</span> <span class="fl">1.5</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/211001_results/15-spatPlot2D.png" style="width:50.0%"></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">subtestobj</span>, show_network <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>         network_color <span class="op">=</span> <span class="st">'blue'</span>, spatial_network_name <span class="op">=</span> <span class="st">'spatial_network'</span>,</span>
-<span>         point_size <span class="op">=</span> <span class="fl">2.5</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/211001_results/16-spatPlot2D.png" style="width:50.0%"></p>
+<span>         point_size <span class="op">=</span> <span class="fl">1.5</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span>,</span>
+<span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'Delaunay_network_spatPlot'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/visualizations/Delaunay_network_spatPlot.png"></p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">subtestobj</span>, show_network <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>         network_color <span class="op">=</span> <span class="st">'blue'</span>, spatial_network_name <span class="op">=</span> <span class="st">'large_network'</span>,</span>
-<span>         point_size <span class="op">=</span> <span class="fl">2.5</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/211001_results/17-spatPlot2D.png" style="width:50.0%"></p>
+<span>         network_color <span class="op">=</span> <span class="st">'blue'</span>, spatial_network_name <span class="op">=</span> <span class="st">'spatial_network'</span>,</span>
+<span>         point_size <span class="op">=</span> <span class="fl">2.5</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span>,</span>
+<span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'spatial_network_spatPlot'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/visualizations/spatial_network_spatPlot.png" style="width:50.0%"></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">subtestobj</span>, show_network <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>         network_color <span class="op">=</span> <span class="st">'blue'</span>, spatial_network_name <span class="op">=</span> <span class="st">'large_network'</span>,</span>
+<span>         point_size <span class="op">=</span> <span class="fl">2.5</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span>,</span>
+<span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'large_network_spatPlot'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/visualizations/large_network_spatPlot.png" style="width:50.0%"></p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/spatPlot.html">spatPlot</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">subtestobj</span>, show_network <span class="op">=</span> <span class="cn">T</span>,</span>
 <span>         network_color <span class="op">=</span> <span class="st">'blue'</span>, spatial_network_name <span class="op">=</span> <span class="st">'distance_network'</span>,</span>
-<span>         point_size <span class="op">=</span> <span class="fl">2.5</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../inst/images/MerFISH_hypoth/211001_results/18-spatPlot2D.png" style="width:50.0%"></p>
-</div>
+<span>         point_size <span class="op">=</span> <span class="fl">2.5</span>, cell_color <span class="op">=</span> <span class="st">'cell_types'</span>,</span>
+<span>         save_param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>save_name <span class="op">=</span> <span class="st">'distance_network_spatPlot'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../inst/images/getting_started_figs/visualizations/distance_network_spatPlot.png" style="width:50.0%"></p>
 </div>
   </div>
 
