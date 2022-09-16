@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How to cluster my Giotto object? • Giotto Suite</title>
+<title>Dimension Reduction and Clustering • Giotto Suite</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="How to cluster my Giotto object?">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Dimension Reduction and Clustering">
 <meta property="og:description" content="Giotto">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -147,7 +147,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>How to cluster my Giotto object?</h1>
+      <h1 data-toc-skip>Dimension Reduction and Clustering</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/RubD/Giotto/blob/HEAD/vignettes/Dimension_reduction.Rmd" class="external-link"><code>vignettes/Dimension_reduction.Rmd</code></a></small>
@@ -158,11 +158,11 @@
     
     
 <p>This tutorial walks through the dimension reduction and clustering
-capabilities of Giotto. We begin this tutorial with the Giotto Object
-processed in the previous tutorial, <a href="./data_processing.html">data processing</a>. For convenience, the
-code to create this object is provided below. However, we encourage new
-users to review the data processing tutorial prior to beginning this
-tutorial.</p>
+capabilities of Giotto and begins with the Giotto Object processed in
+the previous tutorial, <a href="./data_processing.html">data
+processing</a>. For convenience, the code to create this object is
+provided below. However, new users are encouraged to review the data
+processing tutorial prior to beginning this tutorial.</p>
 <p>This tutorial uses a SeqFISH+ dataset of a murine cortex and
 subventrical zone. A complete walkthrough of that dataset can be found
 <a href="./SeqFISH_cortex_210923.html"><strong>here</strong></a>. To
@@ -174,18 +174,26 @@ locally.</p>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rubd.github.io/Giotto/" class="external-link">Giotto</a></span><span class="op">)</span></span>
-<span><span class="va">data_directory</span> <span class="op">=</span> <span class="st">'/path/to/data/directory/'</span></span>
-<span><span class="va">results_directory</span> <span class="op">=</span> <span class="st">'/path/to/results/directory/'</span></span>
 <span></span>
+<span><span class="co"># Specify path from which data may be retrieved/stored</span></span>
+<span><span class="va">data_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">'/gobject_clustering_data/'</span><span class="op">)</span></span>
+<span><span class="co"># alternatively, "/path/to/where/the/data/lives/"</span></span>
+<span></span>
+<span><span class="co"># Specify path to which results may be saved</span></span>
+<span><span class="va">results_directory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">'/gobject_clustering_results/'</span><span class="op">)</span> </span>
+<span><span class="co"># alternatively, "/path/to/store/the/results/"</span></span>
+<span></span>
+<span><span class="co"># Ensure Giotto environment lives local to the machine</span></span>
 <span><span class="va">genv_exists</span> <span class="op">=</span> <span class="fu"><a href="../reference/checkGiottoEnvironment.html">checkGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="va">genv_exists</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="co"># The following command need only be run once to install the Giotto environment.</span></span>
 <span>  <span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="co"># Optional: Specify a Python path. If set to NULL (default), the previously installed</span></span>
-<span><span class="co"># Giotto environment will be used.</span></span>
-<span><span class="va">my_python_path</span> <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># alternatively, "/your/python/path/" if desired.</span></span>
+<span><span class="co"># Optional: Specify a path to a Python executable within a conda or miniconda </span></span>
+<span><span class="co"># environment. If set to NULL (default), the Python executable within the previously</span></span>
+<span><span class="co"># installed Giotto environment will be used.</span></span>
+<span><span class="va">my_python_path</span> <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># alternatively, "/local/python/path/python" if desired.</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/getSpatialDataset.html">getSpatialDataset</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">'seqfish_SS_cortex'</span>, directory <span class="op">=</span> <span class="va">data_directory</span>, method <span class="op">=</span> <span class="st">'wget'</span><span class="op">)</span></span>
 <span></span>
@@ -367,7 +375,7 @@ used here for consistent sub-clustering.</p>
 <span>                             selected_clusters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span><span class="op">)</span>,</span>
 <span>                             name <span class="op">=</span> <span class="st">'sub_leiden_clus_select'</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#Plot a UMAP to visualize your sub-clustering</span></span>
+<span><span class="co">#Plot a UMAP to visualize sub-clusters</span></span>
 <span><span class="fu"><a href="../reference/plotUMAP.html">plotUMAP</a></span><span class="op">(</span>gobject <span class="op">=</span> <span class="va">testobj</span>, cell_color <span class="op">=</span> <span class="st">'sub_leiden_clus_select'</span>, show_NN_network <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../inst/images/getting_started_figs/dimension_reduction/12-UMAP.png" style="width:50.0%"></p>
 </div>

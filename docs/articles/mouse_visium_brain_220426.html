@@ -171,15 +171,16 @@
 <span><span class="co"># set python path to conda env/bin/ directory if manually installed Giotto python dependencies by conda</span></span>
 <span><span class="co"># python_path = '/path_to_conda/.conda/envs/giotto/bin/python'</span></span>
 <span><span class="co"># set python path to NULL if you want to automatically install (only the 1st time) and use the giotto miniconda environment</span></span>
-<span><span class="co"># python_path = NULL</span></span>
-<span><span class="co"># if(is.null(python_path)) {</span></span>
-<span><span class="co">#  installGiottoEnvironment()</span></span>
-<span><span class="co">#}</span></span>
+<span><span class="va">python_path</span> <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">python_path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/installGiottoEnvironment.html">installGiottoEnvironment</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># 3. Create Giotto Instructions</span></span>
 <span><span class="va">instrs</span> <span class="op">=</span> <span class="fu"><a href="../reference/createGiottoInstructions.html">createGiottoInstructions</a></span><span class="op">(</span>save_dir <span class="op">=</span> <span class="va">results_folder</span>,</span>
 <span>                                  save_plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                                  show_plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span>                                  show_plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                                  python_path <span class="op">=</span> <span class="va">python_path</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="dataset-explanation">Dataset explanation<a class="anchor" aria-label="anchor" href="#dataset-explanation"></a>
@@ -404,8 +405,8 @@ signature gene lists:<br>
 - Rank<br>
 - <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02362-7" class="external-link">DWLS
 Deconvolution</a> Corresponded Single cell dataset can be generated from
-<a href="http://mousebrain.org/downloads.html" class="external-link">here</a>. Giotto_SC is
-processed from the downsampled <a href="https://satijalab.org/loomr/loomr_tutorial" class="external-link">Loom</a> file and can
+<a href="http://mousebrain.org/" class="external-link">here</a>. Giotto_SC is processed from
+the downsampled <a href="https://satijalab.org/loomr/loomr_tutorial" class="external-link">Loom</a> file and can
 also be downloaded from getSpatialDataset.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># download data to results directory ####</span></span>
