@@ -32,8 +32,8 @@ To run this vignette you need to install all the necessary Python modules.
 # to automatically save figures in save_dir set save_plot to TRUE
 temp_dir = '~/Temp/'
 myinstructions = createGiottoInstructions(save_dir = temp_dir,
-                                          save_plot = FALSE, 
-                                          show_plot = F)
+                                          save_plot = TRUE, 
+                                          show_plot = T)
 ```
 
 
@@ -147,7 +147,7 @@ showClusterDendrogram(starmap_mini, h = 0.5, rotate = T, cluster_column = 'leide
 ## 5. differential expression
 ```{r eval=FALSE}
 gini_markers = findMarkers_one_vs_all(gobject = starmap_mini,
-                                                  method = 'gini',
+                                                  method = 'scran',
                                                   expression_values = 'normalized',
                                                   cluster_column = 'leiden_clus',
                                                   min_genes = 20,
@@ -224,6 +224,12 @@ geometry to be installed.
 - visualize information about the default Delaunay network  
 - create a spatial Delaunay network (default)  
 - create a spatial kNN network   
+
+```{r}
+install.packages('geometry')
+```
+
+
 ```{r eval=FALSE}
 plotStatDelaunayNetwork(gobject = starmap_mini, maximum_distance = 200, 
                         method = 'delaunayn_geometry')
